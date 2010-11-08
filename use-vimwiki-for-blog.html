@@ -31,12 +31,13 @@ function onSearch(){
 </div>
 <nav>
     <ul>
-        <li class="first"><a href="../index.html" title="Home">Home</a></li>
+        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
         <li class="actived"><a href="index.html" title="Blog">Blog</a></li>
-        <li><a href="../vimwiki/index.html" title="Wiki">Wiki</a></li>
-        <li><a href="../vimwiki/Vim.html" title="Vim">Vim</a></li>
+        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
+        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
         <li><a href="https://twitter.com/hotoo" title="Twitter">Twitter</a></li>
-        <li class="last"><a href="../resume/resume.html" title="About Me">README</a></li>
+        <li class="last"><a href="http://github.com/hotoo" title="Project">Project</a></li>
+        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
     </ul>
 </nav>
 </header>
@@ -48,7 +49,7 @@ function onSearch(){
 <p>
 由于众所周知的缘故，<a href="http://blog.xianyun.org/">我的博客</a> 被消失了。
 在国内买域名或主机都是十分不靠谱的事，所以目前没有重新开独立博客的打算。
-而使用第三方博客服务也同样不靠谱，这也不在计划之内。
+而使用第三方博客服务也同样不靠谱，目前只同步在 Google Blogger 上。
 </p>
 
 <p>
@@ -77,12 +78,12 @@ function onSearch(){
 </li>
 <li>
 如果安装了 <a href="http://www.vim.org/scripts/script.php?script_id=2540">snipMate</a>(可选)
-    在 $VIM/vimfiles/snippets/ 下新建一个 vimwiki.snippets 文件（已有这打开文件）。
+    在 $VIM/vimfiles/snippets/ 下新建一个 vimwiki.snippets 文件（已有则打开文件）。
     在 vimwiki.snippets 中添加自己的博客格式模板，例如我的：
 <pre>
-%\title $1("title" 前面的 "\" 去掉)
-
 snippet blog
+    %\title $1 (注意："title" 前面的 "\" 去掉)
+
     = ${1:title} =
     ${2:content}
 
