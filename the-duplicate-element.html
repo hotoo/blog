@@ -162,7 +162,7 @@ Vim-like 的 <code>/</code> 快捷键用来快速定位到上面的输入框、�
             * var disqus_identifier; [Optional but recommended: Define a unique identifier (e.g. post id or slug) for this thread]
             */
             var disqus_identifier = "http://hotoo.github.com/blog"+location.pathname;
-            window.status = disqus_identifier;
+            console.log("id: ", disqus_identifier);
           (function() {
            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
            dsq.src = 'http://hotoo.disqus.com/embed.js';
