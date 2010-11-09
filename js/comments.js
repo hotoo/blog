@@ -8,11 +8,7 @@
         if(a[i].parentNode.tagName.toLowerCase()!="li"){continue;}
         var cmt=document.createElement("a");
         cmt.className="comment-count";
-        if(/^https?:\/\//.test(a[i].href)){
-            disqus_url=a[i].href.replace(/^http:\/\/blog\.hotoo\.me\//, "http://hotoo.github.com/blog/");
-        }else{
-            disqus_url="http://hotoo.github.com/blog/"+a[i].href;
-        }
+        disqus_url = "http://hotoo.github.com/blog"+a[i].pathname;
         cmt.href=disqus_url+"#disqus_thread";
         cmt.appendChild(document.createTextNode("评论"));
         var span=document.createElement("span");
