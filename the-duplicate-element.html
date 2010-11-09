@@ -161,6 +161,8 @@ Vim-like 的 <code>/</code> 快捷键用来快速定位到上面的输入框、�
           /**
             * var disqus_identifier; [Optional but recommended: Define a unique identifier (e.g. post id or slug) for this thread]
             */
+            var disqus_identifier = encodeURIComponent("http://hotoo.github.com/blog"+location.pathname);
+            console.log("id: ", disqus_identifier);
           (function() {
            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
            dsq.src = 'http://hotoo.disqus.com/embed.js';
@@ -174,8 +176,6 @@ Vim-like 的 <code>/</code> 快捷键用来快速定位到上面的输入框、�
 
         <script type="text/javascript">
         var disqus_shortname = 'hotoo';
-        var disqus_identifier = "http://hotoo.github.com/blog"+location.pathname;
-        console.log("id: ", disqus_identifier);
         (function () {
           var s = document.createElement('script'); s.async = true;
           s.src = 'http://disqus.com/forums/hotoo/count.js';
