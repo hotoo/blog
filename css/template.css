@@ -27,6 +27,9 @@ address::selection,
 p::selection,
 ul::selection,
 li::selection,
+dl::selection,
+dt::selection,
+dd::selection,
 pre::selection,
 blockquote::selection,
 code::selection,
@@ -53,6 +56,9 @@ address::-moz-selection,
 p::-moz-selection,
 ul::-moz-selection,
 li::-moz-selection,
+dl::-moz-selection,
+dt::-moz-selection,
+dd::-moz-selection,
 pre::-moz-selection,
 blockquote::-moz-selection,
 code::-moz-selection,
@@ -112,7 +118,7 @@ pre:hover{
 code{font-family:"Courier New","\5B8B\4F53"; background:#f8f8f8 none; border:1px dashed #ccc; padding:2px 5px; -moz-border-radius:4px; -khtml-border-radius:4px; -webkit-border-radius:4px; border-radius:4px; white-space:nowrap;}
 
 blockquote{
-    margin:.5em 1em; padding:0.4em 50px; line-height:1.5em; min-height:50px;
+    margin:.5em 1em; padding:1em 64px; line-height:1.5em; min-height:50px;
     border-width:0; border-color:#ccc; border-style:solid;
     -moz-border-radius:8px; -khtml-border-radius:8px; -webkit-border-radius:8px; border-radius:8px;
     background-color:#eee; background-image:url(bg/testy-quote-open.gif),url(bg/testy-quote-close.gif);
