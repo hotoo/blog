@@ -12,6 +12,9 @@ nav{width:100%; margin:0 auto; left:0; top:0;}
             nav ul li a{text-decoration:none; color:#666; margin:0; height:37px; line-height:35px; padding:0 16px; display:block;}
             nav ul li.actived a{color:#f60; padding:0 24px; font-weight:bold;}
 
+#searchbox input{font-size:1.2em; margin:2px 0;}
+#input_search{border:1px solid #ccc; padding:2px;}
+
 #container{width:100%; margin:0 auto; font-size:1.0em;}
 body::selection,
 h1::selection,

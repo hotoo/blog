@@ -113,34 +113,36 @@ function onSearch(){
 </p>
 
 <h2 id="toc_1.2">使用帮助(针对Gtalk)：</h2>
-<ul>
-<li>
-<code>@join</code> 加入群。
-</li>
-<li>
-<code>@help</code> 查看所有可用的命令。
-</li>
-<li>
-<code>@stop</code> 暂停接收群消息，时效 1 天。
-</li>
-<li>
-<code>@go</code> 开始接收群消息。
-</li>
-<li>
-<code>@members</code> 查看群成员， <strong>注意：这是个复数，记得加 s</strong> ，很多朋友都输入错误，这是个讨厌的命令，又不能看实时在线人数。
-</li>
-<li>
-<code>@get #</code> 查看倒数第 # 条之后的消息（默认是 1，最大为 100）。
-</li>
-<li>
-<code>@snooze #</code> 暂停 # 分钟不接收群消息，（默认 20 分钟）。
-</li>
-<li>
-<code>@leave</code> 退群。
-</li>
-</ul>
 <p>
-更多内容参考 <a href="http://wiki.hotoo.me/vimwiki/Gtalk">GTalk</a> 及其群聊机器人支持 <a href="http://wiki.hotoo.me/Chatterous">Chatterous</a>]
+下面的命令，机器人会单独针对你进行回复，包括你的命令和回复的消息，都不会被其他群成员接受到
+（除非你的命令有错误，被当作消息发送）。
+</p>
+
+<p>
+命令中带有 <code>#</code> 的表示参数，一般都是数值。
+</p>
+
+<dl>
+<dt><code>@join</code></dt>
+<dd>加入群。将机器人(vimcn@chatterous.com)加为好友后，向其发送这个命令加入群。<br />一般来说，这个命令发送一次就可以了，除非你有主动退群。</dd>
+<dt><code>@help</code></dt>
+<dd>查看所有可用的命令。</dd>
+<dt><code>@stop</code></dt>
+<dd>暂停接收群消息，时效 1 天。</dd>
+<dt><code>@go</code></dt>
+<dd>开始接收群消息。</dd>
+<dt><code>@members</code></dt>
+<dd>查看群成员， <strong>注意：这是个复数，记得加 s</strong> ，很多朋友都输入错误，这是个讨厌的命令，又不能看实时在线人数，甚至连总人数都不统计下。</dd>
+<dt><code>@get #</code></dt>
+<dd>查看最后 # 条消息（默认是 1，最大为 100）。</dd>
+<dt><code>@snooze #</code></dt>
+<dd>暂停 # 分钟不接收群消息，（默认 20 分钟）。</dd>
+<dt><code>@leave</code></dt>
+<dd>退群。呃，你可能还需要手动删除其为好友。注：直接删除好友而不发送此命令，很可能是无效的脱离组织的方式。</dd>
+</dl>
+
+<p>
+更多内容参考 <a href="http://wiki.hotoo.me/vimwiki/Gtalk.html">GTalk</a> 及其群聊机器人支持 <a href="http://wiki.hotoo.me/Chatterous.html">Chatterous</a>]
 </p>
 
 <h2 id="toc_1.3">《群规》</h2>
