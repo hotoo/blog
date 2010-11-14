@@ -139,12 +139,16 @@ table:hover{
 hr {border: none; border-top: 1px solid #ccc; width: 100%;}
 del{text-decoration:line-through; color: #777777;}
 
+dl{margin:3px 0;}
+dt{font-weight:bold; margin:5px 0;}
+dd{line-height:1.3em; margin:5px 2em;}
+
 a{color:#002BB8; text-decoration:none;}
 a:hover{text-decoration:underline;}
-a[href^="http://"],
-a[href^="https://"]{background:transparent url(bg/popout.png) no-repeat scroll right 0; padding:0 18px 0 0;}
-a[target="_self"],
-a[rel="internal"]{background-image:none!important;}
+#container a[href^="http://"],
+#container a[href^="https://"]{background:transparent url(bg/popout.png) no-repeat scroll right 0; padding:0 18px 0 0;}
+#container a[target="_self"],
+#container a[rel="internal"]{background-image:none!important;}
 
 div.toc{border:1px solid #ccc; background:#f8f8f8; float:right; padding:3px;
     -moz-box-shadow:0 0 8px #666; -webkit-box-shadow:0 0 8px #666; box-shadow:0 0 8px #666;
