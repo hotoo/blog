@@ -18,7 +18,7 @@ function onSearch(){
     return false;
 }
 </script>
-<title>用 Vimwiki 写博客 - 闲耘™.博客</title>
+<title>Rating for Foobar2000 columns UI - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -44,116 +44,122 @@ function onSearch(){
 <div id="container">
     <article>
 
-<h1 id="toc_1">用 Vimwiki 写博客</h1>
-
+<h1 id="toc_1">Rating for Foobar2000 columns UI</h1>
 <p>
-由于众所周知的缘故，<a href="http://blog.xianyun.org/">我的博客</a> 被消失了。
-在国内买域名或主机都是十分不靠谱的事，所以目前没有重新开独立博客的打算。
-而使用第三方博客服务也同样不靠谱，目前只同步在 Google Blogger 上。
+给Foobar2000 的Columns UI设置标星功能：
 </p>
 
 <p>
-把东西都放在自己的计算机里算是比较可靠的方式了，
-我计划使用 Vim + Vimwiki + Dropbox 来搭建自己的特殊博客系统。
+<strong>I. 显示歌曲标星级别。</strong>
 </p>
 
-<h2 id="toc_1.1">原理</h2>
-<p>
-使用 Vim 这个极致的编辑器，加上 Vimwiki 这个优秀的插件，
-可以用 Wiki 语法来写日志，<del>1. 然后由 Dropbox 自动同步与发布，</del>
-<del>2. 已经改为 SVN 提交到 Google Code（生成的 HTML 文件需要设置 svn:mime-type 为 text/html），</del>
-3. 现在是用 Git 提交到 <a href="http://hotoo.github.com">hotoo.github.com</a>。
-整体上来说这个系统基本完好，<del>除了域名稍稍缺憾之外，</del>Github 支持绑定第三方域名。
-</p>
-
-<h2 id="toc_1.2">搭建步骤</h2>
-<p>
-如果你看过 <a href="http://code.google.com/p/vim-script-cn/">Vim Script 文档中文计划</a>
-的介绍，下面有写内容大概已经熟悉，这里作为完整的技巧一并介绍：
-</p>
 <ol>
 <li>
-确认正确安装了 <a href="http://www.vim.org">Vim</a> 和
-    <a href="http://www.vim.org/scripts/script.php?script_id=2226">Vimwiki</a>。
+文件 -&gt; 参数设置。
 </li>
 <li>
-如果安装了 <a href="http://www.vim.org/scripts/script.php?script_id=2540">snipMate</a>(可选)
-    在 $VIM/vimfiles/snippets/ 下新建一个 vimwiki.snippets 文件（已有则打开文件）。
-    在 vimwiki.snippets 中添加自己的博客格式模板，例如我的：
-<pre>
-snippet blog
-    %\title $1 (注意："title" 前面的 "\" 去掉)
-
-    = ${1:title} =
-    ${2:content}
-
-     blog:datetime=`strftime("%Y/%m/%d %H:%M:%S")`:tags=${3}
-</pre>
+显示 -&gt; Columns UI -&gt; Playlist view。
 </li>
 <li>
-因为 Vimwiki 和 snipMate 的 <code>&lt;Tab&gt;</code> 热键冲突，
-    可以将 $VIM/vimfiles/ftplugin/vimwiki.vim 中的
-<pre>
-inoremap &lt;expr&gt; &lt;buffer&gt; &lt;Tab&gt; vimwiki_tbl#kbd_tab()
-</pre>
-    换成其他的热键，例如：
-<pre>
-inoremap &lt;expr&gt; &lt;buffer&gt; &lt;C-Tab&gt; vimwiki_tbl#kbd_tab()
-</pre>
-</li>
-<li>
-到此，在 .wiki 文件中输入 <code>blog&lt;Tab&gt;</code> 就展开博客模板了。
-</li>
-<li>
-在 vimrc 的 <code>g:vimwiki_list</code> 中加入一个 wiki，例如我的：
-<pre>
-let g:vimwiki_list = [
-    \ {...},
-    \ {...},
-    \ {...},
-    \ {
-        \ 'path'        : 'D:\My Dropbox\blog',
-      " \ 'path_html'   : 'D:\My Dropbox\Public\blog',
-      " \ 'path_html'   : 'D:\wrokbench\hotoo.googlecode.com\blog',
-        \ 'path_html'   : 'D:\wrokbench\hotoo.github.com\blog',
-        \ 'html_header' : 'D:\My Dropbox\blog\template\header.tpl',
-        \ 'html_footer' : 'D:\My Dropbox\blog\template\footer.tpl'
-    \ }
-\ ]
-</pre>
+切换到Columns页签，新建（New）一个列。
 </li>
 </ol>
 
-<h2 id="toc_1.3">技巧</h2>
 <p>
-这样我使用 <code>4&lt;leader&gt;ww</code>(一般是<code>4\ww</code>) 就可以快速启动博客 Wiki 首页并进行编辑了。
-Wiki 文件保存在 Dropbox 私有目录下，生成的 html 文件保存在公开目录。
+<img src="http://4.bp.blogspot.com/_POl6bUDELqY/SJ6_G0igVlI/AAAAAAAAD20/IMyH4NToL1c/s1600-h/viewRating.jpg" />
 </p>
 
 <p>
-草稿日志的 Wiki 文件中加入 <code>%nohtml</code> 不转成 HTML，索引页用 HTML 注释
-<code>&lt; !-- --&gt;</code> （去掉 ! 前面的空格）就可以了。写好想发布时，
-修改对应代码并 <code>:Vimwiki2HTML</code> 即可。
+如图，Display里的代码是：
+</p>
+<pre>
+$if(%rating%,
+$select(%rating%,
+*,
+**,
+***,
+****,
+*****),
+)
+)
+</pre>
+<p>
+其实也可以简单是输入：<code>%rating%</code>。
 </p>
 
-<h2 id="toc_1.4">模板</h2>
-<p>
-可以直接查看源码得到，或者来邮件索取。
-</p>
-
-<h2 id="toc_1.5">评论系统</h2>
-<p>
-可以使用 <a href="http://disqus.com/">disq.us</a>。
-</p>
-
-<h2 id="toc_1.6">搜索</h2>
-<p>
-使用 Google AJAX Search API，详细可以参考老肥博客的
-<a href="http://fis.io/ajax-google-custom-search-engine.html">打造完美的 ajax 版 Google 自定义搜索</a>
-</p>
 
 <p>
- blog:datetime=2010/03/29 09:41:13:tags=Vim,Wiki,Vimwiki,Dropbox
+<strong>II. 设置标星级别功能。</strong>
+</p>
+
+<ol>
+<li>
+右键播放列表某首歌曲 -&gt; 标签 -&gt; 管理脚本。
+    <img src="http://3.bp.blogspot.com/_POl6bUDELqY/SKKI6GFCmTI/AAAAAAAAD3g/8mBCeRyB4k8/s320/0.right+menu.GIF" />
+</li>
+<li>
+打开“批量标签”窗口。
+    <img src="http://4.bp.blogspot.com/_POl6bUDELqY/SKKPQ-kgaBI/AAAAAAAAD3o/9a8J60zWdRM/s320/1.tags.GIF" />
+</li>
+<li>
+点击“准备的任务”中的“添加”按钮，选择动作类型为“从另一个字段格式化值...”，确定。
+    <img src="http://1.bp.blogspot.com/_POl6bUDELqY/SKKPbKbESKI/AAAAAAAAD3w/5FbcHoTmX68/s320/2.select+action.GIF" />
+</li>
+<li>
+目标字段名：RATING <br />
+    格式化原型：<code>$if($greater(6,$add(%RATING%,1)),$add(%RATING%,1),5)</code> <br />
+    <img src="http://2.bp.blogspot.com/_POl6bUDELqY/SKKPrZHkhrI/AAAAAAAAD34/yPDpKB5d3gA/s320/3.0.format+add+value.GIF" />
+</li>
+<li>
+保存为rating++，名称可以自定，点击“运行”按钮。
+    <img src="http://3.bp.blogspot.com/_POl6bUDELqY/SKKPrqTAO5I/AAAAAAAAD4I/h9QuR4fIlow/s320/3.2.run.jpg" />
+</li>
+<li>
+重复第3步。
+</li>
+<li>
+重复第4步，目标字段名：RATING <br />
+    格式化原型： <code>$if($greater(%RATING%,0),$sub(%RATING%,1),0)</code> <br />
+    保存为：rating-- <br />
+    点击“运行”按钮。
+</li>
+</ol>
+
+
+<p>
+<strong>III. 设置标星界面（操作按钮）：</strong>
+</p>
+
+<ol>
+<li>
+右键工具栏，点击 Customise...
+    <img src="http://2.bp.blogspot.com/_POl6bUDELqY/SKKgVMPR42I/AAAAAAAAD4Q/x3tqs58BTf4/s320/customise.JPG" />
+</li>
+<li>
+添加(Add)一个按钮(button)，并点击Change...按钮。
+    <img src="http://2.bp.blogspot.com/_POl6bUDELqY/SKKgVKCZ3zI/AAAAAAAAD4Y/8rHQn7SXnq4/s320/custonise+buttons.jpg" />
+</li>
+<li>
+Command group中选择“Context menu items”，Item group中选择“Now Playing item”，
+    Command中选择“标签/脚本/rating++”。OK保存后回到Command picker窗口，设置按钮图片什么。
+    注：支持bmp和png格式的图片，但是png图片如果有透明的部分，则可能不会显示。
+    <img src="http://4.bp.blogspot.com/_POl6bUDELqY/SKKgVeJuaXI/AAAAAAAAD4g/ToVomGPvQSA/s320/command+picker.jpg" />
+</li>
+<li>
+重复第2步。Command中选择“标签/脚本/rating--”其他雷同。
+</li>
+<li>
+最后OK保存就可以了，下面是配置完成的界面，两个带星星的按钮功能分别是标星自减和自增。
+</li>
+</ol>
+
+<p>
+<img src="http://4.bp.blogspot.com/_POl6bUDELqY/SKRIW4GiHEI/AAAAAAAAD4o/fN-UJ17Kp1Q/s320/foobar200.jpg" />
+</p>
+
+
+<p>
+ blog:datetime=2008/8/14 14:49:23:tags=Foobar2000
 </p>
     </article>
     </div>

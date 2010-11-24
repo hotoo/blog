@@ -18,7 +18,7 @@ function onSearch(){
     return false;
 }
 </script>
-<title>用 Vimwiki 写博客 - 闲耘™.博客</title>
+<title>神奇的邮件来 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -44,116 +44,85 @@ function onSearch(){
 <div id="container">
     <article>
 
-<h1 id="toc_1">用 Vimwiki 写博客</h1>
-
+<h1 id="toc_1">神奇的邮件</h1>
 <p>
-由于众所周知的缘故，<a href="http://blog.xianyun.org/">我的博客</a> 被消失了。
-在国内买域名或主机都是十分不靠谱的事，所以目前没有重新开独立博客的打算。
-而使用第三方博客服务也同样不靠谱，目前只同步在 Google Blogger 上。
+今天收到一封来自google.com域的垃圾邮件，如图：
 </p>
 
 <p>
-把东西都放在自己的计算机里算是比较可靠的方式了，
-我计划使用 Vim + Vimwiki + Dropbox 来搭建自己的特殊博客系统。
-</p>
-
-<h2 id="toc_1.1">原理</h2>
-<p>
-使用 Vim 这个极致的编辑器，加上 Vimwiki 这个优秀的插件，
-可以用 Wiki 语法来写日志，<del>1. 然后由 Dropbox 自动同步与发布，</del>
-<del>2. 已经改为 SVN 提交到 Google Code（生成的 HTML 文件需要设置 svn:mime-type 为 text/html），</del>
-3. 现在是用 Git 提交到 <a href="http://hotoo.github.com">hotoo.github.com</a>。
-整体上来说这个系统基本完好，<del>除了域名稍稍缺憾之外，</del>Github 支持绑定第三方域名。
-</p>
-
-<h2 id="toc_1.2">搭建步骤</h2>
-<p>
-如果你看过 <a href="http://code.google.com/p/vim-script-cn/">Vim Script 文档中文计划</a>
-的介绍，下面有写内容大概已经熟悉，这里作为完整的技巧一并介绍：
-</p>
-<ol>
-<li>
-确认正确安装了 <a href="http://www.vim.org">Vim</a> 和
-    <a href="http://www.vim.org/scripts/script.php?script_id=2226">Vimwiki</a>。
-</li>
-<li>
-如果安装了 <a href="http://www.vim.org/scripts/script.php?script_id=2540">snipMate</a>(可选)
-    在 $VIM/vimfiles/snippets/ 下新建一个 vimwiki.snippets 文件（已有则打开文件）。
-    在 vimwiki.snippets 中添加自己的博客格式模板，例如我的：
-<pre>
-snippet blog
-    %\title $1 (注意："title" 前面的 "\" 去掉)
-
-    = ${1:title} =
-    ${2:content}
-
-     blog:datetime=`strftime("%Y/%m/%d %H:%M:%S")`:tags=${3}
-</pre>
-</li>
-<li>
-因为 Vimwiki 和 snipMate 的 <code>&lt;Tab&gt;</code> 热键冲突，
-    可以将 $VIM/vimfiles/ftplugin/vimwiki.vim 中的
-<pre>
-inoremap &lt;expr&gt; &lt;buffer&gt; &lt;Tab&gt; vimwiki_tbl#kbd_tab()
-</pre>
-    换成其他的热键，例如：
-<pre>
-inoremap &lt;expr&gt; &lt;buffer&gt; &lt;C-Tab&gt; vimwiki_tbl#kbd_tab()
-</pre>
-</li>
-<li>
-到此，在 .wiki 文件中输入 <code>blog&lt;Tab&gt;</code> 就展开博客模板了。
-</li>
-<li>
-在 vimrc 的 <code>g:vimwiki_list</code> 中加入一个 wiki，例如我的：
-<pre>
-let g:vimwiki_list = [
-    \ {...},
-    \ {...},
-    \ {...},
-    \ {
-        \ 'path'        : 'D:\My Dropbox\blog',
-      " \ 'path_html'   : 'D:\My Dropbox\Public\blog',
-      " \ 'path_html'   : 'D:\wrokbench\hotoo.googlecode.com\blog',
-        \ 'path_html'   : 'D:\wrokbench\hotoo.github.com\blog',
-        \ 'html_header' : 'D:\My Dropbox\blog\template\header.tpl',
-        \ 'html_footer' : 'D:\My Dropbox\blog\template\footer.tpl'
-    \ }
-\ ]
-</pre>
-</li>
-</ol>
-
-<h2 id="toc_1.3">技巧</h2>
-<p>
-这样我使用 <code>4&lt;leader&gt;ww</code>(一般是<code>4\ww</code>) 就可以快速启动博客 Wiki 首页并进行编辑了。
-Wiki 文件保存在 Dropbox 私有目录下，生成的 html 文件保存在公开目录。
+<img src="http://4.bp.blogspot.com/_POl6bUDELqY/R-r61x4EHsI/AAAAAAAADu0/KYTXh23Y-gs/s320/paabgvr%40google.com.jpg" />
 </p>
 
 <p>
-草稿日志的 Wiki 文件中加入 <code>%nohtml</code> 不转成 HTML，索引页用 HTML 注释
-<code>&lt; !-- --&gt;</code> （去掉 ! 前面的空格）就可以了。写好想发布时，
-修改对应代码并 <code>:Vimwiki2HTML</code> 即可。
+当然，这个邮件地址是虚假的，它被Gmail自动放在了Spam里。邮件地址下面的红色警戒条上写着
 </p>
+<blockquote>
+Warning: This message may not be from whom it claims to be.
+Beware of following any links in it or of providing the sender with any personal information.
+<a href="http://mail.google.com/support/bin/answer.py?ctx=%67mail&amp;hl=en&amp;answer=8253">Learn more</a>
+</blockquote>
 
-<h2 id="toc_1.4">模板</h2>
-<p>
-可以直接查看源码得到，或者来邮件索取。
-</p>
 
-<h2 id="toc_1.5">评论系统</h2>
 <p>
-可以使用 <a href="http://disqus.com/">disq.us</a>。
-</p>
-
-<h2 id="toc_1.6">搜索</h2>
-<p>
-使用 Google AJAX Search API，详细可以参考老肥博客的
-<a href="http://fis.io/ajax-google-custom-search-engine.html">打造完美的 ajax 版 Google 自定义搜索</a>
+这种虚假的邮件地址来源很常见，而且我还收到一些邮件地址不合法的邮件，甚至还收到收件人不是我的灵异邮件。
 </p>
 
 <p>
- blog:datetime=2010/03/29 09:41:13:tags=Vim,Wiki,Vimwiki,Dropbox
+但是，纵然这封邮件的地址很假，纵然这封邮件被放在了垃圾邮件箱，纵然这封邮件本身也是广告内容，
+我在这里还是要提一下这封邮件本身，他是一封公益广告邮件，内容是拯救西北的沙化，绿化西北，防止沙尘暴。
+</p>
+
+
+<p>
+下面是引用原文：
+</p>
+<blockquote>
+用您善良的心灵，请友善的点击一下吧!Http://www.net114.com/green/拯救地址，携手绿色西北行动用我们的 爱心我们的 责任我们的 双手<a href="Http://www.net114.com/green/">Http://www.net114.com/green/</a>
+支持 绿 西北行动让沙尘暴不再肆虐 让 绿色 驱赶贫困让我们传递这个共同的责任!请友善的点击一下吧!Http://www.net114.com/green/<a href="Http://www.net114.com/green/">Http://www.net114.com/green/</a>
+</blockquote>
+
+<p>
+拷贝过来的文本已经失去了原文的格式，这里不做调整。
+</p>
+
+<p>
+我看过文中提到的地址，下面发一些里面的牛图：
+</p>
+
+<p>
+<img src="http://1.bp.blogspot.com/_POl6bUDELqY/R-r9xB4EHtI/AAAAAAAADu8/4YhslvoqEKI/s320/ShaChengBaoII.jpg" />
+中国许多地区被沙化。
+</p>
+
+<p>
+<img src="http://2.bp.blogspot.com/_POl6bUDELqY/R-r98R4EHuI/AAAAAAAADvE/oL2Bl_595xs/s320/ShaChengBao.jpg" />
+肆虐的沙尘暴。
+</p>
+
+<h2 id="toc_1.1">UPDATE: 又是神奇的邮件 (2008/3/28)</h2>
+<p>
+昨天收到的神奇邮件令我诧异不止，不想今天又收到一封更为神奇的邮件，
+它的来源是我自己的邮箱地址，却不是我发给自己的：
+</p>
+
+
+<p>
+同样，它被放在了垃圾收件箱，同样打上了警告标语
+</p>
+<blockquote>
+Warning: This message may not be from whom it claims to be.
+Beware of following any links in it or of providing the sender with any personal information. Learn more
+</blockquote>
+
+<p>
+邮件的内容为空，而标题则是RE...。你哪怕发给我一些广告也好啊，我想，现在这样让我怎么给你的身份定位呢？
+你可能怀疑这是我发给自己的作秀邮件，但是我的邮件都会带上个性签名。而且我也尝试过，
+Gmail不会将发给自己的邮件当作垃圾邮件，也不会打上警告标语。
+</p>
+
+
+<p>
+ blog:datetime=2008/3/27 15:56:44:tags=
 </p>
     </article>
     </div>
