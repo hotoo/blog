@@ -99,7 +99,7 @@ ul ul, ul ol, ol ol, ol ul {margin-top: 0.5em; margin-bottom: 0.5em;}
 li{margin:0.3em auto; line-height:1.4em;}
 dt {font-weight: bold;}
 img {border:none; padding:5px;
-    -moz-box-shadow:0 0 8px #666; -webkit-box-shadow:0 0 8px #666; box-shadow:0 0 8px #666;
+    -moz-box-shadow:0 0 8px #ccc; -webkit-box-shadow:0 0 8px #ccc; box-shadow:0 0 8px #ccc;
     -moz-border-radius:4px; -khtml-border-radius:4px; -webkit-border-radius:4px; border-radius:4px;
 }
 a:hover img{
