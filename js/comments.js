@@ -1,4 +1,7 @@
 (function(){
+    // 这些是在 hotoo.github.com 时开启评论的日志。
+    // 如果当前日志是这些里面的，则使用老的评论 disqus_url
+    // 否则，设置 disqus_identifier 为当前日志名，方便域名迁移。
     var Er={
         "the-duplicate-element":1,
         "form-in-action":1,
@@ -41,7 +44,55 @@
         "performance-of-arguments-to-array":1,
         "index-near-the-content":1,
         "place-of-lift-floor-control-panel":1,
-        "safari-4-select-bug":1
+        "safari-4-select-bug":1,
+        "reverse-search":1,
+        "cpp-check-type":1,
+        "impoved-fold-for-vim":1,
+        "vim-cue":1,
+        "vim-css3":1,
+        "vim-html5":1,
+        "validator-for-vim":1,
+        "fuck-gfw-with-tor":1,
+        "firefox-profile-and-multi-instance":1,
+        "map-home-key-for-vim":1,
+        "asx-snippets-for-vim":1,
+        "vim-for-cpp-dev":1,
+        "vim-fonts":1,
+        "let-vim-to-access-remove-resources":1,
+        "humility":1,
+        "jingmi-tea":1,
+        "use-vim-view-html-src":1,
+        "blogday-2009":1,
+        "crazy-performance":1,
+        "menu-item-icons":1,
+        "css-names-with-cn-en-unicode":1,
+        "duplicate-bookmarks":1,
+        "css-code-style":1,
+        "web-design-for-feature":1,
+        "talk-about-popup-window":1,
+        "search-expreience":1,
+        "particulars-of-right-click-menu":1,
+        "upgrad-your-browser":1,
+        "the-god-of-editor":1,
+        "form-design-for-unknow-options":1,
+        "status-pattern":1,
+        "tags-pattern":1,
+        "crumb-navigation":1,
+        "menu-button-improved":1,
+        "how-to-peel-pencil":1,
+        "lift-button-design":1,
+        "after-written-examination":1,
+        "whitehousegov-in-singapore":1,
+        "idea-from-email-srot":1,
+        "dignity":1,
+        "after-nterview":1,
+        "ghost-hand":1,
+        "strange-dream":1,
+        "gmail-labs-multiple-inboxes":1,
+        "remove-msn-9-ad":1,
+        "javascript-vars-scope":1,
+        "open-basketball-field":1,
+        "family-tree-builder-3-released":1
     };
     var path = location.pathname;
     if(!("/"==path || "/index.html"==path || /\/archive-\d{4}\.html$/.test(path))){
@@ -49,20 +100,27 @@
             b=(p in Er && 1==Er[p]);
         initComment(p, b);
     }else{
-        initCommentCount();
+        initCommentCount(Er);
     }
 
 })();
 
+/**
+ * var disqus_identifier; [Optional but recommended: Define a unique identifier (e.g. post id or slug) for this thread]
+ */
+var disqus_identifier, disqus_url;
 var disqus_shortname = 'hotoo';
-function initCommentCount(){
+function initCommentCount(Er){
     var cont=document.getElementById("container");
     var a=cont.getElementsByTagName("a");
     for(var i=a.length-1,disqus_url; i>=0; i--){
         if(a[i].parentNode.tagName.toLowerCase()!="li"){continue;}
         var cmt=document.createElement("a");
         cmt.className="comment-count";
-        disqus_url = "http://hotoo.github.com/blog"+a[i].pathname;
+        var path=a[i].pathname,
+            p=path.replace(/.*\/([a-zA-Z0-9_-]+)\.html$/, "$1"),
+            b=(p in Er && 1==Er[p]);
+        disqus_url = b?path:"http://hotoo.github.com/blog"+path;
         cmt.href=disqus_url+"#disqus_thread";
         cmt.appendChild(document.createTextNode("评论"));
         var span=document.createElement("span");
@@ -78,18 +136,12 @@ function initCommentCount(){
     (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
 }
 
-/**
- * var disqus_identifier; [Optional but recommended: Define a unique identifier (e.g. post id or slug) for this thread]
- */
-var disqus_identifier, disqus_url;
 function initComment(p, b){
     if(b){
         disqus_url = "http://hotoo.github.com/blog"+location.pathname;
     }else{
         disqus_identifier = p;
     }
-    if(window.console && window.console.log){window.console.log(disqus_url);}
-    if(window.console && window.console.log){window.console.log(disqus_identifier);}
 
     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
     dsq.src = 'http://hotoo.disqus.com/embed.js';
