@@ -101,43 +101,39 @@ function onSearch(){
 （除非你的命令有错误，被当作消息发送）。
 </p>
 
-<p>
-命令中带有 <code>#</code> 的表示参数，一般都是数值。
-</p>
-
 <dl>
 <dt><code>//help</code></dt>
 <dd>        查看所有可用的命令。</dd>
-<dt><code>//nick</code></dt>
-<dd>        新昵称:  更改昵称</dd>
+<dt><code>//nick 新昵称</code></dt>
+<dd> 更改自己的昵称</dd>
 <dt><code>//online</code></dt>
-<dd>      查看在线用户</dd>
+<dd>      查看当前在线的用户。</dd>
 <dt><code>//m 昵称 消息</code></dt>
-<dd> PM某人</dd>
+<dd> 给指定昵称的人发送私信。</dd>
 <dt><code>//iam</code></dt>
-<dd>         自己的状态</dd>
+<dd>         查看自己的状态。</dd>
 <dt><code>//stop secs</code></dt>
-<dd>   暂停</dd>
+<dd>   暂停接收消息 secs 秒。</dd>
 <dt><code>//continue</code></dt>
-<dd>    继续(同 //stop -1)</dd>
+<dd>    恢复接收消息，可用于恢复之前的暂停操作(同 <code>//stop -1</code>)</dd>
 <dt><code>//block FID</code></dt>
-<dd>   阻止某人的消息</dd>
+<dd>   阻止某特定 Fixed ID(FID ) 的人发送的消息。</dd>
 <dt><code>//unblock FID</code></dt>
-<dd> 取消阻止</dd>
+<dd> 取消阻止某特定 FID 的人发送的消息。</dd>
 <dt><code>//setid FID</code></dt>
 <dd>   更改自己的 FID (仅一次机会)</dd>
 <dt><code>//showinfo FID</code></dt>
-<dd>查看某人的信息</dd>
+<dd>查看某特定 FID 的人的资料</dd>
 </dl>
 
 <p>
-更多内容参考 <a href="http://wiki.hotoo.me/vimwiki/Gtalk.html">GTalk</a>。
+更多内容参考 <a href="http://io43.com/io43.GtalkGroup/cmds/">http://io43.com/io43.GtalkGroup/cmds/</a> 和 <a href="http://wiki.hotoo.me/Gtalk.html">GTalk</a>。
 </p>
 
 <h2 id="toc_1.3">《群规》</h2>
 <blockquote>
 0. 自由开放，自重互爱。<br />
-1. 管理员不得将 vimcn@chatterous.com 设置为 Private 状态。<br />
+1. 管理员不得将 vim-cn@appspot.com 设置为私有状态，保证入、退群都没有任何障碍。<br />
 2. 管理员不得以任何理由审查聊天信息，禁言、踢人须得至少 2 位管理员同意。<br />
 3. 允许偏见，不要求中立；但尽量不要有歧视，侮辱，诽谤或人身攻击行为。<br />
 4. 允许闲聊，不禁止灌水，但抽水机除外，请至少言之有物。<br />
@@ -145,8 +141,14 @@ function onSearch(){
 </blockquote>
 
 <p>
-我之前也有试玩过将 vimcn 群设置为 Private，记得当时感觉非常不好，作为新用户会遇到很多麻烦。
-另外 Private 群也不出现在 chatterous.com 列表中，新人很难找到，@join 的时候也会遇到问题。
+由于源码的缘故，早期加入 vim-cn@appspot.com 需要管理员审核，新人需要等待管理员审核
+之后才能够完成入群，对新人和管理员来说都非常不便。
+</p>
+
+<p>
+<del>我之前也有试玩过将 vimcn@chattous.com 群设置为 Private，记得当时感觉非常不好，</del>
+<del>作为新用户会遇到很多麻烦。另外 Private 群也不出现在 chatterous.com 列表中，</del>
+<del>新人很难找到，@join 的时候也会遇到问题。</del>
 </p>
 
 <p>
