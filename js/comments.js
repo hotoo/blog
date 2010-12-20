@@ -95,7 +95,7 @@
         "family-tree-builder-3-released":1
     };
     var path = location.pathname;
-    if(!("/"==path || "/index.html"==path || /\/archive-\d{4}\.html$/.test(path))){
+    if(!("/"==path || "/index.html"==path || /\/archive-\d{4}\.html$/.test(path) || "/blog/"==path || "/blog/index.html"==path)){
         var p=path.replace(/.*\/([a-zA-Z0-9_-]+)\.html$/, "$1"),
             b=(p in Er && 1==Er[p]);
         initComment(p, b);
@@ -120,7 +120,8 @@ function initCommentCount(Er){
         var path=a[i].pathname,
             p=path.replace(/.*\/([a-zA-Z0-9_-]+)\.html$/, "$1"),
             b=(p in Er && 1==Er[p]);
-        disqus_url = b?path:"http://hotoo.github.com/blog"+path;
+            if(window.console && window.console.log){window.console.log(p, Er[p], b);}
+        disqus_url = b?"http://hotoo.github.com/blog"+path : path;
         cmt.href=disqus_url+"#disqus_thread";
         cmt.appendChild(document.createTextNode("评论"));
         var span=document.createElement("span");
