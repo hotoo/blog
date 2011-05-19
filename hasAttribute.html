@@ -18,7 +18,7 @@ function onSearch(){
     return false;
 }
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>深入 hasAttribute - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -44,30 +44,81 @@ function onSearch(){
 <div id="container">
     <article>
 
-<h1 id="toc_1">闲耘™.博客</h1>
-<ol>
-<li>
-<a href="hasAttribute.html">深入 hasAttribute (2011/5/19)</a>
-</li>
-<li>
-<a href="window.close.html">window.close() (2011/04/26)</a>
-</li>
-<li>
-<a href="javascript-exceptions.html">JavaScript 异常 (2011/04/03)</a>
-</li>
-<li>
-<a href="quadrant-2.0.html">四象限法2.0 (2011/03/01)</a>
-</li>
-<li>
-<a href="timed-array-processing.html">关于 JavaScript 分时加载 (2011/03/01)</a>
-</li>
-<li>
-<a href="timed-tree-processing.html">树形控件的分时装载 (2011/03/01)</a>
-</li>
-</ol>
+<h1 id="toc_1">深入 hasAttribute</h1>
 
 <p>
-<a href="archive-2010.html">« Older(2010)</a> | <strong>2011</strong>
+众所周知，IE 的 HTMLElement 对象不支持 hasAttribute 方法，于是有了如下实现：
+它针对不支持 hasAttribute 方法的浏览器，检查 getAttribute 得到的是否等于 null，
+如果是 null 则表明这个 HTMLElement 不存在指定的 Attribute。很聪明的一个方法。
+</p>
+
+<pre class="javascript">
+function hasAttr(elem, attr){
+    if(elem.hasAttribute){
+        return elem.hasAttribute(attr);
+    }
+    return null!=elem.getAttribute(attr);
+}
+</pre>
+
+<p>
+最近写了个原理简单的可编辑 Combox/Select 控件，用到了这个方法来检查目标 select
+对象是否存在如 multiple, editable 这样的属性，来实现不同的 Combox 版本。其他
+浏览器上跑的很好，但是在 IE6 上却总是被初始化为 multiple 的实例，很明显，这个
+hasAttribute 的实现出问题了。
+</p>
+
+<p>
+原理针对 IE6，还有稍多一点的特殊性：
+</p>
+<ul>
+<li>
+input.getAttribute("checked") 返回 Boolean 值，true/false；
+</li>
+<ul>
+<li>
+input[type=checkbox|radio].getAttribute("checked") 根据他的 checked 状态相关；
+</li>
+<li>
+input[type=others...].getAttribute("checked") 始终返回 false；
+</li>
+</ul>
+<li>
+select.getAttribute("multiple") 返回 Boolean 值；
+</li>
+<li>
+select&gt;option.getAttribute("selected") 返回 Boolean 值。
+</li>
+</ul>
+
+<p>
+虽然可以通过 getAttribute("checked") 判断 checkbox/radio 的属性状况，但对于
+其他类型的 input 元素，是无法准确获得 checked 属性的。
+</p>
+
+<p>
+下面是比较完整一点的实现：
+</p>
+
+<pre class="javascript">
+function hasAttr(elem, attr){
+    var tag = elem.tagName.toLowerCase();
+    attr = attr.toLowerCase();
+    if(elem.hasAttribute){
+        return elem.hasAttribute(attr);
+    }
+    if(navigator.userAgent.indexOf("MSIE 6")&gt;0 &amp;&amp;
+      (("input"==tag &amp;&amp; "checked"==attr) ||
+      ("option"==tag &amp;&amp; "selected"==attr) ||
+      ("select"==tag &amp;&amp; "multiple"==attr))){
+        return elem.getAttribute(attr);
+    }
+    return null!=elem.getAttribute(attr);
+}
+</pre>
+
+<p>
+ blog:datetime=2011/05/19 21:14:47:tags=JavaScript,IE6
 </p>
     </article>
 </div>

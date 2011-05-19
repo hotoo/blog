@@ -18,7 +18,7 @@ function onSearch(){
     return false;
 }
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>树形控件的分时装载 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -44,30 +44,22 @@ function onSearch(){
 <div id="container">
     <article>
 
-<h1 id="toc_1">闲耘™.博客</h1>
+<h1 id="toc_1">树形控件的分时装载</h1>
+<p>
+异步装载树形控件节点的时机：
+</p>
 <ol>
 <li>
-<a href="hasAttribute.html">深入 hasAttribute (2011/5/19)</a>
+传统方式是展开节点时再装载子节点；
 </li>
 <li>
-<a href="window.close.html">window.close() (2011/04/26)</a>
-</li>
-<li>
-<a href="javascript-exceptions.html">JavaScript 异常 (2011/04/03)</a>
-</li>
-<li>
-<a href="quadrant-2.0.html">四象限法2.0 (2011/03/01)</a>
-</li>
-<li>
-<a href="timed-array-processing.html">关于 JavaScript 分时加载 (2011/03/01)</a>
-</li>
-<li>
-<a href="timed-tree-processing.html">树形控件的分时装载 (2011/03/01)</a>
+预装载子节点（即展开节点时，预装载到孙级节点。
+    任何可见的节点，如果有子节点，则其子节点不是已经装载好，就是在装载的网路上）。
 </li>
 </ol>
 
 <p>
-<a href="archive-2010.html">« Older(2010)</a> | <strong>2011</strong>
+ blog:datetime=2011/03/01 22:18:02:tags=Tree,JavaScript,UED
 </p>
     </article>
 </div>
