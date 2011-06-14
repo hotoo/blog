@@ -1,4 +1,45 @@
 (function(){
+
+    function lines(elem){
+        var code = elem.innerHTML;
+        //var m = code.match(/\r\n|\r|\n/g);
+        //var l = (m ? m.length : 0)+1;
+        var m = code.split('\n');
+        var l = m.length;
+        if(m[0]==""){l -= 1;}
+        if(m[m.length-1]==""){l -= 1;}
+
+        var container = document.createElement("div");
+        container.className = "codes";
+
+        var content = document.createElement("div");
+        content.className = "code";
+
+        line = document.createElement("pre");
+        line.className = "line";
+        line.style.width = (String(l).length+1)+"em";
+        elem.style.marginLeft = (String(l).length+1)+"em";
+        var ln = [];
+        for(var i=1; i<=l; i++){
+            ln.push('<a name="L'+i+'" href="#L'+i+'">'+i+'</a>');
+        }
+        if("innerText" in line && "outerHTML" in line){
+            line.innerHTML = ln.join("<br/>");
+        }else{
+            line.innerHTML = ln.join("\n");
+        }
+
+        container.appendChild(content);
+        container.appendChild(line);
+        elem.parentNode.insertBefore(container, elem);
+        content.appendChild(elem);
+    }
+
+    var pre = document.getElementsByTagName("pre");
+    for(var i=pre.length-1; i>=0; i--){
+        lines(pre[i]);
+    }
+
     // 这些是在 hotoo.github.com 时开启评论的日志。
     // 如果当前日志是这些里面的，则使用老的评论 disqus_url
     // 否则，设置 disqus_identifier 为当前日志名，方便域名迁移。
