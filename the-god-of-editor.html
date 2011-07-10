@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
 <head>
 <!--[if IE]><script type="text/javascript" src="js/html5.js"></script><![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
+<meta charset="UTF-8" />
 <meta name="generator" content="gvim" />
 <meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
 <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -43,6 +41,7 @@ function onSearch(){
 </header>
 <div id="container">
     <article>
+        
 
 <h1 id="toc_1">编辑器之神</h1>
 <p>
@@ -76,46 +75,46 @@ function onSearch(){
 <ol>
 <li>
 代码着色
-</li>
+
 <li>
 现代化的代码折叠方式
-</li>
+
 <li>
 大纲视图
-</li>
+
 <li>
 代码压缩与格式化
-</li>
+
 <li>
 文本比较
-</li>
+
 <li>
 文本书签
-</li>
+
 <li>
 文本拖放
-</li>
+
 <li>
 多模式编辑
-</li>
+
 <li>
 内联搜索模式
-</li>
+
 <li>
 在滚动条或附近使用彩色条纹标识状态
-</li>
+
 <li>
 自动识别文件编码
-</li>
+
 <li>
 可扩展
-</li>
+
 <li>
 项目管理支持
-</li>
+
 <li>
 二进制编辑支持
-</li>
+
 </ol>
 
 
@@ -125,69 +124,69 @@ function onSearch(){
     基本上现在的编辑器都支持代码着色，虽然使用方式各不相同，
     但是使用效果基本可以达到一致，没什么要挑剔的。不过 Vim 的配色模式不错，
     另外应该提供导入到处配色模式。
-</li>
+
 <li>
 现代化的代码折叠方式
     代码折叠是一项如此受人喜爱的创造发明，不支持代码折叠你都不好意思更人打招呼。
     不过 Editplus 和 Vim 的代码折叠方式比较原始，默认情况下只识别缩进后的文本/代码，
     而且Vim左边的折叠按钮更是土到掉渣。
-</li>
+
 <li>
 大纲视图
     Eclipse精于此道，自带的大纲视图对 Java，C++，PHP 等支持都很好，
     而 Aptana 对 Javascript 的大纲视图更是令人称道。
-</li>
+
 <li>
 代码压缩与格式化
     Vim的代码格式化做的很不足，有很多时候格式化不到位。Eclipse及其插件做的比较完美。
-</li>
+
 <li>
 文本比较。<br />
     Vim 和 Eclipse 都做的很好。
-</li>
+
 <li>
 文本书签<br />
     要在大段、篇幅很长的文本/代码中跳跃阅读，并能轻松回到原来的位置上，
     书签就显得尤为重要。Vim 的 mark 插件对文本书签支持的很好。
-</li>
+
 <li>
 文本拖放<br />
     在不想使用复制/剪贴影响剪贴板内容的情况下很有用。
     不过 Vim 默认不支持，Editplus 和 Eclipse 做的很好。
-</li>
+
 <li>
 多模式编辑<br />
     Vim 和 Emacs 的多模式编辑，舒适到不行。
-</li>
+
 <li>
 内联搜索模式<br />
     Vim 的内联搜索模式是如此的浑然天成，并且支持强劲的正则表达式匹配模式。
-</li>
+
 <li>
 在滚动条或附近使用彩色条纹标识状态<br />
     Eclipse的全局搜索，Chrome浏览器的搜索，Beyond Compare 2的文本比较，
     都有在恰当的位置标识出所有结果集在编辑器的全局大体位置，
     使用滚动条拖放到某位置，即可看到对应的搜索结果。
-</li>
+
 <li>
 自动识别文件编码<br />
     Ediplus 做的最为精湛，Vim 也有一个不错的插件支持。
-</li>
+
 <li>
 可扩展<br />
     Eclipse 和 Vim 的扩展性较强。
-</li>
+
 <li>
 项目管理支持<br />
     作为 IDE，Eclipse 当然表现强劲。Editplus 也有一个原始的项目管理功能。
     编辑器本身可以没有项目管理功能集成，这个可以交给更专业的项目管理软件来做，
     编辑器可以实现某些接口来集成或挂载项目管理功能。
-</li>
+
 <li>
 二进制编辑支持<br />
     一般人并不常用，如果在不影响前面的功能和编辑器效率的情况下，
     加上这个功能也未尝不可。
-</li>
+
 </ol>
 
 <p>
@@ -203,9 +202,69 @@ function onSearch(){
 <p>
  blog:datetime=2009/07/24 22:00:28:tags=Editor,Vim
 </p>
-    </article>
-</div>
 
+        <g:plusone></g:plusone>
+    </article>
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
 <div>
     <section>
         <div id="disqus_thread"></div>
@@ -215,6 +274,7 @@ function onSearch(){
         </noscript>
     </section>
 </div>
+<script type="text/javascript" src="js/Vimlike.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 <footer>
     <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
@@ -231,5 +291,6 @@ try {
 var pageTracker=_gat._getTracker("UA-2048484-1");
 pageTracker._trackPageview();
 }catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
 </body>
 </html>

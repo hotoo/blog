@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
 <head>
 <!--[if IE]><script type="text/javascript" src="js/html5.js"></script><![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
+<meta charset="UTF-8" />
 <meta name="generator" content="gvim" />
 <meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
 <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -43,6 +41,7 @@ function onSearch(){
 </header>
 <div id="container">
     <article>
+        
 
 <h1 id="toc_1">用 Vimwiki 写博客</h1>
 
@@ -75,7 +74,7 @@ function onSearch(){
 <li>
 确认正确安装了 <a href="http://www.vim.org">Vim</a> 和
     <a href="http://www.vim.org/scripts/script.php?script_id=2226">Vimwiki</a>。
-</li>
+
 <li>
 如果安装了 <a href="http://www.vim.org/scripts/script.php?script_id=2540">snipMate</a>(可选)
     在 $VIM/vimfiles/snippets/ 下新建一个 vimwiki.snippets 文件（已有则打开文件）。
@@ -89,7 +88,7 @@ snippet blog
 
      blog:datetime=`strftime("%Y/%m/%d %H:%M:%S")`:tags=${3}
 </pre>
-</li>
+
 <li>
 因为 Vimwiki 和 snipMate 的 <code>&lt;Tab&gt;</code> 热键冲突，
     可以将 $VIM/vimfiles/ftplugin/vimwiki.vim 中的
@@ -100,10 +99,10 @@ inoremap &lt;expr&gt; &lt;buffer&gt; &lt;Tab&gt; vimwiki_tbl#kbd_tab()
 <pre>
 inoremap &lt;expr&gt; &lt;buffer&gt; &lt;C-Tab&gt; vimwiki_tbl#kbd_tab()
 </pre>
-</li>
+
 <li>
 到此，在 .wiki 文件中输入 <code>blog&lt;Tab&gt;</code> 就展开博客模板了。
-</li>
+
 <li>
 在 vimrc 的 <code>g:vimwiki_list</code> 中加入一个 wiki，例如我的：
 <pre>
@@ -121,7 +120,7 @@ let g:vimwiki_list = [
     \ }
 \ ]
 </pre>
-</li>
+
 </ol>
 
 <h2 id="toc_1.3">技巧</h2>
@@ -155,9 +154,69 @@ Wiki 文件保存在 Dropbox 私有目录下，生成的 html 文件保存在公
 <p>
  blog:datetime=2010/03/29 09:41:13:tags=Vim,Wiki,Vimwiki,Dropbox
 </p>
-    </article>
-</div>
 
+        <g:plusone></g:plusone>
+    </article>
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
 <div>
     <section>
         <div id="disqus_thread"></div>
@@ -167,6 +226,7 @@ Wiki 文件保存在 Dropbox 私有目录下，生成的 html 文件保存在公
         </noscript>
     </section>
 </div>
+<script type="text/javascript" src="js/Vimlike.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 <footer>
     <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
@@ -183,5 +243,6 @@ try {
 var pageTracker=_gat._getTracker("UA-2048484-1");
 pageTracker._trackPageview();
 }catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
 </body>
 </html>

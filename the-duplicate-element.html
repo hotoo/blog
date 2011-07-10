@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
 <head>
 <!--[if IE]><script type="text/javascript" src="js/html5.js"></script><![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
+<meta charset="UTF-8" />
 <meta name="generator" content="gvim" />
 <meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
 <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -43,6 +41,7 @@ function onSearch(){
 </header>
 <div id="container">
     <article>
+        
 
 <h1 id="toc_1">“方便”的副本</h1>
 <p>
@@ -124,7 +123,7 @@ Vim-like 的 <code>/</code> 快捷键用来快速定位到上面的输入框、�
     有人说翻页放到上面是一种变态，在下面没有翻页链接的情况下。<br />
     恩~~，是够变态的。<br />
     个人认为放在下面比较合适，上面的就不必了。
-</li>
+
 <li>
 类似在线音乐列表的全选/反选复选框。<br />
     支持 +Shift 多选也是一种方案。<br />
@@ -139,20 +138,80 @@ Vim-like 的 <code>/</code> 快捷键用来快速定位到上面的输入框、�
     对于非常长的列表，放置在底部可能比较合适。<br />
     另外：对于不需要思考就很可能会选择全选的内容（如唱片专辑），可以在上、下
     都提供全选及功能按钮。
-</li>
+
 <li>
 一些打着方便的旗号，甚至跨页面的副本。<br />
     有时候也许是好事，但遍地开花就不仅仅是未必了。
-</li>
+
 </ol>
 
 
 <p>
  blog:datetime=2010/10/27 23:22:29:tags=Design
 </p>
-    </article>
-</div>
 
+        <g:plusone></g:plusone>
+    </article>
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
 <div>
     <section>
         <div id="disqus_thread"></div>
@@ -162,6 +221,7 @@ Vim-like 的 <code>/</code> 快捷键用来快速定位到上面的输入框、�
         </noscript>
     </section>
 </div>
+<script type="text/javascript" src="js/Vimlike.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 <footer>
     <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
@@ -178,5 +238,6 @@ try {
 var pageTracker=_gat._getTracker("UA-2048484-1");
 pageTracker._trackPageview();
 }catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
 </body>
 </html>

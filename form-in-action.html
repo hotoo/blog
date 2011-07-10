@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
 <head>
 <!--[if IE]><script type="text/javascript" src="js/html5.js"></script><![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
+<meta charset="UTF-8" />
 <meta name="generator" content="gvim" />
 <meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
 <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -43,6 +41,7 @@ function onSearch(){
 </header>
 <div id="container">
     <article>
+        
 
 <h1 id="toc_1">Form 表单最佳实践</h1>
 
@@ -126,14 +125,14 @@ post 提交后，刷新仍是 post 提交相同的数据。
 最根本的，就是统一客户端和服务器端的编码。建议都使用 utf-8。<br />
     目前服务器上均是使用 utf-8 接受数据，所以可以考虑统一使用 utf-8 编码，
     要做的有一下几点：
-</li>
+
 <ul>
 <li>
 修改页面的 charset 设置
-</li>
+
 <li>
 .vm 文件本身保存为 utf-8 编码。
-</li>
+
 <li>
 修改编码设置：
     milan-web-base-2.0-SNAPSHOT.jar\META-INF\webx\pipeline.xml
@@ -151,17 +150,17 @@ post 提交后，刷新仍是 post 提交相同的数据。
     &lt;property name="velocimacro.library" value="macros.vm"/&gt;
 &lt;/service&gt;
 </pre>
-</li>
+
 </ul>
 <li>
 设置 form 元素的 accept-charset 属性为服务器接收数据使用的编码。<br />
     Hack in IE: <code>onsubmit="document.charset='utf-8';"</code>
-</li>
+
 <li>
 通过 JavaScript 的 <code>encodeURIComponent(key)</code> 函数转码，一般用于 AJAX 提交。<br />
     另有两个转码函数：<code>escape()</code>, <code>encodeURI()</code><br />
     解码函数分别是：<code>unescape()</code>, <code>decodeURI()</code>, <code>decodeURIComponent()</code>
-</li>
+
 </ol>
 
 
@@ -178,7 +177,7 @@ Form 表单的 onsubmit 事件在表单真正向服务器发送请求之前执�
 <li>
 一般简单的页面，直接在 form 标签中添加 onsubmit 属性:
     <code>&lt;form onsubmit="return validater(this);"&gt;...&lt;/form&gt;</code>
-</li>
+
 <li>
 按照“内容与行为分离”的思想，我们一般可以在 JavaScript 加载完成后对表单进行
     事件绑定：
@@ -189,7 +188,7 @@ form.onsubmit = function(){
     return !!this["k"].value;
 };
 </pre>
-</li>
+
 <li>
 更专业的事件绑定方法（考虑到兼容性问题，这里使用 jQuery 代码）：
 <pre>
@@ -197,7 +196,7 @@ $("#formId").submit(function(){
     return this.k.value;
 });
 </pre>
-</li>
+
 </ul>
 
 
@@ -211,11 +210,11 @@ $("#formId").submit(function(){
 删除链接的 href 指向执行删除操作的地址，链接元素绑定 onclick 事件：
     <code>&lt;a href="del.html?id=1" onclick="return window.confirm('确认删除？');"&gt;</code><br />
     这是 GET 提交方式。绑定事件处理函数的技巧同上面的 onsubmit。
-</li>
+
 <li>
 绑定 onclick 事件，并执行 AJAX 提交， return false；回调函数中可以使用动态
     更新 DOM 的方式或其他。
-</li>
+
 </ol>
 
 <p>
@@ -339,9 +338,69 @@ function validater(form){
 <p>
  blog:datetime=2010/10/27 14:35:36:tags=Design,Form
 </p>
-    </article>
-</div>
 
+        <g:plusone></g:plusone>
+    </article>
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
 <div>
     <section>
         <div id="disqus_thread"></div>
@@ -351,6 +410,7 @@ function validater(form){
         </noscript>
     </section>
 </div>
+<script type="text/javascript" src="js/Vimlike.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 <footer>
     <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
@@ -367,5 +427,6 @@ try {
 var pageTracker=_gat._getTracker("UA-2048484-1");
 pageTracker._trackPageview();
 }catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
 </body>
 </html>

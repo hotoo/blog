@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
 <head>
 <!--[if IE]><script type="text/javascript" src="js/html5.js"></script><![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
+<meta charset="UTF-8" />
 <meta name="generator" content="gvim" />
 <meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
 <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -43,6 +41,7 @@ function onSearch(){
 </header>
 <div id="container">
     <article>
+        
 
 <h1 id="toc_1">placeholder 最佳实践</h1>
 <p>
@@ -117,13 +116,13 @@ $("input[placeholder]").each(function(){
 <ul>
 <li>
 字体大小等样式要尽量和 input 一致（颜色例外）。
-</li>
+
 <li>
 使用 label 作为占位符消息的容器标签，可以加上恰当的 for 属性，实现自动关联。
-</li>
+
 <li>
 占位符的位置，可以直接使用 CSS 的相对位置实现，也可以使用 JavaScript 计算获得。
-</li>
+
 </ul>
 
 <p>
@@ -175,28 +174,88 @@ if(!("placeholder" in document.createElement("input"))){
 <ul>
 <li>
 <a href="http://diveintohtml5.org/forms.html#placeholder">diveintohtml5.org#placeholder</a>
-</li>
+
 <li>
 <a href="http://cssrainbow.cn/demos/892.html">让所有的浏览器都支持 HTML5 placeholder 属性，基于MooTools</a>
-</li>
+
 <li>
 <a href="http://www.quanlei.com/2010/09/%E8%B7%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84html5-placeholder-%E5%AE%9E%E7%8E%B0/">跨浏览器的HTML5 placeholder 实现</a>
-</li>
+
 <li>
 <a href="http://www.zhoumingzhi.com/2009/12/17/inline-form-labels/">Inline Form Labels</a>，
     <a href="http://www.zhoumingzhi.com/2010/08/10/inline-form-labels-2/">Inline Form Labels（2）</a>
-</li>
+
 <li>
 <a href="http://www.kamikazemusic.com/quick-tips/jquery-html5-placeholder-fix/">JQuery HTML5 placeholder fix</a>
-</li>
+
 </ul>
 
 <p>
  blog:datetime=2010/12/06 17:25:05:tags=JavaScript,HTML5
 </p>
-    </article>
-</div>
 
+        <g:plusone></g:plusone>
+    </article>
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
 <div>
     <section>
         <div id="disqus_thread"></div>
@@ -206,6 +265,7 @@ if(!("placeholder" in document.createElement("input"))){
         </noscript>
     </section>
 </div>
+<script type="text/javascript" src="js/Vimlike.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 <footer>
     <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
@@ -222,5 +282,6 @@ try {
 var pageTracker=_gat._getTracker("UA-2048484-1");
 pageTracker._trackPageview();
 }catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
 </body>
 </html>

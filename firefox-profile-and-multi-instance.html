@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
 <head>
 <!--[if IE]><script type="text/javascript" src="js/html5.js"></script><![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
+<meta charset="UTF-8" />
 <meta name="generator" content="gvim" />
 <meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
 <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -43,6 +41,7 @@ function onSearch(){
 </header>
 <div id="container">
     <article>
+        
 
 <h1 id="toc_1">Firefox Profile 及多实例运行</h1>
 <p>
@@ -101,19 +100,19 @@ autocmd FileType dosbatch nmap &lt;F5&gt; :exe '!"'.expand("%").'"'&lt;cr&gt;&lt
 <ul>
 <li>
 <a href="http://blog.cathayan.org/item/1543">同时运行两个 Firefox实例</a>
-</li>
+
 <li>
 <a href="http://lifehacker.com/software/firefox/geek-to-live--manage-multiple-firefox-profiles-231646.php#c896803">Geek to Live: Manage multiple Firefox profiles</a>
-</li>
+
 <li>
 <a href="http://kb.mozillazine.org/Command_line_arguments">Command line arguments</a>
-</li>
+
 <li>
 <a href="http://support.mozilla.com/zh-CN/kb/Profiles">Profiles</a>
-</li>
+
 <li>
 <a href="http://dreamsouls.net/ds/archives/220">firefox 啟動參數</a>
-</li>
+
 </ul>
 
 <p>
@@ -122,18 +121,78 @@ autocmd FileType dosbatch nmap &lt;F5&gt; :exe '!"'.expand("%").'"'&lt;cr&gt;&lt
 <ul>
 <li>
 <a href="http://www.inness.cn/archives/598.html">“Firefox 已经在运行，但是没有响应。”</a>
-</li>
+
 <li>
 <a href="http://www.anopos.com/ant/firefox-is-already-running-but-is-not-responding/">Firefox 已经在运行，但是没有响应</a> ^<a href="http://hi.baidu.com/wlwlcy/blog/item/eab5e9ce05153f0493457e5d.html">2</a>^
-</li>
+
 </ul>
 
 <p>
  blog:datetime=2010/05/10 14:37:37:tags=Firefox
 </p>
-    </article>
-</div>
 
+        <g:plusone></g:plusone>
+    </article>
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
 <div>
     <section>
         <div id="disqus_thread"></div>
@@ -143,6 +202,7 @@ autocmd FileType dosbatch nmap &lt;F5&gt; :exe '!"'.expand("%").'"'&lt;cr&gt;&lt
         </noscript>
     </section>
 </div>
+<script type="text/javascript" src="js/Vimlike.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 <footer>
     <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
@@ -159,5 +219,6 @@ try {
 var pageTracker=_gat._getTracker("UA-2048484-1");
 pageTracker._trackPageview();
 }catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
 </body>
 </html>

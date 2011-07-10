@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<head>
+<!--[if IE]><script type="text/javascript" src="js/html5.js"></script><![endif]-->
+<meta charset="UTF-8" />
+<meta name="generator" content="gvim" />
+<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />
+<link rel="alternate" type="application/atom+xml" title="Atom" href="http://vimcn.blogspot.com/feeds/posts/default" />
+<link type="text/css" rel="stylesheet" href="css/template.css" />
+<script type="text/javascript">
+function onSearch(){
+    location.href = "search.html#"+document.getElementById("input_search").value;
+    return false;
+}
+</script>
+<title>取消图片的 HTTP 请求 - 闲耘™.博客</title>
+</head>
+<body>
+<div id="wrapper">
+<header>
+<div style="float:right;">
+    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+        <input type="text" name="q" id="input_search" />
+        <input type="submit" value="搜索" />
+    </form>
+</div>
+<nav>
+    <ul>
+        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
+        <li class="actived"><a href="index.html" title="Blog">Blog</a></li>
+        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
+        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
+        <li><a href="https://twitter.com/hotoo" title="Twitter">Twitter</a></li>
+        <li class="last"><a href="http://github.com/hotoo" title="Project">Project</a></li>
+        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
+    </ul>
+</nav>
+</header>
+<div id="container">
+    <article>
+        
+
+<h1 id="toc_1">取消图片的 HTTP 请求</h1>
+
+<table>
+<tr>
+<th>
+OS
+</th>
+<th>
+Browser
+</th>
+<th>
+""
+</th>
+<th>
+null
+</th>
+<th>
+remove
+</th>
+<th>
+delete
+</th>
+<th>
+stop
+</th>
+<th>
+StopImage
+</th>
+<th>
+Stop
+</th>
+<th>
+Button
+</th>
+<th>
+Timeout
+</th>
+</tr>
+<tr>
+<td rowspan="6">
+Windows
+</td>
+<td>
+IE6,7,8
+</td>
+<td>
+√(e)
+</td>
+<td>
+√(e)
+</td>
+<td>
+II
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+21s (e)
+</td>
+</tr>
+<tr>
+<td>
+FF4,5
+</td>
+<td>
+II
+</td>
+<td>
+II
+</td>
+<td>
+II
+</td>
+<td>
+×
+</td>
+<td>
+II
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+II
+</td>
+<td>
+21s (e)
+</td>
+</tr>
+<tr>
+<td>
+Chrome12
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+II
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+II
+</td>
+<td>
+21s (e)
+</td>
+</tr>
+<tr>
+<td>
+Safari4,5
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+II
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+II
+</td>
+<td>
+21s (e)
+</td>
+</tr>
+<tr>
+<td>
+Opera9
+</td>
+<td>
+×
+</td>
+<td>
+√(e)
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+II
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+II
+</td>
+<td>
+47s (e)
+</td>
+</tr>
+<tr>
+<td>
+Opera11
+</td>
+<td>
+II
+</td>
+<td>
+√(e)
+</td>
+<td>
+II
+</td>
+<td>
+II
+</td>
+<td>
+II
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+II
+</td>
+<td>
+47s (e)
+</td>
+</tr>
+<tr>
+<td rowspan="3">
+Mac OS X
+</td>
+<td>
+Safari5
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+II
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+II
+</td>
+<td>
+1.2m (e)
+</td>
+</tr>
+<tr>
+<td>
+Chrome12
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+II
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+II
+</td>
+<td>
+1.2m (e)
+</td>
+</tr>
+<tr>
+<td>
+FF4,5
+</td>
+<td>
+II
+</td>
+<td>
+II
+</td>
+<td>
+II
+</td>
+<td>
+×
+</td>
+<td>
+II
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+II
+</td>
+<td>
+1m'15s (e)
+</td>
+</tr>
+<tr>
+<td rowspan="2">
+Ubuntu
+</td>
+<td>
+FF4,5
+</td>
+<td>
+II
+</td>
+<td>
+II
+</td>
+<td>
+II
+</td>
+<td>
+×
+</td>
+<td>
+II
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+3m'9s (e)
+</td>
+</tr>
+<tr>
+<td>
+Chrom(e/ium)12
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+II
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+3.2m (e)
+</td>
+</tr>
+</table>
+
+<ul>
+<li>
+Windows XP, Server 2003, 7.
+
+<li>
+Mac OS X 10.6.7
+
+<li>
+Ubuntu 11.04
+
+</ul>
+
+<p>
+<strong>标题注解：</strong>
+<dl>
+<dt>""</dt>
+<dd><code>img.src = ""</code></dd>
+<dt>null</dt>
+<dd><code>img.src = null</code></dd>
+<dt>revmove</dt>
+<dd><code>img.removeAttribute("src")</code></dd>
+<dt>delete</dt>
+<dd><code>delete img["src"]</code></dd>
+<dt>stop</dt>
+<dd><code>window.stop()</code></dd>
+<dt>StopImage</dt>
+<dd><code>document.execCommand("StopImage")</code></dd>
+<dt>Stop</dt>
+<dd><code>document.execCommand("Stop")</code></dd>
+<dt>Button</dt>
+<dd>Browser Stop Button.</dd>
+</dl>
+</p>
+
+<p>
+<strong>图标注解：</strong>
+<dl>
+<dt>√</dt>
+<dd>能够 Abort 图片请求，并回调 (e)onerror/(a)onabort/(l)onload 函数。</dd>
+<dt>II</dt>
+<dd>能够 Abort 图片请求，但不触发任何事件进行回调。</dd>
+<dt>≈</dt>
+<dd>部分版本支持。如 Stop/StopImage 在 .NET Framework 3.0 中取消了支持。</dd>
+<dt>×</dt>
+<dd>不能 Abort 图片请求，或不支持该方法。</dd>
+</dl>
+</p>
+
+<h2 id="toc_1.1">事件回调</h2>
+<pre class="javascript">
+var img = new Image();
+img.onload = function(){out.innerHTML += "loaded.";};
+img.onabort = function(){out.innerHTML += "aborted.";};
+img.onerror = function(){out.innerHTML += "errored.";};
+window.setTimeout(function(){
+    out.innerHTML += "before.";
+    // abort.
+    img.src = null;
+    out.innerHTML += "after." + img.complete;
+}, 2000);
+</pre>
+
+<p>
+测试结果：
+</p>
+
+<dl>
+<dt>IE</dt>
+<dd>before.errored.after.</dd>
+<dt>Opera</dt>
+<dd>before.after.errored.</dd>
+<dt>FF</dt>
+<dd>before.after.</dd>
+<dt>Chrome</dt>
+<dd>before.after.</dd>
+<dt>Safari</dt>
+<dd>before.after.</dd>
+</dl>
+
+<h2 id="toc_1.2">See Also</h2>
+<ul>
+<li>
+<a href="http://stackoverflow.com/questions/930237/javascript-cancel-stop-image-requests">http://stackoverflow.com/questions/930237/javascript-cancel-stop-image-requests</a>
+
+<li>
+<a href="http://www.sysopt.com/forum/archive/index.php/t-177147.html">http://www.sysopt.com/forum/archive/index.php/t-177147.html</a>
+
+<li>
+<a href="http://stackoverflow.com/questions/1671717/javascript-image-onabort-event-not-firing-in-firefox-chrome">http://stackoverflow.com/questions/1671717/javascript-image-onabort-event-not-firing-in-firefox-chrome</a>
+
+<li>
+<a href="http://stackoverflow.com/questions/4506160/abort-active-image-requests">http://stackoverflow.com/questions/4506160/abort-active-image-requests</a>
+
+<li>
+<a href="http://www.devguru.com/technologies/ecmascript/quickref/image.html">http://www.devguru.com/technologies/ecmascript/quickref/image.html</a>
+
+<li>
+<a href="http://stackoverflow.com/questions/930237/javascript-cancel-stop-image-requests">Javascript: Cancel/Stop Image Requests</a>
+
+<li>
+<a href="http://www.google.com/support/forum/p/Chrome/thread?tid=4bf113154d53d101&amp;hl=en">Can't you stop images from loading?</a>
+
+<li>
+window.stop()
+
+<ul>
+<li>
+<a href="http://stackoverflow.com/questions/930237/javascript-cancel-stop-image-requests">http://stackoverflow.com/questions/930237/javascript-cancel-stop-image-requests</a>
+
+<li>
+<a href="http://stackoverflow.com/questions/3146200/stop-loading-of-images-on-a-hashchange-event-via-javascript-or-jquery">http://stackoverflow.com/questions/3146200/stop-loading-of-images-on-a-hashchange-event-via-javascript-or-jquery</a>
+
+<li>
+<a href="https://developer.mozilla.org/en/DOM/window.stop">https://developer.mozilla.org/en/DOM/window.stop</a>
+
+</ul>
+<li>
+execCommand
+
+<ul>
+<li>
+<a href="http://msdn.microsoft.com/en-us/library/ms536419%28v=vs.85%29.aspx">execCommand Method</a>
+
+<li>
+<a href="http://msdn.microsoft.com/en-us/library/ms536419%28v=vs.85%29.aspx">http://msdn.microsoft.com/en-us/library/ms536419%28v=vs.85%29.aspx</a>
+
+<li>
+<a href="http://msdn.microsoft.com/en-us/library/ms533049%28v=vs.85%29.aspx">http://msdn.microsoft.com/en-us/library/ms533049%28v=vs.85%29.aspx</a>
+
+<li>
+<a href="https://developer.mozilla.org/En/Document.execCommand">https://developer.mozilla.org/En/Document.execCommand</a>
+
+</ul>
+<li>
+<a href="http://www.xiahaixia.com/2010/11/19/ie6%E4%B8%8B%E9%93%BE%E6%8E%A5onclick%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E4%B8%AD%E7%9A%84%E8%AF%B7%E6%B1%82%E8%A2%ABaborted/">IE6下链接ONCLICK事件处理中的请求被ABORTED</a>
+
+<li>
+<a href="http://www.cnblogs.com/zhyt1985/archive/2009/05/27/1490755.html">What does (Aborted) mean in HttpWatch?</a>
+    <a href="http://www.sanotes.net/html/y2008/165.html">来源</a>
+
+<li>
+<a href="http://blog.httpwatch.com/2007/11/20/error_internet_invalid_url-httpwatch/">http://blog.httpwatch.com/2007/11/20/error_internet_invalid_url-httpwatch/</a>
+
+<li>
+<a href="http://www.cnblogs.com/mayingbao/archive/2007/11/30/978530.html">HttpWatch工具简介及使用技巧</a>
+
+</ul>
+
+<p>
+ blog:datetime=2011/06/23 20:42:40:tags=JavaScript,Image,HTTP
+</p>
+
+        <g:plusone></g:plusone>
+    </article>
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+<div>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
+</div>
+<script type="text/javascript" src="js/Vimlike.js"></script>
+<script type="text/javascript" src="js/comments.js"></script>
+<footer>
+    <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
+    Copyleft &copy; 2005-2010, Power by <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
+    </p>
+</footer>
+</div>
+<script type="text/javascript">
+var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker=_gat._getTracker("UA-2048484-1");
+pageTracker._trackPageview();
+}catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
+</body>
+</html>

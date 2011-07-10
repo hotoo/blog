@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
 <head>
 <!--[if IE]><script type="text/javascript" src="js/html5.js"></script><![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
+<meta charset="UTF-8" />
 <meta name="generator" content="gvim" />
 <meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
 <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -43,52 +41,53 @@ function onSearch(){
 </header>
 <div id="container">
     <article>
+        
 
 <h1 id="toc_1">针对HTML的Snippets</h1>
 <pre>
 # @see http://www.blueidea.com/tech/web/2009/6547.asp
 snippet cc:ie
-	${3}
+	&lt;!--[if IE${1}]&gt;${2}&lt;![endif]--&gt;${3}
 snippet cc:ie5
-	${2}
+	&lt;!--[if IE 5]&gt;${1}&lt;![endif]--&gt;${2}
 snippet cc:noie5
-	${2}
+	&lt;!--[if !IE 5]&gt;${1}&lt;![endif]--&gt;${2}
 snippet cc:ie6
-	${2}
+	&lt;!--[if IE 6]&gt;${1}&lt;![endif]--&gt;${2}
 snippet cc:ie6+
-	${2}
+	&lt;!--[if gt IE 6]&gt;${1}&lt;![endif]--&gt;${2}
 snippet cc:ie6+=
-	${2}
+	&lt;!--[if gte IE 6]&gt;${1}&lt;![endif]--&gt;${2}
 snippet cc:ie6-
-	${2}
+	&lt;!--[if lt IE 6]&gt;${1}&lt;![endif]--&gt;${2}
 snippet cc:ie6-=
-	${2}
+	&lt;!--[if lte IE 6]&gt;${1}&lt;![endif]--&gt;${2}
 snippet cc:noie6
-	${2}
+	&lt;!--[if !IE 6]&gt;${1}&lt;![endif]--&gt;${2}
 snippet cc:ie7
-	${2}
+	&lt;!--[if IE 7]&gt;${1}&lt;![endif]--&gt;${2}
 snippet cc:ie7+
-	${2}
+	&lt;!--[if gt IE 7]&gt;${1}&lt;![endif]--&gt;${2}
 snippet cc:ie7+=
-	${2}
+	&lt;!--[if gte IE 7]&gt;${1}&lt;![endif]--&gt;${2}
 snippet cc:ie7-
-	${2}
+	&lt;!--[if lt IE 7]&gt;${1}&lt;![endif]--&gt;${2}
 snippet cc:ie7-=
-	${2}
+	&lt;!--[if lte IE 7]&gt;${1}&lt;![endif]--&gt;${2}
 snippet cc:noie7
-	${2}
+	&lt;!--[if !IE 7]&gt;${1}&lt;![endif]--&gt;${2}
 snippet cc:ie8
-	${2}
+	&lt;!--[if IE 8]&gt;${1}&lt;![endif]--&gt;${2}
 snippet cc:ie8+
-	${2}
+	&lt;!--[if gt IE 8]&gt;${1}&lt;![endif]--&gt;${2}
 snippet cc:ie8+=
-	${2}
+	&lt;!--[if gte IE 8]&gt;${1}&lt;![endif]--&gt;${2}
 snippet cc:ie8-
-	${2}
+	&lt;!--[if lt IE 8]&gt;${1}&lt;![endif]--&gt;${2}
 snippet cc:ie8-=
-	${2}
+	&lt;!--[if lte IE 8]&gt;${1}&lt;![endif]--&gt;${2}
 snippet cc:noie8
-	${2}
+	&lt;!--[if !IE 8]&gt;${1}&lt;![endif]--&gt;${2}
 # @see http://code.google.com/p/zen-coding/wiki/ZenHTMLElementsEn
 snippet link:css
 	&lt;link rel="stylesheet" type="text/css" href="${1:style.css}" media="${2:all}" /&gt;
@@ -105,9 +104,69 @@ snippet link:atom
 <p>
  blog:datetime=2010/04/06 13:41:32:tags=Vim,snipMate,HTML
 </p>
-    </article>
-</div>
 
+        <g:plusone></g:plusone>
+    </article>
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
 <div>
     <section>
         <div id="disqus_thread"></div>
@@ -117,6 +176,7 @@ snippet link:atom
         </noscript>
     </section>
 </div>
+<script type="text/javascript" src="js/Vimlike.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 <footer>
     <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
@@ -133,5 +193,6 @@ try {
 var pageTracker=_gat._getTracker("UA-2048484-1");
 pageTracker._trackPageview();
 }catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
 </body>
 </html>

@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
 <head>
 <!--[if IE]><script type="text/javascript" src="js/html5.js"></script><![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
+<meta charset="UTF-8" />
 <meta name="generator" content="gvim" />
 <meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
 <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -43,6 +41,7 @@ function onSearch(){
 </header>
 <div id="container">
     <article>
+        
 
 <h1 id="toc_1">汉化Family Tree Builder</h1>
 <p>
@@ -60,16 +59,16 @@ function onSearch(){
 <ol>
 <li>
 备份软件安装目录下，Lang子目录中的English.lang（也可以是其他国家的语言文件）。
-</li>
+
 <li>
 English.lang其实属于一种属性文件（properties），将每一行的第二部分翻译成中文（或合适的文本）即可。
-</li>
+
 <li>
 备份安装目录下，Res子目录中的English.bmp图片。
-</li>
+
 <li>
 制作一张32x28像素，bmp格式的中国国旗图片，命名为English.bmp，放到Res目录。
-</li>
+
 <li>
 启动程序，菜单“工具(Tools)”-“选项(Options)”，<br />
     “名字(Names)”-“Display people's names”设置为 <code>Last First (Armstong John)</code>，<br />
@@ -77,7 +76,7 @@ English.lang其实属于一种属性文件（properties），将每一行的第�
     “日期(Dates)”，Day/Month/Year format 设置为 <code>%y%-%m%-%d%</code>，<br />
     “Month/Year format”设置为 <code>%y%-%m%</code>。可以根据自己的习惯设置，<br />
     其中 <code>%m%</code> 是使用英文短格式，如Mon，在English.lang改为数字即可。
-</li>
+
 </ol>
 
 <p>
@@ -94,9 +93,69 @@ English.lang其实属于一种属性文件（properties），将每一行的第�
 <p>
  blog:datetime=2010/11/21 11:44:47:tags=
 </p>
-    </article>
-</div>
 
+        <g:plusone></g:plusone>
+    </article>
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
 <div>
     <section>
         <div id="disqus_thread"></div>
@@ -106,6 +165,7 @@ English.lang其实属于一种属性文件（properties），将每一行的第�
         </noscript>
     </section>
 </div>
+<script type="text/javascript" src="js/Vimlike.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 <footer>
     <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
@@ -122,5 +182,6 @@ try {
 var pageTracker=_gat._getTracker("UA-2048484-1");
 pageTracker._trackPageview();
 }catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
 </body>
 </html>

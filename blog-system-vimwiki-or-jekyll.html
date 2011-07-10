@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<head>
+<!--[if IE]><script type="text/javascript" src="js/html5.js"></script><![endif]-->
+<meta charset="UTF-8" />
+<meta name="generator" content="gvim" />
+<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />
+<link rel="alternate" type="application/atom+xml" title="Atom" href="http://vimcn.blogspot.com/feeds/posts/default" />
+<link type="text/css" rel="stylesheet" href="css/template.css" />
+<script type="text/javascript">
+function onSearch(){
+    location.href = "search.html#"+document.getElementById("input_search").value;
+    return false;
+}
+</script>
+<title>使用 Vimwiki 还是 Jekyll 作为博客系统？ - 闲耘™.博客</title>
+</head>
+<body>
+<div id="wrapper">
+<header>
+<div style="float:right;">
+    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+        <input type="text" name="q" id="input_search" />
+        <input type="submit" value="搜索" />
+    </form>
+</div>
+<nav>
+    <ul>
+        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
+        <li class="actived"><a href="index.html" title="Blog">Blog</a></li>
+        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
+        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
+        <li><a href="https://twitter.com/hotoo" title="Twitter">Twitter</a></li>
+        <li class="last"><a href="http://github.com/hotoo" title="Project">Project</a></li>
+        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
+    </ul>
+</nav>
+</header>
+<div id="container">
+    <article>
+        
+
+<h1 id="toc_1">使用 Vimwiki 还是 Jekyll 作为博客系统？</h1>
+
+<p>
+一直使用 Vimwiki 作为个人博客系统，今天非常荣幸收到加入
+<a href="http://planet.vim-cn.com/">Vim 中文星</a> 的邀请，需要我的提供 RSS/Atom 输出。
+</p>
+
+<p>
+但是 Vimwiki 本质上是一个 wiki 系统，通常来说都是（个人推荐）作为平板结构
+来放置信息，较少（但也支持）基于目录，尤其是基于日期时间格式的目录结构来存储
+词条（或者说日志），所以要支持基于时间的 RSS/Atom 就有一定的困难，而且貌似
+需求本身也不怎么合理，不过 github 的提交记录里是有 RSS 输出的，虽然作为博客
+订阅的意义几近于无。
+</p>
+
+<p>
+于是想是否有必要在 Wordpress 上同步更新博客（Blogger 被墙的厉害），但是发现
+很久以前（还是在拥有 xianyun.org，并使用 mail@xianyun.org）注册的 Wordpress，
+杯具的忘记密码了，注册的邮箱也不再使用，无法索取找回密码了。
+</p>
+
+<p>
+于是想：迁移到 Jekyll 怎么样？
+</p>
+
+<p>
+由于 github pages 的缘故，很早就大致了解了下 Jekyll，但是没有深入，一直主观的
+认为 Jekyll 会根据模板动态转换 markdown/textile 文件。但是更深入的了解之后
+发现，Jekyll 只是一个静态文件转换程序，通过模板引擎将数据（博客日志）和模板
+转换成静态 HTML 文件。
+</p>
+
+<ol>
+<li>
+支持 markdown, textile 语法。
+
+<li>
+支持生成 RSS, ATOM。
+
+<li>
+ruby 脚本生成静态文件。
+
+<li>
+需要将安装 ruby 和 jekyll.
+
+</ol>
+
+<p>
+而 Vimwiki 是一个基于 Vim 的 wiki 客户端程序，提供便于管理和使用的本地 wiki 支持。
+</p>
+
+<ol>
+<li>
+支持 wiki 语法。
+
+<li>
+不支持生成 RSS, ATOM。
+
+<li>
+Vim script 生成静态文件。
+
+<li>
+需要安装 Vim, Vimwiki.
+
+</ol>
+
+<p>
+我个人目前最简单的需求，就是在 Vimwiki 的基础上实现 RSS 输出的支持。不过完整
+、完美意义上来说，我还是希望有这样一个博客系统。
+</p>
+
+<ol>
+<li>
+支持 wiki, markdown, textile 或其他语法。(Vimwiki, Jekyll)
+
+<li>
+支持生成 RSS/Atom 输出. (Jekyll)
+
+<li>
+通过 Vim(script) 或其他易于安装使用的程序，将日志+模板自动生成 HTML 文件。(Vimwiki, Jekyll)
+
+<li>
+日志原始文件通过 Dropbox 或其他云服务自动同步，无需 push 到 github。(Vimwiki)
+
+<li>
+只将生成好的静态 HTML 文件 push 到 github。(Vimwiki)
+
+</ol>
+
+<h2 id="toc_1.1">延伸阅读</h2>
+<ul>
+<li>
+<a href="http://kyle.xlau.org/2009/08/13/blogging-like-a-hacker.html">像黑客一样写博客</a>
+
+<li>
+<a href="http://blog.leezhong.com/tech/2010/08/25/make-github-as-blog-engine.html">使用github作为博客引擎</a>
+
+<li>
+<a href="http://www.yangzhiping.com/tech/wordpress-to-jekyll.html">告别wordpress，拥抱jekyll</a>
+
+<li>
+<a href="http://roylez.heroku.com/2010/02/04/jekyll-on-heroku.html">在heroku上用jekyll做博客</a>
+
+<li>
+<a href="http://www.shaoshing.com/2010/04/03/blog-engine-jekyll-vs-toto/">轻量级博客工具: Jekyll vs ToTo</a>
+
+<li>
+<a href="http://blog.miaout17.net/2011/05/08/convert-wordpress-to-jekyll-and-disqus/">將Wordpress轉移到Jekyll及Disqus</a>
+
+</ul>
+
+<p>
+ blog:datetime=2011/06/19 04:38:04:tags=blog
+</p>
+
+        <g:plusone></g:plusone>
+    </article>
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+<div>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
+</div>
+<script type="text/javascript" src="js/Vimlike.js"></script>
+<script type="text/javascript" src="js/comments.js"></script>
+<footer>
+    <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
+    Copyleft &copy; 2005-2010, Power by <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
+    </p>
+</footer>
+</div>
+<script type="text/javascript">
+var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker=_gat._getTracker("UA-2048484-1");
+pageTracker._trackPageview();
+}catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
+</body>
+</html>

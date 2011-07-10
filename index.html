@@ -46,10 +46,22 @@ function onSearch(){
 <h1 id="toc_1">闲耘™.博客</h1>
 <ol>
 <li>
-<a href="parser-return-pattern.html">解析器返回模式 (2011/06/08)</a>
+<a href="non-recursion-walk-the-dom.html">非递归遍历 DOM 结构 (2011/07/10)</a>
 
 <li>
-<a href="vim-tee-2.html">趣味 Vim Tee (2011/05/26)</a>
+<a href="abort-image-request.html">取消图片请求 (2011/06/23)</a>
+
+<li>
+<a href="how-to-get-the-first-single-question-mark.html">如何取 URL 中第一个单独的问号(?) 位置 (2011/06/22)</a>
+
+<li>
+<a href="blog-system-vimwiki-or-jekyll.html">使用 Vimwiki 还是 Jekyll 作为博客系统？ (2011/6/19)</a>
+
+<li>
+<a href="parser-return-pattern.html">多种不同结果的返回模式 (2011/06/08)</a>
+
+<li>
+<a href="vim-tee-2.html">【结束】趣味 Vim Tee (2011/05/26)</a>
 
 <li>
 <a href="closure-compile.vim.html">closure-compile.vim (2011/05/26)</a>
@@ -79,8 +91,68 @@ function onSearch(){
 </p>
 
     </article>
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
 </div>
 
+<script type="text/javascript" src="js/Vimlike.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 <footer>
     <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>

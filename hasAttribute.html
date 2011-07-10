@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
 <head>
 <!--[if IE]><script type="text/javascript" src="js/html5.js"></script><![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
+<meta charset="UTF-8" />
 <meta name="generator" content="gvim" />
 <meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
 <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -43,6 +41,7 @@ function onSearch(){
 </header>
 <div id="container">
     <article>
+        
 
 <h1 id="toc_1">深入 hasAttribute</h1>
 
@@ -62,38 +61,43 @@ function hasAttr(elem, attr){
 </pre>
 
 <p>
-最近写了个原理简单的可编辑 Combox/Select 控件，用到了这个方法来检查目标 select
+最近写了个原理简单的基于 Select+Input 的可编辑 <a href="http://hotoo.me/labs/combox.html">Combox</a>
+控件，用到了这个方法来检查目标 select
 对象是否存在如 multiple, editable 这样的属性，来实现不同的 Combox 版本。其他
 浏览器上跑的很好，但是在 IE6 上却总是被初始化为 multiple 的实例，很明显，这个
 hasAttribute 的实现出问题了。
 </p>
 
 <p>
-原理针对 IE6，还有稍多一点的特殊性：
+原来针对 IE6，还有稍多一点的特殊性：
 </p>
 <ul>
 <li>
-input.getAttribute("checked") 返回 Boolean 值，true/false；
-</li>
+<code>input.getAttribute("checked")</code> 返回 Boolean 值，true/false；
+
 <ul>
 <li>
-input[type=checkbox|radio].getAttribute("checked") 根据他的 checked 状态相关；
-</li>
+<code>input[type=checkbox|radio].getAttribute("checked")</code> 根据他的 checked 状态相关；
+
 <li>
-input[type=others...].getAttribute("checked") 始终返回 false；
-</li>
+<code>input[type=others...].getAttribute("checked")</code> 始终返回 false；
+
 </ul>
 <li>
-select.getAttribute("multiple") 返回 Boolean 值；
-</li>
+<code>select.getAttribute("multiple")</code> 返回 Boolean 值；
+
 <li>
-select&gt;option.getAttribute("selected") 返回 Boolean 值。
-</li>
+<code>select&gt;option.getAttribute("selected")</code> 返回 Boolean 值。
+
 </ul>
 
 <p>
 虽然可以通过 getAttribute("checked") 判断 checkbox/radio 的属性状况，但对于
 其他类型的 input 元素，是无法准确获得 checked 属性的。
+</p>
+
+<p>
+<span class="todo">TODO:</span> checked,compact,declare,defer,disabled,ismap,multiple,nohref,noresize,noshade,nowrap,readonly,selected
 </p>
 
 <p>
@@ -120,9 +124,69 @@ function hasAttr(elem, attr){
 <p>
  blog:datetime=2011/05/19 21:14:47:tags=JavaScript,IE6
 </p>
-    </article>
-</div>
 
+        <g:plusone></g:plusone>
+    </article>
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
 <div>
     <section>
         <div id="disqus_thread"></div>
@@ -132,6 +196,7 @@ function hasAttr(elem, attr){
         </noscript>
     </section>
 </div>
+<script type="text/javascript" src="js/Vimlike.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 <footer>
     <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
@@ -148,5 +213,6 @@ try {
 var pageTracker=_gat._getTracker("UA-2048484-1");
 pageTracker._trackPageview();
 }catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
 </body>
 </html>

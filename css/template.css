@@ -160,7 +160,7 @@ table:hover{
     -moz-box-shadow:0 0 8px #666; -webkit-box-shadow:0 0 8px #666; box-shadow:0 0 8px #666;
 }
 
-    th, td{border-width:0 1px 1px 0; border-style:solid; border-color:#ccc; padding: 0.3em;}
+    th, td{border-width:0 1px 1px 0; border-style:solid; border-color:#ccc; padding: 0.3em; vertical-align:top;}
     th{background-color: #f0f0f0;}
 
 hr {border: none; border-top: 1px solid #ccc; width: 100%;}
@@ -210,3 +210,20 @@ a.comment-count{}
 footer{border-width:1px 0 0; border-style:solid; border-color:#ccc; background:#fff none; color:#999; text-align:right; margin:0; padding:5px; display:block;}
     footer p{margin:0; padding:0; font-size:.75em;}
     footer a{color:#333; margin:0 5px;}
+
+#status-bar{position:fixed; bottom:5px; right:5px;}
+#count{}
+#helper-box{
+    display:none;
+    position:fixed; top:0; left:0;
+    width:100%; height:100%;
+    background:#666 none;
+    -moz-opacity:.8; opacity:.8; -ms-filter:"alpha(opacity=80)"; filter:alpha(opacity=80); zoom:1;
+}
+#helper{
+    display:none;
+    position:fixed; top:100px; left:50%;
+    width:600px; margin-left:-300px;
+    background:#fff none;
+}
+#helper table{width:100%; margin:0;}

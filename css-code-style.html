@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
 <head>
 <!--[if IE]><script type="text/javascript" src="js/html5.js"></script><![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
+<meta charset="UTF-8" />
 <meta name="generator" content="gvim" />
 <meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
 <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -43,6 +41,7 @@ function onSearch(){
 </header>
 <div id="container">
     <article>
+        
 
 <h1 id="toc_1">样式表的书写风格</h1>
 <p>
@@ -52,11 +51,11 @@ function onSearch(){
 <ol>
 <li>
 如果定义较少，则直接放在同一行即可。
-</li>
+
 <li>
 否则，每一行书写同一类型的样式定义（如字体控制），
     不同类型的样式定义则放在不同的行。
-</li>
+
 </ol>
 
 <p>
@@ -65,13 +64,13 @@ function onSearch(){
 <ol>
 <li>
 第一个定义总是顶住左花括号，显得紧凑点，最后一个定义也紧靠着右花括号；
-</li>
+
 <li>
 每个定义间用 1 个空格分隔；
-</li>
+
 <li>
 每组定义从第 2 行开始都相对第 1 行缩进 2 个空格，每组定义间有层级关系的则缩进4个空格。
-</li>
+
 <li>
 与“淘宝的css属性顺序书写规范<sup><small>1</small></sup>”不同的，我倾向于将color定义和
     background-color和border放在一起，因为他们都（可能）有颜色值的控制，
@@ -87,7 +86,7 @@ function onSearch(){
 
     .box p{/*...*/}
 </pre>
-</li>
+
 </ol>
 
 <p>
@@ -99,23 +98,83 @@ function onSearch(){
 <ol>
 <li>
 <a href="http://blog.rexsong.com/?p=425">CSS样式表书写风格</a>
-</li>
+
 <li>
 <a href="http://blog.rexsong.com/?p=5968">再谈CSS样式表书写风格</a>
-</li>
+
 <li>
 <a href="http://www.google.com/search?hl=en&amp;newwindow=1&amp;q=%E6%B7%98%E5%AE%9D%E7%9A%84css%E5%B1%9E%E6%80%A7%E9%A1%BA%E5%BA%8F%E4%B9%A6%E5%86%99%E8%A7%84%E8%8C%83&amp;lr=lang_zh-CN%7Clang_zh-TW&amp;aq=f&amp;oq=&amp;aqi=">淘宝的css属性顺序书写规范</a>(出处未知，似乎是淘宝 <a href="http://htmlcssjs.com/blog/">段正淳</a> 的作品，
     但是其博客及淘宝UED博客都无找到原版)<sup><small>1</small></sup>
-</li>
+
 </ol>
 
 
 <p>
  blog:datetime=2009/08/12 21:28:33:tags=CSS
 </p>
-    </article>
-</div>
 
+        <g:plusone></g:plusone>
+    </article>
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
 <div>
     <section>
         <div id="disqus_thread"></div>
@@ -125,6 +184,7 @@ function onSearch(){
         </noscript>
     </section>
 </div>
+<script type="text/javascript" src="js/Vimlike.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 <footer>
     <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
@@ -141,5 +201,6 @@ try {
 var pageTracker=_gat._getTracker("UA-2048484-1");
 pageTracker._trackPageview();
 }catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
 </body>
 </html>

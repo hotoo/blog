@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
 <head>
 <!--[if IE]><script type="text/javascript" src="js/html5.js"></script><![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
+<meta charset="UTF-8" />
 <meta name="generator" content="gvim" />
 <meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
 <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -43,6 +41,7 @@ function onSearch(){
 </header>
 <div id="container">
     <article>
+        
 
 <h1 id="toc_1">重复的书签</h1>
 <p>
@@ -54,10 +53,10 @@ function onSearch(){
 <ol>
 <li>
 同一文件夹下不允许收藏重复的功能点，只将新的信息（如名称）覆盖到旧有的信息上；
-</li>
+
 <li>
 不同文件夹下可以收藏同一个已收藏的功能点。
-</li>
+
 </ol>
 
 <p>
@@ -67,13 +66,13 @@ function onSearch(){
 <ol>
 <li>
 同一账户不允许重复收藏同一书签；
-</li>
+
 <li>
 当用户收藏一个已收藏的书签时，覆盖已有信息（如名称）；
-</li>
+
 <li>
 如果被收藏到另一个不同的文件夹时，则将旧的收藏移动到新文件夹。
-</li>
+
 </ol>
 <p>
 <a href="http://www.flickr.com/photos/hotoo/3820043578/"><img src="http://farm4.static.flickr.com/3534/3820043578_f8831c9265_o.png" /></a>
@@ -90,10 +89,10 @@ Safari则表现的不同凡响：
 <ol>
 <li>
 用户可以收藏重复的书签；
-</li>
+
 <li>
 甚至在同一个文件夹中，以相同的名称存放。
-</li>
+
 </ol>
 <p>
 <a href="http://www.flickr.com/photos/hotoo/3820043592/"><img src="http://farm3.static.flickr.com/2549/3820043592_a4788c3f80_o.png" /></a>
@@ -110,13 +109,13 @@ IE7和我们所熟悉的一样：
 <ol>
 <li>
 用户可以重复收藏已有的书签；
-</li>
+
 <li>
 仅当这两个书签放在不同的文件夹；
-</li>
+
 <li>
 或者以不同名称，放在同一个文件夹中。
-</li>
+
 </ol>
 <p>
 <a href="http://www.flickr.com/photos/hotoo/3819237355/"><img src="http://farm4.static.flickr.com/3437/3819237355_0bef9cb98c_o.png" /></a>
@@ -140,16 +139,16 @@ Maxthon最初是从IE学习并扩展而来，可想而知，并且实际上也�
 <ol>
 <li>
 不受约束的自由，不是什么好自由；过分的灵活，只会给用户带来迷茫。
-</li>
+
 <li>
 书签本身的作用，就是给用户一个记录、并能够快速打开常用或优秀的网址的地方。
     如果收藏夹，甚至同一个文件夹中存在（看起来）相同的书签，
     用户就需要停下来思考自己要的是哪一个。
-</li>
+
 <li>
 书签一般都需要记录用户使用的次数，并根据算法排序提供给智能地址栏，
     收藏夹存在多个副本也会存在歧义。
-</li>
+
 </ol>
 
 <p>
@@ -161,19 +160,79 @@ Maxthon最初是从IE学习并扩展而来，可想而知，并且实际上也�
 <ol>
 <li>
 收藏夹(Favorite)：指浏览器用来管理书签集合的工具。
-</li>
+
 <li>
 书签(Bookmark)：指单个被收藏的网址信息。
-</li>
+
 </ol>
 
 
 <p>
  blog:datetime=2009/08/14 21:19:42:tags=Design
 </p>
-    </article>
-</div>
 
+        <g:plusone></g:plusone>
+    </article>
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
 <div>
     <section>
         <div id="disqus_thread"></div>
@@ -183,6 +242,7 @@ Maxthon最初是从IE学习并扩展而来，可想而知，并且实际上也�
         </noscript>
     </section>
 </div>
+<script type="text/javascript" src="js/Vimlike.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 <footer>
     <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
@@ -199,5 +259,6 @@ try {
 var pageTracker=_gat._getTracker("UA-2048484-1");
 pageTracker._trackPageview();
 }catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
 </body>
 </html>

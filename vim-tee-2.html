@@ -3,8 +3,6 @@
 <head>
 <!--[if IE]><script type="text/javascript" src="js/html5.js"></script><![endif]-->
 <meta charset="UTF-8" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
 <meta name="generator" content="gvim" />
 <meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
 <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -18,7 +16,7 @@ function onSearch(){
     return false;
 }
 </script>
-<title>Vim 趣味 Tee - 闲耘™.博客</title>
+<title>【结束】趣味 Vim Tee - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -43,10 +41,11 @@ function onSearch(){
 </header>
 <div id="container">
     <article>
+        
 
-<h1 id="toc_1">Vim 趣味 Tee</h1>
+<h1 id="toc_1">【结束】<del>趣味 Vim Tee</del></h1>
 <p>
-去年 <a href="vim73-tee.html">团购庆祝 Vim 7.3 正式发布的 Tee</a> 真是热闹的说，今年刚入夏，
+去年 <a href="vim73-tee.html">【已结束】团购庆祝 Vim 7.3 正式发布的 Tee</a> 真是热闹的说，今年刚入夏，
 就有 Vim 爱好者提出团购 Tee 的事了，我本来没准备印 Vim 的 Tee 的，倒是刚印了
 2 件“连接被重置”和“连接超时”的 Tee。
 </p>
@@ -71,10 +70,10 @@ Vim Talk 群里的“猫猫虫”同学非常给力的描了副大图，几经�
 估计人数会少很多。
 </p>
 <blockquote>
-初步设想：<br />
+Tee 的设计：<br />
 正面：印这幅漫画。<br />
 背面：无。<br />
-袖标：印每个人的 ID，可以自行决定。
+右手袖标：印每个人的 ID，可以自行决定，可以没有。
 </blockquote>
 
 <p>
@@ -93,8 +92,8 @@ Gmail 最近很难连接上，尤其在公司，只能晚上回家整理订单�
 </p>
 
 <p>
-报名还是像去年一样，截至这周末（2011/05/29）吧，过期自己想印的可以单印，
-给商家打出我们的旗号，再好好商量，应该有折扣的 ：）
+报名 ~还是像去年一样，截至这周末（2011/05/29） 吧~ 截至下周一(2011/05/30)，
+过期自己想印的可以单印，给商家打出我们的旗号，再好好商量，应该有折扣的 ：）
 </p>
 
 <p>
@@ -102,16 +101,117 @@ Gmail 最近很难连接上，尤其在公司，只能晚上回家整理订单�
 版权免费（如果猫猫虫同意的话）。
 </p>
 
+<h2 id="toc_1.1">流程</h2>
+<ol>
+<li>
+网友邮件详细信息给闲耘。
+
+<li>
+闲耘收集统计信息，查漏补缺与确认。
+
+<li>
+闲耘下订单。
+
+<li>
+店家印制 Tee 并发货。
+
+<li>
+闲耘得到快递单号，通知各位团友。
+
+<li>
+团友收到 Tee 之后邮件通知闲耘，并（支付宝/银行）转账给闲耘。
+
+</ol>
+
 <p>
-更多信息可以参考 <a href="vim73-tee.html">去年的贴</a>。
+会有快递单号的，到时候我会一一发给各位的。33不是最终价格，看我们最终定的数量，我尽量争取更实惠的价格。邮费是另算的，如果同城其实可以考虑合寄，还可以顺便线下认识下。货款我是下单的时候统一给卖家的，到时候大家收到Tee之前/之后支付宝/银行转账都可以。
 </p>
+
+<ul>
+<li>
+<a href="http://picplz.com/user/nixzhu/pic/grj4q/">@NIX</a>
+
+<li>
+<a href="http://www.fangke.im/338">fanke.im</a>
+
+<li>
+<a href="http://t.co/wy7vGuo">@yyfrankyy</a>
+
+</ul>
+
+<h2 id="toc_1.2">延伸阅读</h2>
+<ul>
+<li>
+<a href="vim73-tee.html">去年的贴</a>
+
+</ul>
 
 <p>
  blog:datetime=2011/05/26 21:26:48:tags=Vim,Tee
 </p>
-    </article>
-</div>
 
+        <g:plusone></g:plusone>
+    </article>
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
 <div>
     <section>
         <div id="disqus_thread"></div>
@@ -121,6 +221,7 @@ Gmail 最近很难连接上，尤其在公司，只能晚上回家整理订单�
         </noscript>
     </section>
 </div>
+<script type="text/javascript" src="js/Vimlike.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 <footer>
     <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
@@ -137,5 +238,6 @@ try {
 var pageTracker=_gat._getTracker("UA-2048484-1");
 pageTracker._trackPageview();
 }catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
 </body>
 </html>

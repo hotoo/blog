@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
 <head>
 <!--[if IE]><script type="text/javascript" src="js/html5.js"></script><![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
+<meta charset="UTF-8" />
 <meta name="generator" content="gvim" />
 <meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
 <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -43,6 +41,7 @@ function onSearch(){
 </header>
 <div id="container">
     <article>
+        
 
 <h1 id="toc_1">Rating for Foobar2000 columns UI</h1>
 <p>
@@ -56,13 +55,13 @@ function onSearch(){
 <ol>
 <li>
 文件 -&gt; 参数设置。
-</li>
+
 <li>
 显示 -&gt; Columns UI -&gt; Playlist view。
-</li>
+
 <li>
 切换到Columns页签，新建（New）一个列。
-</li>
+
 </ol>
 
 <p>
@@ -96,33 +95,33 @@ $select(%rating%,
 <li>
 右键播放列表某首歌曲 -&gt; 标签 -&gt; 管理脚本。
     <img src="http://3.bp.blogspot.com/_POl6bUDELqY/SKKI6GFCmTI/AAAAAAAAD3g/8mBCeRyB4k8/s320/0.right+menu.GIF" />
-</li>
+
 <li>
 打开“批量标签”窗口。
     <img src="http://4.bp.blogspot.com/_POl6bUDELqY/SKKPQ-kgaBI/AAAAAAAAD3o/9a8J60zWdRM/s320/1.tags.GIF" />
-</li>
+
 <li>
 点击“准备的任务”中的“添加”按钮，选择动作类型为“从另一个字段格式化值...”，确定。
     <img src="http://1.bp.blogspot.com/_POl6bUDELqY/SKKPbKbESKI/AAAAAAAAD3w/5FbcHoTmX68/s320/2.select+action.GIF" />
-</li>
+
 <li>
 目标字段名：RATING <br />
     格式化原型：<code>$if($greater(6,$add(%RATING%,1)),$add(%RATING%,1),5)</code> <br />
     <img src="http://2.bp.blogspot.com/_POl6bUDELqY/SKKPrZHkhrI/AAAAAAAAD34/yPDpKB5d3gA/s320/3.0.format+add+value.GIF" />
-</li>
+
 <li>
 保存为rating++，名称可以自定，点击“运行”按钮。
     <img src="http://3.bp.blogspot.com/_POl6bUDELqY/SKKPrqTAO5I/AAAAAAAAD4I/h9QuR4fIlow/s320/3.2.run.jpg" />
-</li>
+
 <li>
 重复第3步。
-</li>
+
 <li>
 重复第4步，目标字段名：RATING <br />
     格式化原型： <code>$if($greater(%RATING%,0),$sub(%RATING%,1),0)</code> <br />
     保存为：rating-- <br />
     点击“运行”按钮。
-</li>
+
 </ol>
 
 
@@ -134,23 +133,23 @@ $select(%rating%,
 <li>
 右键工具栏，点击 Customise...
     <img src="http://2.bp.blogspot.com/_POl6bUDELqY/SKKgVMPR42I/AAAAAAAAD4Q/x3tqs58BTf4/s320/customise.JPG" />
-</li>
+
 <li>
 添加(Add)一个按钮(button)，并点击Change...按钮。
     <img src="http://2.bp.blogspot.com/_POl6bUDELqY/SKKgVKCZ3zI/AAAAAAAAD4Y/8rHQn7SXnq4/s320/custonise+buttons.jpg" />
-</li>
+
 <li>
 Command group中选择“Context menu items”，Item group中选择“Now Playing item”，
     Command中选择“标签/脚本/rating++”。OK保存后回到Command picker窗口，设置按钮图片什么。
     注：支持bmp和png格式的图片，但是png图片如果有透明的部分，则可能不会显示。
     <img src="http://4.bp.blogspot.com/_POl6bUDELqY/SKKgVeJuaXI/AAAAAAAAD4g/ToVomGPvQSA/s320/command+picker.jpg" />
-</li>
+
 <li>
 重复第2步。Command中选择“标签/脚本/rating--”其他雷同。
-</li>
+
 <li>
 最后OK保存就可以了，下面是配置完成的界面，两个带星星的按钮功能分别是标星自减和自增。
-</li>
+
 </ol>
 
 <p>
@@ -161,9 +160,69 @@ Command group中选择“Context menu items”，Item group中选择“Now Playi
 <p>
  blog:datetime=2008/8/14 14:49:23:tags=Foobar2000
 </p>
-    </article>
-</div>
 
+        <g:plusone></g:plusone>
+    </article>
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
 <div>
     <section>
         <div id="disqus_thread"></div>
@@ -173,6 +232,7 @@ Command group中选择“Context menu items”，Item group中选择“Now Playi
         </noscript>
     </section>
 </div>
+<script type="text/javascript" src="js/Vimlike.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 <footer>
     <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
@@ -189,5 +249,6 @@ try {
 var pageTracker=_gat._getTracker("UA-2048484-1");
 pageTracker._trackPageview();
 }catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
 </body>
 </html>

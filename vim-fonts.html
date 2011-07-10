@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
 <head>
 <!--[if IE]><script type="text/javascript" src="js/html5.js"></script><![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
+<meta charset="UTF-8" />
 <meta name="generator" content="gvim" />
 <meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
 <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -43,6 +41,7 @@ function onSearch(){
 </header>
 <div id="container">
     <article>
+        
 
 <h1 id="toc_1">vim字体设置</h1>
 <p>
@@ -68,68 +67,68 @@ function onSearch(){
 <ol>
 <li>
 下载 <a href="http://hotoo.googlecode.com/svn/trunk/fonts/Apple_Courier_Gracecode.zip">Apple Courier字体</a> ^<a href="http://www.box.net/shared/zf08nmhc8g">2</a><sup><small> </small></sup><a href="http://lifesinger.googlecode.com/files/apple_courier_font.zip">3</a><sup><small> </small></sup>GFW^，并安装。安装方法：
-</li>
+
 <ul>
 <li>
 for Windows 7: 右键字体文件，安装即可。
-</li>
+
 <li>
 for Windows XP:
-</li>
+
 <ol>
 <li>
 资源管理器中打开系统盘下的fonts目录（如C:\WINDOWS\Fonts，或运行fonts）
-</li>
+
 <li>
 文件 -&gt; 安装新字体；
-</li>
+
 <li>
 驱动器和文件夹定位到字体所在位置，字体列表将自动列出找到的字体；
-</li>
+
 <li>
 选中要安装的字体，点击确定即可。
-</li>
+
 <li>
 或直接将字体文件拷贝到Fonts文件夹亦可，系统将自动启动安装过程。
-</li>
+
 </ol>
 </ul>
 <li>
 ClearType
-</li>
+
 <ol>
 <li>
 控制面板 -&gt; 显示（或右键桌面 -&gt; 属性） -&gt; 外观 -&gt; 效果；
-</li>
+
 <li>
 选中“☑ 使用下列方式使屏幕字体的边缘平滑”；
-</li>
+
 <li>
 并切换下面的下拉框，选中“清晰(ClearType)”；
-</li>
+
 <li>
 确定即可。
-</li>
+
 </ol>
 <li>
 Vim设置
-</li>
+
 <ol>
 <li>
 在 _vimrc 中加入如下代码：
 <pre>
 set guifont=Courier_New:h11:cANSI
 </pre>
-</li>
+
 <li>
 中文的宋体已经非常好了，不过仍然可以单独设置中文字体：
 <pre>
 set guifontwide=YouYuan:h11:cGB2312
 </pre>
-</li>
+
 <li>
 此时，新启动vim即可使用新设置的字体了。
-</li>
+
 </ol>
 </ol>
 
@@ -156,9 +155,69 @@ guifont=Microsoft_YaHei_Mono:h11:cANSI
 <p>
  blog:date=2009/9/14:tags=Vim,fonts
 </p>
-    </article>
-</div>
 
+        <g:plusone></g:plusone>
+    </article>
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
 <div>
     <section>
         <div id="disqus_thread"></div>
@@ -168,6 +227,7 @@ guifont=Microsoft_YaHei_Mono:h11:cANSI
         </noscript>
     </section>
 </div>
+<script type="text/javascript" src="js/Vimlike.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 <footer>
     <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
@@ -184,5 +244,6 @@ try {
 var pageTracker=_gat._getTracker("UA-2048484-1");
 pageTracker._trackPageview();
 }catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
 </body>
 </html>

@@ -1,5 +1,50 @@
+function $(id){return document.getElementById(id);}
 (function(){
+    // bingKeys.
+    var searchIpt = $("input_search");
+    var helpBox = $("helper");
+    var overlay = $("helper-box");
+    var normal = new Vimlike(document);
+    normal.counter = function(c){$("count").innerHTML = c;}
+    normal.map("gh", function(){location.href = "http://hotoo.me/index.html";});
+    normal.map("gb", function(){location.href = "http://blog.hotoo.me/index.html";});
+    normal.map("gw", function(){location.href = "http://wiki.hotoo.me/index.html";});
+    normal.map("gt", function(){location.href = "https://twitter.com/hotoo";});
+    normal.map("gp", function(){location.href = "https://github.com/hotoo";});
+    normal.map("j", function(c){window.scrollBy(0, 40*(c||1))});
+    normal.map("k", function(c){window.scrollBy(0, -40*(c||1))});
+    normal.map("h", function(c){window.scrollBy(-40*(c||1), 0)});
+    normal.map("l", function(c){window.scrollBy(40*(c||1), 0)});
+    normal.map("gg", function(c){window.scrollTo(0, c||0)});
+    normal.map("G", function(c){window.scrollTo(0, c||document.documentElement.offsetHeight||99999);});
+    //normal.map("<Ctrl>o", function(c){history.go(-1);});
+    //normal.map("<Ctrl>f", function(c){window.scrollBy(0, screen.availHeight||screen.height)});
+    //normal.map("<Ctrl>b", function(c){window.scrollBy(0, -(screen.availHeight||screen.height))});
+    normal.map("/", function(c){searchIpt.focus();});
+    normal.map("?", function(c){
+        overlay.style.display = "block";
+        helpBox.style.display = "block";
+        helpBox.focus();
+    });
 
+    function clearSearch(){
+        if(searchIpt.value == ""){
+            searchIpt.blur();
+        }else{
+            window.setTimeout(function(){searchIpt.value = "";}, 0);
+            //searchIpt.value = "";
+        }
+    }
+    var search = new Vimlike(searchIpt);
+    search.map("<Esc>", clearSearch, true);
+    var help = new Vimlike(helpBox);
+    help.map("<Esc>", function(){
+        helpBox.blur();
+        helpBox.style.display = "none";
+        overlay.style.display = "none";
+    }, true);
+
+    // liner.
     function lines(elem){
         var code = elem.innerHTML;
         //var m = code.match(/\r\n|\r|\n/g);
@@ -40,6 +85,7 @@
         lines(pre[i]);
     }
 
+    // comments.
     // 这些是在 hotoo.github.com 时开启评论的日志。
     // 如果当前日志是这些里面的，则使用老的评论 disqus_url
     // 否则，设置 disqus_identifier 为当前日志名，方便域名迁移。
@@ -152,7 +198,7 @@
 var disqus_identifier, disqus_url;
 var disqus_shortname = 'hotoo';
 function initCommentCount(Er){
-    var cont=document.getElementById("container");
+    var cont=$("container");
     var a=cont.getElementsByTagName("a");
     for(var i=a.length-1,disqus_url; i>=0; i--){
         if(a[i].parentNode.tagName.toLowerCase()!="li"){continue;}
@@ -161,7 +207,6 @@ function initCommentCount(Er){
         var path=a[i].pathname,
             p=path.replace(/.*\/([a-zA-Z0-9_-]+)\.html$/, "$1"),
             b=(p in Er && 1==Er[p]);
-            if(window.console && window.console.log){window.console.log(p, Er[p], b);}
         disqus_url = b?"http://hotoo.github.com/blog"+path : path;
         cmt.href=disqus_url+"#disqus_thread";
         cmt.appendChild(document.createTextNode("评论"));
