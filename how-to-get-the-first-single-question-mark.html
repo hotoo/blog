@@ -113,6 +113,26 @@ var path = function(uri){
 };
 </pre>
 
+<hr />
+<p>
+答案二：
+</p>
+
+<p>
+上面用了两个相同规则的分组，这里可以减少到一个分组
+</p>
+<pre class="javascript">
+"asdfadf??a?a".replace(/([^\s])\?\1/, '$1*$1'); // "asdfadf??a*a"
+</pre>
+<p>
+但是这种做法对于问号(?)在字符串首尾时没有办法匹配
+</p>
+
+<pre class="javascript">
+var temp= "12345???89?asdf".search(/(?:[^?]|^)\?(?!\?)/);
+var index = temp ? temp + 1 : temp; // index的就想要的索引值
+</pre>
+
 <p>
  blog:datetime=2011/06/22 20:00:20:tags=JavaScript, RegExp
 </p>

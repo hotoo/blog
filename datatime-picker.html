@@ -16,7 +16,7 @@ function onSearch(){
     return false;
 }
 </script>
-<title>非递归遍历 DOM 结构 - 闲耘™.博客</title>
+<title>日期时间型控件的体验 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -43,103 +43,92 @@ function onSearch(){
     <article>
         
 
-<h1 id="toc_1">非递归遍历 DOM 结构</h1>
+<h1 id="toc_1">日期时间型控件的体验</h1>
 <p>
-上次在Google+ 上说 <a href="https://plus.google.com/108314985261981078822/posts/ithY3w7tEWR">实现了非递归遍历 DOM 结构</a>，
-有朋友想让分享，我当然很高兴，但是很遗憾这本身没有什么值得分享的，大致如下，
-给大家随便看一下：
+目前支持精确到时分秒输入/选择的日历控件，我总觉得用起来很不爽，
+却又想不出更舒适的交互方式。
 </p>
 
 <p>
-常见的递归方式遍历方式，下面是 Douglas Crockford 写的递归实现：
-</p>
-
-<pre class="javascript">
-function walkTheDOM (node, func) {
-    func(node);
-    node = node.firstChild;
-    while (node) {
-        walkTheDOM(node, func);
-        node = node.nextSibling;
-    }
-}
-</pre>
-
-<p>
-然后有人自称写出了更快的遍历 DOM 方式。
-</p>
-<pre class="javascript">
-var elems = document.getElementsByTagName("*");
-for(var i=0,l=elems.length; i&lt;l; i++){
-    handler(elems[i]);
-}
-</pre>
-<p>
-最初找到有详细对照的文章地址没有找到，这个是
-<a href="http://geekswithblogs.net/mparsons/archive/2006/03/02/71175.aspx">类似的一篇</a>，
-而且也是非递归式的。
+大家有觉得哪种选择时间（非日期）的方式比较舒服一点的控件么，
+或者描述一下自己期望的交互过程也好。
 </p>
 
 <p>
-确实是很快的，但只是快还是不够的，这个实现有很多弊端：
-</p>
-<ol>
-<li>
-注释等元素未必会被遍历。
-
-<li>
-树形数据结构被整理成了平板结构，无法实现遍历过程的 in/out 处理。
-
-</ol>
-
-<p>
-然后今天的主角隆重登场：
-</p>
-<pre class="javascript">
-function walk(node, enter, leave){
-    var tmp, n=node;
-    label:
-    do{
-        enter(n);
-        if(tmp = firstNode(node)){ // firstChild(HTMLElement)
-            n = tmp;
-        }else if(tmp = nextNode(n)){ // nextSibling(HTMLElement)
-            n = tmp;
-        }else if(n.parentNode){
-            do{
-                n = n.parentNode;
-                leave(n);
-                if(n == node){break label;}
-                if(tmp = nextNode(n)){
-                    n = tmp;
-                    continue label;
-                }
-            }while(node);
-        }else{
-            break;
-        }
-    }while(n &amp;&amp; n!=node);
-}
-</pre>
-
-<p>
-上面只是一个精简版，实际过程中还需要考虑节点类型的问题，一般会过滤
-1:HTMLElement, 8:Comment, 9:Document Type, 10:DocType 之外的节点。
+----- Update ----
 </p>
 
 <p>
-其实也不过如此嘛，飘过~~
+Note: 我说的是 时间 (时分秒，非 日期 ，年月日 )选择/输入过程，
+日期型一般点一下或少量几下就可以完成，基本上是比较自然流畅的一个过程；
+但是输入/选择时间的却是非常不流畅的一个过程。
+</p>
+
+<p>
+我只是想体验，或者尝试实现更流畅的时间输入过程，
+不是想让推荐某个库的某个控件（这个控件的时间输入过程非常流畅的例外），谢谢。
+</p>
+
+<p>
+---- Comment 1 ----
+</p>
+
+<p>
+<strong>Hao zi</strong> - 额，我没看错，是时分秒，YUI的链接干扰理解了，
+最喜欢的就是能快捷键输入时间了，普通用户应该还是更青睐鼠标。
+好多地方用的6:00 am 6:30am……时间下拉单的形式我觉得不好用，
+有的甚至还有6:15am……Google calender一方面可以拉动调整时间段，也不需要精确到秒，
+所以用着还好。时间不是10进制，实际生活中表盘上也还需要三根针才能显示，
+设计特别了用户也不好理解，我的展望如图：
+</p>
+
+<p>
+<img src="http://i.min.us/ie1Bum.jpg" />
+</p>
+
+<p>
+时分使用一个滑动框，秒使用一个滑动框，
+时分框移动到PM仍利用AM刻度但背景色改变。
+秒框稍有不同，可只显示部分刻录来避免太密集，滑块拉动到左右边缘时刻录跟着移动。
+</p>
+
+<p>
+---- Comment 2 ----
+</p>
+
+<p>
+<strong>萧星星</strong> - 年月日和时分秒的处理 ： 支持键盘输入和方向增减，
+支持鼠标滚轮和点击的增减 ； 滚轮的会是最流畅的， 不过用户需要一个适应过程～
+</p>
+
+<p>
+---- Comment 3 ----
+</p>
+
+<p>
+<strong>黄川</strong> - 用安卓调时间的UI交互，然后鼠标放在上面，用滚轮，我觉得这种方式不错
+</p>
+
+<p>
+---- Comment 4 ----
+</p>
+
+<p>
+<strong>闲耘</strong> - 鼠标滚轮，或者键盘方向键本身是不错的，我很认同。
+我主要不满意的地方在于：如果 时间 随同日期的弹出层一起，
+同时需要选择日期和时间时，基本上只能增加一个确定按钮来辅助实现。
+现在想想，年历，月历，日历还是和时间部分独立分开的比较合适。
 </p>
 
 <h2 id="toc_1.1">See Also</h2>
 <ul>
 <li>
-<a href="http://www.quirksmode.org/dom/intro.html">W3C DOM -Introduction - ppk</a>
+<a href="https://plus.google.com/108314985261981078822/posts/WE37n8PSYQD">@Google+</a>
 
 </ul>
 
 <p>
- blog:datetime=2011/07/10 21:13:38:tags=JavaScript,算法
+ blog:datetime=2011/07/22 21:54:04:tags=日历,用户体验
 </p>
 
         <g:plusone></g:plusone>

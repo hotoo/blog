@@ -16,7 +16,7 @@ function onSearch(){
     return false;
 }
 </script>
-<title>非递归遍历 DOM 结构 - 闲耘™.博客</title>
+<title>说说支付宝爱心捐助 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -43,103 +43,90 @@ function onSearch(){
     <article>
         
 
-<h1 id="toc_1">非递归遍历 DOM 结构</h1>
+<h1 id="toc_1">说说支付宝爱心捐助</h1>
 <p>
-上次在Google+ 上说 <a href="https://plus.google.com/108314985261981078822/posts/ithY3w7tEWR">实现了非递归遍历 DOM 结构</a>，
-有朋友想让分享，我当然很高兴，但是很遗憾这本身没有什么值得分享的，大致如下，
-给大家随便看一下：
+以前我还持续捐助，但是我觉得支付宝爱心捐助( <a href="https://love.alipay.com">https://love.alipay.com</a> )
+我是越来越没法持续捐助下去了，那该死的 KPI 要求项目达到 XX 数量，
+狗日的又没有质量要求。
 </p>
 
 <p>
-常见的递归方式遍历方式，下面是 Douglas Crockford 写的递归实现：
-</p>
-
-<pre class="javascript">
-function walkTheDOM (node, func) {
-    func(node);
-    node = node.firstChild;
-    while (node) {
-        walkTheDOM(node, func);
-        node = node.nextSibling;
-    }
-}
-</pre>
-
-<p>
-然后有人自称写出了更快的遍历 DOM 方式。
-</p>
-<pre class="javascript">
-var elems = document.getElementsByTagName("*");
-for(var i=0,l=elems.length; i&lt;l; i++){
-    handler(elems[i]);
-}
-</pre>
-<p>
-最初找到有详细对照的文章地址没有找到，这个是
-<a href="http://geekswithblogs.net/mparsons/archive/2006/03/02/71175.aspx">类似的一篇</a>，
-而且也是非递归式的。
+每天救救这个，帮帮那个，都是一些实体的捐助对象，看这很痛心，但排成一排来展览，
+看着就有点恶心了，让人看不下去，吃不下饭。
 </p>
 
 <p>
-确实是很快的，但只是快还是不够的，这个实现有很多弊端：
-</p>
-<ol>
-<li>
-注释等元素未必会被遍历。
-
-<li>
-树形数据结构被整理成了平板结构，无法实现遍历过程的 in/out 处理。
-
-</ol>
-
-<p>
-然后今天的主角隆重登场：
-</p>
-<pre class="javascript">
-function walk(node, enter, leave){
-    var tmp, n=node;
-    label:
-    do{
-        enter(n);
-        if(tmp = firstNode(node)){ // firstChild(HTMLElement)
-            n = tmp;
-        }else if(tmp = nextNode(n)){ // nextSibling(HTMLElement)
-            n = tmp;
-        }else if(n.parentNode){
-            do{
-                n = n.parentNode;
-                leave(n);
-                if(n == node){break label;}
-                if(tmp = nextNode(n)){
-                    n = tmp;
-                    continue label;
-                }
-            }while(node);
-        }else{
-            break;
-        }
-    }while(n &amp;&amp; n!=node);
-}
-</pre>
-
-<p>
-上面只是一个精简版，实际过程中还需要考虑节点类型的问题，一般会过滤
-1:HTMLElement, 8:Comment, 9:Document Type, 10:DocType 之外的节点。
+我知道国内 NGO 很难，靠谱的也不多。但是我还是希望相对靠谱一点的机构
+（下面都简称慈善机构，支付宝本身不是也有爱心小组么，虽然好像都是业余的）
+来做这些实体的捐助过程，安排捐助计划，定时公开捐助报表，
+普通捐助人只需要持续对这个机构捐助就好了。
 </p>
 
 <p>
-其实也不过如此嘛，飘过~~
+像对一个人、或一个家庭这么小的单位，慈善机构自己可以自己列为项目，计划支出，
+但捐助人真的无需去直接接触。你说我捐助了某个病人A，不去捐助另一个病人B吗？
+世界上困难的人这么多，每个捐助人都需要一个个去直接指定捐助么？
+这种事情慈善机构能有一点自己的计划么，该不该捐助，该如何捐助，
+你慈善机构没有计划，你还让捐助人信任你什么？！
 </p>
+
+<p>
+而对于重大集体性灾难，可以在爱心捐助平台上展示一个项目，让更多的人知晓，
+传播给更多的人来支持捐助，而且一般这种项目，捐助人是很希望可以指定捐助的，
+比如上次日本地震+海啸+核污染，中国大陆居然没有可靠方便的捐助方式，简直是匪夷所思。
+</p>
+
+<p>
+最后给大家献给一曲《<a href="http://www.tudou.com/programs/view/sx7rLsjqfJY/">无地自容</a>》
+</p>
+<blockquote>
+策划：雅沫<br />
+导演：莞儿<br />
+曲：李丹<br />
+词：刘咚咚<br />
+唱：@土著Walker<br />
+<br />
+美眉她姓郭，爱炫自我；<br />
+各种名包，各种好车；<br />
+微博经认证，名头热火；<br />
+红十字会商业老总；<br />
+是否涉嫌炒作，你最清楚；<br />
+妹子到底想要揭露什么？<br />
+何必东藏西躲，又何必删贴；<br />
+迟早有一天你会面对我；<br />
+天灾人祸中，常看到你；<br />
+宣扬博爱，弘扬道义；<br />
+捐款全给你，进出无明细；<br />
+庞大帐目谁在审计；<br />
+总在自说自话，难自圆其说；<br />
+百姓问你到底做了什么？<br />
+不要再装沉默，你实话实说；<br />
+我们的爱心多少被挥霍；<br />
+商红会无车，清贫如洗；<br />
+没有电脑没有手续；<br />
+成立十几年，从不会登记；<br />
+中红博爱惹人注意；<br />
+总在自说自话，难自圆其说；<br />
+百姓问你到底做了什么？<br />
+不要再装沉默，你实话实说；<br />
+我们的爱心多少被挥霍；<br />
+不再相信，相信什么公益；<br />
+除非捐款公布明细；<br />
+这场危机，怎样才能过去；<br />
+不必追究是谁的错；<br />
+我曾为你献血，也曾替你开脱；<br />
+如今献唱一曲，让你无地自容！
+</blockquote>
 
 <h2 id="toc_1.1">See Also</h2>
 <ul>
 <li>
-<a href="http://www.quirksmode.org/dom/intro.html">W3C DOM -Introduction - ppk</a>
+<a href="https://plus.google.com/108314985261981078822/posts/8gAama93tnW">@Google+</a>
 
 </ul>
 
 <p>
- blog:datetime=2011/07/10 21:13:38:tags=JavaScript,算法
+ blog:datetime=2011/07/04 00:38:05:tags=Alipay
 </p>
 
         <g:plusone></g:plusone>

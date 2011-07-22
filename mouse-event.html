@@ -16,7 +16,7 @@ function onSearch(){
     return false;
 }
 </script>
-<title>非递归遍历 DOM 结构 - 闲耘™.博客</title>
+<title>mouse event - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -43,103 +43,415 @@ function onSearch(){
     <article>
         
 
-<h1 id="toc_1">非递归遍历 DOM 结构</h1>
+<h1 id="toc_1">Mouse Event</h1>
+
+<table>
+<tr>
+<th rowspan="2">
+Event
+</th>
+<th rowspan="2">
+type
+</th>
+<th colspan="2">
+IE
+</th>
+<th colspan="2">
+FF
+</th>
+<th colspan="2">
+Chrome
+</th>
+<th colspan="2">
+Safari
+</th>
+<th colspan="2">
+Opera
+</th>
+</tr>
+<tr>
+<th>
+button
+</th>
+<th>
+which
+</th>
+<th>
+button
+</th>
+<th>
+which
+</th>
+<th>
+button
+</th>
+<th>
+which
+</th>
+<th>
+button
+</th>
+<th>
+which
+</th>
+<th>
+button
+</th>
+<th>
+which
+</th>
+</tr>
+<tr>
+<td rowspan="3">
+onmousedown
+</td>
+<td>
+left
+</td>
+<td>
+1
+</td>
+<td>
+undefined
+</td>
+<td>
+0
+</td>
+<td>
+1
+</td>
+<td>
+0
+</td>
+<td>
+1
+</td>
+<td>
+0
+</td>
+<td>
+1
+</td>
+<td>
+0
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td>
+middle
+</td>
+<td>
+4
+</td>
+<td>
+undefined
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+</tr>
+<tr>
+<td>
+right
+</td>
+<td>
+2
+</td>
+<td>
+undefined
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+</tr>
+<tr>
+<td rowspan="3">
+onmouseup
+</td>
+<td>
+left
+</td>
+<td>
+1
+</td>
+<td>
+undefined
+</td>
+<td>
+0
+</td>
+<td>
+1
+</td>
+<td>
+0
+</td>
+<td>
+1
+</td>
+<td>
+0
+</td>
+<td>
+1
+</td>
+<td>
+0
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td>
+middle
+</td>
+<td>
+4
+</td>
+<td>
+undefined
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td colspan="2">
+no event
+</td>
+</tr>
+<tr>
+<td>
+right
+</td>
+<td>
+2
+</td>
+<td>
+undefined
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+</tr>
+<tr>
+<td rowspan="3">
+onclick
+</td>
+<td>
+left
+</td>
+<td>
+0
+</td>
+<td>
+undefined
+</td>
+<td>
+0
+</td>
+<td>
+1
+</td>
+<td>
+0
+</td>
+<td>
+1
+</td>
+<td>
+0
+</td>
+<td>
+1
+</td>
+<td>
+0
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td>
+middle
+</td>
+<td>
+0
+</td>
+<td>
+undefined
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td colspan="2">
+no event
+</td>
+</tr>
+<tr>
+<td>
+right
+</td>
+<td colspan="2">
+no event
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td colspan="2">
+no event
+</td>
+<td colspan="2">
+no event
+</td>
+<td colspan="2">
+no event
+</td>
+</tr>
+</table>
+
 <p>
-上次在Google+ 上说 <a href="https://plus.google.com/108314985261981078822/posts/ithY3w7tEWR">实现了非递归遍历 DOM 结构</a>，
-有朋友想让分享，我当然很高兴，但是很遗憾这本身没有什么值得分享的，大致如下，
-给大家随便看一下：
+Windows 2003 Server.<br />
+IE8, FF5, Chrome12, Safari5, Opera11.
 </p>
 
 <p>
-常见的递归方式遍历方式，下面是 Douglas Crockford 写的递归实现：
+Note:
 </p>
-
-<pre class="javascript">
-function walkTheDOM (node, func) {
-    func(node);
-    node = node.firstChild;
-    while (node) {
-        walkTheDOM(node, func);
-        node = node.nextSibling;
-    }
-}
-</pre>
-
-<p>
-然后有人自称写出了更快的遍历 DOM 方式。
-</p>
-<pre class="javascript">
-var elems = document.getElementsByTagName("*");
-for(var i=0,l=elems.length; i&lt;l; i++){
-    handler(elems[i]);
-}
-</pre>
-<p>
-最初找到有详细对照的文章地址没有找到，这个是
-<a href="http://geekswithblogs.net/mparsons/archive/2006/03/02/71175.aspx">类似的一篇</a>，
-而且也是非递归式的。
-</p>
-
-<p>
-确实是很快的，但只是快还是不够的，这个实现有很多弊端：
-</p>
-<ol>
+<ul>
 <li>
-注释等元素未必会被遍历。
+<code>document.onmousedown</code> === <code>document.addEventListener</code> === <code>document.attachEvent("onmousedown")</code>
 
 <li>
-树形数据结构被整理成了平板结构，无法实现遍历过程的 in/out 处理。
+<code>document.onmouseup</code> === <code>document.addEventListener("mouseup")</code> == <code>document.attachEvent("onmouseup")</code>
 
-</ol>
+<li>
+<code>document.onclick</code> === <code>document.addEventListener("click")</code> == <code>document.attachEvent("onclick")</code>
 
-<p>
-然后今天的主角隆重登场：
-</p>
+</ul>
+
 <pre class="javascript">
-function walk(node, enter, leave){
-    var tmp, n=node;
-    label:
-    do{
-        enter(n);
-        if(tmp = firstNode(node)){ // firstChild(HTMLElement)
-            n = tmp;
-        }else if(tmp = nextNode(n)){ // nextSibling(HTMLElement)
-            n = tmp;
-        }else if(n.parentNode){
-            do{
-                n = n.parentNode;
-                leave(n);
-                if(n == node){break label;}
-                if(tmp = nextNode(n)){
-                    n = tmp;
-                    continue label;
-                }
-            }while(node);
-        }else{
-            break;
-        }
-    }while(n &amp;&amp; n!=node);
-}
+document.onmousedown = function(evt){
+    evt = window.event || evt;
+    var mouse = {
+        left:   evt.which ? evt.which==1 : evt.button==1,
+        middle: evt.which ? evt.which==2 : evt.button==4,
+        right:  evt.which ? evt.which==3 : evt.button==2
+    };
+};
 </pre>
-
-<p>
-上面只是一个精简版，实际过程中还需要考虑节点类型的问题，一般会过滤
-1:HTMLElement, 8:Comment, 9:Document Type, 10:DocType 之外的节点。
-</p>
-
-<p>
-其实也不过如此嘛，飘过~~
-</p>
 
 <h2 id="toc_1.1">See Also</h2>
 <ul>
 <li>
-<a href="http://www.quirksmode.org/dom/intro.html">W3C DOM -Introduction - ppk</a>
+<a href="http://www.quirksmode.org/js/events_properties.html">Event properties - ppk</a>
+
+<li>
+<a href="http://hotoo.me/labs/mouse-event.html">http://hotoo.me/labs/mouse-event.html</a>
 
 </ul>
 
 <p>
- blog:datetime=2011/07/10 21:13:38:tags=JavaScript,算法
+ blog:datetime=2011/07/15 22:08:33:tags=JavaScript,Event
 </p>
 
         <g:plusone></g:plusone>
