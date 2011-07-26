@@ -129,14 +129,14 @@ function hasAttr(elem, attr){
 继续发现新坑：IE 中下面的代码
 </p>
 <pre class="html">
-&lt;a&gt;</div>
-<b onclick="alert(0);"></b>
+&lt;p&gt;&lt;/p&gt;
+&lt;q onclick="alert(0);"&gt;&lt;/q&gt;
 
 &lt;script&gt;
-    a.onclick = function(){};
+    p.onclick = function(){};
 
-    alert(a.getAttribute("onclick"));
-    alert(b.getAttribute("onclick"));
+    alert(p.getAttribute("onclick"));
+    alert(q.getAttribute("onclick"));
 &lt;/script&gt;
 </pre>
 
