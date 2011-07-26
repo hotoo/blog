@@ -129,14 +129,14 @@ function hasAttr(elem, attr){
 继续发现新坑：IE 中下面的代码
 </p>
 <pre class="html">
-<div id="div"></div>
-&lt;span onclick="alert(0);" id="span"&gt;&lt;/span&gt;
+&lt;a&gt;</div>
+<b onclick="alert(0);"></b>
 
 &lt;script&gt;
-    div.onclick = function(){};
+    a.onclick = function(){};
 
-    alert(div.getAttribute("onclick"));
-    alert(span.getAttribute("onclick"));
+    alert(a.getAttribute("onclick"));
+    alert(b.getAttribute("onclick"));
 &lt;/script&gt;
 </pre>
 
@@ -153,7 +153,7 @@ alert(0);
 </pre>
 
 <p>
-所以上面的 <code>hasAttr</code> 函数是无法正确返回这种在脚本中设置 onclick 值的。
+所以上面的 <code>hasAttr</code> 函数是无法正确返回这种在脚本中设置 <code>onclick</code> 值的。
 </p>
 
 <p>
