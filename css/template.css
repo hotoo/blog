@@ -154,9 +154,9 @@ blockquote{
     background:#eee url(bg/testy-quote-open.gif) no-repeat\9;
 }
 
-table{border-collapse:collapse; border-spacing:0;
+#container table{border-collapse:collapse; border-spacing:0;
     border-width:1px 0 0 1px; border-style:solid; border-color:#ccc;}
-table:hover{
+#container table:hover{
     -moz-box-shadow:0 0 8px #666; -webkit-box-shadow:0 0 8px #666; box-shadow:0 0 8px #666;
 }
 
