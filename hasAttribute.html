@@ -122,6 +122,66 @@ function hasAttr(elem, attr){
 </pre>
 
 <p>
+-- Update 2011/07/26 --
+</p>
+
+<p>
+继续发现新坑：IE 中下面的代码
+</p>
+<pre class="html">
+<div id="div"></div>
+&lt;span onclick="alert(0);" id="span"&gt;&lt;/span&gt;
+
+&lt;script&gt;
+    div.onclick = function(){};
+
+    alert(div.getAttribute("onclick"));
+    alert(span.getAttribute("onclick"));
+&lt;/script&gt;
+</pre>
+
+<p>
+输出：
+</p>
+<pre>
+function(){}
+
+function onclick()
+{
+alert(0);
+}
+</pre>
+
+<p>
+所以上面的 <code>hasAttr</code> 函数是无法正确返回这种在脚本中设置 onclick 值的。
+</p>
+
+<p>
+对策：
+</p>
+<pre class="javascript">
+var hasAttr = function(elem, attr){
+    if(!elem || 1!=elem.nodeType){return false;}
+    if(elem.hasAttribute){return elem.hasAttribute(attr);}
+    // for IE, not perfect.
+    // @see http://www.patmullin.com/weblog/2006/04/06/getattributestyle-setattributestyle-ie-dont-mix/
+    attr = attr.toLowerCase();
+    if("style" == attr){return "" !== elem.style.cssText;}
+    if(navigator.userAgent.indexOf("MSIE 6")&gt;0 &amp;&amp;
+      (("input"==tag &amp;&amp; "checked"==attr) ||
+      ("option"==tag &amp;&amp; "selected"==attr) ||
+      ("select"==tag &amp;&amp; "multiple"==attr))){
+        return elem.getAttribute(attr);
+    }
+    var val = elem.getAttribute(attr);
+    if(null == val){return false;}
+    else if("function" == typeof(val)){
+        return val.toString().indexOf("function "+attr+"()") == 0;
+    }else{return true;}
+};
+</pre>
+
+<p>
  blog:datetime=2011/05/19 21:14:47:tags=JavaScript,IE6
 </p>
 
