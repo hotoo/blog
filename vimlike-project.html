@@ -16,7 +16,7 @@ function onSearch(){
     return false;
 }
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>宏伟的 Vimlike.js 计划 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -43,86 +43,40 @@ function onSearch(){
     <article>
         
 
-<h1 id="toc_1">闲耘™.博客</h1>
+<h1 id="toc_1">宏伟的 Vimlike.js 计划</h1>
+
+<p>
+一直在想：网站本身提供的快捷键支持（如 Gmail, GReader, Gplus, Twitter），
+和浏览器插件提供的通用快捷键支持（Vimperator, Vimium, ...），两者如何共存，
+相互之间能够相安无事，甚至能够相辅相成？
+</p>
+
+<p>
+目前想到两种方案：
+</p>
+
 <ol>
 <li>
-<a href="vimlike-project.html">宏伟的 Vimlike.js 计划 (2011/08/16)</a>
+白名单机制。像 AutoProxy 一样，针对不同的网站/网址，屏蔽某些键映射，
+    使用官方自有映射支持。不过这个要维护这份列表也是一件蛋疼的事。
 
 <li>
-<a href="abort-http-request.html">Abrot HTTP 请求 (2011/07/22)</a>
-
-<li>
-<a href="datatime-picker.html">日期时间型控件的体验 (2011/07/20)</a>
-
-<li>
-<a href="mouse-event.html">鼠标事件研究 (2011/07/16)</a>
-
-<li>
-<a href="tucao.html">吐槽 (2011/07/15)</a>
-
-<li>
-<a href="douban.fm.html">豆瓣电台，我忍你很久了！(2011/07/13)</a>
-
-<li>
-<a href="non-recursion-walk-the-dom.html">非递归遍历 DOM 结构 (2011/07/10)</a>
-
-<li>
-<a href="about-lazy-load.html">说说渐进加载 (2011/07/08)</a>
-
-<li>
-<a href="vimlike.js.html">Vimlike.js (2011/07/08)</a>
-
-<li>
-<a href="donot-use-try-catch.html">别用 try/catch (2011/07/05)</a>
-
-<li>
-<a href="love.alipay.com.html">说说支付宝爱心捐助 (2011/07/04)</a>
-
-<li>
-<a href="dream-the-thief.html">“盗梦空间” (2011/06/30)</a>
-
-<li>
-<a href="abort-image-request.html">丢弃图片的 HTTP 请求 (2011/06/23)</a>
-
-<li>
-<a href="how-to-get-the-first-single-question-mark.html">如何取 URL 中第一个单独的问号(?) 位置 (2011/06/22)</a>
-
-<li>
-<a href="blog-system-vimwiki-or-jekyll.html">使用 Vimwiki 还是 Jekyll 作为博客系统？ (2011/6/19)</a>
-
-<li>
-<a href="parser-return-pattern.html">多种不同结果的返回模式 (2011/06/08)</a>
-
-<li>
-<a href="vim-tee-2.html">【结束】趣味 Vim Tee (2011/05/26)</a>
-
-<li>
-<a href="closure-compile.vim.html">closure-compile.vim (2011/05/26)</a>
-
-<li>
-<a href="hasAttribute.html">深入 hasAttribute (2011/5/19)</a>
-
-<li>
-<a href="window.close.html">window.close() (2011/04/26)</a>
-
-<li>
-<a href="javascript-exceptions.html">JavaScript 异常 (2011/04/03)</a>
-
-<li>
-<a href="quadrant-2.0.html">四象限法2.0 (2011/03/01)</a>
-
-<li>
-<a href="timed-array-processing.html">关于 JavaScript 分时加载 (2011/03/01)</a>
-
-<li>
-<a href="timed-tree-processing.html">树形控件的分时装载 (2011/03/01)</a>
+网站根据统一约定的快捷键定义接口实现特有功能，非特有的则默认使用共有实现。
+    另外也提供扩展机制，让第三方插件也可以根据这个接口为特定的网站/页面实现特定功能。
 
 </ol>
 
 <p>
-<a href="archive-2010.html">« Older(2010)</a> | <strong>2011</strong>
+个人觉得第 2 中方案比较好，但这是一项宏大的项目，要各个网站遵循这个接口标准来实现，
+不是一件易事。准备先把这个做到 <a href="https://github.com/hotoo/vimlike.js">Vimlike.js</a> 项目里，
+然后请一些 Vim 爱好者的个人博客一起来参与实践。
 </p>
 
+<p>
+ blog:datetime=2011/08/16 20:51:25:tags=Vim
+</p>
+
+        <g:plusone></g:plusone>
     </article>
     <div id="status-bar">
         <span id="count"></span>
@@ -184,7 +138,15 @@ function onSearch(){
     </tbody>
     </table>
 </div>
-
+<div>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
+</div>
 <script type="text/javascript" src="js/Vimlike.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 <footer>
@@ -202,5 +164,6 @@ try {
 var pageTracker=_gat._getTracker("UA-2048484-1");
 pageTracker._trackPageview();
 }catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
 </body>
 </html>
