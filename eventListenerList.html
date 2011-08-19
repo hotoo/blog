@@ -16,7 +16,7 @@ function onSearch(){
     return false;
 }
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>获取元素所绑定的事件列表 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -43,89 +43,43 @@ function onSearch(){
     <article>
         
 
-<h1 id="toc_1">闲耘™.博客</h1>
-<ol>
-<li>
-<a href="eventListenerList.html">获取元素所绑定的事件列表 (2011/08/19)</a>
-
-<li>
-<a href="vimlike-project.html">宏伟的 Vimlike.js 计划 (2011/08/16)</a>
-
-<li>
-<a href="abort-http-request.html">Abrot HTTP 请求 (2011/07/22)</a>
-
-<li>
-<a href="datatime-picker.html">日期时间型控件的体验 (2011/07/20)</a>
-
-<li>
-<a href="mouse-event.html">鼠标事件研究 (2011/07/16)</a>
-
-<li>
-<a href="tucao.html">吐槽 (2011/07/15)</a>
-
-<li>
-<a href="douban.fm.html">豆瓣电台，我忍你很久了！(2011/07/13)</a>
-
-<li>
-<a href="non-recursion-walk-the-dom.html">非递归遍历 DOM 结构 (2011/07/10)</a>
-
-<li>
-<a href="about-lazy-load.html">说说渐进加载 (2011/07/08)</a>
-
-<li>
-<a href="vimlike.js.html">Vimlike.js (2011/07/08)</a>
-
-<li>
-<a href="donot-use-try-catch.html">别用 try/catch (2011/07/05)</a>
-
-<li>
-<a href="love.alipay.com.html">说说支付宝爱心捐助 (2011/07/04)</a>
-
-<li>
-<a href="dream-the-thief.html">“盗梦空间” (2011/06/30)</a>
-
-<li>
-<a href="abort-image-request.html">丢弃图片的 HTTP 请求 (2011/06/23)</a>
-
-<li>
-<a href="how-to-get-the-first-single-question-mark.html">如何取 URL 中第一个单独的问号(?) 位置 (2011/06/22)</a>
-
-<li>
-<a href="blog-system-vimwiki-or-jekyll.html">使用 Vimwiki 还是 Jekyll 作为博客系统？ (2011/6/19)</a>
-
-<li>
-<a href="parser-return-pattern.html">多种不同结果的返回模式 (2011/06/08)</a>
-
-<li>
-<a href="vim-tee-2.html">【结束】趣味 Vim Tee (2011/05/26)</a>
-
-<li>
-<a href="closure-compile.vim.html">closure-compile.vim (2011/05/26)</a>
-
-<li>
-<a href="hasAttribute.html">深入 hasAttribute (2011/5/19)</a>
-
-<li>
-<a href="window.close.html">window.close() (2011/04/26)</a>
-
-<li>
-<a href="javascript-exceptions.html">JavaScript 异常 (2011/04/03)</a>
-
-<li>
-<a href="quadrant-2.0.html">四象限法2.0 (2011/03/01)</a>
-
-<li>
-<a href="timed-array-processing.html">关于 JavaScript 分时加载 (2011/03/01)</a>
-
-<li>
-<a href="timed-tree-processing.html">树形控件的分时装载 (2011/03/01)</a>
-
-</ol>
-
+<h1 id="toc_1">获取元素所绑定的事件列表</h1>
 <p>
-<a href="archive-2010.html">« Older(2010)</a> | <strong>2011</strong>
+技术上有什么办法获得指定 HTMLElement 上有绑定那些 #JavaScript 函数事件，及其处理函数么？
 </p>
 
+<p>
+比如我有一个按钮，想知道他绑定了那些事件？ click 事件的处理函数是什么？
+</p>
+
+<p>
+elem.onclick 这种只能绑定唯一的一个事件处理函数，可以直接取到。
+</p>
+
+<p>
+DOM Level 3 有
+<a href="http://www.w3.org/TR/2001/WD-DOM-Level-3-Events-20010823/events.html#Events-EventListenerList">eventListenerList</a>
+接口，但是现在还没有浏览器实现。
+</p>
+
+<p>
+不过可以通过框架包装的方式获取列表。
+另外 Google Chrome 浏览器的开发者工具有提供查看元素绑定了哪些事件的特性，
+猜测是通过解析页面及其引入的 JavaScript 源码得到的
+（据我所知，Firebug 的性能分析就是通过 inject 代码到各个函数中来实现的）。
+</p>
+
+<h2 id="toc_1.1">延伸阅读</h2>
+<p>
+<a href="http://www.w3.org/TR/2001/WD-DOM-Level-3-Events-20010823/events.html#Events-EventListenerList">http://www.w3.org/TR/2001/WD-DOM-Level-3-Events-20010823/events.html#Events-EventListenerList</a>
+<a href="http://www.quirksmode.org/js/events_advanced.html">http://www.quirksmode.org/js/events_advanced.html</a>
+</p>
+
+<p>
+ blog:datetime=2011/08/19 12:40:14:tags=JavaScript
+</p>
+
+        <g:plusone></g:plusone>
     </article>
     <div id="status-bar">
         <span id="count"></span>
@@ -187,7 +141,15 @@ function onSearch(){
     </tbody>
     </table>
 </div>
-
+<div>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
+</div>
 <script type="text/javascript" src="js/Vimlike.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 <footer>
@@ -205,5 +167,6 @@ try {
 var pageTracker=_gat._getTracker("UA-2048484-1");
 pageTracker._trackPageview();
 }catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
 </body>
 </html>
