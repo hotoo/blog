@@ -16,7 +16,7 @@ function onSearch(){
     return false;
 }
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>深入 Iframe 自适应高度 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -43,101 +43,333 @@ function onSearch(){
     <article>
         
 
-<h1 id="toc_1">闲耘™.博客</h1>
-<ol>
-<li>
-<a href="Date.now.html">Date.now() (2011/09/18)</a>
-
-<li>
-<a href="smart-sync-scroll.html">智能同步滚动条 (2011/09/01)</a>
-
-<li>
-<a href="area-split.html">面积分片算法 (2011/08/25)</a>
-
-<li>
-<a href="iframe-highly-adaptive.html">深入 Iframe 自适应高度(2011/08/24)</a>
-
-<li>
-<a href="eventListenerList.html">获取元素所绑定的事件列表 (2011/08/19)</a>
-
-<li>
-<a href="vimlike-project.html">宏伟的 Vimlike.js 计划 (2011/08/16)</a>
-
-<li>
-<a href="abort-http-request.html">Abrot HTTP 请求 (2011/07/22)</a>
-
-<li>
-<a href="datatime-picker.html">日期时间型控件的体验 (2011/07/20)</a>
-
-<li>
-<a href="mouse-event.html">鼠标事件研究 (2011/07/16)</a>
-
-<li>
-<a href="tucao.html">吐槽 (2011/07/15)</a>
-
-<li>
-<a href="douban.fm.html">豆瓣电台，我忍你很久了！(2011/07/13)</a>
-
-<li>
-<a href="non-recursion-walk-the-dom.html">非递归遍历 DOM 结构 (2011/07/10)</a>
-
-<li>
-<a href="about-lazy-load.html">说说渐进加载 (2011/07/08)</a>
-
-<li>
-<a href="vimlike.js.html">Vimlike.js (2011/07/08)</a>
-
-<li>
-<a href="donot-use-try-catch.html">别用 try/catch (2011/07/05)</a>
-
-<li>
-<a href="love.alipay.com.html">说说支付宝爱心捐助 (2011/07/04)</a>
-
-<li>
-<a href="dream-the-thief.html">“盗梦空间” (2011/06/30)</a>
-
-<li>
-<a href="abort-image-request.html">丢弃图片的 HTTP 请求 (2011/06/23)</a>
-
-<li>
-<a href="how-to-get-the-first-single-question-mark.html">如何取 URL 中第一个单独的问号(?) 位置 (2011/06/22)</a>
-
-<li>
-<a href="blog-system-vimwiki-or-jekyll.html">使用 Vimwiki 还是 Jekyll 作为博客系统？ (2011/6/19)</a>
-
-<li>
-<a href="parser-return-pattern.html">多种不同结果的返回模式 (2011/06/08)</a>
-
-<li>
-<a href="vim-tee-2.html">【结束】趣味 Vim Tee (2011/05/26)</a>
-
-<li>
-<a href="closure-compile.vim.html">closure-compile.vim (2011/05/26)</a>
-
-<li>
-<a href="hasAttribute.html">深入 hasAttribute (2011/5/19)</a>
-
-<li>
-<a href="window.close.html">window.close() (2011/04/26)</a>
-
-<li>
-<a href="javascript-exceptions.html">JavaScript 异常 (2011/04/03)</a>
-
-<li>
-<a href="quadrant-2.0.html">四象限法2.0 (2011/03/01)</a>
-
-<li>
-<a href="timed-array-processing.html">关于 JavaScript 分时加载 (2011/03/01)</a>
-
-<li>
-<a href="timed-tree-processing.html">树形控件的分时装载 (2011/03/01)</a>
-
-</ol>
+<h1 id="toc_1">深入 Iframe 自适应高度</h1>
 
 <p>
-<a href="archive-2010.html">« Older(2010)</a> | <strong>2011</strong>
+DOCTYPE(CSS1Compat): HTML5, HTML4.01 Strict, HTML4.01 Transitional,
+XHTML1.0 Frameset, XHTML1.0 Strict, XHTML1.0 Transitional, XHTML1.1.
+<table>
+<tr>
+<th rowspan="2">
+browser
+</th>
+<th colspan="2">
+documentElement
+</th>
+<th colspan="2">
+body
+</th>
+</tr>
+<tr>
+<th>
+scrollHeight
+</th>
+<th>
+offsetHeight
+</th>
+<th>
+scrollHeight
+</th>
+<th>
+offsetHeight
+</th>
+</tr>
+<tr>
+<td>
+IE
+</td>
+<td>
+√
+</td>
+<td>
+×
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+</tr>
+<tr>
+<td>
+FF
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+</tr>
+<tr>
+<td>
+Chrome
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+</tr>
+<tr>
+<td>
+Safari
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+</tr>
+<tr>
+<td>
+Opera
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+</tr>
+</table>
 </p>
 
+<p>
+non-doctype(BackCompat): 无 DOCTYPE, IE: DOCTYPE 前有非空白字符（包括注释）。
+<table>
+<tr>
+<th rowspan="2">
+browser
+</th>
+<th colspan="2">
+documentElement
+</th>
+<th colspan="2">
+body
+</th>
+</tr>
+<tr>
+<th>
+scrollHeight
+</th>
+<th>
+offsetHeight
+</th>
+<th>
+scrollHeight
+</th>
+<th>
+offsetHeight
+</th>
+</tr>
+<tr>
+<td>
+IE8
+</td>
+<td>
+×
+</td>
+<td>
+×
+</td>
+<td>
+√
+</td>
+<td>
+×
+</td>
+</tr>
+<tr>
+<td>
+FF5
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+</tr>
+<tr>
+<td>
+Chrome13
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+</tr>
+<tr>
+<td>
+Safari5
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+</tr>
+<tr>
+<td>
+Opera11.50
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+<td>
+√
+</td>
+<td>
+×
+</td>
+</tr>
+</table>
+</p>
+
+<p>
+测试环境：Windows Server 2003.
+</p>
+
+<h2 id="toc_1.1">计算高度的时机</h2>
+<p>
+父窗口：
+</p>
+<pre>
+iframe[onload=handler]
+</pre>
+
+<p>
+子窗口
+</p>
+<pre>
+dom-ready = handler;
+window.onload = handler;
+body[onload=handler]
+</pre>
+
+<h2 id="toc_1.2">子窗口获取自身在父窗口的 iframe 元素</h2>
+<p>
+如果父窗口有名字的话，可以直接通过 frames[name] 直接引用。
+</p>
+<pre class="javascript">
+// 求教更恰当的命名。
+function getParentFrame(){
+  if(parent == window){return null;}
+  if(window.name){return parent.frames[window.name];}
+  var ifr = parent.document.getElementsByTagName("iframe");
+  for(var i=0,l=ifr.length; i&lt;l; i++){
+    if(window == ifr[i].contentWindow){
+      return ifr[i];
+    }
+  }
+  var ifr = parent.document.getElementsByTagName("frame");
+  for(var i=0,l=ifr.length; i&lt;l; i++){
+    if(window == ifr[i].contentWindow){
+      return ifr[i];
+    }
+  }
+  return null;
+};
+</pre>
+
+<h2 id="toc_1.3">其他相关</h2>
+<p>
+上面的 getParentFrame 通过窗口名字直接取得元素本身，这里要注意的一点，
+以前写代码的时候有这样的代码定义：
+</p>
+<pre class="javascript">
+  function(){
+      var elem = "elem",
+          name = "name",
+          desc = "desc";
+  }
+</pre>
+
+<p>
+后来要增加一个变量，但是不小心写错标点符号。
+</p>
+<pre class="javascript">
+  function(){
+      var elem = "elem",
++         id = elem.id;
+          name = "name",
+          desc = "desc";
+  }
+</pre>
+
+<p>
+然后 name 就成了全局变量，无意中修改了 window.name 的值。
+所以如果使用 name 作为局部变量的时候，千万要小心，否则执行这段代码之后，
+a[target=oldName] 的链接会因为找不到 frames[oldName] 而弹出新窗口。
+</p>
+
+<h2 id="toc_1.4">延伸阅读</h2>
+<ul>
+<li>
+<a href="http://ued.koubei.com/?p=243">再谈iframe自适应高度</a>
+
+<li>
+<a href="http://ued.koubei.com/?p=1217">三谈Iframe自适应高度</a>
+
+</ul>
+
+<p>
+ blog:datetime=2011/08/24 10:52:52:tags=JavaScript,iframe
+</p>
+
+        <g:plusone></g:plusone>
     </article>
     <div id="status-bar">
         <span id="count"></span>
@@ -199,7 +431,15 @@ function onSearch(){
     </tbody>
     </table>
 </div>
-
+<div>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
+</div>
 <script type="text/javascript" src="js/Vimlike.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 <footer>
@@ -217,5 +457,6 @@ try {
 var pageTracker=_gat._getTracker("UA-2048484-1");
 pageTracker._trackPageview();
 }catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
 </body>
 </html>

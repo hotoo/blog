@@ -16,7 +16,7 @@ function onSearch(){
     return false;
 }
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>Date.now() - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -43,101 +43,185 @@ function onSearch(){
     <article>
         
 
-<h1 id="toc_1">闲耘™.博客</h1>
-<ol>
-<li>
-<a href="Date.now.html">Date.now() (2011/09/18)</a>
-
-<li>
-<a href="smart-sync-scroll.html">智能同步滚动条 (2011/09/01)</a>
-
-<li>
-<a href="area-split.html">面积分片算法 (2011/08/25)</a>
-
-<li>
-<a href="iframe-highly-adaptive.html">深入 Iframe 自适应高度(2011/08/24)</a>
-
-<li>
-<a href="eventListenerList.html">获取元素所绑定的事件列表 (2011/08/19)</a>
-
-<li>
-<a href="vimlike-project.html">宏伟的 Vimlike.js 计划 (2011/08/16)</a>
-
-<li>
-<a href="abort-http-request.html">Abrot HTTP 请求 (2011/07/22)</a>
-
-<li>
-<a href="datatime-picker.html">日期时间型控件的体验 (2011/07/20)</a>
-
-<li>
-<a href="mouse-event.html">鼠标事件研究 (2011/07/16)</a>
-
-<li>
-<a href="tucao.html">吐槽 (2011/07/15)</a>
-
-<li>
-<a href="douban.fm.html">豆瓣电台，我忍你很久了！(2011/07/13)</a>
-
-<li>
-<a href="non-recursion-walk-the-dom.html">非递归遍历 DOM 结构 (2011/07/10)</a>
-
-<li>
-<a href="about-lazy-load.html">说说渐进加载 (2011/07/08)</a>
-
-<li>
-<a href="vimlike.js.html">Vimlike.js (2011/07/08)</a>
-
-<li>
-<a href="donot-use-try-catch.html">别用 try/catch (2011/07/05)</a>
-
-<li>
-<a href="love.alipay.com.html">说说支付宝爱心捐助 (2011/07/04)</a>
-
-<li>
-<a href="dream-the-thief.html">“盗梦空间” (2011/06/30)</a>
-
-<li>
-<a href="abort-image-request.html">丢弃图片的 HTTP 请求 (2011/06/23)</a>
-
-<li>
-<a href="how-to-get-the-first-single-question-mark.html">如何取 URL 中第一个单独的问号(?) 位置 (2011/06/22)</a>
-
-<li>
-<a href="blog-system-vimwiki-or-jekyll.html">使用 Vimwiki 还是 Jekyll 作为博客系统？ (2011/6/19)</a>
-
-<li>
-<a href="parser-return-pattern.html">多种不同结果的返回模式 (2011/06/08)</a>
-
-<li>
-<a href="vim-tee-2.html">【结束】趣味 Vim Tee (2011/05/26)</a>
-
-<li>
-<a href="closure-compile.vim.html">closure-compile.vim (2011/05/26)</a>
-
-<li>
-<a href="hasAttribute.html">深入 hasAttribute (2011/5/19)</a>
-
-<li>
-<a href="window.close.html">window.close() (2011/04/26)</a>
-
-<li>
-<a href="javascript-exceptions.html">JavaScript 异常 (2011/04/03)</a>
-
-<li>
-<a href="quadrant-2.0.html">四象限法2.0 (2011/03/01)</a>
-
-<li>
-<a href="timed-array-processing.html">关于 JavaScript 分时加载 (2011/03/01)</a>
-
-<li>
-<a href="timed-tree-processing.html">树形控件的分时装载 (2011/03/01)</a>
-
-</ol>
-
+<h1 id="toc_1">Date.now()</h1>
 <p>
-<a href="archive-2010.html">« Older(2010)</a> | <strong>2011</strong>
+以前做过一个 JavaScript 性能测试“框架”，也看过其他人做性能比较的时候，基本上
+也都是使用 <code>new Date()</code> 来记时，会“耍点小花样”的同学会使用 <code>+new Date()</code>。
 </p>
 
+<p>
+现在又想做另一种性能监控的方法，便着重考量了下各种记时方案，尽量减少因为
+性能监控代码对业务代码的影响。
+</p>
+
+<p>
+下面是循环 100000 次，过程中只有计数器操作，得到的时间(ms)对照表
+(<a href="http://hotoo.me/labs/Date.now.html">Demo</a>)。
+</p>
+
+<table>
+<tr>
+<th>
+Browser
+</th>
+<th>
+new Date()
+</th>
+<th>
+new Date.getTime()
+</th>
+<th>
+new Date().valueOf()
+</th>
+<th>
++new Date()
+</th>
+<th>
+Date.now()
+</th>
+</tr>
+<tr>
+<td>
+IE8
+</td>
+<td>
+469
+</td>
+<td>
+391
+</td>
+<td>
+375
+</td>
+<td>
+406
+</td>
+<td>
+-
+</td>
+</tr>
+<tr>
+<td>
+Firefox6
+</td>
+<td>
+266
+</td>
+<td>
+258
+</td>
+<td>
+257
+</td>
+<td>
+259
+</td>
+<td>
+236
+</td>
+</tr>
+<tr>
+<td>
+Chrome13
+</td>
+<td>
+46
+</td>
+<td>
+29
+</td>
+<td>
+29
+</td>
+<td>
+35
+</td>
+<td>
+20
+</td>
+</tr>
+<tr>
+<td>
+Opera11
+</td>
+<td>
+246
+</td>
+<td>
+242
+</td>
+<td>
+246
+</td>
+<td>
+244
+</td>
+<td>
+222
+</td>
+</tr>
+<tr>
+<td>
+Safari5
+</td>
+<td>
+256
+</td>
+<td>
+232
+</td>
+<td>
+239
+</td>
+<td>
+255
+</td>
+<td>
+222
+</td>
+</tr>
+</table>
+
+<p>
+由此可以对照出，<code>Date.now()</code> 确实有很明显的性能优势，另外 <code>Date.now()</code> 返回是
+number 类型的数值，并不产生 Date 对象。
+</p>
+
+<p>
+不过目前只有 IE9, Firefox3+, Chrome5+, Opera10.50+, Safari4+ 支持，对于不支持
+的浏览器，可以继续使用 <code>new Date().valueOf()</code> 方法（个人不推荐用 <code>+new Date()</code>）：
+</p>
+
+<pre class="javascript">
+// @return {Number}
+function now(){
+    return ("function"==typeof Date.now) ? Date.now() : new Date().valueOf();
+}
+</pre>
+
+<h2 id="toc_1.1">日期相关</h2>
+
+<pre class="javascript">
+new Date()          // now.
+new Date(null);     // 1970/01/01 00:00:00(UTC)
+new Date(undefined);// IE:NaN; Others:Invalid Date.
+</pre>
+
+<h2 id="toc_1.2">参考阅读</h2>
+<ul>
+<li>
+<a href="http://msdn.microsoft.com/en-us/library/ff679974(v=vs.94).aspx">Date.now Function (JavaScript) - MSDN</a>
+
+<li>
+<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date/now">Data.now() - MDN</a>
+
+</ul>
+
+<p>
+ blog:datetime=2011/09/18 11:26:23:tags=
+</p>
+
+        <g:plusone></g:plusone>
     </article>
     <div id="status-bar">
         <span id="count"></span>
@@ -199,7 +283,15 @@ function onSearch(){
     </tbody>
     </table>
 </div>
-
+<div>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
+</div>
 <script type="text/javascript" src="js/Vimlike.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 <footer>
@@ -217,5 +309,6 @@ try {
 var pageTracker=_gat._getTracker("UA-2048484-1");
 pageTracker._trackPageview();
 }catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
 </body>
 </html>
