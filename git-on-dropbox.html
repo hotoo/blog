@@ -50,19 +50,34 @@ function onSearch(){
 </p>
 
 <pre>
+mkdir test
 cd test
 git init
+
+# for Windows.
+echo NUL &gt; README
+# for Unix-like.
 touch README
+
 git add .
 git commit -m "first commit."
 
 cd ..
 git clone --bare test test.git
+
+# for Windows.
 mkdir "D:\My Dropbox\codes\repositories"
-cp test.git "D:\My Dropbox\codes\repositories"
+copy test.git "D:\My Dropbox\codes\repositories"
+# for Unix-like
+mkdir ~/Dropbox/codes/repositories
+mv test.git ~/Dropbox/codes/repositories
 
 cd test
+# for Windows.
 git remote add "file:///D:\My Dropbox\codes\repositories\test.git"
+# for Unix-like.
+git remote add origin file:///Users/{name}/Dropbox/codes/repositories/test.git
+
 vi README
 git add .
 git commit -m "make changes."
