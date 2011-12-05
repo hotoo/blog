@@ -16,7 +16,7 @@ function onSearch(){
     return false;
 }
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>Confluence Wiki for Vi - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -43,107 +43,44 @@ function onSearch(){
     <article>
         
 
-<h1 id="toc_1">闲耘™.博客</h1>
-<ol>
-<li>
-<a href="confluencewiki.vim.html">Confluence Wiki for Vim(2011/12/04)</a>
-
-<li>
-<a href="chrome-extension-keep-popup.html">保持Chrome插件的 popup 页面状态 (2011/11/01)</a>
-
-<li>
-<a href="Date.now.html">Date.now() (2011/09/18)</a>
-
-<li>
-<a href="smart-sync-scroll.html">智能同步滚动条 (2011/09/01)</a>
-
-<li>
-<a href="area-split.html">面积分片算法 (2011/08/25)</a>
-
-<li>
-<a href="iframe-highly-adaptive.html">深入 Iframe 自适应高度(2011/08/24)</a>
-
-<li>
-<a href="eventListenerList.html">获取元素所绑定的事件列表 (2011/08/19)</a>
-
-<li>
-<a href="vimlike-project.html">宏伟的 Vimlike.js 计划 (2011/08/16)</a>
-
-<li>
-<a href="abort-http-request.html">Abrot HTTP 请求 (2011/07/22)</a>
-
-<li>
-<a href="datatime-picker.html">日期时间型控件的体验 (2011/07/20)</a>
-
-<li>
-<a href="mouse-event.html">鼠标事件研究 (2011/07/16)</a>
-
-<li>
-<a href="tucao.html">吐槽 (2011/07/15)</a>
-
-<li>
-<a href="douban.fm.html">豆瓣电台，我忍你很久了！(2011/07/13)</a>
-
-<li>
-<a href="non-recursion-walk-the-dom.html">非递归遍历 DOM 结构 (2011/07/10)</a>
-
-<li>
-<a href="about-lazy-load.html">说说渐进加载 (2011/07/08)</a>
-
-<li>
-<a href="vimlike.js.html">Vimlike.js (2011/07/08)</a>
-
-<li>
-<a href="donot-use-try-catch.html">别用 try/catch (2011/07/05)</a>
-
-<li>
-<a href="love.alipay.com.html">说说支付宝爱心捐助 (2011/07/04)</a>
-
-<li>
-<a href="dream-the-thief.html">“盗梦空间” (2011/06/30)</a>
-
-<li>
-<a href="abort-image-request.html">丢弃图片的 HTTP 请求 (2011/06/23)</a>
-
-<li>
-<a href="how-to-get-the-first-single-question-mark.html">如何取 URL 中第一个单独的问号(?) 位置 (2011/06/22)</a>
-
-<li>
-<a href="blog-system-vimwiki-or-jekyll.html">使用 Vimwiki 还是 Jekyll 作为博客系统？ (2011/6/19)</a>
-
-<li>
-<a href="parser-return-pattern.html">多种不同结果的返回模式 (2011/06/08)</a>
-
-<li>
-<a href="vim-tee-2.html">【结束】趣味 Vim Tee (2011/05/26)</a>
-
-<li>
-<a href="closure-compile.vim.html">closure-compile.vim (2011/05/26)</a>
-
-<li>
-<a href="hasAttribute.html">深入 hasAttribute (2011/5/19)</a>
-
-<li>
-<a href="window.close.html">window.close() (2011/04/26)</a>
-
-<li>
-<a href="javascript-exceptions.html">JavaScript 异常 (2011/04/03)</a>
-
-<li>
-<a href="quadrant-2.0.html">四象限法2.0 (2011/03/01)</a>
-
-<li>
-<a href="timed-array-processing.html">关于 JavaScript 分时加载 (2011/03/01)</a>
-
-<li>
-<a href="timed-tree-processing.html">树形控件的分时装载 (2011/03/01)</a>
-
-</ol>
+<h1 id="toc_1">Confluence Wiki for Vim</h1>
+<p>
+.ctags / ctags.cnf
+</p>
+<pre>
+--langdef=confluencewiki
+--langmap=confluencewiki:.wiki
+--regex-confluencewiki=/^h1.[ \t]+(.+)$/\1/h,header/
+--regex-confluencewiki=/^h2.[ \t]+(.+)$/. \1/h,header/
+--regex-confluencewiki=/^h3.[ \t]+(.+)$/.   \1/h,header/
+--regex-confluencewiki=/^h4.[ \t]+(.+)$/.     \1/h,header/
+--regex-confluencewiki=/^h5.[ \t]+(.+)$/.       \1/h,header/
+--regex-confluencewiki=/^h6.[ \t]+(.+)$/.         \1/h,header/
+</pre>
 
 <p>
-<a href="archive-2010.html">« Older(2010)</a> | <strong>2011</strong>
+.vimrc / _vimrc
+</p>
+<pre>
+let tlist_confluencewiki_settings = 'confluencewiki;h:Headers'
+</pre>
+
+<p>
+这玩意很好使，同样是 .wiki 后缀，可以同时支持 Vimwiki 和 Confluence Wiki。
 </p>
 
+<h2 id="toc_1.1">See Also</h2>
+<ul>
+<li>
+<a href="http://www.vim.org/scripts/script.php?script_id=1994">http://www.vim.org/scripts/script.php?script_id=1994</a>
+
+</ul>
+
+<p>
+ blog:datetime=2011/12/04 22:37:52:tags=vim,wiki
+</p>
+
+        <g:plusone></g:plusone>
     </article>
     <div id="status-bar">
         <span id="count"></span>
@@ -205,7 +142,15 @@ function onSearch(){
     </tbody>
     </table>
 </div>
-
+<div>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
+</div>
 <script type="text/javascript" src="js/Vimlike.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 <footer>
@@ -223,5 +168,6 @@ try {
 var pageTracker=_gat._getTracker("UA-2048484-1");
 pageTracker._trackPageview();
 }catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
 </body>
 </html>
