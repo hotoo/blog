@@ -63,6 +63,9 @@ data type: number, date, url, email...
 minlength, maxlength, min, max.
 
 <li>
+正则模式
+
+<li>
 用户自定义验证函数。
 
 <li>
@@ -81,6 +84,7 @@ function verifyFormInput(input){
     if(!verifyInputType()){return false;}
     if(!verifyMin()){return false;}
     if(!verifyMax()){return false;}
+    if(!verifyPattern()){return false;}
     if(!verifyUserRules()){return false;}
     if(!verifySync()){return false;}
     return true;
@@ -174,6 +178,7 @@ function verifyFormInput(input){
     certified = certified &amp;&amp; verifyInputType();
     certified = certified &amp;&amp; verifyMin();
     certified = certified &amp;&amp; verifyMax();
+    certified = certified &amp;&amp; verifyPattern();
     certified = certified &amp;&amp; verifyUserRules();
     certified = certified &amp;&amp; verifySync();
     return certified;
