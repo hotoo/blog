@@ -16,7 +16,7 @@ function onSearch(){
     return false;
 }
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>vim-install-tagbar - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -43,29 +43,51 @@ function onSearch(){
     <article>
         
 
-<h1 id="toc_1">闲耘™.博客</h1>
-<ol>
-<li>
-<a href="macvim-svndiff.html">使用 MacVim 做 svn diff(2012/10/31)</a>
-
-<li>
-<a href="vim-install-tagbar.html">在 Vim 上安装使用 Tagbar(2012/10/28)</a>
-
-<li>
-<a href="WuRenCun.html">无人村骑行(2012/10/27)</a>
-
-<li>
-<a href="logical-conjunction.html">『逻辑与』是个好东西 (2012/5/1)</a>
-
-<li>
-<a href="bicycle-travel.html">千里走单骑(2012/04/02)</a>
-
-</ol>
-
 <p>
-<a href="archive-2011.html">« Older(2011)</a> | <strong>2012</strong>
+tags: #tagbar, #ctags, #jsctags
 </p>
 
+<h1 id="toc_1">vim-install-tagbar</h1>
+<blockquote>
+git clone <a href="https://github.com/mozilla/doctorjs.git">https://github.com/mozilla/doctorjs.git</a> –recursive
+cd doctorjs
+sudo make install
+</blockquote>
+
+<p>
+会提示将 NODE_PATH 加入到环境变量 ~/.bash_profile ：
+</p>
+<blockquote>
+NODE_PATH=/usr/local/lib/jsctags/:$NODE_PATH
+</blockquote>
+
+<h2 id="toc_1.1">See Also</h2>
+<ul>
+<li>
+[<a href="http://majutsushi.github.com/tagbar/">http://majutsushi.github.com/tagbar/</a> Tagbar]
+
+<li>
+[<a href="https://github.com/majutsushi/tagbar/wiki">https://github.com/majutsushi/tagbar/wiki</a> Support for additional filetypes]
+
+<li>
+[<a href="http://ahchoo.me/blog/2012/03/08/learn-vim-3-post/">http://ahchoo.me/blog/2012/03/08/learn-vim-3-post/</a> Vim学习 Jsctags]
+
+<li>
+[<a href="https://github.com/mozilla/doctorjs">https://github.com/mozilla/doctorjs</a> Doctor.js] - jsctags.
+
+<li>
+[<a href="https://github.com/hotoo/dotfiles/blob/master/.ctags">https://github.com/hotoo/dotfiles/blob/master/.ctags</a> .ctags]
+
+<li>
+[<a href="http://jezng.com/2011/03/vim-support-javascript-taglist-plus/">http://jezng.com/2011/03/vim-support-javascript-taglist-plus/</a> Awesome vim support for javascript with jsctags and taglist-plus]
+
+</ul>
+<p>
+*
+[<a href="http://hikejun.com/blog/2011/05/07/%E6%9B%B4%E5%A5%BD%E7%9A%84%E7%94%A8vim%E6%B5%8F%E8%A7%88javascript%E4%BB%A3%E7%A0%81/">http://hikejun.com/blog/2011/05/07/%E6%9B%B4%E5%A5%BD%E7%9A%84%E7%94%A8vim%E6%B5%8F%E8%A7%88javascript%E4%BB%A3%E7%A0%81/</a> 更好的用vim浏览Javascript代码]
+</p>
+
+        <g:plusone></g:plusone>
     </article>
     <div id="status-bar">
         <span id="count"></span>
@@ -127,7 +149,15 @@ function onSearch(){
     </tbody>
     </table>
 </div>
-
+<div>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
+</div>
 <script type="text/javascript" src="js/Vimlike.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 <footer>
@@ -145,5 +175,6 @@ try {
 var pageTracker=_gat._getTracker("UA-2048484-1");
 pageTracker._trackPageview();
 }catch(err){}</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js" charset="utf-8"></script>
 </body>
 </html>
