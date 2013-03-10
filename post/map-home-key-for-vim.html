@@ -1,0 +1,74 @@
+<hr />
+
+<p>layout: post
+title: Vim映射Home键到首个非空字符
+tags:</p>
+
+<pre><code>- Vim
+</code></pre>
+
+<hr />
+
+<p>许多编辑器有相关选项，可以直接设置让 <code>&lt;Home&gt;</code> 键在首个非空字符和行首之间跳转。</p>
+
+<p>Vim 也有快捷键，normal 模式下：<br />
+<code>0</code> 跳转到行首；<br />
+<code>^</code> 跳转到首个非空字符；<br />
+<code>$</code> 跳转到行尾。</p>
+
+<p>目前未知跳转到最后一个非空字符的快捷键，有个网友提供了一个很好玩的技巧：</p>
+
+<pre><code>nmap &lt;End&gt; /\S\s*$&lt;CR&gt;:nohl&lt;CR&gt;
+</code></pre>
+
+<p>为了将 <code>&lt;Home&gt;</code>和 <code>End&gt;</code> 键映射到其他编辑器常用的设置，我写了个可以用的代码，请高手不吝赐教。</p>
+
+<pre><code>" Dynamic bind &lt;HOME&gt; key
+" if caret/cursor not at the frist non-white-space character
+"   move caret/cursor to there
+" else
+"   move to beginning
+function HomeBind(offset)
+    let cursor=getpos('.')
+    let s0=getline(line('.'))
+    let s1=substitute(s0, "^\\s\\+", "", "")
+    let x=len(s0)-len(s1)+1
+    if col('.') == x-a:offset
+        let x=1
+    endif
+    call setpos('.', [cursor[0], cursor[1], x, cursor[3]])
+endfunction
+imap &lt;silent&gt; &lt;Home&gt; &lt;Esc&gt;:call HomeBind(1)&lt;cr&gt;i
+nmap &lt;silent&gt; &lt;Home&gt; :call HomeBind(0)&lt;cr&gt;
+vmap &lt;silent&gt; &lt;Home&gt; &lt;Esc&gt;:call HomeBind(1)&lt;cr&gt;
+
+" Dynamic bind &lt;END&gt; key
+" if caret/cursor not at the end
+"   move caret/cursor to there
+" else
+"   move to last non-white-space character.
+function EndBind(offset)
+    let cursor=getpos('.')
+    let s0=getline(line('.'))
+    let s1=substitute(s0, "\\s*$", "", "")
+    let x=len(s0)+a:offset
+    if col('.') == x
+        let x=len(s1)+a:offset
+    endif
+    call setpos('.', [cursor[0], cursor[1], x, cursor[3]])
+endfunction
+imap &lt;silent&gt; &lt;End&gt; &lt;Esc&gt;:call EndBind(0)&lt;cr&gt;a
+nmap &lt;silent&gt; &lt;End&gt; :call EndBind(0)&lt;cr&gt;
+vmap &lt;silent&gt; &lt;End&gt; :call EndBind(0)&lt;cr&gt;
+"nmap &lt;End&gt; /\S\s*$&lt;CR&gt;:nohl&lt;CR&gt;
+</code></pre>
+
+<p>这里还有几个实现很优雅，但稍有问题的脚本：</p>
+
+<ul>
+<li><a href="http://vim.wikia.com/wiki/SmartHome_and_SmartEnd_over_wrapped_lines">SmartHome and SmartEnd over wrapped lines</a></li>
+<li><a href="http://www.vim.org/scripts/script.php?script_id=2772">Crazy Home Key</a>
+  <a href="http://chenkaie.blogspot.com/2009/09/vim-crazy-home-key-crazyhomekeyvim.html">blog</a></li>
+<li><a href="http://gist.github.com/214532">c9s: smart_home_end.vim</a></li>
+</ul>
+

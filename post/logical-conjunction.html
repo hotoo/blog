@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<head>
+<!--[if IE]><script type="text/javascript" src="/js/html5.js"></script><![endif]-->
+<meta charset="UTF-8" />
+<meta name="generator" content="gvim" />
+<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<!--<link rel="alternate" type="application/rss+xml" title="RSS"
+  href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />-->
+<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
+<link type="text/css" rel="stylesheet" href="/css/template.css" />
+<script type="text/javascript" src="/js/sea.js"></script>
+<script type="text/javascript">
+seajs.config({
+  alias: {
+    'jquery': 'jquery-1.8.3.min.js',
+    'hashchange': 'jquery.ba-hashchange.min.js'
+  }
+});
+seajs.use(["jquery", "default-main"], function(){
+    alert("default")
+});
+</script>
+<title>『逻辑与』是个好东西 - 闲耘™.博客</title>
+</head>
+<body>
+<div id="wrapper">
+<header>
+<div style="float:right;">
+    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+        <input type="text" name="q" />
+        <input type="submit" value="搜索" />
+    </form>
+</div>
+<nav>
+    <ul>
+        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
+        <li class="actived"><a href="/" title="Blog">Blog</a></li>
+        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
+        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
+        <li><a href="http://twitter.hotoo.me/" title="Twitter">Twitter</a></li>
+        <li class="last"><a href="/projects.html" title="Project">Project</a></li>
+        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
+    </ul>
+</nav>
+</header>
+<div id="container">
+  <div id="content">
+        <h1>『逻辑与』是个好东西</h1>
+    <article>
+        <p>一直很想实现 WebForms2 的语义化表单验证，最近才开始动手，执行力真差啊。</p>
+
+<p>一个表单元素可以同时存在多种校验方案，比如：</p>
+
+<ul>
+<li>required.</li>
+<li>data type: number, date, url, email...</li>
+<li>minlength, maxlength, min, max.</li>
+<li>pattern</li>
+<li>用户自定义验证函数。</li>
+<li>异步访问服务器进行业务校验。</li>
+</ul>
+
+
+<p>通常可以通过逻辑判断进行处理：</p>
+
+<pre><code>function verifyFormInput(input){
+  if(!verifyRequired()){return false;}
+  if(!verifyMinLength()){return false;}
+  if(!verifyMaxLength()){return false;}
+  if(!verifyInputType()){return false;}
+  if(!verifyMin()){return false;}
+  if(!verifyMax()){return false;}
+  if(!verifyPattern()){return false;}
+  if(!verifyUserRules()){return false;}
+  if(!verifySync()){return false;}
+  return true;
+}
+function verifyForm(form){
+    var flags = [];
+    for(var i=0,l=form.elements.length; i&lt;l; i++){
+        // 一次只能校验一个表单元素异常。
+        //if(!verifyFormInput(form.elements[i])){return false;}
+
+        // 可以同时校验所有元素异常。但是需要辅助循环进行检查。
+        flags[i] = verifyFormInput(form.elements[i]);
+    }
+    // 辅助循环检查。
+    for(var i=0,l=flags.length; i&lt;l; i++){
+        if(!flags[i]){return false;}
+    }
+    return true;
+}
+</code></pre>
+
+<p>实际代码中，各个 <code>verifyXXX</code> 函数可能内联在 <code>verifyFormInput</code> 函数中，
+代码显得多而有点乱，甚至有点冗余。</p>
+
+<p>想起模拟电路课程上学到的『与门』，只有所有电路都是通路时，整个电路才是通路。</p>
+
+<p>而表单验证也是这样：</p>
+
+<ul>
+<li>某个表单元素的所有验证逻辑都通过验证时，这个表单元素才算通过验证。</li>
+<li>整个表单的所有表单元素都通过验证时，才算这个表单通过验证。</li>
+</ul>
+
+
+<p>同时基于『逻辑与』表达式的语言特性，一旦前面的条件可以判断逻辑失败，立即返回
+失败，不再进行后面的条件判断。</p>
+
+<p>LogicalANDExpression:</p>
+
+<blockquote><p><em>Semantics</em></p>
+
+<p>The production LogicalANDExpression : LogicalANDExpression &amp;&amp;
+BitwiseORExpression is evaluated as follows:</p>
+
+<ol>
+<li> Evaluate LogicalANDExpression.</li>
+<li> Call GetValue(Result(1)).</li>
+<li> Call ToBoolean(Result(2)).</li>
+<li> If Result(3) is <em>false</em>, return Result(2).</li>
+<li> Evaluate BitwiseORExpression.</li>
+<li> Call GetValue(Result(5)).</li>
+<li> Return Result(6).</li>
+</ol>
+</blockquote>
+
+<p>BitwiseORExpression:</p>
+
+<blockquote><p>  <em>Semantics</em></p>
+
+<p>  The production A : A@B, where @ is one of the bitwise operators in the
+  productions above, is evaluated as follows:</p>
+
+<ol>
+<li> Evaluate A.</li>
+<li> Call GetValue(Result(1)).</li>
+<li> Evaluate B.</li>
+<li> Call GetValue(Result(3)).</li>
+<li> Call ToInt32(Result(2)).</li>
+<li> Call ToInt32(Result(4)).</li>
+<li> Apply the bitwise operator @ to Result(5) and Result(6). The result is
+a signed 32 bit integer.</li>
+<li> Return Result(7).</li>
+</ol>
+</blockquote>
+
+<p>于是验证算法改良如下：</p>
+
+<pre><code>function verifyFormInput(input){
+    var certified = true;
+    certified = certified &amp;&amp; verifyRequired();
+    certified = certified &amp;&amp; verifyMinLength();
+    certified = certified &amp;&amp; verifyMaxLength();
+    certified = certified &amp;&amp; verifyInputType();
+    certified = certified &amp;&amp; verifyMin();
+    certified = certified &amp;&amp; verifyMax();
+    certified = certified &amp;&amp; verifyPattern();
+    certified = certified &amp;&amp; verifyUserRules();
+    certified = certified &amp;&amp; verifySync();
+    return certified;
+}
+function verifyForm(form){
+    var certified = true;
+    for(var i=0,flag,l=form.elements.length; i&lt;l; i++){
+        // 一次只能校验一个表单元素异常。
+        //certified = certified &amp;&amp; verifyFormInput(form.elements[i]);
+
+        // 可以同时校验所有元素异常。无需辅助循环进行检查。
+        flag = verifyFormInput(form.elements[i]);
+        certified = certified &amp;&amp; flag;
+    }
+    return certified;
+}
+</code></pre>
+
+<h2>延伸</h2>
+
+<p>以前也 Hack 的用过逻辑与表达式，比如：</p>
+
+<pre><code>flag &amp;&amp; action();
+</code></pre>
+
+<p>但这个用法只是用到了条件判断的作用，类似于：</p>
+
+<pre><code>if(flag){action();}
+</code></pre>
+
+<h2>参考阅读</h2>
+
+<ul>
+<li><a href="http://www.ecmascript.org/">ECMAScript</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E9%80%BB%E8%BE%91%E4%B8%8E">逻辑与</a>
+  <a href="http://en.wikipedia.org/wiki/Logical_conjunction">Logical_conjunction</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E4%B8%8E%E9%97%A8">与门</a>
+  <a href="http://en.wikipedia.org/wiki/AND_gate">AND_gate</a></li>
+</ul>
+
+
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
+        
+          
+          <a href="/tags.html#JavaScript">JavaScript</a>
+        
+      </span>
+      <time>May  1, 
+      <a href="/archives.html#2012">2012</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
+<script type="text/javascript" src="/js/comments.js"></script>
+
+  </div>
+
+    <!-- Vimlike status bar -->
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/js/Vimlike.js"></script>
+<footer>
+    <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
+    Copyleft &copy; 2005-2010, Power by <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
+    </p>
+</footer>
+</div>
+<script type="text/javascript">
+var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker=_gat._getTracker("UA-2048484-1");
+pageTracker._trackPageview();
+}catch(err){}</script>
+</body>
+</html>

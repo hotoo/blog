@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<head>
+<!--[if IE]><script type="text/javascript" src="/js/html5.js"></script><![endif]-->
+<meta charset="UTF-8" />
+<meta name="generator" content="gvim" />
+<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<!--<link rel="alternate" type="application/rss+xml" title="RSS"
+  href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />-->
+<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
+<link type="text/css" rel="stylesheet" href="/css/template.css" />
+<script type="text/javascript" src="/js/sea.js"></script>
+<script type="text/javascript">
+seajs.config({
+  alias: {
+    'jquery': 'jquery-1.8.3.min.js',
+    'hashchange': 'jquery.ba-hashchange.min.js'
+  }
+});
+seajs.use(["jquery", "default-main"], function(){
+    alert("default")
+});
+</script>
+<title>正则表达式重复子模式前、后倾的性能比较 - 闲耘™.博客</title>
+</head>
+<body>
+<div id="wrapper">
+<header>
+<div style="float:right;">
+    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+        <input type="text" name="q" />
+        <input type="submit" value="搜索" />
+    </form>
+</div>
+<nav>
+    <ul>
+        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
+        <li class="actived"><a href="/" title="Blog">Blog</a></li>
+        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
+        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
+        <li><a href="http://twitter.hotoo.me/" title="Twitter">Twitter</a></li>
+        <li class="last"><a href="/projects.html" title="Project">Project</a></li>
+        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
+    </ul>
+</nav>
+</header>
+<div id="container">
+  <div id="content">
+        <h1>正则表达式重复子模式前、后倾的性能比较</h1>
+    <article>
+        <h1>正则表达式重复子模式前、后倾的性能比较</h1>
+
+<p>在准备内部的正则表达式 (Regular Expression)分享的过程中，
+注意到一个细节问题：重复的子模式，是应该前倾还是后倾，这两者在性能上有什么差异？</p>
+
+<p>前倾和后倾是我胡诌的两个词，我的定义如下：</p>
+
+<blockquote><p><em>前倾</em> 就是前面的子表达式使用贪婪匹配或较大的量词，尽可能多的匹配内容，
+导致前面匹配的内容较多而使“天平”前倾。例如：<code>/(?:\d{1,3}\.){3}\d{1,3}/</code>。<br />
+<em>后倾</em> 则相反，后面的子表达式使用贪婪匹配或较大的量词。如：<code>/\d{1,3}(?:\.\d{1,3}){3}/</code>。</p></blockquote>
+
+<p>前倾和后倾在实际应用中很常见，如时间，主机名等，中间以某特殊字符（串?）分隔，
+被分隔部分的规则又相同的情况下，一般都是使用这两种实现方式之一。</p>
+
+<p>上面定义中的两个例子只是简例，可以用来大致匹配 IPv4 地址，完整的 IPv4 地址正则式如下，
+它要求每段都在 0-255 之间：
+前倾：</p>
+
+<pre><code>/^(?:(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/
+</code></pre>
+
+<p>后倾：</p>
+
+<pre><code>/^(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(?:\.(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])){3}$/
+</code></pre>
+
+<p>我写了一个测试<a href="http://hotoo.googlecode.com/svn/trunk/test/RegExp.front.end.html">比较这两个正则性能</a>
+的页面，在 IE7, FF3.6, Safari 4, Opera 10 下测试均为前倾的性能较高，Chrome 4 下则不相伯仲。</p>
+
+<p>p.s. 这种重复子模式，要有语法上的简写就好了，像 Perl 正则的递归引用（或类似运行时反向引用），
+维护起来就方便多了。</p>
+
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
+        
+          
+          <a href="/tags.html#RegExp">RegExp</a>
+        
+      </span>
+      <time>January 26, 
+      <a href="/archives.html#2010">2010</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
+<script type="text/javascript" src="/js/comments.js"></script>
+
+  </div>
+
+    <!-- Vimlike status bar -->
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/js/Vimlike.js"></script>
+<footer>
+    <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
+    Copyleft &copy; 2005-2010, Power by <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
+    </p>
+</footer>
+</div>
+<script type="text/javascript">
+var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker=_gat._getTracker("UA-2048484-1");
+pageTracker._trackPageview();
+}catch(err){}</script>
+</body>
+</html>

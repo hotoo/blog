@@ -1,0 +1,87 @@
+<hr />
+
+<p>layout: post
+title: vim字体设置
+tags:</p>
+
+<pre><code>- Vim
+- Fonts
+</code></pre>
+
+<hr />
+
+<p>明城有 “<a href="http://www.gracecode.com/archives/1545/">苹果的 Courier 字体不错</a>”
+和“<a href="http://www.gracecode.com/archives/2402/">Windows 下 gVim 的雅黑字体配置</a>”
+两篇介绍 Vim 下设置推荐字体的文章，里面提供的设置代码及提高的下载资源都很赞。</p>
+
+<p>家里的 Windows 7 用了 Courier New 字体后，体验很好。</p>
+
+<p>但是搬到公司的 Windows XP 上却比原来 Windows 自身的 Courier New 没多大提高。</p>
+
+<p>今天看了蟠盛写的“<a href="http://blog.htmlor.com/2007/10/14/good_programming_fonts/">几种不错的编程字体</a>”，
+顺便看了下 <a href="http://support.microsoft.com/kb/306527/zh-cn">使用 ClearType 增强屏幕字体</a>，按步骤 果然好了很多。</p>
+
+<p>这里记录完整的设置：</p>
+
+<ol>
+<li>下载 <a href="http://hotoo.googlecode.com/svn/trunk/fonts/Apple_Courier_Gracecode.zip">Apple Courier字体</a>
+ <a href="http://www.box.net/shared/zf08nmhc8g">2</a>
+ <a href="http://lifesinger.googlecode.com/files/apple_courier_font.zip">3</a> ，并安装。安装方法：
+
+<ul>
+<li>for Windows 7: 右键字体文件，安装即可。</li>
+<li>for Windows XP:
+
+<ol>
+<li> 资源管理器中打开系统盘下的fonts目录（如C:\WINDOWS\Fonts，或运行fonts）</li>
+<li> 文件 -> 安装新字体；</li>
+<li> 驱动器和文件夹定位到字体所在位置，字体列表将自动列出找到的字体；</li>
+<li> 选中要安装的字体，点击确定即可。</li>
+<li> 或直接将字体文件拷贝到Fonts文件夹亦可，系统将自动启动安装过程。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>ClearType
+
+<ol>
+<li>控制面板 -> 显示（或右键桌面 -> 属性） -> 外观 -> 效果；</li>
+<li>选中“☑ 使用下列方式使屏幕字体的边缘平滑”；</li>
+<li>并切换下面的下拉框，选中“清晰(ClearType)”；</li>
+<li>确定即可。</li>
+</ol>
+</li>
+<li>Vim设置
+
+<ol>
+<li><p>在 _vimrc 中加入如下代码：</p>
+
+<p> set guifont=Courier_New:h11:cANSI</p></li>
+<li><p>中文的宋体已经非常好了，不过仍然可以单独设置中文字体：</p>
+
+<p> set guifontwide=YouYuan:h11:cGB2312</p></li>
+<li><p>此时，新启动vim即可使用新设置的字体了。</p></li>
+</ol>
+</li>
+</ol>
+
+
+<p><img src="http://farm4.static.flickr.com/3462/3919344550_f5cd6656c8_o.png" alt="" /></p>
+
+<p><a href="http://www.flickr.com/photos/hotoo/3919344550/">ref</a></p>
+
+<h2>白露非提供的字体</h2>
+
+<p><a href="http://8.nf/dxa">下载</a></p>
+
+<p>设置：</p>
+
+<pre><code>guifont=Microsoft_YaHei_Mono:h11:cANSI
+</code></pre>
+
+<h2>See Also</h2>
+
+<ul>
+<li><a href="https://twitter.com/#!/belleveinvis/status/19308677508894720">@twitter</a></li>
+</ul>
+

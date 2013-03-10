@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<head>
+<!--[if IE]><script type="text/javascript" src="/js/html5.js"></script><![endif]-->
+<meta charset="UTF-8" />
+<meta name="generator" content="gvim" />
+<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<!--<link rel="alternate" type="application/rss+xml" title="RSS"
+  href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />-->
+<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
+<link type="text/css" rel="stylesheet" href="/css/template.css" />
+<script type="text/javascript" src="/js/sea.js"></script>
+<script type="text/javascript">
+seajs.config({
+  alias: {
+    'jquery': 'jquery-1.8.3.min.js',
+    'hashchange': 'jquery.ba-hashchange.min.js'
+  }
+});
+seajs.use(["jquery", "default-main"], function(){
+    alert("default")
+});
+</script>
+<title>Vim 自动补全成对的括号和引号 - 闲耘™.博客</title>
+</head>
+<body>
+<div id="wrapper">
+<header>
+<div style="float:right;">
+    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+        <input type="text" name="q" />
+        <input type="submit" value="搜索" />
+    </form>
+</div>
+<nav>
+    <ul>
+        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
+        <li class="actived"><a href="/" title="Blog">Blog</a></li>
+        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
+        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
+        <li><a href="http://twitter.hotoo.me/" title="Twitter">Twitter</a></li>
+        <li class="last"><a href="/projects.html" title="Project">Project</a></li>
+        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
+    </ul>
+</nav>
+</header>
+<div id="container">
+  <div id="content">
+        <h1>Vim 自动补全成对的括号和引号</h1>
+    <article>
+        <h1>Vim 自动补全成对的括号和引号</h1>
+
+<p>炫日分享了一个 <a href="http://aoyme.wordpress.com/2010/05/31/%E5%9C%A8vim%E4%B8%AD%E5%B0%86%E6%8B%AC%E5%8F%B7%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%EF%BC%9A/">自动补全成对的括号</a>
+的脚本，【注】：原文代码中引号被转义成了中文引号，下面是修正后的脚本。</p>
+
+<pre><code>inoremap ( ()&lt;ESC&gt;i
+inoremap ) &lt;c-r&gt;=ClosePair(')')&lt;CR&gt;
+inoremap { {}&lt;ESC&gt;i
+inoremap } &lt;c-r&gt;=ClosePair('}')&lt;CR&gt;
+inoremap [ []&lt;ESC&gt;i
+inoremap ] &lt;c-r&gt;=ClosePair(']')&lt;CR&gt;
+inoremap &lt; &lt;&gt;&lt;ESC&gt;i
+inoremap &gt; &lt;c-r&gt;=ClosePair('&gt;')&lt;CR&gt;
+
+function ClosePair(char)
+    if getline('.')[col('.') - 1] == a:char
+        return "\&lt;Right&gt;"
+    else
+        return a:char
+    endif
+endf
+</code></pre>
+
+<p>经启发我增加了对括号和引号更为智能的补全支持，
+不过中文全角的括号和引号目前无法通过映射来实现，
+对于转义的符号对的支持不佳。</p>
+
+<p>支持 2000 行以内（可以根据系统性能自行配置）文档的全局括号对识别能力。
+也就是 2000 行以内的文档，支持跨行的括号对智能匹配能力；当文档行数超出预设值，
+则使用行内括号对智能补全。</p>
+
+<ul>
+<li>OpenPair:
+
+<ol>
+<li> 如果当前行的括号已经成对匹配，则自动补全右括号 <code>(I)</code></li>
+<li> 如果左括号比右括号多，则自动补全  <code>I(()</code> <code>(I()</code> <code>((I)</code> <code>(()I</code></li>
+<li> 如果左括号比右括号少，<br />
+  <code>I())</code> 原样输出，不自动补全<br />
+  <code>(I))</code> 同上<br />
+  <code>()I)</code> 同上<br />
+  <code>())I</code> 自动补全：左括号较少，且光标之后字符串进行一次递归上面的条件</li>
+</ol>
+</li>
+<li>ClosePair:
+
+<ol>
+<li> 如果光标之后是一个右括号，向右移动一列 <code>(I)</code> <code>((I)</code> <code>(I))</code> <code>()I)</code></li>
+<li> 否则原样输出。</li>
+</ol>
+</li>
+</ul>
+
+
+<p>代码见 <a href="http://gist.github.com/449512">gist: 449512</a></p>
+
+<h2>更新 (2010/6/24)</h2>
+
+<h2>最后更新 (2010/7/9)</h2>
+
+<h2>相关脚本</h2>
+
+<ul>
+<li><a href="http://www.vim.org/scripts/script.php?script_id=2754">delimitMate.vim</a>
+(<a href="http://github.com/Raimondi/delimitMate">src</a>)</li>
+<li><a href="http://vim.wikia.com/wiki/Making_Parenthesis_And_Brackets_Handling_Easier">Making Parenthesis And Brackets Handling Easier</a></li>
+</ul>
+
+
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
+        
+          
+          <a href="/tags.html#Vim">Vim</a>
+        
+      </span>
+      <time>June 20, 
+      <a href="/archives.html#2010">2010</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
+<script type="text/javascript" src="/js/comments.js"></script>
+
+  </div>
+
+    <!-- Vimlike status bar -->
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/js/Vimlike.js"></script>
+<footer>
+    <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
+    Copyleft &copy; 2005-2010, Power by <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
+    </p>
+</footer>
+</div>
+<script type="text/javascript">
+var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker=_gat._getTracker("UA-2048484-1");
+pageTracker._trackPageview();
+}catch(err){}</script>
+</body>
+</html>

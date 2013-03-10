@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<head>
+<!--[if IE]><script type="text/javascript" src="/js/html5.js"></script><![endif]-->
+<meta charset="UTF-8" />
+<meta name="generator" content="gvim" />
+<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<!--<link rel="alternate" type="application/rss+xml" title="RSS"
+  href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />-->
+<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
+<link type="text/css" rel="stylesheet" href="/css/template.css" />
+<script type="text/javascript" src="/js/sea.js"></script>
+<script type="text/javascript">
+seajs.config({
+  alias: {
+    'jquery': 'jquery-1.8.3.min.js',
+    'hashchange': 'jquery.ba-hashchange.min.js'
+  }
+});
+seajs.use(["jquery", "default-main"], function(){
+    alert("default")
+});
+</script>
+<title>日期时间型控件的体验 - 闲耘™.博客</title>
+</head>
+<body>
+<div id="wrapper">
+<header>
+<div style="float:right;">
+    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+        <input type="text" name="q" />
+        <input type="submit" value="搜索" />
+    </form>
+</div>
+<nav>
+    <ul>
+        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
+        <li class="actived"><a href="/" title="Blog">Blog</a></li>
+        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
+        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
+        <li><a href="http://twitter.hotoo.me/" title="Twitter">Twitter</a></li>
+        <li class="last"><a href="/projects.html" title="Project">Project</a></li>
+        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
+    </ul>
+</nav>
+</header>
+<div id="container">
+  <div id="content">
+        <h1>日期时间型控件的体验</h1>
+    <article>
+        <h1>日期时间型控件的体验</h1>
+
+<p>目前支持精确到时分秒输入/选择的日历控件，我总觉得用起来很不爽，
+却又想不出更舒适的交互方式。</p>
+
+<p>大家有觉得哪种选择时间（非日期）的方式比较舒服一点的控件么，
+或者描述一下自己期望的交互过程也好。</p>
+
+<p>----- Update ----</p>
+
+<p>Note: 我说的是 时间 (时分秒，非 日期 ，年月日 )选择/输入过程，
+日期型一般点一下或少量几下就可以完成，基本上是比较自然流畅的一个过程；
+但是输入/选择时间的却是非常不流畅的一个过程。</p>
+
+<p>我只是想体验，或者尝试实现更流畅的时间输入过程，
+不是想让推荐某个库的某个控件（这个控件的时间输入过程非常流畅的例外），谢谢。</p>
+
+<p>---- Comment 1 ----</p>
+
+<p><em>Hao zi</em> - 额，我没看错，是时分秒，YUI的链接干扰理解了，
+最喜欢的就是能快捷键输入时间了，普通用户应该还是更青睐鼠标。
+好多地方用的6:00 am 6:30am……时间下拉单的形式我觉得不好用，
+有的甚至还有6:15am……Google calender一方面可以拉动调整时间段，也不需要精确到秒，
+所以用着还好。时间不是10进制，实际生活中表盘上也还需要三根针才能显示，
+设计特别了用户也不好理解，我的展望如图：</p>
+
+<p><img src="http://i.min.us/ie1Bum.jpg" alt="" /></p>
+
+<p>时分使用一个滑动框，秒使用一个滑动框，
+时分框移动到PM仍利用AM刻度但背景色改变。
+秒框稍有不同，可只显示部分刻录来避免太密集，滑块拉动到左右边缘时刻录跟着移动。</p>
+
+<p>---- Comment 2 ----</p>
+
+<p><em>萧星星</em> - 年月日和时分秒的处理 ： 支持键盘输入和方向增减，
+支持鼠标滚轮和点击的增减 ； 滚轮的会是最流畅的， 不过用户需要一个适应过程～</p>
+
+<p>---- Comment 3 ----</p>
+
+<p><em>黄川</em> - 用安卓调时间的UI交互，然后鼠标放在上面，用滚轮，我觉得这种方式不错</p>
+
+<p>---- Comment 4 ----</p>
+
+<p><em>闲耘</em> - 鼠标滚轮，或者键盘方向键本身是不错的，我很认同。
+我主要不满意的地方在于：如果 时间 随同日期的弹出层一起，
+同时需要选择日期和时间时，基本上只能增加一个确定按钮来辅助实现。
+现在想想，年历，月历，日历还是和时间部分独立分开的比较合适。</p>
+
+<h2>See Also</h2>
+
+<ul>
+<li><a href="https://plus.google.com/108314985261981078822/posts/WE37n8PSYQD">@Google+</a></li>
+</ul>
+
+
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
+        
+          
+          <a href="/tags.html#Date">Date</a>
+        
+          ,
+          <a href="/tags.html#UED">UED</a>
+        
+      </span>
+      <time>July 20, 
+      <a href="/archives.html#2011">2011</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
+<script type="text/javascript" src="/js/comments.js"></script>
+
+  </div>
+
+    <!-- Vimlike status bar -->
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/js/Vimlike.js"></script>
+<footer>
+    <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
+    Copyleft &copy; 2005-2010, Power by <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
+    </p>
+</footer>
+</div>
+<script type="text/javascript">
+var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker=_gat._getTracker("UA-2048484-1");
+pageTracker._trackPageview();
+}catch(err){}</script>
+</body>
+</html>

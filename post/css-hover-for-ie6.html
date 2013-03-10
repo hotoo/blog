@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<head>
+<!--[if IE]><script type="text/javascript" src="/js/html5.js"></script><![endif]-->
+<meta charset="UTF-8" />
+<meta name="generator" content="gvim" />
+<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<!--<link rel="alternate" type="application/rss+xml" title="RSS"
+  href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />-->
+<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
+<link type="text/css" rel="stylesheet" href="/css/template.css" />
+<script type="text/javascript" src="/js/sea.js"></script>
+<script type="text/javascript">
+seajs.config({
+  alias: {
+    'jquery': 'jquery-1.8.3.min.js',
+    'hashchange': 'jquery.ba-hashchange.min.js'
+  }
+});
+seajs.use(["jquery", "default-main"], function(){
+    alert("default")
+});
+</script>
+<title>IE6 的 CSS:hover 伪类 - 闲耘™.博客</title>
+</head>
+<body>
+<div id="wrapper">
+<header>
+<div style="float:right;">
+    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+        <input type="text" name="q" />
+        <input type="submit" value="搜索" />
+    </form>
+</div>
+<nav>
+    <ul>
+        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
+        <li class="actived"><a href="/" title="Blog">Blog</a></li>
+        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
+        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
+        <li><a href="http://twitter.hotoo.me/" title="Twitter">Twitter</a></li>
+        <li class="last"><a href="/projects.html" title="Project">Project</a></li>
+        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
+    </ul>
+</nav>
+</header>
+<div id="container">
+  <div id="content">
+        <h1>IE6 的 CSS:hover 伪类</h1>
+    <article>
+        <h1>IE6 的 CSS:hover 伪类</h1>
+
+<p>众所周知，IE6 不支持 a:hover 以外的 CSS 伪类，解决办法一般有 3 种方案：</p>
+
+<h2>使用 JavaScript 事件</h2>
+
+<p>直接使用 JavaScript 的 onmouseover/onmouseenter 和 onmouseout/onmouseleave
+事件进行针对性开发，这大概没什么好详细介绍的。</p>
+
+<h2>使用 CSS 表达式</h2>
+
+<p>辅以 CSS 表达式中 JScript 同样也有 onmouseover/onmouseenter 和
+onmouseout/onmouseleave 事件，用以实现 :hover 效果。<br />
+注意：其中冒号之前的事件名称可以随意，关键是 expression() 里面的事件。</p>
+
+<pre><code>ul li{
+    onmouseout:expression(onmouseout=function(){this.style.backgroundColor=''});
+    onmouseover:expression(onmouseover=function(){this.style.backgroundColor='yellow'});
+}
+ol li{
+    onmouseleave:expression(onmouseleave=function(){this.style.backgroundColor=''});
+    onmouseenter:expression(onmouseenter=function(){this.style.backgroundColor='yellow'});
+}
+</code></pre>
+
+<p>不过应该说使用 CSS class 是更好的实践。</p>
+
+<pre><code>table tr{
+  onmouseout:expression(onmouseout=function(){
+    try{this.className=this.className.replace(' hover','')}catch(ex){}});
+  onmouseover:expression(onmouseover=function(){this.className+=' hover'});
+}
+table tr.hover td{background:yellow;}
+</code></pre>
+
+<p>onmouseout 事件处理函数中加了 try/catch 是为了避免 IE5.5 因为不支持 <code>replace()</code>
+而报脚本错误。当然为了避免这个错误，还是其他的实现方式：</p>
+
+<pre><code>table tr{
+    onmouseenter:expression(onmouseout=function(){
+        var c=this.className, h=' hover', l=h.length;
+        var s=c.indexOf(h);
+        this.className=c.substring(0,s)+c.substr(s+l);
+    });
+    onmouseleave:expression(onmouseover=function(){this.className+=' hover'});
+}
+table tr.hover td{background:yellow;}
+</code></pre>
+
+<h2>使用 CSS behavior 行为</h2>
+
+<p>使用 <a href="http://www.xs4all.nl/~peterned/csshover.html">Whatever:hover</a></p>
+
+<p><a href="http://www.xs4all.nl/~peterned/htc/csshover3.htc">csshover3.htc</a></p>
+
+<pre><code>&lt;!--[if lte IE 6]&gt;
+&lt;style type="text/css"&gt;
+body{behavior:url("csshover3.htc"); }
+&lt;/style&gt;
+&lt;![endif]--&gt;
+</code></pre>
+
+<h2>延伸阅读</h2>
+
+<ol>
+<li><a href="http://blog.csdn.net/andyyukun/archive/2007/07/03/1676963.aspx">强大的CSS表达式 -- expression</a></li>
+<li><a href="http://www.planabc.net/2009/09/21/optimization_of_css_eexpression/">CSS Expression 的优化</a></li>
+</ol>
+
+
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
+        
+          
+          <a href="/tags.html#CSS">CSS</a>
+        
+          ,
+          <a href="/tags.html#IE6">IE6</a>
+        
+      </span>
+      <time>September 15, 
+      <a href="/archives.html#2010">2010</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
+<script type="text/javascript" src="/js/comments.js"></script>
+
+  </div>
+
+    <!-- Vimlike status bar -->
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/js/Vimlike.js"></script>
+<footer>
+    <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
+    Copyleft &copy; 2005-2010, Power by <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
+    </p>
+</footer>
+</div>
+<script type="text/javascript">
+var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker=_gat._getTracker("UA-2048484-1");
+pageTracker._trackPageview();
+}catch(err){}</script>
+</body>
+</html>

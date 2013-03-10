@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<head>
+<!--[if IE]><script type="text/javascript" src="/js/html5.js"></script><![endif]-->
+<meta charset="UTF-8" />
+<meta name="generator" content="gvim" />
+<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<!--<link rel="alternate" type="application/rss+xml" title="RSS"
+  href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />-->
+<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
+<link type="text/css" rel="stylesheet" href="/css/template.css" />
+<script type="text/javascript" src="/js/sea.js"></script>
+<script type="text/javascript">
+seajs.config({
+  alias: {
+    'jquery': 'jquery-1.8.3.min.js',
+    'hashchange': 'jquery.ba-hashchange.min.js'
+  }
+});
+seajs.use(["jquery", "default-main"], function(){
+    alert("default")
+});
+</script>
+<title>迁移博客到 Jekyll - 闲耘™.博客</title>
+</head>
+<body>
+<div id="wrapper">
+<header>
+<div style="float:right;">
+    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+        <input type="text" name="q" />
+        <input type="submit" value="搜索" />
+    </form>
+</div>
+<nav>
+    <ul>
+        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
+        <li class="actived"><a href="/" title="Blog">Blog</a></li>
+        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
+        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
+        <li><a href="http://twitter.hotoo.me/" title="Twitter">Twitter</a></li>
+        <li class="last"><a href="/projects.html" title="Project">Project</a></li>
+        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
+    </ul>
+</nav>
+</header>
+<div id="container">
+  <div id="content">
+        <h1>迁移博客到 Jekyll</h1>
+    <article>
+        <h2>_posts 文件结构</h2>
+
+<p>Jekyll 支持两种结构：</p>
+
+<ol>
+<li>平铺所有文件，每个文件使用日期前缀。</li>
+<li>按照完整的日期目录结构。</li>
+</ol>
+
+
+<h2>静态链接(Permalink)</h2>
+
+<p>我的个人博客并非用于发布新闻，即使非常旧的博客，也会不断更新维护，
+所以无需添加时间标识，直接使用 title 即可。</p>
+
+<p>如果需要多个版本，为避免出现冲突，可以在 title 中添加序号。如 <code>II</code> 或 <code>2</code>。</p>
+
+<h2>草稿(Draft)</h2>
+
+<p>Jekyll 支持 <code>published</code> 标记，设置为 <code>false</code> 就可以避免被转换发布。
+这本身很不错，但是这些草稿和正常发布的文件混淆在一起，无法清晰区分。</p>
+
+<p>所以我创建了 <code>_draft</code> 目录，用于存放草稿。在文章准备好之后拷贝到 <code>_posts</code>
+目录即可。</p>
+
+<p>p.s. 话说相比 <code>published</code> 标记，我更喜欢 <code>draft</code>，如果支持的话。</p>
+
+<h2>more</h2>
+
+<p><a href="http://www.jacquesf.com/2011/03/creating-excerpts-in-jekyll-with-wordpress-style-more-html-comments/">Creating Excerpts in Jekyll with Wordpress-style &lt;!--more--&gt; HTML Comments</a></p>
+
+<!--more-->
+
+
+<h2>存档(Archive)</h2>
+
+<p><a href="https://gist.github.com/enaeher/88cda643aa7e3b0ca1e5">enaeher / tiered_archives.rb</a></p>
+
+<h2>目录(TOC)</h2>
+
+<p>http://stackoverflow.com/questions/9602936/how-to-add-a-table-of-contents-to-jekyll-blog-post
+http://stackoverflow.com/questions/13481572/jekyll-automatic-table-of-contents
+http://du1abadd.org/2010/usr/make_toc_support_for_jekyll_with_rdiscount.html</p>
+
+<h2>标签(Tags)</h2>
+
+<h2>代码高亮</h2>
+
+<h2>分页</h2>
+
+<pre><code>&lt;div class="pagination"&gt;
+  {.% if paginator.previous_page == 1 %}
+    &lt;a href="/" class="previous"&gt;上一页&lt;/a&gt;
+  {.% else if paginator.previous_page %}
+    &lt;a href="/page{.{paginator.previous_page}}" class="previous"&gt;上一页&lt;/a&gt;
+  {.% else %}
+    &lt;span class="previous"&gt;上一页&lt;/span&gt;
+  {.% endif %}
+  &lt;span class="page_number"&gt;页码：{.{paginator.page}} / {.{paginator.total_pages}}&lt;/span&gt;
+  {.% if paginator.next_page %}
+    &lt;a href="/page{.{paginator.next_page}}" class="next"&gt;下一页&lt;/a&gt;
+  {.% else %}
+    &lt;span class="next"&gt;下一页&lt;/span&gt;
+  {.% endif %}
+&lt;/div&gt;
+</code></pre>
+
+<h3>参考：</h3>
+
+<ul>
+<li><a href="http://jeffreysambells.com/2013/02/01/jekyll-draft-publishing-plugin">Jekyll Draft Publishing Plugin</a></li>
+<li><a href="http://tqcblog.com/2012/08/22/jekyll-drafts/">Jekyll Draft Posts</a></li>
+</ul>
+
+
+<h2>与 Vimwiki 结合</h2>
+
+<p>之前的博客使用 Vimwiki 管理，可以无需转换或发布，直接使用 Vim 即可简单浏览。</p>
+
+<pre><code>let g:vimwiki_list = [
+  \ {
+    \ 'path'        : '~/Dropbox/blog.hotoo.me/_posts',
+    \ 'index'       : '_index',
+    \ 'ext'         : '.md',
+    \ 'nested_syntaxes' : {'javascript': 'javascript', 'python': 'python', 'c++': 'cpp'}
+  \ }
+\]
+</code></pre>
+
+<h2>不足</h2>
+
+<p><code>_posts/*.md</code> 文档理论上只会作为内容输出，其中的代码（尤其是 Jekyll 使用的模板
+代码，及其 <code>pre &gt; code</code> 中的代码，应该合理转义处理。但是实际上 Jekyll 没有这样
+做，导致一些代码没有符合期望。</p>
+
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
+        
+          
+          <a href="/tags.html#Blog">Blog</a>
+        
+          ,
+          <a href="/tags.html#Jekyll">Jekyll</a>
+        
+      </span>
+      <time>February 13, 
+      <a href="/archives.html#2013">2013</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
+<script type="text/javascript" src="/js/comments.js"></script>
+
+  </div>
+
+    <!-- Vimlike status bar -->
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/js/Vimlike.js"></script>
+<footer>
+    <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 Generic License</a>.<br>
+    Copyleft &copy; 2005-2010, Power by <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
+    </p>
+</footer>
+</div>
+<script type="text/javascript">
+var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker=_gat._getTracker("UA-2048484-1");
+pageTracker._trackPageview();
+}catch(err){}</script>
+</body>
+</html>
