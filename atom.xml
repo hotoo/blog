@@ -4,7 +4,7 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-03-11T17:23:39+08:00</updated>
+ <updated>2013-03-11T17:29:34+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
@@ -5959,26 +5959,11 @@ alert(0);
  </entry>
  
  <entry>
-   <title>Validator For Vim</title>
+   <title>在 Vim 中验证 X/HTML, Javascript 和 CSS</title>
    <link href="http://blog.hotoo.me/post/validator-for-vim.html"/>
    <updated>2009-10-25T00:00:00+08:00</updated>
    <id>http://blog.hotoo.me/post/validator-for-vim</id>
-   <content type="html">&lt;hr /&gt;
-
-&lt;p&gt;layout: post
-title: 在 Vim 中验证 X/HTML, Javascript 和 CSS
-tags:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;- Vim
-- HTML
-- JavaScript
-- CSS
-- Validate
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;%toc&lt;/p&gt;
+   <content type="html">&lt;p&gt;%toc&lt;/p&gt;
 
 &lt;p&gt;Unix/Linux（以下统称Unix）下可参考&lt;a href=&quot;http://blog.whatwg.org/vim-checker&quot;&gt;这里&lt;/a&gt;
 和 &lt;a href=&quot;http://natalian.org/archives/2008/05/17/vim-web-ide/&quot;&gt;这里&lt;/a&gt;，
@@ -6113,24 +6098,11 @@ window&lt;/a&gt;&lt;/li&gt;
  </entry>
  
  <entry>
-   <title>Fuck Gfw With Tor</title>
+   <title>带套翻墙</title>
    <link href="http://blog.hotoo.me/post/fuck-gfw-with-tor.html"/>
    <updated>2009-10-24T00:00:00+08:00</updated>
    <id>http://blog.hotoo.me/post/fuck-gfw-with-tor</id>
-   <content type="html">&lt;hr /&gt;
-
-&lt;p&gt;layout: post
-title: 带套翻墙
-tags:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;- GFW
-- Tor
-- Freedom
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;因为众所周知的原因(?)，最近GFW变本加厉，穷凶极恶，处处昭示着它即将灭亡的预兆。
+   <content type="html">&lt;p&gt;因为众所周知的原因(?)，最近GFW变本加厉，穷凶极恶，处处昭示着它即将灭亡的预兆。
 不过在它消亡的前夕，我们还是需要翻墙来争取自己的自由，戴套就是一种不错的方法。
 不过最近的套套出了点问题，下面讲修复的办法：&lt;/p&gt;
 
@@ -6166,22 +6138,11 @@ Windows 7: &lt;code&gt;C:\Users\%USER%\AppData\Roaming\Vidalia&lt;/code&gt;&lt;/
  </entry>
  
  <entry>
-   <title>Map Home Key For Vim</title>
+   <title>Vim映射Home键到首个非空字符</title>
    <link href="http://blog.hotoo.me/post/map-home-key-for-vim.html"/>
    <updated>2009-10-22T00:00:00+08:00</updated>
    <id>http://blog.hotoo.me/post/map-home-key-for-vim</id>
-   <content type="html">&lt;hr /&gt;
-
-&lt;p&gt;layout: post
-title: Vim映射Home键到首个非空字符
-tags:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;- Vim
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;许多编辑器有相关选项，可以直接设置让 &lt;code&gt;&amp;lt;Home&amp;gt;&lt;/code&gt; 键在首个非空字符和行首之间跳转。&lt;/p&gt;
+   <content type="html">&lt;p&gt;许多编辑器有相关选项，可以直接设置让 &lt;code&gt;&amp;lt;Home&amp;gt;&lt;/code&gt; 键在首个非空字符和行首之间跳转。&lt;/p&gt;
 
 &lt;p&gt;Vim 也有快捷键，normal 模式下：&lt;br /&gt;
 &lt;code&gt;0&lt;/code&gt; 跳转到行首；&lt;br /&gt;
@@ -6248,22 +6209,11 @@ vmap &amp;lt;silent&amp;gt; &amp;lt;End&amp;gt; :call EndBind(0)&amp;lt;cr&amp;g
  </entry>
  
  <entry>
-   <title>Firefox Profile And Multi Instance</title>
+   <title>Firefox Profile 及多实例运行</title>
    <link href="http://blog.hotoo.me/post/firefox-profile-and-multi-instance.html"/>
    <updated>2009-10-22T00:00:00+08:00</updated>
    <id>http://blog.hotoo.me/post/firefox-profile-and-multi-instance</id>
-   <content type="html">&lt;hr /&gt;
-
-&lt;p&gt;layout: post
-title: Firefox Profile 及多实例运行
-tags:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;- Firefox
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;之前就知道Firefox 支持多账户，并允许各账户安装不同的插件，会话信息也完全独立。&lt;/p&gt;
+   <content type="html">&lt;p&gt;之前就知道Firefox 支持多账户，并允许各账户安装不同的插件，会话信息也完全独立。&lt;/p&gt;
 
 &lt;p&gt;方法是制作快捷方式，目标指向Firefox的安装路径，并加上 &lt;code&gt;-P&lt;/code&gt; 参数：&lt;/p&gt;
 
@@ -6326,22 +6276,11 @@ autocmd FileType dosbatch nmap &amp;lt;F5&amp;gt; :exe '!&quot;'.expand(&quot;%&
  </entry>
  
  <entry>
-   <title>Asx Snippets For Vim</title>
+   <title>asx snippets for vim</title>
    <link href="http://blog.hotoo.me/post/asx-snippets-for-vim.html"/>
    <updated>2009-10-20T00:00:00+08:00</updated>
    <id>http://blog.hotoo.me/post/asx-snippets-for-vim</id>
-   <content type="html">&lt;hr /&gt;
-
-&lt;p&gt;loyout: post
-title: asx snippets for vim
-tags:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;- Vim
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;前段时间写了个 asx (Windows Media Player 的播放列表格式) 的
+   <content type="html">&lt;p&gt;前段时间写了个 asx (Windows Media Player 的播放列表格式) 的
 &lt;a href=&quot;http://www.vim.org/scripts/script.php?script_id=2540&quot;&gt;snipMate&lt;/a&gt; 的模板语法文件。&lt;/p&gt;
 
 &lt;p&gt;本身很简单，&lt;a href=&quot;http://hotoo.googlecode.com/svn/trunk/vim/vimfiles/snippets/asx.snippets&quot;&gt;分享在此&lt;/a&gt;。&lt;/p&gt;
@@ -6359,23 +6298,11 @@ tags:&lt;/p&gt;
  </entry>
  
  <entry>
-   <title>Vim For Cpp Dev</title>
+   <title>配置 Vim 作为 C++ 开发环境初步</title>
    <link href="http://blog.hotoo.me/post/vim-for-cpp-dev.html"/>
    <updated>2009-10-19T00:00:00+08:00</updated>
    <id>http://blog.hotoo.me/post/vim-for-cpp-dev</id>
-   <content type="html">&lt;hr /&gt;
-
-&lt;p&gt;layout: post
-title: 配置 Vim 作为 C++ 开发环境初步
-tags:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;- Vim
-- Cpp
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;一般来说，如果你使用 Vim 开发完整的项目，使用 Makefile 并直接 &lt;code&gt;:make&lt;/code&gt; 就可以了。&lt;/p&gt;
+   <content type="html">&lt;p&gt;一般来说，如果你使用 Vim 开发完整的项目，使用 Makefile 并直接 &lt;code&gt;:make&lt;/code&gt; 就可以了。&lt;/p&gt;
 
 &lt;p&gt;将下面的代码写入到 vimrc 中， Vim 会捕获编译过程中出现的消息并显示在 Quickfix 窗口。&lt;/p&gt;
 
@@ -6422,23 +6349,11 @@ map &amp;lt;F7&amp;gt; :cp&amp;lt;CR&amp;gt;
  </entry>
  
  <entry>
-   <title>Vim Fonts</title>
+   <title>vim字体设置</title>
    <link href="http://blog.hotoo.me/post/vim-fonts.html"/>
    <updated>2009-09-14T00:00:00+08:00</updated>
    <id>http://blog.hotoo.me/post/vim-fonts</id>
-   <content type="html">&lt;hr /&gt;
-
-&lt;p&gt;layout: post
-title: vim字体设置
-tags:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;- Vim
-- Fonts
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;明城有 “&lt;a href=&quot;http://www.gracecode.com/archives/1545/&quot;&gt;苹果的 Courier 字体不错&lt;/a&gt;”
+   <content type="html">&lt;p&gt;明城有 “&lt;a href=&quot;http://www.gracecode.com/archives/1545/&quot;&gt;苹果的 Courier 字体不错&lt;/a&gt;”
 和“&lt;a href=&quot;http://www.gracecode.com/archives/2402/&quot;&gt;Windows 下 gVim 的雅黑字体配置&lt;/a&gt;”
 两篇介绍 Vim 下设置推荐字体的文章，里面提供的设置代码及提高的下载资源都很赞。&lt;/p&gt;
 
@@ -6486,39 +6401,6 @@ tags:&lt;/p&gt;
 
 &lt;p&gt; set guifont=Courier_New:h11:cANSI&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;中文的宋体已经非常好了，不过仍然可以单独设置中文字体：&lt;/p&gt;
-
-&lt;p&gt; set guifontwide=YouYuan:h11:cGB2312&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;此时，新启动vim即可使用新设置的字体了。&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://farm4.static.flickr.com/3462/3919344550_f5cd6656c8_o.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.flickr.com/photos/hotoo/3919344550/&quot;&gt;ref&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2&gt;白露非提供的字体&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://8.nf/dxa&quot;&gt;下载&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;设置：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;guifont=Microsoft_YaHei_Mono:h11:cANSI
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2&gt;See Also&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://twitter.com/#!/belleveinvis/status/19308677508894720&quot;&gt;@twitter&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
- </entry>
- 
-
-</feed>
-独设置中文字体：&lt;/p&gt;
 
 &lt;p&gt; set guifontwide=YouYuan:h11:cGB2312&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;此时，新启动vim即可使用新设置的字体了。&lt;/p&gt;&lt;/li&gt;
