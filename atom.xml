@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
- <title>闲耘.博客</title>
+ <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-03-11T17:16:19+08:00</updated>
+ <updated>2013-03-11T17:20:38+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
    <email>hotoo.cn@gmail.com</email>
  </author>
 
-
+ 
  <entry>
    <title>您好，您拨打的电话暂时无法接通！</title>
    <link href="http://blog.hotoo.me/post/the-number-you-diad-cannot-conected-at-the-moment.html"/>
@@ -145,7 +145,7 @@
 &lt;p&gt;转载自：&lt;a href=&quot;http://make40531788.blog.163.com/blog/static/7708851420084545917695/&quot;&gt;make40531788的博客&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>个人资金管理软件</title>
    <link href="http://blog.hotoo.me/post/personal-financial-manage-soft.html"/>
@@ -215,7 +215,7 @@ Mac 下 &lt;code&gt;i&lt;/code&gt; 系列的好像都不错，于是尝试了下
 显示全部交易也不好，还有那啥~&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>迁移博客到 Jekyll</title>
    <link href="http://blog.hotoo.me/post/start-jekyll-for-blog.html"/>
@@ -317,7 +317,7 @@ http://du1abadd.org/2010/usr/make_toc_support_for_jekyll_with_rdiscount.html&lt;
 做，导致一些代码没有符合期望。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>使用空格还是 Tab 缩进代码？</title>
    <link href="http://blog.hotoo.me/post/format-by-spaces-or-tabs.html"/>
@@ -355,7 +355,7 @@ http://du1abadd.org/2010/usr/make_toc_support_for_jekyll_with_rdiscount.html&lt;
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>使用 MacVim 做 svn diff</title>
    <link href="http://blog.hotoo.me/post/macvim-svndiff.html"/>
@@ -437,7 +437,7 @@ rm -f &quot;$TMPLEFT&quot; &quot;$TMPRIGHT&quot;
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>在 Vim 上安装使用 Tagbar</title>
    <link href="http://blog.hotoo.me/post/vim-install-tagbar.html"/>
@@ -467,7 +467,7 @@ sudo make install
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>杭州萧山无人村骑行</title>
    <link href="http://blog.hotoo.me/post/WuRenCun.html"/>
@@ -488,7 +488,7 @@ sudo make install
 &lt;p&gt;其他同学都有事没能一起，只有一个测试好基友 &lt;a href=&quot;http://weibo.com/n/peacefulgoose&quot;&gt;@peacefulgoose&lt;/a&gt; 一起。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>『逻辑与』是个好东西</title>
    <link href="http://blog.hotoo.me/post/logical-conjunction.html"/>
@@ -646,7 +646,7 @@ function verifyForm(form){
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>千里走单骑</title>
    <link href="http://blog.hotoo.me/post/bicycle-travel.html"/>
@@ -679,7 +679,7 @@ function verifyForm(form){
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>计算主域名</title>
    <link href="http://blog.hotoo.me/post/primary-domain.html"/>
@@ -691,7 +691,7 @@ function verifyForm(form){
 &lt;/code&gt;&lt;/pre&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>Confluence Wiki for Vi</title>
    <link href="http://blog.hotoo.me/post/confluencewiki.vim.html"/>
@@ -726,7 +726,7 @@ function verifyForm(form){
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>Text Width And Input Scrollleft</title>
    <link href="http://blog.hotoo.me/post/text-width-and-input-scrollLeft.html"/>
@@ -773,7 +773,7 @@ function verifyForm(form){
 &lt;p&gt; blog:datetime=2010/11/21 13:15:11:tags=Web,Design&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>保持 Chrome 插件的 popup.html 页面的状态</title>
    <link href="http://blog.hotoo.me/post/chrome-extension-keep-popup.html"/>
@@ -790,7 +790,7 @@ function verifyForm(form){
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>Date.now()</title>
    <link href="http://blog.hotoo.me/post/Date.now.html"/>
@@ -897,7 +897,7 @@ new Date(undefined);// IE:NaN; Others:Invalid Date.
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>智能同步滚动条</title>
    <link href="http://blog.hotoo.me/post/smart-sync-scroll.html"/>
@@ -952,7 +952,7 @@ new Date(undefined);// IE:NaN; Others:Invalid Date.
 &lt;p&gt;TODO: 其他的 get 方式。尝试智能判断是否设置成功，非通过浏览器性别判断。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>面积分割算法</title>
    <link href="http://blog.hotoo.me/post/area-split.html"/>
@@ -989,7 +989,7 @@ new Date(undefined);// IE:NaN; Others:Invalid Date.
 &lt;p&gt;用 canvas 绘制一个透明的区域也未尝不可。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>深入 Iframe 自适应高度</title>
    <link href="http://blog.hotoo.me/post/iframe-highly-adaptive.html"/>
@@ -1207,7 +1207,7 @@ function getParentFrame(){
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>获取元素所绑定的事件列表</title>
    <link href="http://blog.hotoo.me/post/eventListenerList.html"/>
@@ -1239,7 +1239,7 @@ function getParentFrame(){
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>宏伟的 Vimlike.js 计划</title>
    <link href="http://blog.hotoo.me/post/vimlike-project.html"/>
@@ -1266,7 +1266,7 @@ function getParentFrame(){
 然后请一些 Vim 爱好者的个人博客一起来参与实践。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>Abort HTTP 请求</title>
    <link href="http://blog.hotoo.me/post/abort-http-request.html"/>
@@ -1303,7 +1303,7 @@ function getParentFrame(){
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>日期时间型控件的体验</title>
    <link href="http://blog.hotoo.me/post/datatime-picker.html"/>
@@ -1365,7 +1365,7 @@ function getParentFrame(){
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>鼠标事件研究</title>
    <link href="http://blog.hotoo.me/post/mouse-event.html"/>
@@ -1416,7 +1416,7 @@ IE8, FF5, Chrome12, Safari5, Opera11.&lt;/p&gt;
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>吐槽</title>
    <link href="http://blog.hotoo.me/post/tucao.html"/>
@@ -1475,7 +1475,7 @@ IE8, FF5, Chrome12, Safari5, Opera11.&lt;/p&gt;
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>豆瓣电台，我忍你很久了！</title>
    <link href="http://blog.hotoo.me/post/douban.fm.html"/>
@@ -1513,7 +1513,7 @@ IE8, FF5, Chrome12, Safari5, Opera11.&lt;/p&gt;
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>非递归遍历 DOM 结构</title>
    <link href="http://blog.hotoo.me/post/non-recursion-walk-the-dom.html"/>
@@ -1598,7 +1598,7 @@ for(var i=0,l=elems.length; i&amp;lt;l; i++){
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>Vimlike.js</title>
    <link href="http://blog.hotoo.me/post/vimlike.js.html"/>
@@ -1642,7 +1642,7 @@ map(&quot;m[a-zA-Z0-9]&quot;, function(){}) 这样的模糊映射支持了。&lt
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>说说渐进加载</title>
    <link href="http://blog.hotoo.me/post/about-lazy-load.html"/>
@@ -1687,7 +1687,7 @@ hasMore = datas.length == 11;
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>别用 try/catch</title>
    <link href="http://blog.hotoo.me/post/donot-use-try-catch.html"/>
@@ -1706,7 +1706,7 @@ hasMore = datas.length == 11;
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>说说支付宝爱心捐助</title>
    <link href="http://blog.hotoo.me/post/love.alipay.com.html"/>
@@ -1784,7 +1784,7 @@ hasMore = datas.length == 11;
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>“盗梦空间”</title>
    <link href="http://blog.hotoo.me/post/dream-the-thief.html"/>
@@ -1822,7 +1822,7 @@ IT 给我一台谁谁用过的小白，然后我就出来了。&lt;/p&gt;
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>丢弃图片的 HTTP 请求</title>
    <link href="http://blog.hotoo.me/post/abort-image-request.html"/>
@@ -2109,7 +2109,7 @@ appendChild 到 DOM 中会去请求指定资源，可以到底向日志服务器
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>如何取 URL 中第一个单独的问号(?) 位置</title>
    <link href="http://blog.hotoo.me/post/how-to-get-the-first-single-question-mark.html"/>
@@ -2182,7 +2182,7 @@ var index = temp ? temp + 1 : temp; // index的就想要的索引值
 &lt;/code&gt;&lt;/pre&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>使用 Vimwiki 还是 Jekyll 作为博客系统？</title>
    <link href="http://blog.hotoo.me/post/blog-system-vimwiki-or-jekyll.html"/>
@@ -2253,7 +2253,7 @@ var index = temp ? temp + 1 : temp; // index的就想要的索引值
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>多种不同结果的返回模式</title>
    <link href="http://blog.hotoo.me/post/parser-return-pattern.html"/>
@@ -2374,7 +2374,7 @@ err1 = parseError1 + lintError1;&lt;/p&gt;
 如果你有其他的方案，欢迎回帖、回邮，或回博交流指导 ：）&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>【结束】趣味 Vim Tee</title>
    <link href="http://blog.hotoo.me/post/vim-tee-2.html"/>
@@ -2450,7 +2450,7 @@ err1 = parseError1 + lintError1;&lt;/p&gt;
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>closure-compiler.vim</title>
    <link href="http://blog.hotoo.me/post/closure-compile.vim.html"/>
@@ -2477,7 +2477,7 @@ err1 = parseError1 + lintError1;&lt;/p&gt;
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>深入 hasAttribute</title>
    <link href="http://blog.hotoo.me/post/hasAttribute.html"/>
@@ -2600,7 +2600,7 @@ alert(0);
 &lt;p&gt;如果在这里你真的可以忽略 IE，最佳方案还是屏蔽 IE 吧。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>window.close()</title>
    <link href="http://blog.hotoo.me/post/window.close.html"/>
@@ -2637,7 +2637,7 @@ return false;&lt;/p&gt;
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>Vim 神技</title>
    <link href="http://blog.hotoo.me/post/vim-share-2011.html"/>
@@ -2656,7 +2656,7 @@ return false;&lt;/p&gt;
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>JavaScript 异常</title>
    <link href="http://blog.hotoo.me/post/javascript-exceptions.html"/>
@@ -2887,7 +2887,7 @@ IE 浏览器能得到 4 个参数（比 onerror 多一个），但有效的还�
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>树形控件的分时装载</title>
    <link href="http://blog.hotoo.me/post/timed-tree-processing.html"/>
@@ -2903,7 +2903,7 @@ IE 浏览器能得到 4 个参数（比 onerror 多一个），但有效的还�
 &lt;/code&gt;&lt;/pre&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>JavaScript 分时加载</title>
    <link href="http://blog.hotoo.me/post/timed-array-processing.html"/>
@@ -2946,7 +2946,7 @@ IE 浏览器能得到 4 个参数（比 onerror 多一个），但有效的还�
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>四象限法 2.0</title>
    <link href="http://blog.hotoo.me/post/quadrant-2.0.html"/>
@@ -2959,7 +2959,7 @@ IE 浏览器能得到 4 个参数（比 onerror 多一个），但有效的还�
 制作而成的 &lt;a href=&quot;http://hotoo.me/labs/quadrant.html&quot;&gt;2.0 版&lt;/a&gt;。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>JavaScript 千分位算法</title>
    <link href="http://blog.hotoo.me/post/javascript-commfy.html"/>
@@ -2980,7 +2980,7 @@ IE 浏览器能得到 4 个参数（比 onerror 多一个），但有效的还�
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>placeholder 最佳实践</title>
    <link href="http://blog.hotoo.me/post/placeholder-in-action.html"/>
@@ -3097,7 +3097,7 @@ IE 浏览器能得到 4 个参数（比 onerror 多一个），但有效的还�
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>Err Msg For Horizontal Forms</title>
    <link href="http://blog.hotoo.me/post/err-msg-for-horizontal-forms.html"/>
@@ -3142,7 +3142,7 @@ tags:
 &lt;p&gt; blog:datetime=2010/11/26 21:15:56:tags=Forms,Web,Design&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>无限级联动控件的设计</title>
    <link href="http://blog.hotoo.me/post/linkage.html"/>
@@ -3176,7 +3176,7 @@ tags:
 &lt;/code&gt;&lt;/pre&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>客户端时间(续)</title>
    <link href="http://blog.hotoo.me/post/sync-client-time.html"/>
@@ -3211,7 +3211,7 @@ tags:
 时间差。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>用 Dropbox 做私有 Git 服务器</title>
    <link href="http://blog.hotoo.me/post/git-on-dropbox.html"/>
@@ -3267,7 +3267,7 @@ git push origin master
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>“方便”的副本</title>
    <link href="http://blog.hotoo.me/post/the-duplicate-element.html"/>
@@ -3350,7 +3350,7 @@ git push origin master
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>Form 表单最佳实践</title>
    <link href="http://blog.hotoo.me/post/form-in-action.html"/>
@@ -3585,7 +3585,7 @@ function validater(form){
 &lt;p&gt;&lt;a href=&quot;http://hotoo.me/labs/form-search.html|&quot;&gt;搜索表单演示&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>Vim 爱好者联系资料收集</title>
    <link href="http://blog.hotoo.me/post/vimmer-contact.html"/>
@@ -3656,7 +3656,7 @@ function validater(form){
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>IE6 的 CSS:hover 伪类</title>
    <link href="http://blog.hotoo.me/post/css-hover-for-ie6.html"/>
@@ -3733,7 +3733,7 @@ body{behavior:url(&quot;csshover3.htc&quot;); }
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>实现文本转语音</title>
    <link href="http://blog.hotoo.me/post/tts.html"/>
@@ -3815,7 +3815,7 @@ body{behavior:url(&quot;csshover3.htc&quot;); }
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>检测浏览器地址栏</title>
    <link href="http://blog.hotoo.me/post/hashchange.html"/>
@@ -3833,7 +3833,7 @@ body{behavior:url(&quot;csshover3.htc&quot;); }
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>取消 vs. 撤销</title>
    <link href="http://blog.hotoo.me/post/cancel-vs-undo.html"/>
@@ -3859,7 +3859,7 @@ body{behavior:url(&quot;csshover3.htc&quot;); }
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>Diff 模式下，让光标直接跳转到被修改的文本处</title>
    <link href="http://blog.hotoo.me/post/jump-to-difftext.html"/>
@@ -3894,7 +3894,7 @@ body{behavior:url(&quot;csshover3.htc&quot;); }
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>隐私权</title>
    <link href="http://blog.hotoo.me/post/about-Privacy.html"/>
@@ -3957,7 +3957,7 @@ body{behavior:url(&quot;csshover3.htc&quot;); }
 &lt;p&gt;p.s. 希望有生之年不要看见“非法持有他人隐私”的罪名或者大帽出现。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>【已结束】关于团购庆祝 Vim 7.3 正式发布的 Tee</title>
    <link href="http://blog.hotoo.me/post/vim73-tee.html"/>
@@ -4116,7 +4116,7 @@ Tee 可以直接发到每个人手中，考虑到运费，我提议同城的统�
 &lt;p&gt;最后：这样的人生经历一次就够了，谢谢大家。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>SQL LIKE 查询的一个问题</title>
    <link href="http://blog.hotoo.me/post/about-sql-like.html"/>
@@ -4172,7 +4172,7 @@ OR dept LIKE &quot;XX宝-CEO-%&quot;;
 &lt;p&gt;于是简单有效的解决了这个问题。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>用 gvim 比较 git diff</title>
    <link href="http://blog.hotoo.me/post/gitdiff-with-vim.html"/>
@@ -4209,7 +4209,7 @@ OR dept LIKE &quot;XX宝-CEO-%&quot;;
 &lt;p&gt;参考 &lt;a href=&quot;http://technotales.wordpress.com/2009/05/17/git-diff-with-vimdiff/&quot;&gt;Git Diff with Vimdiff&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>整合状态按钮和导向按钮</title>
    <link href="http://blog.hotoo.me/post/integrate-guide-button-and-status-button.html"/>
@@ -4227,7 +4227,7 @@ OR dept LIKE &quot;XX宝-CEO-%&quot;;
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>遍历字符的性能</title>
    <link href="http://blog.hotoo.me/post/performance-for-each-char.html"/>
@@ -4247,7 +4247,7 @@ OR dept LIKE &quot;XX宝-CEO-%&quot;;
 除了 Firefox 之外，所有的浏览器均是第 2 种表达式更快速。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>使用 calendar.vim</title>
    <link href="http://blog.hotoo.me/post/use-vim-calendar.html"/>
@@ -4280,7 +4280,7 @@ Wiki 项目中无需 diary，diary 无需包含在每个 Wiki 项目里。&lt;/p
 &lt;a href=&quot;http://github.com/hotoo/calendar-vim/blob/master/TODO&quot;&gt;这里&lt;/a&gt;。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>在 Vim 页签中打开文件</title>
    <link href="http://blog.hotoo.me/post/open-files-in-vim-tabs.html"/>
@@ -4399,7 +4399,7 @@ nmap &amp;lt;C-S-w&amp;gt; :tabonly&amp;lt;cr&amp;gt;
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>Vim 自动补全成对的括号和引号</title>
    <link href="http://blog.hotoo.me/post/vim-autocomplete-pairs.html"/>
@@ -4475,7 +4475,7 @@ endf
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>在 Google Maps 的街景视图里看实况足球</title>
    <link href="http://blog.hotoo.me/post/3d-game-in-google-maps.html"/>
@@ -4517,7 +4517,7 @@ endf
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>用 Google Code 管理与发布 Wiki</title>
    <link href="http://blog.hotoo.me/post/vimwiki-google-code.html"/>
@@ -4565,7 +4565,7 @@ Wiki 语法的一个子集，所以基本可以天衣无缝的配合使用。&lt
 比较好，做个专职的脑子又笨，目光又短浅的墙脚之猪也可以提高幸福指数的。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>让 Vim 支持 LOG 文件</title>
    <link href="http://blog.hotoo.me/post/log-syntax-4-vim.html"/>
@@ -4593,7 +4593,7 @@ Wiki 语法的一个子集，所以基本可以天衣无缝的配合使用。&lt
 &lt;p&gt;你也可以针对自己的实际情况，来自定义语法。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>Dropbox 的墙掉</title>
    <link href="http://blog.hotoo.me/post/Dropbox-died-in-China.html"/>
@@ -4609,7 +4609,7 @@ Wiki 语法的一个子集，所以基本可以天衣无缝的配合使用。&lt
 -- 闲耘™&lt;/p&gt;&lt;/blockquote&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>老家</title>
    <link href="http://blog.hotoo.me/post/hometown.html"/>
@@ -4620,7 +4620,7 @@ Wiki 语法的一个子集，所以基本可以天衣无缝的配合使用。&lt
 &lt;p&gt;明月，蛙鸣，&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>天目山拓展活动</title>
    <link href="http://blog.hotoo.me/post/outreach-activities-2010-04.html"/>
@@ -4670,7 +4670,7 @@ Wiki 语法的一个子集，所以基本可以天衣无缝的配合使用。&lt
 拉上来的，我没有看到，不过人多力量大，这个绝对可以做到。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>Vim 学习路线</title>
    <link href="http://blog.hotoo.me/post/Vim-tutor.html"/>
@@ -4716,7 +4716,7 @@ Vim Script 和 Wiki 上也有其他人非常多的智慧。&lt;/p&gt;
 Vim。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>欢迎加入 Vim 的 Gtalk 群</title>
    <link href="http://blog.hotoo.me/post/Gtalk-group-for-Vim.html"/>
@@ -4919,7 +4919,7 @@ Vim。&lt;/p&gt;
 &lt;p&gt;2011/10/22:: 自行删除管理员身份，退出群。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>表单设计</title>
    <link href="http://blog.hotoo.me/post/form-design.html"/>
@@ -4937,7 +4937,7 @@ Vim。&lt;/p&gt;
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>有中国特色的社会主义笑话</title>
    <link href="http://blog.hotoo.me/post/China-joke.html"/>
@@ -4967,7 +4967,7 @@ Vim。&lt;/p&gt;
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>轉換編碼筆記</title>
    <link href="http://blog.hotoo.me/post/convert-encoding-note.html"/>
@@ -4997,7 +4997,7 @@ Vim。&lt;/p&gt;
 特殊字符是非常怪異的；BeyondCompare 和 WinMarge 基本可以勝任。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>针对HTML的Snippets</title>
    <link href="http://blog.hotoo.me/post/snippets-for-html.html"/>
@@ -5062,7 +5062,7 @@ snippet link:atom
 &lt;/code&gt;&lt;/pre&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>用 Vimwiki 写博客</title>
    <link href="http://blog.hotoo.me/post/use-vimwiki-for-blog.html"/>
@@ -5158,7 +5158,7 @@ Wiki 文件保存在 Dropbox 私有目录下，生成的 html 文件保存在公
 &lt;a href=&quot;http://fis.io/ajax-google-custom-search-engine.html&quot;&gt;打造完美的 ajax 版 Google 自定义搜索&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>周数(Week Number, WeekNum)计算</title>
    <link href="http://blog.hotoo.me/post/WeekNumber.html"/>
@@ -5202,7 +5202,7 @@ calculateWeek:function(date){
 &lt;p&gt;而从自然语言中来说，这交接的一周即可以是头一年的最后一周，也可以是后一年的第 1周。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>Vimwiki 介绍</title>
    <link href="http://blog.hotoo.me/post/Vimwiki.html"/>
@@ -5229,7 +5229,7 @@ calculateWeek:function(date){
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>Vim 中文帮助文档</title>
    <link href="http://blog.hotoo.me/post/Vim-Chinese-Doc.html"/>
@@ -5301,7 +5301,7 @@ calculateWeek:function(date){
 所以在 vimrc 中的设置会被 vimcdoc.vim 覆盖掉。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>CSS 实现有限不确定背景</title>
    <link href="http://blog.hotoo.me/post/css-limit-bg.html"/>
@@ -5317,7 +5317,7 @@ calculateWeek:function(date){
 可以使用外层的 &lt;code&gt;padding-left&lt;/code&gt; 或内层的 &lt;code&gt;margin-left&lt;/code&gt; 来处理。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>禁用CNNIC的所谓安全证书</title>
    <link href="http://blog.hotoo.me/post/forbid-cnnic.html"/>
@@ -5349,7 +5349,7 @@ calculateWeek:function(date){
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>“正则表达式”分享资料</title>
    <link href="http://blog.hotoo.me/post/regex-share.html"/>
@@ -5368,7 +5368,7 @@ calculateWeek:function(date){
 同事参与的探讨也非常热情。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>Editplus And Everything</title>
    <link href="http://blog.hotoo.me/post/editplus-and-everything.html"/>
@@ -5404,7 +5404,7 @@ calculateWeek:function(date){
 &lt;/code&gt;&lt;/pre&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>正则表达式重复子模式前、后倾的性能比较</title>
    <link href="http://blog.hotoo.me/post/performance-for-regex-repeat-sub-pattern.html"/>
@@ -5443,7 +5443,7 @@ calculateWeek:function(date){
 维护起来就方便多了。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>arguments to Array 之效率</title>
    <link href="http://blog.hotoo.me/post/performance-of-arguments-to-array.html"/>
@@ -5497,7 +5497,7 @@ Safari 4, Opera 10）下一一测试。也欢迎各位参与测试并将结果�
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>电梯楼层选项板的位置</title>
    <link href="http://blog.hotoo.me/post/place-of-lift-floor-control-panel.html"/>
@@ -5516,7 +5516,7 @@ Safari 4, Opera 10）下一一测试。也欢迎各位参与测试并将结果�
 &lt;p&gt;&lt;a href=&quot;http://www.flickr.com/photos/hotoo/4250013678/&quot;&gt;@flickr&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>让索引和内容靠的更近</title>
    <link href="http://blog.hotoo.me/post/index-near-the-content.html"/>
@@ -5539,7 +5539,7 @@ Safari 4, Opera 10）下一一测试。也欢迎各位参与测试并将结果�
 &lt;p&gt;图片本身还可以做的更好更有层次感，或者你也有其他的方案欢迎交流。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>Safari 4 Select Bug</title>
    <link href="http://blog.hotoo.me/post/safari-4-select-bug.html"/>
@@ -5597,7 +5597,7 @@ Safari 4, Opera 10）下一一测试。也欢迎各位参与测试并将结果�
 而恰巧? Safari 4 默认最大下拉长度也是24个。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>反向搜索的设计</title>
    <link href="http://blog.hotoo.me/post/reverse-search.html"/>
@@ -5642,7 +5642,7 @@ Safari 4, Opera 10）下一一测试。也欢迎各位参与测试并将结果�
 则相反。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>C++如何判断声明为基类的对象，是否某子类型的实例?</title>
    <link href="http://blog.hotoo.me/post/cpp-check-type.html"/>
@@ -5698,7 +5698,7 @@ a pointer if type-id is a pointer, or an l-value if type-id is a reference.&lt;/
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>增强 Vim 的语法折叠</title>
    <link href="http://blog.hotoo.me/post/impoved-fold-for-vim.html"/>
@@ -5849,7 +5849,7 @@ alert(0);
 &lt;a href=&quot;http://www.flickr.com/photos/hotoo/4157213437/&quot;&gt;@source&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>让 Vim 支持 cue</title>
    <link href="http://blog.hotoo.me/post/vim-cue.html"/>
@@ -5874,7 +5874,7 @@ alert(0);
 放至 &lt;code&gt;$VIM/vimfiles/snippets/&lt;/code&gt; 目录下即可。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>让 Vim 支持 CSS3</title>
    <link href="http://blog.hotoo.me/post/vim-css3.html"/>
@@ -5915,7 +5915,7 @@ alert(0);
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>让Vim支持html5</title>
    <link href="http://blog.hotoo.me/post/vim-html5.html"/>
@@ -5957,7 +5957,7 @@ alert(0);
 &lt;p&gt;参考我的前一篇 &lt;a href=&quot;validator-for-vim.html&quot;&gt;在 Vim 中验证 X/HTML, Javascript 和 CSS&lt;/a&gt;。&lt;/p&gt;
 </content>
  </entry>
-
+ 
  <entry>
    <title>Validator For Vim</title>
    <link href="http://blog.hotoo.me/post/validator-for-vim.html"/>
@@ -6111,7 +6111,7 @@ window&lt;/a&gt;&lt;/li&gt;
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>Fuck Gfw With Tor</title>
    <link href="http://blog.hotoo.me/post/fuck-gfw-with-tor.html"/>
@@ -6164,7 +6164,7 @@ Windows 7: &lt;code&gt;C:\Users\%USER%\AppData\Roaming\Vidalia&lt;/code&gt;&lt;/
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>Map Home Key For Vim</title>
    <link href="http://blog.hotoo.me/post/map-home-key-for-vim.html"/>
@@ -6246,7 +6246,7 @@ vmap &amp;lt;silent&amp;gt; &amp;lt;End&amp;gt; :call EndBind(0)&amp;lt;cr&amp;g
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>Firefox Profile And Multi Instance</title>
    <link href="http://blog.hotoo.me/post/firefox-profile-and-multi-instance.html"/>
@@ -6324,7 +6324,7 @@ autocmd FileType dosbatch nmap &amp;lt;F5&amp;gt; :exe '!&quot;'.expand(&quot;%&
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>Asx Snippets For Vim</title>
    <link href="http://blog.hotoo.me/post/asx-snippets-for-vim.html"/>
@@ -6357,7 +6357,7 @@ tags:&lt;/p&gt;
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>Vim For Cpp Dev</title>
    <link href="http://blog.hotoo.me/post/vim-for-cpp-dev.html"/>
@@ -6420,7 +6420,7 @@ map &amp;lt;F7&amp;gt; :cp&amp;lt;CR&amp;gt;
 
 </content>
  </entry>
-
+ 
  <entry>
    <title>Vim Fonts</title>
    <link href="http://blog.hotoo.me/post/vim-fonts.html"/>
@@ -6515,36 +6515,6 @@ tags:&lt;/p&gt;
 
 </content>
  </entry>
-
-
-</feed>
-li&gt;&lt;p&gt;此时，新启动vim即可使用新设置的字体了。&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://farm4.static.flickr.com/3462/3919344550_f5cd6656c8_o.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.flickr.com/photos/hotoo/3919344550/&quot;&gt;ref&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2&gt;白露非提供的字体&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://8.nf/dxa&quot;&gt;下载&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;设置：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;guifont=Microsoft_YaHei_Mono:h11:cANSI
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2&gt;See Also&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://twitter.com/#!/belleveinvis/status/19308677508894720&quot;&gt;@twitter&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
- </entry>
-
+ 
 
 </feed>
