@@ -4,7 +4,7 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-03-12T20:54:06+08:00</updated>
+ <updated>2013-03-12T21:21:54+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
@@ -6175,129 +6175,6 @@ autocmd FileType dosbatch nmap &amp;lt;F5&amp;gt; :exe '!&quot;'.expand(&quot;%&
 
 &lt;p&gt;但是如果你是 C/C++ 新手，目前较多书写单个的 C/C++ 代码文件，或者只是想快速测试
 某段代码的话，使用 gcc/g++ 直接编译或许是更简单的方式。你可以直接在 Vim 中执行
-外部 gcc/g++ 命令，也可以想这样映射快捷键：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;autocmd FileType cpp nmap &amp;lt;F10&amp;gt; :w&amp;lt;cr&amp;gt;:exe &quot;!gcc -o &quot;.expand(&quot;%:r&quot;).&quot;.exe &quot;.expand(&quot;%&quot;)&amp;lt;cr&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;不过这样使用外部命令， Vim 并不能捕获编译过程的输出消息，就无法在 Vim 中根据
-错误消息有效的定位到错误行了。&lt;/p&gt;
-
-&lt;p&gt;有更好的方法：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;autocmd FileType cpp nmap &amp;lt;F10&amp;gt; :w&amp;lt;cr&amp;gt;:exe &quot;:set makeprg=g++\\\ -Wall\\\ -o\\\ &quot;.expand(&quot;%:r&quot;).&quot;.exe\\\ &quot;.expand(&quot;%&quot;)&amp;lt;cr&amp;gt;:make&amp;lt;cr&amp;gt;&amp;lt;cr&amp;gt;:cw&amp;lt;cr&amp;gt;
-autocmd FileType c nmap &amp;lt;F10&amp;gt; :w&amp;lt;cr&amp;gt;:exe &quot;:set makeprg=gcc\\\ -Wall\\\ -o\\\ &quot;.expand(&quot;%:r&quot;).&quot;.exe\\\ &quot;.expand(&quot;%&quot;)&amp;lt;cr&amp;gt;:make&amp;lt;cr&amp;gt;&amp;lt;cr&amp;gt;:cw&amp;lt;cr&amp;gt;
-autocmd FileType cpp,c nmap &amp;lt;F5&amp;gt; :exe &quot;!&quot;.expand(&quot;%:r&quot;).&quot;.exe&quot;&amp;lt;Left&amp;gt;
-autocmd FileType javascript nmap &amp;lt;F9&amp;gt; :call JsonLint()&amp;lt;cr&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;再补充映射一些 Quickfix 模式中快速跳转的快捷键：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;map &amp;lt;F4&amp;gt; :cclose&amp;lt;CR&amp;gt;
-map &amp;lt;F8&amp;gt; :cn&amp;lt;CR&amp;gt;
-map &amp;lt;F7&amp;gt; :cp&amp;lt;CR&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;完整的设置可以参考 &lt;a href=&quot;http://hotoo.googlecode.com/svn/trunk/vim/_vimrc&quot;&gt;我的 vimrc&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;更多讨论 &lt;a href=&quot;https://groups.google.com/group/vim-cn/browse_thread/thread/79652cb66297881f&quot;&gt;看这里&lt;/a&gt;。&lt;/p&gt;
-
-&lt;h2&gt;参考&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://easwy.com/blog/archives/advanced-vim-skills-quickfix-mode/&quot;&gt;vim 使用进阶: 剑不离手 – quickfix&lt;/a&gt;
-  &lt;a href=&quot;http://blog.zdnet.com.cn/html/30/422230-2881199.html&quot;&gt;2&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
- </entry>
- 
- <entry>
-   <title>vim字体设置</title>
-   <link href="http://blog.hotoo.me/post/vim-fonts.html"/>
-   <updated>2009-09-14T00:00:00+08:00</updated>
-   <id>http://blog.hotoo.me/post/vim-fonts</id>
-   <content type="html">&lt;p&gt;明城有 “&lt;a href=&quot;http://www.gracecode.com/archives/1545/&quot;&gt;苹果的 Courier 字体不错&lt;/a&gt;”
-和“&lt;a href=&quot;http://www.gracecode.com/archives/2402/&quot;&gt;Windows 下 gVim 的雅黑字体配置&lt;/a&gt;”
-两篇介绍 Vim 下设置推荐字体的文章，里面提供的设置代码及提高的下载资源都很赞。&lt;/p&gt;
-
-&lt;p&gt;家里的 Windows 7 用了 Courier New 字体后，体验很好。&lt;/p&gt;
-
-&lt;p&gt;但是搬到公司的 Windows XP 上却比原来 Windows 自身的 Courier New 没多大提高。&lt;/p&gt;
-
-&lt;p&gt;今天看了蟠盛写的“&lt;a href=&quot;http://blog.htmlor.com/2007/10/14/good_programming_fonts/&quot;&gt;几种不错的编程字体&lt;/a&gt;”，
-顺便看了下 &lt;a href=&quot;http://support.microsoft.com/kb/306527/zh-cn&quot;&gt;使用 ClearType 增强屏幕字体&lt;/a&gt;，按步骤 果然好了很多。&lt;/p&gt;
-
-&lt;p&gt;这里记录完整的设置：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;下载 &lt;a href=&quot;http://hotoo.googlecode.com/svn/trunk/fonts/Apple_Courier_Gracecode.zip&quot;&gt;Apple Courier字体&lt;/a&gt;
- &lt;a href=&quot;http://www.box.net/shared/zf08nmhc8g&quot;&gt;2&lt;/a&gt;
- &lt;a href=&quot;http://lifesinger.googlecode.com/files/apple_courier_font.zip&quot;&gt;3&lt;/a&gt; ，并安装。安装方法：
-
-&lt;ul&gt;
-&lt;li&gt;for Windows 7: 右键字体文件，安装即可。&lt;/li&gt;
-&lt;li&gt;for Windows XP:
-
-&lt;ol&gt;
-&lt;li&gt; 资源管理器中打开系统盘下的fonts目录（如C:\WINDOWS\Fonts，或运行fonts）&lt;/li&gt;
-&lt;li&gt; 文件 -&gt; 安装新字体；&lt;/li&gt;
-&lt;li&gt; 驱动器和文件夹定位到字体所在位置，字体列表将自动列出找到的字体；&lt;/li&gt;
-&lt;li&gt; 选中要安装的字体，点击确定即可。&lt;/li&gt;
-&lt;li&gt; 或直接将字体文件拷贝到Fonts文件夹亦可，系统将自动启动安装过程。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;ClearType
-
-&lt;ol&gt;
-&lt;li&gt;控制面板 -&gt; 显示（或右键桌面 -&gt; 属性） -&gt; 外观 -&gt; 效果；&lt;/li&gt;
-&lt;li&gt;选中“☑ 使用下列方式使屏幕字体的边缘平滑”；&lt;/li&gt;
-&lt;li&gt;并切换下面的下拉框，选中“清晰(ClearType)”；&lt;/li&gt;
-&lt;li&gt;确定即可。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;Vim设置
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;在 _vimrc 中加入如下代码：&lt;/p&gt;
-
-&lt;p&gt; set guifont=Courier_New:h11:cANSI&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;中文的宋体已经非常好了，不过仍然可以单独设置中文字体：&lt;/p&gt;
-
-&lt;p&gt; set guifontwide=YouYuan:h11:cGB2312&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;此时，新启动vim即可使用新设置的字体了。&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;http://farm4.static.flickr.com/3462/3919344550_f5cd6656c8_o.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.flickr.com/photos/hotoo/3919344550/&quot;&gt;ref&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2&gt;白露非提供的字体&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://8.nf/dxa&quot;&gt;下载&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;设置：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;guifont=Microsoft_YaHei_Mono:h11:cANSI
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2&gt;See Also&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://twitter.com/#!/belleveinvis/status/19308677508894720&quot;&gt;@twitter&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
- </entry>
- 
-
-</feed>
-��你可以直接在 Vim 中执行
 外部 gcc/g++ 命令，也可以想这样映射快捷键：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;autocmd FileType cpp nmap &amp;lt;F10&amp;gt; :w&amp;lt;cr&amp;gt;:exe &quot;!gcc -o &quot;.expand(&quot;%:r&quot;).&quot;.exe &quot;.expand(&quot;%&quot;)&amp;lt;cr&amp;gt;
