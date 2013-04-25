@@ -4,13 +4,116 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-03-24T11:55:44+08:00</updated>
+ <updated>2013-04-25T13:45:18+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
    <email>hotoo.cn@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>JavaScript for 循环的变量定义</title>
+   <link href="http://blog.hotoo.me/post/for-variable-defined.html"/>
+   <updated>2013-04-25T00:00:00+08:00</updated>
+   <id>http://blog.hotoo.me/post/for-variable-defined</id>
+   <content type="html">&lt;p&gt;上周有位前端同学周报里分享了段 for 循环的『好代码』：&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;javascript
+for (var i = 0, item; item = list[i]; i++) {
+  // 将 ltem = list[i]当做条件判断语句，当i下标溢出时，返回undefined，循环结束
+  // 居然省了一个变量呢～
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;这位同学是看了 jQuery 的里的这个用法之后做的这个分享：&lt;/p&gt;
+
+&lt;p&gt;```javascript
+// If no nodeType, this is expected to be an array
+for ( ; (node = elem[i]); i++ ) {&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// Do not traverse comment nodes
+ret += getText( node );
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;}
+```&lt;/p&gt;
+
+&lt;p&gt;jQuery 还有不少地方使用这种用法，也有不少地方是传统的使用 length 方法。
+但是 jQuery 这样用有其特定场景，需要正视。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;如果数组项中有 0, false, null, undefined, &quot;&quot;，代码就出 bug 了。&lt;/li&gt;
+&lt;li&gt;好像没看到少了变量，一定要少的话，典型的 for 写法也可以少（但是不推荐）。&lt;/li&gt;
+&lt;li&gt;代码是给人读的，偶尔给及其执行下。&lt;/li&gt;
+&lt;li&gt;另外，对 list 本身有操作，尤其是长度有影响的操作要特别注意。&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;我个人推荐下面这种写法：&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;javascript
+for(var i=0,l=list.length; i&amp;lt;l; i++){
+  list[i]
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Vim snipMate 代码片段模板里这样写：&lt;/p&gt;
+
+&lt;p&gt;```
+snippet for&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for(var ${1:i}=0,${2:l}=${3:list}.length; $1&amp;lt;$2; $1${4:++}){
+    ${5:$3[$1]}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;snippet forr&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for(var ${1:i}=${2:list}.length-1; $1&amp;gt;=0; $1--){
+    ${3:$2[$1]}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;snippet forin&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for(var ${1:k} in ${2:obj}){
+    ${3:$2[$1]}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;由于 JavaScript 作用域的问题，有同学建议说将 &lt;code&gt;i&lt;/code&gt;, &lt;code&gt;l&lt;/code&gt; 变量定义在 &lt;code&gt;for&lt;/code&gt; 循环之外。&lt;/p&gt;
+
+&lt;p&gt;这个我稍微持不同的观点 ：）&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;i&lt;/code&gt;, &lt;code&gt;l&lt;/code&gt; 是定义给 for 用的，机器执行的时候可以给外面用，不代表就应该定义在外面。&lt;/p&gt;
+
+&lt;p&gt;定义在外面给人的暗示是给整个 function 用的，而不只是 for 循环，就会给人
+『在外面用也没关系』的感觉，但这不是我们定义 i, l 的本意。&lt;/p&gt;
+
+&lt;p&gt;代码是给人读的，偶尔给机器执行下。&lt;/p&gt;
+
+&lt;p&gt;所以我比较喜欢就近定义的风格。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;请问你持什么观点呢？&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>关于 JavaScript 拼音的分享</title>
+   <link href="http://blog.hotoo.me/post/javascript-pinyin-share.html"/>
+   <updated>2013-04-08T00:00:00+08:00</updated>
+   <id>http://blog.hotoo.me/post/javascript-pinyin-share</id>
+   <content type="html">&lt;p&gt;3年前(2010年7月)写了 &lt;a href=&quot;https://github.com/hotoo/pinyin.js&quot;&gt;pinyin.js&lt;/a&gt; 项目，
+当时特别重视性能，项目描述还特别强调了『极速』，&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Github 的 404 页面是个好路由</title>
