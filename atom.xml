@@ -4,7 +4,7 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-04-25T14:00:27+08:00</updated>
+ <updated>2013-04-25T14:02:18+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
@@ -77,9 +77,9 @@ snippet forin
 &lt;p&gt;&lt;code&gt;i&lt;/code&gt;, &lt;code&gt;l&lt;/code&gt; 是定义给 for 用的，机器执行的时候可以给外面用，不代表就应该定义在外面。&lt;/p&gt;
 
 &lt;p&gt;定义在外面给人的暗示是给整个 function 用的，而不只是 for 循环，就会给人
-『在外面用也没关系』的感觉，但这不是我们定义 i, l 的本意。&lt;/p&gt;
+『在外面用也没关系』的感觉，但这不是我们定义 &lt;code&gt;i&lt;/code&gt;, &lt;code&gt;l&lt;/code&gt; 的本意。&lt;/p&gt;
 
-&lt;p&gt;代码是给人读的，偶尔给机器执行下。&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;代码是给人读的，偶尔给机器执行下。&lt;/p&gt;&lt;/blockquote&gt;
 
 &lt;p&gt;所以我比较喜欢就近定义的风格。&lt;/p&gt;
 
