@@ -4,7 +4,7 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-04-25T13:46:47+08:00</updated>
+ <updated>2013-04-25T14:00:27+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
@@ -19,25 +19,20 @@
    <id>http://blog.hotoo.me/post/for-variable-defined</id>
    <content type="html">&lt;p&gt;上周有位前端同学周报里分享了段 for 循环的『好代码』：&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-for (var i = 0, item; item = list[i]; i++) {
+&lt;pre&gt;&lt;code&gt;for (var i = 0, item; item = list[i]; i++) {
   // 将 ltem = list[i]当做条件判断语句，当i下标溢出时，返回undefined，循环结束
   // 居然省了一个变量呢～
 }
-&lt;/code&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;这位同学是看了 jQuery 的里的这个用法之后做的这个分享：&lt;/p&gt;
 
-&lt;p&gt;```
-// If no nodeType, this is expected to be an array
-for ( ; (node = elem[i]); i++ ) {&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// Do not traverse comment nodes
-ret += getText( node );
+&lt;pre&gt;&lt;code&gt;// If no nodeType, this is expected to be an array
+for ( ; (node = elem[i]); i++ ) {
+    // Do not traverse comment nodes
+    ret += getText( node );
+}
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;}
-```&lt;/p&gt;
 
 &lt;p&gt;jQuery 还有不少地方使用这种用法，也有不少地方是传统的使用 length 方法。
 但是 jQuery 这样用有其特定场景，需要正视。&lt;/p&gt;
@@ -52,37 +47,26 @@ ret += getText( node );
 
 &lt;p&gt;我个人推荐下面这种写法：&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-for(var i=0,l=list.length; i&amp;lt;l; i++){
+&lt;pre&gt;&lt;code&gt;for(var i=0,l=list.length; i&amp;lt;l; i++){
   list[i]
 }
-&lt;/code&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Vim snipMate 代码片段模板里这样写：&lt;/p&gt;
 
-&lt;p&gt;```
-snippet for&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;for(var ${1:i}=0,${2:l}=${3:list}.length; $1&amp;lt;$2; $1${4:++}){
-    ${5:$3[$1]}
-}
+&lt;pre&gt;&lt;code&gt;snippet for
+    for(var ${1:i}=0,${2:l}=${3:list}.length; $1&amp;lt;$2; $1${4:++}){
+        ${5:$3[$1]}
+    }
+snippet forr
+    for(var ${1:i}=${2:list}.length-1; $1&amp;gt;=0; $1--){
+        ${3:$2[$1]}
+    }
+snippet forin
+    for(var ${1:k} in ${2:obj}){
+        ${3:$2[$1]}
+    }
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;snippet forr&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;for(var ${1:i}=${2:list}.length-1; $1&amp;gt;=0; $1--){
-    ${3:$2[$1]}
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;snippet forin&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;for(var ${1:k} in ${2:obj}){
-    ${3:$2[$1]}
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -101,7 +85,21 @@ snippet for&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;请问你持什么观点呢？&lt;/p&gt;
+&lt;p&gt;那么你持什么观点呢？&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Detector Info</title>
+   <link href="http://blog.hotoo.me/post/detector-info.html"/>
+   <updated>2013-04-17T00:00:00+08:00</updated>
+   <id>http://blog.hotoo.me/post/detector-info</id>
+   <content type="html">&lt;hr /&gt;
+
+&lt;p&gt;layout: post
+title: detector&lt;/p&gt;
+
+&lt;h2&gt;published: false&lt;/h2&gt;
 </content>
  </entry>
  

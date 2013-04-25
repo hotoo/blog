@@ -52,25 +52,20 @@ seajs.use(["jquery", "default-main"], function(){
     <article>
         <p>上周有位前端同学周报里分享了段 for 循环的『好代码』：</p>
 
-<p><code>
-for (var i = 0, item; item = list[i]; i++) {
+<pre><code>for (var i = 0, item; item = list[i]; i++) {
   // 将 ltem = list[i]当做条件判断语句，当i下标溢出时，返回undefined，循环结束
   // 居然省了一个变量呢～
 }
-</code></p>
+</code></pre>
 
 <p>这位同学是看了 jQuery 的里的这个用法之后做的这个分享：</p>
 
-<p>```
-// If no nodeType, this is expected to be an array
-for ( ; (node = elem[i]); i++ ) {</p>
-
-<pre><code>// Do not traverse comment nodes
-ret += getText( node );
+<pre><code>// If no nodeType, this is expected to be an array
+for ( ; (node = elem[i]); i++ ) {
+    // Do not traverse comment nodes
+    ret += getText( node );
+}
 </code></pre>
-
-<p>}
-```</p>
 
 <p>jQuery 还有不少地方使用这种用法，也有不少地方是传统的使用 length 方法。
 但是 jQuery 这样用有其特定场景，需要正视。</p>
@@ -85,37 +80,26 @@ ret += getText( node );
 
 <p>我个人推荐下面这种写法：</p>
 
-<p><code>
-for(var i=0,l=list.length; i&lt;l; i++){
+<pre><code>for(var i=0,l=list.length; i&lt;l; i++){
   list[i]
 }
-</code></p>
+</code></pre>
 
 <p>Vim snipMate 代码片段模板里这样写：</p>
 
-<p>```
-snippet for</p>
-
-<pre><code>for(var ${1:i}=0,${2:l}=${3:list}.length; $1&lt;$2; $1${4:++}){
-    ${5:$3[$1]}
-}
+<pre><code>snippet for
+    for(var ${1:i}=0,${2:l}=${3:list}.length; $1&lt;$2; $1${4:++}){
+        ${5:$3[$1]}
+    }
+snippet forr
+    for(var ${1:i}=${2:list}.length-1; $1&gt;=0; $1--){
+        ${3:$2[$1]}
+    }
+snippet forin
+    for(var ${1:k} in ${2:obj}){
+        ${3:$2[$1]}
+    }
 </code></pre>
-
-<p>snippet forr</p>
-
-<pre><code>for(var ${1:i}=${2:list}.length-1; $1&gt;=0; $1--){
-    ${3:$2[$1]}
-}
-</code></pre>
-
-<p>snippet forin</p>
-
-<pre><code>for(var ${1:k} in ${2:obj}){
-    ${3:$2[$1]}
-}
-</code></pre>
-
-<p>```</p>
 
 <hr />
 
@@ -134,7 +118,7 @@ snippet for</p>
 
 <hr />
 
-<p>请问你持什么观点呢？</p>
+<p>那么你持什么观点呢？</p>
 
     </article>
     <footer class="post clearfix">
