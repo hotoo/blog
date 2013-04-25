@@ -52,7 +52,7 @@ seajs.use(["jquery", "default-main"], function(){
     <article>
         <p>上周有位前端同学周报里分享了段 for 循环的『好代码』：</p>
 
-<p><code>javascript
+<p><code>
 for (var i = 0, item; item = list[i]; i++) {
   // 将 ltem = list[i]当做条件判断语句，当i下标溢出时，返回undefined，循环结束
   // 居然省了一个变量呢～
@@ -61,7 +61,7 @@ for (var i = 0, item; item = list[i]; i++) {
 
 <p>这位同学是看了 jQuery 的里的这个用法之后做的这个分享：</p>
 
-<p>```javascript
+<p>```
 // If no nodeType, this is expected to be an array
 for ( ; (node = elem[i]); i++ ) {</p>
 
@@ -85,7 +85,7 @@ ret += getText( node );
 
 <p>我个人推荐下面这种写法：</p>
 
-<p><code>javascript
+<p><code>
 for(var i=0,l=list.length; i&lt;l; i++){
   list[i]
 }

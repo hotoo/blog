@@ -4,7 +4,7 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-04-25T13:45:18+08:00</updated>
+ <updated>2013-04-25T13:46:47+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
@@ -19,7 +19,7 @@
    <id>http://blog.hotoo.me/post/for-variable-defined</id>
    <content type="html">&lt;p&gt;上周有位前端同学周报里分享了段 for 循环的『好代码』：&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;javascript
+&lt;p&gt;&lt;code&gt;
 for (var i = 0, item; item = list[i]; i++) {
   // 将 ltem = list[i]当做条件判断语句，当i下标溢出时，返回undefined，循环结束
   // 居然省了一个变量呢～
@@ -28,7 +28,7 @@ for (var i = 0, item; item = list[i]; i++) {
 
 &lt;p&gt;这位同学是看了 jQuery 的里的这个用法之后做的这个分享：&lt;/p&gt;
 
-&lt;p&gt;```javascript
+&lt;p&gt;```
 // If no nodeType, this is expected to be an array
 for ( ; (node = elem[i]); i++ ) {&lt;/p&gt;
 
@@ -52,7 +52,7 @@ ret += getText( node );
 
 &lt;p&gt;我个人推荐下面这种写法：&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;javascript
+&lt;p&gt;&lt;code&gt;
 for(var i=0,l=list.length; i&amp;lt;l; i++){
   list[i]
 }
