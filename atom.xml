@@ -4,7 +4,7 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-04-26T11:44:00+08:00</updated>
+ <updated>2013-04-26T11:46:16+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
@@ -79,12 +79,12 @@ snippet forin
 
 &lt;p&gt;持有变量应前置定义观点的同学，估计有不少是受了《JavaScript 权威指南》或其他权威著作的影响。&lt;/p&gt;
 
-&lt;p&gt;《JavaScript 权威指南》第 4 章 4.3.1 小节 [1] 详细分析了块级作用域中变量定义的问题，&lt;/p&gt;
+&lt;p&gt;《JavaScript 权威指南》第 4 章 4.3.1 小节 [1] 详细分析了块级作用域中变量定义的问题。&lt;/p&gt;
 
-&lt;p&gt;JavaScript 只有函数作用域，没有块级作用域，因此在 &lt;code&gt;for&lt;/code&gt;, &lt;code&gt;if/else&lt;/code&gt;, &lt;code&gt;do/while&lt;/code&gt;, &lt;code&gt;switch/case&lt;/code&gt;
+&lt;p&gt;由于 JavaScript 只有函数作用域，没有块级作用域，因此在 &lt;code&gt;for&lt;/code&gt;, &lt;code&gt;if/else&lt;/code&gt;, &lt;code&gt;do/while&lt;/code&gt;, &lt;code&gt;switch/case&lt;/code&gt;
 这些块中定义的变量，实际在块之外也可以使用。&lt;/p&gt;
 
-&lt;p&gt;这是 JavaScript 设计的 BUG，所以书中作者建议将所有变量声明集中放置在函数开头，
+&lt;p&gt;这是 JavaScript 设计的 BUG，书中作者建议将所有变量声明集中放置在函数开头，
 说这是个好习惯。&lt;/p&gt;
 
 &lt;blockquote&gt;&lt;p&gt;In programming languages with block scope, it is generally good programming

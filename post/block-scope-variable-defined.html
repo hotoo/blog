@@ -112,12 +112,12 @@ snippet forin
 
 <p>持有变量应前置定义观点的同学，估计有不少是受了《JavaScript 权威指南》或其他权威著作的影响。</p>
 
-<p>《JavaScript 权威指南》第 4 章 4.3.1 小节 [1] 详细分析了块级作用域中变量定义的问题，</p>
+<p>《JavaScript 权威指南》第 4 章 4.3.1 小节 [1] 详细分析了块级作用域中变量定义的问题。</p>
 
-<p>JavaScript 只有函数作用域，没有块级作用域，因此在 <code>for</code>, <code>if/else</code>, <code>do/while</code>, <code>switch/case</code>
+<p>由于 JavaScript 只有函数作用域，没有块级作用域，因此在 <code>for</code>, <code>if/else</code>, <code>do/while</code>, <code>switch/case</code>
 这些块中定义的变量，实际在块之外也可以使用。</p>
 
-<p>这是 JavaScript 设计的 BUG，所以书中作者建议将所有变量声明集中放置在函数开头，
+<p>这是 JavaScript 设计的 BUG，书中作者建议将所有变量声明集中放置在函数开头，
 说这是个好习惯。</p>
 
 <blockquote><p>In programming languages with block scope, it is generally good programming
