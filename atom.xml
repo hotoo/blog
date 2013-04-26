@@ -4,7 +4,7 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-04-26T11:50:09+08:00</updated>
+ <updated>2013-04-26T12:18:17+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
@@ -141,7 +141,8 @@ for 之外有使用 for 内部定义的变量时，给予恰当的警告。这�
 
 &lt;ol&gt;
 &lt;li&gt;《JavaScript 权威指南》第六版章节和标题有所变更。第六版对应章节在第 3 章
- 第 3.10.1 小节：函数作用域和声明提前。&lt;/li&gt;
+ 第 3.10.1 小节：函数作用域和声明提前。
+ 第六版中，关于变量声明提前的结束语中相对中立了很多。&lt;/li&gt;
 &lt;/ol&gt;
 
 </content>
