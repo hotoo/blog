@@ -4,7 +4,7 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-04-27T00:34:54+08:00</updated>
+ <updated>2013-04-27T00:38:16+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
@@ -138,7 +138,7 @@ Define all variables at the top of the function.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;定义在外面给人的暗示是这个变量是给整个 function 用的，而不只是 for 循环，
 就会给人『在外面用也没关系』的错觉。但这其实不是我们定义 &lt;code&gt;i&lt;/code&gt;, &lt;code&gt;l&lt;/code&gt; 的本意。&lt;/p&gt;
 
-&lt;p&gt;而且变量前置声明，会导致变量声明、定义和使用之间分离，不直观，而且容易造成
+&lt;p&gt;另外变量前置声明，会导致变量声明、定义和使用之间分离，不直观，而且容易造成
 误清理、或遗漏清理变量的问题。&lt;/p&gt;
 
 &lt;p&gt;对于 JavaScript 的这个糟粕，让人来适应机器的问题而修改代码，甚至改变本性习惯，
@@ -181,7 +181,7 @@ Define all variables at the top of the function.&lt;/p&gt;&lt;/blockquote&gt;
 
 &lt;hr /&gt;
 
-&lt;h3&gt;备注&lt;/h3&gt;
+&lt;h3&gt;注&lt;/h3&gt;
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;《JavaScript 权威指南》第六版章节和标题有所变更。第六版对应章节在第 3 章
