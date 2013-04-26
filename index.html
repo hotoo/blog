@@ -95,8 +95,8 @@ for ( ; (node = elem[i]); i++ ) {
 <p>Vim snipMate 代码片段模板里这样写：</p>
 
 <pre><code>snippet for
-    for(var ${1:i}=0,${2:l}=${3:list}.length; $1&lt;$2; $1${4:++}){
-        ${5:$3[$1]}
+    for(var ${1:i}=0,${2:l}=${3:list}.length; $1&lt;$2; $1++){
+        ${4:$3[$1]}
     }
 snippet forr
     for(var ${1:i}=${2:list}.length-1; $1&gt;=0; $1--){
