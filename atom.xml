@@ -4,7 +4,7 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-04-27T00:34:03+08:00</updated>
+ <updated>2013-04-27T00:34:54+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
@@ -125,8 +125,6 @@ Define all variables at the top of the function.&lt;/p&gt;&lt;/blockquote&gt;
     for(i=0; i&amp;lt;l; i++){
         var blockVariable = i;
     }
-    alert(i); // 5
-    alert(blockVariable); // 4
 }
 &lt;/code&gt;&lt;/pre&gt;
 
