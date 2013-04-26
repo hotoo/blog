@@ -4,7 +4,7 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-04-27T00:42:50+08:00</updated>
+ <updated>2013-04-27T00:44:37+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
@@ -74,7 +74,7 @@ snippet forin
 
 &lt;p&gt;好了，使用溢出判断数组循环结束的讨论到此就结束了，但是好戏还在后头。&lt;/p&gt;
 
-&lt;!-- more --&gt;
+&lt;!--more--&gt;
 
 
 &lt;p&gt;由于 JavaScript 作用域的问题，有同学建议说将 &lt;code&gt;i&lt;/code&gt;, &lt;code&gt;l&lt;/code&gt; 变量定义在 &lt;code&gt;for&lt;/code&gt; 循环之外。
