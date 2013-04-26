@@ -147,6 +147,22 @@ your variable declarations together at the start of any function.</p></blockquot
 confuse programmers who are experienced with other C family languages.
 Define all variables at the top of the function.</p></blockquote>
 
+<p>他们的理由是，既然在块级作用域之内定义的变量可以被块级作用域之外使用，
+那么就应该把变量定义在块级作用域之外，让它们看起来和它们实际的作用域表现一致。</p>
+
+<pre><code>function functionScope(){
+    var i, l=5;
+
+    // more codes ...
+
+    for(i=0; i&lt;l; i++){
+        var blockVariable = i;
+    }
+    alert(i); // 5
+    alert(blockVariable); // 4
+}
+</code></pre>
+
 <hr />
 
 <p>但是这个我稍微持不同的观点 ：）</p>
