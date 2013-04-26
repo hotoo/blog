@@ -4,7 +4,7 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-04-26T11:39:58+08:00</updated>
+ <updated>2013-04-26T11:41:07+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
@@ -109,7 +109,7 @@ true scope of the variables.&lt;/p&gt;&lt;/blockquote&gt;
 或遗漏清理变量声明。&lt;/p&gt;
 
 &lt;p&gt;对于 JavaScript 的这个糟粕，让人来适应机器的问题而修改代码，甚至改变本性习惯，
-和另一个分号的话题是何其的相似。&lt;/p&gt;
+和另一个使用逗号连续定义变量的话题是何其的相似。&lt;/p&gt;
 
 &lt;p&gt;那么为什么不让机器来适应人，在 IDE 中编辑代码、或编译 JavaScript 代码时发现有
 for 之外有使用 for 内部定义的变量时，给予恰当的警告。这样是否更合理呢。&lt;/p&gt;
