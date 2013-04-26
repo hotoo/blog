@@ -4,7 +4,7 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-04-26T11:30:14+08:00</updated>
+ <updated>2013-04-26T11:30:44+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
@@ -18,8 +18,6 @@
    <updated>2013-04-25T00:00:00+08:00</updated>
    <id>http://blog.hotoo.me/post/for-variable-defined</id>
    <content type="html">&lt;blockquote&gt;&lt;p&gt;代码是写给人看的，顺便给机器执行。&lt;/p&gt;&lt;/blockquote&gt;
-
-&lt;hr /&gt;
 
 &lt;p&gt;上周有位前端同学周报里分享了段 for 循环的『好代码』：&lt;/p&gt;
 
