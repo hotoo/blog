@@ -105,28 +105,47 @@ snippet forin
 
 <hr />
 
-<p>好了，使用溢出判断数组循环结束的讨论到此结束了。但是由于 JavaScript 作用域的问题，
-有同学建议说将 <code>i</code>, <code>l</code> 变量定义在 <code>for</code> 循环之外。</p>
+<p>好了，使用溢出判断数组循环结束的讨论到此就结束了，但是好戏还在后头。</p>
 
-<p>于是进入另一个变量定义的话题。</p>
+<p>由于 JavaScript 作用域的问题，有同学建议说将 <code>i</code>, <code>l</code> 变量定义在 <code>for</code> 循环之外。
+于是进入另一个变量定义的话题。</p>
 
 <p>持有变量应前置定义观点的同学，估计有不少是受了《JavaScript 权威指南》或其他权威著作的影响。</p>
 
 <p>《JavaScript 权威指南》第 4 章 4.3.1 小节 [1] 详细分析了块级作用域中变量定义的问题。</p>
 
-<p>由于 JavaScript 只有函数作用域，没有块级作用域，因此在 <code>for</code>, <code>if/else</code>, <code>do/while</code>, <code>switch/case</code>
+<p>由于 JavaScript 只有函数作用域，没有块级作用域，因此在 <code>for</code>, <code>if/else</code>,
+<code>do/while</code>, <code>switch/case</code>, <code>try/catch</code>
 这些块中定义的变量，实际在块之外也可以使用。</p>
+
+<pre><code>function functionScope(){
+    for(var i=0,l=5; i&lt;l; i++){
+        var blockVariable = i;
+    }
+    alert(i); // 5
+    alert(blockVariable); // 4
+}
+</code></pre>
+
+<p>上面的代码，在 for 这个块之中定义的变量，在 for 之外也可以使用。
+这在其他支持块级作用域的编程语言如 C/C++ [2], Java 中是无法理解，甚至不可接受的。</p>
 
 <p>这是 JavaScript 设计的 BUG，书中作者建议将所有变量声明集中放置在函数开头，
 说这是个好习惯。</p>
 
-<blockquote><p>In programming languages with block scope, it is generally good programming
-practice to declare variables as close as possible to where they are used and
-with the narrowest possible scope. Since JavaScript does not have block scope,
-some programmers make a point of declaring all their variables at the top of
-the function, rather than trying to declare them closer to the point at which
-they are used. This technique makes their source code accurately reflect the
-true scope of the variables.</p></blockquote>
+<blockquote><p>This example illustrates why it is good programming practice to place all of
+your variable declarations together at the start of any function.</p></blockquote>
+
+<p>JavaScript 传教士老道也有
+<a href="http://javascript.crockford.com/code.html#variable%20declarations">类似的教诲</a>：</p>
+
+<blockquote><p>The var statements should be the first statements in the function body.</p>
+
+<p>...</p>
+
+<p>JavaScript does not have block scope, so defining variables in blocks can
+confuse programmers who are experienced with other C family languages.
+Define all variables at the top of the function.</p></blockquote>
 
 <hr />
 
@@ -136,16 +155,17 @@ true scope of the variables.</p></blockquote>
 给块级作用域外面用，不代表就应该定义在外面。</p>
 
 <p>定义在外面给人的暗示是这个变量是给整个 function 用的，而不只是 for 循环，
-就会给人『在外面用也没关系』的感觉。但这其实不是我们定义 <code>i</code>, <code>l</code> 的本意。</p>
+就会给人『在外面用也没关系』的错觉。但这其实不是我们定义 <code>i</code>, <code>l</code> 的本意。</p>
 
-<p>而且前置定义导致变量声明和实际变量使用两种分离，不直观，而且容易误清理、
-或遗漏清理变量声明。</p>
+<p>而且变量前置声明，会导致变量声明、定义和使用之间分离，不直观，而且容易造成
+误清理、或遗漏清理变量的问题。</p>
 
 <p>对于 JavaScript 的这个糟粕，让人来适应机器的问题而修改代码，甚至改变本性习惯，
 和另一个使用逗号连续定义变量的话题是何其的相似。</p>
 
-<p>那么为什么不让机器来适应人，在 IDE 中编辑代码、或编译 JavaScript 代码时发现有
-for 之外有使用 for 内部定义的变量时，给予恰当的警告。这样是否更合理呢。</p>
+<p>为什么不让机器来适应人，在编辑器中编辑、或在编译器中编译 JavaScript 代码时，
+发现块级作用域之外有使用块级作用域内部定义的变量时，给予恰当的警告。
+这是否更合理呢。</p>
 
 <p>如果遵循权威的教诲，把变量定义在函数前面，编辑器和编译器都没有办法帮我们了。</p>
 
@@ -153,7 +173,7 @@ for 之外有使用 for 内部定义的变量时，给予恰当的警告。这�
 
 <ol>
 <li>定义在块级作用域的变量不应该被块级作用域之外使用。</li>
-<li>如果被块之外使用了：
+<li>如果被块级作用域之外使用了：
 
 <ol>
 <li>要么这是一个错误的用法，会带来隐患。人、编辑器、编译器、
@@ -164,18 +184,42 @@ for 之外有使用 for 内部定义的变量时，给予恰当的警告。这�
 </ol>
 
 
-<p>所以我比较认同 <code>就近定义</code> 这种更合理、更人性的风格。</p>
+<p>所以我比较认同 <a href="http://www.approxion.com/?p=120">就近原则(The Principle of Proximity)</a>
+这种更合理、更人性的风格。</p>
 
-<h2>最后</h2>
+<ul>
+<li>文档、注释应尽可能的靠近代码。</li>
+<li>声明变量应尽可能的靠近变量使用。</li>
+<li>应尽量限制变量的作用域。</li>
+</ul>
 
-<p>那么，请问你持什么样的观点呢？</p>
 
-<h2>备注</h2>
+<h2>那么</h2>
+
+<p>请问你持什么样的观点呢？</p>
+
+<hr />
+
+<h3>备注</h3>
 
 <ol>
-<li>《JavaScript 权威指南》第六版章节和标题有所变更。第六版对应章节在第 3 章
+<li><p>《JavaScript 权威指南》第六版章节和标题有所变更。第六版对应章节在第 3 章
  第 3.10.1 小节：函数作用域和声明提前。
- 第六版中，关于变量声明提前的结束语中相对中立了很多。</li>
+ 第六版中，关于变量声明提前的结束语中相对中立了很多。</p>
+
+<blockquote><p>In programming languages with block scope, it is generally good programming
+practice to declare variables as close as possible to where they are used and
+with the narrowest possible scope. Since JavaScript does not have block scope,
+some programmers make a point of declaring all their variables at the top of
+the function, rather than trying to declare them closer to the point at which
+they are used. This technique makes their source code accurately reflect the
+true scope of the variables.</p></blockquote></li>
+<li><p>早在 <a href="http://flash-gordon.me.uk/ansi.c.txt">C89 规范</a> 中，规定了变量必须声明在作用域的最前面，
+但是 <a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1336.pdf">C99</a>
+和 C++ 取消了这个限制，支持就近声明变量。</p>
+
+<p>由于就近声明可以让变量作用于恰当的作用域之中，而且变量声明更靠近变量的使用,
+因此也更容易理解。<code>就近原则</code> 在很多编程语言当中都是最佳实践，JavaScript 也不例外。</p></li>
 </ol>
 
 
