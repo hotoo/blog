@@ -92,21 +92,9 @@ for ( ; (node = elem[i]); i++ ) {
 }
 </code></pre>
 
-<p>Vim snipMate 代码片段模板里这样写：</p>
-
-<pre><code>snippet for
-    for(var ${1:i}=0,${2:l}=${3:list}.length; $1&lt;$2; $1++){
-        ${4:$3[$1]}
-    }
-snippet forr
-    for(var ${1:i}=${2:list}.length-1; $1&gt;=0; $1--){
-        ${3:$2[$1]}
-    }
-snippet forin
-    for(var ${1:k} in ${2:obj}){
-        ${3:$2[$1]}
-    }
-</code></pre>
+<p>p.s. 使用 Vim snipMate 的同学可以参考
+<a href="https://github.com/hotoo/snipmate.vim/blob/master/snippets/javascript.snippets#L56">javascript.snippet</a>
+这个代码片段模板。</p>
 
 <hr />
 

@@ -4,7 +4,7 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-04-27T09:48:11+08:00</updated>
+ <updated>2013-04-27T11:06:46+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
@@ -54,21 +54,9 @@ for ( ; (node = elem[i]); i++ ) {
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Vim snipMate 代码片段模板里这样写：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;snippet for
-    for(var ${1:i}=0,${2:l}=${3:list}.length; $1&amp;lt;$2; $1++){
-        ${4:$3[$1]}
-    }
-snippet forr
-    for(var ${1:i}=${2:list}.length-1; $1&amp;gt;=0; $1--){
-        ${3:$2[$1]}
-    }
-snippet forin
-    for(var ${1:k} in ${2:obj}){
-        ${3:$2[$1]}
-    }
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;p.s. 使用 Vim snipMate 的同学可以参考
+&lt;a href=&quot;https://github.com/hotoo/snipmate.vim/blob/master/snippets/javascript.snippets#L56&quot;&gt;javascript.snippet&lt;/a&gt;
+这个代码片段模板。&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -136,18 +124,16 @@ Define all variables at the top of the function.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;但是这个我稍微持不同的观点 ：）&lt;/p&gt;
 
 &lt;p&gt;实际上我们定义 &lt;code&gt;i&lt;/code&gt;, &lt;code&gt;l&lt;/code&gt; 是为了给 &lt;code&gt;for&lt;/code&gt; 用的，JavaScript 解释器在执行的时候可以
-给块级作用域外面用，不代表就应该定义在外面。&lt;/p&gt;
-
-&lt;p&gt;定义在外面给人的暗示是这个变量是给整个 function 用的，而不只是 for 循环，
+给块级作用域外面用，不代表就应该定义在外面。
+定义在外面给人的暗示是这个变量是给整个 function 用的，而不只是 for 循环，
 就会给人『在外面用也没关系』的错觉。但这其实不是我们定义 &lt;code&gt;i&lt;/code&gt;, &lt;code&gt;l&lt;/code&gt; 的本意。&lt;/p&gt;
 
 &lt;p&gt;另外变量前置声明，会导致变量声明、定义和使用之间分离，不直观，而且容易造成
 误清理、或遗漏清理变量的问题。&lt;/p&gt;
 
 &lt;p&gt;对于 JavaScript 的这个糟粕，让人来适应机器的问题而修改代码，甚至改变本性习惯，
-和另一个使用逗号连续定义变量的话题是何其的相似。&lt;/p&gt;
-
-&lt;p&gt;为什么不让机器来适应人，在编辑器中编辑、或在编译器中编译 JavaScript 代码时，
+和另一个使用逗号连续定义变量的话题是何其的相似。
+为什么不让机器来适应人，在编辑器中编辑、或在编译器中编译 JavaScript 代码时，
 发现块级作用域之外有使用块级作用域内部定义的变量时，给予恰当的警告。
 这是否更合理呢。&lt;/p&gt;
 
