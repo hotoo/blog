@@ -154,12 +154,12 @@ Define all variables at the top of the function.</p></blockquote>
 那么就应该把变量定义在块级作用域之外，让它们看起来和它们实际的作用域表现一致。</p>
 
 <pre><code>function functionScope(){
-    var i, l=5;
+    var i, l=5, blockVariable;
 
     // more codes ...
 
     for(i=0; i&lt;l; i++){
-        var blockVariable = i;
+        blockVariable = i;
     }
 }
 </code></pre>
