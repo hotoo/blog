@@ -50,7 +50,7 @@ seajs.use(["jquery", "default-main"], function(){
   <div id="content">
         <h1>JavaScript 块级作用域的变量定义</h1>
     <article>
-        <blockquote><p>代码是写给人看的，顺便给机器执行。</p></blockquote>
+        <blockquote><p>代码是写给人看的，顺便给机器执行。[1]</p></blockquote>
 
 <p>上周有位前端同学周报里分享了段 for 循环的『好代码』：</p>
 
@@ -115,7 +115,7 @@ snippet forin
 
 <p>持有变量应前置定义观点的同学，估计有不少是受了《JavaScript 权威指南》或其他权威著作的影响。</p>
 
-<p>《JavaScript 权威指南》第 4 章 4.3.1 小节 [1] 详细分析了块级作用域中变量定义的问题。</p>
+<p>《JavaScript 权威指南》第 4 章 4.3.1 小节 [2] 详细分析了块级作用域中变量定义的问题。</p>
 
 <p>由于 JavaScript 只有函数作用域，没有块级作用域，因此在 <code>for</code>, <code>if/else</code>,
 <code>do/while</code>, <code>switch/case</code>, <code>try/catch</code>
@@ -131,7 +131,7 @@ snippet forin
 </code></pre>
 
 <p>上面的代码，在 for 这个块之中定义的变量，在 for 之外也可以使用。
-这在其他支持块级作用域的编程语言如 C/C++ [2], Java 中是无法理解，甚至不可接受的。</p>
+这在其他支持块级作用域的编程语言如 C/C++ [3], Java 中是无法理解，甚至不可接受的。</p>
 
 <p>这是 JavaScript 设计的 BUG，书中作者建议将所有变量声明集中放置在函数开头，
 说这是个好习惯。</p>
@@ -201,8 +201,7 @@ Define all variables at the top of the function.</p></blockquote>
 </ol>
 
 
-<p>所以我比较认同 <a href="http://www.approxion.com/?p=120">就近原则(The Principle of Proximity)</a>
-这种更合理、更人性的风格。</p>
+<p>所以我比较认同 <code>就近原则</code> [4] 这种更合理、更人性的风格。</p>
 
 <ul>
 <li>文档、注释应尽可能的靠近代码。</li>
@@ -220,6 +219,12 @@ Define all variables at the top of the function.</p></blockquote>
 <h3>注</h3>
 
 <ol>
+<li>出自《Structure and Interpretation of Computer Programs》，中文版《计算机程序的构造和解释》
+
+<blockquote><p>Thus, programs must be written for people to read, and only incidentally
+for machines to execute.</p>
+
+<p>-- by Harold Abelson and Gerald Jay Sussman with Julie Sussman</p></blockquote></li>
 <li><p>《JavaScript 权威指南》第六版章节和标题有所变更。第六版对应章节在第 3 章
  第 3.10.1 小节：函数作用域和声明提前。
  第六版中，关于变量声明提前的结束语中相对中立了很多。</p>
@@ -235,8 +240,13 @@ true scope of the variables.</p></blockquote></li>
 但是 <a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1336.pdf">C99</a>
 和 C++ 取消了这个限制，支持就近声明变量。</p>
 
-<p>由于就近声明可以让变量作用于恰当的作用域之中，而且变量声明更靠近变量的使用,
+<p>由于就近声明可以让变量作用于恰当的作用域之中，而且变量声明更靠近变量的使用，
 因此也更容易理解。<code>就近原则</code> 在很多编程语言当中都是最佳实践，JavaScript 也不例外。</p></li>
+<li><a href="http://en.wikipedia.org/wiki/The_Proximity_Principle">就近原则(The Principle of Proximity)</a> 是一项社会心理学
+ 的理论，实际在 <a href="http://www.approxion.com/?p=120">计算机编程</a> 、
+ <a href="http://desktoppub.about.com/od/designprinciples/tp/Principles_of_Design.htm">视觉设计</a> 、
+ <a href="http://www.webdesignerdepot.com/2010/01/the-principle-of-proximity-in-web-design/">网页设计</a>
+ 领域也有很多的延伸与实践。</li>
 </ol>
 
 
