@@ -4,7 +4,7 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-04-27T18:03:34+08:00</updated>
+ <updated>2013-04-28T10:12:52+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
@@ -13,7 +13,7 @@
 
  
  <entry>
-   <title>JavaScript 块级作用域的变量定义</title>
+   <title>就近原则：JavaScript 块级作用域的变量定义</title>
    <link href="http://blog.hotoo.me/post/block-scope-variable-defined.html"/>
    <updated>2013-04-25T00:00:00+08:00</updated>
    <id>http://blog.hotoo.me/post/block-scope-variable-defined</id>
