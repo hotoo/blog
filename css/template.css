@@ -163,7 +163,12 @@ blockquote{
     th, td{border-width:0 1px 1px 0; border-style:solid; border-color:#ccc; padding: 0.3em; vertical-align:top;}
     th{background-color: #f0f0f0;}
 
-hr {border: none; border-top: 1px solid #ccc; width: 100%;}
+hr {
+  /*border: none; border-top: 1px solid #ccc; width: 100%;*/
+  height: 60px;
+  border: none;
+  background: transparent url(bg/line-w.png) no-repeat center 0;
+}
 del{text-decoration:line-through; color: #777777;}
 
 dl{margin:3px 0;}

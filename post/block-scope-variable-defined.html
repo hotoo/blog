@@ -52,6 +52,8 @@ seajs.use(["jquery", "default-main"], function(){
     <article>
         <blockquote><p>代码是写给人看的，顺便给机器执行。[1]</p></blockquote>
 
+<h2>引子</h2>
+
 <p>上周有位前端同学周报里分享了段 for 循环的『好代码』：</p>
 
 <pre><code>for (var i = 0, item; item = list[i]; i++) {
@@ -91,12 +93,14 @@ for ( ; (node = elem[i]); i++ ) {
 <a href="https://github.com/hotoo/snipmate.vim/blob/master/snippets/javascript.snippets#L56">javascript.snippet</a>
 这个代码片段模板。</p>
 
-<hr />
-
 <p>好了，使用溢出判断数组循环结束的讨论到此就结束了，但是好戏还在后头。</p>
 
 <!--more-->
 
+
+<hr />
+
+<h2>如何定义块级作用域变量？</h2>
 
 <p>由于 JavaScript 作用域的问题，有同学建议说将 <code>i</code>, <code>l</code> 变量定义在 <code>for</code> 循环之外。
 于是进入另一个变量定义的话题。</p>
