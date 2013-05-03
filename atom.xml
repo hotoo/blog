@@ -4,7 +4,7 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-05-03T14:35:53+08:00</updated>
+ <updated>2013-05-03T14:38:24+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
@@ -421,44 +421,6 @@ http://du1abadd.org/2010/usr/make_toc_support_for_jekyll_with_rdiscount.html&lt;
 &lt;p&gt;&lt;code&gt;_posts/*.md&lt;/code&gt; 文档理论上只会作为内容输出，其中的代码（尤其是 Jekyll 使用的模板
 代码，及其 &lt;code&gt;pre &amp;gt; code&lt;/code&gt; 中的代码，应该合理转义处理。但是实际上 Jekyll 没有这样
 做，导致一些代码没有符合期望。&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>使用空格还是 Tab 缩进代码？</title>
-   <link href="http://blog.hotoo.me/post/format-by-spaces-or-tabs.html"/>
-   <updated>2013-01-06T00:00:00+08:00</updated>
-   <id>http://blog.hotoo.me/post/format-by-spaces-or-tabs</id>
-   <content type="html">&lt;p&gt;这也是一个经典的问题吧。很长一段时间以来我都是被影响为使用空格，而且似乎大多数
-人都使用 4 个空格吧。。&lt;/p&gt;
-
-&lt;h2&gt;可视空间&lt;/h2&gt;
-
-&lt;p&gt;空格：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;几乎所有编辑器或代码查看器中的占位一致，缩进风格统一。&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;!--more--&gt;
-
-
-&lt;p&gt;Tab:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;每个编辑器可视占位空间可能不一致，但大多数编辑器可以设置，所以每个用户可以
-使用自己的视觉习惯。&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;h2&gt;展开阅读&lt;/h2&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.derkarl.org/why_to_tabs.html&quot;&gt;Why I love having tabs in source code.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.jwz.org/doc/tabs-vs-spaces.html&quot;&gt;Tabs versus Spaces: An Eternal Holy War.&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
 </content>
  </entry>
  
