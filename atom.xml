@@ -4,7 +4,7 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-05-03T14:38:24+08:00</updated>
+ <updated>2013-05-04T11:08:45+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
@@ -145,7 +145,7 @@ Define all variables at the top of the function.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;我认为：&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;定义在块级作用域的变量不应该被块级作用域之外使用。&lt;/li&gt;
+&lt;li&gt;定义在块级作用域之内的变量不应该被块级作用域之外使用。&lt;/li&gt;
 &lt;li&gt;如果被块级作用域之外使用了：
 
 &lt;ol&gt;
