@@ -4,13 +4,160 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-05-22T20:57:41+08:00</updated>
+ <updated>2013-05-27T15:44:26+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
    <email>hotoo.cn@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>庆祝即将发布的 Vim 7.4 发布，发起团购 Tee(2013)</title>
+   <link href="http://blog.hotoo.me/post/vim74-tee.html"/>
+   <updated>2013-05-26T00:00:00+08:00</updated>
+   <id>http://blog.hotoo.me/post/vim74-tee</id>
+   <content type="html">&lt;p&gt;即将发布的 Vim 7.4 的主要特性更新如下：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;增强 Python 支持；&lt;/li&gt;
+&lt;li&gt;内置更快的正则表达式引擎；&lt;/li&gt;
+&lt;li&gt;bugs fix.&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+
+&lt;h2&gt;Tee&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;初步确定为 POLO 男款（店家没有专门的女款，抱歉 :( 如果你不介意，这款女生穿着也很帅 ：)）&lt;/li&gt;
+&lt;li&gt;个人觉得需要适当增大胸前的胶印 LOGO。待讨论确定。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;增加个性袖标。&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;:version&lt;br/&gt;
+VIM - Vi IMproved 7.4 (2013 Jun 15, 发布日期未定)&lt;br/&gt;
+@hotoo&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;http://img02.taobaocdn.com/bao/uploaded/i6/T1ziidXfXxXXXjwAs._113128.jpg_310x310.jpg&quot; alt=&quot;vimtee-green&quot; /&gt;
+&lt;img src=&quot;http://img02.taobaocdn.com/imgextra/i2/54677444/T21zBqXbxMXXXXXXXX_!!54677444.jpg_310x310.jpg&quot; alt=&quot;vimtee-blue&quot; /&gt;
+&lt;img src=&quot;http://img03.taobaocdn.com/imgextra/i3/54677444/T2BjJqXaBMXXXXXXXX_!!54677444.jpg_310x310.jpg&quot; alt=&quot;vimtee-black&quot; /&gt;&lt;/p&gt;
+
+&lt;h3&gt;局部特写：&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://img03.taobaocdn.com/imgextra/i3/54677444/T2EnXpXa0MXXXXXXXX_!!54677444.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3&gt;尺码：&lt;/h3&gt;
+
+&lt;p&gt;我个人喜欢穿稍微宽松的 Tee，一般会买大一号的，仅作参考 :)&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt; 通用款   &lt;/th&gt;
+&lt;th&gt; M       &lt;/th&gt;
+&lt;th&gt; L       &lt;/th&gt;
+&lt;th&gt; XL      &lt;/th&gt;
+&lt;th&gt; XXL&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt; 适合身高 &lt;/td&gt;
+&lt;td&gt; 165~170 &lt;/td&gt;
+&lt;td&gt; 170~175 &lt;/td&gt;
+&lt;td&gt; 175~180 &lt;/td&gt;
+&lt;td&gt; 180~190&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt; 胸围     &lt;/td&gt;
+&lt;td&gt; 98      &lt;/td&gt;
+&lt;td&gt; 104     &lt;/td&gt;
+&lt;td&gt; 116     &lt;/td&gt;
+&lt;td&gt; 121&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt; 衣长     &lt;/td&gt;
+&lt;td&gt; 67      &lt;/td&gt;
+&lt;td&gt; 70      &lt;/td&gt;
+&lt;td&gt; 75      &lt;/td&gt;
+&lt;td&gt; 78&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt; 肩宽     &lt;/td&gt;
+&lt;td&gt; 42      &lt;/td&gt;
+&lt;td&gt; 45      &lt;/td&gt;
+&lt;td&gt; 48      &lt;/td&gt;
+&lt;td&gt; 50&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.freewear.org/?page=show_item&amp;amp;id=FW0041&quot;&gt;官方推荐的 Tee&lt;/a&gt; 要 18.5欧元，
+将近 150元人民币，其中每件会捐助 3欧元（相当于24元人民币）给 Vim。
+相对来说很贵，而且还需要从国外运到国内，会麻烦很多（可能还需要关税）。&lt;/p&gt;
+
+&lt;p&gt;所以组织在国内自印，会划算靠谱很多。这个 Tee 的质量更好，大概只需要其 2/3 的价格，
+就可以捐助给 Vim 多一倍的爱心。&lt;/p&gt;
+
+&lt;h2&gt;捐助&lt;/h2&gt;
+
+&lt;p&gt;每件 Tee 需要额外的 20元左右的人民币，以 vimcn 团队的身份捐助给 Vim 以帮助乌干达
+可怜的儿童。&lt;/p&gt;
+
+&lt;h2&gt;报名&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;每件 Tee 的价格在 65~70 元左右；&lt;/li&gt;
+&lt;li&gt;快递费另外算。可以同城合并快递，线下认识下也不错。&lt;/li&gt;
+&lt;li&gt;我可以代收杭州的部分。&lt;/li&gt;
+&lt;li&gt;其他地区的同学如果同意被代收，我会随机选同城的一位同学代收。&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;邮件发送以下内容到
+&lt;a href=&quot;mailto:hotoo.cn+vimtee@gmail.com?subject=VimTee(2013)&amp;body=%E5%B0%BA%E7%A0%81%EF%BC%9A%0A%E9%A2%9C%E8%89%B2%EF%BC%9A%0A%E8%A2%96%E6%A0%87%E4%BF%A1%E6%81%AF%EF%BC%9A%0A%E4%BB%B6%E6%95%B0%EF%BC%9A%0A%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F%EF%BC%88%E6%89%8B%E6%9C%BA%E6%88%96%E5%9B%BA%E8%AF%9D%EF%BC%89%EF%BC%9A%0A%E6%94%B6%E8%B4%A7%E4%BA%BA%E5%A7%93%E5%90%8D%EF%BC%9A%0A%E6%94%B6%E8%B4%A7%E5%9C%B0%E5%9D%80%E5%92%8C%E9%82%AE%E7%BC%96%EF%BC%9A%0A%0A%E6%98%AF%E5%90%A6%E5%90%8C%E6%84%8F%E5%90%8C%E5%9F%8E%E4%BB%A3%E6%94%B6%E6%88%96%E8%A2%AB%E4%BB%A3%E6%94%B6%EF%BC%9F%0A%E6%98%AF%E5%90%A6%E6%9C%89%E5%BF%85%E8%A6%81%E9%80%82%E5%BD%93%E5%A2%9E%E5%A4%A7%E8%83%B8%E5%89%8D%20LOGO%EF%BC%9F%0A%E8%A2%96%E6%A0%87%E5%8D%B0%E5%9C%A8%E5%B7%A6%E6%89%8B%E8%BF%98%E6%98%AF%E5%8F%B3%E6%89%8B%EF%BC%9F&quot;&gt;hotoo.cn+vimtee[AT]gmail.com&lt;/a&gt;
+（点击链接即可）&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;尺码：&lt;br/&gt;
+颜色：军绿色|蓝色|黑色|（白色暂无）&lt;br/&gt;
+袖标信息：例如 &lt;code&gt;@hotoo&lt;/code&gt;&lt;br/&gt;
+件数：默认 1件&lt;br/&gt;
+联系方式（手机或固话）：&lt;br/&gt;
+收货人姓名：&lt;br/&gt;
+收货地址和邮编：&lt;br/&gt;&lt;/p&gt;
+
+&lt;p&gt;是否同意同城代收或被代收？&lt;br/&gt;
+是否有必要适当增大胸前 LOGO？&lt;br/&gt;
+袖标印在左手还是右手？&lt;br/&gt;&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h2&gt;声明&lt;/h2&gt;
+
+&lt;p&gt;这是一次庆祝、纪念的活动，另外还兼有公益的团队捐助活动。&lt;/p&gt;
+
+&lt;p&gt;如果你对 Tee 的设计不满意，可以自行设计印制。你也可以以个人身份捐助 Vim。&lt;/p&gt;
+
+&lt;h2&gt;VimTee 回顾&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;2010年7月，Vim 7.3 发布的时候，我组织了一次
+ &lt;a href=&quot;http://blog.hotoo.me/post/vim73-tee.html&quot;&gt;团购 VimTee&lt;/a&gt; 的活动。&lt;/li&gt;
+&lt;li&gt;2011年应邀又组织了一次 &lt;a href=&quot;http://blog.hotoo.me/post/vim-tee-2.html&quot;&gt;趣味 Vim Tee&lt;/a&gt;
+ 的活动。&lt;/li&gt;
+&lt;li&gt;2012年由于种种原因我没有组织。&lt;/li&gt;
+&lt;li&gt;2013年5月，Vim 7.4 即将发布，我想再发起一次组织团购 VimTee 的活动。&lt;/li&gt;
+&lt;/ol&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>JavaScript 异常档案</title>
