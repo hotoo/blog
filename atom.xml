@@ -4,7 +4,7 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-08-01T14:01:43+08:00</updated>
+ <updated>2013-08-01T14:04:00+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
@@ -3470,10 +3470,9 @@ tags:
 事件。这种实现可以轻易做到动态级别、动态维度的联动，各个 &lt;code&gt;&amp;lt;select&amp;gt;&lt;/code&gt; 的数据源及
 及处理函数都由自身确定。&lt;/p&gt;
 
-&lt;p&gt;我想说的其实只有一句：&lt;/p&gt;
+&lt;p&gt;总结：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;这里用 *从动监听主动* ，比 *主动调用从动* 的设计思想更先进。
-&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;&lt;p&gt;这里 &lt;strong&gt;事件监听&lt;/strong&gt; ，比 &lt;strong&gt;主动调用&lt;/strong&gt; 的设计思想更优秀。&lt;/p&gt;&lt;/blockquote&gt;
 </content>
  </entry>
  
