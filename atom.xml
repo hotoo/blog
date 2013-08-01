@@ -4,7 +4,7 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-05-28T19:29:07+08:00</updated>
+ <updated>2013-08-01T14:01:05+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
@@ -3450,20 +3450,18 @@ tags:
    <link href="http://blog.hotoo.me/post/linkage.html"/>
    <updated>2010-11-23T00:00:00+08:00</updated>
    <id>http://blog.hotoo.me/post/linkage</id>
-   <content type="html">&lt;h1&gt;无限级联动控件的设计&lt;/h1&gt;
-
-&lt;p&gt;联动控件一般用于下拉列表，例如省市县的联动。&lt;/p&gt;
+   <content type="html">&lt;p&gt;联动控件一般用于下拉列表，例如省市县的联动。&lt;/p&gt;
 
 &lt;p&gt;很早的时候有些初级的实现只做到了固定级别（比如二级、三级）的联动，它们传入固定
-的 N 个 &lt;select&gt; DOM 元素，形成固定的 N 级联动关系。后来有了一些较好的实现，
+的 N 个 &lt;code&gt;&amp;lt;select&amp;gt;&lt;/code&gt; DOM 元素，形成固定的 N 级联动关系。后来有了一些较好的实现，
 这些实现做到了动态级别的联动（即无限级联动）。&lt;/p&gt;
 
 &lt;p&gt;早期的无限级联动控件，一般实现是通过主动下拉列表在 onchange 触发时主动调用
-被动列表的更新 &lt;option&gt; 的方法，或者甚至在 onchange 处理函数中直接操作从动列表
-的 &lt;option&gt;。&lt;/p&gt;
+被动列表的更新 &lt;code&gt;&amp;lt;option&amp;gt;&lt;/code&gt; 的方法，或者甚至在 onchange 处理函数中直接操作从动列表
+的 &lt;code&gt;&amp;lt;option&amp;gt;&lt;/code&gt;。&lt;/p&gt;
 
 &lt;p&gt;主动调用从动列表的更新函数，则需要事先函数名称及传参的约定。
-直接操作从动列表的 &lt;option&gt; 就更不靠谱了，灵活性也更差。&lt;/p&gt;
+直接操作从动列表的 &lt;code&gt;&amp;lt;option&amp;gt;&lt;/code&gt; 就更不靠谱了，灵活性也更差。&lt;/p&gt;
 
 &lt;p&gt;另外，这两种实现只能做到一维的线性联动，即一个主动列表对应一个从动列表，要实现
 一个主动列表联动多个（不确定数量的）从动列表，则比较麻烦/困难。&lt;/p&gt;
