@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>Safari 4 Select Bug - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,85 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>Safari 4 Select Bug</h1>
+    <article>
+        <h1>发现 Safari4 的 select 控件 bug</h1>
 
-<ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
-</ol>
+<p>昨天看了新的<a href="http://www.taobao.com/">淘宝首页</a>，非常赞，有不少模仿/参考Yahoo 的成分。</p>
+
+<p>当时用的Safari 4 Public Beta (528.16)（后来用同事的Safari 4.0.2 (530.19.1)也一样），偶然点到预订机票的页签，随便点了几下选择框(<select>)，2月，28天，正常；3月，28天？；4 月，28天！…</p>
+
+<p><img src="http://farm3.static.flickr.com/2659/4246970340_ee2cabeefc_o.png" alt="" /></p>
+
+<p><a href="http://www.flickr.com/photos/hotoo/4246970340/">Safari 4 select bug(Windows)</a></p>
+
+<p>另外在IE 7, FF3.5, Chrome 4, Opera 10上测试却都是正常的。</p>
+
+<p>源码很易读，逻辑上没有什么问题，几点建议：</p>
+
+<pre><code>* 清空选项框建议使用遍历并 `selDay.remove(0);`；
+    （一时忘记在什么情况下 `selDay.options.length = 0;` 会有问题了）
+* 在创建好 Option 对象之后再 `selMonth.options[month].selected = true;` 和
+    `selDay.options[day-startDay].selected = true;` 就可以了，无需在循环时一一判断；
+</code></pre>
+
+<ul>
+<li> 另外关于转换不存在的日期（如2月31日）时，在这里其实没有什么用处的，
+    转出来的日期基本也不会是用户期望的日期（用户期望是2月某日，却跑到了3月），
+    遇到这种情况，变成2月1日或2月28日就可以了，而无需给出任何（讨厌的alert）提示。</li>
+</ul>
 
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
+<p>这都不是造成这个bug的原因，打印各个关键的运行时变量值都是正常的，但在界面是就是没有显示出来。</p>
 
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
-        
-          <h2>最近文章</h2>
-          <ul>
-        
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
+<p>今天 5 号，把昨天没有确定（是当时机器，或者当时浏览器）的问题拿出来再看，
+发现2,3,4…月都只有27天了，这个值与第一次产生的 <code>options.length</code>相等。
+注释掉 519: <code>//startDay = now.getDate();</code> ，让 <select> 最初长度为31，
+再转到2月，发现最后多了好几个不能点击的可见选项，此时浏览器也经常性崩溃。</p>
 
-</div>
+<p>这应该是渲染引擎的问题，而针对 IE 激活重新渲染的代码也无效：</p>
 
+<pre><code>function reflow(){
+    var b = document.body;
+    //b.style.zoom = b.style.zoom=="1"?"100%":"1";
+    //b.style.zoom = 1.1;
+    //b.style.zoom = '';
+    b.style.display = "none";
+    b.style.display = "";
+}
+</code></pre>
+
+<p>但是淘宝紧邻预订机票左侧页签的“游戏快冲”却没有这个问题，于是怀疑是跟 Option 的个数有关。</p>
+
+<p>经过更多的实验分析， <em>结论</em> 是超出24个 Option 之后的选项，渲染就会出问题，
+而恰巧? Safari 4 默认最大下拉长度也是24个。</p>
+
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
+        
+          
+          <a href="/tags.html#Browser">Browser</a>
+        
+          ,
+          <a href="/tags.html#Safari">Safari</a>
+        
+          ,
+          <a href="/tags.html#BUG">BUG</a>
+        
+      </span>
+      <time>January  5, 
+      <a href="/archives.html#2010">2010</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

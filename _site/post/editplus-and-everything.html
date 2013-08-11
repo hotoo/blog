@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>Editplus And Everything - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,66 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>Editplus And Everything</h1>
+    <article>
+        <h1>让 Editplus 和 Everything 结合，快速搜索</h1>
 
-<ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
-</ol>
+<p>今天朋友向我分享了他新学的一个小技巧：将 Everything 搜索集成到 Editplus。</p>
+
+<p>毫无疑问，<a href="http://www.voidtools.com/">Everything</a> 是 NTFS磁盘下，
+本地文件快速搜索的极品，而 <a href="http://www.editplus.com/">Editplus</a> 也是Windows下非常优秀的文本编辑器。</p>
+
+<p>虽然 Editplus 本身也有文件搜索功能，而且支持内容搜索，不过这个集成也非常有意思。</p>
+
+<ul>
+<li> 首先需要安装（绿色的也可以）有Everything本身。</li>
+<li> 下载面向命令行界面的 <a href="http://www.voidtools.com/download.php">es.exe</a>
+    ^<a href="http://xbeta.info/everything/download.htm">2</a>^ 程序，放至 Everything 安装目录。</li>
+<li> 打开 Editplus ， “工具” -> “配置用户工具” -> “添加工具”</li>
+<li> “菜单文本”可以随便命名，</li>
+<li> “命令”填入 es.exe 所在的完整路径，如 E:\Everything\es.exe</li>
+<li> “参数”填 <code>$(FileDir) $(CurSel)</code></li>
+<li> 选中捕获输出</li>
+<li> 确定，现在选中一串文本，就可以使用 <Ctrl-N> 快捷键或菜单执行搜索了，搜索结果集会输出在输出窗口中。</li>
+</ul>
 
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
+<p>谢谢晓东的分享。有时间的话可以为 Vim 也写一个插件，搜索结果在 QuickFix 窗口中输出。</p>
 
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
-        
-          <h2>最近文章</h2>
-          <ul>
-        
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
+<p>注意：一定要记得先选定文本一串，否则会搜索出所有的文件，如果参数没有加入当前文件所在的目录，还会更惨 ^_^! 。不过作为 Vim 插件就可以更灵活了，不需要选定文本，直接执行类似命令就可以了。</p>
 
-</div>
+<pre><code>:ES ${keyword}[ ${path}]
+</code></pre>
 
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
+        
+          
+          <a href="/tags.html#Editplus">Editplus</a>
+        
+          ,
+          <a href="/tags.html#Editor">Editor</a>
+        
+          ,
+          <a href="/tags.html#Everything">Everything</a>
+        
+          ,
+          <a href="/tags.html#Search Engine">Search Engine</a>
+        
+      </span>
+      <time>January 27, 
+      <a href="/archives.html#2010">2010</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

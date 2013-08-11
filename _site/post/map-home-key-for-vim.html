@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>Vim映射Home键到首个非空字符 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,92 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>Vim映射Home键到首个非空字符</h1>
+    <article>
+        <p>许多编辑器有相关选项，可以直接设置让 <code>&lt;Home&gt;</code> 键在首个非空字符和行首之间跳转。</p>
 
-<ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
-</ol>
+<p>Vim 也有快捷键，normal 模式下：<br />
+<code>0</code> 跳转到行首；<br />
+<code>^</code> 跳转到首个非空字符；<br />
+<code>$</code> 跳转到行尾。</p>
+
+<p>目前未知跳转到最后一个非空字符的快捷键，有个网友提供了一个很好玩的技巧：</p>
+
+<pre><code>nmap &lt;End&gt; /\S\s*$&lt;CR&gt;:nohl&lt;CR&gt;
+</code></pre>
+
+<p>为了将 <code>&lt;Home&gt;</code>和 <code>End&gt;</code> 键映射到其他编辑器常用的设置，我写了个可以用的代码，请高手不吝赐教。</p>
+
+<pre><code>" Dynamic bind &lt;HOME&gt; key
+" if caret/cursor not at the frist non-white-space character
+"   move caret/cursor to there
+" else
+"   move to beginning
+function HomeBind(offset)
+    let cursor=getpos('.')
+    let s0=getline(line('.'))
+    let s1=substitute(s0, "^\\s\\+", "", "")
+    let x=len(s0)-len(s1)+1
+    if col('.') == x-a:offset
+        let x=1
+    endif
+    call setpos('.', [cursor[0], cursor[1], x, cursor[3]])
+endfunction
+imap &lt;silent&gt; &lt;Home&gt; &lt;Esc&gt;:call HomeBind(1)&lt;cr&gt;i
+nmap &lt;silent&gt; &lt;Home&gt; :call HomeBind(0)&lt;cr&gt;
+vmap &lt;silent&gt; &lt;Home&gt; &lt;Esc&gt;:call HomeBind(1)&lt;cr&gt;
+
+" Dynamic bind &lt;END&gt; key
+" if caret/cursor not at the end
+"   move caret/cursor to there
+" else
+"   move to last non-white-space character.
+function EndBind(offset)
+    let cursor=getpos('.')
+    let s0=getline(line('.'))
+    let s1=substitute(s0, "\\s*$", "", "")
+    let x=len(s0)+a:offset
+    if col('.') == x
+        let x=len(s1)+a:offset
+    endif
+    call setpos('.', [cursor[0], cursor[1], x, cursor[3]])
+endfunction
+imap &lt;silent&gt; &lt;End&gt; &lt;Esc&gt;:call EndBind(0)&lt;cr&gt;a
+nmap &lt;silent&gt; &lt;End&gt; :call EndBind(0)&lt;cr&gt;
+vmap &lt;silent&gt; &lt;End&gt; :call EndBind(0)&lt;cr&gt;
+"nmap &lt;End&gt; /\S\s*$&lt;CR&gt;:nohl&lt;CR&gt;
+</code></pre>
+
+<p>这里还有几个实现很优雅，但稍有问题的脚本：</p>
+
+<ul>
+<li><a href="http://vim.wikia.com/wiki/SmartHome_and_SmartEnd_over_wrapped_lines">SmartHome and SmartEnd over wrapped lines</a></li>
+<li><a href="http://www.vim.org/scripts/script.php?script_id=2772">Crazy Home Key</a>
+  <a href="http://chenkaie.blogspot.com/2009/09/vim-crazy-home-key-crazyhomekeyvim.html">blog</a></li>
+<li><a href="http://gist.github.com/214532">c9s: smart_home_end.vim</a></li>
+</ul>
 
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
-
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
         
-          <h2>最近文章</h2>
-          <ul>
+          
+          <a href="/tags.html#Vim">Vim</a>
         
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
-
-</div>
-
+      </span>
+      <time>October 22, 
+      <a href="/archives.html#2009">2009</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

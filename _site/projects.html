@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>项目(Projects) - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,53 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
-
-<ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
-</ol>
-
-
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
-
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
-        
-          <h2>最近文章</h2>
-          <ul>
-        
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
-
+      <h2>项目(Projects)</h2>
+<div>
+  <h4><a href="http://github.com/hotoo">@hotoo</a>(<span id="hotoo-repos-count">...</span>)</h4>
+  <div id="hotoo-calendar"></div>
+  <div id="hotoo-repos">Loading...</div>
+  <h4><a href="http://github.com/vimcn">@vimcn</a>(<span id="vimcn-repos-count">...</span>)</h4>
+  <div id="vimcn-repos">Loading...</div>
 </div>
 
-<script type="text/javascript" src="/js/comments.js"></script>
 <script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
+  seajs.use(["jquery"], function(){
+    function loadRepos(user_name, container, counter){
+      jQuery.getJSON("https://api.github.com/users/"+user_name+"/repos?callback=?",
+        {
+          type: "sources",
+          per_page: 100
+        },
+        function(repos){
+          var html = ['<ul class="project-list">'];
+          var len = 0;
+          var data = repos.data.sort(function(a, b){
+            return String(b.updated_at).localeCompare(a.updated_at);
+
+            return (new Date(b.updated_at.replace(/-/g,"/")).getTime() -
+                new Date(a.updated_at.replace(/-/g,"/")).getTime()) ||
+              (b.watchers - a.watchers) ||
+              (b.forks - a.forks);
+          });
+          jQuery(data).each(function(){
+            if(this.fork){return;}
+            html.push('<li><div><a href="', this.html_url, '">', this.name, '</a>',
+              '<span class="extinal">watchers:', this.watchers, ', forks:', this.forks,
+              '</span></div><div>', this.description, '</div></li>');
+            len++;
+          });
+          html.push('</ul>');
+
+          jQuery(container).html(html.join(''));
+          jQuery(counter).html(len);
+        }
+      );
+    }
+
+    loadRepos("hotoo", "#hotoo-repos", "#hotoo-repos-count");
+    loadRepos("vimcn", "#vimcn-repos", "#vimcn-repos-count");
   });
 /*]]>*/</script>
-
 
   </div>
 

@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>Vim 自动补全成对的括号和引号 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,97 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>Vim 自动补全成对的括号和引号</h1>
+    <article>
+        <h1>Vim 自动补全成对的括号和引号</h1>
+
+<p>炫日分享了一个 <a href="http://aoyme.wordpress.com/2010/05/31/%E5%9C%A8vim%E4%B8%AD%E5%B0%86%E6%8B%AC%E5%8F%B7%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%EF%BC%9A/">自动补全成对的括号</a>
+的脚本，【注】：原文代码中引号被转义成了中文引号，下面是修正后的脚本。</p>
+
+<pre><code>inoremap ( ()&lt;ESC&gt;i
+inoremap ) &lt;c-r&gt;=ClosePair(')')&lt;CR&gt;
+inoremap { {}&lt;ESC&gt;i
+inoremap } &lt;c-r&gt;=ClosePair('}')&lt;CR&gt;
+inoremap [ []&lt;ESC&gt;i
+inoremap ] &lt;c-r&gt;=ClosePair(']')&lt;CR&gt;
+inoremap &lt; &lt;&gt;&lt;ESC&gt;i
+inoremap &gt; &lt;c-r&gt;=ClosePair('&gt;')&lt;CR&gt;
+
+function ClosePair(char)
+    if getline('.')[col('.') - 1] == a:char
+        return "\&lt;Right&gt;"
+    else
+        return a:char
+    endif
+endf
+</code></pre>
+
+<p>经启发我增加了对括号和引号更为智能的补全支持，
+不过中文全角的括号和引号目前无法通过映射来实现，
+对于转义的符号对的支持不佳。</p>
+
+<p>支持 2000 行以内（可以根据系统性能自行配置）文档的全局括号对识别能力。
+也就是 2000 行以内的文档，支持跨行的括号对智能匹配能力；当文档行数超出预设值，
+则使用行内括号对智能补全。</p>
+
+<ul>
+<li>OpenPair:
 
 <ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
+<li> 如果当前行的括号已经成对匹配，则自动补全右括号 <code>(I)</code></li>
+<li> 如果左括号比右括号多，则自动补全  <code>I(()</code> <code>(I()</code> <code>((I)</code> <code>(()I</code></li>
+<li> 如果左括号比右括号少，<br />
+  <code>I())</code> 原样输出，不自动补全<br />
+  <code>(I))</code> 同上<br />
+  <code>()I)</code> 同上<br />
+  <code>())I</code> 自动补全：左括号较少，且光标之后字符串进行一次递归上面的条件</li>
 </ol>
+</li>
+<li>ClosePair:
+
+<ol>
+<li> 如果光标之后是一个右括号，向右移动一列 <code>(I)</code> <code>((I)</code> <code>(I))</code> <code>()I)</code></li>
+<li> 否则原样输出。</li>
+</ol>
+</li>
+</ul>
 
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
+<p>代码见 <a href="http://gist.github.com/449512">gist: 449512</a></p>
 
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
-        
-          <h2>最近文章</h2>
-          <ul>
-        
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
+<h2>更新 (2010/6/24)</h2>
 
-</div>
+<h2>最后更新 (2010/7/9)</h2>
 
+<h2>相关脚本</h2>
+
+<ul>
+<li><a href="http://www.vim.org/scripts/script.php?script_id=2754">delimitMate.vim</a>
+(<a href="http://github.com/Raimondi/delimitMate">src</a>)</li>
+<li><a href="http://vim.wikia.com/wiki/Making_Parenthesis_And_Brackets_Handling_Easier">Making Parenthesis And Brackets Handling Easier</a></li>
+</ul>
+
+
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
+        
+          
+          <a href="/tags.html#Vim">Vim</a>
+        
+      </span>
+      <time>June 20, 
+      <a href="/archives.html#2010">2010</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

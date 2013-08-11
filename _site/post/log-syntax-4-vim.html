@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>让 Vim 支持 LOG 文件 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,52 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>让 Vim 支持 LOG 文件</h1>
+    <article>
+        <h1>让 Vim 支持 LOG 文件</h1>
 
-<ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
-</ol>
+<p>日志(.LOG)文件的基本上无章可循，各成风格。所以一般都是在纯文本模式下查看。
+以普通文本的方式显示日志，基本没有清晰度和阅读舒适感。</p>
 
+<p>不过一般来说，日志中是会有日期时间（格式非常多样），错误产生的地址，行号，
+列号，日志类型（错误(ERROR)，信息(INFO)，调试(DEBUG)，警告(WARN)等）</p>
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
+<p>据此，我为 .LOG 文件定义了一些语法着色的规则，将
+<a href="http://hotoo.googlecode.com/svn/trunk/vim/vimfiles/syntax/log.vim">log.vim</a>
+放至 <code>$VIM\vimfiles\syntax</code>(Windows) 目录，并在 <code>$VIM\vim72\filetype.vim</code> 中加入：</p>
 
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
-        
-          <h2>最近文章</h2>
-          <ul>
-        
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
+<pre><code>au BufNewFile,BufRead *.log         setf log
+</code></pre>
 
-</div>
+<p>现在就可以在 Vim 中较清晰的查看 .LOG 日志了。</p>
 
+<p><img src="http://farm5.static.flickr.com/4051/4623711702_81901313f9_o.jpg" alt="" /></p>
+
+<p>你也可以针对自己的实际情况，来自定义语法。</p>
+
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
+        
+          
+          <a href="/tags.html#Vim">Vim</a>
+        
+          ,
+          <a href="/tags.html#.LOG">.LOG</a>
+        
+      </span>
+      <time>May 13, 
+      <a href="/archives.html#2010">2010</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

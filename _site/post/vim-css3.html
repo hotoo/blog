@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>让 Vim 支持 CSS3 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,68 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>让 Vim 支持 CSS3</h1>
+    <article>
+        <p>和 <a href="http://www.w3.org/TR/html5/">HTML5</a> 一样，<a href="http://www.w3.org/TR/css3-roadmap/">CSS3</a>
+也是目前热门的技术，为了在 Vim 中更舒适的编辑 css ，我整理补充了 css3 的语法高亮和自动补全部分。</p>
 
-<ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
-</ol>
+<h2>语法高亮</h2>
+
+<p>下载这个 <a href="http://hotoo.googlecode.com/svn/trunk/vim/vimfiles/syntax/css.vim">css.vim</a>
+，放至 <code>$VIM/vimfiles/syntax/</code> (Windows) 或 <code>~/.vim/syntax/</code> (*nix) 目录下即可。</p>
+
+<p><em>更新</em> ：</p>
+
+<p>将 <a href="http://hotoo.googlecode.com/svn/trunk/vim/vim72/syntax/css.vim">css.vim</a>
+下载放置 <code>$VIM/vim72/syntax/</code> 下，覆盖源文件，这个版本补充和修正了CSS3的伪类支持。</p>
+
+<h2>自动补全</h2>
+
+<p>下载这个 <a href="http://hotoo.googlecode.com/svn/trunk/vim/vim72/autoload/csscomplete.vim">csscomplete.vim</a>
+放至 <code>$VIM/vim72/autoload/</code> 目录下，覆盖原文件即可。</p>
+
+<p>其中 vim72 中的 72 是 Vim 版本号。</p>
+
+<p>如果安装有 snipMate，可以参考这个
+<a href="http://hotoo.googlecode.com/svn/trunk/vim/vimfiles/snippets/css.snippets">css.snippets</a></p>
+
+<h2>语法验证</h2>
+
+<p>可以参考这篇 <a href="validator-for-vim.html">在 Vim 中验证 X/HTML, Javascript 和 CSS</a></p>
+
+<h2>参考：</h2>
+
+<ul>
+<li><a href="http://webteam.tencent.com/css3/">CSS 3.0 参考手册 (中文版)</a></li>
+</ul>
 
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
-
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
         
-          <h2>最近文章</h2>
-          <ul>
+          
+          <a href="/tags.html#Vim">Vim</a>
         
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
+          ,
+          <a href="/tags.html#CSS">CSS</a>
         
-      
-    
-      
+          ,
+          <a href="/tags.html#CSS3">CSS3</a>
         
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
-
-</div>
-
+      </span>
+      <time>November  6, 
+      <a href="/archives.html#2009">2009</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

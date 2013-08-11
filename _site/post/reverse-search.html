@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>反向搜索的设计 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,69 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>反向搜索的设计</h1>
+    <article>
+        <p>文本搜索是一项非常常用的功能，在文本编辑器中更是一个不可或缺的功能。</p>
 
-<ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
-</ol>
+<p>而反向搜索（搜索光标之前的文本）的设计，最初也非常原始：</p>
 
+<p><img src="http://farm5.static.flickr.com/4030/4231137828_a3e4fd8031_o.jpg" alt="" />
+<a href="http://www.flickr.com/photos/hotoo/4231137828/">Windows Notepad</a></p>
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
+<p><img src="http://farm5.static.flickr.com/4023/4230370125_a8f522ca80_o.png" alt="" />
+<a href="http://www.flickr.com/photos/hotoo/4230370125/">Editplus 2.3</a></p>
 
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
-        
-          <h2>最近文章</h2>
-          <ul>
-        
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
+<p><img src="http://farm3.static.flickr.com/2574/4230370157_461d09e194_o.jpg" alt="" />
+<a href="http://www.flickr.com/photos/hotoo/4230370157/">UltraEdit 11</a></p>
 
-</div>
+<p><img src="http://farm5.static.flickr.com/4050/4231137878_b2046bd82c_o.png" alt="" />
+<a href="http://www.flickr.com/photos/hotoo/4231137878/">Eclipse 3.4</a></p>
 
+<p>这基本算是可用了，不过还是有一些非常用心的改进的：</p>
+
+<p><img src="http://farm3.static.flickr.com/2741/4231137916_5c5f7ca33a_o.jpg" alt="" />
+<a href="http://www.flickr.com/photos/hotoo/4231137916/">Editplus 3</a></p>
+
+<p><img src="http://farm5.static.flickr.com/4055/4231137964_93518fe61d_o.jpg" alt="" />
+<a href="http://www.flickr.com/photos/hotoo/4231137964/">Windows Internet Explorer 7</a></p>
+
+<p><img src="http://farm3.static.flickr.com/2768/4230370195_7b954cda56_o.png" alt="" />
+<a href="http://www.flickr.com/photos/hotoo/4230370195/">Google Chrome 4</a></p>
+
+<p><img src="http://farm3.static.flickr.com/2790/4230370185_092763befc_o.png" alt="" />
+<a href="http://www.flickr.com/photos/hotoo/4230370185/">Apple Safari 4</a></p>
+
+<p><img src="http://farm5.static.flickr.com/4024/4230370225_b39a29718a_o.png" alt="" />
+<a href="http://www.flickr.com/photos/hotoo/4230370225/">Mozilla Firefox</a></p>
+
+<p>这些细小的改进都有一个共性，就是可以快捷的反向搜索，快速定位到上次匹配到的地方。
+作为 Vim 爱好者，她的反向搜索功能（包括搜索功能）更是华丽的惊人，normal 模式下
+正向搜索(/keyword)， n 键下一个匹配， N 键前一个匹配；如果是反向搜索(?keyword)，
+则相反。</p>
+
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
+        
+          
+          <a href="/tags.html#Search">Search</a>
+        
+          ,
+          <a href="/tags.html#UED">UED</a>
+        
+      </span>
+      <time>December 31, 
+      <a href="/archives.html#2009">2009</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

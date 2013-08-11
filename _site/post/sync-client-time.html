@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>客户端时间(续) - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,56 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>客户端时间(续)</h1>
+    <article>
+        <h1>同步客户端时间(续)</h1>
 
-<ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
-</ol>
+<p>08 年我就有了这样的 <a href="correct-web-client-datetime.html">想法</a>，却到今天才开始实践。</p>
 
+<p>公司电脑时间错了好多，但我的账户没有 Internet 同步的权限，遂手动校准。</p>
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
+<p>到 <a href="http://www.time.ac.cn/stime.asp">国家授时中心</a> 校准时，发现其服务器时间的
+跳跃是受客户端时间影响的，当客户端时间发生修改时，页面上显示的服务器时间也跟着
+偏差。</p>
 
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
-        
-          <h2>最近文章</h2>
-          <ul>
-        
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
+<p>后来到台湾的 <a href="http://www.stdtime.gov.tw/chinese/home.aspx">國家時間與頻率標準實驗室</a>
+发现没有这个问题。</p>
 
-</div>
+<p>研究了两者的代码，发现跟第一观感不同的是，这两者我更赞赏大陆的做法了，虽然有明显的可见缺陷。
+下面简单分析下两者的实现思想及各自的优缺点。</p>
 
+<p>台湾的是使用 setInterval 实现了一个定时器，这个定时器考虑到了调用函数的时间消耗，
+但是 setInterval 或 setTimeout 本身的不确定性，随着跳跃时间变长，页面显示的服务器
+时间便有非常大的偏差，尤其在 IE 浏览器中（几十分钟内，Firefox偏差数秒，IE7偏差数分钟）。</p>
+
+<p>而大陆的实现则使用服务器的初始时间，但使用客户端的频率进行跳跃（并在 1 秒中检查 10 次，
+避免跳秒问题）。这样即使经过长时间的跳跃，同样能保持较高的准确度。但问题是，当客户端
+时间发生修改时，所谓的服务器时间也会收到影响。</p>
+
+<p>于是我结合两者各自的优点，避开他们的缺点，实现了一个 <a href="https://github.com/hotoo/Chronos">校时器</a>。
+他使用客户端的跳秒，但是当客户端发生时间不正常的跳跃时，自动修正客户端和服务器端之间的
+时间差。</p>
+
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
+        
+          
+          <a href="/tags.html#Web Design">Web Design</a>
+        
+      </span>
+      <time>November 15, 
+      <a href="/archives.html#2010">2010</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

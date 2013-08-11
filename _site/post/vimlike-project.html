@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>宏伟的 Vimlike.js 计划 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,51 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>宏伟的 Vimlike.js 计划</h1>
+    <article>
+        <h1>宏伟的 Vimlike.js 计划</h1>
+
+<p>一直在想：网站本身提供的快捷键支持（如 Gmail, GReader, Gplus, Twitter），
+和浏览器插件提供的通用快捷键支持（Vimperator, Vimium, ...），两者如何共存，
+相互之间能够相安无事，甚至能够相辅相成？</p>
+
+<p>目前想到两种方案：</p>
 
 <ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
+<li>白名单机制。像 AutoProxy 一样，针对不同的网站/网址，屏蔽某些键映射，
+ 使用官方自有映射支持。不过这个要维护这份列表也是一件蛋疼的事。</li>
+<li>网站根据统一约定的快捷键定义接口实现特有功能，非特有的则默认使用共有实现。
+ 另外也提供扩展机制，让第三方插件也可以根据这个接口为特定的网站/页面实现特定功能。</li>
 </ol>
 
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
+<p>个人觉得第 2 中方案比较好，但这是一项宏大的项目，要各个网站遵循这个接口标准来实现，
+不是一件易事。准备先把这个做到 [https://github.com/hotoo/vimlike.js Vimlike.js] 项目里，
+然后请一些 Vim 爱好者的个人博客一起来参与实践。</p>
 
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
         
-          <h2>最近文章</h2>
-          <ul>
+          
+          <a href="/tags.html#Vim">Vim</a>
         
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
+          ,
+          <a href="/tags.html#JavaScript">JavaScript</a>
         
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
-
-</div>
-
+      </span>
+      <time>August 16, 
+      <a href="/archives.html#2011">2011</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

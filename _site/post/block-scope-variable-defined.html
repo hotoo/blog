@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<head>
+<!--[if IE]><script type="text/javascript" src="/js/html5.js"></script><![endif]-->
+<meta charset="UTF-8" />
+<meta name="generator" content="gvim" />
+<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<!--<link rel="alternate" type="application/rss+xml" title="RSS"
+  href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />-->
+<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
+<link type="text/css" rel="stylesheet" href="/css/template.css" />
+<script type="text/javascript" src="/js/sea.js"></script>
+<script type="text/javascript">
+seajs.config({
+  alias: {
+    'jquery': 'jquery-1.8.3.min.js',
+    'hashchange': 'jquery.ba-hashchange.min.js'
+  }
+});
+seajs.use(["jquery", "default-main"], function(){
+    alert("default")
+});
+</script>
+<title>就近原则：JavaScript 块级作用域的变量定义 - 闲耘™.博客</title>
+</head>
+<body>
+<div id="wrapper">
+<header>
+<div style="float:right;">
+    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+        <input type="text" name="q" />
+        <input type="submit" value="搜索" />
+    </form>
+</div>
+<nav>
+    <ul>
+        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
+        <li class="actived"><a href="/" title="Blog">Blog</a></li>
+        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
+        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
+        <li><a href="http://twitter.hotoo.me/" title="Twitter">Twitter</a></li>
+        <li class="last"><a href="/projects.html" title="Project">Project</a></li>
+        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
+    </ul>
+</nav>
+</header>
+<div id="container">
+  <div id="content">
+        <h1>就近原则：JavaScript 块级作用域的变量定义</h1>
+    <article>
+        <blockquote><p>代码是写给人看的，顺便给机器执行。[1]</p></blockquote>
+
+<h2>引子</h2>
+
+<p>上周有位前端同学周报里分享了段 for 循环的『好代码』：</p>
+
+<pre><code>for (var i = 0, item; item = list[i]; i++) {
+  // 将 ltem = list[i]当做条件判断语句，当i下标溢出时，返回undefined，循环结束
+  // 居然省了一个变量呢～
+}
+</code></pre>
+
+<p>这位同学是看了 jQuery 里类似下面这种用法之后做的这个分享：</p>
+
+<pre><code>// If no nodeType, this is expected to be an array
+for ( ; (node = elem[i]); i++ ) {
+    // Do not traverse comment nodes
+    ret += getText( node );
+}
+</code></pre>
+
+<p>jQuery 还有不少地方使用这种用法，也有不少地方是传统的使用 length 方法。
+但是 jQuery 这样用有其特定场景，需要正视。我回复说：</p>
+
+<ol>
+<li>如果数组项中有 0, false, null, undefined, ""，代码就出 bug 了。</li>
+<li>好像没看到少了变量，一定要少的话，典型的 for 写法也可以少（但是不推荐）。</li>
+<li>代码是写给人读的，顺便给机器执行。</li>
+<li>另外，对 list 本身有操作，尤其是长度有影响的操作要特别注意。</li>
+</ol>
+
+
+<p>我个人推荐下面这种写法：</p>
+
+<pre><code>for(var i=0,l=list.length; i&lt;l; i++){
+  list[i]
+}
+</code></pre>
+
+<p>p.s. 使用 Vim snipMate 的同学可以参考
+<a href="https://github.com/hotoo/snipmate.vim/blob/master/snippets/javascript.snippets#L56">javascript.snippet</a>
+这个代码片段模板。</p>
+
+<p>好了，使用溢出判断数组循环结束的讨论到此就结束了，但是好戏还在后头。</p>
+
+<p>由于 JavaScript 作用域的问题，有同学建议说将 <code>i</code>, <code>l</code> 变量定义在 <code>for</code> 循环之外。
+于是进入另一个变量定义的话题。</p>
+
+<!--more-->
+
+
+<hr />
+
+<h2>如何定义块级作用域中使用的变量？</h2>
+
+<p>持有变量应前置定义观点的同学，估计有不少是受了《JavaScript 权威指南》或其他权威著作的影响。</p>
+
+<p>《JavaScript 权威指南》第 4 章 4.3.1 小节 [2] 详细分析了块级作用域中变量定义的问题。</p>
+
+<p>由于 JavaScript 只有函数作用域，没有块级作用域，因此在 <code>for</code>, <code>if/else</code>,
+<code>do/while</code>, <code>switch/case</code>, <code>try/catch</code> 这些块中定义的变量，实际在块之外也可以使用。</p>
+
+<pre><code>function functionScope(){
+    for(var i=0,l=5; i&lt;l; i++){
+        var blockVariable = i;
+    }
+    alert(i); // 5
+    alert(blockVariable); // 4
+}
+</code></pre>
+
+<p>例如上面的代码，在 for 这个块之中定义的变量，在 for 之外也可以使用。
+这在其他支持块级作用域(如C/C++ [3], Java)的编程语言中是无法理解，甚至不可接受的。</p>
+
+<p>这是 JavaScript 设计的 BUG，书中作者建议将所有变量声明集中放置在函数开头，
+说这是个好习惯。</p>
+
+<blockquote><p>This example illustrates why it is good programming practice to place all of
+your variable declarations together at the start of any function.</p></blockquote>
+
+<p>JavaScript 传教士老道也有
+<a href="http://javascript.crockford.com/code.html#variable%20declarations">类似的教诲</a>：</p>
+
+<blockquote><p>The var statements should be the first statements in the function body.</p>
+
+<p>...</p>
+
+<p>JavaScript does not have block scope, so defining variables in blocks can
+confuse programmers who are experienced with other C family languages.
+Define all variables at the top of the function.</p></blockquote>
+
+<p>他们的理由是，既然在块级作用域之内定义的变量可以被块级作用域之外使用，
+那么就应该把变量定义在块级作用域之外，让它们看起来和它们实际的作用域表现一致。</p>
+
+<pre><code>function functionScope(){
+    var i, l=5, blockVariable;
+
+    // more codes ...
+
+    for(i=0; i&lt;l; i++){
+        blockVariable = i;
+    }
+}
+</code></pre>
+
+<hr />
+
+<p>但是这个我稍微持不同的观点 ：）</p>
+
+<p>实际上我们定义 <code>i</code>, <code>l</code> 是为了给 <code>for</code> 用的，JavaScript 解释器在执行的时候可以
+给块级作用域外面用，不代表就应该定义在外面。
+定义在外面给人的暗示是这个变量是给整个 function 用的，而不只是 for 循环，
+就会给人『在外面用也没关系』的错觉。但这其实不是我们定义 <code>i</code>, <code>l</code> 的本意。</p>
+
+<p>另外变量前置声明，会导致变量声明、定义和使用之间分离，变量含义自我解释性被削弱，
+而且容易造成误清理、或遗漏清理变量的问题。</p>
+
+<p>对于 JavaScript 的这个糟粕，让人来适应机器的问题而修改代码，甚至改变本性习惯，
+和另一个使用逗号连续定义变量的话题是何其的相似。
+为什么不让机器来适应人，在编辑器中编辑、或在编译器中编译 JavaScript 代码时，
+发现块级作用域之外有使用块级作用域内部定义的变量时，给予恰当的警告。
+这是否更合理呢。</p>
+
+<p>如果遵循权威的教诲，把变量定义在函数前面，编辑器和编译器都没有办法帮我们了。</p>
+
+<p>我认为：</p>
+
+<ol>
+<li>定义在块级作用域之内的变量不应该被块级作用域之外使用。</li>
+<li>如果被块级作用域之外使用了：
+
+<ol>
+<li><p>要么这是一个错误的用法，会带来隐患。<br/>
+ <em>人、编辑器、编译器、甚至将来的解释器可以发现这个问题并给出警告。</em></p></li>
+<li><p>或者确实有这样的使用需求，那么这个变量应该被声明在块级作用域之外。</p></li>
+</ol>
+</li>
+</ol>
+
+
+<p>所以我比较认同 <code>就近原则</code> [4] 这种更合理、更人性的风格。</p>
+
+<ul>
+<li>文档、注释应尽可能的靠近代码。</li>
+<li>变量声明应尽可能的靠近变量使用。</li>
+<li>应尽量限制变量的作用域。</li>
+</ul>
+
+
+<h2>那么</h2>
+
+<p>请问你持什么样的观点呢？</p>
+
+<hr />
+
+<h3>注</h3>
+
+<ol>
+<li>出自《Structure and Interpretation of Computer Programs》，中文版《计算机程序的构造和解释》
+
+<blockquote><p>Thus, programs must be written for people to read, and only incidentally
+for machines to execute.</p>
+
+<p>-- by Harold Abelson and Gerald Jay Sussman with Julie Sussman</p></blockquote></li>
+<li><p>《JavaScript 权威指南》第六版章节和标题有所变更。第六版对应章节在第 3 章
+ 第 3.10.1 小节：函数作用域和声明提前。
+ 第六版中，关于变量声明提前的结束语中相对中立了很多。</p>
+
+<blockquote><p>In programming languages with block scope, it is generally good programming
+practice to declare variables as close as possible to where they are used and
+with the narrowest possible scope. Since JavaScript does not have block scope,
+some programmers make a point of declaring all their variables at the top of
+the function, rather than trying to declare them closer to the point at which
+they are used. This technique makes their source code accurately reflect the
+true scope of the variables.</p></blockquote>
+
+<p> 大意是说：<br/>
+ 在支持块级作用域的编程语言中，变量就近定义是一个非常好的编程实践。
+ 变量定义尽量靠近变量使用，变量尽量限制在最小的作用域之内。
+ 由于 JavaScript 没有块级作用域，一些程序员提出将变量定义在函数的顶部，
+ 而不是靠近使用变量的地方。这使得源码准确反映了其真正的作用域范围。</p></li>
+<li><p>早在 <a href="http://flash-gordon.me.uk/ansi.c.txt">C89 规范</a> 中，规定了变量必须声明在作用域的最前面，
+但是 <a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1336.pdf">C99</a>
+和 C++ 取消了这个限制，支持就近声明变量。</p>
+
+<p>由于就近声明可以让变量作用于恰当的作用域之中，而且变量声明更靠近变量的使用，
+因此也更容易理解。<code>就近原则</code> 在很多编程语言当中都是最佳实践，JavaScript 也不例外。</p></li>
+<li><a href="http://en.wikipedia.org/wiki/The_Proximity_Principle">就近原则(The Principle of Proximity)</a> 是一项社会心理学
+ 的理论，实际在 <a href="http://www.approxion.com/?p=120">计算机编程</a> 、
+ <a href="http://desktoppub.about.com/od/designprinciples/tp/Principles_of_Design.htm">视觉设计</a> 、
+ <a href="http://www.webdesignerdepot.com/2010/01/the-principle-of-proximity-in-web-design/">网页设计</a>
+ 领域也有很多的延伸与实践。</li>
+</ol>
+
+
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
+        
+          
+          <a href="/tags.html#JavaScript">JavaScript</a>
+        
+      </span>
+      <time>April 25, 
+      <a href="/archives.html#2013">2013</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
+<script type="text/javascript" src="/js/comments.js"></script>
+
+  </div>
+
+    <!-- Vimlike status bar -->
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/js/Vimlike.js"></script>
+<footer>
+  <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
+    alt="Creative Commons License" style="border-width: 0pt;"
+    src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"/></a>
+  This work is licensed under a
+  <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
+    Commons Attribution 2.5 Generic License</a>.<br/>
+  Copyleft &copy; 2005-2013, Power by
+  <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
+    </p>
+</footer>
+</div>
+<script type="text/javascript">
+var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker=_gat._getTracker("UA-2048484-1");
+pageTracker._trackPageview();
+}catch(err){}</script>
+</body>
+</html>

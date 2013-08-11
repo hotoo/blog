@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>在 Vim 上安装使用 Tagbar - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,60 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>在 Vim 上安装使用 Tagbar</h1>
+    <article>
+        <pre><code>git clone https://github.com/mozilla/doctorjs.git –recursive
+cd doctorjs
+sudo make install
+</code></pre>
 
-<ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
-</ol>
+<p>会提示将 NODE_PATH 加入到环境变量 ~/.bash_profile ：</p>
+
+<pre><code>export NODE_PATH=/usr/local/lib/jsctags/:$NODE_PATH
+</code></pre>
+
+<h2>See Also</h2>
+
+<ul>
+<li><a href="http://majutsushi.github.com/tagbar/">Tagbar</a></li>
+<li><a href="https://github.com/majutsushi/tagbar/wiki">Support for additional filetypes</a></li>
+<li><a href="http://ahchoo.me/blog/2012/03/08/learn-vim-3-post/">Vim学习 Jsctags</a></li>
+<li><a href="https://github.com/mozilla/doctorjs">Doctor.js</a> - jsctags.</li>
+<li><a href="https://github.com/hotoo/dotfiles/blob/master/.ctags">.ctags</a></li>
+<li><a href="http://jezng.com/2011/03/vim-support-javascript-taglist-plus/">Awesome vim support for javascript with jsctags and taglist-plus</a></li>
+<li><a href="http://hikejun.com/blog/2011/05/07/%E6%9B%B4%E5%A5%BD%E7%9A%84%E7%94%A8vim%E6%B5%8F%E8%A7%88javascript%E4%BB%A3%E7%A0%81/">更好的用vim浏览Javascript代码</a></li>
+</ul>
 
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
-
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
         
-          <h2>最近文章</h2>
-          <ul>
+          
+          <a href="/tags.html#Vim">Vim</a>
         
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
+          ,
+          <a href="/tags.html#tagbar">tagbar</a>
         
-      
-    
-      
+          ,
+          <a href="/tags.html#ctags">ctags</a>
         
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
+          ,
+          <a href="/tags.html#jsctags">jsctags</a>
         
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
-
-</div>
-
+      </span>
+      <time>October 28, 
+      <a href="/archives.html#2012">2012</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

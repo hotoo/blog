@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>轉換編碼筆記 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,51 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>轉換編碼筆記</h1>
+    <article>
+        <h1>轉換編碼筆記</h1>
 
-<ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
-</ol>
+<p>今天發現一個顯示為亂碼的 html 頁面，發現是當前頁面和 reference 頁面編碼
+不一致造成的，reference 編碼為 gbk，當前頁面編碼是 utf8。</p>
 
+<p>雖然各自 head 里的 charset 和其文件存儲的編碼一致，但某些瀏覽器（如Firefox）
+從 reference 轉過來時，默認當前頁面的 charset 和 reference 的一致，導致亂碼
+顯示。</p>
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
+<p>由于 reference 所使用的編碼是整站的基準編碼，所以把當前頁面的 fileencoding
+轉成和 reference 一致即可，不過轉碼時遇到一個問題是，文件中存在特殊字符，無法
+由 utf8 正常轉碼為 gbk。</p>
 
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
-        
-          <h2>最近文章</h2>
-          <ul>
-        
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
+<p>文檔中無法用肉眼看出那些特殊字符，于是備份后使用 notepad 或 editplus 強行轉碼
+（注：會丟失那些特殊的字符），然后將轉碼后的文檔和原始備份檔比較，來查找特殊
+字符，編輯（刪除無意義的，轉義有用的）保存即可。</p>
 
-</div>
+<p>注：Vim <code>:set fenc=gbk</code>，可以轉碼，但 <code>:wq!</code> 無法正常保存；UltraEdit 本身的編碼
+支持不夠好，不建議用來轉碼。</p>
 
+<p>注2：Vim diff 可以比較出不同，找出特殊字符，但可能無法正常編輯（如刪除）它們，
+特殊字符是非常怪異的；BeyondCompare 和 WinMarge 基本可以勝任。</p>
+
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
+        
+          
+          <a href="/tags.html#编码">编码</a>
+        
+      </span>
+      <time>April  7, 
+      <a href="/archives.html#2010">2010</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

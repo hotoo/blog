@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>如何取 URL 中第一个单独的问号(?) 位置 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,97 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>如何取 URL 中第一个单独的问号(?) 位置</h1>
+    <article>
+        <h1>如何取 URL 中第一个单独的问号(?) 位置</h1>
 
-<ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
-</ol>
+<p>新版 Arale 通过 nginx 服务支持使用双问号的访问方式：</p>
+
+<pre><code>https://static.alipay.com/ar??arale.js
+</code></pre>
+
+<p>访问 <code>https://static.alipay.com/ar/arale.js</code></p>
+
+<p>通过正则的正向预搜索有办法获得第一个单问号的位置么？</p>
+
+<pre><code>var r = /\?(?!\?)/;
+</code></pre>
+
+<p>会匹配双问号的第 2 个问号：</p>
+
+<pre><code>https://static.alipay.com/ar??arale.js
+                             ^
 
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
+var path = function(uri){
+    var idx = uri.indexOf(";jsessionid=");
+    if(idx &gt;= 0){return uri.substr(0, idx);}
 
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
-        
-          <h2>最近文章</h2>
-          <ul>
-        
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
+    do{
+        idx = uri.indexOf("?", idx);
+        if(idx &lt; 0){break;}
+        if("?" == uri.charAt(idx+1)){
+            idx += 2;
+        }else{
+            break;
+        }
+    }while(idx &gt;= 0);
 
-</div>
+    return idx &lt; 0 ? uri : uri.substr(0, idx);
+};
+</code></pre>
 
+<p>目前是通过循环方式计算的，无心比较遍历和正则之间无优劣，
+纯粹对于正则的实现很有兴趣 :)</p>
+
+<hr />
+
+<p>答案一：</p>
+
+<pre><code>var path = function(uri){
+    return uri.replace(/;jsessionid=.*$/, "")
+        .replace(/^(.*?[^?])\?[^?]/, "$1");
+};
+</code></pre>
+
+<hr />
+
+<p>答案二：</p>
+
+<p>上面用了两个相同规则的分组，这里可以减少到一个分组</p>
+
+<pre><code>"asdfadf??a?a".replace(/([^\s])\?\1/, '$1*$1'); // "asdfadf??a*a"
+</code></pre>
+
+<p>但是这种做法对于问号(?)在字符串首尾时没有办法匹配</p>
+
+<pre><code>var temp= "12345???89?asdf".search(/(?:[^?]|^)\?(?!\?)/);
+var index = temp ? temp + 1 : temp; // index的就想要的索引值
+</code></pre>
+
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
+        
+          
+          <a href="/tags.html#JavaScript">JavaScript</a>
+        
+          ,
+          <a href="/tags.html#RegExp">RegExp</a>
+        
+      </span>
+      <time>June 22, 
+      <a href="/archives.html#2011">2011</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

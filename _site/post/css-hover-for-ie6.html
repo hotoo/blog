@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>IE6 的 CSS:hover 伪类 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,101 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>IE6 的 CSS:hover 伪类</h1>
+    <article>
+        <h1>IE6 的 CSS:hover 伪类</h1>
+
+<p>众所周知，IE6 不支持 a:hover 以外的 CSS 伪类，解决办法一般有 3 种方案：</p>
+
+<h2>使用 JavaScript 事件</h2>
+
+<p>直接使用 JavaScript 的 onmouseover/onmouseenter 和 onmouseout/onmouseleave
+事件进行针对性开发，这大概没什么好详细介绍的。</p>
+
+<h2>使用 CSS 表达式</h2>
+
+<p>辅以 CSS 表达式中 JScript 同样也有 onmouseover/onmouseenter 和
+onmouseout/onmouseleave 事件，用以实现 :hover 效果。<br />
+注意：其中冒号之前的事件名称可以随意，关键是 expression() 里面的事件。</p>
+
+<pre><code>ul li{
+    onmouseout:expression(onmouseout=function(){this.style.backgroundColor=''});
+    onmouseover:expression(onmouseover=function(){this.style.backgroundColor='yellow'});
+}
+ol li{
+    onmouseleave:expression(onmouseleave=function(){this.style.backgroundColor=''});
+    onmouseenter:expression(onmouseenter=function(){this.style.backgroundColor='yellow'});
+}
+</code></pre>
+
+<p>不过应该说使用 CSS class 是更好的实践。</p>
+
+<pre><code>table tr{
+  onmouseout:expression(onmouseout=function(){
+    try{this.className=this.className.replace(' hover','')}catch(ex){}});
+  onmouseover:expression(onmouseover=function(){this.className+=' hover'});
+}
+table tr.hover td{background:yellow;}
+</code></pre>
+
+<p>onmouseout 事件处理函数中加了 try/catch 是为了避免 IE5.5 因为不支持 <code>replace()</code>
+而报脚本错误。当然为了避免这个错误，还是其他的实现方式：</p>
+
+<pre><code>table tr{
+    onmouseenter:expression(onmouseout=function(){
+        var c=this.className, h=' hover', l=h.length;
+        var s=c.indexOf(h);
+        this.className=c.substring(0,s)+c.substr(s+l);
+    });
+    onmouseleave:expression(onmouseover=function(){this.className+=' hover'});
+}
+table tr.hover td{background:yellow;}
+</code></pre>
+
+<h2>使用 CSS behavior 行为</h2>
+
+<p>使用 <a href="http://www.xs4all.nl/~peterned/csshover.html">Whatever:hover</a></p>
+
+<p><a href="http://www.xs4all.nl/~peterned/htc/csshover3.htc">csshover3.htc</a></p>
+
+<pre><code>&lt;!--[if lte IE 6]&gt;
+&lt;style type="text/css"&gt;
+body{behavior:url("csshover3.htc"); }
+&lt;/style&gt;
+&lt;![endif]--&gt;
+</code></pre>
+
+<h2>延伸阅读</h2>
 
 <ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
+<li><a href="http://blog.csdn.net/andyyukun/archive/2007/07/03/1676963.aspx">强大的CSS表达式 -- expression</a></li>
+<li><a href="http://www.planabc.net/2009/09/21/optimization_of_css_eexpression/">CSS Expression 的优化</a></li>
 </ol>
 
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
-
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
         
-          <h2>最近文章</h2>
-          <ul>
+          
+          <a href="/tags.html#CSS">CSS</a>
         
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
+          ,
+          <a href="/tags.html#IE6">IE6</a>
         
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
-
-</div>
-
+      </span>
+      <time>September 15, 
+      <a href="/archives.html#2010">2010</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

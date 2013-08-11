@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>增强 Vim 的语法折叠 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,172 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>增强 Vim 的语法折叠</h1>
+    <article>
+        <h1>增强 Vim 的语法折叠</h1>
 
 <ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
+<li><p>折叠多行注释</p>
+
+<p> /*</p>
+
+<ul>
+<li>This is file description.</li>
+<li>@author 闲耘™ (@hotoo xianyun[AT]xianyun.org)
+*/</li>
+</ul>
+</li>
 </ol>
 
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
+<p>折叠为：</p>
 
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
-        
-          <h2>最近文章</h2>
-          <ul>
-        
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
+<pre><code>/* This is file description. ... */
+</code></pre>
 
-</div>
+<ol>
+<li><p>折叠单行注释</p>
 
+<p> // Line Comment 1.
+ // Line Comment 2.
+ // Line Comment 3.</p></li>
+</ol>
+
+
+<p>折叠为：</p>
+
+<pre><code>// Line Comments 1. ...
+</code></pre>
+
+<ol>
+<li><p>折叠导入外部定义</p>
+
+<p> @import java.lang.<em>;
+ @import java.io.</em>;
+ @import java.net.<em>;
+ @import java.util.</em>;</p></li>
+</ol>
+
+
+<p>折叠为：</p>
+
+<pre><code>@import java.lang.*; ...
+
+
+#include &lt;iostream&gt;
+#include "xxx.h"
+#include "yyy.h"
+</code></pre>
+
+<p>折叠为”</p>
+
+<pre><code>#include &lt;iostream&gt; ...
+</code></pre>
+
+<ol>
+<li><p>折叠作用域</p>
+
+<p> window.setTimeout(function(){
+     alert(0);
+ }, 1000);</p></li>
+</ol>
+
+
+<p>折叠为：</p>
+
+<pre><code>window.setTimeout(function(){...}, 1000);
+</code></pre>
+
+<p>这属于语法折叠部分。</p>
+
+<ol>
+<li><p>折叠标记语言</p>
+
+<p> <div id="demo" onclick="alert(0)">
+     some thing.
+ </div></p></li>
+</ol>
+
+
+<p>折叠为：</p>
+
+<pre><code>&lt;div id="demo"&gt;...&lt;/div&gt;
+
+
+&lt;link type="text/css" rel="stylesheet" href="xx.css" /&gt;
+&lt;link type="text/css" rel="stylesheet" href="yy.css" /&gt;
+&lt;link type="text/css" rel="stylesheet" href="zz.css" /&gt;
+</code></pre>
+
+<p>折叠为：</p>
+
+<pre><code>&lt;link type="text/css" rel="stylesheet" href="xx.css" /&gt; ...
+
+
+&lt;script type="text/javascript" src="xx.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="yy.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="zz.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>折叠为：</p>
+
+<pre><code>&lt;script type="text/javascript" src="xx.js"&gt;&lt;/script&gt; ...
+
+
+&lt;script type="text/javascript"&gt;/*&lt;![CDATA[*/
+alert(0);
+/*]]&gt;*/&lt;/script&gt;
+</code></pre>
+
+<p>折叠为：</p>
+
+<pre><code>&lt;script type="text/javascript"&gt;...&lt;/script&gt;
+</code></pre>
+
+<p>以上是我目前想到的折叠方式，欢迎补充。</p>
+
+<p>这里推荐一个 <a href="http://www.vim.org/scripts/script.php?script_id=1491">增强的 Javascript 语法文件</a> ，
+有非常多值得借鉴的地方。</p>
+
+<p>遗憾：折叠文本(foldtext)没有状态栏(statusline)的居左、居右概念(以等号[=]分隔)，
+比如想将在左侧放置折叠上下文文本，右侧放置被折叠的行数：</p>
+
+<pre><code>if(true){...) ----------------------------------[3 lines]
+</code></pre>
+
+<p>目前只能通过计算 Vim 窗口宽度和折叠文本的长度来模拟。</p>
+
+<p>这个折叠方法我已经在C,C++,Java,Javascript,CSS上实现，主要跟语法(syntax)
+文件和折叠文本(foldtext) 有关。</p>
+
+<p>另外我觉得被折叠的行应该和注释一样低调一点（desert主题使用金色的文本前景色）。</p>
+
+<p><img src="http://farm3.static.flickr.com/2490/4157973680_be7167ac77_o.png" alt="" />
+<a href="http://www.flickr.com/photos/hotoo/4157973680/">@source</a></p>
+
+<p><img src="http://farm3.static.flickr.com/2556/4157213437_144329fe89_o.png" alt="" />
+<a href="http://www.flickr.com/photos/hotoo/4157213437/">@source</a></p>
+
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
+        
+          
+          <a href="/tags.html#Vim">Vim</a>
+        
+      </span>
+      <time>December  4, 
+      <a href="/archives.html#2009">2009</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>面积分割算法 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,58 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>面积分割算法</h1>
+    <article>
+        <h1>面积分割算法</h1>
+
+<p>做用户点击行为分析的展现时，用了一个透明的层覆盖在页面上，然后覆盖一层 canvas
+画布，使用稀疏矩阵算法绘制热点分布图。</p>
+
+<p>预蒙上一层透明蒙版，然后只对需要的区域进行绘制热点图，本是非常不错的方案，我
+本机上也一直无问题。但是测试提交了一个 bug，说 IE 下看到点击热点图及轨迹图背后
+一片漆黑，我就猜测滤镜问题，最先猜想的是浏览器安全设置导致的滤镜无效，但是又
+发现有些类似的图形有没有问题。</p>
+
+<p>结果发现是某些显卡下，IE 中超大面积的区域滤镜会失效。</p>
+
+<p>首先想到的解决办法就是针对 IE 进行切割蒙版，由多个蒙版拼接而成，类似于铺地板。</p>
+
+<p>普通的算法有两种：</p>
 
 <ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
+<li>将整块蒙版区域划分成多个 2000*2000 的蒙版，最后一列和最后一行不足指数，取余
+ 设置宽高。</li>
+<li>将整块蒙版划分成多个不超过 2000*2000 的等份蒙版。这种算法比较简单，稍微的不足
+ 之处在于，不能除断的情况，无法等分。</li>
 </ol>
 
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
+<p>TODO: 有更灵巧的算法么，当然有了，只是我还不知道而已。</p>
 
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
-        
-          <h2>最近文章</h2>
-          <ul>
-        
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
+<h2>后来想到</h2>
 
-</div>
+<p>用 canvas 绘制一个透明的区域也未尝不可。</p>
 
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
+        
+          
+          <a href="/tags.html#算法">算法</a>
+        
+      </span>
+      <time>August 25, 
+      <a href="/archives.html#2011">2011</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

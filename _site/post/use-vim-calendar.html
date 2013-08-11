@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>使用 calendar.vim - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,57 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>使用 calendar.vim</h1>
+    <article>
+        <h1>使用 calendar.vim</h1>
 
-<ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
-</ol>
+<p>最初看到明城 <a href="http://www.gracecode.com/archives/674/">推荐使用 Vim Calendar 插件</a>，
+于是很小白的尝试了一下，然后就没有了然后。</p>
 
+<p>最初尝试的过程已经基本忘记，恍惚记得在 Calendar 的日期上回车，窗户貌似在右侧窗口
+打开的（后来发现我记错了，这是 Vimwiki-diary的支持）；至于明城推荐设置的 <code>ca</code>
+快捷键，后来才知道是与 text-object 冲突的。</p>
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
+<p>再后来就用上了 Vimwiki，做个人 Wiki 之余，还用它的 diary 写日记。总体来说，Vimwiki
+的 diary 是比较强大的，我甚至还提了几个被接受的建议。</p>
 
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
-        
-          <h2>最近文章</h2>
-          <ul>
-        
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
+<p>但是随着使用的深入，发现通常 Wiki 项目下是不需要 diary 的，而 diary 也基本不需要
+Wiki，把这两种整合在一起也许就是个错误。我们真正需要的是一个更强的 Calendar diary，
+而不是 Wiki 附加的 diary 支持。</p>
 
-</div>
+<p>如果真的希望 Vimwiki 有 diary 的支持，我也希望这个 diary 和 Wiki 是相互独立的，
+Wiki 项目中无需 diary，diary 无需包含在每个 Wiki 项目里。</p>
 
+<p>另外基于 Wiki 的原因，所有的 diary-wiki 文件都放在同一个目录下，当 diary 日渐增多，
+目录变得臃肿起来也不是什么好事。</p>
+
+<p>我需要的是一个更强的 Vim Calendar。基于这个想法，我便尝试着手增强 Calendar。
+目前已经支持 <code>:CalendarSearch</code> 和更好的 diary 打开方式。更多的想法见
+<a href="http://github.com/hotoo/calendar-vim/blob/master/TODO">这里</a>。</p>
+
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
+        
+          
+          <a href="/tags.html#Vim">Vim</a>
+        
+          ,
+          <a href="/tags.html#Calendar">Calendar</a>
+        
+      </span>
+      <time>July 23, 
+      <a href="/archives.html#2010">2010</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>Diff 模式下，让光标直接跳转到被修改的文本处 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,59 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>Diff 模式下，让光标直接跳转到被修改的文本处</h1>
+    <article>
+        <h1>Diff 模式下，让光标直接跳转到被修改的文本处</h1>
+
+<p>Vim 的 Diff 功能非常优秀。有一个我非常喜欢的特性是：完全相同的地方，
+会被折叠隐藏起来(上下文除外)。还可以很方便的在各个差异点之间做出修改合并和快速跳转。</p>
+
+<p>不过默认的 <code>[c</code> 和 <code>]c</code> 两种跳转方式，目前只能跳转到差异点的行首。对于只修改了
+行内部分文本内容（一般底色是浅红色）时，我更希望直接跳转到有变化的文本（底色是
+深红色的部分）上。</p>
+
+<p>感谢 tocer ，我初步实现了两个版本 <a href="http://gist.github.com/556810">gits:556810</a></p>
 
 <ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
+<li>v1: 仅支持跳转到 DiffChange 的第一个 DiffText</li>
+<li>v2: 支持 DiffChange 行多个 DiffText</li>
 </ol>
 
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
+<h2>参考</h2>
 
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
-        
-          <h2>最近文章</h2>
-          <ul>
-        
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
+<ol>
+<li><code>:h synIDattr</code></li>
+<li><code>:h diff_hlID</code></li>
+<li><a href="https://twitter.com/hotoo/status/22227282177">@twitter</a></li>
+<li><a href="http://groups.google.com/group/vim-cn/browse_thread/thread/8a0b5b7ed335782b">vimdiff 的跳转</a></li>
+<li><a href="http://superuser.com/questions/145940/vimdiff-jump-to-next-difference-inside-line">vimdiff: Jump to next difference inside line?</a></li>
+</ol>
 
-</div>
 
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
+        
+          
+          <a href="/tags.html#Vim">Vim</a>
+        
+          ,
+          <a href="/tags.html#Diff">Diff</a>
+        
+      </span>
+      <time>August 30, 
+      <a href="/archives.html#2010">2010</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

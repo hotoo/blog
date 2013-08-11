@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>让Vim支持html5 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,66 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>让Vim支持html5</h1>
+    <article>
+        <p><a href="http://www.w3.org/TR/html5/">html5</a> 呼之已出，众多的现代浏览器也已支持其大半新特性。</p>
 
-<ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
-</ol>
+<h2>HTML5 语法高亮</h2>
 
+<p>网上已有让 Vim 支持新的标签和属性的语法文件，安装好语法文件即可正确的高亮显示html5标记和属性。</p>
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
+<p>详细方法参考 <a href="http://rm.blog.br/2009/09/vim-syntax-highlight-para-html-5/">VIM syntax highlight para HTML 5</a>，
+下载其 <a href="http://rm.blog.br/wp-content/uploads/2009/09/html.vim">html.vim</a> 语法文件，
+放至 <code>$VIM/vimfiles/syntax/</code> 目录下即可。</p>
 
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
-        
-          <h2>最近文章</h2>
-          <ul>
-        
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
+<p>注：因为 html5 本身在不断更新，所以上面的脚本并不完整，我将持续关注并更新这个
+<a href="http://hotoo.googlecode.com/svn/trunk/vim/vimfiles/syntax/html.vim">html.vim</a> 脚本。</p>
 
-</div>
+<h2>html5 自动补全</h2>
 
+<p>不过貌似目前还未有让 Vim 完整支持 html5 自动完成（又称自动补全）之脚本。</p>
+
+<p>我初步研究并修改了 <code>$VIM/vim72/autoload/htmlcomplete.vim</code> ，使其支持 html5
+的自动完成。目前这个脚本逻辑基本可用，不过针对 html5 自动完成的数据
+（ <code>$VIM/vim72/autoload/xml/html5.vim</code> ）还在收集调整中，
+我也趁此机会深入学习一些 html5 知识。</p>
+
+<h2>安装详情</h2>
+
+<p>将 <a href="http://hotoo.googlecode.com/svn/trunk/vim/vim72/autoload/htmlcomplete.vim">htmlcomplete.vim</a>
+下载放至 <code>$VIM/vim72/autoload/</code> 目录下，覆盖原文件即可，
+再将 <a href="http://hotoo.googlecode.com/svn/trunk/vim/vim72/autoload/xml/html5.vim">html5.vim</a>
+下载放至 <code>$VIM/vim72/autoload/xml/</code> 目录下即可。</p>
+
+<p>注：这个 html5.vim近期会做一些更新补充，以支持更完整正确的 html5 语法。</p>
+
+<h2>html5 合法性验证</h2>
+
+<p>参考我的前一篇 <a href="validator-for-vim.html">在 Vim 中验证 X/HTML, Javascript 和 CSS</a>。</p>
+
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
+        
+          
+          <a href="/tags.html#Vim">Vim</a>
+        
+          ,
+          <a href="/tags.html#HTML5">HTML5</a>
+        
+      </span>
+      <time>November  1, 
+      <a href="/archives.html#2009">2009</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

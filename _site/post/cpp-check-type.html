@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>C++如何判断声明为基类的对象，是否某子类型的实例? - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,77 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>C++如何判断声明为基类的对象，是否某子类型的实例?</h1>
+    <article>
+        <p>我有如下类结构</p>
+
+<pre><code>BaseToken
+|-- KeywordToken
+     |-- ThisToken
+     |-- IfToken
+     |-- ...
+</code></pre>
+
+<p>并定义有：</p>
+
+<pre><code>BaseToken lastToken;
+</code></pre>
+
+<p>有一个地方需要判断 lastToken 是否是 KeywordToken</p>
+
+<pre><code>if(dynamic_cast&amp;lt;KeywordToken *&amp;gt;(lastToken)){}
+</code></pre>
+
+<p>但是编译时报错如下：</p>
+
+<blockquote><p>LexicalAnalyzer.cpp|444| error: cannot dynamic_cast
+<code>((LexicalAnalyzer*)this)-&amp;gt;LexicalAnalyzer::lastToken’ (of type
+</code>class BaseToken’) to type `class KeywordToken*’ (source is not a pointer)</p></blockquote>
+
+<p>貌似不能将父类型转为子类型，那么请问如何判断 <code>lastToken</code> 是 <code>KeywordToken</code> ?</p>
+
+<p>经过“<a href="http://www.douban.com/people/2590444/">帅的不敢出门</a> ”
+<a href="http://www.douban.com/group/topic/9279355/?start=0&amp;amp;post=ok#last">提点</a> ：</p>
+
+<blockquote><p>dynamic_cast &lt; type-id &gt; ( expression )<br>
+<br />
+The type-id must be a pointer or a reference to a previously defined
+class type or a “pointer to void”. The type of expression must be
+a pointer if type-id is a pointer, or an l-value if type-id is a reference.</p></blockquote>
+
+<p><code>dynamic_cast</code> 需要的是一个指针，将代码改为如下即可：</p>
+
+<pre><code>if(dynamic_cast&amp;lt;KeywordToken *&amp;gt;(&amp;amp;lastToken)){}
+</code></pre>
+
+<p>参考：</p>
 
 <ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
+<li><a href="http://www.vckbase.com/document/viewdoc/?id=653">如何在运行时确定对象类型（RTTI）</a></li>
+<li><a href="http://www.cppreference.com/wiki/keywords/dynamic_cast">dynamic_cast</a></li>
 </ol>
 
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
-
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
         
-          <h2>最近文章</h2>
-          <ul>
+          
+          <a href="/tags.html#Cpp">Cpp</a>
         
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
-
-</div>
-
+      </span>
+      <time>December 31, 
+      <a href="/archives.html#2009">2009</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

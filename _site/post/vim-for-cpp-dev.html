@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>配置 Vim 作为 C++ 开发环境初步 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,75 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>配置 Vim 作为 C++ 开发环境初步</h1>
+    <article>
+        <p>一般来说，如果你使用 Vim 开发完整的项目，使用 Makefile 并直接 <code>:make</code> 就可以了。</p>
 
-<ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
-</ol>
+<p>将下面的代码写入到 vimrc 中， Vim 会捕获编译过程中出现的消息并显示在 Quickfix 窗口。</p>
+
+<pre><code>autocmd FileType cpp,c nmap &lt;F9&gt; :make&lt;CR&gt; :copen&lt;CR&gt; &lt;C-W&gt;10_
+</code></pre>
+
+<p>但是如果你是 C/C++ 新手，目前较多书写单个的 C/C++ 代码文件，或者只是想快速测试
+某段代码的话，使用 gcc/g++ 直接编译或许是更简单的方式。你可以直接在 Vim 中执行
+外部 gcc/g++ 命令，也可以想这样映射快捷键：</p>
+
+<pre><code>autocmd FileType cpp nmap &lt;F10&gt; :w&lt;cr&gt;:exe "!gcc -o ".expand("%:r").".exe ".expand("%")&lt;cr&gt;
+</code></pre>
+
+<p>不过这样使用外部命令， Vim 并不能捕获编译过程的输出消息，就无法在 Vim 中根据
+错误消息有效的定位到错误行了。</p>
+
+<p>有更好的方法：</p>
+
+<pre><code>autocmd FileType cpp nmap &lt;F10&gt; :w&lt;cr&gt;:exe ":set makeprg=g++\\\ -Wall\\\ -o\\\ ".expand("%:r").".exe\\\ ".expand("%")&lt;cr&gt;:make&lt;cr&gt;&lt;cr&gt;:cw&lt;cr&gt;
+autocmd FileType c nmap &lt;F10&gt; :w&lt;cr&gt;:exe ":set makeprg=gcc\\\ -Wall\\\ -o\\\ ".expand("%:r").".exe\\\ ".expand("%")&lt;cr&gt;:make&lt;cr&gt;&lt;cr&gt;:cw&lt;cr&gt;
+autocmd FileType cpp,c nmap &lt;F5&gt; :exe "!".expand("%:r").".exe"&lt;Left&gt;
+autocmd FileType javascript nmap &lt;F9&gt; :call JsonLint()&lt;cr&gt;
+</code></pre>
+
+<p>再补充映射一些 Quickfix 模式中快速跳转的快捷键：</p>
+
+<pre><code>map &lt;F4&gt; :cclose&lt;CR&gt;
+map &lt;F8&gt; :cn&lt;CR&gt;
+map &lt;F7&gt; :cp&lt;CR&gt;
+</code></pre>
+
+<p>完整的设置可以参考 <a href="http://hotoo.googlecode.com/svn/trunk/vim/_vimrc">我的 vimrc</a></p>
+
+<p>更多讨论 <a href="https://groups.google.com/group/vim-cn/browse_thread/thread/79652cb66297881f">看这里</a>。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="http://easwy.com/blog/archives/advanced-vim-skills-quickfix-mode/">vim 使用进阶: 剑不离手 – quickfix</a>
+  <a href="http://blog.zdnet.com.cn/html/30/422230-2881199.html">2</a></li>
+</ul>
 
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
-
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
         
-          <h2>最近文章</h2>
-          <ul>
+          
+          <a href="/tags.html#Vim">Vim</a>
         
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
+          ,
+          <a href="/tags.html#Cpp">Cpp</a>
         
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
-
-</div>
-
+      </span>
+      <time>October 19, 
+      <a href="/archives.html#2009">2009</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>日期时间型控件的体验 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,86 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>日期时间型控件的体验</h1>
+    <article>
+        <h1>日期时间型控件的体验</h1>
 
-<ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
-</ol>
+<p>目前支持精确到时分秒输入/选择的日历控件，我总觉得用起来很不爽，
+却又想不出更舒适的交互方式。</p>
+
+<p>大家有觉得哪种选择时间（非日期）的方式比较舒服一点的控件么，
+或者描述一下自己期望的交互过程也好。</p>
+
+<p>----- Update ----</p>
+
+<p>Note: 我说的是 时间 (时分秒，非 日期 ，年月日 )选择/输入过程，
+日期型一般点一下或少量几下就可以完成，基本上是比较自然流畅的一个过程；
+但是输入/选择时间的却是非常不流畅的一个过程。</p>
+
+<p>我只是想体验，或者尝试实现更流畅的时间输入过程，
+不是想让推荐某个库的某个控件（这个控件的时间输入过程非常流畅的例外），谢谢。</p>
+
+<p>---- Comment 1 ----</p>
+
+<p><em>Hao zi</em> - 额，我没看错，是时分秒，YUI的链接干扰理解了，
+最喜欢的就是能快捷键输入时间了，普通用户应该还是更青睐鼠标。
+好多地方用的6:00 am 6:30am……时间下拉单的形式我觉得不好用，
+有的甚至还有6:15am……Google calender一方面可以拉动调整时间段，也不需要精确到秒，
+所以用着还好。时间不是10进制，实际生活中表盘上也还需要三根针才能显示，
+设计特别了用户也不好理解，我的展望如图：</p>
+
+<p><img src="http://i.min.us/ie1Bum.jpg" alt="" /></p>
+
+<p>时分使用一个滑动框，秒使用一个滑动框，
+时分框移动到PM仍利用AM刻度但背景色改变。
+秒框稍有不同，可只显示部分刻录来避免太密集，滑块拉动到左右边缘时刻录跟着移动。</p>
+
+<p>---- Comment 2 ----</p>
+
+<p><em>萧星星</em> - 年月日和时分秒的处理 ： 支持键盘输入和方向增减，
+支持鼠标滚轮和点击的增减 ； 滚轮的会是最流畅的， 不过用户需要一个适应过程～</p>
+
+<p>---- Comment 3 ----</p>
+
+<p><em>黄川</em> - 用安卓调时间的UI交互，然后鼠标放在上面，用滚轮，我觉得这种方式不错</p>
+
+<p>---- Comment 4 ----</p>
+
+<p><em>闲耘</em> - 鼠标滚轮，或者键盘方向键本身是不错的，我很认同。
+我主要不满意的地方在于：如果 时间 随同日期的弹出层一起，
+同时需要选择日期和时间时，基本上只能增加一个确定按钮来辅助实现。
+现在想想，年历，月历，日历还是和时间部分独立分开的比较合适。</p>
+
+<h2>See Also</h2>
+
+<ul>
+<li><a href="https://plus.google.com/108314985261981078822/posts/WE37n8PSYQD">@Google+</a></li>
+</ul>
 
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
-
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
         
-          <h2>最近文章</h2>
-          <ul>
+          
+          <a href="/tags.html#Date">Date</a>
         
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
+          ,
+          <a href="/tags.html#UED">UED</a>
         
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
-
-</div>
-
+      </span>
+      <time>July 20, 
+      <a href="/archives.html#2011">2011</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>Vim 中文帮助文档 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,96 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>Vim 中文帮助文档</h1>
+    <article>
+        <h1>Vim 中文帮助文档</h1>
+
+<p>前两天不知道为什么，帮助文档又跑会英文了（隐约是用 Vimball 安装了 Vimwiki
+或者 <em>重复</em>安装了 TwitVim 的缘故）。</p>
+
+<pre><code>:set helplang=cn
+</code></pre>
+
+<p>无效。</p>
+
+<pre><code>let helptags=$VIM.'\vimfiles\doc'
+</code></pre>
+
+<p>亦无效。</p>
+
+<p>很早以前不知道从哪里抄来的这个：</p>
+
+<pre><code>cp -R doc $VIM.'\vimfiles\doc\'
+</code></pre>
+
+<p>从一开始就是报错的，一直被注释，从未被启用。</p>
+
+<p>在注册表中找到两个相关的项：</p>
+
+<pre><code>HKEY_CLASSES_ROOT\TypeLib\{0F0BFAE0-4C90-11D1-82D7-0004AC368519}\1.1\HELPDIR
+(默认)    d:\Vim\vim72
+</code></pre>
+
+<p>将默认值修改为：</p>
+
+<pre><code>d:\Vim\vimfiles
+</code></pre>
+
+<p>或：</p>
+
+<pre><code>d:\Vim\vimfiles\doc
+</code></pre>
+
+<p>重启系统，均无效。</p>
+
+<p>另一个注册表项的路径是正确的，无需改变：</p>
+
+<pre><code>HKEY_LOCAL_MACHINE\SOFTWARE\Classes\TypeLib\{0F0BFAE0-4C90-11D1-82D7-0004AC368519}\1.1\HELPDIR
+(默认值)    d:\Vim\vimfiles\doc
+</code></pre>
+
+<p>万般无奈，只好重装了中文文档。</p>
+
+<p>中文文档可以从 <a href="http://vimcdoc.sourceforge.net/">vimCdoc.sf.net</a> 下载，也可以从
+<a href="http://vimdoc.sourceforge.net/">vimdoc.sf.net</a> 找到链接，下载回来的是一个 .exe
+可执行安装文件，研究了下安装过程：</p>
 
 <ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
+<li>前面都是在抽取中文文档文件(.cnx)，并放至合适的位置：(如 D:\Vim\vim72..\vimfiles\doc)</li>
+<li>抽取 tags-cn 并输出到文档同一目录 D:\Vim\vim72..\vimfiles\doc</li>
+<li>抽取 help_cn.vim 输出到 D:\Vim\vim72..\vimfiles\syntax</li>
+<li>抽取 vimcdoc.vim 输出到 D:\Vim\vim72..\vimfiles\plugin</li>
+<li>抽取 README,INSTALL,LICENSE,AUTHORS,guides.txt 到 C:\Program Files\vimcdoc</li>
 </ol>
 
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
+<p>其中设置 Vim 帮助的默认语言的步骤，即是在 vimcdoc.vim 中，因为 plugin 比 vimrc
+加载要晚(<a href="http://forum.ubuntu.org.cn/viewtopic.php?f=68&amp;t=190529">参考</a>)，
+所以在 vimrc 中的设置会被 vimcdoc.vim 覆盖掉。</p>
 
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
         
-          <h2>最近文章</h2>
-          <ul>
+          
+          <a href="/tags.html#Vim">Vim</a>
         
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
+          ,
+          <a href="/tags.html#doc">doc</a>
         
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
-
-</div>
-
+      </span>
+      <time>March 15, 
+      <a href="/archives.html#2010">2010</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

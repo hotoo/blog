@@ -23,7 +23,7 @@ seajs.use(["jquery", "default-main"], function(){
     alert("default")
 });
 </script>
-<title>首页 - 闲耘™.博客</title>
+<title>鼠标事件研究 - 闲耘™.博客</title>
 </head>
 <body>
 <div id="wrapper">
@@ -48,104 +48,78 @@ seajs.use(["jquery", "default-main"], function(){
 </header>
 <div id="container">
   <div id="content">
-      <div id="home">
-  <div class="posts">
-    
-      
-        <div>
-          <h1>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</h1>
-          <div class="content">
-          <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
+        <h1>鼠标事件研究</h1>
+    <article>
+        <h1>Mouse Event</h1>
 
-<ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
-</ol>
+<p>| Event       | type   | IE       | >         | FF     | >     | Chrome   | >     | Safari   | >     | Opera    | >     |
+| \/          | \/     | button   | which     | button | which | button   | which | button   | which | button   | which |
+|-------------|--------|----------|-----------|--------|-------|----------|-------|----------|-------|----------|-------|
+| onmousedown | left   | 1        | undefined | 0      | 1     | 0        | 1     | 0        | 1     | 0        | 1     |
+| \/          | middle | 4        | undefined | 1      | 2     | 1        | 2     | 1        | 2     | 1        | 2     |
+| \/          | right  | 2        | undefined | 2      | 3     | 2        | 3     | 2        | 3     | 2        | 3     |
+| onmouseup   | left   | 1        | undefined | 0      | 1     | 0        | 1     | 0        | 1     | 0        | 1     |
+| \/          | middle | 4        | undefined | 1      | 2     | 1        | 2     | 1        | 2     | no event | >     |
+| \/          | right  | 2        | undefined | 2      | 3     | 2        | 3     | 2        | 3     | 2        | 3     |
+| onclick     | left   | 0        | undefined | 0      | 1     | 0        | 1     | 0        | 1     | 0        | 1     |
+| \/          | middle | 0        | undefined | 1      | 2     | 1        | 2     | 1        | 2     | no event | >     |
+| \/          | right  | no event | >         | 2      | 3     | no event | >     | no event | >     | no event | >     |</p>
+
+<p>Windows 2003 Server.<br />
+IE8, FF5, Chrome12, Safari5, Opera11.</p>
+
+<p>Note:</p>
+
+<ul>
+<li><code>document.onmousedown</code> === <code>document.addEventListener</code> === <code>document.attachEvent("onmousedown")</code></li>
+<li><code>document.onmouseup</code> === <code>document.addEventListener("mouseup")</code> == <code>document.attachEvent("onmouseup")</code></li>
+<li><p><code>document.onclick</code> === <code>document.addEventListener("click")</code> == <code>document.attachEvent("onclick")</code></p>
+
+<p>  document.onmousedown = function(evt){
+      evt = window.event || evt;
+      var mouse = {
+          left:   evt.which ? evt.which==1 : evt.button==1,
+          middle: evt.which ? evt.which==2 : evt.button==4,
+          right:  evt.which ? evt.which==3 : evt.button==2
+      };
+  };</p></li>
+</ul>
 
 
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
+<h2>See Also</h2>
 
-<p class='more'><a href='/post/vim74-tee.html'>查看更多...</a></p>
-          </div>
-          <footer class="post clearfix">
-            <span class="tags">Tags:
-              
-                
-                <a href="/tags.html#Vim">Vim</a>
-              
-                , 
-                <a href="/tags.html#VimTee">VimTee</a>
-              
-            </span>
-            <time>May 26, 
-            <a href="archives.html#2013">2013</a>
-            </time>
-          </footer>
-        </div>
-      
-    
-      
-        
-          <h2>最近文章</h2>
-          <ul>
-        
-          <li>
-            <a href="/post/javascript-exceptions-archives.html">JavaScript 异常档案</a>
-            <span>(<time>May 22, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/block-scope-variable-defined.html">就近原则：JavaScript 块级作用域的变量定义</a>
-            <span>(<time>April 25, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/github-404-is-a-good-route.html">Github 的 404 页面是个好路由</a>
-            <span>(<time>March 24, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/personal-financial-manage-soft.html">个人资金管理软件</a>
-            <span>(<time>February 17, 2013</time>)</span>
-          </li>
-        
-      
-    
-      
-        
-          <li>
-            <a href="/post/start-jekyll-for-blog.html">迁移博客到 Jekyll</a>
-            <span>(<time>February 13, 2013</time>)</span>
-          </li>
-        
-          </ul>
-        
-      
-    
-  </div>
+<ul>
+<li><a href="http://www.quirksmode.org/js/events_properties.html">Event properties - ppk</a></li>
+<li><a href="http://hotoo.me/labs/mouse-event.html">Demo</a></li>
+</ul>
 
-</div>
 
+    </article>
+    <footer class="post clearfix">
+      <span class="tags">
+        tags:
+        
+          
+          <a href="/tags.html#JavaScript">JavaScript</a>
+        
+          ,
+          <a href="/tags.html#Mouse">Mouse</a>
+        
+          ,
+          <a href="/tags.html#Events">Events</a>
+        
+      </span>
+      <time>July 16, 
+      <a href="/archives.html#2011">2011</a>
+    </footer>
+    <section>
+        <div id="disqus_thread"></div>
+        <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        </noscript>
+    </section>
 <script type="text/javascript" src="/js/comments.js"></script>
-<script type="text/javascript">/*<![CDATA[*/
-  seajs.use(["index-main"], function(){
-  });
-/*]]>*/</script>
-
 
   </div>
 

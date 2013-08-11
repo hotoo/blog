@@ -4,7 +4,7 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-08-11T20:10:24+08:00</updated>
+ <updated>2013-08-01T14:04:00+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
@@ -13,11 +13,11 @@
 
  
  <entry>
-   <title>庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)，截至8月15日</title>
+   <title>庆祝 Vim 7.4 即将发布，发起团购 Tee + 团捐活动(2013)</title>
    <link href="http://blog.hotoo.me/post/vim74-tee.html"/>
    <updated>2013-05-26T00:00:00+08:00</updated>
    <id>http://blog.hotoo.me/post/vim74-tee</id>
-   <content type="html">&lt;p&gt;于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：&lt;/p&gt;
+   <content type="html">&lt;p&gt;即将发布的 Vim 7.4 的主要特性更新如下：&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;增强 Python 支持；&lt;/li&gt;
@@ -26,8 +26,7 @@
 &lt;/ol&gt;
 
 
-&lt;p&gt;为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。&lt;/p&gt;
+&lt;p&gt;为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -40,7 +39,7 @@
 &lt;li&gt;&lt;p&gt;增加个性袖标。&lt;/p&gt;
 
 &lt;blockquote&gt;&lt;p&gt;:version&lt;br/&gt;
-VIM - Vi IMproved 7.4 (2013 Aug 10)&lt;br/&gt;
+VIM - Vi IMproved 7.4 (2013 Jun 15, 发布日期未定)&lt;br/&gt;
 @hotoo&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
