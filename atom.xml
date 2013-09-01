@@ -4,7 +4,7 @@
  <title>闲耘™.博客</title>
  <link href="http://blog.hotoo.me/atom.xml" rel="self"/>
  <link href="http://blog.hotoo.me/"/>
- <updated>2013-09-01T11:43:55+08:00</updated>
+ <updated>2013-09-01T11:45:27+08:00</updated>
  <id>http://blog.hotoo.me/</id>
  <author>
    <name>闲耘</name>
@@ -18,10 +18,12 @@
    <updated>2013-05-26T00:00:00+08:00</updated>
    <id>http://blog.hotoo.me/post/vim74-tee</id>
    <content type="html">&lt;blockquote&gt;&lt;p&gt;团购活动已经结束，但你仍然可以自行印制或购买（有人抱怨质量不佳） &lt;br/&gt;
-团捐活动已经结束，但你仍然可以 &lt;a href=&quot;http://www.vim.org/sponsor/index.php&quot;&gt;自行捐助&lt;/a&gt;&lt;/p&gt;
+团捐活动已经结束，但你仍然可以 &lt;a href=&quot;http://www.vim.org/sponsor/index.php&quot;&gt;自行捐助&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 
-&lt;p&gt;捐助的信息现在可以在 http://www.vim.org/account/profile.php?user_id=66604 看到。
-以 @vimcn 的身份捐赠 159欧元，实际人民币 1377.94元。
+&lt;hr /&gt;
+
+&lt;blockquote&gt;&lt;p&gt;以 &lt;a href=&quot;http://www.vim.org/account/profile.php?user_id=66604&quot;&gt;@vimcn&lt;/a&gt; 的身份捐赠
+159欧元，实际人民币 1377.94元。
 参考团捐的同学请查收邮件并于 2013年10月份之前行使您的 Vim 新特性赞同或反对票。&lt;/p&gt;&lt;/blockquote&gt;
 
 &lt;p&gt;于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：&lt;/p&gt;
