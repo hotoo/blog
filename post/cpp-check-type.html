@@ -55,7 +55,7 @@
 <a name="L1-5" href="#L1-5">5</a></pre></div></div>
 <p>并定义有：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="cpp">BaseToken lastToken;
 </code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div>
-<p>有一个地方需要判断 lastToken 是否是 KeywordToken</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="cpp"><span class="keyword">if</span>(<span class="keyword">dynamic_cast</span>&amp;lt;KeywordToken *&amp;gt;(lastToken)){}
+<p>有一个地方需要判断 lastToken 是否是 KeywordToken</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="cpp"><span class="keyword">if</span>(<span class="keyword">dynamic_cast</span>&lt;KeywordToken *&gt;(lastToken)){}
 </code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a></pre></div></div>
 <p>但是编译时报错如下：</p>
 
@@ -78,7 +78,7 @@ class type or a “pointer to void”. The type of expression must be
 a pointer if type-id is a pointer, or an l-value if type-id is a reference.</p>
 </blockquote>
 
-<p><code>dynamic_cast</code> 需要的是一个指针，将代码改为如下即可：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="cpp"><span class="keyword">if</span>(<span class="keyword">dynamic_cast</span>&amp;lt;KeywordToken *&amp;gt;(&amp;amp;lastToken)){}
+<p><code>dynamic_cast</code> 需要的是一个指针，将代码改为如下即可：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="cpp"><span class="keyword">if</span>(<span class="keyword">dynamic_cast</span>&lt;KeywordToken *&gt;(&amp;lastToken)){}
 </code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a></pre></div></div><h2 id="参考">参考</h2>
 <ol>
 <li><a href="http://www.vckbase.com/document/viewdoc/?id=653">如何在运行时确定对象类型（RTTI）</a></li>
