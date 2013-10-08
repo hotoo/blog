@@ -176,7 +176,7 @@ try/catch 异常处理流程进行，所以对业务本身没有影响。</p></l
         <updated>2013-09-05T00:00:00.000Z</updated>
         <id>http://blog.hotoo.me/post/weekly-topic-about-exceptions-8.html</id>
         <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <p>上周的 <a href="weekly-topic-about-exceptions-7.md">每周异常：第 7期，保持简单，保持拙朴</a>
+            <![CDATA[ <p>上周的 <a href="weekly-topic-about-exceptions-7">每周异常：第 7期，保持简单，保持拙朴</a>
 中介绍了通过页面关键的 URL/ID 信息，简单有效的发现异常的方案。
 本周我们在这个异常分析方法之上，再稍微深入下：</p>
 
@@ -696,7 +696,7 @@ VIM - Vi IMproved 7.4 (2013 Aug 10)<br/>
 
 <p>等一下，你突然发现了这么一个页面：
 <a href="http://errors.totorojs.org/wiki/object-doesnot-support-this-property-or-method"><strong style="font-size:1.3em;font-weight:bolder;">对象不支持此属性或方法</strong></a>
-<a href="https://github.com/totorojs/javascript-exception-archives/blob/master/content/wiki/object-doesnot-support-this-property-or-method.md"><sub>@github</sub></a>
+<a href="https://github.com/totorojs/javascript-exception-archives/blob/master/content/wiki/object-doesnot-support-this-property-or-method"><sub>@github</sub></a>
 这个页面里有这个异常在各个语种下的异常消息描述，同一个异常代码在不同浏览器里的
 详细分析，还有有血有肉的实际案例分析，关键代码，实际异常演示页，，，
 可能还很不完善，还需要我们一起来参与，但是泪奔的感觉有木有~</p>
