@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title>闲耘™.博客</title>
-    <link href="http://blog.hotoo.me/./" rel="self" />
-    <link href="http://blog.hotoo.me/./" />
-    <id>http://blog.hotoo.me/./</id>
+    <link href="http://blog.hotoo.me/feed.xml" rel="self" />
+    <link href="http://blog.hotoo.me/feed.xml" />
+    <id>http://blog.hotoo.me/feed.xml</id>
     <entry>
         <title type="html"><![CDATA[不缓存 CDN 静态资源方案]]></title>
         <link href="http://blog.hotoo.me/post/no-cache-in-cdn.html"/>
