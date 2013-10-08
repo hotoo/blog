@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title>闲耘™.博客</title>
-    <link href="./" rel="self" />
-    <link href="./" />
-    <id>./</id>
+    <link href="http://blog.hotoo.me/./" rel="self" />
+    <link href="http://blog.hotoo.me/./" />
+    <id>http://blog.hotoo.me/./</id>
     <entry>
         <title type="html"><![CDATA[不缓存 CDN 静态资源方案]]></title>
-        <link href="post/no-cache-in-cdn.html"/>
+        <link href="http://blog.hotoo.me/post/no-cache-in-cdn.html"/>
         <published>2013-09-21T00:00:00.000Z</published>
         <updated>2013-09-21T00:00:00.000Z</updated>
-        <id>post/no-cache-in-cdn.html</id>
-        <content type="html" xml:base="" xml:lang="en">
+        <id>http://blog.hotoo.me/post/no-cache-in-cdn.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <h2 id="背景">背景</h2>
 <p>支付宝目前使用淘宝提供的 CDN 服务，这个服务中的 CDN 节点在自身找不到对应资源时
 主动到源服务器拉取的策略。</p>
@@ -64,11 +64,11 @@
         </content>
     </entry><entry>
         <title type="html"><![CDATA[每周异常：第 9期，搜狗浏览器中神一样的 try/catch 特性]]></title>
-        <link href="post/weekly-topic-about-exceptions-9.html"/>
+        <link href="http://blog.hotoo.me/post/weekly-topic-about-exceptions-9.html"/>
         <published>2013-09-13T00:00:00.000Z</published>
         <updated>2013-09-13T00:00:00.000Z</updated>
-        <id>post/weekly-topic-about-exceptions-9.html</id>
-        <content type="html" xml:base="" xml:lang="en">
+        <id>http://blog.hotoo.me/post/weekly-topic-about-exceptions-9.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <h2 id="背景">背景</h2>
 <p>某日 16时 30分，监控实时大盘中全站 JavaScript 异常和 404 异常分别朝着不同的方向延伸，
 橙色的 JavaScript 异常急剧上升。</p>
@@ -171,11 +171,11 @@ try/catch 异常处理流程进行，所以对业务本身没有影响。</p></l
         </content>
     </entry><entry>
         <title type="html"><![CDATA[每周异常：第 8期，异常象限]]></title>
-        <link href="post/weekly-topic-about-exceptions-8.html"/>
+        <link href="http://blog.hotoo.me/post/weekly-topic-about-exceptions-8.html"/>
         <published>2013-09-05T00:00:00.000Z</published>
         <updated>2013-09-05T00:00:00.000Z</updated>
-        <id>post/weekly-topic-about-exceptions-8.html</id>
-        <content type="html" xml:base="" xml:lang="en">
+        <id>http://blog.hotoo.me/post/weekly-topic-about-exceptions-8.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <p>上周的 <a href="weekly-topic-about-exceptions-7.md">每周异常：第 7期，保持简单，保持拙朴</a>
 中介绍了通过页面关键的 URL/ID 信息，简单有效的发现异常的方案。
 本周我们在这个异常分析方法之上，再稍微深入下：</p>
@@ -241,11 +241,11 @@ try/catch 异常处理流程进行，所以对业务本身没有影响。</p></l
         </content>
     </entry><entry>
         <title type="html"><![CDATA[每周异常：第 7期，保持简单，保持拙朴]]></title>
-        <link href="post/weekly-topic-about-exceptions-7.html"/>
+        <link href="http://blog.hotoo.me/post/weekly-topic-about-exceptions-7.html"/>
         <published>2013-08-28T00:00:00.000Z</published>
         <updated>2013-08-28T00:00:00.000Z</updated>
-        <id>post/weekly-topic-about-exceptions-7.html</id>
-        <content type="html" xml:base="" xml:lang="en">
+        <id>http://blog.hotoo.me/post/weekly-topic-about-exceptions-7.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <h2 id="副标题：如何简单有效的发现最重要的有效异常">副标题：如何简单有效的发现最重要的有效异常</h2>
 <blockquote>
 <p>Keep It Simple, Stupid.</p>
@@ -355,11 +355,11 @@ try/catch 异常处理流程进行，所以对业务本身没有影响。</p></l
         </content>
     </entry><entry>
         <title type="html"><![CDATA[每周异常：第 6期，JavaScript 异常监控脚本引发的 JavaScript 异常]]></title>
-        <link href="post/weekly-topic-about-exceptions-6.html"/>
+        <link href="http://blog.hotoo.me/post/weekly-topic-about-exceptions-6.html"/>
         <published>2013-08-22T00:00:00.000Z</published>
         <updated>2013-08-22T00:00:00.000Z</updated>
-        <id>post/weekly-topic-about-exceptions-6.html</id>
-        <content type="html" xml:base="" xml:lang="en">
+        <id>http://blog.hotoo.me/post/weekly-topic-about-exceptions-6.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <h2 id="背景">背景</h2>
 <p>早上收到比较重要的用户反馈说某个重要的系统的页面在 IE 浏览器中卡死，无法继续。</p>
 
@@ -489,11 +489,11 @@ at function(fn)         ......-
         </content>
     </entry><entry>
         <title type="html"><![CDATA[『已结束』庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)]]></title>
-        <link href="post/vim74-tee.html"/>
+        <link href="http://blog.hotoo.me/post/vim74-tee.html"/>
         <published>2013-05-26T00:00:00.000Z</published>
         <updated>2013-05-26T00:00:00.000Z</updated>
-        <id>post/vim74-tee.html</id>
-        <content type="html" xml:base="" xml:lang="en">
+        <id>http://blog.hotoo.me/post/vim74-tee.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <blockquote>
 <p>团购活动已经结束，但你仍然可以自行印制或购买（有人抱怨质量不佳） <br/>
 团捐活动已经结束，但你仍然可以 <a href="http://www.vim.org/sponsor/index.php">自行捐助</a></p>
@@ -638,11 +638,11 @@ VIM - Vi IMproved 7.4 (2013 Aug 10)<br/>
         </content>
     </entry><entry>
         <title type="html"><![CDATA[JavaScript 异常档案]]></title>
-        <link href="post/javascript-exceptions-archives.html"/>
+        <link href="http://blog.hotoo.me/post/javascript-exceptions-archives.html"/>
         <published>2013-05-22T00:00:00.000Z</published>
         <updated>2013-05-22T00:00:00.000Z</updated>
-        <id>post/javascript-exceptions-archives.html</id>
-        <content type="html" xml:base="" xml:lang="en">
+        <id>http://blog.hotoo.me/post/javascript-exceptions-archives.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <p><img src="/static/images/ie6-en.jpg" alt="IE6"/></p>
 
 <p><img src="/static/images/ie8.jpg" alt="IE8"/></p>
@@ -717,11 +717,11 @@ VIM - Vi IMproved 7.4 (2013 Aug 10)<br/>
         </content>
     </entry><entry>
         <title type="html"><![CDATA[就近原则：JavaScript 块级作用域的变量定义]]></title>
-        <link href="post/block-scope-variable-defined.html"/>
+        <link href="http://blog.hotoo.me/post/block-scope-variable-defined.html"/>
         <published>2013-04-25T00:00:00.000Z</published>
         <updated>2013-04-25T00:00:00.000Z</updated>
-        <id>post/block-scope-variable-defined.html</id>
-        <content type="html" xml:base="" xml:lang="en">
+        <id>http://blog.hotoo.me/post/block-scope-variable-defined.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <blockquote>
 <p>代码是写给人看的，顺便给机器执行。[1]</p>
 </blockquote>
@@ -903,11 +903,11 @@ true scope of the variables.</p>
         </content>
     </entry><entry>
         <title type="html"><![CDATA[Github 的 404 页面是个好路由]]></title>
-        <link href="post/github-404-is-a-good-route.html"/>
+        <link href="http://blog.hotoo.me/post/github-404-is-a-good-route.html"/>
         <published>2013-03-24T00:00:00.000Z</published>
         <updated>2013-03-24T00:00:00.000Z</updated>
-        <id>post/github-404-is-a-good-route.html</id>
-        <content type="html" xml:base="" xml:lang="en">
+        <id>http://blog.hotoo.me/post/github-404-is-a-good-route.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <p>上周五周会上 @玉伯 做了个微分享：由于新浪微博的 BUG，不会将 https 的 URL 自动
 转成可点击的链接，于是玉伯给 lifesinger.github.com Project 做了个 index.html
 页面：</p>
@@ -940,11 +940,11 @@ true scope of the variables.</p>
         </content>
     </entry><entry>
         <title type="html"><![CDATA[个人资金管理软件]]></title>
-        <link href="post/personal-financial-manage-soft.html"/>
+        <link href="http://blog.hotoo.me/post/personal-financial-manage-soft.html"/>
         <published>2013-02-17T00:00:00.000Z</published>
         <updated>2013-02-17T00:00:00.000Z</updated>
-        <id>post/personal-financial-manage-soft.html</id>
-        <content type="html" xml:base="" xml:lang="en">
+        <id>http://blog.hotoo.me/post/personal-financial-manage-soft.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <p>过年花掉不少钱，而其中有一部分是喜酒之类的礼金，按照礼尚往来的习俗，这些礼金
 早晚都是要被送回来的，而被送回来的途径，则是喜酒回请。</p>
 
@@ -1004,11 +1004,11 @@ Mac 下 <code>i</code> 系列的好像都不错，于是尝试了下。</p>
         </content>
     </entry><entry>
         <title type="html"><![CDATA[迁移博客到 Jekyll]]></title>
-        <link href="post/start-jekyll-for-blog.html"/>
+        <link href="http://blog.hotoo.me/post/start-jekyll-for-blog.html"/>
         <published>2013-02-13T00:00:00.000Z</published>
         <updated>2013-02-13T00:00:00.000Z</updated>
-        <id>post/start-jekyll-for-blog.html</id>
-        <content type="html" xml:base="" xml:lang="en">
+        <id>http://blog.hotoo.me/post/start-jekyll-for-blog.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <h2 id="posts-文件结构">_posts 文件结构</h2>
 <p>Jekyll 支持两种结构：</p>
 
@@ -1077,11 +1077,11 @@ Mac 下 <code>i</code> 系列的好像都不错，于是尝试了下。</p>
         </content>
     </entry><entry>
         <title type="html"><![CDATA[使用 MacVim 做 svn diff]]></title>
-        <link href="post/macvim-svndiff.html"/>
+        <link href="http://blog.hotoo.me/post/macvim-svndiff.html"/>
         <published>2012-10-31T00:00:00.000Z</published>
         <updated>2012-10-31T00:00:00.000Z</updated>
-        <id>post/macvim-svndiff.html</id>
-        <content type="html" xml:base="" xml:lang="en">
+        <id>http://blog.hotoo.me/post/macvim-svndiff.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <h2 id="对于终端的-vim">对于终端的 vim</h2>
 <ol>
 <li><p><code>~/.subversion/config</code></p>
@@ -1142,11 +1142,11 @@ rm -f &quot;$TMPLEFT&quot; &quot;$TMPRIGHT&quot;
         </content>
     </entry><entry>
         <title type="html"><![CDATA[在 Vim 上安装使用 Tagbar]]></title>
-        <link href="post/vim-install-tagbar.html"/>
+        <link href="http://blog.hotoo.me/post/vim-install-tagbar.html"/>
         <published>2012-10-28T00:00:00.000Z</published>
         <updated>2012-10-28T00:00:00.000Z</updated>
-        <id>post/vim-install-tagbar.html</id>
-        <content type="html" xml:base="" xml:lang="en">
+        <id>http://blog.hotoo.me/post/vim-install-tagbar.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <pre>git clone https:&#47;&#47;github.com&#47;mozilla&#47;doctorjs.git –recursive
 cd doctorjs
 sudo make install
@@ -1167,11 +1167,11 @@ sudo make install
         </content>
     </entry><entry>
         <title type="html"><![CDATA[杭州萧山无人村骑行]]></title>
-        <link href="post/wurencun.html"/>
+        <link href="http://blog.hotoo.me/post/wurencun.html"/>
         <published>2012-10-27T00:00:00.000Z</published>
         <updated>2012-10-27T00:00:00.000Z</updated>
-        <id>post/wurencun.html</id>
-        <content type="html" xml:base="" xml:lang="en">
+        <id>http://blog.hotoo.me/post/wurencun.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <p>从驴友哪里知道杭州附近有个无人村，网上看了帖子盘山公路很风景都很吸引人，
 但是地图山就是搜索不到在哪里，后来才知道地图上是狮山村，大概是后来没有人住了
 才被大家称为无人村的。</p>
@@ -1188,11 +1188,11 @@ sudo make install
         </content>
     </entry><entry>
         <title type="html"><![CDATA[『逻辑与』是个好东西]]></title>
-        <link href="post/logical-conjunction.html"/>
+        <link href="http://blog.hotoo.me/post/logical-conjunction.html"/>
         <published>2012-05-01T00:00:00.000Z</published>
         <updated>2012-05-01T00:00:00.000Z</updated>
-        <id>post/logical-conjunction.html</id>
-        <content type="html" xml:base="" xml:lang="en">
+        <id>http://blog.hotoo.me/post/logical-conjunction.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <p>一直很想实现 WebForms2 的语义化表单验证，最近才开始动手，执行力真差啊。</p>
 
 <p>一个表单元素可以同时存在多种校验方案，比如：</p>
@@ -1334,11 +1334,11 @@ a signed 32 bit integer.</li>
         </content>
     </entry><entry>
         <title type="html"><![CDATA[千里走单骑]]></title>
-        <link href="post/bicycle-travel.html"/>
+        <link href="http://blog.hotoo.me/post/bicycle-travel.html"/>
         <published>2012-04-02T00:00:00.000Z</published>
         <updated>2012-04-02T00:00:00.000Z</updated>
-        <id>post/bicycle-travel.html</id>
-        <content type="html" xml:base="" xml:lang="en">
+        <id>http://blog.hotoo.me/post/bicycle-travel.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <p>今天和 5 个同事一起从公司出发，骑车去径山寺。</p>
 <h2 id="路线-amp-定位">路线&amp;定位</h2>
 <ul>
@@ -1362,21 +1362,21 @@ My Places 的数据，这个支持还不行，会被拉成直线。</li>
         </content>
     </entry><entry>
         <title type="html"><![CDATA[计算主域名]]></title>
-        <link href="post/primary-domain.html"/>
+        <link href="http://blog.hotoo.me/post/primary-domain.html"/>
         <published>2011-12-13T00:00:00.000Z</published>
         <updated>2011-12-13T00:00:00.000Z</updated>
-        <id>post/primary-domain.html</id>
-        <content type="html" xml:base="" xml:lang="en">
+        <id>http://blog.hotoo.me/post/primary-domain.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <div class="highlight"><pre><code class="javascript">document.domain = document.domain.split(<span class="string">"."</span>).slice(-<span class="number">2</span>).join(<span class="string">"."</span>);
 </code></pre></div>]]>
         </content>
     </entry><entry>
         <title type="html"><![CDATA[Confluence Wiki for Vi]]></title>
-        <link href="post/confluencewiki.vim.html"/>
+        <link href="http://blog.hotoo.me/post/confluencewiki.vim.html"/>
         <published>2011-12-04T00:00:00.000Z</published>
         <updated>2011-12-04T00:00:00.000Z</updated>
-        <id>post/confluencewiki.vim.html</id>
-        <content type="html" xml:base="" xml:lang="en">
+        <id>http://blog.hotoo.me/post/confluencewiki.vim.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <p>.ctags / ctags.cnf</p>
 <pre>--langdef=confluencewiki
 --langmap=confluencewiki:.wiki
@@ -1399,11 +1399,11 @@ My Places 的数据，这个支持还不行，会被拉成直线。</li>
         </content>
     </entry><entry>
         <title type="html"><![CDATA[文本宽度 及 文本框滚动偏移量(scrollLeft)]]></title>
-        <link href="post/text-width-and-input-scrollleft.html"/>
+        <link href="http://blog.hotoo.me/post/text-width-and-input-scrollleft.html"/>
         <published>2011-11-07T00:00:00.000Z</published>
         <updated>2011-11-07T00:00:00.000Z</updated>
-        <id>post/text-width-and-input-scrollleft.html</id>
-        <content type="html" xml:base="" xml:lang="en">
+        <id>http://blog.hotoo.me/post/text-width-and-input-scrollleft.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <h2 id="背景">背景</h2>
 <p>最近将多标签输入框进行修改，把原来随光标(caret)移动的自动建议浮动条改为根据当前标签相对左对齐。</p>
 
@@ -1443,11 +1443,11 @@ My Places 的数据，这个支持还不行，会被拉成直线。</li>
         </content>
     </entry><entry>
         <title type="html"><![CDATA[Date.now()]]></title>
-        <link href="post/date.now.html"/>
+        <link href="http://blog.hotoo.me/post/date.now.html"/>
         <published>2011-09-18T00:00:00.000Z</published>
         <updated>2011-09-18T00:00:00.000Z</updated>
-        <id>post/date.now.html</id>
-        <content type="html" xml:base="" xml:lang="en">
+        <id>http://blog.hotoo.me/post/date.now.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <p>以前做过一个 JavaScript 性能测试“框架”，也看过其他人做性能比较的时候，基本上
 也都是使用 <code>new Date()</code> 来记时，会“耍点小花样”的同学会使用 <code>+new Date()</code>。</p>
 
