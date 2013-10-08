@@ -1,141 +1,167 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
-<head>
-<!--[if IE]><script type="text/javascript" src="/js/html5.js"></script><![endif]-->
-<meta charset="UTF-8" />
-<meta name="generator" content="gvim" />
-<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-<!--<link rel="alternate" type="application/rss+xml" title="RSS"
-  href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />-->
-<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
-<link type="text/css" rel="stylesheet" href="/css/template.css" />
-<script type="text/javascript" src="/js/sea.js"></script>
-<script type="text/javascript">
-seajs.config({
-  alias: {
-    'jquery': 'jquery-1.8.3.min.js',
-    'hashchange': 'jquery.ba-hashchange.min.js'
-  }
-});
-seajs.use(["jquery", "default-main"], function(){
-    alert("default")
-});
-</script>
-<title>Vim映射Home键到首个非空字符 - 闲耘™.博客</title>
-</head>
-<body>
-<div id="wrapper">
-<header>
-<div style="float:right;">
-    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
-        <input type="text" name="q" />
-        <input type="submit" value="搜索" />
-    </form>
-</div>
-<nav>
-    <ul>
-        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
-        <li class="actived"><a href="/" title="Blog">Blog</a></li>
-        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
-        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
-        <li><a href="http://twitter.hotoo.me/" title="Twitter">Twitter</a></li>
-        <li class="last"><a href="/projects.html" title="Project">Project</a></li>
-        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
-    </ul>
-</nav>
-</header>
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>Vim映射Home键到首个非空字符</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
+
 <div id="container">
-  <div id="content">
-        <h1>Vim映射Home键到首个非空字符</h1>
-    <article>
-        <p>许多编辑器有相关选项，可以直接设置让 <code>&lt;Home&gt;</code> 键在首个非空字符和行首之间跳转。</p>
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">Vim映射Home键到首个非空字符</h1>
+  <div class="entry-content"><p>许多编辑器有相关选项，可以直接设置让 <code>&lt;Home&gt;</code> 键在首个非空字符和行首之间跳转。</p>
 
-<p>Vim 也有快捷键，normal 模式下：<br />
-<code>0</code> 跳转到行首；<br />
-<code>^</code> 跳转到首个非空字符；<br />
-<code>$</code> 跳转到行尾。</p>
+<p>Vim 也有快捷键，normal 模式下：</p>
 
-<p>目前未知跳转到最后一个非空字符的快捷键，有个网友提供了一个很好玩的技巧：</p>
+<ul>
+<li><code>0</code> 跳转到行首；</li>
+<li><code>^</code> 跳转到首个非空字符；</li>
+<li><code>$</code> 跳转到行尾。</li>
+</ul>
 
-<pre><code>nmap &lt;End&gt; /\S\s*$&lt;CR&gt;:nohl&lt;CR&gt;
-</code></pre>
-
-<p>为了将 <code>&lt;Home&gt;</code>和 <code>End&gt;</code> 键映射到其他编辑器常用的设置，我写了个可以用的代码，请高手不吝赐教。</p>
-
-<pre><code>" Dynamic bind &lt;HOME&gt; key
-" if caret/cursor not at the frist non-white-space character
-"   move caret/cursor to there
-" else
-"   move to beginning
+<p>目前未知跳转到最后一个非空字符的快捷键，有个网友提供了一个很好玩的技巧：</p><div class="highlight"><div class="codes"><div class="code"><pre>nmap &lt;End&gt; &#47;\S\s*$&lt;CR&gt;:nohl&lt;CR&gt;
+</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a></pre></div></div>
+<p>为了将 <code>&lt;Home&gt;</code>和 <code>End&gt;</code> 键映射到其他编辑器常用的设置，我写了个可以用的代码，请高手不吝赐教。</p><div class="highlight"><div class="codes"><div class="code"><pre>&quot; Dynamic bind &lt;HOME&gt; key
+&quot; if caret&#47;cursor not at the frist non-white-space character
+&quot;   move caret&#47;cursor to there
+&quot; else
+&quot;   move to beginning
 function HomeBind(offset)
-    let cursor=getpos('.')
-    let s0=getline(line('.'))
-    let s1=substitute(s0, "^\\s\\+", "", "")
+    let cursor=getpos(&#39;.&#39;)
+    let s0=getline(line(&#39;.&#39;))
+    let s1=substitute(s0, &quot;^\\s\\+&quot;, &quot;&quot;, &quot;&quot;)
     let x=len(s0)-len(s1)+1
-    if col('.') == x-a:offset
+    if col(&#39;.&#39;) == x-a:offset
         let x=1
     endif
-    call setpos('.', [cursor[0], cursor[1], x, cursor[3]])
+    call setpos(&#39;.&#39;, [cursor[0], cursor[1], x, cursor[3]])
 endfunction
 imap &lt;silent&gt; &lt;Home&gt; &lt;Esc&gt;:call HomeBind(1)&lt;cr&gt;i
 nmap &lt;silent&gt; &lt;Home&gt; :call HomeBind(0)&lt;cr&gt;
 vmap &lt;silent&gt; &lt;Home&gt; &lt;Esc&gt;:call HomeBind(1)&lt;cr&gt;
 
-" Dynamic bind &lt;END&gt; key
-" if caret/cursor not at the end
-"   move caret/cursor to there
-" else
-"   move to last non-white-space character.
+&quot; Dynamic bind &lt;END&gt; key
+&quot; if caret&#47;cursor not at the end
+&quot;   move caret&#47;cursor to there
+&quot; else
+&quot;   move to last non-white-space character.
 function EndBind(offset)
-    let cursor=getpos('.')
-    let s0=getline(line('.'))
-    let s1=substitute(s0, "\\s*$", "", "")
+    let cursor=getpos(&#39;.&#39;)
+    let s0=getline(line(&#39;.&#39;))
+    let s1=substitute(s0, &quot;\\s*$&quot;, &quot;&quot;, &quot;&quot;)
     let x=len(s0)+a:offset
-    if col('.') == x
+    if col(&#39;.&#39;) == x
         let x=len(s1)+a:offset
     endif
-    call setpos('.', [cursor[0], cursor[1], x, cursor[3]])
+    call setpos(&#39;.&#39;, [cursor[0], cursor[1], x, cursor[3]])
 endfunction
 imap &lt;silent&gt; &lt;End&gt; &lt;Esc&gt;:call EndBind(0)&lt;cr&gt;a
 nmap &lt;silent&gt; &lt;End&gt; :call EndBind(0)&lt;cr&gt;
 vmap &lt;silent&gt; &lt;End&gt; :call EndBind(0)&lt;cr&gt;
-"nmap &lt;End&gt; /\S\s*$&lt;CR&gt;:nohl&lt;CR&gt;
-</code></pre>
-
+&quot;nmap &lt;End&gt; &#47;\S\s*$&lt;CR&gt;:nohl&lt;CR&gt;
+</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+<a name="L2-2" href="#L2-2">2</a>
+<a name="L2-3" href="#L2-3">3</a>
+<a name="L2-4" href="#L2-4">4</a>
+<a name="L2-5" href="#L2-5">5</a>
+<a name="L2-6" href="#L2-6">6</a>
+<a name="L2-7" href="#L2-7">7</a>
+<a name="L2-8" href="#L2-8">8</a>
+<a name="L2-9" href="#L2-9">9</a>
+<a name="L2-10" href="#L2-10">10</a>
+<a name="L2-11" href="#L2-11">11</a>
+<a name="L2-12" href="#L2-12">12</a>
+<a name="L2-13" href="#L2-13">13</a>
+<a name="L2-14" href="#L2-14">14</a>
+<a name="L2-15" href="#L2-15">15</a>
+<a name="L2-16" href="#L2-16">16</a>
+<a name="L2-17" href="#L2-17">17</a>
+<a name="L2-18" href="#L2-18">18</a>
+<a name="L2-19" href="#L2-19">19</a>
+<a name="L2-20" href="#L2-20">20</a>
+<a name="L2-21" href="#L2-21">21</a>
+<a name="L2-22" href="#L2-22">22</a>
+<a name="L2-23" href="#L2-23">23</a>
+<a name="L2-24" href="#L2-24">24</a>
+<a name="L2-25" href="#L2-25">25</a>
+<a name="L2-26" href="#L2-26">26</a>
+<a name="L2-27" href="#L2-27">27</a>
+<a name="L2-28" href="#L2-28">28</a>
+<a name="L2-29" href="#L2-29">29</a>
+<a name="L2-30" href="#L2-30">30</a>
+<a name="L2-31" href="#L2-31">31</a>
+<a name="L2-32" href="#L2-32">32</a>
+<a name="L2-33" href="#L2-33">33</a>
+<a name="L2-34" href="#L2-34">34</a>
+<a name="L2-35" href="#L2-35">35</a>
+<a name="L2-36" href="#L2-36">36</a>
+<a name="L2-37" href="#L2-37">37</a>
+<a name="L2-38" href="#L2-38">38</a></pre></div></div><h2 id="参考">参考</h2>
 <p>这里还有几个实现很优雅，但稍有问题的脚本：</p>
 
 <ul>
 <li><a href="http://vim.wikia.com/wiki/SmartHome_and_SmartEnd_over_wrapped_lines">SmartHome and SmartEnd over wrapped lines</a></li>
 <li><a href="http://www.vim.org/scripts/script.php?script_id=2772">Crazy Home Key</a>
-  <a href="http://chenkaie.blogspot.com/2009/09/vim-crazy-home-key-crazyhomekeyvim.html">blog</a></li>
+<a href="http://chenkaie.blogspot.com/2009/09/vim-crazy-home-key-crazyhomekeyvim.html">blog</a></li>
 <li><a href="http://gist.github.com/214532">c9s: smart_home_end.vim</a></li>
 </ul>
+</div>
 
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/Vim">Vim</a>
+      
+    </span>
 
-    </article>
-    <footer class="post clearfix">
-      <span class="tags">
-        tags:
-        
-          
-          <a href="/tags.html#Vim">Vim</a>
-        
-      </span>
-      <time>October 22, 
-      <a href="/archives.html#2009">2009</a>
-    </footer>
+    <time datetime="2009-10-22T00:00:00.000Z">
+      <a href="/2009">2009年</a>10月22日
+    </time>
+  </footer>
     <section>
-        <div id="disqus_thread"></div>
-        <noscript>
+      <div id="disqus_thread"></div>
+      <noscript>
         要查看或参与评论，请启用 JavaScript 支持。<br />
         Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
-        </noscript>
+      </noscript>
     </section>
-<script type="text/javascript" src="/js/comments.js"></script>
-
-  </div>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
 
     <!-- Vimlike status bar -->
     <div id="status-bar">
@@ -199,7 +225,7 @@ vmap &lt;silent&gt; &lt;End&gt; :call EndBind(0)&lt;cr&gt;
     </table>
 </div>
 
-<script type="text/javascript" src="/js/Vimlike.js"></script>
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
 <footer>
   <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
     alt="Creative Commons License" style="border-width: 0pt;"
@@ -208,8 +234,8 @@ vmap &lt;silent&gt; &lt;End&gt; :call EndBind(0)&lt;cr&gt;
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
-    </p>
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
 </footer>
 </div>
 <script type="text/javascript">
@@ -218,8 +244,9 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 </script>
 <script type="text/javascript">
 try {
-var pageTracker=_gat._getTracker("UA-2048484-1");
-pageTracker._trackPageview();
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
 }catch(err){}</script>
-</body>
+
+  </body>
 </html>

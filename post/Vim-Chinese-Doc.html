@@ -1,101 +1,73 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
-<head>
-<!--[if IE]><script type="text/javascript" src="/js/html5.js"></script><![endif]-->
-<meta charset="UTF-8" />
-<meta name="generator" content="gvim" />
-<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-<!--<link rel="alternate" type="application/rss+xml" title="RSS"
-  href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />-->
-<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
-<link type="text/css" rel="stylesheet" href="/css/template.css" />
-<script type="text/javascript" src="/js/sea.js"></script>
-<script type="text/javascript">
-seajs.config({
-  alias: {
-    'jquery': 'jquery-1.8.3.min.js',
-    'hashchange': 'jquery.ba-hashchange.min.js'
-  }
-});
-seajs.use(["jquery", "default-main"], function(){
-    alert("default")
-});
-</script>
-<title>Vim 中文帮助文档 - 闲耘™.博客</title>
-</head>
-<body>
-<div id="wrapper">
-<header>
-<div style="float:right;">
-    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
-        <input type="text" name="q" />
-        <input type="submit" value="搜索" />
-    </form>
-</div>
-<nav>
-    <ul>
-        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
-        <li class="actived"><a href="/" title="Blog">Blog</a></li>
-        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
-        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
-        <li><a href="http://twitter.hotoo.me/" title="Twitter">Twitter</a></li>
-        <li class="last"><a href="/projects.html" title="Project">Project</a></li>
-        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
-    </ul>
-</nav>
-</header>
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>Vim 中文帮助文档</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
+
 <div id="container">
-  <div id="content">
-        <h1>Vim 中文帮助文档</h1>
-    <article>
-        <h1>Vim 中文帮助文档</h1>
-
-<p>前两天不知道为什么，帮助文档又跑会英文了（隐约是用 Vimball 安装了 Vimwiki
-或者 <em>重复</em>安装了 TwitVim 的缘故）。</p>
-
-<pre><code>:set helplang=cn
-</code></pre>
-
-<p>无效。</p>
-
-<pre><code>let helptags=$VIM.'\vimfiles\doc'
-</code></pre>
-
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">Vim 中文帮助文档</h1>
+  <div class="entry-content"><p>前两天不知道为什么，帮助文档又跑会英文了（隐约是用 Vimball 安装了 Vimwiki
+或者 <em>重复</em>安装了 TwitVim 的缘故）。</p><div class="highlight"><div class="codes"><div class="code"><pre>:set helplang=cn
+</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a></pre></div></div>
+<p>无效。</p><div class="highlight"><div class="codes"><div class="code"><pre>let helptags=$VIM.&#39;\vimfiles\doc&#39;
+</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div>
 <p>亦无效。</p>
 
-<p>很早以前不知道从哪里抄来的这个：</p>
-
-<pre><code>cp -R doc $VIM.'\vimfiles\doc\'
-</code></pre>
-
+<p>很早以前不知道从哪里抄来的这个：</p><div class="highlight"><div class="codes"><div class="code"><pre>cp -R doc $VIM.&#39;\vimfiles\doc\&#39;
+</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a></pre></div></div>
 <p>从一开始就是报错的，一直被注释，从未被启用。</p>
 
-<p>在注册表中找到两个相关的项：</p>
-
-<pre><code>HKEY_CLASSES_ROOT\TypeLib\{0F0BFAE0-4C90-11D1-82D7-0004AC368519}\1.1\HELPDIR
+<p>在注册表中找到两个相关的项：</p><div class="highlight"><div class="codes"><div class="code"><pre>HKEY_CLASSES_ROOT\TypeLib\{0F0BFAE0-4C90-11D1-82D7-0004AC368519}\1.1\HELPDIR
 (默认)    d:\Vim\vim72
-</code></pre>
-
-<p>将默认值修改为：</p>
-
-<pre><code>d:\Vim\vimfiles
-</code></pre>
-
-<p>或：</p>
-
-<pre><code>d:\Vim\vimfiles\doc
-</code></pre>
-
+</pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
+<a name="L4-2" href="#L4-2">2</a></pre></div></div>
+<p>将默认值修改为：</p><div class="highlight"><div class="codes"><div class="code"><pre>d:\Vim\vimfiles
+</pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a></pre></div></div>
+<p>或：</p><div class="highlight"><div class="codes"><div class="code"><pre>d:\Vim\vimfiles\doc
+</pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a></pre></div></div>
 <p>重启系统，均无效。</p>
 
-<p>另一个注册表项的路径是正确的，无需改变：</p>
-
-<pre><code>HKEY_LOCAL_MACHINE\SOFTWARE\Classes\TypeLib\{0F0BFAE0-4C90-11D1-82D7-0004AC368519}\1.1\HELPDIR
+<p>另一个注册表项的路径是正确的，无需改变：</p><div class="highlight"><div class="codes"><div class="code"><pre>HKEY_LOCAL_MACHINE\SOFTWARE\Classes\TypeLib\{0F0BFAE0-4C90-11D1-82D7-0004AC368519}\1.1\HELPDIR
 (默认值)    d:\Vim\vimfiles\doc
-</code></pre>
-
+</pre></div><pre class="line"><a name="L7-1" href="#L7-1">1</a>
+<a name="L7-2" href="#L7-2">2</a></pre></div></div>
 <p>万般无奈，只好重装了中文文档。</p>
 
 <p>中文文档可以从 <a href="http://vimcdoc.sourceforge.net/">vimCdoc.sf.net</a> 下载，也可以从
@@ -110,36 +82,32 @@ seajs.use(["jquery", "default-main"], function(){
 <li>抽取 README,INSTALL,LICENSE,AUTHORS,guides.txt 到 C:\Program Files\vimcdoc</li>
 </ol>
 
-
 <p>其中设置 Vim 帮助的默认语言的步骤，即是在 vimcdoc.vim 中，因为 plugin 比 vimrc
 加载要晚(<a href="http://forum.ubuntu.org.cn/viewtopic.php?f=68&amp;t=190529">参考</a>)，
 所以在 vimrc 中的设置会被 vimcdoc.vim 覆盖掉。</p>
+</div>
 
-    </article>
-    <footer class="post clearfix">
-      <span class="tags">
-        tags:
-        
-          
-          <a href="/tags.html#Vim">Vim</a>
-        
-          ,
-          <a href="/tags.html#doc">doc</a>
-        
-      </span>
-      <time>March 15, 
-      <a href="/archives.html#2010">2010</a>
-    </footer>
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/Vim">Vim</a>
+      
+    </span>
+
+    <time datetime="2010-03-15T00:00:00.000Z">
+      <a href="/2010">2010年</a>03月15日
+    </time>
+  </footer>
     <section>
-        <div id="disqus_thread"></div>
-        <noscript>
+      <div id="disqus_thread"></div>
+      <noscript>
         要查看或参与评论，请启用 JavaScript 支持。<br />
         Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
-        </noscript>
+      </noscript>
     </section>
-<script type="text/javascript" src="/js/comments.js"></script>
-
-  </div>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
 
     <!-- Vimlike status bar -->
     <div id="status-bar">
@@ -203,7 +171,7 @@ seajs.use(["jquery", "default-main"], function(){
     </table>
 </div>
 
-<script type="text/javascript" src="/js/Vimlike.js"></script>
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
 <footer>
   <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
     alt="Creative Commons License" style="border-width: 0pt;"
@@ -212,8 +180,8 @@ seajs.use(["jquery", "default-main"], function(){
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
-    </p>
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
 </footer>
 </div>
 <script type="text/javascript">
@@ -222,8 +190,9 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 </script>
 <script type="text/javascript">
 try {
-var pageTracker=_gat._getTracker("UA-2048484-1");
-pageTracker._trackPageview();
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
 }catch(err){}</script>
-</body>
+
+  </body>
 </html>

@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>不缓存 CDN 静态资源方案</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
+
+<div id="container">
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">不缓存 CDN 静态资源方案</h1>
+  <div class="entry-content"><h2 id="背景">背景</h2>
+<p>支付宝目前使用淘宝提供的 CDN 服务，这个服务中的 CDN 节点在自身找不到对应资源时
+主动到源服务器拉取的策略。</p>
+
+<p><img src="/images/no-cache-in-cdn.png" alt="图"/></p>
+
+<p>支付宝使用的静态资源合并(combo)方案，导致在不同的访问参数情况下，被认为是不同
+的静态资源。如果挟带的是避免缓存的随机参数，CDN 在没有缓存这个资源的情况下，
+会到源服务器拉取资源。</p>
+
+<p>原则上，我们使用特定的版本机制，每个新版本文件以不同的文件名发布，不允许使用
+参数，尤其是随机数方式避免缓存问题。</p>
+<h2 id="问题">问题</h2>
+<p>由于我们使用的版本策略，我们可以指定用户缓存静态资源时效为永久，实际方案上
+我们指定用户缓存时间为 1年，但是在某些场景下（如测量用户网络速度），
+用户客户端（非 CDN 节点）访问某些特定静态资源需要禁止使用缓存。</p>
+
+<p>目前常见的方案都是在客户端使用时间戳+随机数。这个方案本身看似没什么问题，但是
+实际上有非常大的隐患，测量的数据参考性也不佳。</p>
+
+<ul>
+<li>CDN 节点上缓存了大量挟带永不重复随机数的资源，对磁盘造成影响。</li>
+<li>CDN 缓存命中率降低，这些挟带随机数的静态资源缓存率命中率为 0。</li>
+<li>增加源服务器的访问压力。</li>
+<li>测量的用户网络响应时间实际不是到 CDN 节点的，还包含 CDN 回源的时间。</li>
+</ul>
+
+<a name="more"></a>
+<h2 id="解决方案">解决方案</h2>
+<p>为了解决这种明确不允许用户客户端缓存，同时又不建议使用随机参数访问的需求，我们
+有以下几种方案：</p>
+
+<ol>
+<li>CDN 服务器端控制浏览器不缓存。『最佳方案』<br/>
+设置指定目录下的静态资源禁止缓存头信息，有需要禁止缓存需求时上传静态资源到
+这个目录。</li>
+<li>直接访问源服务器。<br/>
+现在的加随机数访问 CDN 方案和直接访问源服务器本质上相同，这方案只能测用户到
+源服务器的响应时间。</li>
+<li>使用有限随机数方案。『不考虑』</li>
+</ol>
+<h2 id="延伸">延伸</h2>
+<p>实际上，对于静态资源来说，纯粹的参数是无意义的，CDN 节点本可以忽略这个参数。
+虽然合并策略使用了参数方式，但是我们使用双问号激活合并服务的方案可以让我们
+明确区分出合并参数和其他参数，因此技术上是完全可以忽略其他参数导致的回源。</p>
+<h2 id="参考">参考</h2>
+<ol>
+<li><a href="http://segmentfault.com/q/1010000000119794">拉取式相比推送式的对比的参考</a></li>
+</ol>
+</div>
+
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/Web Design">Web Design</a>
+      
+ , 
+      <a href="/tag/CDN">CDN</a>
+      
+    </span>
+
+    <time datetime="2013-09-21T00:00:00.000Z">
+      <a href="/2013">2013年</a>09月21日
+    </time>
+  </footer>
+    <section>
+      <div id="disqus_thread"></div>
+      <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+      </noscript>
+    </section>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
+
+    <!-- Vimlike status bar -->
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
+<footer>
+  <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
+    alt="Creative Commons License" style="border-width: 0pt;"
+    src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"/></a>
+  This work is licensed under a
+  <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
+    Commons Attribution 2.5 Generic License</a>.<br/>
+  Copyleft &copy; 2005-2013, Power by
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
+</footer>
+</div>
+<script type="text/javascript">
+var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
+}catch(err){}</script>
+
+  </body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>每周异常：第 9期，搜狗浏览器中神一样的 try/catch 特性</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
+
+<div id="container">
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">每周异常：第 9期，搜狗浏览器中神一样的 try/catch 特性</h1>
+  <div class="entry-content"><h2 id="背景">背景</h2>
+<p>某日 16时 30分，监控实时大盘中全站 JavaScript 异常和 404 异常分别朝着不同的方向延伸，
+橙色的 JavaScript 异常急剧上升。</p>
+
+<p><img src="https://f.cloud.github.com/assets/143572/1136611/435cbfac-1c48-11e3-8856-8fc7ef13ce5a.png" alt="bac3c01389cadbb12d4873520b3bd2a9"/></p>
+
+<p>详细数据中我们看到一向高标准高质量的收银台出现异常大量的异常。</p>
+
+<p><img src="https://f.cloud.github.com/assets/143572/1136701/ae74db38-1c4a-11e3-9d2d-1101c0b61a79.png" alt="2013-09-13 4 00 58"/></p>
+<h2 id="排查">排查</h2>
+<p>我们发现其中有两个页面异常最多，而这两个页面中异常最多的『一个异常』详情如下：</p>
+
+<ul>
+<li>File: 同页面 URL</li>
+<li>Line: 1</li>
+<li>Message: Uncaught SyntaxError: Unexpected token a</li>
+</ul>
+
+<p>客户端信息：</p>
+
+<ul>
+<li>pc/-1;windows/5.1;sg/2.x;webkit/535.1</li>
+<li>pc/-1;windows/6.1;sg/2.x;webkit/535.1</li>
+</ul>
+
+<p>堆栈信息：</p><div class="highlight"><div class="codes"><div class="code"><pre>at function parse()
+    at function ()
+    at function (data)
+    at function ()
+    at function ()
+</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a>
+<a name="L1-3" href="#L1-3">3</a>
+<a name="L1-4" href="#L1-4">4</a>
+<a name="L1-5" href="#L1-5">5</a></pre></div></div>
+<p>分析过程非常艰辛，重现异常的过程也是一波三折，这里不做赘述，最终分析得出：</p>
+
+<ul>
+<li>搜狗浏览器的 userAgent 太坑爹，几乎所有版本都是 2.x，开发者太不专业了。最终找到内核为 webkit/535.1 的是 3.2 版。</li>
+<li><p>重现到老版 arale 中的 ajax 模块中对 JSON 有特殊的处理，如果浏览器内置的 JSON 不支持非标准的 JSON （如 <code>{a:1}</code>）则 hack 做兼容。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">W3CParse</span><span class="params">(data)</span> {</span>
+        <span class="keyword">if</span> (validJSON(data)) {
+            <span class="keyword">return</span> window.JSON.parse(data)
+        } <span class="keyword">else</span> {
+            <span class="keyword">return</span> <span class="literal">null</span>;
+            arale.error(<span class="string">"Invalid JSON: "</span> + data)
+        }
+    }
+
+    <span class="function"><span class="keyword">function</span> <span class="title">defaultParse</span><span class="params">(data)</span> {</span>
+        <span class="keyword">if</span> (validJSON(data)) {
+            <span class="keyword">return</span> (<span class="keyword">new</span> Function(<span class="string">"return ("</span> + data + <span class="string">")"</span>))()
+        } <span class="keyword">else</span> {
+            <span class="keyword">return</span> <span class="literal">null</span>;
+            arale.error(<span class="string">"Invalid JSON: "</span> + data)
+        }
+    }
+    <span class="keyword">var</span> ok_wrong_json = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        <span class="keyword">try</span> {
+            JSON.parse(<span class="string">"{ a: 1 }"</span>);
+            <span class="keyword">return</span> <span class="literal">true</span>
+        } <span class="keyword">catch</span> (x) {
+            <span class="keyword">return</span> <span class="literal">false</span>
+        }
+    };
+    <span class="keyword">if</span> (window.JSON &amp;&amp; window.JSON.parse &amp;&amp; ok_wrong_json()) {
+        parseJSON = <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> {</span>
+            <span class="keyword">return</span> W3CParse.call(<span class="keyword">this</span>, data)
+        }
+    } <span class="keyword">else</span> {
+        parseJSON = <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> {</span>
+            <span class="keyword">return</span> defaultParse.call(<span class="keyword">this</span>, data)
+        }
+    }
+</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+<a name="L2-2" href="#L2-2">2</a>
+<a name="L2-3" href="#L2-3">3</a>
+<a name="L2-4" href="#L2-4">4</a>
+<a name="L2-5" href="#L2-5">5</a>
+<a name="L2-6" href="#L2-6">6</a>
+<a name="L2-7" href="#L2-7">7</a>
+<a name="L2-8" href="#L2-8">8</a>
+<a name="L2-9" href="#L2-9">9</a>
+<a name="L2-10" href="#L2-10">10</a>
+<a name="L2-11" href="#L2-11">11</a>
+<a name="L2-12" href="#L2-12">12</a>
+<a name="L2-13" href="#L2-13">13</a>
+<a name="L2-14" href="#L2-14">14</a>
+<a name="L2-15" href="#L2-15">15</a>
+<a name="L2-16" href="#L2-16">16</a>
+<a name="L2-17" href="#L2-17">17</a>
+<a name="L2-18" href="#L2-18">18</a>
+<a name="L2-19" href="#L2-19">19</a>
+<a name="L2-20" href="#L2-20">20</a>
+<a name="L2-21" href="#L2-21">21</a>
+<a name="L2-22" href="#L2-22">22</a>
+<a name="L2-23" href="#L2-23">23</a>
+<a name="L2-24" href="#L2-24">24</a>
+<a name="L2-25" href="#L2-25">25</a>
+<a name="L2-26" href="#L2-26">26</a>
+<a name="L2-27" href="#L2-27">27</a>
+<a name="L2-28" href="#L2-28">28</a>
+<a name="L2-29" href="#L2-29">29</a>
+<a name="L2-30" href="#L2-30">30</a>
+<a name="L2-31" href="#L2-31">31</a>
+<a name="L2-32" href="#L2-32">32</a>
+<a name="L2-33" href="#L2-33">33</a>
+<a name="L2-34" href="#L2-34">34</a></pre></div></div></li>
+<li><p>抛出异常的代码是 <code>JSON.parse(&quot;{a: 1}&quot;)</code></p></li>
+<li><p>但奇怪的是这段代码是放在 try/catch 中，为什么还会有异常被监控捕获？</p></li>
+<li><p>最终发现这是搜狗浏览器 3.2版极速(webkit)模式中的特性：即使 try/catch 住的异常，
+同样会被 window.onerror 捕获，但并未因此中断业务逻辑，后续的代码仍然会按照正确的
+try/catch 异常处理流程进行，所以对业务本身没有影响。</p></li>
+<li><p>p.s. 搜狗浏览器没有控制台，用户不会知道出了异常。</p></li>
+<li><p>另外收银台之前异常量少的主要原因是主要的页面没有引入前端监控，用户抛出了异常而我们不知道而已。</p></li>
+</ul>
+<h2 id="相关截图">相关截图</h2>
+<p><img src="https://f.cloud.github.com/assets/143572/1136977/316cd2d8-1c51-11e3-9f7e-4bbebec06108.png" alt="2013-09-13 4 39 14"/>
+<img src="https://f.cloud.github.com/assets/143572/1136980/32da28aa-1c51-11e3-8dc4-5773fc84f885.png" alt="2013-09-13 4 39 33"/>
+<img src="https://f.cloud.github.com/assets/143572/1136981/331bb9f0-1c51-11e3-93bf-8cd2dcdf5d7f.png" alt="2013-09-13 4 40 26"/>
+<img src="https://f.cloud.github.com/assets/143572/1136982/331f90c0-1c51-11e3-8d08-8d61c08512dc.png" alt="2013-09-13 4 40 12"/>
+<img src="https://f.cloud.github.com/assets/143572/1136983/332ad480-1c51-11e3-991f-b4b0db932f69.png" alt="2013-09-13 4 41 03"/></p>
+<h2 id="解决方案">解决方案</h2>
+<p>最初虽然有些争议，但我们最终决定的处理方案是监控中临时排除 sg/2.x|webkit/535.1 中
+<code>Uncaught SyntaxError: Unexpected token a</code> 异常。</p>
+<h3 id="是否要排除这个浏览器中所有的异常？">是否要排除这个浏览器中所有的异常？</h3>
+<p>呃，考虑到搜狗浏览器的份额，我们的策略是只排除已知的异常，未知的异常看最终分析结果再考虑。</p>
+<h2 id="广告">广告</h2>
+<p>这个异常排查的主要功臣 @wsvn53，我们在排查过程中频繁使用了他开发的工具
+<a href="https://github.com/wsvn53/fedit">Fedit</a>，可以直接修改线上代码。
+排查线上故 障、线下接⼝什么的都非常⽅方便。强烈建议⼤家都装上⽤用。</p>
+<h2 id="最后">最后</h2>
+<p>我仅代表我自己，想说某些毫无责任心的国产浏览器壳厂商们，你们没有创造价值，
+只是在各种不同方式的索取。</p>
+</div>
+
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/每周异常">每周异常</a>
+      
+    </span>
+
+    <time datetime="2013-09-13T00:00:00.000Z">
+      <a href="/2013">2013年</a>09月13日
+    </time>
+  </footer>
+    <section>
+      <div id="disqus_thread"></div>
+      <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+      </noscript>
+    </section>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
+
+    <!-- Vimlike status bar -->
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
+<footer>
+  <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
+    alt="Creative Commons License" style="border-width: 0pt;"
+    src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"/></a>
+  This work is licensed under a
+  <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
+    Commons Attribution 2.5 Generic License</a>.<br/>
+  Copyleft &copy; 2005-2013, Power by
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
+</footer>
+</div>
+<script type="text/javascript">
+var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
+}catch(err){}</script>
+
+  </body>
+</html>

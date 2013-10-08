@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>让 gvim 访问网络资源</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
+
+<div id="container">
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">让 gvim 访问网络资源</h1>
+  <div class="entry-content"><p>当我还是 Vim 超级菜鸟的时候，我就知道 Vim 可以和 Editplus、UltraEdit 一样，
+访问网络资源，操作方式也很类似：</p>
+
+<ul>
+<li>使用菜单栏的“文件”-&gt;“打开”命令；</li>
+<li>或者使用工具栏的“打开”按钮；</li>
+<li>会打开“编辑文件”对话框，此时在默认光标获焦的“文件名”文本框中输入网络资源定位符；</li>
+<li>回车，或点击“打开”按钮；</li>
+<li>Vim 就会加载网站资源文件的内容。</li>
+</ul>
+
+<p>没有错，作为超级菜鸟，我们就是这样被当作什么都不懂，什么都不会的小孩一样来教导的。</p>
+
+<p>本来这样已经可以了，我们还有强求什么呢？真是得寸进尺啊，我发现 gvim 使用命令
+是无法正常访问网络资源的。</p><div class="highlight"><div class="codes"><div class="code"><pre>:vi http:&#47;&#47;www.xianyun.org&#47;
+:vim http:&#47;&#47;www.xianyun.org&#47;
+:gvim http:&#47;&#47;www.xianyun.org&#47;
+:e http:&#47;&#47;www.xianyun.org&#47;
+:sp http:&#47;&#47;www.xianyun.org&#47;
+:tabnew http:&#47;&#47;www.xianyun.org&#47;
+:Nread http:&#47;&#47;www.xianyun.org&#47;
+</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a>
+<a name="L1-3" href="#L1-3">3</a>
+<a name="L1-4" href="#L1-4">4</a>
+<a name="L1-5" href="#L1-5">5</a>
+<a name="L1-6" href="#L1-6">6</a>
+<a name="L1-7" href="#L1-7">7</a></pre></div></div>
+<p>虽说 Vim 从 7.0 就已经默认集成安装了 netrw. Vim 了，支持网络资源访问，
+但是如果使用上面的命令，gvim 会告诉你说：</p>
+
+<blockquote>
+<p><strong>error</strong> (netrw) neither the wget nor the fetch command is available<br/>
+——————————————————————————————–<br/>
+“NetrwMessage” –缓冲区无内容–</p>
+</blockquote>
+
+<p>向人请教得到解答：
+这是因为缺少访问网络资源的程序（wget）
+Windows下需要下载 <a href="http://users.ugent.be/%7Ebpuype/wget/">WGET for Windows (win32)</a>，
+将 wget.exe 放到某个系统环境变量 Path 包含的位置（如 c:\windows）即可。
+如果是Linux，直接安装wget即可。</p>
+
+<p>现在还有一点问题，gvim使用上面的某个命令访问网络资源时，会打开命令行窗口：</p><div class="highlight"><div class="codes"><div class="code"><pre>C:\WINDOWS\system32\cmd.exe &#47;c wget -q -O &quot;C:\DOCUME~1\WB-TIA~1\LOCALS~1\Temp\VICC3E.tmp&quot; &quot;http:&#47;&#47;www.vim.org&#47;&quot;
+Hit any key to close this window...
+</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+<a name="L2-2" href="#L2-2">2</a></pre></div></div>
+<p>需要再敲一个键，才能关闭这个命令行窗口（Windows 7因为安全的原因，还有更多一步麻烦），
+并将网络资源的内容读到 Vim，目前不知有什么完美的方法，不需要打开，或者能够自动关闭这个窗口？
+而使用菜单或功能按钮等 gui 操作方式，是没有这些东西的，只是在同步加载远程资源时，
+不能进行其他操作。</p>
+<h2 id="参考讨论">参考讨论</h2>
+<ul>
+<li><a href="http://groups.google.com/group/vim-cn/browse_thread/thread/ca34e99e9d02d25d">Vim 网络读写功能的问题</a></li>
+</ul>
+</div>
+
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/Vim">Vim</a>
+      
+    </span>
+
+    <time datetime="2009-09-12T00:00:00.000Z">
+      <a href="/2009">2009年</a>09月12日
+    </time>
+  </footer>
+    <section>
+      <div id="disqus_thread"></div>
+      <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+      </noscript>
+    </section>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
+
+    <!-- Vimlike status bar -->
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
+<footer>
+  <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
+    alt="Creative Commons License" style="border-width: 0pt;"
+    src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"/></a>
+  This work is licensed under a
+  <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
+    Commons Attribution 2.5 Generic License</a>.<br/>
+  Copyleft &copy; 2005-2013, Power by
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
+</footer>
+</div>
+<script type="text/javascript">
+var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
+}catch(err){}</script>
+
+  </body>
+</html>

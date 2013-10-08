@@ -1,58 +1,49 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
-<head>
-<!--[if IE]><script type="text/javascript" src="/js/html5.js"></script><![endif]-->
-<meta charset="UTF-8" />
-<meta name="generator" content="gvim" />
-<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-<!--<link rel="alternate" type="application/rss+xml" title="RSS"
-  href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />-->
-<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
-<link type="text/css" rel="stylesheet" href="/css/template.css" />
-<script type="text/javascript" src="/js/sea.js"></script>
-<script type="text/javascript">
-seajs.config({
-  alias: {
-    'jquery': 'jquery-1.8.3.min.js',
-    'hashchange': 'jquery.ba-hashchange.min.js'
-  }
-});
-seajs.use(["jquery", "default-main"], function(){
-    alert("default")
-});
-</script>
-<title>Editplus And Everything - 闲耘™.博客</title>
-</head>
-<body>
-<div id="wrapper">
-<header>
-<div style="float:right;">
-    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
-        <input type="text" name="q" />
-        <input type="submit" value="搜索" />
-    </form>
-</div>
-<nav>
-    <ul>
-        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
-        <li class="actived"><a href="/" title="Blog">Blog</a></li>
-        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
-        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
-        <li><a href="http://twitter.hotoo.me/" title="Twitter">Twitter</a></li>
-        <li class="last"><a href="/projects.html" title="Project">Project</a></li>
-        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
-    </ul>
-</nav>
-</header>
-<div id="container">
-  <div id="content">
-        <h1>Editplus And Everything</h1>
-    <article>
-        <h1>让 Editplus 和 Everything 结合，快速搜索</h1>
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>让 Editplus 和 Everything 结合，快速搜索</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<p>今天朋友向我分享了他新学的一个小技巧：将 Everything 搜索集成到 Editplus。</p>
+<div id="container">
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">让 Editplus 和 Everything 结合，快速搜索</h1>
+  <div class="entry-content"><p>今天朋友向我分享了他新学的一个小技巧：将 Everything 搜索集成到 Editplus。</p>
 
 <p>毫无疑问，<a href="http://www.voidtools.com/">Everything</a> 是 NTFS磁盘下，
 本地文件快速搜索的极品，而 <a href="http://www.editplus.com/">Editplus</a> 也是Windows下非常优秀的文本编辑器。</p>
@@ -60,56 +51,49 @@ seajs.use(["jquery", "default-main"], function(){
 <p>虽然 Editplus 本身也有文件搜索功能，而且支持内容搜索，不过这个集成也非常有意思。</p>
 
 <ul>
-<li> 首先需要安装（绿色的也可以）有Everything本身。</li>
-<li> 下载面向命令行界面的 <a href="http://www.voidtools.com/download.php">es.exe</a>
+<li>首先需要安装（绿色的也可以）有Everything本身。</li>
+<li>下载面向命令行界面的 <a href="http://www.voidtools.com/download.php">es.exe</a>
     ^<a href="http://xbeta.info/everything/download.htm">2</a>^ 程序，放至 Everything 安装目录。</li>
-<li> 打开 Editplus ， “工具” -> “配置用户工具” -> “添加工具”</li>
-<li> “菜单文本”可以随便命名，</li>
-<li> “命令”填入 es.exe 所在的完整路径，如 E:\Everything\es.exe</li>
-<li> “参数”填 <code>$(FileDir) $(CurSel)</code></li>
-<li> 选中捕获输出</li>
-<li> 确定，现在选中一串文本，就可以使用 <Ctrl-N> 快捷键或菜单执行搜索了，搜索结果集会输出在输出窗口中。</li>
+<li>打开 Editplus ， “工具” -&gt; “配置用户工具” -&gt; “添加工具”</li>
+<li>“菜单文本”可以随便命名，</li>
+<li>“命令”填入 es.exe 所在的完整路径，如 E:\Everything\es.exe</li>
+<li>“参数”填 <code>$(FileDir) $(CurSel)</code></li>
+<li>选中捕获输出</li>
+<li>确定，现在选中一串文本，就可以使用 <Ctrl-N> 快捷键或菜单执行搜索了，搜索结果集会输出在输出窗口中。</li>
 </ul>
-
 
 <p>谢谢晓东的分享。有时间的话可以为 Vim 也写一个插件，搜索结果在 QuickFix 窗口中输出。</p>
 
-<p>注意：一定要记得先选定文本一串，否则会搜索出所有的文件，如果参数没有加入当前文件所在的目录，还会更惨 ^_^! 。不过作为 Vim 插件就可以更灵活了，不需要选定文本，直接执行类似命令就可以了。</p>
+<p>注意：一定要记得先选定文本一串，否则会搜索出所有的文件，如果参数没有加入当前文件所在的目录，还会更惨 ^_^! 。不过作为 Vim 插件就可以更灵活了，不需要选定文本，直接执行类似命令就可以了。</p><div class="highlight"><div class="codes"><div class="code"><pre>:ES ${keyword}[ ${path}]
+</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a></pre></div></div></div>
 
-<pre><code>:ES ${keyword}[ ${path}]
-</code></pre>
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/Editor">Editor</a>
+      
+ , 
+      <a href="/tag/Search Engine">Search Engine</a>
+      
+ , 
+      <a href="/tag/Tools">Tools</a>
+      
+    </span>
 
-    </article>
-    <footer class="post clearfix">
-      <span class="tags">
-        tags:
-        
-          
-          <a href="/tags.html#Editplus">Editplus</a>
-        
-          ,
-          <a href="/tags.html#Editor">Editor</a>
-        
-          ,
-          <a href="/tags.html#Everything">Everything</a>
-        
-          ,
-          <a href="/tags.html#Search Engine">Search Engine</a>
-        
-      </span>
-      <time>January 27, 
-      <a href="/archives.html#2010">2010</a>
-    </footer>
+    <time datetime="2010-01-27T00:00:00.000Z">
+      <a href="/2010">2010年</a>01月27日
+    </time>
+  </footer>
     <section>
-        <div id="disqus_thread"></div>
-        <noscript>
+      <div id="disqus_thread"></div>
+      <noscript>
         要查看或参与评论，请启用 JavaScript 支持。<br />
         Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
-        </noscript>
+      </noscript>
     </section>
-<script type="text/javascript" src="/js/comments.js"></script>
-
-  </div>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
 
     <!-- Vimlike status bar -->
     <div id="status-bar">
@@ -173,7 +157,7 @@ seajs.use(["jquery", "default-main"], function(){
     </table>
 </div>
 
-<script type="text/javascript" src="/js/Vimlike.js"></script>
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
 <footer>
   <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
     alt="Creative Commons License" style="border-width: 0pt;"
@@ -182,8 +166,8 @@ seajs.use(["jquery", "default-main"], function(){
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
-    </p>
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
 </footer>
 </div>
 <script type="text/javascript">
@@ -192,8 +176,9 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 </script>
 <script type="text/javascript">
 try {
-var pageTracker=_gat._getTracker("UA-2048484-1");
-pageTracker._trackPageview();
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
 }catch(err){}</script>
-</body>
+
+  </body>
 </html>

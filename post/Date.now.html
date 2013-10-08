@@ -1,58 +1,49 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
-<head>
-<!--[if IE]><script type="text/javascript" src="/js/html5.js"></script><![endif]-->
-<meta charset="UTF-8" />
-<meta name="generator" content="gvim" />
-<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-<!--<link rel="alternate" type="application/rss+xml" title="RSS"
-  href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />-->
-<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
-<link type="text/css" rel="stylesheet" href="/css/template.css" />
-<script type="text/javascript" src="/js/sea.js"></script>
-<script type="text/javascript">
-seajs.config({
-  alias: {
-    'jquery': 'jquery-1.8.3.min.js',
-    'hashchange': 'jquery.ba-hashchange.min.js'
-  }
-});
-seajs.use(["jquery", "default-main"], function(){
-    alert("default")
-});
-</script>
-<title>Date.now() - 闲耘™.博客</title>
-</head>
-<body>
-<div id="wrapper">
-<header>
-<div style="float:right;">
-    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
-        <input type="text" name="q" />
-        <input type="submit" value="搜索" />
-    </form>
-</div>
-<nav>
-    <ul>
-        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
-        <li class="actived"><a href="/" title="Blog">Blog</a></li>
-        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
-        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
-        <li><a href="http://twitter.hotoo.me/" title="Twitter">Twitter</a></li>
-        <li class="last"><a href="/projects.html" title="Project">Project</a></li>
-        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
-    </ul>
-</nav>
-</header>
-<div id="container">
-  <div id="content">
-        <h1>Date.now()</h1>
-    <article>
-        <h1>Date.now()</h1>
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>Date.now()</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<p>以前做过一个 JavaScript 性能测试“框架”，也看过其他人做性能比较的时候，基本上
+<div id="container">
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">Date.now()</h1>
+  <div class="entry-content"><p>以前做过一个 JavaScript 性能测试“框架”，也看过其他人做性能比较的时候，基本上
 也都是使用 <code>new Date()</code> 来记时，会“耍点小花样”的同学会使用 <code>+new Date()</code>。</p>
 
 <p>现在又想做另一种性能监控的方法，便着重考量了下各种记时方案，尽量减少因为
@@ -61,120 +52,102 @@ seajs.use(["jquery", "default-main"], function(){
 <p>下面是循环 100000 次，过程中只有计数器操作，得到的时间(ms)对照表
 (<a href="http://hotoo.me/labs/Date.now.html">Demo</a>)。</p>
 
-<table>
-<thead>
+<table><thead>
 <tr>
-<th></th>
-<th> Browser  </th>
-<th> new Date() </th>
-<th> new Date().getTime() </th>
-<th> new Date().valueOf() </th>
-<th> +new Date() </th>
-<th> Date.now() </th>
+<th>Browser</th>
+<th>new Date()</th>
+<th>new Date().getTime()</th>
+<th>new Date().valueOf()</th>
+<th>+new Date()</th>
+<th>Date.now()</th>
 </tr>
-</thead>
-<tbody>
+</thead><tbody>
 <tr>
-<td></td>
-<td> IE8      </td>
-<td> 469        </td>
-<td> 391                  </td>
-<td> 375                  </td>
-<td> 406         </td>
-<td> -          |</td>
+<td>IE8</td>
+<td>469</td>
+<td>391</td>
+<td>375</td>
+<td>406</td>
+<td>-</td>
 </tr>
 <tr>
-<td></td>
-<td> Firefox6 </td>
-<td> 266        </td>
-<td> 258                  </td>
-<td> 257                  </td>
-<td> 259         </td>
-<td> 236        |</td>
+<td>Firefox6</td>
+<td>266</td>
+<td>258</td>
+<td>257</td>
+<td>259</td>
+<td>236</td>
 </tr>
 <tr>
-<td></td>
-<td> Chrome13 </td>
-<td> 46         </td>
-<td> 29                   </td>
-<td> 29                   </td>
-<td> 35          </td>
-<td> 20         |</td>
+<td>Chrome13</td>
+<td>46</td>
+<td>29</td>
+<td>29</td>
+<td>35</td>
+<td>20</td>
 </tr>
 <tr>
-<td></td>
-<td> Opera11  </td>
-<td> 246        </td>
-<td> 242                  </td>
-<td> 246                  </td>
-<td> 244         </td>
-<td> 222        |</td>
+<td>Opera11</td>
+<td>246</td>
+<td>242</td>
+<td>246</td>
+<td>244</td>
+<td>222</td>
 </tr>
 <tr>
-<td></td>
-<td> Safari5  </td>
-<td> 256        </td>
-<td> 232                  </td>
-<td> 239                  </td>
-<td> 255         </td>
-<td> 222        |</td>
+<td>Safari5</td>
+<td>256</td>
+<td>232</td>
+<td>239</td>
+<td>255</td>
+<td>222</td>
 </tr>
-</tbody>
-</table>
-
+</tbody></table>
 
 <p>由此可以对照出，<code>Date.now()</code> 确实有很明显的性能优势，另外 <code>Date.now()</code> 返回是
 number 类型的数值，并不产生 Date 对象。</p>
 
 <p>不过目前只有 IE9, Firefox3+, Chrome5+, Opera10.50+, Safari4+ 支持，对于不支持
-的浏览器，可以继续使用 <code>new Date().valueOf()</code> 方法（个人不推荐用 <code>+new Date()</code>）：</p>
-
-<pre><code>// @return {Number}
-function now(){
-    return ("function"==typeof Date.now) ? Date.now() : new Date().valueOf();
+的浏览器，可以继续使用 <code>new Date().valueOf()</code> 方法（个人不推荐用 <code>+new Date()</code>）：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">// @return {Number}</span>
+<span class="function"><span class="keyword">function</span> <span class="title">now</span><span class="params">()</span>{</span>
+    <span class="keyword">return</span> (<span class="string">"function"</span>==<span class="keyword">typeof</span> Date.now) ? Date.now() : <span class="keyword">new</span> Date().valueOf();
 }
-</code></pre>
-
-<h2>日期相关</h2>
-
-<pre><code>new Date()          // now.
-new Date(null);     // 1970/01/01 00:00:00(UTC)
-new Date(undefined);// IE:NaN; Others:Invalid Date.
-</code></pre>
-
-<h2>参考阅读</h2>
-
+</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a>
+<a name="L1-3" href="#L1-3">3</a>
+<a name="L1-4" href="#L1-4">4</a></pre></div></div><h2 id="日期相关">日期相关</h2><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">new</span> Date()          <span class="comment">// now.</span>
+<span class="keyword">new</span> Date(<span class="literal">null</span>);     <span class="comment">// 1970/01/01 00:00:00(UTC)</span>
+<span class="keyword">new</span> Date(<span class="literal">undefined</span>);<span class="comment">// IE:NaN; Others:Invalid Date.</span>
+</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+<a name="L2-2" href="#L2-2">2</a>
+<a name="L2-3" href="#L2-3">3</a></pre></div></div><h2 id="参考阅读">参考阅读</h2>
 <ul>
 <li><a href="http://msdn.microsoft.com/en-us/library/ff679974(v=vs.94">Date.now Function (JavaScript) - MSDN</a>.aspx)</li>
 <li><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date/now">Data.now() - MDN</a></li>
 </ul>
+</div>
 
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/JavaScript">JavaScript</a>
+      
+    </span>
 
-    </article>
-    <footer class="post clearfix">
-      <span class="tags">
-        tags:
-        
-          
-          <a href="/tags.html#JavaScript">JavaScript</a>
-        
-          ,
-          <a href="/tags.html#Date">Date</a>
-        
-      </span>
-      <time>September 18, 
-      <a href="/archives.html#2011">2011</a>
-    </footer>
+    <time datetime="2011-09-18T00:00:00.000Z">
+      <a href="/2011">2011年</a>09月18日
+    </time>
+  </footer>
     <section>
-        <div id="disqus_thread"></div>
-        <noscript>
+      <div id="disqus_thread"></div>
+      <noscript>
         要查看或参与评论，请启用 JavaScript 支持。<br />
         Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
-        </noscript>
+      </noscript>
     </section>
-<script type="text/javascript" src="/js/comments.js"></script>
-
-  </div>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
 
     <!-- Vimlike status bar -->
     <div id="status-bar">
@@ -238,7 +211,7 @@ new Date(undefined);// IE:NaN; Others:Invalid Date.
     </table>
 </div>
 
-<script type="text/javascript" src="/js/Vimlike.js"></script>
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
 <footer>
   <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
     alt="Creative Commons License" style="border-width: 0pt;"
@@ -247,8 +220,8 @@ new Date(undefined);// IE:NaN; Others:Invalid Date.
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
-    </p>
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
 </footer>
 </div>
 <script type="text/javascript">
@@ -257,8 +230,9 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 </script>
 <script type="text/javascript">
 try {
-var pageTracker=_gat._getTracker("UA-2048484-1");
-pageTracker._trackPageview();
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
 }catch(err){}</script>
-</body>
+
+  </body>
 </html>

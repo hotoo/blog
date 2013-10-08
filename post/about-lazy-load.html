@@ -1,58 +1,49 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
-<head>
-<!--[if IE]><script type="text/javascript" src="/js/html5.js"></script><![endif]-->
-<meta charset="UTF-8" />
-<meta name="generator" content="gvim" />
-<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-<!--<link rel="alternate" type="application/rss+xml" title="RSS"
-  href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />-->
-<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
-<link type="text/css" rel="stylesheet" href="/css/template.css" />
-<script type="text/javascript" src="/js/sea.js"></script>
-<script type="text/javascript">
-seajs.config({
-  alias: {
-    'jquery': 'jquery-1.8.3.min.js',
-    'hashchange': 'jquery.ba-hashchange.min.js'
-  }
-});
-seajs.use(["jquery", "default-main"], function(){
-    alert("default")
-});
-</script>
-<title>说说渐进加载 - 闲耘™.博客</title>
-</head>
-<body>
-<div id="wrapper">
-<header>
-<div style="float:right;">
-    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
-        <input type="text" name="q" />
-        <input type="submit" value="搜索" />
-    </form>
-</div>
-<nav>
-    <ul>
-        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
-        <li class="actived"><a href="/" title="Blog">Blog</a></li>
-        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
-        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
-        <li><a href="http://twitter.hotoo.me/" title="Twitter">Twitter</a></li>
-        <li class="last"><a href="/projects.html" title="Project">Project</a></li>
-        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
-    </ul>
-</nav>
-</header>
-<div id="container">
-  <div id="content">
-        <h1>说说渐进加载</h1>
-    <article>
-        <h1>说说渐进加载</h1>
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>说说渐进加载</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<ol>
+<div id="container">
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">说说渐进加载</h1>
+  <div class="entry-content"><ol>
 <li><p>google+, quora, twitter... 这些网站都使用渐进加载数据的方式，
 类似的还有淘宝图片的懒加载，都是等用户真正滚到最后之后才开始去加载，
 提前一些预加载体验不是更好么。</p></li>
@@ -60,59 +51,53 @@ seajs.use(["jquery", "default-main"], function(){
 没更多数据了，这不是蛋疼么？</p></li>
 </ol>
 
-
-<p>估计是基于算法上的考虑，比如每页 10 条：</p>
-
-<pre><code>dataList = select top 10 * from table where id &gt; 10 * page;
-for(var i=0,l=dataList.length; i&lt;l; i++){}
-hasMore = select top 1 * from table where id &gt; 10*(page+1);
-</code></pre>
-
+<p>估计是基于算法上的考虑，比如每页 10 条：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">dataList = select top <span class="number">10</span> * from table where id &gt; <span class="number">10</span> * page;
+<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,l=dataList.length; i&lt;l; i++){}
+hasMore = select top <span class="number">1</span> * from table where id &gt; <span class="number">10</span>*(page+<span class="number">1</span>);
+</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a>
+<a name="L1-3" href="#L1-3">3</a></pre></div></div>
 <p>这样要查询 2 次。</p>
 
-<p>不过只查数据库一次也是可以的：</p>
-
-<pre><code>datas = select top 11 * from table where id &gt; 10*page;
+<p>不过只查数据库一次也是可以的：</p><div class="highlight"><div class="codes"><div class="code"><pre>datas = select top 11 * from table where id &gt; 10*page;
 for(var i=0,l=min(data.length, 10); i&lt;l; i++){}
 hasMore = datas.length == 11;
-</code></pre>
-
+</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+<a name="L2-2" href="#L2-2">2</a>
+<a name="L2-3" href="#L2-3">3</a></pre></div></div>
 <p>好久不写后端程序，不知道他们这么做是否有基于其他的考虑？</p>
 
 <p>p.s. Google+ 个笨蛋居然剔除行首的有效空白，而不剔除行尾的无效空白。。。</p>
-
-<h2>See Also</h2>
-
+<h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="https://plus.google.com/108314985261981078822/posts/WrYSxHJnDXW">@Google+</a></li>
 </ul>
+</div>
 
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/UED">UED</a>
+      
+ , 
+      <a href="/tag/算法">算法</a>
+      
+    </span>
 
-    </article>
-    <footer class="post clearfix">
-      <span class="tags">
-        tags:
-        
-          
-          <a href="/tags.html#UED">UED</a>
-        
-          ,
-          <a href="/tags.html#算法">算法</a>
-        
-      </span>
-      <time>July  8, 
-      <a href="/archives.html#2011">2011</a>
-    </footer>
+    <time datetime="2011-07-08T00:00:00.000Z">
+      <a href="/2011">2011年</a>07月08日
+    </time>
+  </footer>
     <section>
-        <div id="disqus_thread"></div>
-        <noscript>
+      <div id="disqus_thread"></div>
+      <noscript>
         要查看或参与评论，请启用 JavaScript 支持。<br />
         Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
-        </noscript>
+      </noscript>
     </section>
-<script type="text/javascript" src="/js/comments.js"></script>
-
-  </div>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
 
     <!-- Vimlike status bar -->
     <div id="status-bar">
@@ -176,7 +161,7 @@ hasMore = datas.length == 11;
     </table>
 </div>
 
-<script type="text/javascript" src="/js/Vimlike.js"></script>
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
 <footer>
   <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
     alt="Creative Commons License" style="border-width: 0pt;"
@@ -185,8 +170,8 @@ hasMore = datas.length == 11;
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
-    </p>
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
 </footer>
 </div>
 <script type="text/javascript">
@@ -195,8 +180,9 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 </script>
 <script type="text/javascript">
 try {
-var pageTracker=_gat._getTracker("UA-2048484-1");
-pageTracker._trackPageview();
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
 }catch(err){}</script>
-</body>
+
+  </body>
 </html>

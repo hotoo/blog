@@ -1,56 +1,49 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
-<head>
-<!--[if IE]><script type="text/javascript" src="/js/html5.js"></script><![endif]-->
-<meta charset="UTF-8" />
-<meta name="generator" content="gvim" />
-<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-<!--<link rel="alternate" type="application/rss+xml" title="RSS"
-  href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />-->
-<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
-<link type="text/css" rel="stylesheet" href="/css/template.css" />
-<script type="text/javascript" src="/js/sea.js"></script>
-<script type="text/javascript">
-seajs.config({
-  alias: {
-    'jquery': 'jquery-1.8.3.min.js',
-    'hashchange': 'jquery.ba-hashchange.min.js'
-  }
-});
-seajs.use(["jquery", "default-main"], function(){
-    alert("default")
-});
-</script>
-<title>『逻辑与』是个好东西 - 闲耘™.博客</title>
-</head>
-<body>
-<div id="wrapper">
-<header>
-<div style="float:right;">
-    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
-        <input type="text" name="q" />
-        <input type="submit" value="搜索" />
-    </form>
-</div>
-<nav>
-    <ul>
-        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
-        <li class="actived"><a href="/" title="Blog">Blog</a></li>
-        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
-        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
-        <li><a href="http://twitter.hotoo.me/" title="Twitter">Twitter</a></li>
-        <li class="last"><a href="/projects.html" title="Project">Project</a></li>
-        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
-    </ul>
-</nav>
-</header>
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>『逻辑与』是个好东西</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
+
 <div id="container">
-  <div id="content">
-        <h1>『逻辑与』是个好东西</h1>
-    <article>
-        <p>一直很想实现 WebForms2 的语义化表单验证，最近才开始动手，执行力真差啊。</p>
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">『逻辑与』是个好东西</h1>
+  <div class="entry-content"><p>一直很想实现 WebForms2 的语义化表单验证，最近才开始动手，执行力真差啊。</p>
 
 <p>一个表单元素可以同时存在多种校验方案，比如：</p>
 
@@ -63,38 +56,60 @@ seajs.use(["jquery", "default-main"], function(){
 <li>异步访问服务器进行业务校验。</li>
 </ul>
 
-
-<p>通常可以通过逻辑判断进行处理：</p>
-
-<pre><code>function verifyFormInput(input){
-  if(!verifyRequired()){return false;}
-  if(!verifyMinLength()){return false;}
-  if(!verifyMaxLength()){return false;}
-  if(!verifyInputType()){return false;}
-  if(!verifyMin()){return false;}
-  if(!verifyMax()){return false;}
-  if(!verifyPattern()){return false;}
-  if(!verifyUserRules()){return false;}
-  if(!verifySync()){return false;}
-  return true;
+<p>通常可以通过逻辑判断进行处理：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">verifyFormInput</span><span class="params">(input)</span>{</span>
+  <span class="keyword">if</span>(!verifyRequired()){<span class="keyword">return</span> <span class="literal">false</span>;}
+  <span class="keyword">if</span>(!verifyMinLength()){<span class="keyword">return</span> <span class="literal">false</span>;}
+  <span class="keyword">if</span>(!verifyMaxLength()){<span class="keyword">return</span> <span class="literal">false</span>;}
+  <span class="keyword">if</span>(!verifyInputType()){<span class="keyword">return</span> <span class="literal">false</span>;}
+  <span class="keyword">if</span>(!verifyMin()){<span class="keyword">return</span> <span class="literal">false</span>;}
+  <span class="keyword">if</span>(!verifyMax()){<span class="keyword">return</span> <span class="literal">false</span>;}
+  <span class="keyword">if</span>(!verifyPattern()){<span class="keyword">return</span> <span class="literal">false</span>;}
+  <span class="keyword">if</span>(!verifyUserRules()){<span class="keyword">return</span> <span class="literal">false</span>;}
+  <span class="keyword">if</span>(!verifySync()){<span class="keyword">return</span> <span class="literal">false</span>;}
+  <span class="keyword">return</span> <span class="literal">true</span>;
 }
-function verifyForm(form){
-    var flags = [];
-    for(var i=0,l=form.elements.length; i&lt;l; i++){
-        // 一次只能校验一个表单元素异常。
-        //if(!verifyFormInput(form.elements[i])){return false;}
+<span class="function"><span class="keyword">function</span> <span class="title">verifyForm</span><span class="params">(form)</span>{</span>
+    <span class="keyword">var</span> flags = [];
+    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,l=form.elements.length; i&lt;l; i++){
+        <span class="comment">// 一次只能校验一个表单元素异常。</span>
+        <span class="comment">//if(!verifyFormInput(form.elements[i])){return false;}</span>
 
-        // 可以同时校验所有元素异常。但是需要辅助循环进行检查。
+        <span class="comment">// 可以同时校验所有元素异常。但是需要辅助循环进行检查。</span>
         flags[i] = verifyFormInput(form.elements[i]);
     }
-    // 辅助循环检查。
-    for(var i=0,l=flags.length; i&lt;l; i++){
-        if(!flags[i]){return false;}
+    <span class="comment">// 辅助循环检查。</span>
+    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,l=flags.length; i&lt;l; i++){
+        <span class="keyword">if</span>(!flags[i]){<span class="keyword">return</span> <span class="literal">false</span>;}
     }
-    return true;
+    <span class="keyword">return</span> <span class="literal">true</span>;
 }
-</code></pre>
-
+</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a>
+<a name="L1-3" href="#L1-3">3</a>
+<a name="L1-4" href="#L1-4">4</a>
+<a name="L1-5" href="#L1-5">5</a>
+<a name="L1-6" href="#L1-6">6</a>
+<a name="L1-7" href="#L1-7">7</a>
+<a name="L1-8" href="#L1-8">8</a>
+<a name="L1-9" href="#L1-9">9</a>
+<a name="L1-10" href="#L1-10">10</a>
+<a name="L1-11" href="#L1-11">11</a>
+<a name="L1-12" href="#L1-12">12</a>
+<a name="L1-13" href="#L1-13">13</a>
+<a name="L1-14" href="#L1-14">14</a>
+<a name="L1-15" href="#L1-15">15</a>
+<a name="L1-16" href="#L1-16">16</a>
+<a name="L1-17" href="#L1-17">17</a>
+<a name="L1-18" href="#L1-18">18</a>
+<a name="L1-19" href="#L1-19">19</a>
+<a name="L1-20" href="#L1-20">20</a>
+<a name="L1-21" href="#L1-21">21</a>
+<a name="L1-22" href="#L1-22">22</a>
+<a name="L1-23" href="#L1-23">23</a>
+<a name="L1-24" href="#L1-24">24</a>
+<a name="L1-25" href="#L1-25">25</a>
+<a name="L1-26" href="#L1-26">26</a>
+<a name="L1-27" href="#L1-27">27</a></pre></div></div>
 <p>实际代码中，各个 <code>verifyXXX</code> 函数可能内联在 <code>verifyFormInput</code> 函数中，
 代码显得多而有点乱，甚至有点冗余。</p>
 
@@ -107,52 +122,51 @@ function verifyForm(form){
 <li>整个表单的所有表单元素都通过验证时，才算这个表单通过验证。</li>
 </ul>
 
-
 <p>同时基于『逻辑与』表达式的语言特性，一旦前面的条件可以判断逻辑失败，立即返回
 失败，不再进行后面的条件判断。</p>
 
 <p>LogicalANDExpression:</p>
 
-<blockquote><p><em>Semantics</em></p>
+<blockquote>
+<p><em>Semantics</em></p>
 
 <p>The production LogicalANDExpression : LogicalANDExpression &amp;&amp;
 BitwiseORExpression is evaluated as follows:</p>
 
 <ol>
-<li> Evaluate LogicalANDExpression.</li>
-<li> Call GetValue(Result(1)).</li>
-<li> Call ToBoolean(Result(2)).</li>
-<li> If Result(3) is <em>false</em>, return Result(2).</li>
-<li> Evaluate BitwiseORExpression.</li>
-<li> Call GetValue(Result(5)).</li>
-<li> Return Result(6).</li>
+<li>Evaluate LogicalANDExpression.</li>
+<li>Call GetValue(Result(1)).</li>
+<li>Call ToBoolean(Result(2)).</li>
+<li>If Result(3) is <em>false</em>, return Result(2).</li>
+<li>Evaluate BitwiseORExpression.</li>
+<li>Call GetValue(Result(5)).</li>
+<li>Return Result(6).</li>
 </ol>
 </blockquote>
 
 <p>BitwiseORExpression:</p>
 
-<blockquote><p>  <em>Semantics</em></p>
+<blockquote>
+<p><em>Semantics</em></p>
 
-<p>  The production A : A@B, where @ is one of the bitwise operators in the
+<p>The production A : A@B, where @ is one of the bitwise operators in the
   productions above, is evaluated as follows:</p>
 
 <ol>
-<li> Evaluate A.</li>
-<li> Call GetValue(Result(1)).</li>
-<li> Evaluate B.</li>
-<li> Call GetValue(Result(3)).</li>
-<li> Call ToInt32(Result(2)).</li>
-<li> Call ToInt32(Result(4)).</li>
-<li> Apply the bitwise operator @ to Result(5) and Result(6). The result is
+<li>Evaluate A.</li>
+<li>Call GetValue(Result(1)).</li>
+<li>Evaluate B.</li>
+<li>Call GetValue(Result(3)).</li>
+<li>Call ToInt32(Result(2)).</li>
+<li>Call ToInt32(Result(4)).</li>
+<li>Apply the bitwise operator @ to Result(5) and Result(6). The result is
 a signed 32 bit integer.</li>
-<li> Return Result(7).</li>
+<li>Return Result(7).</li>
 </ol>
 </blockquote>
 
-<p>于是验证算法改良如下：</p>
-
-<pre><code>function verifyFormInput(input){
-    var certified = true;
+<p>于是验证算法改良如下：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">verifyFormInput</span><span class="params">(input)</span>{</span>
+    <span class="keyword">var</span> certified = <span class="literal">true</span>;
     certified = certified &amp;&amp; verifyRequired();
     certified = certified &amp;&amp; verifyMinLength();
     certified = certified &amp;&amp; verifyMaxLength();
@@ -162,67 +176,79 @@ a signed 32 bit integer.</li>
     certified = certified &amp;&amp; verifyPattern();
     certified = certified &amp;&amp; verifyUserRules();
     certified = certified &amp;&amp; verifySync();
-    return certified;
+    <span class="keyword">return</span> certified;
 }
-function verifyForm(form){
-    var certified = true;
-    for(var i=0,flag,l=form.elements.length; i&lt;l; i++){
-        // 一次只能校验一个表单元素异常。
-        //certified = certified &amp;&amp; verifyFormInput(form.elements[i]);
+<span class="function"><span class="keyword">function</span> <span class="title">verifyForm</span><span class="params">(form)</span>{</span>
+    <span class="keyword">var</span> certified = <span class="literal">true</span>;
+    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,flag,l=form.elements.length; i&lt;l; i++){
+        <span class="comment">// 一次只能校验一个表单元素异常。</span>
+        <span class="comment">//certified = certified &amp;&amp; verifyFormInput(form.elements[i]);</span>
 
-        // 可以同时校验所有元素异常。无需辅助循环进行检查。
+        <span class="comment">// 可以同时校验所有元素异常。无需辅助循环进行检查。</span>
         flag = verifyFormInput(form.elements[i]);
         certified = certified &amp;&amp; flag;
     }
-    return certified;
+    <span class="keyword">return</span> certified;
 }
-</code></pre>
-
-<h2>延伸</h2>
-
-<p>以前也 Hack 的用过逻辑与表达式，比如：</p>
-
-<pre><code>flag &amp;&amp; action();
-</code></pre>
-
-<p>但这个用法只是用到了条件判断的作用，类似于：</p>
-
-<pre><code>if(flag){action();}
-</code></pre>
-
-<h2>参考阅读</h2>
-
+</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+<a name="L2-2" href="#L2-2">2</a>
+<a name="L2-3" href="#L2-3">3</a>
+<a name="L2-4" href="#L2-4">4</a>
+<a name="L2-5" href="#L2-5">5</a>
+<a name="L2-6" href="#L2-6">6</a>
+<a name="L2-7" href="#L2-7">7</a>
+<a name="L2-8" href="#L2-8">8</a>
+<a name="L2-9" href="#L2-9">9</a>
+<a name="L2-10" href="#L2-10">10</a>
+<a name="L2-11" href="#L2-11">11</a>
+<a name="L2-12" href="#L2-12">12</a>
+<a name="L2-13" href="#L2-13">13</a>
+<a name="L2-14" href="#L2-14">14</a>
+<a name="L2-15" href="#L2-15">15</a>
+<a name="L2-16" href="#L2-16">16</a>
+<a name="L2-17" href="#L2-17">17</a>
+<a name="L2-18" href="#L2-18">18</a>
+<a name="L2-19" href="#L2-19">19</a>
+<a name="L2-20" href="#L2-20">20</a>
+<a name="L2-21" href="#L2-21">21</a>
+<a name="L2-22" href="#L2-22">22</a>
+<a name="L2-23" href="#L2-23">23</a>
+<a name="L2-24" href="#L2-24">24</a>
+<a name="L2-25" href="#L2-25">25</a></pre></div></div><h2 id="延伸">延伸</h2>
+<p>以前也 Hack 的用过逻辑与表达式，比如：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">flag &amp;&amp; action();
+</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a></pre></div></div>
+<p>但这个用法只是用到了条件判断的作用，类似于：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">if</span>(flag){action();}
+</code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a></pre></div></div><h2 id="参考阅读">参考阅读</h2>
 <ul>
 <li><a href="http://www.ecmascript.org/">ECMAScript</a></li>
 <li><a href="http://zh.wikipedia.org/wiki/%E9%80%BB%E8%BE%91%E4%B8%8E">逻辑与</a>
-  <a href="http://en.wikipedia.org/wiki/Logical_conjunction">Logical_conjunction</a></li>
+<a href="http://en.wikipedia.org/wiki/Logical_conjunction">Logical_conjunction</a></li>
 <li><a href="http://zh.wikipedia.org/wiki/%E4%B8%8E%E9%97%A8">与门</a>
-  <a href="http://en.wikipedia.org/wiki/AND_gate">AND_gate</a></li>
+<a href="http://en.wikipedia.org/wiki/AND_gate">AND_gate</a></li>
 </ul>
+</div>
 
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/JavaScript">JavaScript</a>
+      
+    </span>
 
-    </article>
-    <footer class="post clearfix">
-      <span class="tags">
-        tags:
-        
-          
-          <a href="/tags.html#JavaScript">JavaScript</a>
-        
-      </span>
-      <time>May  1, 
-      <a href="/archives.html#2012">2012</a>
-    </footer>
+    <time datetime="2012-05-01T00:00:00.000Z">
+      <a href="/2012">2012年</a>05月01日
+    </time>
+  </footer>
     <section>
-        <div id="disqus_thread"></div>
-        <noscript>
+      <div id="disqus_thread"></div>
+      <noscript>
         要查看或参与评论，请启用 JavaScript 支持。<br />
         Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
-        </noscript>
+      </noscript>
     </section>
-<script type="text/javascript" src="/js/comments.js"></script>
-
-  </div>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
 
     <!-- Vimlike status bar -->
     <div id="status-bar">
@@ -286,7 +312,7 @@ function verifyForm(form){
     </table>
 </div>
 
-<script type="text/javascript" src="/js/Vimlike.js"></script>
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
 <footer>
   <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
     alt="Creative Commons License" style="border-width: 0pt;"
@@ -295,8 +321,8 @@ function verifyForm(form){
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
-    </p>
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
 </footer>
 </div>
 <script type="text/javascript">
@@ -305,8 +331,9 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 </script>
 <script type="text/javascript">
 try {
-var pageTracker=_gat._getTracker("UA-2048484-1");
-pageTracker._trackPageview();
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
 }catch(err){}</script>
-</body>
+
+  </body>
 </html>

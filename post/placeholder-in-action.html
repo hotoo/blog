@@ -1,58 +1,49 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
-<head>
-<!--[if IE]><script type="text/javascript" src="/js/html5.js"></script><![endif]-->
-<meta charset="UTF-8" />
-<meta name="generator" content="gvim" />
-<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-<!--<link rel="alternate" type="application/rss+xml" title="RSS"
-  href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />-->
-<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
-<link type="text/css" rel="stylesheet" href="/css/template.css" />
-<script type="text/javascript" src="/js/sea.js"></script>
-<script type="text/javascript">
-seajs.config({
-  alias: {
-    'jquery': 'jquery-1.8.3.min.js',
-    'hashchange': 'jquery.ba-hashchange.min.js'
-  }
-});
-seajs.use(["jquery", "default-main"], function(){
-    alert("default")
-});
-</script>
-<title>placeholder 最佳实践 - 闲耘™.博客</title>
-</head>
-<body>
-<div id="wrapper">
-<header>
-<div style="float:right;">
-    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
-        <input type="text" name="q" />
-        <input type="submit" value="搜索" />
-    </form>
-</div>
-<nav>
-    <ul>
-        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
-        <li class="actived"><a href="/" title="Blog">Blog</a></li>
-        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
-        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
-        <li><a href="http://twitter.hotoo.me/" title="Twitter">Twitter</a></li>
-        <li class="last"><a href="/projects.html" title="Project">Project</a></li>
-        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
-    </ul>
-</nav>
-</header>
-<div id="container">
-  <div id="content">
-        <h1>placeholder 最佳实践</h1>
-    <article>
-        <h1>placeholder 最佳实践</h1>
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>placeholder 最佳实践</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<p><a href="http://dev.w3.org/html5/spec/Overview.html#the-placeholder-attribute">placeholder</a>
+<div id="container">
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">placeholder 最佳实践</h1>
+  <div class="entry-content"><p><a href="http://dev.w3.org/html5/spec/Overview.html#the-placeholder-attribute">placeholder</a>
 <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/common-input-element-attributes.html#the-placeholder-attribute">2</a>
 是 HTML5 中的标准属性，它用于定义显示在输入框中的简短提示信息，并在适当的时机
 （比如在输入框获得焦点时）隐匿起来。</p>
@@ -67,28 +58,42 @@ seajs.use(["jquery", "default-main"], function(){
 <p>早期的实现中还有一个比较不好的问题是，代码里直接判断 input.value 是否为空，
 或者是否为占位符提示的值，如果用户输入的内容如果碰巧和占位符提示相同，则会出现误判。</p>
 
-<p>下面可以说是早期思想中一个较佳的实现：</p>
-
-<pre><code>$("input[placeholder]").each(function(){
+<p>下面可以说是早期思想中一个较佳的实现：</p><div class="highlight"><div class="codes"><div class="code"><pre>$(&quot;input[placeholder]&quot;).each(function(){
     var o=$(this);
     if(!o.val()){
-        o.val(o.attr("placeholder"));
-        o.addClass("placeholder")
+        o.val(o.attr(&quot;placeholder&quot;));
+        o.addClass(&quot;placeholder&quot;)
     }
     o.focus(function(){
-        if(o.hasClass("placeholder")){
-            o.val("");
-            o.removeClass("placeholder");
+        if(o.hasClass(&quot;placeholder&quot;)){
+            o.val(&quot;&quot;);
+            o.removeClass(&quot;placeholder&quot;);
         }
     }).blur(function(){
-        if(""==o.val()){
-            o.val(o.attr("placeholder"));
-            o.addClass("placeholder");
+        if(&quot;&quot;==o.val()){
+            o.val(o.attr(&quot;placeholder&quot;));
+            o.addClass(&quot;placeholder&quot;);
         }
     });
 });
-</code></pre>
-
+</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a>
+<a name="L1-3" href="#L1-3">3</a>
+<a name="L1-4" href="#L1-4">4</a>
+<a name="L1-5" href="#L1-5">5</a>
+<a name="L1-6" href="#L1-6">6</a>
+<a name="L1-7" href="#L1-7">7</a>
+<a name="L1-8" href="#L1-8">8</a>
+<a name="L1-9" href="#L1-9">9</a>
+<a name="L1-10" href="#L1-10">10</a>
+<a name="L1-11" href="#L1-11">11</a>
+<a name="L1-12" href="#L1-12">12</a>
+<a name="L1-13" href="#L1-13">13</a>
+<a name="L1-14" href="#L1-14">14</a>
+<a name="L1-15" href="#L1-15">15</a>
+<a name="L1-16" href="#L1-16">16</a>
+<a name="L1-17" href="#L1-17">17</a>
+<a name="L1-18" href="#L1-18">18</a></pre></div></div>
 <p>但是即使如此，直接修改 input.value 同样会有一个几乎无法避免的问题：假如用户在必填项中没有
 输入任何内容，但是占位符会填充其内容，在提交表单时，当然也可以通过判断 input 是否包含
 <code>placeholder</code> 样式类来针对性处理。但是特殊地，当页面出现脚本错误（这应该说不少见），导致
@@ -108,18 +113,15 @@ seajs.use(["jquery", "default-main"], function(){
 <li>占位符的位置，可以直接使用 CSS 的相对位置实现，也可以使用 JavaScript 计算获得。</li>
 </ul>
 
-
-<p>比如下面的实现：</p>
-
-<pre><code>$('input[placeholder],textarea[placeholder]').each(function(){
-    var ME=$(this), id=ME.attr('id'), txt=ME.attr('placeholder');
+<p>比如下面的实现：</p><div class="highlight"><div class="codes"><div class="code"><pre>$(&#39;input[placeholder],textarea[placeholder]&#39;).each(function(){
+    var ME=$(this), id=ME.attr(&#39;id&#39;), txt=ME.attr(&#39;placeholder&#39;);
     if(!id){
-        id="rand_ID_"+Math.random().toString().substr(2);
-        ME.attr('id', id);
+        id=&quot;rand_ID_&quot;+Math.random().toString().substr(2);
+        ME.attr(&#39;id&#39;, id);
     }
-    var holder=$('&lt;label for="'+id+'" class="placeholder"&gt;'+txt+'&lt;/label&gt;')
+    var holder=$(&#39;&lt;label for=&quot;&#39;+id+&#39;&quot; class=&quot;placeholder&quot;&gt;&#39;+txt+&#39;&lt;&#47;label&gt;&#39;)
     if(holder.width&gt;ME.width()){
-        holder.css({"width":ME.width()});
+        holder.css({&quot;width&quot;:ME.width()});
     }
     ME.before(holder);
     function hanlder(){
@@ -129,7 +131,7 @@ seajs.use(["jquery", "default-main"], function(){
             holder.show();
         }
     }
-    if("keyup"==placeholder_handler){
+    if(&quot;keyup&quot;==placeholder_handler){
         ME.keyup(hanlder);
     }else{
         ME.focus(function(){
@@ -139,55 +141,74 @@ seajs.use(["jquery", "default-main"], function(){
     ME.blur(hanlder);
     if(!ME.val()){holder.show();}
 });
-</code></pre>
-
-<p>另外对于已经支持 <code>placeholder</code> 的浏览器可以忽略上面的代码，而使用浏览器的默认实现。</p>
-
-<pre><code>if(!("placeholder" in document.createElement("input"))){
-    // ...
+</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+<a name="L2-2" href="#L2-2">2</a>
+<a name="L2-3" href="#L2-3">3</a>
+<a name="L2-4" href="#L2-4">4</a>
+<a name="L2-5" href="#L2-5">5</a>
+<a name="L2-6" href="#L2-6">6</a>
+<a name="L2-7" href="#L2-7">7</a>
+<a name="L2-8" href="#L2-8">8</a>
+<a name="L2-9" href="#L2-9">9</a>
+<a name="L2-10" href="#L2-10">10</a>
+<a name="L2-11" href="#L2-11">11</a>
+<a name="L2-12" href="#L2-12">12</a>
+<a name="L2-13" href="#L2-13">13</a>
+<a name="L2-14" href="#L2-14">14</a>
+<a name="L2-15" href="#L2-15">15</a>
+<a name="L2-16" href="#L2-16">16</a>
+<a name="L2-17" href="#L2-17">17</a>
+<a name="L2-18" href="#L2-18">18</a>
+<a name="L2-19" href="#L2-19">19</a>
+<a name="L2-20" href="#L2-20">20</a>
+<a name="L2-21" href="#L2-21">21</a>
+<a name="L2-22" href="#L2-22">22</a>
+<a name="L2-23" href="#L2-23">23</a>
+<a name="L2-24" href="#L2-24">24</a>
+<a name="L2-25" href="#L2-25">25</a>
+<a name="L2-26" href="#L2-26">26</a>
+<a name="L2-27" href="#L2-27">27</a>
+<a name="L2-28" href="#L2-28">28</a></pre></div></div>
+<p>另外对于已经支持 <code>placeholder</code> 的浏览器可以忽略上面的代码，而使用浏览器的默认实现。</p><div class="highlight"><div class="codes"><div class="code"><pre>if(!(&quot;placeholder&quot; in document.createElement(&quot;input&quot;))){
+    &#47;&#47; ...
 }
-</code></pre>
-
-<h2>延伸阅读</h2>
-
+</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+<a name="L3-2" href="#L3-2">2</a>
+<a name="L3-3" href="#L3-3">3</a></pre></div></div><h2 id="延伸阅读">延伸阅读</h2>
 <ul>
 <li><a href="http://diveintohtml5.org/forms.html#placeholder">diveintohtml5.org#placeholder</a></li>
 <li><a href="http://cssrainbow.cn/demos/892.html">让所有的浏览器都支持 HTML5 placeholder 属性，基于MooTools</a></li>
 <li><a href="http://www.quanlei.com/2010/09/%E8%B7%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84html5-placeholder-%E5%AE%9E%E7%8E%B0/">跨浏览器的HTML5 placeholder 实现</a></li>
 <li><a href="http://www.zhoumingzhi.com/2009/12/17/inline-form-labels/">Inline Form Labels</a>，
-  <a href="http://www.zhoumingzhi.com/2010/08/10/inline-form-labels-2/">Inline Form Labels（2）</a></li>
+<a href="http://www.zhoumingzhi.com/2010/08/10/inline-form-labels-2/">Inline Form Labels（2）</a></li>
 <li><a href="http://www.kamikazemusic.com/quick-tips/jquery-html5-placeholder-fix/">JQuery HTML5 placeholder fix</a></li>
 </ul>
+</div>
 
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/JavaScript">JavaScript</a>
+      
+ , 
+      <a href="/tag/HTML5">HTML5</a>
+      
+    </span>
 
-    </article>
-    <footer class="post clearfix">
-      <span class="tags">
-        tags:
-        
-          
-          <a href="/tags.html#JavaScript">JavaScript</a>
-        
-          ,
-          <a href="/tags.html#HTML5">HTML5</a>
-        
-          ,
-          <a href="/tags.html#placeholder">placeholder</a>
-        
-      </span>
-      <time>December  6, 
-      <a href="/archives.html#2010">2010</a>
-    </footer>
+    <time datetime="2010-12-06T00:00:00.000Z">
+      <a href="/2010">2010年</a>12月06日
+    </time>
+  </footer>
     <section>
-        <div id="disqus_thread"></div>
-        <noscript>
+      <div id="disqus_thread"></div>
+      <noscript>
         要查看或参与评论，请启用 JavaScript 支持。<br />
         Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
-        </noscript>
+      </noscript>
     </section>
-<script type="text/javascript" src="/js/comments.js"></script>
-
-  </div>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
 
     <!-- Vimlike status bar -->
     <div id="status-bar">
@@ -251,7 +272,7 @@ seajs.use(["jquery", "default-main"], function(){
     </table>
 </div>
 
-<script type="text/javascript" src="/js/Vimlike.js"></script>
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
 <footer>
   <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
     alt="Creative Commons License" style="border-width: 0pt;"
@@ -260,8 +281,8 @@ seajs.use(["jquery", "default-main"], function(){
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
-    </p>
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
 </footer>
 </div>
 <script type="text/javascript">
@@ -270,8 +291,9 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 </script>
 <script type="text/javascript">
 try {
-var pageTracker=_gat._getTracker("UA-2048484-1");
-pageTracker._trackPageview();
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
 }catch(err){}</script>
-</body>
+
+  </body>
 </html>

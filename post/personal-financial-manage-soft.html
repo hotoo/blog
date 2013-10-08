@@ -1,56 +1,49 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
-<head>
-<!--[if IE]><script type="text/javascript" src="/js/html5.js"></script><![endif]-->
-<meta charset="UTF-8" />
-<meta name="generator" content="gvim" />
-<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-<!--<link rel="alternate" type="application/rss+xml" title="RSS"
-  href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />-->
-<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
-<link type="text/css" rel="stylesheet" href="/css/template.css" />
-<script type="text/javascript" src="/js/sea.js"></script>
-<script type="text/javascript">
-seajs.config({
-  alias: {
-    'jquery': 'jquery-1.8.3.min.js',
-    'hashchange': 'jquery.ba-hashchange.min.js'
-  }
-});
-seajs.use(["jquery", "default-main"], function(){
-    alert("default")
-});
-</script>
-<title>个人资金管理软件 - 闲耘™.博客</title>
-</head>
-<body>
-<div id="wrapper">
-<header>
-<div style="float:right;">
-    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
-        <input type="text" name="q" />
-        <input type="submit" value="搜索" />
-    </form>
-</div>
-<nav>
-    <ul>
-        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
-        <li class="actived"><a href="/" title="Blog">Blog</a></li>
-        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
-        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
-        <li><a href="http://twitter.hotoo.me/" title="Twitter">Twitter</a></li>
-        <li class="last"><a href="/projects.html" title="Project">Project</a></li>
-        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
-    </ul>
-</nav>
-</header>
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>个人资金管理软件</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
+
 <div id="container">
-  <div id="content">
-        <h1>个人资金管理软件</h1>
-    <article>
-        <p>过年花掉不少钱，而其中有一部分是喜酒之类的礼金，按照礼尚往来的习俗，这些礼金
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">个人资金管理软件</h1>
+  <div class="entry-content"><p>过年花掉不少钱，而其中有一部分是喜酒之类的礼金，按照礼尚往来的习俗，这些礼金
 早晚都是要被送回来的，而被送回来的途径，则是喜酒回请。</p>
 
 <p>这些俗礼，即使不是为了收回礼金，回请对方也是必须的。</p>
@@ -62,11 +55,8 @@ seajs.use(["jquery", "default-main"], function(){
 的软件，两者同步数据是必须的要求。毕竟移动设备记账有很多的便利优势，而 PC 做
 更细致的管理与分析则更为方便和强大。</p>
 
-<!--more-->
-
-
-<h2>GNUCash</h2>
-
+<a name="more"></a>
+<h2 id="gnucash">GNUCash</h2>
 <p><a href="http://www.gnucash.org/">GNUCash</a> 非常有名，也是我最早知道的开源金融管理软件
 之一，复式记账一直是我觉得很厉害但是又不明白的概念。后来看了一些金融相关不入门
 的信息，才有所了解。</p>
@@ -79,9 +69,7 @@ seajs.use(["jquery", "default-main"], function(){
 还是将数据库的。原来 GNUCash 使用的是 MySQL 存储数据？</p>
 
 <p>GNUCash 目前支持 Windows, Mac, Linux, 和 Android 平台。</p>
-
-<h2>iCash</h2>
-
+<h2 id="icash">iCash</h2>
 <p>后来看到有人推荐使用 <a href="http://www.maxprog.com/site/software/personal-finance/icash_sheet_us.php">iCash</a>，
 Mac 下 <code>i</code> 系列的好像都不错，于是尝试了下。</p>
 
@@ -95,9 +83,7 @@ Mac 下 <code>i</code> 系列的好像都不错，于是尝试了下。</p>
 
 <p>填了不到 50条左右（存储的 .icash 文件有 23.8M 这么大）就烦了，
 于是继续寻找其他软件。</p>
-
-<h2>Money</h2>
-
+<h2 id="money">Money</h2>
 <p>最后才找到 <a href="http://www.jumsoft.com/money/">Money by jumsoft</a> 界面设计非常赞，
 大部分使用体验也很棒，有部分瑕疵，而最要命的启动速度非常慢，导入从 iCash
 导出的 QIF 格式数据(.money 文件 500+KB) 启动时间大概需要 10秒。</p>
@@ -112,38 +98,38 @@ Mac 下 <code>i</code> 系列的好像都不错，于是尝试了下。</p>
 
 <p>总之是很赞啦，如果解决了性能问题就更好了，还有就是缺少中文本地化，另外 Mac 版
 显示全部交易也不好，还有那啥~</p>
+</div>
 
-    </article>
-    <footer class="post clearfix">
-      <span class="tags">
-        tags:
-        
-          
-          <a href="/tags.html#金融管理">金融管理</a>
-        
-          ,
-          <a href="/tags.html#软件">软件</a>
-        
-          ,
-          <a href="/tags.html#Mac OS X">Mac OS X</a>
-        
-          ,
-          <a href="/tags.html#iOS">iOS</a>
-        
-      </span>
-      <time>February 17, 
-      <a href="/archives.html#2013">2013</a>
-    </footer>
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/金融管理">金融管理</a>
+      
+ , 
+      <a href="/tag/软件">软件</a>
+      
+ , 
+      <a href="/tag/Mac OS X">Mac OS X</a>
+      
+ , 
+      <a href="/tag/iOS">iOS</a>
+      
+    </span>
+
+    <time datetime="2013-02-17T00:00:00.000Z">
+      <a href="/2013">2013年</a>02月17日
+    </time>
+  </footer>
     <section>
-        <div id="disqus_thread"></div>
-        <noscript>
+      <div id="disqus_thread"></div>
+      <noscript>
         要查看或参与评论，请启用 JavaScript 支持。<br />
         Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
-        </noscript>
+      </noscript>
     </section>
-<script type="text/javascript" src="/js/comments.js"></script>
-
-  </div>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
 
     <!-- Vimlike status bar -->
     <div id="status-bar">
@@ -207,7 +193,7 @@ Mac 下 <code>i</code> 系列的好像都不错，于是尝试了下。</p>
     </table>
 </div>
 
-<script type="text/javascript" src="/js/Vimlike.js"></script>
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
 <footer>
   <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
     alt="Creative Commons License" style="border-width: 0pt;"
@@ -216,8 +202,8 @@ Mac 下 <code>i</code> 系列的好像都不错，于是尝试了下。</p>
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
-    </p>
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
 </footer>
 </div>
 <script type="text/javascript">
@@ -226,8 +212,9 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 </script>
 <script type="text/javascript">
 try {
-var pageTracker=_gat._getTracker("UA-2048484-1");
-pageTracker._trackPageview();
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
 }catch(err){}</script>
-</body>
+
+  </body>
 </html>

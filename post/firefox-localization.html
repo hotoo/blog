@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>Firefox本地化及其切换</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
+
+<div id="container">
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">Firefox本地化及其切换</h1>
+  <div class="entry-content"><p>昨天用Firefox内置的下载管理器下载一个较大的文件，而且新搬来这边的网速慢到让我想起
+令人怀念的大学时期（那时候的校园网，不是一般人能够忍受的），无意中我看到下载管理器里
+当前下载的文件下显示着“第x小时，剩余x分钟”的提示（不超过一小时时，只显示“剩余x分钟”）。
+看到这个提示，我当时有两种想法：</p>
+
+<ul>
+<li>Firefox下载管理器的剩余时间计算方法比较有趣，将每小时的下载分段，
+所以就有了第1小时，剩余20分钟的说法；</li>
+<li>翻译问题，实际应该是剩余1小时又20分钟的意思。</li>
+</ul>
+
+<p>这两种理解方式都有其道理，而且在我最初看来，是各占 50% 的。</p>
+
+<p>为了打消疑问，我Google，Baidu试了个遍，但是没有找到一条符合的记录，
+于是又尝试问一些对Firefox有/无兴趣的朋友，以及mozine的Gtalk群友，
+但是大伙都没有注意到这个，只能给个猜测的结果。</p>
+
+<p>为了找到答案，就需要知道Firefox英文版是怎么说的，但是我还不想为此再装一个英文版Firefox，
+那么怎么切换本地化语言呢，又是大肆搜罗一番，找到一些近似的，这里整理如下：</p>
+<h2 id="切换方法-i">切换方法 I:</h2>
+<ul>
+<li>about:config</li>
+<li>general.useragent.locale由zh-CN改为en-US。
+（前提：Firefox/chrome/目录下有en-US.jar和en-US.manifest）</li>
+</ul>
+<h2 id="切换方法-ii">切换方法 II:</h2>
+<ul>
+<li><a href="http://releases.mozilla.org/pub/mozilla.org/firefox/releases/%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%AF%B9%E5%BA%94%E7%9A%84%E8%AF%AD%E8%A8%80%E5%8C%85(.xpi)%E3%80%82">http://releases.mozilla.org/pub/mozilla.org/firefox/releases/下载安装对应的语言包(.xpi)。</a></li>
+<li>启用该语言包（安装后默认启用）并重启Firefox。</li>
+</ul>
+
+<p>例如我的Firefox版本3.0.3，Windows，则语言包文件地址为：
+<a href="http://releases.mozilla.org/pub/mozilla.org/firefox/releases/3.0.3/win32/xpi/en-GB.xpi">http://releases.mozilla.org/pub/mozilla.org/firefox/releases/3.0.3/win32/xpi/en-GB.xpi</a>
+（粗体为Firefox对应的版本号）。</p>
+
+<p>注意：<a href="http://releases.mozilla.org/pub/mozilla.org/firefox/releases/">http://releases.mozilla.org/pub/mozilla.org/firefox/releases/</a>
+下的目录并不会列出xpi文件，将正确的版本号替换粗体部分，直接拷贝到地址栏回车即可。</p>
+
+<p>安装并重启之后，可以看到Add-ons - 语言页签下会列出刚安装的English(GB) Language Pack语言包，想撤回中文时，禁用此语言包，重启Firefox即可。</p>
+<h2 id="iii">III:</h2>
+<p>另外还有几个用来切换本地化语言的扩展，<a href="https://addons.mozilla.org/en-US/firefox/addon/356">Locale Switcher</a> 和
+<a href="https://addons.mozilla.org/zh-CN/firefox/addon/1333">Quick Locale Switcher</a>，
+它们可以让Firefox直接在菜单栏切换语言。</p>
+
+<p>言归正传，话说回来，切换为英文语言后，尝试大文件下载发现原文是类似于
+<code>2 hours, 8 minutes remaining</code> 这样的提示，意思是剩余2小时8分钟。</p>
+
+<p>Firefox 中文版的这个翻译确实不怎么样。</p>
+</div>
+
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/Firefox">Firefox</a>
+      
+    </span>
+
+    <time datetime="2008-11-14T00:00:00.000Z">
+      <a href="/2008">2008年</a>11月14日
+    </time>
+  </footer>
+    <section>
+      <div id="disqus_thread"></div>
+      <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+      </noscript>
+    </section>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
+
+    <!-- Vimlike status bar -->
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
+<footer>
+  <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
+    alt="Creative Commons License" style="border-width: 0pt;"
+    src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"/></a>
+  This work is licensed under a
+  <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
+    Commons Attribution 2.5 Generic License</a>.<br/>
+  Copyleft &copy; 2005-2013, Power by
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
+</footer>
+</div>
+<script type="text/javascript">
+var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
+}catch(err){}</script>
+
+  </body>
+</html>

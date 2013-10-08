@@ -1,69 +1,62 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
-<head>
-<!--[if IE]><script type="text/javascript" src="/js/html5.js"></script><![endif]-->
-<meta charset="UTF-8" />
-<meta name="generator" content="gvim" />
-<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-<!--<link rel="alternate" type="application/rss+xml" title="RSS"
-  href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />-->
-<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
-<link type="text/css" rel="stylesheet" href="/css/template.css" />
-<script type="text/javascript" src="/js/sea.js"></script>
-<script type="text/javascript">
-seajs.config({
-  alias: {
-    'jquery': 'jquery-1.8.3.min.js',
-    'hashchange': 'jquery.ba-hashchange.min.js'
-  }
-});
-seajs.use(["jquery", "default-main"], function(){
-    alert("default")
-});
-</script>
-<title>深入 hasAttribute - 闲耘™.博客</title>
-</head>
-<body>
-<div id="wrapper">
-<header>
-<div style="float:right;">
-    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
-        <input type="text" name="q" />
-        <input type="submit" value="搜索" />
-    </form>
-</div>
-<nav>
-    <ul>
-        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
-        <li class="actived"><a href="/" title="Blog">Blog</a></li>
-        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
-        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
-        <li><a href="http://twitter.hotoo.me/" title="Twitter">Twitter</a></li>
-        <li class="last"><a href="/projects.html" title="Project">Project</a></li>
-        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
-    </ul>
-</nav>
-</header>
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>深入 hasAttribute</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
+
 <div id="container">
-  <div id="content">
-        <h1>深入 hasAttribute</h1>
-    <article>
-        <h1>深入 hasAttribute</h1>
-
-<p>众所周知，IE 的 HTMLElement 对象不支持 hasAttribute 方法，于是有了如下实现：
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">深入 hasAttribute</h1>
+  <div class="entry-content"><p>众所周知，IE 的 HTMLElement 对象不支持 hasAttribute 方法，于是有了如下实现：
 它针对不支持 hasAttribute 方法的浏览器，检查 getAttribute 得到的是否等于 null，
-如果是 null 则表明这个 HTMLElement 不存在指定的 Attribute。很聪明的一个方法。</p>
-
-<pre><code>function hasAttr(elem, attr){
-    if(elem.hasAttribute){
-        return elem.hasAttribute(attr);
+如果是 null 则表明这个 HTMLElement 不存在指定的 Attribute。很聪明的一个方法。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">hasAttr</span><span class="params">(elem, attr)</span>{</span>
+    <span class="keyword">if</span>(elem.hasAttribute){
+        <span class="keyword">return</span> elem.hasAttribute(attr);
     }
-    return null!=elem.getAttribute(attr);
+    <span class="keyword">return</span> <span class="literal">null</span>!=elem.getAttribute(attr);
 }
-</code></pre>
-
+</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a>
+<a name="L1-3" href="#L1-3">3</a>
+<a name="L1-4" href="#L1-4">4</a>
+<a name="L1-5" href="#L1-5">5</a>
+<a name="L1-6" href="#L1-6">6</a></pre></div></div>
 <p>最近写了个原理简单的基于 Select+Input 的可编辑 <a href="http://hotoo.me/labs/combox.html">Combox</a>
 控件，用到了这个方法来检查目标 select
 对象是否存在如 multiple, editable 这样的属性，来实现不同的 Combox 版本。其他
@@ -73,124 +66,151 @@ hasAttribute 的实现出问题了。</p>
 <p>原来针对 IE6，还有稍多一点的特殊性：</p>
 
 <ul>
-<li><code>input.getAttribute("checked")</code> 返回 Boolean 值，true/false；
+<li><code>input.getAttribute(&quot;checked&quot;)</code> 返回 Boolean 值，true/false；
 
 <ul>
-<li><code>input[type=checkbox|radio].getAttribute("checked")</code> 根据他的 checked 状态相关；</li>
-<li><code>input[type=others...].getAttribute("checked")</code> 始终返回 false；</li>
-</ul>
-</li>
-<li><code>select.getAttribute("multiple")</code> 返回 Boolean 值；</li>
-<li><code>select&gt;option.getAttribute("selected")</code> 返回 Boolean 值。</li>
+<li><code>input[type=checkbox|radio].getAttribute(&quot;checked&quot;)</code> 根据他的 checked 状态相关；</li>
+<li><code>input[type=others...].getAttribute(&quot;checked&quot;)</code> 始终返回 false；</li>
+</ul></li>
+<li><code>select.getAttribute(&quot;multiple&quot;)</code> 返回 Boolean 值；</li>
+<li><code>select&gt;option.getAttribute(&quot;selected&quot;)</code> 返回 Boolean 值。</li>
 </ul>
 
-
-<p>虽然可以通过 getAttribute("checked") 判断 checkbox/radio 的属性状况，但对于
+<p>虽然可以通过 getAttribute(&quot;checked&quot;) 判断 checkbox/radio 的属性状况，但对于
 其他类型的 input 元素，是无法准确获得 checked 属性的。</p>
 
 <p>TODO: checked,compact,declare,defer,disabled,ismap,multiple,nohref,noresize,noshade,nowrap,readonly,selected</p>
 
-<p>下面是比较完整一点的实现：</p>
-
-<pre><code>function hasAttr(elem, attr){
+<p>下面是比较完整一点的实现：</p><div class="highlight"><div class="codes"><div class="code"><pre>function hasAttr(elem, attr){
     var tag = elem.tagName.toLowerCase();
     attr = attr.toLowerCase();
     if(elem.hasAttribute){
         return elem.hasAttribute(attr);
     }
-    if(navigator.userAgent.indexOf("MSIE 6")&gt;0 &amp;&amp;
-      (("input"==tag &amp;&amp; "checked"==attr) ||
-      ("option"==tag &amp;&amp; "selected"==attr) ||
-      ("select"==tag &amp;&amp; "multiple"==attr))){
+    if(navigator.userAgent.indexOf(&quot;MSIE 6&quot;)&gt;0 &amp;&amp;
+      ((&quot;input&quot;==tag &amp;&amp; &quot;checked&quot;==attr) ||
+      (&quot;option&quot;==tag &amp;&amp; &quot;selected&quot;==attr) ||
+      (&quot;select&quot;==tag &amp;&amp; &quot;multiple&quot;==attr))){
         return elem.getAttribute(attr);
     }
     return null!=elem.getAttribute(attr);
 }
-</code></pre>
-
+</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+<a name="L2-2" href="#L2-2">2</a>
+<a name="L2-3" href="#L2-3">3</a>
+<a name="L2-4" href="#L2-4">4</a>
+<a name="L2-5" href="#L2-5">5</a>
+<a name="L2-6" href="#L2-6">6</a>
+<a name="L2-7" href="#L2-7">7</a>
+<a name="L2-8" href="#L2-8">8</a>
+<a name="L2-9" href="#L2-9">9</a>
+<a name="L2-10" href="#L2-10">10</a>
+<a name="L2-11" href="#L2-11">11</a>
+<a name="L2-12" href="#L2-12">12</a>
+<a name="L2-13" href="#L2-13">13</a>
+<a name="L2-14" href="#L2-14">14</a></pre></div></div>
 <p>-- Update 2011/07/26 --</p>
 
-<p>继续发现新坑：IE 中下面的代码</p>
-
-<pre><code>&lt;p&gt;&lt;/p&gt;
-&lt;q onclick="alert(0);"&gt;&lt;/q&gt;
+<p>继续发现新坑：IE 中下面的代码</p><div class="highlight"><div class="codes"><div class="code"><pre>&lt;p&gt;&lt;&#47;p&gt;
+&lt;q onclick=&quot;alert(0);&quot;&gt;&lt;&#47;q&gt;
 
 &lt;script&gt;
     p.onclick = function(){};
 
-    alert(p.getAttribute("onclick"));
-    alert(q.getAttribute("onclick"));
-&lt;/script&gt;
-</code></pre>
-
-<p>输出：</p>
-
-<pre><code>function(){}
+    alert(p.getAttribute(&quot;onclick&quot;));
+    alert(q.getAttribute(&quot;onclick&quot;));
+&lt;&#47;script&gt;
+</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+<a name="L3-2" href="#L3-2">2</a>
+<a name="L3-3" href="#L3-3">3</a>
+<a name="L3-4" href="#L3-4">4</a>
+<a name="L3-5" href="#L3-5">5</a>
+<a name="L3-6" href="#L3-6">6</a>
+<a name="L3-7" href="#L3-7">7</a>
+<a name="L3-8" href="#L3-8">8</a>
+<a name="L3-9" href="#L3-9">9</a></pre></div></div>
+<p>输出：</p><div class="highlight"><div class="codes"><div class="code"><pre>function(){}
 
 function onclick()
 {
 alert(0);
 }
-</code></pre>
-
+</pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
+<a name="L4-2" href="#L4-2">2</a>
+<a name="L4-3" href="#L4-3">3</a>
+<a name="L4-4" href="#L4-4">4</a>
+<a name="L4-5" href="#L4-5">5</a>
+<a name="L4-6" href="#L4-6">6</a></pre></div></div>
 <p>所以上面的 <code>hasAttr</code> 函数是无法正确返回这种在脚本中设置 <code>onclick</code> 值的。</p>
 
-<p>对策：</p>
-
-<pre><code>var hasAttr = function(elem, attr){
+<p>对策：</p><div class="highlight"><div class="codes"><div class="code"><pre>var hasAttr = function(elem, attr){
     if(!elem || 1!=elem.nodeType){return false;}
     if(elem.hasAttribute){return elem.hasAttribute(attr);}
-    // for IE, not perfect.
-    // @see http://www.patmullin.com/weblog/2006/04/06/getattributestyle-setattributestyle-ie-dont-mix/
+    &#47;&#47; for IE, not perfect.
+    &#47;&#47; @see http:&#47;&#47;www.patmullin.com&#47;weblog&#47;2006&#47;04&#47;06&#47;getattributestyle-setattributestyle-ie-dont-mix&#47;
     attr = attr.toLowerCase();
-    if("style" == attr){return "" !== elem.style.cssText;}
-    if(navigator.userAgent.indexOf("MSIE 6")&gt;0 &amp;&amp;
-      (("input"==tag &amp;&amp; "checked"==attr) ||
-      ("option"==tag &amp;&amp; "selected"==attr) ||
-      ("select"==tag &amp;&amp; "multiple"==attr))){
+    if(&quot;style&quot; == attr){return &quot;&quot; !== elem.style.cssText;}
+    if(navigator.userAgent.indexOf(&quot;MSIE 6&quot;)&gt;0 &amp;&amp;
+      ((&quot;input&quot;==tag &amp;&amp; &quot;checked&quot;==attr) ||
+      (&quot;option&quot;==tag &amp;&amp; &quot;selected&quot;==attr) ||
+      (&quot;select&quot;==tag &amp;&amp; &quot;multiple&quot;==attr))){
         return elem.getAttribute(attr);
     }
     var val = elem.getAttribute(attr);
     if(null == val){return false;}
-    else if("function" == typeof(val)){
-        return val.toString().indexOf("function "+attr+"()") == 0;
+    else if(&quot;function&quot; == typeof(val)){
+        return val.toString().indexOf(&quot;function &quot;+attr+&quot;()&quot;) == 0;
     }else{return true;}
 };
-</code></pre>
-
+</pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
+<a name="L5-2" href="#L5-2">2</a>
+<a name="L5-3" href="#L5-3">3</a>
+<a name="L5-4" href="#L5-4">4</a>
+<a name="L5-5" href="#L5-5">5</a>
+<a name="L5-6" href="#L5-6">6</a>
+<a name="L5-7" href="#L5-7">7</a>
+<a name="L5-8" href="#L5-8">8</a>
+<a name="L5-9" href="#L5-9">9</a>
+<a name="L5-10" href="#L5-10">10</a>
+<a name="L5-11" href="#L5-11">11</a>
+<a name="L5-12" href="#L5-12">12</a>
+<a name="L5-13" href="#L5-13">13</a>
+<a name="L5-14" href="#L5-14">14</a>
+<a name="L5-15" href="#L5-15">15</a>
+<a name="L5-16" href="#L5-16">16</a>
+<a name="L5-17" href="#L5-17">17</a>
+<a name="L5-18" href="#L5-18">18</a>
+<a name="L5-19" href="#L5-19">19</a></pre></div></div>
 <p>----- Update 2011/10/26 ------</p>
 
-<p>继续新坑，IE5,6,7 的 <code>script.getAttribute("src") === ""</code>，正常的 DOM 方法已经
+<p>继续新坑，IE5,6,7 的 <code>script.getAttribute(&quot;src&quot;) === &quot;&quot;</code>，正常的 DOM 方法已经
 阻止不了 IE 了，hack 方案可以解析 wrapHTML(node){return outerHTML.startTag;}，
 判断是否有 src 属性。</p>
 
 <p>如果在这里你真的可以忽略 IE，最佳方案还是屏蔽 IE 吧。</p>
+</div>
 
-    </article>
-    <footer class="post clearfix">
-      <span class="tags">
-        tags:
-        
-          
-          <a href="/tags.html#JavaScript">JavaScript</a>
-        
-          ,
-          <a href="/tags.html#IE6">IE6</a>
-        
-      </span>
-      <time>May 19, 
-      <a href="/archives.html#2011">2011</a>
-    </footer>
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/JavaScript">JavaScript</a>
+      
+    </span>
+
+    <time datetime="2011-05-19T00:00:00.000Z">
+      <a href="/2011">2011年</a>05月19日
+    </time>
+  </footer>
     <section>
-        <div id="disqus_thread"></div>
-        <noscript>
+      <div id="disqus_thread"></div>
+      <noscript>
         要查看或参与评论，请启用 JavaScript 支持。<br />
         Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
-        </noscript>
+      </noscript>
     </section>
-<script type="text/javascript" src="/js/comments.js"></script>
-
-  </div>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
 
     <!-- Vimlike status bar -->
     <div id="status-bar">
@@ -254,7 +274,7 @@ alert(0);
     </table>
 </div>
 
-<script type="text/javascript" src="/js/Vimlike.js"></script>
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
 <footer>
   <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
     alt="Creative Commons License" style="border-width: 0pt;"
@@ -263,8 +283,8 @@ alert(0);
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
-    </p>
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
 </footer>
 </div>
 <script type="text/javascript">
@@ -273,8 +293,9 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 </script>
 <script type="text/javascript">
 try {
-var pageTracker=_gat._getTracker("UA-2048484-1");
-pageTracker._trackPageview();
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
 }catch(err){}</script>
-</body>
+
+  </body>
 </html>

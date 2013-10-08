@@ -1,80 +1,66 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
-<head>
-<!--[if IE]><script type="text/javascript" src="/js/html5.js"></script><![endif]-->
-<meta charset="UTF-8" />
-<meta name="generator" content="gvim" />
-<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-<!--<link rel="alternate" type="application/rss+xml" title="RSS"
-  href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />-->
-<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
-<link type="text/css" rel="stylesheet" href="/css/template.css" />
-<script type="text/javascript" src="/js/sea.js"></script>
-<script type="text/javascript">
-seajs.config({
-  alias: {
-    'jquery': 'jquery-1.8.3.min.js',
-    'hashchange': 'jquery.ba-hashchange.min.js'
-  }
-});
-seajs.use(["jquery", "default-main"], function(){
-    alert("default")
-});
-</script>
-<title>Form 表单最佳实践 - 闲耘™.博客</title>
-</head>
-<body>
-<div id="wrapper">
-<header>
-<div style="float:right;">
-    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
-        <input type="text" name="q" />
-        <input type="submit" value="搜索" />
-    </form>
-</div>
-<nav>
-    <ul>
-        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
-        <li class="actived"><a href="/" title="Blog">Blog</a></li>
-        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
-        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
-        <li><a href="http://twitter.hotoo.me/" title="Twitter">Twitter</a></li>
-        <li class="last"><a href="/projects.html" title="Project">Project</a></li>
-        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
-    </ul>
-</nav>
-</header>
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>Form 表单最佳实践</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
+
 <div id="container">
-  <div id="content">
-        <h1>Form 表单最佳实践</h1>
-    <article>
-        <h1>Form 表单最佳实践</h1>
-
-<h2>前言</h2>
-
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">Form 表单最佳实践</h1>
+  <div class="entry-content"><h2 id="前言">前言</h2>
 <p>这份文档献给我身边某些可爱的 Java 工程师，感谢你们激怒了我 :)</p>
 
 <p>“Form 表单”其实是一种错误的叫法，Form 本身就是表单，不过这样叫似乎比较顺口。</p>
 
 <p>这里所谓的“最佳实践”只是标题党。</p>
-
-<h2>POST &amp; GET</h2>
-
+<h2 id="post-amp-get">POST &amp; GET</h2>
 <p>表单有一般使用 POST 或 GET 方式提交数据到服务器端，如果你理解这两个词，这里就
 不再赘述了；如果不理解，那也没什么好讲的，就以下面通俗的“所见即所得”理解吧。</p>
-
-<h3>GET:</h3>
-
-<p>所谓 GET 方式，通俗的讲，就是地址栏可见所有提交的信息：</p>
-
-<pre><code>&lt;form action="http://example.com/get.htm" method="get"&gt;
-    &lt;input type="text" name="key" value="value" /&gt;
-    &lt;input type="submit" name="search" value="搜索" /&gt;
-&lt;/form&gt;
-</code></pre>
-
+<h3 id="get">GET:</h3>
+<p>所谓 GET 方式，通俗的讲，就是地址栏可见所有提交的信息：</p><div class="highlight"><div class="codes"><div class="code"><pre>&lt;form action=&quot;http:&#47;&#47;example.com&#47;get.htm&quot; method=&quot;get&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;key&quot; value=&quot;value&quot; &#47;&gt;
+    &lt;input type=&quot;submit&quot; name=&quot;search&quot; value=&quot;搜索&quot; &#47;&gt;
+&lt;&#47;form&gt;
+</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a>
+<a name="L1-3" href="#L1-3">3</a>
+<a name="L1-4" href="#L1-4">4</a></pre></div></div>
 <p>这个表单提交之后，地址栏就包含了所有的提交信息：
 <code>http://example.com/get.html?key=value&amp;search=%CB%D1%CB%F7</code></p>
 
@@ -82,35 +68,31 @@ seajs.use(["jquery", "default-main"], function(){
 action: 即 <code>http://example.com/get.html</code> 部分。
 data/param: 即 key=value&amp;search=%CB%D1%CB%F7 这些参数部分。</p>
 
-<p>广义上，通俗的讲，包括地址栏上手写并回车，点击链接，或者 method="get" 的表单，
+<p>广义上，通俗的讲，包括地址栏上手写并回车，点击链接，或者 method=&quot;get&quot; 的表单，
 以及通过 AJAX get 提交的都是 get 方式。get 请求，刷新时还是 get 请求。</p>
-
-<h3>POST:</h3>
-
-<p>通俗的讲，POST 就是地址栏看不到提交请求所带的数据（又称为“参数”）。</p>
-
-<pre><code>&lt;form action="http://example.com/post.html" method="post"&gt;
-    &lt;input type="text" name="data" /&gt;
-    &lt;input type="submit" value="提交"&gt;
-&lt;/form&gt;
-</code></pre>
-
+<h3 id="post">POST:</h3>
+<p>通俗的讲，POST 就是地址栏看不到提交请求所带的数据（又称为“参数”）。</p><div class="highlight"><div class="codes"><div class="code"><pre>&lt;form action=&quot;http:&#47;&#47;example.com&#47;post.html&quot; method=&quot;post&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;data&quot; &#47;&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;
+&lt;&#47;form&gt;
+</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+<a name="L2-2" href="#L2-2">2</a>
+<a name="L2-3" href="#L2-3">3</a>
+<a name="L2-4" href="#L2-4">4</a></pre></div></div>
 <p>这个表单提交之后，地址栏除了 <code>http://example.com/post.html</code> 外不包含其他信息。</p>
 
-<p>广义上，通俗的讲，method="post" 的表单，AJAX post 都是 post 方式。
+<p>广义上，通俗的讲，method=&quot;post&quot; 的表单，AJAX post 都是 post 方式。
 post 提交后，刷新仍是 post 提交相同的数据。</p>
-
-<h2>编码(Encoding)</h2>
-
+<h2 id="编码-encoding">编码(Encoding)</h2>
 <p>在客户端页面和服务器端程序编码不同时，提交数据非常容易出现编码问题，即所谓的
 “乱码”。</p>
 
 <p>解决这个问题，可以多种方式：</p>
 
 <ol>
-<li>最根本的，就是统一客户端和服务器端的编码。建议都使用 utf-8。<br />
- 目前服务器上均是使用 utf-8 接受数据，所以可以考虑统一使用 utf-8 编码，
- 要做的有一下几点：
+<li><p>最根本的，就是统一客户端和服务器端的编码。建议都使用 utf-8。<br />
+目前服务器上均是使用 utf-8 接受数据，所以可以考虑统一使用 utf-8 编码，
+要做的有一下几点：</p>
 
 <ul>
 <li>修改页面的 charset 设置</li>
@@ -118,125 +100,114 @@ post 提交后，刷新仍是 post 提交相同的数据。</p>
 <li><p>修改编码设置：
 milan-web-base-2.0-SNAPSHOT.jar\META-INF\webx\pipeline.xml</p>
 
-<pre><code>&lt;valve class="com.alibaba.turbine.pipeline.SetLocaleValve"
-    defaultLocale="zh_CN" defaultCharset="UTF-8"/&gt;
-</code></pre>
-
-<p>milan-web-base-2.0-SNAPSHOT.jar\META-INF\webx\webx-default.xml</p>
-
-<pre><code>&lt;service name="VelocityService"
-    class="com.alibaba.service.velocity.DefaultVelocityService" earlyInit="true"&gt;
-
-    &lt;property name="input.encoding" value="UTF-8"/&gt;
-    &lt;property name="parser.pool.size" value="100"/&gt;
-    &lt;property name="velocimacro.library" value="macros.vm"/&gt;
-&lt;/service&gt;
-</code></pre></li>
+<p><valve class="com.alibaba.turbine.pipeline.SetLocaleValve"
+    defaultLocale="zh_CN" defaultCharset="UTF-8"/></p></li>
 </ul>
-</li>
-<li>设置 form 元素的 accept-charset 属性为服务器接收数据使用的编码。<br />
- Hack in IE: <code>onsubmit="document.charset='utf-8';"</code></li>
-<li>通过 JavaScript 的 <code>encodeURIComponent(key)</code> 函数转码，一般用于 AJAX 提交。<br />
- 另有两个转码函数：<code>escape()</code>, <code>encodeURI()</code><br />
- 解码函数分别是：<code>unescape()</code>, <code>decodeURI()</code>, <code>decodeURIComponent()</code></li>
+
+<p>milan-web-base-2.0-SNAPSHOT.jar\META-INF\webx\webx-default.xml</p><div class="highlight"><div class="codes"><div class="code"><pre>&lt;service name=&quot;VelocityService&quot;
+    class=&quot;com.alibaba.service.velocity.DefaultVelocityService&quot; earlyInit=&quot;true&quot;&gt;
+
+    &lt;property name=&quot;input.encoding&quot; value=&quot;UTF-8&quot;&#47;&gt;
+    &lt;property name=&quot;parser.pool.size&quot; value=&quot;100&quot;&#47;&gt;
+    &lt;property name=&quot;velocimacro.library&quot; value=&quot;macros.vm&quot;&#47;&gt;
+&lt;&#47;service&gt;
+</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+<a name="L3-2" href="#L3-2">2</a>
+<a name="L3-3" href="#L3-3">3</a>
+<a name="L3-4" href="#L3-4">4</a>
+<a name="L3-5" href="#L3-5">5</a>
+<a name="L3-6" href="#L3-6">6</a>
+<a name="L3-7" href="#L3-7">7</a></pre></div></div></li>
+<li><p>设置 form 元素的 accept-charset 属性为服务器接收数据使用的编码。<br />
+Hack in IE: <code>onsubmit=&quot;document.charset=&#39;utf-8&#39;;&quot;</code></p></li>
+<li><p>通过 JavaScript 的 <code>encodeURIComponent(key)</code> 函数转码，一般用于 AJAX 提交。<br />
+另有两个转码函数：<code>escape()</code>, <code>encodeURI()</code><br />
+解码函数分别是：<code>unescape()</code>, <code>decodeURI()</code>, <code>decodeURIComponent()</code></p></li>
 </ol>
-
-
-<h2>onsubmit</h2>
-
+<h2 id="onsubmit">onsubmit</h2>
 <p>Form 表单的 onsubmit 事件在表单真正向服务器发送请求之前执行，一般用于验证表单
 的数据完整性和合法性。如果处理函数返回 false，则不向服务器发送请求。</p>
 
 <p>绑定 onsubmit 事件处理函数的方法有 3 种：
-* 一般简单的页面，直接在 form 标签中添加 onsubmit 属性:</p>
-
-<pre><code>`&lt;form onsubmit="return validater(this);"&gt;...&lt;/form&gt;`
-</code></pre>
-
+* 一般简单的页面，直接在 form 标签中添加 onsubmit 属性:
+    <code>&lt;form onsubmit=&quot;return validater(this);&quot;&gt;...&lt;/form&gt;</code>
+* 按照“内容与行为分离”的思想，我们一般可以在 JavaScript 加载完成后对表单进行
+    事件绑定：</p><div class="highlight"><div class="codes"><div class="code"><pre>  &#47;&#47;var form = document.getElementById(&quot;formId&quot;);
+  form.onsubmit = function(){
+      if(ie){document.charset=&quot;utf-8&quot;;}
+      return !!this[&quot;k&quot;].value;
+  };
+</pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
+<a name="L4-2" href="#L4-2">2</a>
+<a name="L4-3" href="#L4-3">3</a>
+<a name="L4-4" href="#L4-4">4</a>
+<a name="L4-5" href="#L4-5">5</a></pre></div></div>
 <ul>
-<li><p>按照“内容与行为分离”的思想，我们一般可以在 JavaScript 加载完成后对表单进行
-  事件绑定：</p>
-
-<pre><code>//var form = document.getElementById("formId");
-form.onsubmit = function(){
-    if(ie){document.charset="utf-8";}
-    return !!this["k"].value;
-};
-</code></pre></li>
 <li><p>更专业的事件绑定方法（考虑到兼容性问题，这里使用 jQuery 代码）：</p>
 
-<pre><code>$("#formId").submit(function(){
-    return this.k.value;
-});
-</code></pre></li>
+<p>$(&quot;#formId&quot;).submit(function(){
+      return this.k.value;
+  });</p></li>
 </ul>
-
-
-<h2>普通提交数据的表单</h2>
-
+<h2 id="普通提交数据的表单">普通提交数据的表单</h2>
 <p>对于普通提交数据的表单，比如新增、修改数据，使用 POST 方式提交数据即可。
 删除的方式一般有两种：
-1. 删除链接的 href 指向执行删除操作的地址，链接元素绑定 onclick 事件：</p>
-
-<pre><code>`&lt;a href="del.html?id=1" onclick="return window.confirm('确认删除？');"&gt;`&lt;br /&gt;
-这是 GET 提交方式。绑定事件处理函数的技巧同上面的 onsubmit。
-</code></pre>
-
-<ol>
-<li>绑定 onclick 事件，并执行 AJAX 提交， return false；回调函数中可以使用动态
- 更新 DOM 的方式或其他。</li>
-</ol>
-
+1. 删除链接的 href 指向执行删除操作的地址，链接元素绑定 onclick 事件：
+    <code>&lt;a href=&quot;del.html?id=1&quot; onclick=&quot;return window.confirm(&#39;确认删除？&#39;);&quot;&gt;</code><br />
+    这是 GET 提交方式。绑定事件处理函数的技巧同上面的 onsubmit。
+1. 绑定 onclick 事件，并执行 AJAX 提交， return false；回调函数中可以使用动态
+    更新 DOM 的方式或其他。</p>
 
 <p>呃，其实最好体验也许是：删除操作时不要求确认（弹出确认对话框），但在事后可以
 执行 <a href="cancel-vs-undo.html">撤销</a> 删除操作。</p>
-
-<h2>多个提交按钮的表单</h2>
-
+<h2 id="多个提交按钮的表单">多个提交按钮的表单</h2>
 <p>某些时候，单个表单中可能存在 2 个及其以上的提交按钮。</p>
 
 <p>首先，考虑清楚这多个按钮是否真的都需要向服务器提交数据。像关闭，返回，后退，
-或者失传已久的重置操作，就不要使用按钮了，至少不要使用绑定 onclick 并</p>
-
-<pre><code>form.action = "back.html";
+或者失传已久的重置操作，就不要使用按钮了，至少不要使用绑定 onclick 并</p><div class="highlight"><div class="codes"><div class="code"><pre>form.action = &quot;back.html&quot;;
 form.submit()
-</code></pre>
+</pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
+<a name="L5-2" href="#L5-2">2</a></pre></div></div>
+<p>或 <code>location.href=&quot;back.html&quot;</code> 这样的按钮。</p>
 
-<p>或 <code>location.href="back.html"</code> 这样的按钮。</p>
+<p>这些按钮在实践上使用链接来实现更好更简单：<code>&lt;a href=&quot;back.html&quot;&gt;后退&lt;/a&gt;</code></p>
 
-<p>这些按钮在实践上使用链接来实现更好更简单：<code>&lt;a href="back.html"&gt;后退&lt;/a&gt;</code></p>
-
-<p>对于确实需要多个提交操作的按钮，可以通过提交按钮的 name 来区分。</p>
-
-<pre><code>&lt;input type="submit" name="event_submit_do_publish" value="发布" /&gt;
-&lt;input type="submit" name="event_submit_do_draft" value="保存为草稿" /&gt;
-</code></pre>
-
-<h2>多个相同操作的表单</h2>
-
+<p>对于确实需要多个提交操作的按钮，可以通过提交按钮的 name 来区分。</p><div class="highlight"><div class="codes"><div class="code"><pre>&lt;input type=&quot;submit&quot; name=&quot;event_submit_do_publish&quot; value=&quot;发布&quot; &#47;&gt;
+&lt;input type=&quot;submit&quot; name=&quot;event_submit_do_draft&quot; value=&quot;保存为草稿&quot; &#47;&gt;
+</pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a>
+<a name="L6-2" href="#L6-2">2</a></pre></div></div><h2 id="多个相同操作的表单">多个相同操作的表单</h2>
 <p>类似于搜索引擎结果页，页面上、下均有功能相同的搜索框（为方便用户使用，虽然
 实际受惠的用户可能并不多），这两个搜索框分别由两个表单组成，但是可以统一使用
-同一个 onsubmit 事件处理函数。</p>
-
-<pre><code>&lt;form onsubmit="return validater(this);"&gt;
-    &lt;input type="text" name="k" /&gt;
-    &lt;input type="submit" value="搜索" /&gt;
-&lt;/form&gt;
+同一个 onsubmit 事件处理函数。</p><div class="highlight"><div class="codes"><div class="code"><pre>&lt;form onsubmit=&quot;return validater(this);&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;k&quot; &#47;&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;搜索&quot; &#47;&gt;
+&lt;&#47;form&gt;
 
 搜索结果列表...
 
-&lt;form onsubmit="return validater(this);"&gt;
-    &lt;input type="text" name="k" /&gt;
-    &lt;input type="submit" value="搜索" /&gt;
-&lt;/form&gt;
+&lt;form onsubmit=&quot;return validater(this);&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;k&quot; &#47;&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;搜索&quot; &#47;&gt;
+&lt;&#47;form&gt;
 
 function validater(form){
-    return form["k"].value;
+    return form[&quot;k&quot;].value;
 }
-</code></pre>
-
-<h2>搜索</h2>
-
+</pre></div><pre class="line"><a name="L7-1" href="#L7-1">1</a>
+<a name="L7-2" href="#L7-2">2</a>
+<a name="L7-3" href="#L7-3">3</a>
+<a name="L7-4" href="#L7-4">4</a>
+<a name="L7-5" href="#L7-5">5</a>
+<a name="L7-6" href="#L7-6">6</a>
+<a name="L7-7" href="#L7-7">7</a>
+<a name="L7-8" href="#L7-8">8</a>
+<a name="L7-9" href="#L7-9">9</a>
+<a name="L7-10" href="#L7-10">10</a>
+<a name="L7-11" href="#L7-11">11</a>
+<a name="L7-12" href="#L7-12">12</a>
+<a name="L7-13" href="#L7-13">13</a>
+<a name="L7-14" href="#L7-14">14</a>
+<a name="L7-15" href="#L7-15">15</a></pre></div></div><h2 id="搜索">搜索</h2>
 <p>搜索建议使用 GET 方式提交，过滤参数和当前页码这些信息全部带在地址中。
 <code>http://example.com/search.html?k=keywrod</code></p>
 
@@ -246,63 +217,69 @@ function validater(form){
 <p>翻页系统一般还允许用户手动输入页码并直接跳转到指定页，这个翻页表单建议和
 搜索表单分离，分别是不同的 form 组成。</p>
 
-<p>下面是搜索关键字 key 并翻页到第 2 页之后的状态：</p>
-
-<pre><code>&lt;form action="search.html" method="get"&gt;
-    &lt;input type="text" name="k" value="key" /&gt;
-    &lt;input type="submit" value="搜索" /&gt;
-&lt;/form&gt;
+<p>下面是搜索关键字 key 并翻页到第 2 页之后的状态：</p><div class="highlight"><div class="codes"><div class="code"><pre>&lt;form action=&quot;search.html&quot; method=&quot;get&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;k&quot; value=&quot;key&quot; &#47;&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;搜索&quot; &#47;&gt;
+&lt;&#47;form&gt;
 
 搜索结果列表...
 
-&lt;a href="search.html?k=key&amp;p=1"&gt;上一页&lt;/a&gt;
-&lt;a href="search.html?k=key&amp;p=3"&gt;下一页&lt;/a&gt;
-&lt;form action="search.html" method="get"&gt;
-    &lt;input type="hidden" name="k" value="key" /&gt;
-    &lt;input type="text" name="p" value="3" /&gt;
-    &lt;input type="submit" value="翻页" /&gt;
-&lt;/form&gt;
-</code></pre>
-
-<h2>可爱的陋习</h2>
-
+&lt;a href=&quot;search.html?k=key&amp;p=1&quot;&gt;上一页&lt;&#47;a&gt;
+&lt;a href=&quot;search.html?k=key&amp;p=3&quot;&gt;下一页&lt;&#47;a&gt;
+&lt;form action=&quot;search.html&quot; method=&quot;get&quot;&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;k&quot; value=&quot;key&quot; &#47;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;p&quot; value=&quot;3&quot; &#47;&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;翻页&quot; &#47;&gt;
+&lt;&#47;form&gt;
+</pre></div><pre class="line"><a name="L8-1" href="#L8-1">1</a>
+<a name="L8-2" href="#L8-2">2</a>
+<a name="L8-3" href="#L8-3">3</a>
+<a name="L8-4" href="#L8-4">4</a>
+<a name="L8-5" href="#L8-5">5</a>
+<a name="L8-6" href="#L8-6">6</a>
+<a name="L8-7" href="#L8-7">7</a>
+<a name="L8-8" href="#L8-8">8</a>
+<a name="L8-9" href="#L8-9">9</a>
+<a name="L8-10" href="#L8-10">10</a>
+<a name="L8-11" href="#L8-11">11</a>
+<a name="L8-12" href="#L8-12">12</a>
+<a name="L8-13" href="#L8-13">13</a>
+<a name="L8-14" href="#L8-14">14</a></pre></div></div><h2 id="可爱的陋习">可爱的陋习</h2>
 <p>不要在表单中为 button 类型的按钮绑定 onclick 事件，并在事件处理函数中执行
 <code>form.submit();</code> ，然后费尽心思实现“在输入框中也可以回车提交”这种蠢事。</p>
 
-<p>也不要为了<del>解决</del>避免编码问题而在 onsubmit 处理函数中做
+<p>也不要为了~~解决~~避免编码问题而在 onsubmit 处理函数中做
 <code>input.value=encodeURIComponent(input.value);</code>，然后为了避免这个带来的
 “乱码(被编码的字符)瞬间出现在表单中”而把搜索框做成隐藏域，再附加一个傀儡
 输入框用于输入。</p>
+<h2 id="demo">Demo</h2>
+<p><a href="http://hotoo.me/labs/form-search.html%7C">搜索表单演示</a></p>
+</div>
 
-<h2>Demo</h2>
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/Forms">Forms</a>
+      
+ , 
+      <a href="/tag/Web Design">Web Design</a>
+      
+    </span>
 
-<p><a href="http://hotoo.me/labs/form-search.html|">搜索表单演示</a></p>
-
-    </article>
-    <footer class="post clearfix">
-      <span class="tags">
-        tags:
-        
-          
-          <a href="/tags.html#Forms">Forms</a>
-        
-          ,
-          <a href="/tags.html#Web Design">Web Design</a>
-        
-      </span>
-      <time>October 27, 
-      <a href="/archives.html#2010">2010</a>
-    </footer>
+    <time datetime="2010-10-27T00:00:00.000Z">
+      <a href="/2010">2010年</a>10月27日
+    </time>
+  </footer>
     <section>
-        <div id="disqus_thread"></div>
-        <noscript>
+      <div id="disqus_thread"></div>
+      <noscript>
         要查看或参与评论，请启用 JavaScript 支持。<br />
         Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
-        </noscript>
+      </noscript>
     </section>
-<script type="text/javascript" src="/js/comments.js"></script>
-
-  </div>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
 
     <!-- Vimlike status bar -->
     <div id="status-bar">
@@ -366,7 +343,7 @@ function validater(form){
     </table>
 </div>
 
-<script type="text/javascript" src="/js/Vimlike.js"></script>
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
 <footer>
   <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
     alt="Creative Commons License" style="border-width: 0pt;"
@@ -375,8 +352,8 @@ function validater(form){
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
-    </p>
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
 </footer>
 </div>
 <script type="text/javascript">
@@ -385,8 +362,9 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 </script>
 <script type="text/javascript">
 try {
-var pageTracker=_gat._getTracker("UA-2048484-1");
-pageTracker._trackPageview();
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
 }catch(err){}</script>
-</body>
+
+  </body>
 </html>

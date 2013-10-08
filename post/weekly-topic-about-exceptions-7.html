@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>每周异常：第 7期，保持简单，保持拙朴</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
+
+<div id="container">
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">每周异常：第 7期，保持简单，保持拙朴</h1>
+  <div class="entry-content"><h2 id="副标题：如何简单有效的发现最重要的有效异常">副标题：如何简单有效的发现最重要的有效异常</h2>
+<blockquote>
+<p>Keep It Simple, Stupid.</p>
+
+<p>-- U.S. Navy (1960)</p>
+</blockquote>
+
+<p>在这之前，我一直苦苦寻求牛逼的算法 <a href="https://github.com/totorojs/javascript-exception-archives/issues/17">#12</a> ，
+来解决这个看似简单，其实不易；仿佛不易，最终简单的问题：
+找出最重要的有效异常。</p>
+
+<p>最早的时候，我们定义了『一个异常』由以下核心部分组成：</p>
+
+<ul>
+<li>URL: 异常所在页面。</li>
+<li>File: 异常代码所在文件。</li>
+<li>Line: 异常代码所在行数。</li>
+<li>Message: 异常消息。</li>
+</ul>
+
+<p>这些是不变的，相同页面中，同一个异常代码文件同一行，异常消息相同的异常，我们可以近似的认为它是同一个异常。</p>
+
+<a name="more"></a>
+
+<p>另外还定义了异常率：</p>
+
+<ul>
+<li>异常率(PV)：『一个异常』的 PV，除以这个异常所在页面的 PV。</li>
+<li>异常率(UV)：『一个异常』的 UV，除以这个异常所在页面的 UV。</li>
+</ul>
+
+<p>于是我们通过 URL, File, Line, Message 四个核心信息来统计每一个异常的 PV, UV, PV异常率，UV异常率。
+并按照其中的某个字段为主进行排序。</p>
+
+<p>但是得到的结果总是让人不尽如人意，总会有很多无法排查，甚至还有一些显然不是我们代码的问题的异常排前排。</p>
+
+<p>我们尝试限制异常 PV, UV 的基数，尝试限制页面 PV, UV 的基数，结果仍然不理想。
+而且也没有想出其他牛逼的权重算法来评估每个异常。</p>
+
+<p>我们想过异常是跟代码所在文件和行号、异常消息有关系的，跟页面 URL 的关系不那么强，因为公共代码会在很多页面使用，把这同一个异常分散算到不同页面中会严重影响这个异常的排名。</p>
+
+<p>但是实际上公共代码（尤其是基础类库）的异常很多情况下是业务系统调用不当，或者使用的版本有 BUG 导致，最终还是需要这个页面的开发者调整调用方法，或升级使用更新的公共脚本来解决。所以忽略或弱化异常所在页面是不可接受的。</p>
+
+<p>而且排除了异常所在页面的信息，对于排查异常来说更为困难。</p>
+
+<p>够了，我已经受够了，脑袋一片浆糊。
+累、困，早点回家睡觉。</p>
+
+<hr/>
+
+<p>回到家随手画了几笔，然后去洗澡。洗澡的时候想着刚刚画的思维草图，逐渐想清楚了很多。</p>
+
+<ul>
+<li>File: 由于是 seajs 自动管理依赖，以及 combo 的使用，异常所在文件本身具有不稳定性。</li>
+<li>Line: 由于上面 File 的原因，不仅仅是 HTML 代码中的异常行号不稳定，静态脚本异常行号也具有不稳定性。</li>
+<li>Message: 不同浏览器（包括不同版本，或者在不同操作系统中）对同一个异常有不同的消息反馈，另外还有本地化的原因，异常消息也具有不稳定性。</li>
+</ul>
+
+<p>最后，只有异常所在页面 URL（或者页面 ID，一个页面源文件可能有多个 URL 地址，但是它们是有关系的，ID 相同）才是最稳定的。</p>
+
+<hr/>
+
+<p>于是我根据页面 URL 排列出每个页面的异常 PV, UV, PV异常率，UV异常率。并根据 PV 异常率为主进行倒序排序（每次访问都抛出的异常，比每个用户访问都抛出的异常的优先级更高）于是我们轻易得出了全站异常率最高的页面。</p>
+
+<p>根据这个关键的页面信息，再次查询出每『一个异常』的 PV, UV, PV异常率，UV异常率。</p>
+
+<p>以不变（页面 URL 或 ID），应万变。我们一个个把这些异常大户揪出来，各个击破。即使暂时没有发布解决，我们仍可以轻易识别排除这个已经揪出的异常。</p>
+
+<p>好了，妈妈再也不用操心我的每周异常 TOP 数据分析了。</p>
+
+<p>嗯， <a href="https://github.com/totorojs/javascript-exception-archives/issues/17">#12</a> 这个 issue 也可以关了。</p>
+
+<hr/>
+
+<p>在做静态资源异常监控时，也有类似的经历。</p>
+
+<p>静态资源监控最重要的是发现哪个页面引用了哪个 404资源，尤其是漏发的资源。因此最重要的有两个关联维度：</p>
+
+<ul>
+<li>404资源所在页面</li>
+<li>404资源文件地址</li>
+</ul>
+
+<p>但是引起 404 的场景很多，包括：</p>
+
+<ul>
+<li>漏发文件。</li>
+<li>静态引用地址错误。</li>
+<li>动态引用地址错误。</li>
+</ul>
+
+<p>其中动态引用是由于动态脚本计算得出的静态资源地址，引发的 404 非常频繁，多样、而且分布的很散。因此这两个维度的排列组合结果就非常巨大。而且我们的分析系统是基于索引的，这些内容不确定、数量庞大的指标非常不适合用这个系统分析。（我们还有另一个非常时候实时异常分析的系统，这里不做介绍）</p>
+
+<p>因此我们把重心放在更为稳定的页面 URL，只关注出现 404 的页面，至于是什么资源可以直接根据 URL 查询日志，或直接访问这个页面。</p>
+<h2 id="小结">小结</h2>
+<p>这篇讲的几个关键内容再强调下：</p>
+
+<ul>
+<li>保持简单，保持拙朴。</li>
+<li>抓住重点，真正的核心重点。</li>
+</ul>
+
+<hr/>
+
+<p>终于可以睡了，晚安~</p>
+</div>
+
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/每周异常">每周异常</a>
+      
+    </span>
+
+    <time datetime="2013-08-28T00:00:00.000Z">
+      <a href="/2013">2013年</a>08月28日
+    </time>
+  </footer>
+    <section>
+      <div id="disqus_thread"></div>
+      <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+      </noscript>
+    </section>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
+
+    <!-- Vimlike status bar -->
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
+<footer>
+  <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
+    alt="Creative Commons License" style="border-width: 0pt;"
+    src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"/></a>
+  This work is licensed under a
+  <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
+    Commons Attribution 2.5 Generic License</a>.<br/>
+  Copyleft &copy; 2005-2013, Power by
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
+</footer>
+</div>
+<script type="text/javascript">
+var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
+}catch(err){}</script>
+
+  </body>
+</html>

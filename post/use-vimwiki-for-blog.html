@@ -1,178 +1,162 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
-<head>
-<!--[if IE]><script type="text/javascript" src="/js/html5.js"></script><![endif]-->
-<meta charset="UTF-8" />
-<meta name="generator" content="gvim" />
-<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-<!--<link rel="alternate" type="application/rss+xml" title="RSS"
-  href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />-->
-<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
-<link type="text/css" rel="stylesheet" href="/css/template.css" />
-<script type="text/javascript" src="/js/sea.js"></script>
-<script type="text/javascript">
-seajs.config({
-  alias: {
-    'jquery': 'jquery-1.8.3.min.js',
-    'hashchange': 'jquery.ba-hashchange.min.js'
-  }
-});
-seajs.use(["jquery", "default-main"], function(){
-    alert("default")
-});
-</script>
-<title>用 Vimwiki 写博客 - 闲耘™.博客</title>
-</head>
-<body>
-<div id="wrapper">
-<header>
-<div style="float:right;">
-    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
-        <input type="text" name="q" />
-        <input type="submit" value="搜索" />
-    </form>
-</div>
-<nav>
-    <ul>
-        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
-        <li class="actived"><a href="/" title="Blog">Blog</a></li>
-        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
-        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
-        <li><a href="http://twitter.hotoo.me/" title="Twitter">Twitter</a></li>
-        <li class="last"><a href="/projects.html" title="Project">Project</a></li>
-        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
-    </ul>
-</nav>
-</header>
-<div id="container">
-  <div id="content">
-        <h1>用 Vimwiki 写博客</h1>
-    <article>
-        <h1>用 Vimwiki 写博客</h1>
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>用 Vimwiki 写博客</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<p>由于众所周知的缘故，<a href="http://blog.xianyun.org/">我的博客</a> 被消失了。
+<div id="container">
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">用 Vimwiki 写博客</h1>
+  <div class="entry-content"><p>由于众所周知的缘故，<a href="http://blog.xianyun.org/">我的博客</a> 被消失了。
 在国内买域名或主机都是十分不靠谱的事，所以目前没有重新开独立博客的打算。
 而使用第三方博客服务也同样不靠谱，目前只同步在 Google Blogger 上。</p>
 
 <p>把东西都放在自己的计算机里算是比较可靠的方式了，
 我计划使用 Vim + Vimwiki + Dropbox 来搭建自己的特殊博客系统。</p>
-
-<h2>原理</h2>
-
+<h2 id="原理">原理</h2>
 <p>使用 Vim 这个极致的编辑器，加上 Vimwiki 这个优秀的插件，
-可以用 Wiki 语法来写日志，<del>1. 然后由 Dropbox 自动同步与发布，</del>
+可以用 Wiki 语法来写日志，~~1. 然后由 Dropbox 自动同步与发布，~~
 <del>2. 已经改为 SVN 提交到 Google Code（生成的 HTML 文件需要设置 svn:mime-type 为 text/html），</del>
 3. 现在是用 Git 提交到 <a href="http://hotoo.github.com">hotoo.github.com</a>。
-整体上来说这个系统基本完好，<del>除了域名稍稍缺憾之外，</del>Github 支持绑定第三方域名。</p>
-
-<h2>搭建步骤</h2>
-
+整体上来说这个系统基本完好，~~除了域名稍稍缺憾之外，~~Github 支持绑定第三方域名。</p>
+<h2 id="搭建步骤">搭建步骤</h2>
 <p>如果你看过 <a href="http://code.google.com/p/vim-script-cn/">Vim Script 文档中文计划</a>
 的介绍，下面有写内容大概已经熟悉，这里作为完整的技巧一并介绍：</p>
 
 <ol>
 <li>确认正确安装了 <a href="http://www.vim.org">Vim</a> 和
- <a href="http://www.vim.org/scripts/script.php?script_id=2226">Vimwiki</a>。</li>
+<a href="http://www.vim.org/scripts/script.php?script_id=2226">Vimwiki</a>。</li>
 <li><p>如果安装了 <a href="http://www.vim.org/scripts/script.php?script_id=2540">snipMate</a>
- 在 $VIM/vimfiles/snippets/ 下新建一个 vimwiki.snippets 文件（已有则打开文件）。
- 在 vimwiki.snippets 中添加自己的博客格式模板，例如我的：</p>
+在 $VIM/vimfiles/snippets/ 下新建一个 vimwiki.snippets 文件（已有则打开文件）。
+在 vimwiki.snippets 中添加自己的博客格式模板，例如我的：</p><div class="highlight"><div class="codes"><div class="code"><pre>snippet blog
+    %\title $1 (注意：&quot;title&quot; 前面的 &quot;\&quot; 去掉)
 
-<pre><code> snippet blog
-     %\title $1 (注意："title" 前面的 "\" 去掉)
+    = ${1:title} =
+    ${2:content}
 
-     = ${1:title} =
-     ${2:content}
-
-      blog:datetime=`strftime("%Y/%m/%d %H:%M:%S")`:tags=${3}
-</code></pre></li>
+     blog:datetime=`strftime(&quot;%Y&#47;%m&#47;%d %H:%M:%S&quot;)`:tags=${3}
+</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a>
+<a name="L1-3" href="#L1-3">3</a>
+<a name="L1-4" href="#L1-4">4</a>
+<a name="L1-5" href="#L1-5">5</a>
+<a name="L1-6" href="#L1-6">6</a>
+<a name="L1-7" href="#L1-7">7</a></pre></div></div></li>
 <li><p>因为 Vimwiki 和 snipMate 的 <code>&lt;Tab&gt;</code> 热键冲突，
- 可以将 $VIM/vimfiles/ftplugin/vimwiki.vim 中的</p>
-
-<pre><code> inoremap &lt;expr&gt; &lt;buffer&gt; &lt;Tab&gt; vimwiki_tbl#kbd_tab()
-</code></pre>
-
-<p> 换成其他的热键，例如：</p>
-
-<pre><code> inoremap &lt;expr&gt; &lt;buffer&gt; &lt;C-Tab&gt; vimwiki_tbl#kbd_tab()
-</code></pre></li>
+可以将 $VIM/vimfiles/ftplugin/vimwiki.vim 中的</p><div class="highlight"><div class="codes"><div class="code"><pre>inoremap &lt;expr&gt; &lt;buffer&gt; &lt;Tab&gt; vimwiki_tbl#kbd_tab()
+</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div>
+<p>换成其他的热键，例如：</p><div class="highlight"><div class="codes"><div class="code"><pre>inoremap &lt;expr&gt; &lt;buffer&gt; &lt;C-Tab&gt; vimwiki_tbl#kbd_tab()
+</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a></pre></div></div></li>
 <li><p>到此，在 .wiki 文件中输入 <code>blog&lt;Tab&gt;</code> 就展开博客模板了。</p></li>
-<li><p>在 vimrc 的 <code>g:vimwiki_list</code> 中加入一个 wiki，例如我的：</p>
-
-<pre><code> let g:vimwiki_list = [
-     \ {...},
-     \ {...},
-     \ {...},
-     \ {
-         \ 'path'        : 'D:\My Dropbox\blog',
-       " \ 'path_html'   : 'D:\My Dropbox\Public\blog',
-       " \ 'path_html'   : 'D:\wrokbench\hotoo.googlecode.com\blog',
-         \ 'path_html'   : 'D:\wrokbench\hotoo.github.com\blog',
-         \ 'html_header' : 'D:\My Dropbox\blog\template\header.tpl',
-         \ 'html_footer' : 'D:\My Dropbox\blog\template\footer.tpl'
-     \ }
- \ ]
-</code></pre></li>
+<li><p>在 vimrc 的 <code>g:vimwiki_list</code> 中加入一个 wiki，例如我的：</p><div class="highlight"><div class="codes"><div class="code"><pre>let g:vimwiki_list = [
+    \ {...},
+    \ {...},
+    \ {...},
+    \ {
+        \ &#39;path&#39;        : &#39;D:\My Dropbox\blog&#39;,
+      &quot; \ &#39;path_html&#39;   : &#39;D:\My Dropbox\Public\blog&#39;,
+      &quot; \ &#39;path_html&#39;   : &#39;D:\wrokbench\hotoo.googlecode.com\blog&#39;,
+        \ &#39;path_html&#39;   : &#39;D:\wrokbench\hotoo.github.com\blog&#39;,
+        \ &#39;html_header&#39; : &#39;D:\My Dropbox\blog\template\header.tpl&#39;,
+        \ &#39;html_footer&#39; : &#39;D:\My Dropbox\blog\template\footer.tpl&#39;
+    \ }
+\ ]
+</pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
+<a name="L4-2" href="#L4-2">2</a>
+<a name="L4-3" href="#L4-3">3</a>
+<a name="L4-4" href="#L4-4">4</a>
+<a name="L4-5" href="#L4-5">5</a>
+<a name="L4-6" href="#L4-6">6</a>
+<a name="L4-7" href="#L4-7">7</a>
+<a name="L4-8" href="#L4-8">8</a>
+<a name="L4-9" href="#L4-9">9</a>
+<a name="L4-10" href="#L4-10">10</a>
+<a name="L4-11" href="#L4-11">11</a>
+<a name="L4-12" href="#L4-12">12</a>
+<a name="L4-13" href="#L4-13">13</a></pre></div></div></li>
 </ol>
-
-
-<h2>技巧</h2>
-
+<h2 id="技巧">技巧</h2>
 <p>这样我使用 <code>4&lt;leader&gt;ww</code>(一般是<code>4\ww</code>) 就可以快速启动博客 Wiki 首页并进行编辑了。
 Wiki 文件保存在 Dropbox 私有目录下，生成的 html 文件保存在公开目录。</p>
 
 <p>草稿日志的 Wiki 文件中加入 <code>%nohtml</code> 不转成 HTML，索引页用 HTML 注释
 <code>&lt; !-- --&gt;</code> （去掉 ! 前面的空格）就可以了。写好想发布时，
 修改对应代码并 <code>:Vimwiki2HTML</code> 即可。</p>
-
-<h2>模板</h2>
-
+<h2 id="模板">模板</h2>
 <p>可以直接查看源码得到，或者这里 <a href="http://dl.dropbox.com/u/1151037/dl/vimwiki/wiki.template.zip">下载</a>。</p>
-
-<h2>评论系统</h2>
-
+<h2 id="评论系统">评论系统</h2>
 <p>可以使用 <a href="http://disqus.com/">disq.us</a>。</p>
-
-<h2>搜索</h2>
-
+<h2 id="搜索">搜索</h2>
 <p>使用 Google AJAX Search API，详细可以参考老肥博客的
 <a href="http://fis.io/ajax-google-custom-search-engine.html">打造完美的 ajax 版 Google 自定义搜索</a></p>
+</div>
 
-    </article>
-    <footer class="post clearfix">
-      <span class="tags">
-        tags:
-        
-          
-          <a href="/tags.html#Vim">Vim</a>
-        
-          ,
-          <a href="/tags.html#Wiki">Wiki</a>
-        
-          ,
-          <a href="/tags.html#Vimwiki">Vimwiki</a>
-        
-          ,
-          <a href="/tags.html#Dropbox">Dropbox</a>
-        
-          ,
-          <a href="/tags.html#Blog">Blog</a>
-        
-      </span>
-      <time>March 29, 
-      <a href="/archives.html#2010">2010</a>
-    </footer>
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/Vim">Vim</a>
+      
+ , 
+      <a href="/tag/Vimwiki">Vimwiki</a>
+      
+ , 
+      <a href="/tag/Dropbox">Dropbox</a>
+      
+ , 
+      <a href="/tag/Blog">Blog</a>
+      
+    </span>
+
+    <time datetime="2010-03-29T00:00:00.000Z">
+      <a href="/2010">2010年</a>03月29日
+    </time>
+  </footer>
     <section>
-        <div id="disqus_thread"></div>
-        <noscript>
+      <div id="disqus_thread"></div>
+      <noscript>
         要查看或参与评论，请启用 JavaScript 支持。<br />
         Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
-        </noscript>
+      </noscript>
     </section>
-<script type="text/javascript" src="/js/comments.js"></script>
-
-  </div>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
 
     <!-- Vimlike status bar -->
     <div id="status-bar">
@@ -236,7 +220,7 @@ Wiki 文件保存在 Dropbox 私有目录下，生成的 html 文件保存在公
     </table>
 </div>
 
-<script type="text/javascript" src="/js/Vimlike.js"></script>
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
 <footer>
   <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
     alt="Creative Commons License" style="border-width: 0pt;"
@@ -245,8 +229,8 @@ Wiki 文件保存在 Dropbox 私有目录下，生成的 html 文件保存在公
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
-    </p>
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
 </footer>
 </div>
 <script type="text/javascript">
@@ -255,8 +239,9 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 </script>
 <script type="text/javascript">
 try {
-var pageTracker=_gat._getTracker("UA-2048484-1");
-pageTracker._trackPageview();
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
 }catch(err){}</script>
-</body>
+
+  </body>
 </html>

@@ -1,83 +1,66 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
-<head>
-<!--[if IE]><script type="text/javascript" src="/js/html5.js"></script><![endif]-->
-<meta charset="UTF-8" />
-<meta name="generator" content="gvim" />
-<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-<!--<link rel="alternate" type="application/rss+xml" title="RSS"
-  href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />-->
-<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
-<link type="text/css" rel="stylesheet" href="/css/template.css" />
-<script type="text/javascript" src="/js/sea.js"></script>
-<script type="text/javascript">
-seajs.config({
-  alias: {
-    'jquery': 'jquery-1.8.3.min.js',
-    'hashchange': 'jquery.ba-hashchange.min.js'
-  }
-});
-seajs.use(["jquery", "default-main"], function(){
-    alert("default")
-});
-</script>
-<title>如何取 URL 中第一个单独的问号(?) 位置 - 闲耘™.博客</title>
-</head>
-<body>
-<div id="wrapper">
-<header>
-<div style="float:right;">
-    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
-        <input type="text" name="q" />
-        <input type="submit" value="搜索" />
-    </form>
-</div>
-<nav>
-    <ul>
-        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
-        <li class="actived"><a href="/" title="Blog">Blog</a></li>
-        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
-        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
-        <li><a href="http://twitter.hotoo.me/" title="Twitter">Twitter</a></li>
-        <li class="last"><a href="/projects.html" title="Project">Project</a></li>
-        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
-    </ul>
-</nav>
-</header>
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>如何取 URL 中第一个单独的问号(?) 位置</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
+
 <div id="container">
-  <div id="content">
-        <h1>如何取 URL 中第一个单独的问号(?) 位置</h1>
-    <article>
-        <h1>如何取 URL 中第一个单独的问号(?) 位置</h1>
-
-<p>新版 Arale 通过 nginx 服务支持使用双问号的访问方式：</p>
-
-<pre><code>https://static.alipay.com/ar??arale.js
-</code></pre>
-
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">如何取 URL 中第一个单独的问号(?) 位置</h1>
+  <div class="entry-content"><p>新版 Arale 通过 nginx 服务支持使用双问号的访问方式：</p><div class="highlight"><div class="codes"><div class="code"><pre>https:&#47;&#47;static.alipay.com&#47;ar??arale.js
+</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a></pre></div></div>
 <p>访问 <code>https://static.alipay.com/ar/arale.js</code></p>
 
-<p>通过正则的正向预搜索有办法获得第一个单问号的位置么？</p>
-
-<pre><code>var r = /\?(?!\?)/;
-</code></pre>
-
-<p>会匹配双问号的第 2 个问号：</p>
-
-<pre><code>https://static.alipay.com/ar??arale.js
+<p>通过正则的正向预搜索有办法获得第一个单问号的位置么？</p><div class="highlight"><div class="codes"><div class="code"><pre>var r = &#47;\?(?!\?)&#47;;
+</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div>
+<p>会匹配双问号的第 2 个问号：</p><div class="highlight"><div class="codes"><div class="code"><pre>https:&#47;&#47;static.alipay.com&#47;ar??arale.js
                              ^
 
 
 var path = function(uri){
-    var idx = uri.indexOf(";jsessionid=");
+    var idx = uri.indexOf(&quot;;jsessionid=&quot;);
     if(idx &gt;= 0){return uri.substr(0, idx);}
 
     do{
-        idx = uri.indexOf("?", idx);
+        idx = uri.indexOf(&quot;?&quot;, idx);
         if(idx &lt; 0){break;}
-        if("?" == uri.charAt(idx+1)){
+        if(&quot;?&quot; == uri.charAt(idx+1)){
             idx += 2;
         }else{
             break;
@@ -86,61 +69,74 @@ var path = function(uri){
 
     return idx &lt; 0 ? uri : uri.substr(0, idx);
 };
-</code></pre>
-
+</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+<a name="L3-2" href="#L3-2">2</a>
+<a name="L3-3" href="#L3-3">3</a>
+<a name="L3-4" href="#L3-4">4</a>
+<a name="L3-5" href="#L3-5">5</a>
+<a name="L3-6" href="#L3-6">6</a>
+<a name="L3-7" href="#L3-7">7</a>
+<a name="L3-8" href="#L3-8">8</a>
+<a name="L3-9" href="#L3-9">9</a>
+<a name="L3-10" href="#L3-10">10</a>
+<a name="L3-11" href="#L3-11">11</a>
+<a name="L3-12" href="#L3-12">12</a>
+<a name="L3-13" href="#L3-13">13</a>
+<a name="L3-14" href="#L3-14">14</a>
+<a name="L3-15" href="#L3-15">15</a>
+<a name="L3-16" href="#L3-16">16</a>
+<a name="L3-17" href="#L3-17">17</a>
+<a name="L3-18" href="#L3-18">18</a>
+<a name="L3-19" href="#L3-19">19</a>
+<a name="L3-20" href="#L3-20">20</a></pre></div></div>
 <p>目前是通过循环方式计算的，无心比较遍历和正则之间无优劣，
 纯粹对于正则的实现很有兴趣 :)</p>
 
-<hr />
+<hr/>
 
-<p>答案一：</p>
-
-<pre><code>var path = function(uri){
-    return uri.replace(/;jsessionid=.*$/, "")
-        .replace(/^(.*?[^?])\?[^?]/, "$1");
+<p>答案一：</p><div class="highlight"><div class="codes"><div class="code"><pre>var path = function(uri){
+    return uri.replace(&#47;;jsessionid=.*$&#47;, &quot;&quot;)
+        .replace(&#47;^(.*?[^?])\?[^?]&#47;, &quot;$1&quot;);
 };
-</code></pre>
-
-<hr />
+</pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
+<a name="L4-2" href="#L4-2">2</a>
+<a name="L4-3" href="#L4-3">3</a>
+<a name="L4-4" href="#L4-4">4</a></pre></div></div>
+<hr/>
 
 <p>答案二：</p>
 
-<p>上面用了两个相同规则的分组，这里可以减少到一个分组</p>
+<p>上面用了两个相同规则的分组，这里可以减少到一个分组</p><div class="highlight"><div class="codes"><div class="code"><pre>&quot;asdfadf??a?a&quot;.replace(&#47;([^\s])\?\1&#47;, &#39;$1*$1&#39;); &#47;&#47; &quot;asdfadf??a*a&quot;
+</pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a></pre></div></div>
+<p>但是这种做法对于问号(?)在字符串首尾时没有办法匹配</p><div class="highlight"><div class="codes"><div class="code"><pre>var temp= &quot;12345???89?asdf&quot;.search(&#47;(?:[^?]|^)\?(?!\?)&#47;);
+var index = temp ? temp + 1 : temp; &#47;&#47; index的就想要的索引值
+</pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a>
+<a name="L6-2" href="#L6-2">2</a></pre></div></div></div>
 
-<pre><code>"asdfadf??a?a".replace(/([^\s])\?\1/, '$1*$1'); // "asdfadf??a*a"
-</code></pre>
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/JavaScript">JavaScript</a>
+      
+ , 
+      <a href="/tag/RegExp">RegExp</a>
+      
+    </span>
 
-<p>但是这种做法对于问号(?)在字符串首尾时没有办法匹配</p>
-
-<pre><code>var temp= "12345???89?asdf".search(/(?:[^?]|^)\?(?!\?)/);
-var index = temp ? temp + 1 : temp; // index的就想要的索引值
-</code></pre>
-
-    </article>
-    <footer class="post clearfix">
-      <span class="tags">
-        tags:
-        
-          
-          <a href="/tags.html#JavaScript">JavaScript</a>
-        
-          ,
-          <a href="/tags.html#RegExp">RegExp</a>
-        
-      </span>
-      <time>June 22, 
-      <a href="/archives.html#2011">2011</a>
-    </footer>
+    <time datetime="2011-06-22T00:00:00.000Z">
+      <a href="/2011">2011年</a>06月22日
+    </time>
+  </footer>
     <section>
-        <div id="disqus_thread"></div>
-        <noscript>
+      <div id="disqus_thread"></div>
+      <noscript>
         要查看或参与评论，请启用 JavaScript 支持。<br />
         Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
-        </noscript>
+      </noscript>
     </section>
-<script type="text/javascript" src="/js/comments.js"></script>
-
-  </div>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
 
     <!-- Vimlike status bar -->
     <div id="status-bar">
@@ -204,7 +200,7 @@ var index = temp ? temp + 1 : temp; // index的就想要的索引值
     </table>
 </div>
 
-<script type="text/javascript" src="/js/Vimlike.js"></script>
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
 <footer>
   <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
     alt="Creative Commons License" style="border-width: 0pt;"
@@ -213,8 +209,8 @@ var index = temp ? temp + 1 : temp; // index的就想要的索引值
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
-    </p>
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
 </footer>
 </div>
 <script type="text/javascript">
@@ -223,8 +219,9 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 </script>
 <script type="text/javascript">
 try {
-var pageTracker=_gat._getTracker("UA-2048484-1");
-pageTracker._trackPageview();
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
 }catch(err){}</script>
-</body>
+
+  </body>
 </html>

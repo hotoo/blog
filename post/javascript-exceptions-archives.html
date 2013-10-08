@@ -1,64 +1,57 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
-<head>
-<!--[if IE]><script type="text/javascript" src="/js/html5.js"></script><![endif]-->
-<meta charset="UTF-8" />
-<meta name="generator" content="gvim" />
-<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-<!--<link rel="alternate" type="application/rss+xml" title="RSS"
-  href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />-->
-<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
-<link type="text/css" rel="stylesheet" href="/css/template.css" />
-<script type="text/javascript" src="/js/sea.js"></script>
-<script type="text/javascript">
-seajs.config({
-  alias: {
-    'jquery': 'jquery-1.8.3.min.js',
-    'hashchange': 'jquery.ba-hashchange.min.js'
-  }
-});
-seajs.use(["jquery", "default-main"], function(){
-    alert("default")
-});
-</script>
-<title>JavaScript 异常档案 - 闲耘™.博客</title>
-</head>
-<body>
-<div id="wrapper">
-<header>
-<div style="float:right;">
-    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
-        <input type="text" name="q" />
-        <input type="submit" value="搜索" />
-    </form>
-</div>
-<nav>
-    <ul>
-        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
-        <li class="actived"><a href="/" title="Blog">Blog</a></li>
-        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
-        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
-        <li><a href="http://twitter.hotoo.me/" title="Twitter">Twitter</a></li>
-        <li class="last"><a href="/projects.html" title="Project">Project</a></li>
-        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
-    </ul>
-</nav>
-</header>
-<div id="container">
-  <div id="content">
-        <h1>JavaScript 异常档案</h1>
-    <article>
-        <p><img src="../images/ie6-en.jpg" alt="IE6" /></p>
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>JavaScript 异常档案</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<p><img src="../images/ie8.jpg" alt="IE8" /></p>
+<div id="container">
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">JavaScript 异常档案</h1>
+  <div class="entry-content"><p><img src="/static/images/ie6-en.jpg" alt="IE6"/></p>
+
+<p><img src="/static/images/ie8.jpg" alt="IE8"/></p>
 
 <p>作为前端工程师，看到上面的异常，我们该如何进行排查？</p>
 
 <ol>
 <li>根据异常所在文件及其异常所在行，找到引发异常的相关代码附近，
- 对代码进行分析？</li>
+对代码进行分析？</li>
 <li>然后呢？就只能依靠我们以往的经验进行猜测和尝试了。</li>
 <li>没有这个异常的相关经验？哪有这么巧的事情？好吧，那你悲剧了。</li>
 <li>呃，Google 吧，也许 Bing 或 Baidu 也有点答案。</li>
@@ -69,13 +62,11 @@ seajs.use(["jquery", "default-main"], function(){
 <li>然后就没有了然后。。。</li>
 </ol>
 
+<p><img src="/static/images/bugs.png" alt="bugs"/></p>
 
-<p><img src="../images/bugs.png" alt="bugs" /></p>
+<a name="more"></a>
 
-<!--more-->
-
-
-<hr />
+<hr/>
 
 <p>各位同学，我们在排查调试 JavaScript 异常时，是不是经常感觉到乏力呢？</p>
 
@@ -86,20 +77,18 @@ seajs.use(["jquery", "default-main"], function(){
 <li>每个浏览器厂商的开发者文档或社区都是独立的，各种异常文档或分享散落各个社区或者个人博客中。</li>
 </ul>
 
-
 <p>凡此种种，我都觉得有必要建立这样的一套异常档案，他可以：</p>
 
 <ul>
 <li>对于已知或未知的 JavaScript 异常，都存档有对应的异常信息、场景上下文、源码片段、
-  对应的分析说明、及核心异常代码演示。</li>
+对应的分析说明、及核心异常代码演示。</li>
 <li>长久的存在，不因时间的流逝、博客的关闭、URL 的变更等等原因而消逝。</li>
 <li>开放，分享和交流每个人的异常分析经验，让异常分析经验和知识更为普及和提升。</li>
 </ul>
 
+<p><img src="/static/images/no_bugs.jpg" alt="bugs"/></p>
 
-<p><img src="../images/no_bugs.jpg" alt="bugs" /></p>
-
-<hr />
+<hr/>
 
 <p>因此，我们在 Github 上初步建立了一个
 『 <a href="https://github.com/totorojs/javascript-exception-archives">JavaScript 异常档案</a> 』
@@ -112,7 +101,7 @@ seajs.use(["jquery", "default-main"], function(){
 详细分析，还有有血有肉的实际案例分析，关键代码，实际异常演示页，，，
 可能还很不完善，还需要我们一起来参与，但是泪奔的感觉有木有~</p>
 
-<hr />
+<hr/>
 
 <p>希望有一天：</p>
 
@@ -121,36 +110,35 @@ seajs.use(["jquery", "default-main"], function(){
 <li>我们分析的脚本异常都可以出现在这个档案中以惠及他人。</li>
 </ul>
 
-
 <p>最良好的祝愿！</p>
 
-<p><img src="../images/exception.jpg" alt="bugs" /></p>
+<p><img src="/static/images/exception.jpg" alt="bugs"/></p>
+</div>
 
-    </article>
-    <footer class="post clearfix">
-      <span class="tags">
-        tags:
-        
-          
-          <a href="/tags.html#JavaScript">JavaScript</a>
-        
-          ,
-          <a href="/tags.html#Bugs">Bugs</a>
-        
-      </span>
-      <time>May 22, 
-      <a href="/archives.html#2013">2013</a>
-    </footer>
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/JavaScript">JavaScript</a>
+      
+ , 
+      <a href="/tag/Bugs">Bugs</a>
+      
+    </span>
+
+    <time datetime="2013-05-22T00:00:00.000Z">
+      <a href="/2013">2013年</a>05月22日
+    </time>
+  </footer>
     <section>
-        <div id="disqus_thread"></div>
-        <noscript>
+      <div id="disqus_thread"></div>
+      <noscript>
         要查看或参与评论，请启用 JavaScript 支持。<br />
         Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
-        </noscript>
+      </noscript>
     </section>
-<script type="text/javascript" src="/js/comments.js"></script>
-
-  </div>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
 
     <!-- Vimlike status bar -->
     <div id="status-bar">
@@ -214,7 +202,7 @@ seajs.use(["jquery", "default-main"], function(){
     </table>
 </div>
 
-<script type="text/javascript" src="/js/Vimlike.js"></script>
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
 <footer>
   <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
     alt="Creative Commons License" style="border-width: 0pt;"
@@ -223,8 +211,8 @@ seajs.use(["jquery", "default-main"], function(){
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
-    </p>
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
 </footer>
 </div>
 <script type="text/javascript">
@@ -233,8 +221,9 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 </script>
 <script type="text/javascript">
 try {
-var pageTracker=_gat._getTracker("UA-2048484-1");
-pageTracker._trackPageview();
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
 }catch(err){}</script>
-</body>
+
+  </body>
 </html>

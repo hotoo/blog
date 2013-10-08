@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>标签模式</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
+
+<div id="container">
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">标签模式</h1>
+  <div class="entry-content"><p>目前的标签有以下几种模式(形式)：</p>
+<h2 id="手动外联标签模式。">手动外联标签模式。</h2>
+<p>这种模式将标签和内容分离，用户需要为指定文档/内容贴上不同的标签。
+例如Gmail和新版Wordpress的标签。</p>
+
+<p><img src="http://3.bp.blogspot.com/_POl6bUDELqY/SfvBJ3-KZQI/AAAAAAAAIAY/qS9Y53-xN4g/s320/Gmail_labels.JPG" alt="图"/></p>
+
+<ul>
+<li>优点：简单易用，可控性强。</li>
+<li>缺点：需要为每个内容设置标签。</li>
+</ul>
+<h2 id="手动内联标签模式。">手动内联标签模式。</h2>
+<p>这种模式将标签和内容融合，用户同样需要为文档/内容贴上不同的标签，
+并且这种模式因为没有明确的标签输入区（标签输入区和内容输入区在一起），
+容易导致忘记贴标签，对于及时性和不可修改性的应用不太理想。</p>
+
+<p>如Twitter就有这方面的第三方应用，参考 <a href="http://www.hashtags.org/">hashtags</a>。</p>
+
+<p><img src="http://2.bp.blogspot.com/_POl6bUDELqY/SfvCwh4OmRI/AAAAAAAAIAg/WM8rUQkDBl8/s400/twitter_tags.JPG" alt="图"/></p>
+
+<ul>
+<li>优点：内容被语义化；标签本身简单易用，可控性也很强。</li>
+<li>缺点：需要辅助标记，内容被干扰；容易忘记使用标签。</li>
+</ul>
+<h2 id="自动内联标签模式。">自动内联标签模式。</h2>
+<p>这种模式需要用户手动设置标签集合，系统根据内容自动匹配标签。
+目前还没有发现这种模式的实际应用，比较接近的有 <em>关键字替换</em> 和
+<em>对局部文本进行评论</em> （忘记怎么称呼了，请指教）。
+关键字替换只是展示层的，用户可以根据内容发现（暂且称之为）标签，
+但无法通过标签找到匹配的内容
+（由此想到了搜索引擎）。</p>
+
+<p><img src="http://1.bp.blogspot.com/_POl6bUDELqY/SfvGbLpTtAI/AAAAAAAAIAo/7osZzg3lZPU/s400/qq_news_replace_text.jpg" alt="图"/></p>
+
+<ul>
+<li>优点：标签自动化，用户无需操心内容和标签之间的关系。</li>
+<li>缺点：要匹配到正确的标签并不容易，大概到真正的语义时代可以解决。</li>
+</ul>
+
+<p>由此扩展另一种：</p>
+<h2 id="内联标签兼容模式。">内联标签兼容模式。</h2>
+<p>系统根据用户设置的标签集合管理标签与内容之间的关系，另外用户也可以手动管理标签。</p>
+
+<ul>
+<li>优点：标签自动化；可控性强。</li>
+<li>缺点：简单问题变复杂，包括系统实现复杂度和用户使用复杂度。</li>
+</ul>
+
+<p>不过回头想想，标签本身很简单，有必要把它变复杂吗？自动化就是不想手动控制，
+如果需要手动控制还要自动化干嘛？</p>
+
+<hr/>
+
+<p>UPDATE: 未尝不可一试. (2010/10/24)</p>
+</div>
+
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/UED">UED</a>
+      
+    </span>
+
+    <time datetime="2009-05-02T00:00:00.000Z">
+      <a href="/2009">2009年</a>05月02日
+    </time>
+  </footer>
+    <section>
+      <div id="disqus_thread"></div>
+      <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+      </noscript>
+    </section>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
+
+    <!-- Vimlike status bar -->
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
+<footer>
+  <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
+    alt="Creative Commons License" style="border-width: 0pt;"
+    src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"/></a>
+  This work is licensed under a
+  <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
+    Commons Attribution 2.5 Generic License</a>.<br/>
+  Copyleft &copy; 2005-2013, Power by
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
+</footer>
+</div>
+<script type="text/javascript">
+var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
+}catch(err){}</script>
+
+  </body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>Rating for Foobar2000 columns UI</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
+
+<div id="container">
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">Rating for Foobar2000 columns UI</h1>
+  <div class="entry-content"><p>给Foobar2000 的Columns UI设置标星功能：</p>
+<h2 id="i-显示歌曲标星级别。">I. 显示歌曲标星级别。</h2>
+<ul>
+<li>文件 -&gt; 参数设置。</li>
+<li>显示 -&gt; Columns UI -&gt; Playlist view。</li>
+<li>切换到Columns页签，新建（New）一个列。</li>
+</ul>
+
+<p><a href="http://4.bp.blogspot.com/_POl6bUDELqY/SJ6_G0igVlI/AAAAAAAAD20/IMyH4NToL1c/s1600-h/viewRating.jpg">http://4.bp.blogspot.com/_POl6bUDELqY/SJ6_G0igVlI/AAAAAAAAD20/IMyH4NToL1c/s1600-h/viewRating.jpg</a></p>
+
+<p>如图，Display里的代码是：</p><div class="highlight"><div class="codes"><div class="code"><pre>$if(%rating%,
+$select(%rating%,
+*,
+**,
+***,
+****,
+*****),
+)
+)
+</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a>
+<a name="L1-3" href="#L1-3">3</a>
+<a name="L1-4" href="#L1-4">4</a>
+<a name="L1-5" href="#L1-5">5</a>
+<a name="L1-6" href="#L1-6">6</a>
+<a name="L1-7" href="#L1-7">7</a>
+<a name="L1-8" href="#L1-8">8</a>
+<a name="L1-9" href="#L1-9">9</a></pre></div></div>
+<p>其实也可以简单是输入：<code>%rating%</code>。</p>
+<h2 id="ii-设置标星级别功能。">II. 设置标星级别功能。</h2>
+<ul>
+<li>右键播放列表某首歌曲 -&gt; 标签 -&gt; 管理脚本。
+<a href="http://3.bp.blogspot.com/_POl6bUDELqY/SKKI6GFCmTI/AAAAAAAAD3g/8mBCeRyB4k8/s320/0.right+menu.GIF">http://3.bp.blogspot.com/_POl6bUDELqY/SKKI6GFCmTI/AAAAAAAAD3g/8mBCeRyB4k8/s320/0.right+menu.GIF</a></li>
+<li>打开“批量标签”窗口。
+<a href="http://4.bp.blogspot.com/_POl6bUDELqY/SKKPQ-kgaBI/AAAAAAAAD3o/9a8J60zWdRM/s320/1.tags.GIF">http://4.bp.blogspot.com/_POl6bUDELqY/SKKPQ-kgaBI/AAAAAAAAD3o/9a8J60zWdRM/s320/1.tags.GIF</a></li>
+<li>点击“准备的任务”中的“添加”按钮，选择动作类型为“从另一个字段格式化值...”，确定。
+<a href="http://1.bp.blogspot.com/_POl6bUDELqY/SKKPbKbESKI/AAAAAAAAD3w/5FbcHoTmX68/s320/2.select+action.GIF">http://1.bp.blogspot.com/_POl6bUDELqY/SKKPbKbESKI/AAAAAAAAD3w/5FbcHoTmX68/s320/2.select+action.GIF</a></li>
+<li>目标字段名：RATING <br />
+格式化原型：<code>$if($greater(6,$add(%RATING%,1)),$add(%RATING%,1),5)</code> <br />
+<a href="http://2.bp.blogspot.com/_POl6bUDELqY/SKKPrZHkhrI/AAAAAAAAD34/yPDpKB5d3gA/s320/3.0.format+add+value.GIF">http://2.bp.blogspot.com/_POl6bUDELqY/SKKPrZHkhrI/AAAAAAAAD34/yPDpKB5d3gA/s320/3.0.format+add+value.GIF</a></li>
+<li>保存为rating++，名称可以自定，点击“运行”按钮。
+<a href="http://3.bp.blogspot.com/_POl6bUDELqY/SKKPrqTAO5I/AAAAAAAAD4I/h9QuR4fIlow/s320/3.2.run.jpg">http://3.bp.blogspot.com/_POl6bUDELqY/SKKPrqTAO5I/AAAAAAAAD4I/h9QuR4fIlow/s320/3.2.run.jpg</a></li>
+<li>重复第3步。</li>
+<li>重复第4步，目标字段名：RATING <br />
+格式化原型： <code>$if($greater(%RATING%,0),$sub(%RATING%,1),0)</code> <br />
+保存为：rating-- <br />
+点击“运行”按钮。</li>
+</ul>
+<h2 id="iii-设置标星界面（操作按钮）：">III. 设置标星界面（操作按钮）：</h2>
+<ul>
+<li>右键工具栏，点击 Customise...
+<a href="http://2.bp.blogspot.com/_POl6bUDELqY/SKKgVMPR42I/AAAAAAAAD4Q/x3tqs58BTf4/s320/customise.JPG">http://2.bp.blogspot.com/_POl6bUDELqY/SKKgVMPR42I/AAAAAAAAD4Q/x3tqs58BTf4/s320/customise.JPG</a></li>
+<li>添加(Add)一个按钮(button)，并点击Change...按钮。
+<a href="http://2.bp.blogspot.com/_POl6bUDELqY/SKKgVKCZ3zI/AAAAAAAAD4Y/8rHQn7SXnq4/s320/custonise+buttons.jpg">http://2.bp.blogspot.com/_POl6bUDELqY/SKKgVKCZ3zI/AAAAAAAAD4Y/8rHQn7SXnq4/s320/custonise+buttons.jpg</a></li>
+<li>Command group中选择“Context menu items”，Item group中选择“Now Playing item”，
+Command中选择“标签/脚本/rating++”。OK保存后回到Command picker窗口，设置按钮图片什么。
+注：支持bmp和png格式的图片，但是png图片如果有透明的部分，则可能不会显示。
+<a href="http://4.bp.blogspot.com/_POl6bUDELqY/SKKgVeJuaXI/AAAAAAAAD4g/ToVomGPvQSA/s320/command+picker.jpg">http://4.bp.blogspot.com/_POl6bUDELqY/SKKgVeJuaXI/AAAAAAAAD4g/ToVomGPvQSA/s320/command+picker.jpg</a></li>
+<li>重复第2步。Command中选择“标签/脚本/rating--”其他雷同。</li>
+<li>最后OK保存就可以了，下面是配置完成的界面，两个带星星的按钮功能分别是标星自减和自增。</li>
+</ul>
+
+<p><img src="http://4.bp.blogspot.com/_POl6bUDELqY/SKRIW4GiHEI/AAAAAAAAD4o/fN-UJ17Kp1Q/s320/foobar200.jpg" alt="pic"/></p>
+</div>
+
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/Music">Music</a>
+      
+ , 
+      <a href="/tag/Tools">Tools</a>
+      
+ , 
+      <a href="/tag/Foobar2000">Foobar2000</a>
+      
+    </span>
+
+    <time datetime="2008-08-14T00:00:00.000Z">
+      <a href="/2008">2008年</a>08月14日
+    </time>
+  </footer>
+    <section>
+      <div id="disqus_thread"></div>
+      <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+      </noscript>
+    </section>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
+
+    <!-- Vimlike status bar -->
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
+<footer>
+  <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
+    alt="Creative Commons License" style="border-width: 0pt;"
+    src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"/></a>
+  This work is licensed under a
+  <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
+    Commons Attribution 2.5 Generic License</a>.<br/>
+  Copyleft &copy; 2005-2013, Power by
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
+</footer>
+</div>
+<script type="text/javascript">
+var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
+}catch(err){}</script>
+
+  </body>
+</html>

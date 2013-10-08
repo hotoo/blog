@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>未来的前端设计</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
+
+<div id="container">
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">未来的前端设计</h1>
+  <div class="entry-content"><p>今天基本完成了用户首页，用户可以拖放管理自定义布局
+（类似 <a href="http://www.google.com/ig?hl=en">igoogle</a>）。</p>
+
+<p>在PM试体验的时候，发现他的拖放方式都（跟部门主管一样）是“丢放式”的，
+鼠标抓起一个模块，带有速度的往某个位置一扔，有时在没有到达目标区域就放手了，
+导致实际上没有被扔到目标区域。不仅仅是拖放模块，甚至连拖放改变边侧栏宽度也是使用这种手法。
+可以想象他们使用桌面应用程序（比如改变窗口大小）也是这样操作的。^1^</p>
+
+<p>我当时指出这两种拖放手法的不同，然后我们就短暂的畅想了关于“丢放式”的前端设计。</p>
+
+<p>如果你看过微软未来操作系统的视频^2^，或者腾讯未来QQ的演示视频^3^，大概能了解这是怎样的一种情形。</p>
+
+<p>这种模拟现实，并超越现实的操作体验，比目前任何的3D游戏都要精致、逼真得多，
+它是如此的流畅（非性能），以至于让人感觉不到操作系统和软件的存在，仿佛在摆弄实物一般。</p>
+
+<p>目前的大多数web前端设计，还只是初步模拟操作系统或桌面应用程序2D时代的作品，
+受浏览器的约束，也有一些做出了还不错的3D及流畅的动态效果，然而即使是flash也做的很不够。
+就3D效果本身来说，这只不过是未来设计中很基本的一种特性，另外包括手势动作及趋势，
+操作的速度及方向，还有现实世界中力学，人体工程学，甚至心理学等等众多科学的渗入，
+辅助以多点触摸屏，声控等，展现层的设计会越来越逼真，操作方式跟现实世界会越来越无差异。</p>
+
+<p>更进一步的，我曾经似乎看过，也传播过这样一句话：最好的界面，就是没有界面。
+我虽然只是随便说说，但是心里还是蛮认真的。当然这里说的没有，只是说对操作用户来说几乎透明，
+几乎感觉不到，而当用户希望有感觉时，他可以自己拼出符合自己期望的界面来。</p>
+<h2 id="参考与延伸欣赏：">参考与延伸欣赏：</h2>
+<ul>
+<li><a href="https://twitter.com/hotoo/statuses/3241383666">Twitter@hotoo:3241383666</a>
+发现部门两个老大的拖放手法都是“丢放式”，
+未来操作系统在触摸屏的辅助下，已经有这样的抽象设计。
+我想，web前端也可以尝试这样的抽象设计。^1^</li>
+<li><a href="http://v.youku.com/v_show/id_XMzQ0Njc1MzI=.html">视频: 超酷的微软操作系统</a> ^2^</li>
+<li><a href="http://www.iqshw.com/post/308.html">超炫的未来QQ版本（视频集合）</a> ^3^</li>
+<li><a href="http://tech.163.com/07/0601/09/3FT3PNA7000926PT.html">未来的操作系统将采用3D用户界面和触摸操作</a></li>
+</ul>
+</div>
+
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/UED">UED</a>
+      
+ , 
+      <a href="/tag/Web Design">Web Design</a>
+      
+    </span>
+
+    <time datetime="2009-08-12T00:00:00.000Z">
+      <a href="/2009">2009年</a>08月12日
+    </time>
+  </footer>
+    <section>
+      <div id="disqus_thread"></div>
+      <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+      </noscript>
+    </section>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
+
+    <!-- Vimlike status bar -->
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
+<footer>
+  <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
+    alt="Creative Commons License" style="border-width: 0pt;"
+    src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"/></a>
+  This work is licensed under a
+  <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
+    Commons Attribution 2.5 Generic License</a>.<br/>
+  Copyleft &copy; 2005-2013, Power by
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
+</footer>
+</div>
+<script type="text/javascript">
+var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
+}catch(err){}</script>
+
+  </body>
+</html>

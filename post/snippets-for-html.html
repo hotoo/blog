@@ -1,58 +1,49 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
-<head>
-<!--[if IE]><script type="text/javascript" src="/js/html5.js"></script><![endif]-->
-<meta charset="UTF-8" />
-<meta name="generator" content="gvim" />
-<meta name="author" content="闲耘 (hotoo.cn[AT]gmail.com)" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-<!--<link rel="alternate" type="application/rss+xml" title="RSS"
-  href="http://vimcn.blogspot.com/feeds/posts/default?alt=rss" />-->
-<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
-<link type="text/css" rel="stylesheet" href="/css/template.css" />
-<script type="text/javascript" src="/js/sea.js"></script>
-<script type="text/javascript">
-seajs.config({
-  alias: {
-    'jquery': 'jquery-1.8.3.min.js',
-    'hashchange': 'jquery.ba-hashchange.min.js'
-  }
-});
-seajs.use(["jquery", "default-main"], function(){
-    alert("default")
-});
-</script>
-<title>针对HTML的Snippets - 闲耘™.博客</title>
-</head>
-<body>
-<div id="wrapper">
-<header>
-<div style="float:right;">
-    <form action="search.html" id="searchbox" onsubmit="return onSearch();">
-        <input type="text" name="q" />
-        <input type="submit" value="搜索" />
-    </form>
-</div>
-<nav>
-    <ul>
-        <li class="first"><a href="http://hotoo.me/" title="Home">Home</a></li>
-        <li class="actived"><a href="/" title="Blog">Blog</a></li>
-        <li><a href="http://wiki.hotoo.me/" title="Wiki">Wiki</a></li>
-        <li><a href="http://wiki.hotoo.me/Vim.html" title="Vim">Vim</a></li>
-        <li><a href="http://twitter.hotoo.me/" title="Twitter">Twitter</a></li>
-        <li class="last"><a href="/projects.html" title="Project">Project</a></li>
-        <!-- li class="last"><a href="../resume/resume.html" title="About Me">README</a></li -->
-    </ul>
-</nav>
-</header>
-<div id="container">
-  <div id="content">
-        <h1>针对HTML的Snippets</h1>
-    <article>
-        <h1>针对 HTML 的 Snippets</h1>
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.7">
+    <meta name="theme" content="one 0.1">
+    <title>针对 HTML 的 Snippets</title>
+    <link rel="alternate" type="application/rss+xml" href="feed.xml" title="" />
+    <!--<link rel="stylesheet" href="../static/one.css" />-->
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../"></a>-->
+      <div style="float:right;">
+        <form action="search.html" id="searchbox" onsubmit="return onSearch();">
+          <input type="text" id="input_search" name="q" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<pre><code># @see http://www.blueidea.com/tech/web/2009/6547.asp
+<div id="container">
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">针对 HTML 的 Snippets</h1>
+  <div class="entry-content"><div class="highlight"><div class="codes"><div class="code"><pre># @see http:&#47;&#47;www.blueidea.com&#47;tech&#47;web&#47;2009&#47;6547.asp
 snippet cc:ie
   &lt;!--[if IE${1}]&gt;${2}&lt;![endif]--&gt;${3}
 snippet cc:ie5
@@ -95,47 +86,99 @@ snippet cc:ie8-=
   &lt;!--[if lte IE 8]&gt;${1}&lt;![endif]--&gt;${2}
 snippet cc:noie8
   &lt;!--[if !IE 8]&gt;${1}&lt;![endif]--&gt;${2}
-# @see http://code.google.com/p/zen-coding/wiki/ZenHTMLElementsEn
+# @see http:&#47;&#47;code.google.com&#47;p&#47;zen-coding&#47;wiki&#47;ZenHTMLElementsEn
 snippet link:css
-  &lt;link rel="stylesheet" type="text/css" href="${1:style.css}" media="${2:all}" /&gt;
+  &lt;link rel=&quot;stylesheet&quot; type=&quot;text&#47;css&quot; href=&quot;${1:style.css}&quot; media=&quot;${2:all}&quot; &#47;&gt;
 snippet link:icon
-  &lt;link rel="shortcut icon" type="image/x-icon" href="${1:favicon.ico}" /&gt;
+  &lt;link rel=&quot;shortcut icon&quot; type=&quot;image&#47;x-icon&quot; href=&quot;${1:favicon.ico}&quot; &#47;&gt;
 snippet link:favicon
-  &lt;link rel="shortcut icon" type="image/x-icon" href="${1:favicon.ico}" /&gt;
+  &lt;link rel=&quot;shortcut icon&quot; type=&quot;image&#47;x-icon&quot; href=&quot;${1:favicon.ico}&quot; &#47;&gt;
 snippet link:rss
-  &lt;link rel="alternate" type="application/rss+xml" title="${1:RSS}" href="${2:rss.xml}" /&gt;
+  &lt;link rel=&quot;alternate&quot; type=&quot;application&#47;rss+xml&quot; title=&quot;${1:RSS}&quot; href=&quot;${2:rss.xml}&quot; &#47;&gt;
 snippet link:atom
-  &lt;link rel="alternate" type="application/atom+xml" title="${1:Atom}" href="${2:atom.xml}" /&gt;
-</code></pre>
+  &lt;link rel=&quot;alternate&quot; type=&quot;application&#47;atom+xml&quot; title=&quot;${1:Atom}&quot; href=&quot;${2:atom.xml}&quot; &#47;&gt;
+</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a>
+<a name="L1-3" href="#L1-3">3</a>
+<a name="L1-4" href="#L1-4">4</a>
+<a name="L1-5" href="#L1-5">5</a>
+<a name="L1-6" href="#L1-6">6</a>
+<a name="L1-7" href="#L1-7">7</a>
+<a name="L1-8" href="#L1-8">8</a>
+<a name="L1-9" href="#L1-9">9</a>
+<a name="L1-10" href="#L1-10">10</a>
+<a name="L1-11" href="#L1-11">11</a>
+<a name="L1-12" href="#L1-12">12</a>
+<a name="L1-13" href="#L1-13">13</a>
+<a name="L1-14" href="#L1-14">14</a>
+<a name="L1-15" href="#L1-15">15</a>
+<a name="L1-16" href="#L1-16">16</a>
+<a name="L1-17" href="#L1-17">17</a>
+<a name="L1-18" href="#L1-18">18</a>
+<a name="L1-19" href="#L1-19">19</a>
+<a name="L1-20" href="#L1-20">20</a>
+<a name="L1-21" href="#L1-21">21</a>
+<a name="L1-22" href="#L1-22">22</a>
+<a name="L1-23" href="#L1-23">23</a>
+<a name="L1-24" href="#L1-24">24</a>
+<a name="L1-25" href="#L1-25">25</a>
+<a name="L1-26" href="#L1-26">26</a>
+<a name="L1-27" href="#L1-27">27</a>
+<a name="L1-28" href="#L1-28">28</a>
+<a name="L1-29" href="#L1-29">29</a>
+<a name="L1-30" href="#L1-30">30</a>
+<a name="L1-31" href="#L1-31">31</a>
+<a name="L1-32" href="#L1-32">32</a>
+<a name="L1-33" href="#L1-33">33</a>
+<a name="L1-34" href="#L1-34">34</a>
+<a name="L1-35" href="#L1-35">35</a>
+<a name="L1-36" href="#L1-36">36</a>
+<a name="L1-37" href="#L1-37">37</a>
+<a name="L1-38" href="#L1-38">38</a>
+<a name="L1-39" href="#L1-39">39</a>
+<a name="L1-40" href="#L1-40">40</a>
+<a name="L1-41" href="#L1-41">41</a>
+<a name="L1-42" href="#L1-42">42</a>
+<a name="L1-43" href="#L1-43">43</a>
+<a name="L1-44" href="#L1-44">44</a>
+<a name="L1-45" href="#L1-45">45</a>
+<a name="L1-46" href="#L1-46">46</a>
+<a name="L1-47" href="#L1-47">47</a>
+<a name="L1-48" href="#L1-48">48</a>
+<a name="L1-49" href="#L1-49">49</a>
+<a name="L1-50" href="#L1-50">50</a>
+<a name="L1-51" href="#L1-51">51</a>
+<a name="L1-52" href="#L1-52">52</a>
+<a name="L1-53" href="#L1-53">53</a>
+<a name="L1-54" href="#L1-54">54</a></pre></div></div></div>
 
-    </article>
-    <footer class="post clearfix">
-      <span class="tags">
-        tags:
-        
-          
-          <a href="/tags.html#Vim">Vim</a>
-        
-          ,
-          <a href="/tags.html#snipMate">snipMate</a>
-        
-          ,
-          <a href="/tags.html#HTML">HTML</a>
-        
-      </span>
-      <time>April  6, 
-      <a href="/archives.html#2010">2010</a>
-    </footer>
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/Vim">Vim</a>
+      
+ , 
+      <a href="/tag/snipMate">snipMate</a>
+      
+ , 
+      <a href="/tag/HTML">HTML</a>
+      
+    </span>
+
+    <time datetime="2010-04-06T00:00:00.000Z">
+      <a href="/2010">2010年</a>04月06日
+    </time>
+  </footer>
     <section>
-        <div id="disqus_thread"></div>
-        <noscript>
+      <div id="disqus_thread"></div>
+      <noscript>
         要查看或参与评论，请启用 JavaScript 支持。<br />
         Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
-        </noscript>
+      </noscript>
     </section>
-<script type="text/javascript" src="/js/comments.js"></script>
-
-  </div>
+  <script type="text/javascript" src="/static/js/comments.js"></script>
+</div>
+</div>
 
     <!-- Vimlike status bar -->
     <div id="status-bar">
@@ -199,7 +242,7 @@ snippet link:atom
     </table>
 </div>
 
-<script type="text/javascript" src="/js/Vimlike.js"></script>
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
 <footer>
   <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
     alt="Creative Commons License" style="border-width: 0pt;"
@@ -208,8 +251,8 @@ snippet link:atom
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://code.google.com/p/vimwiki/">Vimwiki</a>, Theme by 闲耘™(@hotoo).
-    </p>
+  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  </p>
 </footer>
 </div>
 <script type="text/javascript">
@@ -218,8 +261,9 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 </script>
 <script type="text/javascript">
 try {
-var pageTracker=_gat._getTracker("UA-2048484-1");
-pageTracker._trackPageview();
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
 }catch(err){}</script>
-</body>
+
+  </body>
 </html>
