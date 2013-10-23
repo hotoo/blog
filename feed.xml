@@ -5,6 +5,37 @@
     <link href="http://blog.hotoo.me/feed.xml" />
     <id>http://blog.hotoo.me/feed.xml</id>
     <entry>
+        <title type="html"><![CDATA[Vim Talk in 来往扎堆]]></title>
+        <link href="http://blog.hotoo.me/post/vim-talk-laiwangzhadui.html"/>
+        <published>2013-10-23T00:00:00.000Z</published>
+        <updated>2013-10-23T00:00:00.000Z</updated>
+        <id>http://blog.hotoo.me/post/vim-talk-laiwangzhadui.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+            <![CDATA[ <blockquote>
+<p>首先感谢支持加我的『来往』好友们，你们太让人感动了。</p>
+</blockquote>
+
+<p>下面开始正常的使用来往，好好利用这个应用。</p>
+
+<hr/>
+
+<p>欢迎加入 Vim Talk 扎堆，一起聊些有用有趣的技术话题。</p>
+
+<p>加入方法：</p>
+
+<ol>
+<li>安装并启动 <a href="https://www.laiwang.com/">来往</a> 客户端。</li>
+<li>打开『通讯录』-『添加好友』-『扫一扫加好友』-扫描下面的二维码即可。
+<img src="/images/vim-talk-laiwangzhadui.png" alt="二维码"/></li>
+</ol>
+
+<hr/>
+
+<p>扎堆是一个类似贴吧、论坛类信息分享交流的移动平台。
+大家可以在这里随时随机的分享话题、信息、图片等，也可以对他人发起的话题进行回复交流。</p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[不缓存 CDN 静态资源方案]]></title>
         <link href="http://blog.hotoo.me/post/no-cache-in-cdn.html"/>
         <published>2013-09-21T00:00:00.000Z</published>
@@ -1439,93 +1470,6 @@ My Places 的数据，这个支持还不行，会被拉成直线。</li>
 但是在光标向前移动使文本向右滚动时，就会出现偏差。</p>
 
 <p>最终解决办法是期待浏览器能够得到正确的scrollLeft值，或者其他巧妙的计算方法。</p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[Date.now()]]></title>
-        <link href="http://blog.hotoo.me/post/date.now.html"/>
-        <published>2011-09-18T00:00:00.000Z</published>
-        <updated>2011-09-18T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/date.now.html</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <p>以前做过一个 JavaScript 性能测试“框架”，也看过其他人做性能比较的时候，基本上
-也都是使用 <code>new Date()</code> 来记时，会“耍点小花样”的同学会使用 <code>+new Date()</code>。</p>
-
-<p>现在又想做另一种性能监控的方法，便着重考量了下各种记时方案，尽量减少因为
-性能监控代码对业务代码的影响。</p>
-
-<p>下面是循环 100000 次，过程中只有计数器操作，得到的时间(ms)对照表
-(<a href="http://hotoo.me/labs/Date.now.html">Demo</a>)。</p>
-
-<table><thead>
-<tr>
-<th>Browser</th>
-<th>new Date()</th>
-<th>new Date().getTime()</th>
-<th>new Date().valueOf()</th>
-<th>+new Date()</th>
-<th>Date.now()</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>IE8</td>
-<td>469</td>
-<td>391</td>
-<td>375</td>
-<td>406</td>
-<td>-</td>
-</tr>
-<tr>
-<td>Firefox6</td>
-<td>266</td>
-<td>258</td>
-<td>257</td>
-<td>259</td>
-<td>236</td>
-</tr>
-<tr>
-<td>Chrome13</td>
-<td>46</td>
-<td>29</td>
-<td>29</td>
-<td>35</td>
-<td>20</td>
-</tr>
-<tr>
-<td>Opera11</td>
-<td>246</td>
-<td>242</td>
-<td>246</td>
-<td>244</td>
-<td>222</td>
-</tr>
-<tr>
-<td>Safari5</td>
-<td>256</td>
-<td>232</td>
-<td>239</td>
-<td>255</td>
-<td>222</td>
-</tr>
-</tbody></table>
-
-<p>由此可以对照出，<code>Date.now()</code> 确实有很明显的性能优势，另外 <code>Date.now()</code> 返回是
-number 类型的数值，并不产生 Date 对象。</p>
-
-<p>不过目前只有 IE9, Firefox3+, Chrome5+, Opera10.50+, Safari4+ 支持，对于不支持
-的浏览器，可以继续使用 <code>new Date().valueOf()</code> 方法（个人不推荐用 <code>+new Date()</code>）：</p>
-<div class="highlight"><pre><code class="javascript"><span class="comment">// @return {Number}</span>
-<span class="function"><span class="keyword">function</span> <span class="title">now</span><span class="params">()</span>{</span>
-    <span class="keyword">return</span> (<span class="string">"function"</span>==<span class="keyword">typeof</span> Date.now) ? Date.now() : <span class="keyword">new</span> Date().valueOf();
-}
-</code></pre></div><h2 id="日期相关">日期相关</h2><div class="highlight"><pre><code class="javascript"><span class="keyword">new</span> Date()          <span class="comment">// now.</span>
-<span class="keyword">new</span> Date(<span class="literal">null</span>);     <span class="comment">// 1970/01/01 00:00:00(UTC)</span>
-<span class="keyword">new</span> Date(<span class="literal">undefined</span>);<span class="comment">// IE:NaN; Others:Invalid Date.</span>
-</code></pre></div><h2 id="参考阅读">参考阅读</h2>
-<ul>
-<li><a href="http://msdn.microsoft.com/en-us/library/ff679974(v=vs.94">Date.now Function (JavaScript) - MSDN</a>.aspx)</li>
-<li><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date/now">Data.now() - MDN</a></li>
-</ul>
 ]]>
         </content>
     </entry>
