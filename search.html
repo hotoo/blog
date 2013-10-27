@@ -5,22 +5,16 @@
     <meta name="viewport" content="width=device-width">
     <meta name="generator" content="nico 0.4.7">
     <meta name="theme" content="one 0.1">
-    <title>closure-compiler.vim - 闲耘™.博客</title>
+    <title>搜索 - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
-    <!--<link rel="stylesheet" href="../static/one.css" />-->
-    <link rel="stylesheet" href="../static/syntax.css" />
-    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+    <!--<link rel="stylesheet" href="./static/one.css" />-->
+    <link rel="stylesheet" href="./static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="./static/template.css" />
   </head>
   <body>
   <div id="wrapper">
     <header class="navigation" role="navigation">
-      <!--<a class="home" href="../">闲耘™.博客</a>-->
-      <div style="float:right;">
-        <form action="/search.html">
-          <input type="text" name="q" autocomplete="off" />
-          <input type="submit" value="搜索" />
-        </form>
-      </div>
+      <!--<a class="home" href="./">闲耘™.博客</a>-->
       <nav class="menu">
         <ul>
           <li class="first"><a href="http://hotoo.me/"
@@ -42,42 +36,72 @@
 <div id="container">
   <div id="content" class="document">
 <div class="hentry">
-  <h1 class="entry-title">closure-compiler.vim</h1>
-  <div class="entry-content"><p><a href="https://github.com/hotoo/vimrc/blob/master/plugin/ClosureCompiler.vim">ClosureCompiler.vim</a></p>
-<h2 id="see-also">See Also</h2>
-<ul>
-<li><a href="http://vim.wikia.com/wiki/Auto_compile_Javascript_with_Closure">Auto compile Javascript with Closure</a></li>
-<li><a href="http://blog.othree.net/log/2009/09/08/vim-js-yuicompressor/">Vim 儲存完 JavaScript 檔案後自動用 yuicompressor</a></li>
-<li><a href="http://bootleq.blogspot.com/2010/08/vim-funcion-closure-compiler-js.html">Vim function：使用 closure compiler 壓縮 js 文件</a></li>
-<li><a href="http://www.cnblogs.com/JeffreyZhao/archive/2009/12/09/ikvm-google-closure-compiler.html">在项目中使用Google Closure Compiler</a></li>
-<li><a href="http://ued.taobao.com/blog/2010/12/23/advanced-optimization-in-closure-compiler-and-more/">Closure Compiler 高级模式及更多思考</a></li>
-<li><a href="http://www.slideshare.net/lifesinger/closure-compiler-vs-yuicompressor">Closure Compiler vs YUICompressor</a></li>
-<li><a href="https://gist.github.com/545665">function to use closure-compiler</a></li>
-<li><a href="http://code.google.com/p/closure-compiler/">Closure Compiler</a></li>
-<li><a href="http://closure-compiler.appspot.com/">closure-compiler online</a></li>
-<li><a href="http://code.google.com/intl/zh-CN/closure/compiler/">Closure Compiler Documentation</a></li>
-</ul>
+  <h1 class="entry-title">搜索</h1>
+  <div class="entry-content"><style>
+  form > input[name=q],
+  form > input[type=submit]{
+    -webkit-appearance: none;
+    font-size:1.5em;
+    border: 1px solid #ccc;
+  }
+
+  form > input[name=q]{
+    width:400px;
+  }
+
+  form > input[type=submit]{
+    width:100px;
+  }
+
+  #container table ,
+  #container table td{
+    border:0 none!important;
+    margin:0!important;
+  }
+  #container table:hover {
+    -moz-box-shadow: 0 0 0 #666!important;
+    -webkit-box-shadow: 0 0 0 #666!important;
+    box-shadow: 0 0 0 #666!important;
+  }
+</style>
+
+<div>
+ <form action="/search.html">
+  <input type="text" name="q" autocomplete="off" autofocus />
+  <input type="submit" value="搜索" />
+ </form>
 </div>
 
-  <footer class="entry-meta post clearfix">
-    <span class="tags"><a href="/tag">Tags</a>:
- 
-      <a href="/tag/#Vim">Vim</a>
-      
-    </span>
+<div>
+  <script>
+  (function() {
+    var cx = '012242588420705517395:spt0k_ybmgm';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+  </script>
+  <gcse:searchresults-only linkTarget=""></gcse:searchresults-only>
 
-    <time datetime="2011-05-26T00:00:00.000Z">
-      <a href="/2011">2011年</a>05月26日
-    </time>
-  </footer>
-    <section>
-      <div id="disqus_thread"></div>
-      <noscript>
-        要查看或参与评论，请启用 JavaScript 支持。<br />
-        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
-      </noscript>
-    </section>
-  <script type="text/javascript" src="/static/js/comments.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script>
+    $(function(){
+      var match = location.search.match(/q=([^&]*)(&|$)/);
+      if(match && match[1]){
+        key = match[1];
+      }
+      key = decodeURIComponent(key);
+      $('input[name]').val(key);
+    });
+  </script>
+</div>
+
+<p><a href="/">« 首页</a></p>
+</div>
 </div>
 </div>
 
