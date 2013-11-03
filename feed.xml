@@ -532,7 +532,7 @@ at function(fn)         ......-
         <id>http://blog.hotoo.me/post/vim74-tee.html</id>
         <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <blockquote>
-<p>团购活动已经结束，但你仍然可以自行印制或购买（有人抱怨质量不佳） <br/>
+<p>团购活动已经结束，但你仍然可以自行印制或购买<br/>
 团捐活动已经结束，但你仍然可以 <a href="http://www.vim.org/sponsor/index.php">自行捐助</a></p>
 </blockquote>
 
@@ -662,6 +662,12 @@ VIM - Vi IMproved 7.4 (2013 Aug 10)<br/>
 <p>这是一次庆祝、纪念的活动，另外还兼有公益的团队捐助活动。</p>
 
 <p>如果你对 Tee 的设计不满意，可以自行设计印制。你也可以以个人身份捐助 Vim。</p>
+<h2 id="有图有真相">有图有真相</h2>
+<p><img src="../../images/vimtee74.png" alt="vimtee74"/></p>
+
+<p><img src="../../images/vimtee74-logo.png" alt="vimtee74-logo"/></p>
+
+<p><img src="../../images/vimtee74@hotoo.png" alt="vimtee74@hotoo"/></p>
 <h2 id="vimtee-回顾">VimTee 回顾</h2>
 <ol>
 <li>2010年7月，Vim 7.3 发布的时候，我组织了一次
