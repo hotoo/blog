@@ -232,6 +232,9 @@ hr {
 .entry-description {
   color: #676867;
 }
+.entry-content {
+  bottom:20px;
+}
 .entry-title, .entry-content h2 {
   margin: 40px -30px 30px;
   padding: 14px 30px;

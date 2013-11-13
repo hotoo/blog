@@ -5,6 +5,83 @@
     <link href="http://blog.hotoo.me/feed.xml" />
     <id>http://blog.hotoo.me/feed.xml</id>
     <entry>
+        <title type="html"><![CDATA[中国农历]]></title>
+        <link href="http://blog.hotoo.me/post/lunar-calendar.html"/>
+        <published>2013-11-13T00:00:00.000Z</published>
+        <updated>2013-11-13T00:00:00.000Z</updated>
+        <id>http://blog.hotoo.me/post/lunar-calendar.html</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+            <![CDATA[ <p>Google 日历内置了中国农历的支持，但是各种桌面客户端如 Mac iCal, iPhone 默认日历
+都无法正常使用，网上搜索了一遍也没有更好的订阅地址，大都不更新了。</p>
+
+<p>而且我又不想装各种乱七八糟的第三方日历应用。</p>
+
+<p>因此我自己制作了一个公开农历日历，需要的同学可以订阅到 Google Calendar，并且在
+Google Calendar 中可以隐藏这个日历，只是在各个客户端中显示即可。</p>
+
+<p>不过不爽的是，客户端不能针对特定日历设置提醒，有更好的方案的同学欢迎指教哈。</p>
+
+<!--more-->
+<h2 id="启用-google-calendar-内置农历（推荐）">启用 Google Calendar 内置农历（推荐）</h2>
+<ol>
+<li><p>设置(Settings)</p>
+
+<p><img src="../../images/google-calendar-settings.png" alt="Settings"/></p></li>
+<li><p>基本(General)</p></li>
+<li><p>备用日历(Alternate calendar)</p>
+
+<p><img src="../../images/google-calendar-settings-alternate-calendar.png" alt="Alternate calendar"/></p></li>
+<li><p>选择 <code>农历 - 简体中文</code> (<code>Chinese calendar - Simplified Chinese</code>)</p></li>
+<li><p>保存(Save)</p></li>
+<li><p>最终可以在每日的日历顶部，有对应农历的显示。</p>
+
+<p><img src="../../images/google-calendar-lunar-calendar-demo.png" alt="农历月历演示"/></p></li>
+</ol>
+
+<hr/>
+
+<p>Google 日历的这个特性真是太赞了，以前为每天创建一个全天日历的挫 B方案没脸比。</p>
+
+<p>不过，现有的桌面（包括移动设备）应用中，都没能很好的支持这个特性。我又不想安装
+第三方的乱七八糟的日历应用，希望一个日历应用管理所有的日历数据，希望数据是开放的。</p>
+
+<p>因此挫 B 的方案只能继续。</p>
+
+<p>通过互联网在整个世界找了一圈，分享出来的农历订阅日历都已经失效、或者不更新了，
+因此我决定自己来维护世界和平，创建并分享了下面的中国农历，大家只需要订阅
+到自己的日历中就可以了。</p>
+<h2 id="订阅地址">订阅地址</h2>
+<ul>
+<li><a href="https://www.google.com/calendar/ical/896414ier7cs228f2fp4mkn02g%40group.calendar.google.com/public/basic.ics">ical</a></li>
+<li><a href="https://www.google.com/calendar/feeds/896414ier7cs228f2fp4mkn02g%40group.calendar.google.com/public/basic">xml</a></li>
+<li><a href="https://www.google.com/calendar/embed?src=896414ier7cs228f2fp4mkn02g%40group.calendar.google.com&amp;ctz=Asia/Shanghai">html</a></li>
+</ul>
+<h2 id="订阅方法">订阅方法</h2>
+<p>桌面应用本身支持直接订阅 ical 日历，但是为了便于管理，我统一使用了 Google Calendar
+管理我的日历，桌面应用只是客户端，数据来源于 Google Calendar。</p>
+
+<ul>
+<li><p>Other calendars 右侧的菜单，选择 <code>Add by URL</code></p>
+
+<p><img src="../../images/google-calendar-add-by-url.png" alt="Add Calendar"/></p></li>
+<li><p>填入 ical 地址：</p>
+
+<p><code>https://www.google.com/calendar/ical/896414ier7cs228f2fp4mkn02g%40group.calendar.google.com/public/basic.ics</code></p>
+
+<p><img src="../../images/google-calendar-add-calendar.png" alt="Add Calendar"/></p></li>
+<li><p>点击 Add Calendar 按钮。</p></li>
+<li><p>由于 Google Calendar 本身内置了农历的支持，可以在 Google Calendar 中隐藏不显示这个日历。</p></li>
+</ul>
+
+<p>预览：</p>
+
+<iframe src="https://www.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=896414ier7cs228f2fp4mkn02g%40group.calendar.google.com&amp;color=%23875509&amp;ctz=Asia%2FShanghai"
+  style=" border-width:0 " width="800" height="600" frameborder="0" scrolling="no"></iframe>
+<h2 id="其他">其他</h2>
+<p>如果在使用过程中发现其中的错误，请邮件给我。</p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Vim Talk in 来往扎堆]]></title>
         <link href="http://blog.hotoo.me/post/vim-talk-laiwangzhadui.html"/>
         <published>2013-10-23T00:00:00.000Z</published>
@@ -1439,50 +1516,6 @@ My Places 的数据，这个支持还不行，会被拉成直线。</li>
 <ul>
 <li><a href="http://www.vim.org/scripts/script.php?script_id=1994">http://www.vim.org/scripts/script.php?script_id=1994</a></li>
 </ul>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[文本宽度 及 文本框滚动偏移量(scrollLeft)]]></title>
-        <link href="http://blog.hotoo.me/post/text-width-and-input-scrollleft.html"/>
-        <published>2011-11-07T00:00:00.000Z</published>
-        <updated>2011-11-07T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/text-width-and-input-scrollleft.html</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <h2 id="背景">背景</h2>
-<p>最近将多标签输入框进行修改，把原来随光标(caret)移动的自动建议浮动条改为根据当前标签相对左对齐。</p>
-
-<p><a href="http://1.bp.blogspot.com/_POl6bUDELqY/SRQ_xx7LXCI/AAAAAAAAFSw/syXjnAQ-RLI/s320/tags.jpg">http://1.bp.blogspot.com/_POl6bUDELqY/SRQ_xx7LXCI/AAAAAAAAFSw/syXjnAQ-RLI/s320/tags.jpg</a></p>
-
-<p>解决方法很简单，计算当前标签前的文本宽度(将需要计算的文本转义后放入一个各字体样式与目标输入框相同的容器，
-如span中，span.offsetWidth即是文本的宽度。注意：文本框中，中文半角空格的宽度和英文半角空格的宽度显示为不同，
-虽然这两个空格本质上相同)，浮动条根据该值定位即可。</p>
-<h2 id="问题">问题</h2>
-<p>当标签文本过长，超出文本框宽度时，标签文本会向左滚动，但是此时当前标签前面的文本宽度不变，
-定位浮动条时需要减去文本向左滚动的尺寸。</p>
-
-<p>网页文档对象中，元素都有一个可读写的scrollLeft属性，表示元素内容相当元素容器向左移动的偏移量。</p>
-
-<p>但是 Firefox 和 Opera 有一些例外，如文本框的 scrollLeft 始终为 0，
-[<a href="https://developer.mozilla.org/En/DOM/Element.scrollLeft">https://developer.mozilla.org/En/DOM/Element.scrollLeft</a> Mozilla] 的描述是：</p>
-
-<blockquote>
-<p>If the element can&#39;t be scrolled (e.g. it has no overflow), scrollLeft is set to 0.</p>
-</blockquote>
-
-<p>对于一些不可滚动(scroll，即没有溢出)的元素，scrollLeft始终为0。而单行文本框
-（在Gecko引擎看来）是不可滚动的，即使将样式指定为 <code>overflow:scroll</code>
-（IE会出现水平和垂直滚动条这样的怪胎）。</p>
-
-<p>虽说单行文本框是不应该出现滚动条这样怪异的形态，但是这不表示它是不可滚动的，
-当文本宽度大于文本框宽度时，（为了将光标caret显示在文本框可见区域）文本势必向左滚动，如图：</p>
-
-<p><a href="http://3.bp.blogspot.com/_POl6bUDELqY/SRQ2rw-JdEI/AAAAAAAAFSo/hY8HxHGQk0Q/s320/scrollLeft.jpg">http://3.bp.blogspot.com/_POl6bUDELqY/SRQ2rw-JdEI/AAAAAAAAFSo/hY8HxHGQk0Q/s320/scrollLeft.jpg</a></p>
-<h2 id="解决办法">解决办法</h2>
-<p>对于文本框不支持scrollLeft的浏览器，一个临时的解决办法是，在文本宽度大于文本框宽度时，
-浮动条定位在相对文本框后端若干像素（便于输入）的位置，在增量输入时，体验不是太差，
-但是在光标向前移动使文本向右滚动时，就会出现偏差。</p>
-
-<p>最终解决办法是期待浏览器能够得到正确的scrollLeft值，或者其他巧妙的计算方法。</p>
 ]]>
         </content>
     </entry>
