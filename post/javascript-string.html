@@ -3,11 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta name="generator" content="nico 0.4.7">
-    <meta name="theme" content="one 0.1">
+    <meta name="generator" content="nico 0.5.0">
+    <meta name="theme" content="KISS 0.1">
     <title>Javascript String 方法效率大比拼 - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
-    <!--<link rel="stylesheet" href="../static/one.css" />-->
     <link rel="stylesheet" href="../static/syntax.css" />
     <link type="text/css" rel="stylesheet" href="../static/template.css" />
   </head>
@@ -56,25 +55,25 @@
 <h2 id="大型字符串trim">大型字符串trim</h2>
 <p>其实never-online在他的文章里有一些说的不准确的地方，代码也不算很精炼。
 既然这是鸡毛蒜皮的小事，这些零碎东西当然要斤斤计较了。
-我很久以前有收集到这样一些实现，I：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.trim = <span class="keyword">function</span>(){
+我很久以前有收集到这样一些实现，I：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.trim = <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
 <span class="keyword">return</span> <span class="keyword">this</span>.replace(<span class="regexp">/(^\s+)(\s+$)/g</span>, <span class="string">''</span>);
 };
 </code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a></pre></div></div>
-<p>为了避免正则表达式使用括号带来的消耗，可以写成这样，II：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.trim = <span class="keyword">function</span>(){
+<p>为了避免正则表达式使用括号带来的消耗，可以写成这样，II：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.trim = <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
     <span class="keyword">return</span> <span class="keyword">this</span>.replace(<span class="regexp">/(?:^\s+)(?:\s+$)/g</span>, <span class="string">''</span>);
 };
 </code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a></pre></div></div>
-<p>另外有一套实现是这样的，III：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.lTrim = <span class="keyword">function</span>(){
+<p>另外有一套实现是这样的，III：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.lTrim = <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
     <span class="keyword">return</span> <span class="keyword">this</span>.replace(<span class="regexp">/^\s+/</span>, <span class="string">''</span>);
 };
-String.prototype.rTrim = <span class="keyword">function</span>(){
+String.prototype.rTrim = <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
     <span class="keyword">return</span> <span class="keyword">this</span>.replace(<span class="regexp">/\s+$/</span>, <span class="string">''</span>);
 };
-String.prototype.trim = <span class="keyword">function</span>(){
+String.prototype.trim = <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
     <span class="keyword">return</span> <span class="keyword">this</span>.lTrim().rTrim();
 };
 </code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
@@ -87,19 +86,19 @@ String.prototype.trim = <span class="keyword">function</span>(){
 <a name="L3-8" href="#L3-8">8</a>
 <a name="L3-9" href="#L3-9">9</a></pre></div></div>
 <p>其实调用函数也会多少有一点消耗，写成这样或许会快一点点（开个玩笑，这样写会带来
-一些冗余代码，这时候就需要基于效率（时间）、代码量（空间）和可维护性方面的考量了），IV：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.trim = <span class="keyword">function</span>(){
+一些冗余代码，这时候就需要基于效率（时间）、代码量（空间）和可维护性方面的考量了），IV：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.trim = <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
 <span class="keyword">return</span> <span class="keyword">this</span>.replace(<span class="regexp">/^\s+/</span>, <span class="string">''</span>).replace(<span class="regexp">/\s+$/</span>, <span class="string">''</span>);
 };
 </code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
 <a name="L4-2" href="#L4-2">2</a>
 <a name="L4-3" href="#L4-3">3</a></pre></div></div>
-<p>后来我对正则表达式有了更多的了解，知道了贪婪与非贪婪匹配，于是自作聪明写了这一段：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.trim = <span class="keyword">function</span>(){
+<p>后来我对正则表达式有了更多的了解，知道了贪婪与非贪婪匹配，于是自作聪明写了这一段：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.trim = <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
 <span class="keyword">return</span> <span class="keyword">this</span>.replace(<span class="regexp">/^\s*(.*?)\s*$/</span>, <span class="string">"$1"</span>); <span class="comment">// 两端空白字符贪婪匹配，中间字符非贪婪匹配。</span>
 };
 </code></pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
 <a name="L5-2" href="#L5-2">2</a>
 <a name="L5-3" href="#L5-3">3</a></pre></div></div>
-<p>我曾经为这段代码自鸣得意了好长一段时间，不过后来想到点号不包括换行符，字符串中间有换行符时，返回值就不正确了，于是不情愿的改成这样（多行模式效率也很低），V：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.trim = <span class="keyword">function</span>(){
+<p>我曾经为这段代码自鸣得意了好长一段时间，不过后来想到点号不包括换行符，字符串中间有换行符时，返回值就不正确了，于是不情愿的改成这样（多行模式效率也很低），V：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.trim = <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
 <span class="keyword">return</span> <span class="keyword">this</span>.replace(<span class="regexp">/^\s*((?:.\n)*?)\s*$/</span>, <span class="string">"$1"</span>);
 };
 </code></pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a>
@@ -107,7 +106,7 @@ String.prototype.trim = <span class="keyword">function</span>(){
 <a name="L6-3" href="#L6-3">3</a></pre></div></div>
 <p>谁知，这样的代码遇到大家伙时效率会一落千丈，哎，失败。</p>
 
-<p>原以为String.replace方法比String.substr、String.substring效率低，于是想，只使用正则表达式获得两头（或者一头）的索引位置，然后使用substring方法取出子串，VI：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.trim = <span class="keyword">function</span>(){
+<p>原以为String.replace方法比String.substr、String.substring效率低，于是想，只使用正则表达式获得两头（或者一头）的索引位置，然后使用substring方法取出子串，VI：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.trim = <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
     <span class="keyword">var</span> l=<span class="keyword">this</span>.length;
     <span class="regexp">/^[\s]*/</span>.test(<span class="keyword">this</span>);
     <span class="comment">// /(?=[^\s])/.test(this);// -- never-online</span>
@@ -116,7 +115,7 @@ String.prototype.trim = <span class="keyword">function</span>(){
     <span class="keyword">if</span>(s==l){<span class="keyword">return</span> <span class="string">''</span>;}
     <span class="comment">// /\s*$/.test(this);</span>
     <span class="comment">// var e=RegExp.index;</span>
-    <span class="keyword">var</span> e=$lastIndexOf(<span class="keyword">function</span>(c){<span class="keyword">return</span> !Char.isBlank(c);});
+    <span class="keyword">var</span> e=$lastIndexOf(<span class="function"><span class="keyword">function</span><span class="params">(c)</span>{</span><span class="keyword">return</span> !Char.isBlank(c);});
     e=-<span class="number">1</span>==e?l:e+<span class="number">1</span>;
     <span class="keyword">return</span> <span class="keyword">this</span>.substring(s,e);
 };
@@ -133,8 +132,8 @@ String.prototype.trim = <span class="keyword">function</span>(){
 <a name="L7-11" href="#L7-11">11</a>
 <a name="L7-12" href="#L7-12">12</a>
 <a name="L7-13" href="#L7-13">13</a></pre></div></div>
-<p>而最土的方法，莫过于两头都使用循环获得索引了，VII：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.trim = <span class="keyword">function</span>(){
-    <span class="keyword">var</span> f=<span class="keyword">function</span>(c){<span class="keyword">return</span> !Char.isBlank(c);};
+<p>而最土的方法，莫过于两头都使用循环获得索引了，VII：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.trim = <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+    <span class="keyword">var</span> f=<span class="function"><span class="keyword">function</span><span class="params">(c)</span>{</span><span class="keyword">return</span> !Char.isBlank(c);};
     <span class="keyword">var</span> l=<span class="keyword">this</span>.length, s=<span class="keyword">this</span>.$indexOf(f), e=<span class="keyword">this</span>.$lastIndexOf(f);
     <span class="keyword">if</span>(-<span class="number">1</span>==s)s=<span class="number">0</span>;
     e= -<span class="number">1</span>==e?l:e+<span class="number">1</span>;
@@ -150,14 +149,14 @@ String.prototype.trim = <span class="keyword">function</span>(){
 <p>代码里老是for啊for的一大串，为了节省字节，而且有可能的话，也准备再优化一下循环，
 就实现了$indexOf和$lastIndexOf两个方法，可以传递一个返回boolean值的函数作为参数
 （本来还想也支持正则表达式参数的，想想以前扩展indexOf和lastIndexOf方法后的效率，
-就算了），这样就可以求得第一个非空白和最后一个非空白字符的位置了。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.$indexOf = <span class="keyword">function</span>(f){
+就算了），这样就可以求得第一个非空白和最后一个非空白字符的位置了。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.$indexOf = <span class="function"><span class="keyword">function</span><span class="params">(f)</span>{</span>
     <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,c,l=<span class="keyword">this</span>.length; i=<span class="number">0</span>; i--){
         c=<span class="keyword">this</span>.charAt(i);
         <span class="keyword">if</span>(f(c)){<span class="keyword">return</span> i;}
     }
     <span class="keyword">return</span> -<span class="number">1</span>;
 };
-String.prototype.$lastIndexOf = <span class="keyword">function</span>(f){
+String.prototype.$lastIndexOf = <span class="function"><span class="keyword">function</span><span class="params">(f)</span>{</span>
     <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="keyword">this</span>.length-<span class="number">1</span>,c; i&gt;=<span class="number">0</span>; i--){
         c=<span class="keyword">this</span>.charAt(i);
         <span class="keyword">if</span>(f(c)){<span class="keyword">return</span> i;}
@@ -182,7 +181,7 @@ String.prototype.$lastIndexOf = <span class="keyword">function</span>(f){
 有优化算法可以得到更高效率）。</p>
 
 <p>另一个辅助方法：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">var</span> Char = {
-    isBlank:<span class="keyword">function</span>(c){
+    isBlank:<span class="function"><span class="keyword">function</span><span class="params">(c)</span>{</span>
         <span class="comment">//return /\s/.test(c);</span>
         <span class="keyword">return</span> <span class="string">' '</span>==c <span class="string">'\t'</span>==c <span class="string">'\r\n'</span>==c <span class="string">'\n'</span>==c <span class="string">'\r'</span>==c;
     }
@@ -193,7 +192,7 @@ String.prototype.$lastIndexOf = <span class="keyword">function</span>(f){
 <a name="L10-4" href="#L10-4">4</a>
 <a name="L10-5" href="#L10-5">5</a>
 <a name="L10-6" href="#L10-6">6</a></pre></div></div>
-<p>到了永不在线(<a href="http://translate.google.com/translate_t#en%7Czh-CN%7Cnever-online">Google Translate翻译为</a>“永远在线”)的算法，VIII：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.trim = <span class="keyword">function</span>(){
+<p>到了永不在线(<a href="http://translate.google.com/translate_t#en%7Czh-CN%7Cnever-online">Google Translate翻译为</a>“永远在线”)的算法，VIII：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.trim = <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
     <span class="keyword">var</span> s = <span class="keyword">this</span>.replace(<span class="regexp">/^\s+/</span>, <span class="string">''</span>);
     <span class="keyword">var</span> l=s.length, e=l;
     <span class="keyword">if</span>(<span class="number">0</span>==l){<span class="keyword">return</span> <span class="string">''</span>;}
@@ -229,7 +228,7 @@ IV表现较为稳定，甚至可以处理超大型字符串（修正：之前有
 <h2 id="大型字符串字节长度">大型字符串字节长度</h2>
 <p>即双字节长度为2。注意：这个提法其实也不正确，Javascript是使用Unicode字符集的，
 所有的字符都（有可能）是双字节字符。将汉字等转换为双字节长度主要是为了某些应用。
-最土的方法还是循环遍历所有字符，I：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.bytes = <span class="keyword">function</span>(){
+最土的方法还是循环遍历所有字符，I：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.bytes = <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
     <span class="keyword">var</span> l=<span class="keyword">this</span>.length, r=l, n=<span class="number">0xff</span>;
     <span class="keyword">for</span>(<span class="keyword">var</span> i=l; i&gt;=<span class="number">0</span>; i--){
         <span class="keyword">if</span>(<span class="keyword">this</span>.charCodeAt(i)&gt;n){
@@ -249,20 +248,20 @@ IV表现较为稳定，甚至可以处理超大型字符串（修正：之前有
 <a name="L12-9" href="#L12-9">9</a></pre></div></div>
 <p>这里判断字符是否双字节有很多方法，效率较高的之间相差（大概）不大。</p>
 
-<p>另一种实现则看起来很轻灵，寥寥几行，II：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.bytes = <span class="keyword">function</span>(){
+<p>另一种实现则看起来很轻灵，寥寥几行，II：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.bytes = <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
 <span class="keyword">return</span> <span class="keyword">this</span>.replace(<span class="regexp">/[^\x00-\xff]/g</span>,<span class="string">"xx"</span>).length;
 };
 </code></pre></div><pre class="line"><a name="L13-1" href="#L13-1">1</a>
 <a name="L13-2" href="#L13-2">2</a>
 <a name="L13-3" href="#L13-3">3</a></pre></div></div>
 <p>多动脑子，则想法愈多（也常把简单的事情复杂化），我想如果可以快速取得表达式
-(双字节/单字节)匹配次数，两值相加应该比较高效，III：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.bytes = <span class="keyword">function</span>(){
+(双字节/单字节)匹配次数，两值相加应该比较高效，III：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.bytes = <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
     <span class="keyword">return</span> <span class="keyword">this</span>.length+<span class="keyword">this</span>.replace(<span class="regexp">/[\x00-\xff]/g</span>,<span class="string">""</span>).length;
 };
 </code></pre></div><pre class="line"><a name="L14-1" href="#L14-1">1</a>
 <a name="L14-2" href="#L14-2">2</a>
 <a name="L14-3" href="#L14-3">3</a></pre></div></div>
-<p>IV：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.bytes = <span class="keyword">function</span>(){
+<p>IV：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">String.prototype.bytes = <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
     <span class="keyword">return</span> <span class="keyword">this</span>.length+(<span class="keyword">this</span>.match(<span class="regexp">/[^\x00-\xff]/g</span>)<span class="string">""</span>).length;
 };
 </code></pre></div><pre class="line"><a name="L15-1" href="#L15-1">1</a>
@@ -305,7 +304,14 @@ replace方法（II）快，而使用正则表达式match方法（IV）又比repl
         Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
       </noscript>
     </section>
-  <script type="text/javascript" src="/static/js/comments.js"></script>
+  <script type="text/javascript">
+    
+    var disqus_identifier = "javascript-string";
+    
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://hotoo.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  </script>
 </div>
 </div>
 
@@ -380,7 +386,7 @@ replace方法（II）快，而使用正则表达式match方法（IV）又比repl
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://lab.lepture.com/nico/">nico@0.4.7</a>, Theme by 闲耘™(@hotoo).
+  <a href="http://lab.lepture.com/nico/">nico@0.5.0</a>, Theme by 闲耘™(@hotoo).
   </p>
 </footer>
 </div>

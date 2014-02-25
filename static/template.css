@@ -1,4 +1,11 @@
-html,body{font-family:Georgia,Times,sans-serif,Arial,Verdana,Helvetica; font-size:18px; margin:0; padding:0; line-height: 130%;}
+html,body{
+  font-family:Georgia,Times,sans-serif,Arial,Verdana,Helvetica;
+  font-size:18px;
+  margin:0;
+  padding:0;
+  line-height: 130%;
+  background-color:rgba(240, 240, 230, 0.2);
+}
 
 #wrapper{width:960px; height:100%; margin:0 auto;}
 nav{width:100%; margin:0 auto; left:0; top:0;}
@@ -92,8 +99,7 @@ h1:after, h2:after, h3:after{display:none;}
 h1:hover:after, h2:hover:after, h3:hover:after{display:inline;}
 
 h1 a.title-permalink{
-  color: #fff;
-  background-color: #fff;
+  color: transparent;
   padding:0 8px;
   -moz-border-radius:4px; -khtml-border-radius:4px; -webkit-border-radius:4px; border-radius:4px;
 }

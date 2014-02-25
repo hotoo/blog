@@ -156,7 +156,6 @@ function $(id){return document.getElementById(id);}
 /**
  * var disqus_identifier; [Optional but recommended: Define a unique identifier (e.g. post id or slug) for this thread]
  */
-var disqus_identifier, disqus_url;
 var disqus_shortname = 'hotoo';
 function initCommentCount(Er){
     var cont=$("container");
@@ -185,12 +184,6 @@ function initCommentCount(Er){
 }
 
 function initComment(p, b){
-    if(b){
-        disqus_url = "http://hotoo.github.com/blog"+location.pathname;
-    }else{
-        disqus_identifier = p;
-    }
-
     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
     dsq.src = 'http://hotoo.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
