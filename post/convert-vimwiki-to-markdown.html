@@ -1,0 +1,259 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.5.0">
+    <meta name="theme" content="KISS 0.1">
+    <title>转换 Vimwiki 为 Markdown - 闲耘™.博客</title>
+    <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../">闲耘™.博客</a>-->
+      <div style="float:right;">
+        <form action="/search.html">
+          <input type="text" name="q" autocomplete="off" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
+
+<div id="container">
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">转换 Vimwiki 为 Markdown</h1>
+  <div class="entry-content"><blockquote>
+<p><code>sed -f ex -i *.md</code></p>
+</blockquote>
+<h2 id="readme">README</h2>
+<p>相对 Wiki 语法，和 Wiki 对应工具支持情况，我更加喜欢 Markdown 了。
+本地配合使用 Vimwiki 来编辑查看，发布使用 nico 来转换，而且有 Github 的原生支持，
+使用 Markdown 是不二之选。</p>
+
+<p>为了减少转换工作量，我简要写了这个脚本，可以初步将 vimwiki 语法的项目，
+自动转换成 markdown 语法。</p>
+
+<a name="more"></a>
+
+<p>转换的内容包括：</p>
+
+<ul>
+<li>header</li>
+<li>codes</li>
+<li>wikiword.</li>
+<li>links</li>
+<li>images</li>
+<li>comments</li>
+<li>%toc</li>
+<li>%title</li>
+<li>%nohtml</li>
+</ul>
+<h2 id="usage">Usage</h2>
+<p>假设上面的脚本保存结构如下：</p><div class="highlight"><div class="codes"><div class="code"><pre>&#47;
+|- convert.sh
+|- ex
+|- vimwiki&#47;
+  |- index.wiki
+  `- vim.wiki
+</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a>
+<a name="L1-3" href="#L1-3">3</a>
+<a name="L1-4" href="#L1-4">4</a>
+<a name="L1-5" href="#L1-5">5</a>
+<a name="L1-6" href="#L1-6">6</a></pre></div></div>
+<p>在 convert.sh 同级目录执行：</p><div class="highlight"><div class="codes"><div class="code"><pre>$ .&#47;convert.sh vimwiki&#47;*.wiki
+</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div>
+<p>然后自动或手动调整之后，删除 <code>.wiki</code> 文件即可。</p>
+<h2 id="codes">Codes</h2><h3 id="convert-sh">convert.sh</h3><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash"><span class="shebang">#!/usr/bin/env bash
+</span>
+<span class="keyword">for</span> x
+<span class="keyword">do</span>
+  filename=$(<span class="built_in">echo</span> <span class="variable">$x</span>|sed <span class="operator">-e</span> <span class="string">"s/\.wiki$/.md/"</span>)
+  sed <span class="operator">-f</span> ex <span class="variable">$x</span> &gt; <span class="variable">$filename</span>
+<span class="keyword">done</span>
+</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+<a name="L3-2" href="#L3-2">2</a>
+<a name="L3-3" href="#L3-3">3</a>
+<a name="L3-4" href="#L3-4">4</a>
+<a name="L3-5" href="#L3-5">5</a>
+<a name="L3-6" href="#L3-6">6</a>
+<a name="L3-7" href="#L3-7">7</a></pre></div></div><h3 id="ex">ex</h3><div class="highlight"><div class="codes"><div class="code"><pre>s&#47;# \(.*\)$&#47;* \1&#47;g
+s&#47;^= \(.*\) =$&#47;# \1&#47;g
+s&#47;^== \(.*\) ==$&#47;## \1&#47;g
+s&#47;^=== \(.*\) ===$&#47;### \1&#47;g
+s&#47;^==== \(.*\) ====$&#47;#### \1&#47;g
+s&#47;^===== \(.*\) =====$&#47;##### \1&#47;g
+s&#47;^====== \(.*\) ======$&#47;###### \1&#47;g
+s&#47;{{{class=&quot;brush: *\([^&quot;]*\)&quot;&#47;\`\`\`\1&#47;g
+s&#47;{{{class=&quot;\([^&quot;]*\)&quot;&#47;\`\`\`\1&#47;g
+s&#47;{{{&#47;\`\`\`&#47;g
+s&#47;}}}&#47;\`\`\`&#47;g
+s&#47;\[\([^] ]\{1,\}\)\]\([^](]\)&#47;![pic](\1)\2&#47;g
+s&#47;\[\([^] ]\{1,\}\)\]$&#47;![pic](\1)&#47;g
+s&#47;\[\[\(\([^|]\{1,\}\)\|\)\([^]]\{1,\}\)\]\]&#47;[\3](\2.md)&#47;g
+s&#47;\[\[\([^]]\{1,\}\)\]\]&#47;[\1](\1.md)&#47;g
+s&#47;\[\(https\{0,1\}:\&#47;\&#47;[^ ]*\) \([^]]*\)\]&#47;[\2](\1)&#47;g
+s&#47;%% \(.*\)&#47;&lt;!-- \1 --&gt;&#47;g
+&#47;%toc.*&#47;d
+s&#47;%title \(.*\)&#47;# \1&#47;g
+s&#47;%nohtml&#47;- status: draft&#47;g
+</pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
+<a name="L4-2" href="#L4-2">2</a>
+<a name="L4-3" href="#L4-3">3</a>
+<a name="L4-4" href="#L4-4">4</a>
+<a name="L4-5" href="#L4-5">5</a>
+<a name="L4-6" href="#L4-6">6</a>
+<a name="L4-7" href="#L4-7">7</a>
+<a name="L4-8" href="#L4-8">8</a>
+<a name="L4-9" href="#L4-9">9</a>
+<a name="L4-10" href="#L4-10">10</a>
+<a name="L4-11" href="#L4-11">11</a>
+<a name="L4-12" href="#L4-12">12</a>
+<a name="L4-13" href="#L4-13">13</a>
+<a name="L4-14" href="#L4-14">14</a>
+<a name="L4-15" href="#L4-15">15</a>
+<a name="L4-16" href="#L4-16">16</a>
+<a name="L4-17" href="#L4-17">17</a>
+<a name="L4-18" href="#L4-18">18</a>
+<a name="L4-19" href="#L4-19">19</a>
+<a name="L4-20" href="#L4-20">20</a></pre></div></div></div>
+
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/#Vimwiki">Vimwiki</a>
+      
+ , 
+      <a href="/tag/#Markdown">Markdown</a>
+      
+    </span>
+
+    <time datetime="2014-03-31T00:00:00.000Z">
+      <a href="/2014">2014年</a>03月31日
+    </time>
+  </footer>
+    <section>
+      <div id="disqus_thread"></div>
+      <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+      </noscript>
+    </section>
+  <script type="text/javascript">
+    
+    var disqus_identifier = "convert-vimwiki-to-markdown";
+    
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://hotoo.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  </script>
+</div>
+</div>
+
+    <!-- Vimlike status bar -->
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
+<footer>
+  <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
+    alt="Creative Commons License" style="border-width: 0pt;"
+    src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"/></a>
+  This work is licensed under a
+  <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
+    Commons Attribution 2.5 Generic License</a>.<br/>
+  Copyleft &copy; 2005-2013, Power by
+  <a href="http://lab.lepture.com/nico/">nico@0.5.0</a>, Theme by 闲耘™(@hotoo).
+  </p>
+</footer>
+</div>
+<script type="text/javascript">
+var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
+}catch(err){}</script>
+
+  </body>
+</html>

@@ -5,6 +5,81 @@
     <link href="http://blog.hotoo.me/feed.xml" />
     <id>http://blog.hotoo.me/feed.xml</id>
     <entry>
+        <title type="html"><![CDATA[转换 Vimwiki 为 Markdown]]></title>
+        <link href="http://blog.hotoo.me/post/convert-vimwiki-to-markdown"/>
+        <published>2014-03-31T00:00:00.000Z</published>
+        <updated>2014-03-31T00:00:00.000Z</updated>
+        <id>http://blog.hotoo.me/post/convert-vimwiki-to-markdown</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+            <![CDATA[ <blockquote>
+<p><code>sed -f ex -i *.md</code></p>
+</blockquote>
+<h2 id="readme">README</h2>
+<p>相对 Wiki 语法，和 Wiki 对应工具支持情况，我更加喜欢 Markdown 了。
+本地配合使用 Vimwiki 来编辑查看，发布使用 nico 来转换，而且有 Github 的原生支持，
+使用 Markdown 是不二之选。</p>
+
+<p>为了减少转换工作量，我简要写了这个脚本，可以初步将 vimwiki 语法的项目，
+自动转换成 markdown 语法。</p>
+
+<!--more-->
+
+<p>转换的内容包括：</p>
+
+<ul>
+<li>header</li>
+<li>codes</li>
+<li>wikiword.</li>
+<li>links</li>
+<li>images</li>
+<li>comments</li>
+<li>%toc</li>
+<li>%title</li>
+<li>%nohtml</li>
+</ul>
+<h2 id="usage">Usage</h2>
+<p>假设上面的脚本保存结构如下：</p>
+<pre>&#47;
+|- convert.sh
+|- ex
+|- vimwiki&#47;
+  |- index.wiki
+  `- vim.wiki
+</pre>
+<p>在 convert.sh 同级目录执行：</p>
+<pre>$ .&#47;convert.sh vimwiki&#47;*.wiki
+</pre>
+<p>然后自动或手动调整之后，删除 <code>.wiki</code> 文件即可。</p>
+<h2 id="codes">Codes</h2><h3 id="convert-sh">convert.sh</h3><div class="highlight"><pre><code class="bash"><span class="shebang">#!/usr/bin/env bash
+</span>
+<span class="keyword">for</span> x
+<span class="keyword">do</span>
+  filename=$(<span class="built_in">echo</span> <span class="variable">$x</span>|sed <span class="operator">-e</span> <span class="string">"s/\.wiki$/.md/"</span>)
+  sed <span class="operator">-f</span> ex <span class="variable">$x</span> &gt; <span class="variable">$filename</span>
+<span class="keyword">done</span>
+</code></pre></div><h3 id="ex">ex</h3><pre>s&#47;# \(.*\)$&#47;* \1&#47;g
+s&#47;^= \(.*\) =$&#47;# \1&#47;g
+s&#47;^== \(.*\) ==$&#47;## \1&#47;g
+s&#47;^=== \(.*\) ===$&#47;### \1&#47;g
+s&#47;^==== \(.*\) ====$&#47;#### \1&#47;g
+s&#47;^===== \(.*\) =====$&#47;##### \1&#47;g
+s&#47;^====== \(.*\) ======$&#47;###### \1&#47;g
+s&#47;{{{class=&quot;brush: *\([^&quot;]*\)&quot;&#47;\`\`\`\1&#47;g
+s&#47;{{{class=&quot;\([^&quot;]*\)&quot;&#47;\`\`\`\1&#47;g
+s&#47;{{{&#47;\`\`\`&#47;g
+s&#47;}}}&#47;\`\`\`&#47;g
+s&#47;\[\([^] ]\{1,\}\)\]\([^](]\)&#47;![pic](\1)\2&#47;g
+s&#47;\[\([^] ]\{1,\}\)\]$&#47;![pic](\1)&#47;g
+s&#47;\[\[\(\([^|]\{1,\}\)\|\)\([^]]\{1,\}\)\]\]&#47;[\3](\2.md)&#47;g
+s&#47;\[\[\([^]]\{1,\}\)\]\]&#47;[\1](\1.md)&#47;g
+s&#47;\[\(https\{0,1\}:\&#47;\&#47;[^ ]*\) \([^]]*\)\]&#47;[\2](\1)&#47;g
+s&#47;%% \(.*\)&#47;&lt;!-- \1 --&gt;&#47;g
+&#47;%toc.*&#47;d
+s&#47;%title \(.*\)&#47;# \1&#47;g
+s&#47;%nohtml&#47;- status: draft&#47;g
+</pre>]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[阿里巴巴三年醇]]></title>
         <link href="http://blog.hotoo.me/post/alibaba-3-years"/>
         <published>2014-02-25T00:00:00.000Z</published>
@@ -1510,16 +1585,6 @@ My Places 的数据，这个支持还不行，会被拉成直线。</li>
 <li><a href="http://www.51766.com/img/jingshansi/">余杭径山寺</a></li>
 </ul>
 ]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[计算主域名]]></title>
-        <link href="http://blog.hotoo.me/post/primary-domain"/>
-        <published>2011-12-13T00:00:00.000Z</published>
-        <updated>2011-12-13T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/primary-domain</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <div class="highlight"><pre><code class="javascript">document.domain = document.domain.split(<span class="string">"."</span>).slice(-<span class="number">2</span>).join(<span class="string">"."</span>);
-</code></pre></div>]]>
         </content>
     </entry>
 </feed>
