@@ -45,83 +45,57 @@
   <div class="entry-content"><p>最近有好几次进阿里集团的笔试经验，有一个小体会：笔试后招聘方和应聘方最好能一起交流讨论题解
 （记得学校考试的时候，对题目有疑问时可以举手提问，老师也有出错题的时候，但是考场上发现后会立即处理。
 不过由于笔试时间短，出现意外再改的话时间会很仓促，所以建议在笔试后讨论，题可以先按照“常理”解答）。</p>
-
 <p>前两次分别在 <a href="http://ued.taobao.com/">淘宝UED</a> 和 <a href="http://www.alimama.com/">阿里妈妈</a>
 的笔试题里，有一道很相似的题：给数值对象（Number）扩展一个原型方法，
 将数值格式化为指定长度的字符串（另外还有一个条件，淘宝UED给的是“能指定格式最好”，
 阿里妈妈则是“能指定进制最好”）。</p>
-
 <p>淘宝UED：
 想到数值可能是小数，但题目没有知道小数保留长度等条件，这里只考虑整数位。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">Number.prototype.format = <span class="function"><span class="keyword">function</span><span class="params">(len, format)</span>{</span>
   <span class="keyword">var</span> a=<span class="keyword">this</span>.toString().split(<span class="string">"."</span>), l=a[<span class="number">0</span>].length;
   <span class="keyword">if</span>(l&gt;=len) <span class="keyword">return</span> a.join(<span class="string">"."</span>);
   <span class="keyword">return</span> <span class="keyword">new</span> Array(len-l+<span class="number">1</span>).join(<span class="string">"0"</span>)+a[<span class="number">0</span>] + (a[<span class="number">1</span>]?<span class="string">"."</span>+a[<span class="number">1</span>]:<span class="string">""</span>);
-};
-</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+};</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
-<a name="L1-4" href="#L1-4">4</a>
-<a name="L1-5" href="#L1-5">5</a></pre></div></div>
-<p>阿里妈妈：
+<a name="L1-4" href="#L1-4">4</a></pre></div></div><p>阿里妈妈：
 同样有小数问题，而且小数转进制的话也有特殊的地方，这里忽略小数。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">Number.prototype.format = <span class="function"><span class="keyword">function</span><span class="params">(len, dem)</span>{</span>
   <span class="keyword">var</span> s = <span class="keyword">this</span>.toString(dem), l=s.length;
   <span class="keyword">if</span>(l&gt;=len) <span class="keyword">return</span> s;
   <span class="keyword">return</span> <span class="keyword">new</span> Array(l-len+<span class="number">1</span>).join(<span class="string">"0"</span>) + s;
-};
-</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+};</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
-<a name="L2-4" href="#L2-4">4</a>
-<a name="L2-5" href="#L2-5">5</a></pre></div></div>
-<p>好在两个部门笔试后都有相关讨论，对这一问题做了及时的初步探讨。</p>
-
+<a name="L2-4" href="#L2-4">4</a></pre></div></div><p>好在两个部门笔试后都有相关讨论，对这一问题做了及时的初步探讨。</p>
 <p>今天又去参加了 <a href="http://china.alibaba.com/">阿里巴巴</a> 的笔试，这次的题没有重复的，
 但是也有一个问题压轴题。</p>
-
 <p>大意是用CSS控制3个DIV，布局如下图（图是随手画的，不计较大小比例）：</p>
-
-<p><img src="http://3.bp.blogspot.com/_POl6bUDELqY/ScpP_IbKQOI/AAAAAAAAH94/2CpARReFJww/s320/Alibaba-CSS.jpg" alt="图"/></p>
-
+<p><img src="http://3.bp.blogspot.com/_POl6bUDELqY/ScpP_IbKQOI/AAAAAAAAH94/2CpARReFJww/s320/Alibaba-CSS.jpg" alt="图"></p>
 <p>当时解答的时候，在我看来，似乎是只给3个兄弟关系的div，没有辅助标记，让写css控制布局。</p>
-
 <p>css虽不是我所最擅长，但是这个布局还是可以做出来的，但是难点只在于不使用辅助标记，哪怕是div。
 当时我的解法如下（这里是调试后正确的代码，当时思想相同，但代码没有写完整，也没有经过调试验证）：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="css"><span class="id">#box0</span><span class="rules">{<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1</span>px solid <span class="hexcolor">#f00</span></span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200</span>px</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">400</span>px</span></span>;<span class="rule"><span class="attribute">margin-bottom</span>:<span class="value"><span class="number">10</span>px</span></span>;<span class="rule">}</span></span>
 <span class="id">#box1</span><span class="rules">{<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1</span>px solid <span class="hexcolor">#0f0</span></span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200</span>px</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">250</span>px</span></span>;<span class="rule">}</span></span>
-<span class="id">#box2</span><span class="rules">{<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1</span>px solid <span class="hexcolor">#00f</span></span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">600</span>px</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">650</span>px</span></span>;<span class="rule"><span class="attribute">position</span>:<span class="value">relative</span></span>;<span class="rule"><span class="attribute">top</span>:<span class="value">-<span class="number">664</span>px</span></span>;<span class="rule"><span class="attribute">left</span>:<span class="value"><span class="number">210</span>px</span></span>;<span class="rule">}</span></span>
-</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
-<a name="L3-2" href="#L3-2">2</a>
-<a name="L3-3" href="#L3-3">3</a></pre></div></div><div class="highlight"><div class="codes"><div class="code"><pre><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"box0"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="id">#box2</span><span class="rules">{<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1</span>px solid <span class="hexcolor">#00f</span></span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">600</span>px</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">650</span>px</span></span>;<span class="rule"><span class="attribute">position</span>:<span class="value">relative</span></span>;<span class="rule"><span class="attribute">top</span>:<span class="value">-<span class="number">664</span>px</span></span>;<span class="rule"><span class="attribute">left</span>:<span class="value"><span class="number">210</span>px</span></span>;<span class="rule">}</span></span></code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+<a name="L3-2" href="#L3-2">2</a></pre></div></div><div class="highlight"><div class="codes"><div class="code"><pre><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"box0"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"box1"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"box2"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
-<a name="L4-2" href="#L4-2">2</a>
-<a name="L4-3" href="#L4-3">3</a></pre></div></div>
-<p>虽然效果基本相同，而且没有使用辅助标签，但总觉得有点ugly，因为这里的区域尺寸都是固定像素的，
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"box2"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
+<a name="L4-2" href="#L4-2">2</a></pre></div></div><p>虽然效果基本相同，而且没有使用辅助标签，但总觉得有点ugly，因为这里的区域尺寸都是固定像素的，
 所以较好控制，当遇到未知高度时，#box2的top就不知道要设置为多少了，还是加一个辅助标签简单灵活。</p>
-
 <p>如果可以使用辅助标记，我的题解如下：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="css"><span class="id">#box</span><span class="rules">{<span class="rule"><span class="attribute">float</span>:<span class="value">left</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200</span>px</span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">0</span>px solid <span class="hexcolor">#000</span></span></span>;<span class="rule">}</span></span>
 <span class="id">#space0</span><span class="rules">{<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200</span>px</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">400</span>px</span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1</span>px solid <span class="hexcolor">#f00</span></span></span>;<span class="rule"><span class="attribute">margin-bottom</span>:<span class="value"><span class="number">10</span>px</span></span>;<span class="rule">}</span></span>
 <span class="id">#space1</span><span class="rules">{<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200</span>px</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">250</span>px</span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1</span>px solid <span class="hexcolor">#0f0</span></span></span>;<span class="rule">}</span></span>
-<span class="id">#space2</span><span class="rules">{<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">600</span>px</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">650</span>px</span></span>;<span class="rule"><span class="attribute">float</span>:<span class="value">left</span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1</span>px solid <span class="hexcolor">#00f</span></span></span>;<span class="rule"><span class="attribute">margin-left</span>:<span class="value"><span class="number">10</span>px</span></span>;<span class="rule">}</span></span>
-</code></pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
+<span class="id">#space2</span><span class="rules">{<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">600</span>px</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">650</span>px</span></span>;<span class="rule"><span class="attribute">float</span>:<span class="value">left</span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1</span>px solid <span class="hexcolor">#00f</span></span></span>;<span class="rule"><span class="attribute">margin-left</span>:<span class="value"><span class="number">10</span>px</span></span>;<span class="rule">}</span></span></code></pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
 <a name="L5-2" href="#L5-2">2</a>
-<a name="L5-3" href="#L5-3">3</a>
-<a name="L5-4" href="#L5-4">4</a></pre></div></div><div class="highlight"><div class="codes"><div class="code"><pre><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"box"</span>&gt;</span>
+<a name="L5-3" href="#L5-3">3</a></pre></div></div><div class="highlight"><div class="codes"><div class="code"><pre><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"box"</span>&gt;</span>
   <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"space0"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
   <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"space1"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"space2"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</code></pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a>
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"space2"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a>
 <a name="L6-2" href="#L6-2">2</a>
 <a name="L6-3" href="#L6-3">3</a>
-<a name="L6-4" href="#L6-4">4</a>
-<a name="L6-5" href="#L6-5">5</a></pre></div></div>
-<p>还有一个问题是，因为有边框和间隔的关系，左右两个区域是无法上下对齐的。
+<a name="L6-4" href="#L6-4">4</a></pre></div></div><p>还有一个问题是，因为有边框和间隔的关系，左右两个区域是无法上下对齐的。
 另外实际应用中还要考虑到清除浮动，父级元素等情况。</p>
-
 <p>当时有想过打破（可能是自己臆想的）规则，用辅助div实现，但是由于尝试在规则之中实现，
 结果用了过多的时间，还答的一塌糊涂。</p>
-
 <p>由于这次有多人一同笔试，而且时间很晚（预约18:30分），无法安排讨论，我对这道题也耿耿于怀，
 回来请教我那 <a href="http://www.hxblog.net/">牛逼的朋友</a>，第一选择也是使用辅助div。
 不知道阿里巴巴这道题的作者是怎么想的，难道是故意的？</p>

@@ -45,30 +45,22 @@
   <div class="entry-content"><ol>
 <li><p>google+, quora, twitter... 这些网站都使用渐进加载数据的方式，
 类似的还有淘宝图片的懒加载，都是等用户真正滚到最后之后才开始去加载，
-提前一些预加载体验不是更好么。</p></li>
+提前一些预加载体验不是更好么。</p>
+</li>
 <li><p>到最后一页了还是有“更多”，直到点击最后一个更多没加载到数据才告诉用户
-没更多数据了，这不是蛋疼么？</p></li>
+没更多数据了，这不是蛋疼么？</p>
+</li>
 </ol>
-
 <p>估计是基于算法上的考虑，比如每页 10 条：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">dataList = select top <span class="number">10</span> * from table where id &gt; <span class="number">10</span> * page;
 <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,l=dataList.length; i&lt;l; i++){}
-hasMore = select top <span class="number">1</span> * from table where id &gt; <span class="number">10</span>*(page+<span class="number">1</span>);
-</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
-<a name="L1-2" href="#L1-2">2</a>
-<a name="L1-3" href="#L1-3">3</a></pre></div></div>
-<p>这样要查询 2 次。</p>
-
+hasMore = select top <span class="number">1</span> * from table where id &gt; <span class="number">10</span>*(page+<span class="number">1</span>);</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a></pre></div></div><p>这样要查询 2 次。</p>
 <p>不过只查数据库一次也是可以的：</p><div class="highlight"><div class="codes"><div class="code"><pre>datas = select top 11 * from table where id &gt; 10*page;
 for(var i=0,l=min(data.length, 10); i&lt;l; i++){}
-hasMore = datas.length == 11;
-</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
-<a name="L2-2" href="#L2-2">2</a>
-<a name="L2-3" href="#L2-3">3</a></pre></div></div>
-<p>好久不写后端程序，不知道他们这么做是否有基于其他的考虑？</p>
-
+hasMore = datas.length == 11;</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+<a name="L2-2" href="#L2-2">2</a></pre></div></div><p>好久不写后端程序，不知道他们这么做是否有基于其他的考虑？</p>
 <p>p.s. Google+ 个笨蛋居然剔除行首的有效空白，而不剔除行尾的无效空白。。。</p>
-<h2 id="see-also">See Also</h2>
-<ul>
+<h2 id="see-also">See Also</h2><ul>
 <li><a href="https://plus.google.com/108314985261981078822/posts/WrYSxHJnDXW">@Google+</a></li>
 </ul>
 </div>

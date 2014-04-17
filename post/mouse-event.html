@@ -54,12 +54,9 @@
 | onclick     | left   | 0        | undefined | 0      | 1     | 0        | 1     | 0        | 1     | 0        | 1     |
 | \/          | middle | 0        | undefined | 1      | 2     | 1        | 2     | 1        | 2     | no event | &gt;     |
 | \/          | right  | no event | &gt;         | 2      | 3     | no event | &gt;     | no event | &gt;     | no event | &gt;     |</p>
-
 <p>Windows 2003 Server.<br />
 IE8, FF5, Chrome12, Safari5, Opera11.</p>
-
 <p>Note:</p>
-
 <ul>
 <li><code>document.onmousedown</code> === <code>document.addEventListener</code> === <code>document.attachEvent(&quot;onmousedown&quot;)</code></li>
 <li><code>document.onmouseup</code> === <code>document.addEventListener(&quot;mouseup&quot;)</code> == <code>document.attachEvent(&quot;onmouseup&quot;)</code></li>
@@ -71,16 +68,13 @@ IE8, FF5, Chrome12, Safari5, Opera11.</p>
         middle: evt.which ? evt.which==<span class="number">2</span> : evt.button==<span class="number">4</span>,
         right:  evt.which ? evt.which==<span class="number">3</span> : evt.button==<span class="number">2</span>
     };
-};
-</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+};</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
 <a name="L1-4" href="#L1-4">4</a>
 <a name="L1-5" href="#L1-5">5</a>
 <a name="L1-6" href="#L1-6">6</a>
-<a name="L1-7" href="#L1-7">7</a>
-<a name="L1-8" href="#L1-8">8</a></pre></div></div><h2 id="see-also">See Also</h2>
-<ul>
+<a name="L1-7" href="#L1-7">7</a></pre></div></div><h2 id="see-also">See Also</h2><ul>
 <li><a href="http://www.quirksmode.org/js/events_properties.html">Event properties - ppk</a></li>
 <li><a href="http://hotoo.me/labs/mouse-event.html">Demo</a></li>
 </ul>

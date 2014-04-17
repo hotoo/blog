@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="generator" content="nico 0.5.0">
     <meta name="theme" content="KISS 0.1">
-    <title>论广告窗口的弹出 - 闲耘™.博客</title>
+    <title>定位到服务器集群的特定节点 - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
     <link rel="stylesheet" href="../static/syntax.css" />
     <link type="text/css" rel="stylesheet" href="../static/template.css" />
@@ -41,61 +41,78 @@
 <div id="container">
   <div id="content" class="document">
 <div class="hentry">
-  <h1 class="entry-title">论广告窗口的弹出</h1>
-  <div class="entry-content"><p>弹窗广告，这（和页面漂浮广告）是上个世纪用的最频繁的广告方式，这种广告之所以“流行”，
-是因为它引人注目的特性，广告商也正是看中这一点。而这也是最讨人厌的一种广告方式，
-因为它未经用户同意，擅自弹出新窗口，一来每次都要手动关闭窗口很烦，二来它不尊重用户的意愿。</p>
-<p>既然服务商不尊重用户，用户当然说服务商很讨厌。</p>
-<p>后来通过服务商，广告商，开发人员和用户等大众的共同努力，这种弹窗方式逐渐受到质疑：</p>
-<ol>
-<li>这种广告方式真的很有效吗？</li>
-<li>有更好更受欢迎的广告模式吗，为什么(Google) <em>内联的</em> ，
-精确匹配的广告模式会受广告商和普通用户的一致好评？</li>
-</ol>
-<p>同时这（两）种广告模式逐渐退出广告历史的舞台，只有非常小众的网站才偶尔，
-或非常恶劣的网站才频繁出现。</p>
-<p>并且，即使链接本身是否在新窗口弹出都成了讨论的热点话题。w3c 已经不建议使用 target 属性了，
-是否在新窗口、新页签中打开，这应该是用户可控的，属于用户的偏好问题，应该尊重用户的选择。</p>
-<p>不过，用过淘宝的人应该都知道，<a href="http://www.taobao.com/">淘宝首页</a> 是会弹出广告窗口的，
-即使默认情况下被浏览器自动屏蔽掉，在用户点击页面时还是会被弹出，此时因为带有用户行为，
-浏览器较难判断是否应该屏蔽。</p>
-<p>真是令人发指，淘宝这样出色的公司，居然做出这么卑劣的事情，而且还费尽心机。</p>
-<p>前些时候我发现淘宝首页的拼音索引和商品详细信息等都不可用了，于是在 Twitter 上对
-<a href="https://twitter.com/taobaoued">@TaobaoUED</a> 发了句牢骚，然后
-<a href="https://twitter.com/macji">@Macji</a> 很主动的跟我联系了解情况。
-后来发现问题出在 <a href="https://addons.mozilla.org/zh-CN/firefox/addon/1865">Adblock plus</a>
-<a href="http://adblockplus.org/en/">2</a> 的 ChinaList 直接将淘宝用的 tbra 框架屏蔽了，
-然后我和 Macji 进行了“深入的激辩”，大致情况如下：</p>
-<blockquote>
-<p>Macji: 对于 china list 这种不负责的乱禁用 js 框架, 而不是只是禁用广告. 所以我们也无办法<br />
-闲耘: 我觉得在弹窗这一点上，chinalist 是负责任的，是淘宝不负责任<br />
-Macji: chinalist 应该专业点的,  只是禁用弹出广告<br />
-闲耘: 也许淘宝应该专业点，不要用弹窗广告<br />
-...<br />
-Macji: 弹出广告 严重邮箱用户体验, 其实我们一直再争取, 但我们不是高层<br />
-Macji: 我会写信给 chinalist 给出禁用弹窗的解决方案</p>
+  <h1 class="entry-title">定位到服务器集群的特定节点</h1>
+  <div class="entry-content"><blockquote>
+<p>齐宣王使人吹竽，必三百人。南郭处士请为王吹竽，宣王说之，廪食以数百人。
+宣王死，湣王立，好一一听之，处士逃。</p>
+<p>《韩非子·内储说上》</p>
 </blockquote>
-<p>最后想说：淘宝是个很有责任感的公司，这个弹窗广告除外；淘宝是个很注重用户体验的公司，
-这个弹窗广告除外；淘宝是个很尊重用户的公司，这个弹窗广告除外。淘宝是个很注重细节的公司，
-包括这个弹窗在内；淘宝是个很注重技术的团队，包括这个弹窗在内。</p>
+<h2 id="背景">背景</h2><p>某日，突然收到报警，某发现实时异常监控趋势图上，静态资源 404 异常有明显的上升。
+分析详细的异常信息发现是某个发布操作引起某几个系统引起的。</p>
+<a name="more"></a>
+
 <hr>
-<p><em>更新：可喜的是，经过努力，新版淘宝已经戒掉了这个恶习。</em></p>
-<h2 id="延伸阅读：">延伸阅读：</h2><ul>
-<li><a href="http://shawphy.com/2009/01/window-open-is-evil.html">万恶的弹窗广告</a></li>
-<li><a href="http://www.om19.cn/2008/08/16/%E7%AC%A6%E5%90%88%E5%9B%BD%E6%83%85%E7%9A%84%E9%93%BE%E6%8E%A5%E6%96%B0%E7%AA%97%E5%8F%A3%E6%89%93%E5%BC%80/">符合国情的链接新窗口打开</a></li>
-<li><a href="http://shawphy.com/2009/01/window-open-is-evil.html">在新窗口打开链接是流氓行为</a></li>
-</ul>
+<p>找到对应的开发，分析结论是部分配置文件未生效，导致拼接资源文件地址错误。
+按照业务量计算，这个异常量大约是其中一、两台机器有问题。</p>
+<p>可能发布系统或其他问题，重新发布一次仍没能修复这个异常。</p>
+<p>我们需要快速定位到这只滥竽，尽快将问题修复。
+但是实际上却没有这么简单，我们最终花费 了 7个多小时，最终是因为这个系统正好有
+其他发布才顺便解决。</p>
+<p><img src="https://i.alipayobjects.com/i/localhost/png/201404/2TD6uw5N0n.png" alt="realtile-error-trend"></p>
+<p>上图有两个造成异常的发布，分别是『CMS 发布』和『后台系统发布』。</p>
+<p>红色是 JavaScript 实时异常，绿色是静态资源 404 异常。</p>
+<h2 id="方案">方案</h2><p>事后我们坐下来讨论如何解决这个问题，避免在以后遇到类似问题时能快速有效的应对。</p>
+<p><img src="https://i.alipayobjects.com/i/localhost/png/201404/2Tdj3TmMdR.png" alt="异常过程序列图"></p>
+<p>如上图，问题出在某个问题业务应用服务器节点配置文件未生效，拼接出来的 JavaScript
+资源地址不正确导致 CDN 节点未命中而最终回源，源服务器也没有这个文件，最终发生
+404 悲剧。</p>
+<p>实际的业务系统中，会提供用户访问的节点信息，但是请求静态资源时无法获得这个信息，
+是不是有办法在静态资源源服务器上获得来源页面所在的服务器节点信息呢？</p>
+<ol>
+<li>方案一：我们首先想到 Cookie。但是应用服务器和静态资源服务器分别在不同的域名
+下，即使在访问应用服务器时写入节点信息到 Cookie 中，这个信息也不会携带到静态
+资源服务器。『失败』。</li>
+<li>方案二：CDN 节点域提供外部写 Cookie 的接口，用户访问应用服务时，同时调用接口
+在 CDN 节点所在域写入用户访问应用服务器节点信息。『放弃』，缺点：<ol>
+<li>成本高。</li>
+<li>风险大。</li>
+</ol>
+</li>
+<li>方案三：然后想到每个应用系统重写静态资源地址，在地址中携带当前应用服务器节点
+信息。『放弃』，缺点：<ol>
+<li>成本过高。</li>
+<li>导致 CDN 命中率下降。</li>
+</ol>
+</li>
+<li><p>方案四：重写用户访问页面地址，附带应用服务器节点信息。成本过高，『放弃』。</p>
+<p>从前端角度直接解决这个看似无望，换个思路。</p>
+</li>
+<li><p>方案五：在网络内部，使用内部代理。如 <code>curl -I -x internal-host:port url</code>
+『可行』，缺点：</p>
+<ol>
+<li>需要在服务器所在内网执行，指定目标服务器内部 IP，因此只有系统管理员可以操作。</li>
+<li>而系统管理员不清楚实际应用业务。</li>
+</ol>
+</li>
+<li>方案六：如果可以在外部指定服务器节点访问应用，是不是可行呢？
+这个跟负载均衡规则有关，如果负载均衡服务器支持这个特性，或可一试。
+跟相关同学沟通后，表示可以做。而且从外网直接访问，清楚业务的开发同学可以自行
+排查。『可行』。需要注意的问题：<ol>
+<li>逐个击破，定向攻击。可以通过拒绝频繁的指定节点访问请求来防范。</li>
+</ol>
+</li>
+</ol>
 </div>
 
   <footer class="entry-meta post clearfix">
     <span class="tags"><a href="/tag">Tags</a>:
  
-      <a href="/tag/#UED">UED</a>
+      <a href="/tag/#服务器集群">服务器集群</a>
       
     </span>
 
-    <time datetime="2009-08-07T00:00:00.000Z">
-      <a href="/2009">2009年</a>08月07日
+    <time datetime="2014-04-17T00:00:00.000Z">
+      <a href="/2014">2014年</a>04月17日
     </time>
   </footer>
     <section>
@@ -107,7 +124,7 @@ Macji: 我会写信给 chinalist 给出禁用弹窗的解决方案</p>
     </section>
   <script type="text/javascript">
     
-    var disqus_identifier = "talk-about-popup-window";
+    var disqus_identifier = "find-nodes-from-server-cluster";
     
     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
     dsq.src = 'http://hotoo.disqus.com/embed.js';

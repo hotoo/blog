@@ -44,112 +44,75 @@
   <h1 class="entry-title">增强 Vim 的语法折叠</h1>
   <div class="entry-content"><ol>
 <li>折叠多行注释</li>
-</ol><div class="highlight"><div class="codes"><div class="code"><pre>&#47;*
+</ol><div class="highlight"><div class="codes"><div class="code"><pre>/*
  * This is file description.
  * @author 闲耘™ (@hotoo xianyun[AT]xianyun.org)
- *&#47;
-</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+ */</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
-<a name="L1-3" href="#L1-3">3</a>
-<a name="L1-4" href="#L1-4">4</a></pre></div></div>
-<p>折叠为：</p><div class="highlight"><div class="codes"><div class="code"><pre>&#47;* This is file description. ... *&#47;
-</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div>
-<ol>
+<a name="L1-3" href="#L1-3">3</a></pre></div></div><p>折叠为：</p><div class="highlight"><div class="codes"><div class="code"><pre>/* This is file description. ... */</pre></div><pre class="line"></pre></div></div><ol>
 <li>折叠单行注释</li>
-</ol><div class="highlight"><div class="codes"><div class="code"><pre>&#47;&#47; Line Comment 1.
-&#47;&#47; Line Comment 2.
-&#47;&#47; Line Comment 3.
-</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
-<a name="L3-2" href="#L3-2">2</a>
-<a name="L3-3" href="#L3-3">3</a></pre></div></div>
-<p>折叠为：</p><div class="highlight"><div class="codes"><div class="code"><pre>&#47;&#47; Line Comments 1. ...
-</pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a></pre></div></div>
-<ol>
+</ol><div class="highlight"><div class="codes"><div class="code"><pre>// Line Comment 1.
+// Line Comment 2.
+// Line Comment 3.</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+<a name="L3-2" href="#L3-2">2</a></pre></div></div><p>折叠为：</p><div class="highlight"><div class="codes"><div class="code"><pre>// Line Comments 1. ...</pre></div><pre class="line"></pre></div></div><ol>
 <li>折叠导入外部定义</li>
 </ol><div class="highlight"><div class="codes"><div class="code"><pre>@import java.lang.*;
 @import java.io.*;
 @import java.net.*;
-@import java.util.*;
-</pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
+@import java.util.*;</pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
 <a name="L5-2" href="#L5-2">2</a>
-<a name="L5-3" href="#L5-3">3</a>
-<a name="L5-4" href="#L5-4">4</a></pre></div></div>
-<p>折叠为：</p><div class="highlight"><div class="codes"><div class="code"><pre>@import java.lang.*; ...
-</pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a></pre></div></div><div class="highlight"><div class="codes"><div class="code"><pre>#include &lt;iostream&gt;
+<a name="L5-3" href="#L5-3">3</a></pre></div></div><p>折叠为：</p><div class="highlight"><div class="codes"><div class="code"><pre>@import java.lang.*; ...</pre></div><pre class="line"></pre></div></div><div class="highlight"><div class="codes"><div class="code"><pre>#include &lt;iostream&gt;
 #include &quot;xxx.h&quot;
-#include &quot;yyy.h&quot;
-</pre></div><pre class="line"><a name="L7-1" href="#L7-1">1</a>
-<a name="L7-2" href="#L7-2">2</a>
-<a name="L7-3" href="#L7-3">3</a></pre></div></div>
-<p>折叠为：</p><div class="highlight"><div class="codes"><div class="code"><pre>#include &lt;iostream&gt; ...
-</pre></div><pre class="line"><a name="L8-1" href="#L8-1">1</a></pre></div></div>
-<ol>
+#include &quot;yyy.h&quot;</pre></div><pre class="line"><a name="L7-1" href="#L7-1">1</a>
+<a name="L7-2" href="#L7-2">2</a></pre></div></div><p>折叠为：</p><div class="highlight"><div class="codes"><div class="code"><pre>#include &lt;iostream&gt; ...</pre></div><pre class="line"></pre></div></div><ol>
 <li>折叠作用域</li>
 </ol><div class="highlight"><div class="codes"><div class="code"><pre>window.setTimeout(function(){
     alert(0);
-}, 1000);
-</pre></div><pre class="line"><a name="L9-1" href="#L9-1">1</a>
-<a name="L9-2" href="#L9-2">2</a>
-<a name="L9-3" href="#L9-3">3</a></pre></div></div>
-<p>折叠为：</p><div class="highlight"><div class="codes"><div class="code"><pre>window.setTimeout(function(){...}, 1000);
-</pre></div><pre class="line"><a name="L10-1" href="#L10-1">1</a></pre></div></div>
-<p>这属于语法折叠部分。</p>
-
+}, 1000);</pre></div><pre class="line"><a name="L9-1" href="#L9-1">1</a>
+<a name="L9-2" href="#L9-2">2</a></pre></div></div><p>折叠为：</p><div class="highlight"><div class="codes"><div class="code"><pre>window.setTimeout(function(){...}, 1000);</pre></div><pre class="line"></pre></div></div><p>这属于语法折叠部分。</p>
 <ol>
 <li>折叠标记语言</li>
 </ol><div class="highlight"><div class="codes"><div class="code"><pre>&lt;div id=&quot;demo&quot; onclick=&quot;alert(0)&quot;&gt;
     some thing.
-&lt;&#47;div&gt;
-</pre></div><pre class="line"><a name="L11-1" href="#L11-1">1</a>
-<a name="L11-2" href="#L11-2">2</a>
-<a name="L11-3" href="#L11-3">3</a></pre></div></div>
-<p>折叠为：</p><div class="highlight"><div class="codes"><div class="code"><pre>&lt;div id=&quot;demo&quot;&gt;...&lt;&#47;div&gt;
-</pre></div><pre class="line"><a name="L12-1" href="#L12-1">1</a></pre></div></div><div class="highlight"><div class="codes"><div class="code"><pre>&lt;link type=&quot;text&#47;css&quot; rel=&quot;stylesheet&quot; href=&quot;xx.css&quot; &#47;&gt;
-&lt;link type=&quot;text&#47;css&quot; rel=&quot;stylesheet&quot; href=&quot;yy.css&quot; &#47;&gt;
-&lt;link type=&quot;text&#47;css&quot; rel=&quot;stylesheet&quot; href=&quot;zz.css&quot; &#47;&gt;
-</pre></div><pre class="line"><a name="L13-1" href="#L13-1">1</a>
-<a name="L13-2" href="#L13-2">2</a>
-<a name="L13-3" href="#L13-3">3</a></pre></div></div>
-<p>折叠为：</p><div class="highlight"><div class="codes"><div class="code"><pre>&lt;link type=&quot;text&#47;css&quot; rel=&quot;stylesheet&quot; href=&quot;xx.css&quot; &#47;&gt; ...
-</pre></div><pre class="line"><a name="L14-1" href="#L14-1">1</a></pre></div></div><div class="highlight"><div class="codes"><div class="code"><pre>&lt;script type=&quot;text&#47;javascript&quot; src=&quot;xx.js&quot;&gt;&lt;&#47;script&gt;
-&lt;script type=&quot;text&#47;javascript&quot; src=&quot;yy.js&quot;&gt;&lt;&#47;script&gt;
-&lt;script type=&quot;text&#47;javascript&quot; src=&quot;zz.js&quot;&gt;&lt;&#47;script&gt;
-</pre></div><pre class="line"><a name="L15-1" href="#L15-1">1</a>
-<a name="L15-2" href="#L15-2">2</a>
-<a name="L15-3" href="#L15-3">3</a></pre></div></div>
-<p>折叠为：</p><div class="highlight"><div class="codes"><div class="code"><pre>&lt;script type=&quot;text&#47;javascript&quot; src=&quot;xx.js&quot;&gt;&lt;&#47;script&gt; ...
+&lt;/div&gt;</pre></div><pre class="line"><a name="L11-1" href="#L11-1">1</a>
+<a name="L11-2" href="#L11-2">2</a></pre></div></div><p>折叠为：</p><div class="highlight"><div class="codes"><div class="code"><pre>&lt;div id=&quot;demo&quot;&gt;...&lt;/div&gt;</pre></div><pre class="line"></pre></div></div><div class="highlight"><div class="codes"><div class="code"><pre>&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;xx.css&quot; /&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;yy.css&quot; /&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;zz.css&quot; /&gt;</pre></div><pre class="line"><a name="L13-1" href="#L13-1">1</a>
+<a name="L13-2" href="#L13-2">2</a></pre></div></div><p>折叠为：</p><div class="highlight"><div class="codes"><div class="code"><pre>&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;xx.css&quot; /&gt; ...</pre></div><pre class="line"></pre></div></div><div class="highlight"><div class="codes"><div class="code"><pre>&lt;script type=&quot;text/javascript&quot; src=&quot;xx.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;yy.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;zz.js&quot;&gt;&lt;/script&gt;</pre></div><pre class="line"><a name="L15-1" href="#L15-1">1</a>
+<a name="L15-2" href="#L15-2">2</a></pre></div></div><p>折叠为：</p><div class="highlight"><div class="codes"><div class="code"><pre>&lt;script type=&quot;text/javascript&quot; src=&quot;xx.js&quot;&gt;&lt;/script&gt; ...
 
 
-&lt;script type=&quot;text&#47;javascript&quot;&gt;&#47;*&lt;![CDATA[*&#47;
+&lt;script type=&quot;text/javascript&quot;&gt;/*&lt;![CDATA[*/
 alert(0);
-&#47;*]]&gt;*&#47;&lt;&#47;script&gt;
+/*]]&gt;*/&lt;/script&gt;
+
 </pre></div><pre class="line"><a name="L16-1" href="#L16-1">1</a>
 <a name="L16-2" href="#L16-2">2</a>
 <a name="L16-3" href="#L16-3">3</a>
 <a name="L16-4" href="#L16-4">4</a>
 <a name="L16-5" href="#L16-5">5</a>
-<a name="L16-6" href="#L16-6">6</a></pre></div></div>
-<p>折叠为：</p><div class="highlight"><div class="codes"><div class="code"><pre>&lt;script type=&quot;text&#47;javascript&quot;&gt;...&lt;&#47;script&gt;
-</pre></div><pre class="line"><a name="L17-1" href="#L17-1">1</a></pre></div></div>
-<p>以上是我目前想到的折叠方式，欢迎补充。</p>
+<a name="L16-6" href="#L16-6">6</a>
+<a name="L16-7" href="#L16-7">7</a></pre></div></div><p>折叠为：</p><div class="highlight"><div class="codes"><div class="code"><pre>&lt;script type=&quot;text/javascript&quot;&gt;...&lt;/script&gt;
 
+
+</pre></div><pre class="line"><a name="L17-1" href="#L17-1">1</a>
+<a name="L17-2" href="#L17-2">2</a>
+<a name="L17-3" href="#L17-3">3</a></pre></div></div><p>以上是我目前想到的折叠方式，欢迎补充。</p>
 <p>这里推荐一个 <a href="http://www.vim.org/scripts/script.php?script_id=1491">增强的 Javascript 语法文件</a> ，
 有非常多值得借鉴的地方。</p>
-
 <p>遗憾：折叠文本(foldtext)没有状态栏(statusline)的居左、居右概念(以等号[=]分隔)，
 比如想将在左侧放置折叠上下文文本，右侧放置被折叠的行数：</p><div class="highlight"><div class="codes"><div class="code"><pre>if(true){...) ----------------------------------[3 lines]
-</pre></div><pre class="line"><a name="L18-1" href="#L18-1">1</a></pre></div></div>
-<p>目前只能通过计算 Vim 窗口宽度和折叠文本的长度来模拟。</p>
 
+</pre></div><pre class="line"><a name="L18-1" href="#L18-1">1</a>
+<a name="L18-2" href="#L18-2">2</a></pre></div></div><p>目前只能通过计算 Vim 窗口宽度和折叠文本的长度来模拟。</p>
 <p>这个折叠方法我已经在C,C++,Java,Javascript,CSS上实现，主要跟语法(syntax)
 文件和折叠文本(foldtext) 有关。</p>
-
 <p>另外我觉得被折叠的行应该和注释一样低调一点（desert主题使用金色的文本前景色）。</p>
-
-<p><img src="http://farm3.static.flickr.com/2490/4157973680_be7167ac77_o.png" alt=""/>
+<p><img src="http://farm3.static.flickr.com/2490/4157973680_be7167ac77_o.png" alt="">
 <a href="http://www.flickr.com/photos/hotoo/4157973680/">@source</a></p>
-
-<p><img src="http://farm3.static.flickr.com/2556/4157213437_144329fe89_o.png" alt=""/>
+<p><img src="http://farm3.static.flickr.com/2556/4157213437_144329fe89_o.png" alt="">
 <a href="http://www.flickr.com/photos/hotoo/4157213437/">@source</a></p>
 </div>
 

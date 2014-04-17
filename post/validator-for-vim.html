@@ -45,101 +45,78 @@
   <div class="entry-content"><p>Unix/Linux（以下统称Unix）下可参考<a href="http://blog.whatwg.org/vim-checker">这里</a>
 和 <a href="http://natalian.org/archives/2008/05/17/vim-web-ide/">这里</a>，
 因为介绍和代码都是现成的，而且我没有实验过，所以不多作介绍。</p>
-
 <p><em>原理</em> ：
 改变makeprg，make时使用curl向指定的检测服务地址发送数据，通过管道，
 使用sed编辑整理返回的数据后在Quickfix窗口中显示。</p>
-
 <p>我在Windows 7 下做了部分改动，由于对Unix命令不了解，目前还有一下输出格式的问题待修正。</p>
-
 <p>大部分代码参考<a href="http://svn.natalian.org/projects/html5/">这个Project</a>，
 里面的.sh文件都是 Unix中的脚本，Windows下可以改为.bat，有部分格式不同出需要修改，
 如Unix下的 $1，Windows下是%1，注释符合也不同，另外Sed for Windows是不支持使用
 单引号(?)的，需要改成双引号，里面的双引号需要转义，cURL和Sed这部分我目前没搞清楚，
 所以少讲少错些的好。</p>
-
 <p>下面讲详细步骤：</p>
-<h2 id="校验x-html">校验X/HTML</h2>
-<ol>
-<li>安装cURL for Windows：
-
-<ol>
+<h2 id="校验x-html">校验X/HTML</h2><ol>
+<li>安装cURL for Windows：<ol>
 <li>到 <a href="http://curl.haxx.se/download.html">这个页面</a> 找“Win32 – Generic”，
 下载下面带或不带ssl的都可以；</li>
 <li>把解压的 curl.exe 放到 Path 环境变量所在的目录（如 C:\Windows）</li>
 <li>另外还需要几个动态链接库，如 libeay32.dll, libssl32.dll 直接在网上搜索
 下载并放到 Path 环境变量所在目录下即可。</li>
 <li>命令行下运行 curl 测试是否安装成功。</li>
-</ol></li>
-<li>安装Sed for Windows：
-
-<ol>
+</ol>
+</li>
+<li>安装Sed for Windows：<ol>
 <li>到 <a href="http://gnuwin32.sourceforge.net/packages/sed.htm">这里</a>
 下载Binaries 版本，将解压的 sed.exe 放至系统 Path 环境变量所在目录。</li>
 <li>另外需要的 libintl-2, libiconv-2, regex 这几个动态链接库，sed下载页的
 底部都有链接，放至系统 Path 环境变量所在目录。</li>
 <li>命令行下运行 sed 测试是否安装成功。</li>
-</ol></li>
+</ol>
+</li>
 <li><p>下载这个 <a href="http://svn.natalian.org/projects/html5/validate-html.sh">validate-html.sh</a>，
-重命名为 validate-html.bat，放至系统 Path所在路径，并编辑修改为以下内容：</p><div class="highlight"><div class="codes"><div class="code"><pre>:: sudo ln -s `pwd`&#47;validate-html.sh &#47;usr&#47;bin&#47;validate-html.sh
+重命名为 validate-html.bat，放至系统 Path所在路径，并编辑修改为以下内容：</p><div class="highlight"><div class="codes"><div class="code"><pre>:: sudo ln -s `pwd`/validate-html.sh /usr/bin/validate-html.sh
 :: Many thanks to Anselm Garbe for helping me with the blasted sed regexp
 
 @echo off
-::curl -s -F laxtype=yes -F parser=html5 -F level=error -F out=gnu -F doc=@%1 &quot;http:&#47;&#47;validator.nu&quot; | sed &#39;s,^.*&quot;:,&#39;&quot;%1:&quot;&#39;,&#39;
-curl -s -F laxtype=yes -F parser=html5 -F level=error -F out=gnu -F doc=@%1 &quot;http:&#47;&#47;validator.nu&quot; | sed &quot;s,^.*&quot;&quot;:,&quot;&quot;%1:&quot;&quot;,&quot;
-</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+::curl -s -F laxtype=yes -F parser=html5 -F level=error -F out=gnu -F doc=@%1 &quot;http://validator.nu&quot; | sed &#39;s,^.*&quot;:,&#39;&quot;%1:&quot;&#39;,&#39;
+curl -s -F laxtype=yes -F parser=html5 -F level=error -F out=gnu -F doc=@%1 &quot;http://validator.nu&quot; | sed &quot;s,^.*&quot;&quot;:,&quot;&quot;%1:&quot;&quot;,&quot;</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
 <a name="L1-4" href="#L1-4">4</a>
-<a name="L1-5" href="#L1-5">5</a>
-<a name="L1-6" href="#L1-6">6</a></pre></div></div>
-<p>上面指定以 html5 标准来校验，如果你使用其他标准，可以自行修改。</p></li>
-<li><p>下载这个 <a href="http://svn.natalian.org/projects/html5/html.vim">html.vim</a> ，将里面的
-<code>
-set makeprg=validate-html.sh\ %
-</code></p>
-
-<p>改成</p><div class="highlight"><div class="codes"><div class="code"><pre>set makeprg=validate-html.bat\ %
-</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div>
-<p>放至 <code>$VIM/vimfiles/ftplugin/</code> 目录下。</p></li>
-<li><p>修改 _vimrc，加入如下代码：</p><div class="highlight"><div class="codes"><div class="code"><pre>autocmd FileType html,xhtml nmap &lt;F9&gt; :make&lt;cr&gt;&lt;cr&gt;:copen&lt;cr&gt;
-</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a></pre></div></div></li>
-<li><p>现在，打开.html类型的文件，按<F9>键既可校验当前的html文档合法性了。</p></li>
+<a name="L1-5" href="#L1-5">5</a></pre></div></div><p>上面指定以 html5 标准来校验，如果你使用其他标准，可以自行修改。</p>
+</li>
+<li><p>下载这个 <a href="http://svn.natalian.org/projects/html5/html.vim">html.vim</a> ，将里面的</p><div class="highlight"><div class="codes"><div class="code"><pre>set makeprg=validate-html.sh\ %</pre></div><pre class="line"></pre></div></div><p>改成</p><div class="highlight"><div class="codes"><div class="code"><pre>set makeprg=validate-html.bat\ %</pre></div><pre class="line"></pre></div></div><p>放至 <code>$VIM/vimfiles/ftplugin/</code> 目录下。</p>
+</li>
+<li><p>修改 _vimrc，加入如下代码：</p><div class="highlight"><div class="codes"><div class="code"><pre>autocmd FileType html,xhtml nmap &lt;F9&gt; :make&lt;cr&gt;&lt;cr&gt;:copen&lt;cr&gt;</pre></div><pre class="line"></pre></div></div></li>
+<li><p>现在，打开.html类型的文件，按<F9>键既可校验当前的html文档合法性了。</p>
+</li>
 </ol>
-
-<p><img src="http://farm3.static.flickr.com/2753/4043041358_09704d3424_o.png" alt="pic"/></p>
-
+<p><img src="http://farm3.static.flickr.com/2753/4043041358_09704d3424_o.png" alt="pic"></p>
 <p><a href="http://www.flickr.com/photos/hotoo/4043041358/">ref</a></p>
-<h2 id="校验css">校验CSS</h2>
-<p>方法和上面的类似，从第3大步开始：
+<h2 id="校验css">校验CSS</h2><p>方法和上面的类似，从第3大步开始：
 1. 下载这个 validate-css.sh ，重命名为 validate-css.bat 放至 Path 环境变量所在目录，
     并修改为如下代码：</p><div class="highlight"><div class="codes"><div class="code"><pre>```
 :: WORK-IN-PROGRESS
-curl -s -F &quot;file=@%1;type=text&#47;css&quot; -F output=text &quot;http:&#47;&#47;jigsaw.w3.org&#47;css-validator&#47;validator&#47;&quot;
+curl -s -F &quot;file=@%1;type=text/css&quot; -F output=text &quot;http://jigsaw.w3.org/css-validator/validator/&quot;
 ```
-</pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
-<a name="L4-2" href="#L4-2">2</a>
-<a name="L4-3" href="#L4-3">3</a>
-<a name="L4-4" href="#L4-4">4</a></pre></div></div>
-<ol>
-<li><p>复制一份 $VIM/vimfile/ftplugin/ 下的 html.vim，重命名为 css.vim，并修改以下内容为：</p><div class="highlight"><div class="codes"><div class="code"><pre>set makeprg=validate-css.bat\ %
-</pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a></pre></div></div></li>
-<li><p>修改 _vimrc 加入如下代码：</p><div class="highlight"><div class="codes"><div class="code"><pre>autocmd FileType css nmap &lt;F9&gt; :make&lt;cr&gt;&lt;cr&gt;:copen&lt;cr&gt;
-</pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a></pre></div></div></li>
-<li><p>至此，打开CSS文件，按下<F9>就可以校验CSS代码了。</p></li>
+
+</pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
+<a name="L5-2" href="#L5-2">2</a>
+<a name="L5-3" href="#L5-3">3</a>
+<a name="L5-4" href="#L5-4">4</a>
+<a name="L5-5" href="#L5-5">5</a></pre></div></div><ol>
+<li><p>复制一份 $VIM/vimfile/ftplugin/ 下的 html.vim，重命名为 css.vim，并修改以下内容为：</p><div class="highlight"><div class="codes"><div class="code"><pre>set makeprg=validate-css.bat\ %</pre></div><pre class="line"></pre></div></div></li>
+<li><p>修改 _vimrc 加入如下代码：</p><div class="highlight"><div class="codes"><div class="code"><pre>autocmd FileType css nmap &lt;F9&gt; :make&lt;cr&gt;&lt;cr&gt;:copen&lt;cr&gt;</pre></div><pre class="line"></pre></div></div></li>
+<li><p>至此，打开CSS文件，按下<F9>就可以校验CSS代码了。</p>
+</li>
 </ol>
-
-<p><img src="http://farm3.static.flickr.com/2465/4042318385_7da39f37e7_o.png" alt="pic"/></p>
-
+<p><img src="http://farm3.static.flickr.com/2465/4042318385_7da39f37e7_o.png" alt="pic"></p>
 <p><a href="http://www.flickr.com/photos/hotoo/4042318385/">ref</a></p>
-
 <p>另外还有一个插件支持验证CSS：<a href="http://www.vim.org/scripts/script.php?script_id=1577">css.vim : CSS compiler file</a></p>
-<h2 id="校验javascript">校验Javascript</h2>
-<p>这个已有单机应用程序版本，更多资料可以参考 <a href="http://www.gracecode.com/archives/2902/">jsLint for Vim</a>
+<h2 id="校验javascript">校验Javascript</h2><p>这个已有单机应用程序版本，更多资料可以参考 <a href="http://www.gracecode.com/archives/2902/">jsLint for Vim</a>
 和 <a href="http://www.vim.org/scripts/script.php?script_id=2578">javaScriptLint.vim (script#2578)</a> ，
 另外，还是很期待 X/HTML 和 CSS 也有类似的版本的。</p>
-<h2 id="参考">参考</h2>
-<ul>
+<h2 id="参考">参考</h2><ul>
 <li><a href="http://blog.whatwg.org/vim-checker">HTML5 conformance checking in Vim</a></li>
 <li><a href="http://natalian.org/archives/2008/05/17/vim-web-ide/">VIM IDE for Web applications</a></li>
 <li><a href="http://svn.natalian.org/projects/html5/">Project html5 (download)</a></li>

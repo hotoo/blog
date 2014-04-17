@@ -45,18 +45,14 @@
   <div class="entry-content"><blockquote>
 <p><code>sed -f ex -i *.md</code></p>
 </blockquote>
-<h2 id="readme">README</h2>
-<p>相对 Wiki 语法，和 Wiki 对应工具支持情况，我更加喜欢 Markdown 了。
+<h2 id="readme">README</h2><p>相对 Wiki 语法，和 Wiki 对应工具支持情况，我更加喜欢 Markdown 了。
 本地配合使用 Vimwiki 来编辑查看，发布使用 nico 来转换，而且有 Github 的原生支持，
 使用 Markdown 是不二之选。</p>
-
 <p>为了减少转换工作量，我简要写了这个脚本，可以初步将 vimwiki 语法的项目，
 自动转换成 markdown 语法。</p>
-
 <a name="more"></a>
 
 <p>转换的内容包括：</p>
-
 <ul>
 <li>header</li>
 <li>codes</li>
@@ -68,56 +64,47 @@
 <li>%title</li>
 <li>%nohtml</li>
 </ul>
-<h2 id="usage">Usage</h2>
-<p>假设上面的脚本保存结构如下：</p><div class="highlight"><div class="codes"><div class="code"><pre>&#47;
+<h2 id="usage">Usage</h2><p>假设上面的脚本保存结构如下：</p><div class="highlight"><div class="codes"><div class="code"><pre>/
 |- convert.sh
 |- ex
-|- vimwiki&#47;
+|- vimwiki/
   |- index.wiki
-  `- vim.wiki
-</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+  `- vim.wiki</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
 <a name="L1-4" href="#L1-4">4</a>
-<a name="L1-5" href="#L1-5">5</a>
-<a name="L1-6" href="#L1-6">6</a></pre></div></div>
-<p>在 convert.sh 同级目录执行：</p><div class="highlight"><div class="codes"><div class="code"><pre>$ .&#47;convert.sh vimwiki&#47;*.wiki
-</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div>
-<p>然后自动或手动调整之后，删除 <code>.wiki</code> 文件即可。</p>
+<a name="L1-5" href="#L1-5">5</a></pre></div></div><p>在 convert.sh 同级目录执行：</p><div class="highlight"><div class="codes"><div class="code"><pre>$ ./convert.sh vimwiki/*.wiki</pre></div><pre class="line"></pre></div></div><p>然后自动或手动调整之后，删除 <code>.wiki</code> 文件即可。</p>
 <h2 id="codes">Codes</h2><h3 id="convert-sh">convert.sh</h3><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash"><span class="shebang">#!/usr/bin/env bash
 </span>
 <span class="keyword">for</span> x
 <span class="keyword">do</span>
   filename=$(<span class="built_in">echo</span> <span class="variable">$x</span>|sed <span class="operator">-e</span> <span class="string">"s/\.wiki$/.md/"</span>)
   sed <span class="operator">-f</span> ex <span class="variable">$x</span> &gt; <span class="variable">$filename</span>
-<span class="keyword">done</span>
-</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+<span class="keyword">done</span></code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
 <a name="L3-3" href="#L3-3">3</a>
 <a name="L3-4" href="#L3-4">4</a>
 <a name="L3-5" href="#L3-5">5</a>
-<a name="L3-6" href="#L3-6">6</a>
-<a name="L3-7" href="#L3-7">7</a></pre></div></div><h3 id="ex">ex</h3><div class="highlight"><div class="codes"><div class="code"><pre>s&#47;# \(.*\)$&#47;* \1&#47;g
-s&#47;^= \(.*\) =$&#47;# \1&#47;g
-s&#47;^== \(.*\) ==$&#47;## \1&#47;g
-s&#47;^=== \(.*\) ===$&#47;### \1&#47;g
-s&#47;^==== \(.*\) ====$&#47;#### \1&#47;g
-s&#47;^===== \(.*\) =====$&#47;##### \1&#47;g
-s&#47;^====== \(.*\) ======$&#47;###### \1&#47;g
-s&#47;{{{class=&quot;brush: *\([^&quot;]*\)&quot;&#47;\`\`\`\1&#47;g
-s&#47;{{{class=&quot;\([^&quot;]*\)&quot;&#47;\`\`\`\1&#47;g
-s&#47;{{{&#47;\`\`\`&#47;g
-s&#47;}}}&#47;\`\`\`&#47;g
-s&#47;\[\([^] ]\{1,\}\)\]\([^](]\)&#47;![pic](\1)\2&#47;g
-s&#47;\[\([^] ]\{1,\}\)\]$&#47;![pic](\1)&#47;g
-s&#47;\[\[\(\([^|]\{1,\}\)\|\)\([^]]\{1,\}\)\]\]&#47;[\3](\2.md)&#47;g
-s&#47;\[\[\([^]]\{1,\}\)\]\]&#47;[\1](\1.md)&#47;g
-s&#47;\[\(https\{0,1\}:\&#47;\&#47;[^ ]*\) \([^]]*\)\]&#47;[\2](\1)&#47;g
-s&#47;%% \(.*\)&#47;&lt;!-- \1 --&gt;&#47;g
-&#47;%toc.*&#47;d
-s&#47;%title \(.*\)&#47;# \1&#47;g
-s&#47;%nohtml&#47;- status: draft&#47;g
-</pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
+<a name="L3-6" href="#L3-6">6</a></pre></div></div><h3 id="ex">ex</h3><div class="highlight"><div class="codes"><div class="code"><pre>s/# \(.*\)$/* \1/g
+s/^= \(.*\) =$/# \1/g
+s/^== \(.*\) ==$/## \1/g
+s/^=== \(.*\) ===$/### \1/g
+s/^==== \(.*\) ====$/#### \1/g
+s/^===== \(.*\) =====$/##### \1/g
+s/^====== \(.*\) ======$/###### \1/g
+s/{{{class=&quot;brush: *\([^&quot;]*\)&quot;/\`\`\`\1/g
+s/{{{class=&quot;\([^&quot;]*\)&quot;/\`\`\`\1/g
+s/{{{/\`\`\`/g
+s/}}}/\`\`\`/g
+s/\[\([^] ]\{1,\}\)\]\([^](]\)/![pic](\1)\2/g
+s/\[\([^] ]\{1,\}\)\]$/![pic](\1)/g
+s/\[\[\(\([^|]\{1,\}\)\|\)\([^]]\{1,\}\)\]\]/[\3](\2.md)/g
+s/\[\[\([^]]\{1,\}\)\]\]/[\1](\1.md)/g
+s/\[\(https\{0,1\}:\/\/[^ ]*\) \([^]]*\)\]/[\2](\1)/g
+s/%% \(.*\)/&lt;!-- \1 --&gt;/g
+/%toc.*/d
+s/%title \(.*\)/# \1/g
+s/%nohtml/- status: draft/g</pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
 <a name="L4-2" href="#L4-2">2</a>
 <a name="L4-3" href="#L4-3">3</a>
 <a name="L4-4" href="#L4-4">4</a>
@@ -135,8 +122,7 @@ s&#47;%nohtml&#47;- status: draft&#47;g
 <a name="L4-16" href="#L4-16">16</a>
 <a name="L4-17" href="#L4-17">17</a>
 <a name="L4-18" href="#L4-18">18</a>
-<a name="L4-19" href="#L4-19">19</a>
-<a name="L4-20" href="#L4-20">20</a></pre></div></div></div>
+<a name="L4-19" href="#L4-19">19</a></pre></div></div></div>
 
   <footer class="entry-meta post clearfix">
     <span class="tags"><a href="/tag">Tags</a>:

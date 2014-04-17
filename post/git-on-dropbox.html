@@ -61,20 +61,19 @@ git clone --bare test test.git
 mkdir &quot;D:\My Dropbox\codes\repositories&quot;
 copy test.git &quot;D:\My Dropbox\codes\repositories&quot;
 # for Unix-like
-mkdir ~&#47;Dropbox&#47;codes&#47;repositories
-mv test.git ~&#47;Dropbox&#47;codes&#47;repositories
+mkdir ~/Dropbox/codes/repositories
+mv test.git ~/Dropbox/codes/repositories
 
 cd test
 # for Windows.
-git remote add &quot;file:&#47;&#47;&#47;D:\My Dropbox\codes\repositories\test.git&quot;
+git remote add &quot;file:///D:\My Dropbox\codes\repositories\test.git&quot;
 # for Unix-like.
-git remote add origin file:&#47;&#47;&#47;Users&#47;{name}&#47;Dropbox&#47;codes&#47;repositories&#47;test.git
+git remote add origin file:///Users/{name}/Dropbox/codes/repositories/test.git
 
 vi README
 git add .
 git commit -m &quot;make changes.&quot;
-git push origin master
-</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+git push origin master</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
 <a name="L1-4" href="#L1-4">4</a>
@@ -104,9 +103,7 @@ git push origin master
 <a name="L1-28" href="#L1-28">28</a>
 <a name="L1-29" href="#L1-29">29</a>
 <a name="L1-30" href="#L1-30">30</a>
-<a name="L1-31" href="#L1-31">31</a>
-<a name="L1-32" href="#L1-32">32</a></pre></div></div><h2 id="延伸阅读">延伸阅读</h2>
-<ol>
+<a name="L1-31" href="#L1-31">31</a></pre></div></div><h2 id="延伸阅读">延伸阅读</h2><ol>
 <li><a href="http://roylez.heroku.com/2010/01/16/git-dropbox.html">用dropbox做私有git服务器</a></li>
 <li><a href="http://blog.williamyao.com/archives/232">方便而又强大：本地 Git 操作完全指南</a></li>
 <li><a href="http://andre.engelbrechtonline.net/blog/2010/04/22/hosting-git-repo-dropbox/">Hosting a Git Repo on Dropbox</a></li>

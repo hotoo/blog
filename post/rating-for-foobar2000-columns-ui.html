@@ -43,15 +43,12 @@
 <div class="hentry">
   <h1 class="entry-title">Rating for Foobar2000 columns UI</h1>
   <div class="entry-content"><p>给Foobar2000 的Columns UI设置标星功能：</p>
-<h2 id="i-显示歌曲标星级别。">I. 显示歌曲标星级别。</h2>
-<ul>
+<h2 id="i-显示歌曲标星级别。">I. 显示歌曲标星级别。</h2><ul>
 <li>文件 -&gt; 参数设置。</li>
 <li>显示 -&gt; Columns UI -&gt; Playlist view。</li>
 <li>切换到Columns页签，新建（New）一个列。</li>
 </ul>
-
 <p><a href="http://4.bp.blogspot.com/_POl6bUDELqY/SJ6_G0igVlI/AAAAAAAAD20/IMyH4NToL1c/s1600-h/viewRating.jpg">http://4.bp.blogspot.com/_POl6bUDELqY/SJ6_G0igVlI/AAAAAAAAD20/IMyH4NToL1c/s1600-h/viewRating.jpg</a></p>
-
 <p>如图，Display里的代码是：</p><div class="highlight"><div class="codes"><div class="code"><pre>$if(%rating%,
 $select(%rating%,
 *,
@@ -60,19 +57,15 @@ $select(%rating%,
 ****,
 *****),
 )
-)
-</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+)</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
 <a name="L1-4" href="#L1-4">4</a>
 <a name="L1-5" href="#L1-5">5</a>
 <a name="L1-6" href="#L1-6">6</a>
 <a name="L1-7" href="#L1-7">7</a>
-<a name="L1-8" href="#L1-8">8</a>
-<a name="L1-9" href="#L1-9">9</a></pre></div></div>
-<p>其实也可以简单是输入：<code>%rating%</code>。</p>
-<h2 id="ii-设置标星级别功能。">II. 设置标星级别功能。</h2>
-<ul>
+<a name="L1-8" href="#L1-8">8</a></pre></div></div><p>其实也可以简单是输入：<code>%rating%</code>。</p>
+<h2 id="ii-设置标星级别功能。">II. 设置标星级别功能。</h2><ul>
 <li>右键播放列表某首歌曲 -&gt; 标签 -&gt; 管理脚本。
 <a href="http://3.bp.blogspot.com/_POl6bUDELqY/SKKI6GFCmTI/AAAAAAAAD3g/8mBCeRyB4k8/s320/0.right+menu.GIF">http://3.bp.blogspot.com/_POl6bUDELqY/SKKI6GFCmTI/AAAAAAAAD3g/8mBCeRyB4k8/s320/0.right+menu.GIF</a></li>
 <li>打开“批量标签”窗口。
@@ -90,8 +83,7 @@ $select(%rating%,
 保存为：rating-- <br />
 点击“运行”按钮。</li>
 </ul>
-<h2 id="iii-设置标星界面（操作按钮）：">III. 设置标星界面（操作按钮）：</h2>
-<ul>
+<h2 id="iii-设置标星界面（操作按钮）：">III. 设置标星界面（操作按钮）：</h2><ul>
 <li>右键工具栏，点击 Customise...
 <a href="http://2.bp.blogspot.com/_POl6bUDELqY/SKKgVMPR42I/AAAAAAAAD4Q/x3tqs58BTf4/s320/customise.JPG">http://2.bp.blogspot.com/_POl6bUDELqY/SKKgVMPR42I/AAAAAAAAD4Q/x3tqs58BTf4/s320/customise.JPG</a></li>
 <li>添加(Add)一个按钮(button)，并点击Change...按钮。
@@ -103,8 +95,7 @@ Command中选择“标签/脚本/rating++”。OK保存后回到Command picker�
 <li>重复第2步。Command中选择“标签/脚本/rating--”其他雷同。</li>
 <li>最后OK保存就可以了，下面是配置完成的界面，两个带星星的按钮功能分别是标星自减和自增。</li>
 </ul>
-
-<p><img src="http://4.bp.blogspot.com/_POl6bUDELqY/SKRIW4GiHEI/AAAAAAAAD4o/fN-UJ17Kp1Q/s320/foobar200.jpg" alt="pic"/></p>
+<p><img src="http://4.bp.blogspot.com/_POl6bUDELqY/SKRIW4GiHEI/AAAAAAAAD4o/fN-UJ17Kp1Q/s320/foobar200.jpg" alt="pic"></p>
 </div>
 
   <footer class="entry-meta post clearfix">

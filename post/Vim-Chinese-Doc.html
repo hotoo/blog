@@ -44,35 +44,39 @@
   <h1 class="entry-title">Vim 中文帮助文档</h1>
   <div class="entry-content"><p>前两天不知道为什么，帮助文档又跑会英文了（隐约是用 Vimball 安装了 Vimwiki
 或者 <em>重复</em>安装了 TwitVim 的缘故）。</p><div class="highlight"><div class="codes"><div class="code"><pre>:set helplang=cn
-</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a></pre></div></div>
-<p>无效。</p><div class="highlight"><div class="codes"><div class="code"><pre>let helptags=$VIM.&#39;\vimfiles\doc&#39;
-</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div>
-<p>亦无效。</p>
 
+</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a></pre></div></div><p>无效。</p><div class="highlight"><div class="codes"><div class="code"><pre>let helptags=$VIM.&#39;\vimfiles\doc&#39;
+
+</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+<a name="L2-2" href="#L2-2">2</a></pre></div></div><p>亦无效。</p>
 <p>很早以前不知道从哪里抄来的这个：</p><div class="highlight"><div class="codes"><div class="code"><pre>cp -R doc $VIM.&#39;\vimfiles\doc\&#39;
-</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a></pre></div></div>
-<p>从一开始就是报错的，一直被注释，从未被启用。</p>
 
+</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+<a name="L3-2" href="#L3-2">2</a></pre></div></div><p>从一开始就是报错的，一直被注释，从未被启用。</p>
 <p>在注册表中找到两个相关的项：</p><div class="highlight"><div class="codes"><div class="code"><pre>HKEY_CLASSES_ROOT\TypeLib\{0F0BFAE0-4C90-11D1-82D7-0004AC368519}\1.1\HELPDIR
 (默认)    d:\Vim\vim72
-</pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
-<a name="L4-2" href="#L4-2">2</a></pre></div></div>
-<p>将默认值修改为：</p><div class="highlight"><div class="codes"><div class="code"><pre>d:\Vim\vimfiles
-</pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a></pre></div></div>
-<p>或：</p><div class="highlight"><div class="codes"><div class="code"><pre>d:\Vim\vimfiles\doc
-</pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a></pre></div></div>
-<p>重启系统，均无效。</p>
 
+</pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
+<a name="L4-2" href="#L4-2">2</a>
+<a name="L4-3" href="#L4-3">3</a></pre></div></div><p>将默认值修改为：</p><div class="highlight"><div class="codes"><div class="code"><pre>d:\Vim\vimfiles
+
+</pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
+<a name="L5-2" href="#L5-2">2</a></pre></div></div><p>或：</p><div class="highlight"><div class="codes"><div class="code"><pre>d:\Vim\vimfiles\doc
+
+</pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a>
+<a name="L6-2" href="#L6-2">2</a></pre></div></div><p>重启系统，均无效。</p>
 <p>另一个注册表项的路径是正确的，无需改变：</p><div class="highlight"><div class="codes"><div class="code"><pre>HKEY_LOCAL_MACHINE\SOFTWARE\Classes\TypeLib\{0F0BFAE0-4C90-11D1-82D7-0004AC368519}\1.1\HELPDIR
 (默认值)    d:\Vim\vimfiles\doc
-</pre></div><pre class="line"><a name="L7-1" href="#L7-1">1</a>
-<a name="L7-2" href="#L7-2">2</a></pre></div></div>
-<p>万般无奈，只好重装了中文文档。</p>
 
+
+</pre></div><pre class="line"><a name="L7-1" href="#L7-1">1</a>
+<a name="L7-2" href="#L7-2">2</a>
+<a name="L7-3" href="#L7-3">3</a>
+<a name="L7-4" href="#L7-4">4</a></pre></div></div><p>万般无奈，只好重装了中文文档。</p>
 <p>中文文档可以从 <a href="http://vimcdoc.sourceforge.net/">vimCdoc.sf.net</a> 下载，也可以从
 <a href="http://vimdoc.sourceforge.net/">vimdoc.sf.net</a> 找到链接，下载回来的是一个 .exe
 可执行安装文件，研究了下安装过程：</p>
-
 <ol>
 <li>前面都是在抽取中文文档文件(.cnx)，并放至合适的位置：(如 D:\Vim\vim72..\vimfiles\doc)</li>
 <li>抽取 tags-cn 并输出到文档同一目录 D:\Vim\vim72..\vimfiles\doc</li>
@@ -80,7 +84,6 @@
 <li>抽取 vimcdoc.vim 输出到 D:\Vim\vim72..\vimfiles\plugin</li>
 <li>抽取 README,INSTALL,LICENSE,AUTHORS,guides.txt 到 C:\Program Files\vimcdoc</li>
 </ol>
-
 <p>其中设置 Vim 帮助的默认语言的步骤，即是在 vimcdoc.vim 中，因为 plugin 比 vimrc
 加载要晚(<a href="http://forum.ubuntu.org.cn/viewtopic.php?f=68&amp;t=190529">参考</a>)，
 所以在 vimrc 中的设置会被 vimcdoc.vim 覆盖掉。</p>

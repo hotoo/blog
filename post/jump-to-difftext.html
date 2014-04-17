@@ -44,19 +44,15 @@
   <h1 class="entry-title">Diff 模式下，让光标直接跳转到被修改的文本处</h1>
   <div class="entry-content"><p>Vim 的 Diff 功能非常优秀。有一个我非常喜欢的特性是：完全相同的地方，
 会被折叠隐藏起来(上下文除外)。还可以很方便的在各个差异点之间做出修改合并和快速跳转。</p>
-
 <p>不过默认的 <code>[c</code> 和 <code>]c</code> 两种跳转方式，目前只能跳转到差异点的行首。对于只修改了
 行内部分文本内容（一般底色是浅红色）时，我更希望直接跳转到有变化的文本（底色是
 深红色的部分）上。</p>
-
 <p>感谢 tocer ，我初步实现了两个版本 <a href="http://gist.github.com/556810">gits:556810</a></p>
-
 <ol>
 <li>v1: 仅支持跳转到 DiffChange 的第一个 DiffText</li>
 <li>v2: 支持 DiffChange 行多个 DiffText</li>
 </ol>
-<h2 id="参考">参考</h2>
-<ol>
+<h2 id="参考">参考</h2><ol>
 <li><code>:h synIDattr</code></li>
 <li><code>:h diff_hlID</code></li>
 <li><a href="https://twitter.com/hotoo/status/22227282177">@twitter</a></li>

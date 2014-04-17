@@ -45,7 +45,6 @@
   <div class="entry-content"><p>jQuery UI v1.8rc 版的日历控件已经非常完善，比之 v1.7.1 已经支持显示周数(WeekNum)，
 而且计算 WeekNum 的算法可以自定义；而 <a href="http://www.my97.net/dp/demo/index.htm">My97DatePicker</a>
 的算法又有Bug。对于两年交接的周，有两种常见的算法：</p>
-
 <p>每年 1月 1日所在的周均为该年的第 1周（如MS Excel的WeekNum()函数和 jQuery 实现）；</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">/* Set as calculateWeek to determine the week of the year based on the ISO 8601 definition.
    @param  date  Date - the date to get the week for
    @return  number - the number of the week within the year that contains this date */</span>
@@ -57,8 +56,7 @@ iso8601Week: <span class="function"><span class="keyword">function</span><span c
     checkDate.setMonth(<span class="number">0</span>); <span class="comment">// Compare with Jan 1</span>
     checkDate.setDate(<span class="number">1</span>);
     <span class="keyword">return</span> Math.floor(Math.round((time - checkDate) / <span class="number">86400000</span>) / <span class="number">7</span>) + <span class="number">1</span>;
-},
-</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+},</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
 <a name="L1-4" href="#L1-4">4</a>
@@ -68,9 +66,7 @@ iso8601Week: <span class="function"><span class="keyword">function</span><span c
 <a name="L1-8" href="#L1-8">8</a>
 <a name="L1-9" href="#L1-9">9</a>
 <a name="L1-10" href="#L1-10">10</a>
-<a name="L1-11" href="#L1-11">11</a>
-<a name="L1-12" href="#L1-12">12</a></pre></div></div>
-<p>每年最后 1天所在的周</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">/**
+<a name="L1-11" href="#L1-11">11</a></pre></div></div><p>每年最后 1天所在的周</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">/**
  * @param date {Date} 每周第 1天。
  * @return {Number}
  */</span>
@@ -78,17 +74,14 @@ calculateWeek:<span class="function"><span class="keyword">function</span><span 
     <span class="keyword">var</span> d = <span class="keyword">new</span> Date(date.getTime()+(<span class="number">6</span>*<span class="number">86400000</span>)), t=d.getTime();
     <span class="keyword">var</span> start = <span class="keyword">new</span> Date(d.getTime()); start.setMonth(<span class="number">0</span>); start.setDate(<span class="number">1</span>);
     <span class="keyword">return</span> Math.floor((t - start.getTime())/<span class="number">86400000</span>/<span class="number">7</span>)+<span class="number">1</span>;
-}
-</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+}</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
 <a name="L2-4" href="#L2-4">4</a>
 <a name="L2-5" href="#L2-5">5</a>
 <a name="L2-6" href="#L2-6">6</a>
 <a name="L2-7" href="#L2-7">7</a>
-<a name="L2-8" href="#L2-8">8</a>
-<a name="L2-9" href="#L2-9">9</a></pre></div></div>
-<p>而从自然语言中来说，这交接的一周即可以是头一年的最后一周，也可以是后一年的第 1周。</p>
+<a name="L2-8" href="#L2-8">8</a></pre></div></div><p>而从自然语言中来说，这交接的一周即可以是头一年的最后一周，也可以是后一年的第 1周。</p>
 </div>
 
   <footer class="entry-meta post clearfix">

@@ -45,31 +45,23 @@
   <div class="entry-content"><p>很久之前做了一个 <a href="https://github.com/hotoo/Vimlide">Vimlike 的 HTML(5) Slide</a>，
 很小的一个玩意，但是很好玩。里面支持 normal, search, command, help 等模式，
 最初是每个单独自己 Copy 的一份，然后精简成各个模式自己需要的键映射。</p>
-
 <p>一直想把这个 Vimlike 的键映射部分抽象提取处理，前段时间 Google+ 出来的时候，
 看到 mattn 做的一个用来
 <a href="https://github.com/mattn/GooglePlusCommander">支持 +, c, s ... 等快捷键的 user-script</a>，
 我就立即提议实现 gg, G, gh, gp, gP 这些键盘映射，并把这个 Vimlike 键映射抽取好了。</p>
-
 <p>抽取的过程基本还顺利，只遇到一点点小问题，另外还做了些优化。</p>
-
 <p>之前为了避免无映射的键 push 到 history 中造成无法正确触发键映射的问题
 （比如只映射了 <code>&lt;Esc&gt;</code> 键，其他的 abc 之类的键会 push 到 histroy 中，
 尝试对应的映射是找不到的，后续的键就无法触发了），采用优先触发当前键事件的方式。</p>
-
 <p>仔细想了想，优先考虑当前 key 是不合理的，比如同时映射了 j 和 gj，
 由于优先原则的干扰，造成 gj 永远都不会被触发。</p>
-
 <p>接着以为针对 <code>&lt;Esc&gt;</code>, <code>&lt;CR&gt;</code>, <code>&lt;Tab&gt;</code> 等键特殊处理，遇到这种键直接触发，
 不放到 history 中就差不多可以了。</p>
-
 <p>继续深入思考，仍然不够，其实完整的 Vim-like 如果要支持 mark, g+, z+, +,
 等一系列的扩展支持，都需要有内置支持，否则就是需要类似
 map(&quot;m[a-zA-Z0-9]&quot;, function(){}) 这样的模糊映射支持了。</p>
-
 <p>实现增强版的内置扩展键支持，还是实现模糊映射支持，这是个问题？</p>
-<h2 id="see-also">See Also</h2>
-<ul>
+<h2 id="see-also">See Also</h2><ul>
 <li><a href="https://github.com/hotoo/Vimlike.js">Vimlike.js@github</a>,
 <a href="http://hotoo.me/Vimlike.js/Vimlike.html">Demo</a></li>
 </ul>

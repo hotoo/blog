@@ -43,20 +43,15 @@
 <div class="hentry">
   <h1 class="entry-title">Vim映射Home键到首个非空字符</h1>
   <div class="entry-content"><p>许多编辑器有相关选项，可以直接设置让 <code>&lt;Home&gt;</code> 键在首个非空字符和行首之间跳转。</p>
-
 <p>Vim 也有快捷键，normal 模式下：</p>
-
 <ul>
 <li><code>0</code> 跳转到行首；</li>
 <li><code>^</code> 跳转到首个非空字符；</li>
 <li><code>$</code> 跳转到行尾。</li>
 </ul>
-
-<p>目前未知跳转到最后一个非空字符的快捷键，有个网友提供了一个很好玩的技巧：</p><div class="highlight"><div class="codes"><div class="code"><pre>nmap &lt;End&gt; &#47;\S\s*$&lt;CR&gt;:nohl&lt;CR&gt;
-</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a></pre></div></div>
-<p>为了将 <code>&lt;Home&gt;</code>和 <code>End&gt;</code> 键映射到其他编辑器常用的设置，我写了个可以用的代码，请高手不吝赐教。</p><div class="highlight"><div class="codes"><div class="code"><pre>&quot; Dynamic bind &lt;HOME&gt; key
-&quot; if caret&#47;cursor not at the frist non-white-space character
-&quot;   move caret&#47;cursor to there
+<p>目前未知跳转到最后一个非空字符的快捷键，有个网友提供了一个很好玩的技巧：</p><div class="highlight"><div class="codes"><div class="code"><pre>nmap &lt;End&gt; /\S\s*$&lt;CR&gt;:nohl&lt;CR&gt;</pre></div><pre class="line"></pre></div></div><p>为了将 <code>&lt;Home&gt;</code>和 <code>End&gt;</code> 键映射到其他编辑器常用的设置，我写了个可以用的代码，请高手不吝赐教。</p><div class="highlight"><div class="codes"><div class="code"><pre>&quot; Dynamic bind &lt;HOME&gt; key
+&quot; if caret/cursor not at the frist non-white-space character
+&quot;   move caret/cursor to there
 &quot; else
 &quot;   move to beginning
 function HomeBind(offset)
@@ -74,8 +69,8 @@ nmap &lt;silent&gt; &lt;Home&gt; :call HomeBind(0)&lt;cr&gt;
 vmap &lt;silent&gt; &lt;Home&gt; &lt;Esc&gt;:call HomeBind(1)&lt;cr&gt;
 
 &quot; Dynamic bind &lt;END&gt; key
-&quot; if caret&#47;cursor not at the end
-&quot;   move caret&#47;cursor to there
+&quot; if caret/cursor not at the end
+&quot;   move caret/cursor to there
 &quot; else
 &quot;   move to last non-white-space character.
 function EndBind(offset)
@@ -91,8 +86,7 @@ endfunction
 imap &lt;silent&gt; &lt;End&gt; &lt;Esc&gt;:call EndBind(0)&lt;cr&gt;a
 nmap &lt;silent&gt; &lt;End&gt; :call EndBind(0)&lt;cr&gt;
 vmap &lt;silent&gt; &lt;End&gt; :call EndBind(0)&lt;cr&gt;
-&quot;nmap &lt;End&gt; &#47;\S\s*$&lt;CR&gt;:nohl&lt;CR&gt;
-</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+&quot;nmap &lt;End&gt; /\S\s*$&lt;CR&gt;:nohl&lt;CR&gt;</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
 <a name="L2-4" href="#L2-4">4</a>
@@ -128,10 +122,7 @@ vmap &lt;silent&gt; &lt;End&gt; :call EndBind(0)&lt;cr&gt;
 <a name="L2-34" href="#L2-34">34</a>
 <a name="L2-35" href="#L2-35">35</a>
 <a name="L2-36" href="#L2-36">36</a>
-<a name="L2-37" href="#L2-37">37</a>
-<a name="L2-38" href="#L2-38">38</a></pre></div></div><h2 id="参考">参考</h2>
-<p>这里还有几个实现很优雅，但稍有问题的脚本：</p>
-
+<a name="L2-37" href="#L2-37">37</a></pre></div></div><h2 id="参考">参考</h2><p>这里还有几个实现很优雅，但稍有问题的脚本：</p>
 <ul>
 <li><a href="http://vim.wikia.com/wiki/SmartHome_and_SmartEnd_over_wrapped_lines">SmartHome and SmartEnd over wrapped lines</a></li>
 <li><a href="http://www.vim.org/scripts/script.php?script_id=2772">Crazy Home Key</a>

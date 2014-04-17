@@ -42,13 +42,14 @@
   <div id="content" class="document">
 <div class="hentry">
   <h1 class="entry-title">如何取 URL 中第一个单独的问号(?) 位置</h1>
-  <div class="entry-content"><p>新版 Arale 通过 nginx 服务支持使用双问号的访问方式：</p><div class="highlight"><div class="codes"><div class="code"><pre>https:&#47;&#47;static.alipay.com&#47;ar??arale.js
-</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a></pre></div></div>
-<p>访问 <code>https://static.alipay.com/ar/arale.js</code></p>
+  <div class="entry-content"><p>新版 Arale 通过 nginx 服务支持使用双问号的访问方式：</p><div class="highlight"><div class="codes"><div class="code"><pre>https://static.alipay.com/ar??arale.js
 
-<p>通过正则的正向预搜索有办法获得第一个单问号的位置么？</p><div class="highlight"><div class="codes"><div class="code"><pre>var r = &#47;\?(?!\?)&#47;;
-</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div>
-<p>会匹配双问号的第 2 个问号：</p><div class="highlight"><div class="codes"><div class="code"><pre>https:&#47;&#47;static.alipay.com&#47;ar??arale.js
+</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a></pre></div></div><p>访问 <code>https://static.alipay.com/ar/arale.js</code></p>
+<p>通过正则的正向预搜索有办法获得第一个单问号的位置么？</p><div class="highlight"><div class="codes"><div class="code"><pre>var r = /\?(?!\?)/;
+
+</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+<a name="L2-2" href="#L2-2">2</a></pre></div></div><p>会匹配双问号的第 2 个问号：</p><div class="highlight"><div class="codes"><div class="code"><pre>https://static.alipay.com/ar??arale.js
                              ^
 
 
@@ -68,6 +69,7 @@ var path = function(uri){
 
     return idx &lt; 0 ? uri : uri.substr(0, idx);
 };
+
 </pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
 <a name="L3-3" href="#L3-3">3</a>
@@ -87,28 +89,26 @@ var path = function(uri){
 <a name="L3-17" href="#L3-17">17</a>
 <a name="L3-18" href="#L3-18">18</a>
 <a name="L3-19" href="#L3-19">19</a>
-<a name="L3-20" href="#L3-20">20</a></pre></div></div>
-<p>目前是通过循环方式计算的，无心比较遍历和正则之间无优劣，
+<a name="L3-20" href="#L3-20">20</a>
+<a name="L3-21" href="#L3-21">21</a></pre></div></div><p>目前是通过循环方式计算的，无心比较遍历和正则之间无优劣，
 纯粹对于正则的实现很有兴趣 :)</p>
-
-<hr/>
-
+<hr>
 <p>答案一：</p><div class="highlight"><div class="codes"><div class="code"><pre>var path = function(uri){
-    return uri.replace(&#47;;jsessionid=.*$&#47;, &quot;&quot;)
-        .replace(&#47;^(.*?[^?])\?[^?]&#47;, &quot;$1&quot;);
+    return uri.replace(/;jsessionid=.*$/, &quot;&quot;)
+        .replace(/^(.*?[^?])\?[^?]/, &quot;$1&quot;);
 };
+
 </pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
 <a name="L4-2" href="#L4-2">2</a>
 <a name="L4-3" href="#L4-3">3</a>
-<a name="L4-4" href="#L4-4">4</a></pre></div></div>
-<hr/>
-
+<a name="L4-4" href="#L4-4">4</a>
+<a name="L4-5" href="#L4-5">5</a></pre></div></div><hr>
 <p>答案二：</p>
+<p>上面用了两个相同规则的分组，这里可以减少到一个分组</p><div class="highlight"><div class="codes"><div class="code"><pre>&quot;asdfadf??a?a&quot;.replace(/([^\s])\?\1/, &#39;$1*$1&#39;); // &quot;asdfadf??a*a&quot;
 
-<p>上面用了两个相同规则的分组，这里可以减少到一个分组</p><div class="highlight"><div class="codes"><div class="code"><pre>&quot;asdfadf??a?a&quot;.replace(&#47;([^\s])\?\1&#47;, &#39;$1*$1&#39;); &#47;&#47; &quot;asdfadf??a*a&quot;
-</pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a></pre></div></div>
-<p>但是这种做法对于问号(?)在字符串首尾时没有办法匹配</p><div class="highlight"><div class="codes"><div class="code"><pre>var temp= &quot;12345???89?asdf&quot;.search(&#47;(?:[^?]|^)\?(?!\?)&#47;);
-var index = temp ? temp + 1 : temp; &#47;&#47; index的就想要的索引值
+</pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
+<a name="L5-2" href="#L5-2">2</a></pre></div></div><p>但是这种做法对于问号(?)在字符串首尾时没有办法匹配</p><div class="highlight"><div class="codes"><div class="code"><pre>var temp= &quot;12345???89?asdf&quot;.search(/(?:[^?]|^)\?(?!\?)/);
+var index = temp ? temp + 1 : temp; // index的就想要的索引值
 </pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a>
 <a name="L6-2" href="#L6-2">2</a></pre></div></div></div>
 

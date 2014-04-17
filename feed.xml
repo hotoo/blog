@@ -5,6 +5,75 @@
     <link href="http://blog.hotoo.me/feed.xml" />
     <id>http://blog.hotoo.me/feed.xml</id>
     <entry>
+        <title type="html"><![CDATA[定位到服务器集群的特定节点]]></title>
+        <link href="http://blog.hotoo.me/post/find-nodes-from-server-cluster"/>
+        <published>2014-04-17T00:00:00.000Z</published>
+        <updated>2014-04-17T00:00:00.000Z</updated>
+        <id>http://blog.hotoo.me/post/find-nodes-from-server-cluster</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+            <![CDATA[ <blockquote>
+<p>齐宣王使人吹竽，必三百人。南郭处士请为王吹竽，宣王说之，廪食以数百人。
+宣王死，湣王立，好一一听之，处士逃。</p>
+<p>《韩非子·内储说上》</p>
+</blockquote>
+<h2 id="背景">背景</h2><p>某日，突然收到报警，某发现实时异常监控趋势图上，静态资源 404 异常有明显的上升。
+分析详细的异常信息发现是某个发布操作引起某几个系统引起的。</p>
+<!--more-->
+
+<hr>
+<p>找到对应的开发，分析结论是部分配置文件未生效，导致拼接资源文件地址错误。
+按照业务量计算，这个异常量大约是其中一、两台机器有问题。</p>
+<p>可能发布系统或其他问题，重新发布一次仍没能修复这个异常。</p>
+<p>我们需要快速定位到这只滥竽，尽快将问题修复。
+但是实际上却没有这么简单，我们最终花费 了 7个多小时，最终是因为这个系统正好有
+其他发布才顺便解决。</p>
+<p><img src="https://i.alipayobjects.com/i/localhost/png/201404/2TD6uw5N0n.png" alt="realtile-error-trend"></p>
+<p>上图有两个造成异常的发布，分别是『CMS 发布』和『后台系统发布』。</p>
+<p>红色是 JavaScript 实时异常，绿色是静态资源 404 异常。</p>
+<h2 id="方案">方案</h2><p>事后我们坐下来讨论如何解决这个问题，避免在以后遇到类似问题时能快速有效的应对。</p>
+<p><img src="https://i.alipayobjects.com/i/localhost/png/201404/2Tdj3TmMdR.png" alt="异常过程序列图"></p>
+<p>如上图，问题出在某个问题业务应用服务器节点配置文件未生效，拼接出来的 JavaScript
+资源地址不正确导致 CDN 节点未命中而最终回源，源服务器也没有这个文件，最终发生
+404 悲剧。</p>
+<p>实际的业务系统中，会提供用户访问的节点信息，但是请求静态资源时无法获得这个信息，
+是不是有办法在静态资源源服务器上获得来源页面所在的服务器节点信息呢？</p>
+<ol>
+<li>方案一：我们首先想到 Cookie。但是应用服务器和静态资源服务器分别在不同的域名
+下，即使在访问应用服务器时写入节点信息到 Cookie 中，这个信息也不会携带到静态
+资源服务器。『失败』。</li>
+<li>方案二：CDN 节点域提供外部写 Cookie 的接口，用户访问应用服务时，同时调用接口
+在 CDN 节点所在域写入用户访问应用服务器节点信息。『放弃』，缺点：<ol>
+<li>成本高。</li>
+<li>风险大。</li>
+</ol>
+</li>
+<li>方案三：然后想到每个应用系统重写静态资源地址，在地址中携带当前应用服务器节点
+信息。『放弃』，缺点：<ol>
+<li>成本过高。</li>
+<li>导致 CDN 命中率下降。</li>
+</ol>
+</li>
+<li><p>方案四：重写用户访问页面地址，附带应用服务器节点信息。成本过高，『放弃』。</p>
+<p>从前端角度直接解决这个看似无望，换个思路。</p>
+</li>
+<li><p>方案五：在网络内部，使用内部代理。如 <code>curl -I -x internal-host:port url</code>
+『可行』，缺点：</p>
+<ol>
+<li>需要在服务器所在内网执行，指定目标服务器内部 IP，因此只有系统管理员可以操作。</li>
+<li>而系统管理员不清楚实际应用业务。</li>
+</ol>
+</li>
+<li>方案六：如果可以在外部指定服务器节点访问应用，是不是可行呢？
+这个跟负载均衡规则有关，如果负载均衡服务器支持这个特性，或可一试。
+跟相关同学沟通后，表示可以做。而且从外网直接访问，清楚业务的开发同学可以自行
+排查。『可行』。需要注意的问题：<ol>
+<li>逐个击破，定向攻击。可以通过拒绝频繁的指定节点访问请求来防范。</li>
+</ol>
+</li>
+</ol>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[转换 Vimwiki 为 Markdown]]></title>
         <link href="http://blog.hotoo.me/post/convert-vimwiki-to-markdown"/>
         <published>2014-03-31T00:00:00.000Z</published>
@@ -14,18 +83,14 @@
             <![CDATA[ <blockquote>
 <p><code>sed -f ex -i *.md</code></p>
 </blockquote>
-<h2 id="readme">README</h2>
-<p>相对 Wiki 语法，和 Wiki 对应工具支持情况，我更加喜欢 Markdown 了。
+<h2 id="readme">README</h2><p>相对 Wiki 语法，和 Wiki 对应工具支持情况，我更加喜欢 Markdown 了。
 本地配合使用 Vimwiki 来编辑查看，发布使用 nico 来转换，而且有 Github 的原生支持，
 使用 Markdown 是不二之选。</p>
-
 <p>为了减少转换工作量，我简要写了这个脚本，可以初步将 vimwiki 语法的项目，
 自动转换成 markdown 语法。</p>
-
 <!--more-->
 
 <p>转换的内容包括：</p>
-
 <ul>
 <li>header</li>
 <li>codes</li>
@@ -37,47 +102,40 @@
 <li>%title</li>
 <li>%nohtml</li>
 </ul>
-<h2 id="usage">Usage</h2>
-<p>假设上面的脚本保存结构如下：</p>
-<pre>&#47;
+<h2 id="usage">Usage</h2><p>假设上面的脚本保存结构如下：</p>
+<pre>/
 |- convert.sh
 |- ex
-|- vimwiki&#47;
+|- vimwiki/
   |- index.wiki
-  `- vim.wiki
-</pre>
-<p>在 convert.sh 同级目录执行：</p>
-<pre>$ .&#47;convert.sh vimwiki&#47;*.wiki
-</pre>
-<p>然后自动或手动调整之后，删除 <code>.wiki</code> 文件即可。</p>
+  `- vim.wiki</pre><p>在 convert.sh 同级目录执行：</p>
+<pre>$ ./convert.sh vimwiki/*.wiki</pre><p>然后自动或手动调整之后，删除 <code>.wiki</code> 文件即可。</p>
 <h2 id="codes">Codes</h2><h3 id="convert-sh">convert.sh</h3><div class="highlight"><pre><code class="bash"><span class="shebang">#!/usr/bin/env bash
 </span>
 <span class="keyword">for</span> x
 <span class="keyword">do</span>
   filename=$(<span class="built_in">echo</span> <span class="variable">$x</span>|sed <span class="operator">-e</span> <span class="string">"s/\.wiki$/.md/"</span>)
   sed <span class="operator">-f</span> ex <span class="variable">$x</span> &gt; <span class="variable">$filename</span>
-<span class="keyword">done</span>
-</code></pre></div><h3 id="ex">ex</h3><pre>s&#47;# \(.*\)$&#47;* \1&#47;g
-s&#47;^= \(.*\) =$&#47;# \1&#47;g
-s&#47;^== \(.*\) ==$&#47;## \1&#47;g
-s&#47;^=== \(.*\) ===$&#47;### \1&#47;g
-s&#47;^==== \(.*\) ====$&#47;#### \1&#47;g
-s&#47;^===== \(.*\) =====$&#47;##### \1&#47;g
-s&#47;^====== \(.*\) ======$&#47;###### \1&#47;g
-s&#47;{{{class=&quot;brush: *\([^&quot;]*\)&quot;&#47;\`\`\`\1&#47;g
-s&#47;{{{class=&quot;\([^&quot;]*\)&quot;&#47;\`\`\`\1&#47;g
-s&#47;{{{&#47;\`\`\`&#47;g
-s&#47;}}}&#47;\`\`\`&#47;g
-s&#47;\[\([^] ]\{1,\}\)\]\([^](]\)&#47;![pic](\1)\2&#47;g
-s&#47;\[\([^] ]\{1,\}\)\]$&#47;![pic](\1)&#47;g
-s&#47;\[\[\(\([^|]\{1,\}\)\|\)\([^]]\{1,\}\)\]\]&#47;[\3](\2.md)&#47;g
-s&#47;\[\[\([^]]\{1,\}\)\]\]&#47;[\1](\1.md)&#47;g
-s&#47;\[\(https\{0,1\}:\&#47;\&#47;[^ ]*\) \([^]]*\)\]&#47;[\2](\1)&#47;g
-s&#47;%% \(.*\)&#47;&lt;!-- \1 --&gt;&#47;g
-&#47;%toc.*&#47;d
-s&#47;%title \(.*\)&#47;# \1&#47;g
-s&#47;%nohtml&#47;- status: draft&#47;g
-</pre>]]>
+<span class="keyword">done</span></code></pre></div><h3 id="ex">ex</h3><pre>s/# \(.*\)$/* \1/g
+s/^= \(.*\) =$/# \1/g
+s/^== \(.*\) ==$/## \1/g
+s/^=== \(.*\) ===$/### \1/g
+s/^==== \(.*\) ====$/#### \1/g
+s/^===== \(.*\) =====$/##### \1/g
+s/^====== \(.*\) ======$/###### \1/g
+s/{{{class=&quot;brush: *\([^&quot;]*\)&quot;/\`\`\`\1/g
+s/{{{class=&quot;\([^&quot;]*\)&quot;/\`\`\`\1/g
+s/{{{/\`\`\`/g
+s/}}}/\`\`\`/g
+s/\[\([^] ]\{1,\}\)\]\([^](]\)/![pic](\1)\2/g
+s/\[\([^] ]\{1,\}\)\]$/![pic](\1)/g
+s/\[\[\(\([^|]\{1,\}\)\|\)\([^]]\{1,\}\)\]\]/[\3](\2.md)/g
+s/\[\[\([^]]\{1,\}\)\]\]/[\1](\1.md)/g
+s/\[\(https\{0,1\}:\/\/[^ ]*\) \([^]]*\)\]/[\2](\1)/g
+s/%% \(.*\)/&lt;!-- \1 --&gt;/g
+/%toc.*/d
+s/%title \(.*\)/# \1/g
+s/%nohtml/- status: draft/g</pre>]]>
         </content>
     </entry><entry>
         <title type="html"><![CDATA[阿里巴巴三年醇]]></title>
@@ -87,21 +145,14 @@ s&#47;%nohtml&#47;- status: draft&#47;g
         <id>http://blog.hotoo.me/post/alibaba-3-years</id>
         <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <p>今天 <a href="https://github.com/lifesinger">@玉伯</a> 给我送来的三年醇礼物。</p>
-
 <p>一个阿里真棒玉坠。</p>
-
-<p><img src="https://f.cloud.github.com/assets/143572/2257303/db0a08fa-9e16-11e3-90b3-5b9cea307a2a.png" alt="阿里真棒"/></p>
-
+<p><img src="https://f.cloud.github.com/assets/143572/2257303/db0a08fa-9e16-11e3-90b3-5b9cea307a2a.png" alt="阿里真棒"></p>
 <!--more-->
 
 <p>三周年成（阿里）人手印礼。</p>
-
-<p><img src="https://f.cloud.github.com/assets/143572/2257320/2a17e296-9e17-11e3-98f8-6a45a91ffcf5.png" alt="手印礼"/></p>
-
+<p><img src="https://f.cloud.github.com/assets/143572/2257320/2a17e296-9e17-11e3-98f8-6a45a91ffcf5.png" alt="手印礼"></p>
 <p>和女朋友一起用手印礼多出来的印泥自制的小猪猪。</p>
-
-<p><img src="https://f.cloud.github.com/assets/143572/2257321/37011bda-9e17-11e3-9f28-36c0391f505a.png" alt="印泥手工制品"/></p>
-
+<p><img src="https://f.cloud.github.com/assets/143572/2257321/37011bda-9e17-11e3-9f28-36c0391f505a.png" alt="印泥手工制品"></p>
 <p>感谢阿里。</p>
 ]]>
         </content>
@@ -114,72 +165,60 @@ s&#47;%nohtml&#47;- status: draft&#47;g
         <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <p>Google 日历内置了中国农历的支持，但是各种桌面客户端如 Mac iCal, iPhone 默认日历
 都无法正常使用，网上搜索了一遍也没有更好的订阅地址，大都不更新了。</p>
-
 <p>而且我又不想装各种乱七八糟的第三方日历应用。</p>
-
 <p>因此我自己制作了一个公开农历日历，需要的同学可以订阅到 Google Calendar，并且在
 Google Calendar 中可以隐藏这个日历，只是在各个客户端中显示即可。</p>
-
 <p>不过不爽的是，客户端不能针对特定日历设置提醒，有更好的方案的同学欢迎指教哈。</p>
-
 <!--more-->
-<h2 id="启用-google-calendar-内置农历（推荐）">启用 Google Calendar 内置农历（推荐）</h2>
-<ol>
+
+<h2 id="启用-google-calendar-内置农历（推荐）">启用 Google Calendar 内置农历（推荐）</h2><ol>
 <li><p>设置(Settings)</p>
-
-<p><img src="../../images/google-calendar-settings.png" alt="Settings"/></p></li>
-<li><p>基本(General)</p></li>
+<p><img src="../../images/google-calendar-settings.png" alt="Settings"></p>
+</li>
+<li><p>基本(General)</p>
+</li>
 <li><p>备用日历(Alternate calendar)</p>
-
-<p><img src="../../images/google-calendar-settings-alternate-calendar.png" alt="Alternate calendar"/></p></li>
-<li><p>选择 <code>农历 - 简体中文</code> (<code>Chinese calendar - Simplified Chinese</code>)</p></li>
-<li><p>保存(Save)</p></li>
+<p><img src="../../images/google-calendar-settings-alternate-calendar.png" alt="Alternate calendar"></p>
+</li>
+<li><p>选择 <code>农历 - 简体中文</code> (<code>Chinese calendar - Simplified Chinese</code>)</p>
+</li>
+<li>保存(Save)</li>
 <li><p>最终可以在每日的日历顶部，有对应农历的显示。</p>
-
-<p><img src="../../images/google-calendar-lunar-calendar-demo.png" alt="农历月历演示"/></p></li>
+<p><img src="../../images/google-calendar-lunar-calendar-demo.png" alt="农历月历演示"></p>
+</li>
 </ol>
-
-<hr/>
-
+<hr>
 <p>Google 日历的这个特性真是太赞了，以前为每天创建一个全天日历的挫 B方案没脸比。</p>
-
 <p>不过，现有的桌面（包括移动设备）应用中，都没能很好的支持这个特性。我又不想安装
 第三方的乱七八糟的日历应用，希望一个日历应用管理所有的日历数据，希望数据是开放的。</p>
-
 <p>因此挫 B 的方案只能继续。</p>
-
 <p>通过互联网在整个世界找了一圈，分享出来的农历订阅日历都已经失效、或者不更新了，
 因此我决定自己来维护世界和平，创建并分享了下面的中国农历，大家只需要订阅
 到自己的日历中就可以了。</p>
-<h2 id="订阅地址">订阅地址</h2>
-<ul>
+<h2 id="订阅地址">订阅地址</h2><ul>
 <li><a href="https://www.google.com/calendar/ical/896414ier7cs228f2fp4mkn02g%40group.calendar.google.com/public/basic.ics">ical</a></li>
 <li><a href="https://www.google.com/calendar/feeds/896414ier7cs228f2fp4mkn02g%40group.calendar.google.com/public/basic">xml</a></li>
 <li><a href="https://www.google.com/calendar/embed?src=896414ier7cs228f2fp4mkn02g%40group.calendar.google.com&amp;ctz=Asia/Shanghai">html</a></li>
 </ul>
-<h2 id="订阅方法">订阅方法</h2>
-<p>桌面应用本身支持直接订阅 ical 日历，但是为了便于管理，我统一使用了 Google Calendar
+<h2 id="订阅方法">订阅方法</h2><p>桌面应用本身支持直接订阅 ical 日历，但是为了便于管理，我统一使用了 Google Calendar
 管理我的日历，桌面应用只是客户端，数据来源于 Google Calendar。</p>
-
 <ul>
 <li><p>Other calendars 右侧的菜单，选择 <code>Add by URL</code></p>
-
-<p><img src="../../images/google-calendar-add-by-url.png" alt="Add Calendar"/></p></li>
+<p><img src="../../images/google-calendar-add-by-url.png" alt="Add Calendar"></p>
+</li>
 <li><p>填入 ical 地址：</p>
-
 <p><code>https://www.google.com/calendar/ical/896414ier7cs228f2fp4mkn02g%40group.calendar.google.com/public/basic.ics</code></p>
-
-<p><img src="../../images/google-calendar-add-calendar.png" alt="Add Calendar"/></p></li>
-<li><p>点击 Add Calendar 按钮。</p></li>
-<li><p>由于 Google Calendar 本身内置了农历的支持，可以在 Google Calendar 中隐藏不显示这个日历。</p></li>
+<p><img src="../../images/google-calendar-add-calendar.png" alt="Add Calendar"></p>
+</li>
+<li><p>点击 Add Calendar 按钮。</p>
+</li>
+<li>由于 Google Calendar 本身内置了农历的支持，可以在 Google Calendar 中隐藏不显示这个日历。</li>
 </ul>
-
 <p>预览：</p>
-
 <iframe src="https://www.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=896414ier7cs228f2fp4mkn02g%40group.calendar.google.com&amp;color=%23875509&amp;ctz=Asia%2FShanghai"
   style=" border-width:0 " width="800" height="600" frameborder="0" scrolling="no"></iframe>
-<h2 id="其他">其他</h2>
-<ul>
+
+<h2 id="其他">其他</h2><ul>
 <li>如果在使用过程中发现其中的错误，请邮件给我。</li>
 <li>同时欢迎 Fork 这个 <a href="https://github.com/hotoo/chinese-lunar-calendar">『中国农历』开放项目</a> 。
 或者给我们提交 Issues。</li>
@@ -196,19 +235,13 @@ Google Calendar 中可以隐藏这个日历，只是在各个客户端中显示�
             <![CDATA[ <blockquote>
 <p>首先感谢支持加我的『来往』好友们，你们太让人感动了。</p>
 </blockquote>
-
 <p>经过一阵狂热，下面开始冷静正常的使用来往，好好利用这个应用。</p>
-
 <p>扎堆是一个类似贴吧、论坛类信息分享交流的移动平台。
 大家可以在这里随时随机的分享话题、信息、图片等，
 也可以对他人发起的话题进行回复交流。</p>
-
-<p><img src="/images/vim-talk-laiwangzhadui.png" alt="二维码"/></p>
-
+<p><img src="/images/vim-talk-laiwangzhadui.png" alt="二维码"></p>
 <p>欢迎加入 Vim Talk 扎堆，一起聊些有用有趣的技术话题。</p>
-
 <p>加入方法：</p>
-
 <ol>
 <li>安装并启动 <a href="https://www.laiwang.com/">来往</a> 客户端。</li>
 <li>打开『通讯录』-『添加好友』-『扫一扫加好友』-扫描上面的二维码即可。</li>
@@ -222,61 +255,49 @@ Google Calendar 中可以隐藏这个日历，只是在各个客户端中显示�
         <updated>2013-09-21T00:00:00.000Z</updated>
         <id>http://blog.hotoo.me/post/no-cache-in-cdn</id>
         <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <h2 id="背景">背景</h2>
-<p>支付宝目前使用淘宝提供的 CDN 服务，这个服务中的 CDN 节点在自身找不到对应资源时
+            <![CDATA[ <h2 id="背景">背景</h2><p>支付宝目前使用淘宝提供的 CDN 服务，这个服务中的 CDN 节点在自身找不到对应资源时
 主动到源服务器拉取的策略。</p>
-
-<p><img src="/images/no-cache-in-cdn.png" alt="图"/></p>
-
+<p><img src="/images/no-cache-in-cdn.png" alt="图"></p>
 <p>支付宝使用的静态资源合并(combo)方案，导致在不同的访问参数情况下，被认为是不同
 的静态资源。如果挟带的是避免缓存的随机参数，CDN 在没有缓存这个资源的情况下，
 会到源服务器拉取资源。</p>
-
 <p>原则上，我们使用特定的版本机制，每个新版本文件以不同的文件名发布，不允许使用
 参数，尤其是随机数方式避免缓存问题。</p>
-<h2 id="问题">问题</h2>
-<p>由于我们使用的版本策略，我们可以指定用户缓存静态资源时效为永久，实际方案上
+<h2 id="问题">问题</h2><p>由于我们使用的版本策略，我们可以指定用户缓存静态资源时效为永久，实际方案上
 我们指定用户缓存时间为 1年，但是在某些场景下（如测量用户网络速度），
 用户客户端（非 CDN 节点）访问某些特定静态资源需要禁止使用缓存。</p>
-
 <p>目前常见的方案都是在客户端使用时间戳+随机数。这个方案本身看似没什么问题，但是
 实际上有非常大的隐患，测量的数据参考性也不佳。</p>
-
 <ul>
 <li>CDN 节点上缓存了大量挟带永不重复随机数的资源，对磁盘造成影响。</li>
 <li>CDN 缓存命中率降低，这些挟带随机数的静态资源缓存率命中率为 0。</li>
 <li>增加源服务器的访问压力。</li>
 <li>测量的用户网络响应时间实际不是到 CDN 节点的，还包含 CDN 回源的时间。</li>
 </ul>
-
 <!--more-->
-<h2 id="解决方案">解决方案</h2>
-<p>为了解决这种明确不允许用户客户端缓存，同时又不建议使用随机参数访问的需求，我们
-有以下几种方案：</p>
 
+<h2 id="解决方案">解决方案</h2><p>为了解决这种明确不允许用户客户端缓存，同时又不建议使用随机参数访问的需求，我们
+有以下几种方案：</p>
 <ol>
 <li><p>CDN 服务器端控制浏览器不缓存。『最佳方案』</p>
-
 <p>设置指定目录下的静态资源禁止缓存头信息，有需要禁止缓存需求时上传静态资源到
-这个目录。</p></li>
+这个目录。</p>
+</li>
 <li><p>直接访问源服务器。</p>
-
 <p>现在的加随机数访问 CDN 方案和直接访问源服务器本质上相同，这方案只能测用户到
-源服务器的响应时间。</p></li>
+源服务器的响应时间。</p>
+</li>
 <li><p>使用有限随机数方案。</p>
-
 <p>虽然第一种是最佳方案，但也不排除某些浏览器或壳在不关闭页面情况下，有缓存的
 问题，所以这和第一种方案结合使用可能是更靠谱一些的方案。『待验证』</p>
-
 <p>页面脚本请求静态资源时，带上从零递增的参数，避免单页面缓存问题，亦可避免
-CDN 缓存大量无意义资源的问题。</p></li>
+CDN 缓存大量无意义资源的问题。</p>
+</li>
 </ol>
-<h2 id="延伸">延伸</h2>
-<p>实际上，对于静态资源来说，纯粹的参数是无意义的，CDN 节点本可以忽略这个参数。
+<h2 id="延伸">延伸</h2><p>实际上，对于静态资源来说，纯粹的参数是无意义的，CDN 节点本可以忽略这个参数。
 虽然合并策略使用了参数方式，但是我们使用双问号激活合并服务的方案可以让我们
 明确区分出合并参数和其他参数，因此技术上是完全可以忽略其他参数导致的回源。</p>
-<h2 id="参考">参考</h2>
-<ol>
+<h2 id="参考">参考</h2><ol>
 <li><a href="http://segmentfault.com/q/1010000000119794">拉取式相比推送式的对比的参考</a></li>
 </ol>
 ]]>
@@ -288,40 +309,28 @@ CDN 缓存大量无意义资源的问题。</p></li>
         <updated>2013-09-13T00:00:00.000Z</updated>
         <id>http://blog.hotoo.me/post/weekly-topic-about-exceptions-9</id>
         <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <h2 id="背景">背景</h2>
-<p>某日 16时 30分，监控实时大盘中全站 JavaScript 异常和 404 异常分别朝着不同的方向延伸，
+            <![CDATA[ <h2 id="背景">背景</h2><p>某日 16时 30分，监控实时大盘中全站 JavaScript 异常和 404 异常分别朝着不同的方向延伸，
 橙色的 JavaScript 异常急剧上升。</p>
-
-<p><img src="https://f.cloud.github.com/assets/143572/1136611/435cbfac-1c48-11e3-8856-8fc7ef13ce5a.png" alt="bac3c01389cadbb12d4873520b3bd2a9"/></p>
-
+<p><img src="https://f.cloud.github.com/assets/143572/1136611/435cbfac-1c48-11e3-8856-8fc7ef13ce5a.png" alt="bac3c01389cadbb12d4873520b3bd2a9"></p>
 <p>详细数据中我们看到一向高标准高质量的收银台出现异常大量的异常。</p>
-
-<p><img src="https://f.cloud.github.com/assets/143572/1136701/ae74db38-1c4a-11e3-9d2d-1101c0b61a79.png" alt="2013-09-13 4 00 58"/></p>
-<h2 id="排查">排查</h2>
-<p>我们发现其中有两个页面异常最多，而这两个页面中异常最多的『一个异常』详情如下：</p>
-
+<p><img src="https://f.cloud.github.com/assets/143572/1136701/ae74db38-1c4a-11e3-9d2d-1101c0b61a79.png" alt="2013-09-13 4 00 58"></p>
+<h2 id="排查">排查</h2><p>我们发现其中有两个页面异常最多，而这两个页面中异常最多的『一个异常』详情如下：</p>
 <ul>
 <li>File: 同页面 URL</li>
 <li>Line: 1</li>
 <li>Message: Uncaught SyntaxError: Unexpected token a</li>
 </ul>
-
 <p>客户端信息：</p>
-
 <ul>
 <li>pc/-1;windows/5.1;sg/2.x;webkit/535.1</li>
 <li>pc/-1;windows/6.1;sg/2.x;webkit/535.1</li>
 </ul>
-
 <p>堆栈信息：</p>
 <pre>at function parse()
     at function ()
     at function (data)
     at function ()
-    at function ()
-</pre>
-<p>分析过程非常艰辛，重现异常的过程也是一波三折，这里不做赘述，最终分析得出：</p>
-
+    at function ()</pre><p>分析过程非常艰辛，重现异常的过程也是一波三折，这里不做赘述，最终分析得出：</p>
 <ul>
 <li>搜狗浏览器的 userAgent 太坑爹，几乎所有版本都是 2.x，开发者太不专业了。最终找到内核为 webkit/535.1 的是 3.2 版。</li>
 <li><p>重现到老版 arale 中的 ajax 模块中对 JSON 有特殊的处理，如果浏览器内置的 JSON 不支持非标准的 JSON （如 <code>{a:1}</code>）则 hack 做兼容。</p>
@@ -358,33 +367,27 @@ CDN 缓存大量无意义资源的问题。</p></li>
         parseJSON = <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> {</span>
             <span class="keyword">return</span> defaultParse.call(<span class="keyword">this</span>, data)
         }
-    }
-</code></pre></div></li>
-<li><p>抛出异常的代码是 <code>JSON.parse(&quot;{a: 1}&quot;)</code></p></li>
-<li><p>但奇怪的是这段代码是放在 try/catch 中，为什么还会有异常被监控捕获？</p></li>
-<li><p>最终发现这是搜狗浏览器 3.2版极速(webkit)模式中的特性：即使 try/catch 住的异常，
+    }</code></pre></div></li>
+<li>抛出异常的代码是 <code>JSON.parse(&quot;{a: 1}&quot;)</code></li>
+<li>但奇怪的是这段代码是放在 try/catch 中，为什么还会有异常被监控捕获？</li>
+<li>最终发现这是搜狗浏览器 3.2版极速(webkit)模式中的特性：即使 try/catch 住的异常，
 同样会被 window.onerror 捕获，但并未因此中断业务逻辑，后续的代码仍然会按照正确的
-try/catch 异常处理流程进行，所以对业务本身没有影响。</p></li>
-<li><p>p.s. 搜狗浏览器没有控制台，用户不会知道出了异常。</p></li>
-<li><p>另外收银台之前异常量少的主要原因是主要的页面没有引入前端监控，用户抛出了异常而我们不知道而已。</p></li>
+try/catch 异常处理流程进行，所以对业务本身没有影响。</li>
+<li>p.s. 搜狗浏览器没有控制台，用户不会知道出了异常。</li>
+<li>另外收银台之前异常量少的主要原因是主要的页面没有引入前端监控，用户抛出了异常而我们不知道而已。</li>
 </ul>
-<h2 id="相关截图">相关截图</h2>
-<p><img src="https://f.cloud.github.com/assets/143572/1136977/316cd2d8-1c51-11e3-9f7e-4bbebec06108.png" alt="2013-09-13 4 39 14"/>
-<img src="https://f.cloud.github.com/assets/143572/1136980/32da28aa-1c51-11e3-8dc4-5773fc84f885.png" alt="2013-09-13 4 39 33"/>
-<img src="https://f.cloud.github.com/assets/143572/1136981/331bb9f0-1c51-11e3-93bf-8cd2dcdf5d7f.png" alt="2013-09-13 4 40 26"/>
-<img src="https://f.cloud.github.com/assets/143572/1136982/331f90c0-1c51-11e3-8d08-8d61c08512dc.png" alt="2013-09-13 4 40 12"/>
-<img src="https://f.cloud.github.com/assets/143572/1136983/332ad480-1c51-11e3-991f-b4b0db932f69.png" alt="2013-09-13 4 41 03"/></p>
-<h2 id="解决方案">解决方案</h2>
-<p>最初虽然有些争议，但我们最终决定的处理方案是监控中临时排除 sg/2.x|webkit/535.1 中
+<h2 id="相关截图">相关截图</h2><p><img src="https://f.cloud.github.com/assets/143572/1136977/316cd2d8-1c51-11e3-9f7e-4bbebec06108.png" alt="2013-09-13 4 39 14">
+<img src="https://f.cloud.github.com/assets/143572/1136980/32da28aa-1c51-11e3-8dc4-5773fc84f885.png" alt="2013-09-13 4 39 33">
+<img src="https://f.cloud.github.com/assets/143572/1136981/331bb9f0-1c51-11e3-93bf-8cd2dcdf5d7f.png" alt="2013-09-13 4 40 26">
+<img src="https://f.cloud.github.com/assets/143572/1136982/331f90c0-1c51-11e3-8d08-8d61c08512dc.png" alt="2013-09-13 4 40 12">
+<img src="https://f.cloud.github.com/assets/143572/1136983/332ad480-1c51-11e3-991f-b4b0db932f69.png" alt="2013-09-13 4 41 03"></p>
+<h2 id="解决方案">解决方案</h2><p>最初虽然有些争议，但我们最终决定的处理方案是监控中临时排除 sg/2.x|webkit/535.1 中
 <code>Uncaught SyntaxError: Unexpected token a</code> 异常。</p>
-<h3 id="是否要排除这个浏览器中所有的异常？">是否要排除这个浏览器中所有的异常？</h3>
-<p>呃，考虑到搜狗浏览器的份额，我们的策略是只排除已知的异常，未知的异常看最终分析结果再考虑。</p>
-<h2 id="广告">广告</h2>
-<p>这个异常排查的主要功臣 @wsvn53，我们在排查过程中频繁使用了他开发的工具
+<h3 id="是否要排除这个浏览器中所有的异常？">是否要排除这个浏览器中所有的异常？</h3><p>呃，考虑到搜狗浏览器的份额，我们的策略是只排除已知的异常，未知的异常看最终分析结果再考虑。</p>
+<h2 id="广告">广告</h2><p>这个异常排查的主要功臣 @wsvn53，我们在排查过程中频繁使用了他开发的工具
 <a href="https://github.com/wsvn53/fedit">Fedit</a>，可以直接修改线上代码。
 排查线上故 障、线下接⼝什么的都非常⽅方便。强烈建议⼤家都装上⽤用。</p>
-<h2 id="最后">最后</h2>
-<p>我仅代表我自己，想说某些毫无责任心的国产浏览器壳厂商们，你们没有创造价值，
+<h2 id="最后">最后</h2><p>我仅代表我自己，想说某些毫无责任心的国产浏览器壳厂商们，你们没有创造价值，
 只是在各种不同方式的索取。</p>
 ]]>
         </content>
@@ -398,63 +401,48 @@ try/catch 异常处理流程进行，所以对业务本身没有影响。</p></l
             <![CDATA[ <p>上周的 <a href="weekly-topic-about-exceptions-7">每周异常：第 7期，保持简单，保持拙朴</a>
 中介绍了通过页面关键的 URL/ID 信息，简单有效的发现异常的方案。
 本周我们在这个异常分析方法之上，再稍微深入下：</p>
-
 <p>对于整个网站来说，每个系统、页面是有重要级别的，比如支付宝收银台就是 A1 级系统。
 这些系统、页面一般可以按照以下方法来判断重要性：</p>
-
 <ul>
 <li>访问量极大，是最主要的业务，对用户影响极大。</li>
 <li>用户本身重要（例如商户，尤其是大商户），是最重要的业务，对企业影响巨大。</li>
 </ul>
-
 <p>对于前者，我们可以通过系统、域名的访问量来近似的划分；
 对于后者，我们可以建立白名单机制。</p>
-
 <p>对于异常来说，可以通过异常率来判断异常自身的紧急程度。</p>
-
-<hr/>
-
+<hr>
 <ul>
 <li>系统、页面重要性作为『异常重要性』的一个指标。</li>
-<li>异常率及异常量作为『异常紧急程度』作为一个指标。
-
-<ul>
+<li>异常率及异常量作为『异常紧急程度』作为一个指标。<ul>
 <li>异常率超过阈值的为高发率异常。</li>
 <li>（可选）异常量超过阈值的也是高发量异常。</li>
 <li>并且以高发率为主。</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>我们画出以下异常象限：</p>
-
-<p><img src="/static/images/quadrant.png" alt="异常象限"/></p>
-
+<p><img src="/static/images/quadrant.png" alt="异常象限"></p>
 <ul>
 <li>图中一、二、三、四为象限代号。</li>
 <li>(0, 1, 2, 3) 为异常重要性序号。</li>
 </ul>
-
 <p>经过一些分析，我们可以得出结论：</p>
-
 <ul>
 <li>第一、第二象限的异常，是我们最需要关注的部分。尤其是第一象限的异常，
 实时高发异常一般也是在这个象限。</li>
 <li>第四、三象限的低发异常，则几乎可以不用关注。</li>
 <li>总之我们只需要关注高发异常，但应该以页面的重要性来排优先级。</li>
 </ul>
-<h2 id="如何设定阈值？">如何设定阈值？</h2>
-<p>要确定异常象限，确定各个阈值是关键，这里只提供一些简单的参考。</p>
-
+<h2 id="如何设定阈值？">如何设定阈值？</h2><p>要确定异常象限，确定各个阈值是关键，这里只提供一些简单的参考。</p>
 <ul>
 <li>重要程度：全站重要页面占全站所有页面的 5% 左右，可以根据自身情况调整。</li>
-<li>紧迫程度：
-
-<ul>
+<li>紧迫程度：<ul>
 <li>目前的经验数据是异常率 4‰ 以上可以认为是高发率异常，但仍需继续
 分析实际数据做调整。</li>
 <li>（可选）异常 PV 超过 (全站访问最高页面 PV 乘以 1‰) 的也可以认为是高发量异常，
 实际可以根据自身情况调整。</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 ]]>
         </content>
@@ -465,110 +453,73 @@ try/catch 异常处理流程进行，所以对业务本身没有影响。</p></l
         <updated>2013-08-28T00:00:00.000Z</updated>
         <id>http://blog.hotoo.me/post/weekly-topic-about-exceptions-7</id>
         <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <h2 id="副标题：如何简单有效的发现最重要的有效异常">副标题：如何简单有效的发现最重要的有效异常</h2>
-<blockquote>
+            <![CDATA[ <h2 id="副标题：如何简单有效的发现最重要的有效异常">副标题：如何简单有效的发现最重要的有效异常</h2><blockquote>
 <p>Keep It Simple, Stupid.</p>
-
 <p>-- U.S. Navy (1960)</p>
 </blockquote>
-
 <p>在这之前，我一直苦苦寻求牛逼的算法 <a href="https://github.com/totorojs/javascript-exception-archives/issues/17">#12</a> ，
 来解决这个看似简单，其实不易；仿佛不易，最终简单的问题：
 找出最重要的有效异常。</p>
-
 <p>最早的时候，我们定义了『一个异常』由以下核心部分组成：</p>
-
 <ul>
 <li>URL: 异常所在页面。</li>
 <li>File: 异常代码所在文件。</li>
 <li>Line: 异常代码所在行数。</li>
 <li>Message: 异常消息。</li>
 </ul>
-
 <p>这些是不变的，相同页面中，同一个异常代码文件同一行，异常消息相同的异常，我们可以近似的认为它是同一个异常。</p>
-
 <!--more-->
 
 <p>另外还定义了异常率：</p>
-
 <ul>
 <li>异常率(PV)：『一个异常』的 PV，除以这个异常所在页面的 PV。</li>
 <li>异常率(UV)：『一个异常』的 UV，除以这个异常所在页面的 UV。</li>
 </ul>
-
 <p>于是我们通过 URL, File, Line, Message 四个核心信息来统计每一个异常的 PV, UV, PV异常率，UV异常率。
 并按照其中的某个字段为主进行排序。</p>
-
 <p>但是得到的结果总是让人不尽如人意，总会有很多无法排查，甚至还有一些显然不是我们代码的问题的异常排前排。</p>
-
 <p>我们尝试限制异常 PV, UV 的基数，尝试限制页面 PV, UV 的基数，结果仍然不理想。
 而且也没有想出其他牛逼的权重算法来评估每个异常。</p>
-
 <p>我们想过异常是跟代码所在文件和行号、异常消息有关系的，跟页面 URL 的关系不那么强，因为公共代码会在很多页面使用，把这同一个异常分散算到不同页面中会严重影响这个异常的排名。</p>
-
 <p>但是实际上公共代码（尤其是基础类库）的异常很多情况下是业务系统调用不当，或者使用的版本有 BUG 导致，最终还是需要这个页面的开发者调整调用方法，或升级使用更新的公共脚本来解决。所以忽略或弱化异常所在页面是不可接受的。</p>
-
 <p>而且排除了异常所在页面的信息，对于排查异常来说更为困难。</p>
-
 <p>够了，我已经受够了，脑袋一片浆糊。
 累、困，早点回家睡觉。</p>
-
-<hr/>
-
+<hr>
 <p>回到家随手画了几笔，然后去洗澡。洗澡的时候想着刚刚画的思维草图，逐渐想清楚了很多。</p>
-
 <ul>
 <li>File: 由于是 seajs 自动管理依赖，以及 combo 的使用，异常所在文件本身具有不稳定性。</li>
 <li>Line: 由于上面 File 的原因，不仅仅是 HTML 代码中的异常行号不稳定，静态脚本异常行号也具有不稳定性。</li>
 <li>Message: 不同浏览器（包括不同版本，或者在不同操作系统中）对同一个异常有不同的消息反馈，另外还有本地化的原因，异常消息也具有不稳定性。</li>
 </ul>
-
 <p>最后，只有异常所在页面 URL（或者页面 ID，一个页面源文件可能有多个 URL 地址，但是它们是有关系的，ID 相同）才是最稳定的。</p>
-
-<hr/>
-
+<hr>
 <p>于是我根据页面 URL 排列出每个页面的异常 PV, UV, PV异常率，UV异常率。并根据 PV 异常率为主进行倒序排序（每次访问都抛出的异常，比每个用户访问都抛出的异常的优先级更高）于是我们轻易得出了全站异常率最高的页面。</p>
-
 <p>根据这个关键的页面信息，再次查询出每『一个异常』的 PV, UV, PV异常率，UV异常率。</p>
-
 <p>以不变（页面 URL 或 ID），应万变。我们一个个把这些异常大户揪出来，各个击破。即使暂时没有发布解决，我们仍可以轻易识别排除这个已经揪出的异常。</p>
-
 <p>好了，妈妈再也不用操心我的每周异常 TOP 数据分析了。</p>
-
 <p>嗯， <a href="https://github.com/totorojs/javascript-exception-archives/issues/17">#12</a> 这个 issue 也可以关了。</p>
-
-<hr/>
-
+<hr>
 <p>在做静态资源异常监控时，也有类似的经历。</p>
-
 <p>静态资源监控最重要的是发现哪个页面引用了哪个 404资源，尤其是漏发的资源。因此最重要的有两个关联维度：</p>
-
 <ul>
 <li>404资源所在页面</li>
 <li>404资源文件地址</li>
 </ul>
-
 <p>但是引起 404 的场景很多，包括：</p>
-
 <ul>
 <li>漏发文件。</li>
 <li>静态引用地址错误。</li>
 <li>动态引用地址错误。</li>
 </ul>
-
 <p>其中动态引用是由于动态脚本计算得出的静态资源地址，引发的 404 非常频繁，多样、而且分布的很散。因此这两个维度的排列组合结果就非常巨大。而且我们的分析系统是基于索引的，这些内容不确定、数量庞大的指标非常不适合用这个系统分析。（我们还有另一个非常时候实时异常分析的系统，这里不做介绍）</p>
-
 <p>因此我们把重心放在更为稳定的页面 URL，只关注出现 404 的页面，至于是什么资源可以直接根据 URL 查询日志，或直接访问这个页面。</p>
-<h2 id="小结">小结</h2>
-<p>这篇讲的几个关键内容再强调下：</p>
-
+<h2 id="小结">小结</h2><p>这篇讲的几个关键内容再强调下：</p>
 <ul>
 <li>保持简单，保持拙朴。</li>
 <li>抓住重点，真正的核心重点。</li>
 </ul>
-
-<hr/>
-
+<hr>
 <p>终于可以睡了，晚安~</p>
 ]]>
         </content>
@@ -579,32 +530,24 @@ try/catch 异常处理流程进行，所以对业务本身没有影响。</p></l
         <updated>2013-08-22T00:00:00.000Z</updated>
         <id>http://blog.hotoo.me/post/weekly-topic-about-exceptions-6</id>
         <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <h2 id="背景">背景</h2>
-<p>早上收到比较重要的用户反馈说某个重要的系统的页面在 IE 浏览器中卡死，无法继续。</p>
-
-<p><img src="https://f.cloud.github.com/assets/143572/1007567/5214e9b4-0b0b-11e3-8d43-07d34947d198.png" alt="2013-08-22 5 14 01"/>
-<img src="https://f.cloud.github.com/assets/143572/1007568/523e63de-0b0b-11e3-85bd-b3adee635aef.png" alt="2013-08-22 5 14 25"/></p>
-
+            <![CDATA[ <h2 id="背景">背景</h2><p>早上收到比较重要的用户反馈说某个重要的系统的页面在 IE 浏览器中卡死，无法继续。</p>
+<p><img src="https://f.cloud.github.com/assets/143572/1007567/5214e9b4-0b0b-11e3-8d43-07d34947d198.png" alt="2013-08-22 5 14 01">
+<img src="https://f.cloud.github.com/assets/143572/1007568/523e63de-0b0b-11e3-85bd-b3adee635aef.png" alt="2013-08-22 5 14 25"></p>
 <p>问题很严重。</p>
-
 <p>系统比较特殊复杂，不是一般人能登录进去的。找到对应同学在小概率重现的情况下终于拿到了第一手的问题源码。</p>
-<h2 id="分析">分析</h2>
-<p>修改配置和采样率之后在本地跑起来，发现在 IE6 里非常有问题。</p>
-
+<h2 id="分析">分析</h2><p>修改配置和采样率之后在本地跑起来，发现在 IE6 里非常有问题。</p>
 <ol>
 <li>性能这么大的问题，首先想到的是页面中大面积扫描 HTML 代码的部分，但是注释掉这部分仍然没有改善。</li>
 <li>再次把整个回调处理函数注释掉，仍然没有改善。</li>
 <li>直接把加载后置脚本的 seajs.use 注释掉之后，终于没问题了。（坑爹的缓存问题就不说了，好久之后才发现，都是泪~）</li>
-<li>这么看来有两种可能：
-
-<ol>
+<li>这么看来有两种可能：<ol>
 <li>模块本身有性能问题。</li>
 <li>seajs 性能有问题（这个问题页面目前使用的 1.3.1）</li>
-</ol></li>
+</ol>
+</li>
 <li>首先考虑自身的问题。return 整个 factory，性能无问题，因此不是模块过多导致 seajs 性能问题。</li>
 <li><p>逐步修改 return 位置（其实可以打断点），终于发现问题出在 <a href="https://github.com/totorojs/monitor.js/blob/2.2.0/src/monitor.js#L23">初始化事件绑定函数部分</a>。</p>
-
-<!-- baseline:11 -->
+<p><!-- baseline:11 --></p>
 <div class="highlight"><pre><code class="javascript"><span class="comment">// 避免未引用先行脚本抛出异常。</span>
 <span class="keyword">if</span>(!win.monitor){
   M = win.monitor = {};
@@ -619,16 +562,14 @@ M.on = <span class="function"><span class="keyword">function</span><span class="
 };
 <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,l=_events.length; i&lt;l; i++){
   M.on(_events[i][<span class="number">0</span>], _events[i][<span class="number">1</span>]);
-}
-</code></pre></div></li>
-<li><p>此时 _events = undefined。访问 undefined.length 或其他属性会导致浏览器挂起？ IE6 还有这样的坑？</p></li>
-<li><p>新建一个最小代码的新页面，直接 <code>script[src]</code> 引入这个脚本没有问题，IE 会正常的抛出异常，不会挂起。</p></li>
-<li><p>动态创建 script 插入脚本，仍然不会挂起，正常抛出异常。</p></li>
-<li><p>奇怪。各种尝试，最终加入前置脚本后在这个最小重现代码中重现了异常。</p></li>
-<li><p>然后发现是在 window.onerror 中出现问题。</p></li>
-<li><p>继续发现的模拟调用栈信息的算法出现问题。</p></li>
+}</code></pre></div></li>
+<li>此时 _events = undefined。访问 undefined.length 或其他属性会导致浏览器挂起？ IE6 还有这样的坑？</li>
+<li>新建一个最小代码的新页面，直接 <code>script[src]</code> 引入这个脚本没有问题，IE 会正常的抛出异常，不会挂起。</li>
+<li>动态创建 script 插入脚本，仍然不会挂起，正常抛出异常。</li>
+<li>奇怪。各种尝试，最终加入前置脚本后在这个最小重现代码中重现了异常。</li>
+<li>然后发现是在 window.onerror 中出现问题。</li>
+<li>继续发现的模拟调用栈信息的算法出现问题。</li>
 </ol>
-
 <p>cmd 模块在 define 的 factory 中本身抛出异常，会被前置脚本的 window.onerror 捕获，捕获过程中尝试 <a href="https://github.com/totorojs/monitor.js/blob/2.2.0/src/seer.js#L66">还原函数调用栈</a>。模拟还原调用栈信息是通过 arguments.callee.caller 向上递归，直到找到函数调用的发起者。但是悲剧的是发现 seajs 这个调用栈是无穷无尽的：</p>
 <pre>at function(require, exports, module)
 at function runInModuleContext(fn, module)
@@ -658,14 +599,9 @@ at function preload(callback) |
 at function()                 |
 at function cb(module)        |
 at function onFetched()       |
-at function(fn)         ......-
-</pre>
-<p>这也就是为什么用户的浏览器会挂起的原因。</p>
-
-<hr/>
-<h3 id="小结">小结</h3>
-<p>用户浏览器被挂起，最终发现：</p>
-
+at function(fn)         ......-</pre><p>这也就是为什么用户的浏览器会挂起的原因。</p>
+<hr>
+<h3 id="小结">小结</h3><p>用户浏览器被挂起，最终发现：</p>
 <ul>
 <li>不是扫描整个文档的性能问题。</li>
 <li>不是 seajs 加载多个模块的性能问题。</li>
@@ -675,35 +611,25 @@ at function(fn)         ......-
 <li>这其实是 IE 的问题。</li>
 <li>好吧，最终还是我的问题。</li>
 </ul>
-<h2 id="监控脚本自身的-cmd-模块定义的异常是怎么出现的？">监控脚本自身的 cmd 模块定义的异常是怎么出现的？</h2>
-<p>monitor 2.2.0 新增了 <a href="https://github.com/totorojs/monitor.js/issues/18">事件机制</a>，支持监控任意的自定义数据。</p>
-
+<h2 id="监控脚本自身的-cmd-模块定义的异常是怎么出现的？">监控脚本自身的 cmd 模块定义的异常是怎么出现的？</h2><p>monitor 2.2.0 新增了 <a href="https://github.com/totorojs/monitor.js/issues/18">事件机制</a>，支持监控任意的自定义数据。</p>
 <p>其中在前置脚本中新增了 <code>monitor.on()</code> 方法，将自定义事件处理函数临时存储在 <code>monitor._EVENTS</code> 属性中 <a href="https://github.com/totorojs/monitor.js/blob/2.2.0/src/seer.js#L18">参考代码</a> 。后置脚本加载完成后，会复写 <code>monitor.on()</code> 方法，并将之前用户自定义事件处理函数绑定到对应事件，以使事件机制生效。</p>
-
 <p>这些理论上都是非常不错的设计思路。</p>
-
 <p>但是现实太残酷，全站公共区域被实际部署的情况有太复杂：</p>
-
 <ol>
 <li>有些系统没有完全引入前置脚本。</li>
 <li>有些系统仍然引用的老版本的前置脚本。</li>
 </ol>
-
 <p>后置脚本对于后面的这个场景没有考虑到，因此这段保险栓未能正确执行导致后续脚本报错。</p>
-<h2 id="为什么这个异常会到生产环境？">为什么这个异常会到生产环境？</h2>
-<p>都是我的错，没有考虑周全。没有考虑到这种特殊的系统部署环境，而且我也从来不能进去实际体验、验证。</p>
-<h2 id="如何处理这个异常？">如何处理这个异常？</h2>
-<ol>
+<h2 id="为什么这个异常会到生产环境？">为什么这个异常会到生产环境？</h2><p>都是我的错，没有考虑周全。没有考虑到这种特殊的系统部署环境，而且我也从来不能进去实际体验、验证。</p>
+<h2 id="如何处理这个异常？">如何处理这个异常？</h2><ol>
 <li>作为全站全局运行的代码，要详细评估考虑到各种系统变态的部署环境。</li>
-<li>打断循环调用栈
-
-<ol>
+<li>打断循环调用栈<ol>
 <li>限制监控的最大函数调用栈深度。</li>
 <li>对于已经调用的栈，不再深入递归，或现在递归次数（待评估，实际项目存在正常的递归或多次调用的代码。）</li>
-</ol></li>
 </ol>
-<h2 id="为什么-seajs-define-模块中报错会出现函数调用栈无限递归？">为什么 seajs define 模块中报错会出现函数调用栈无限递归？</h2>
-<p>这是 seajs 1.3.1 的 BUG，更准确的说，可能是 IE6,7,8闭包的问题。参考： <a href="https://github.com/seajs/seajs/issues/911">https://github.com/seajs/seajs/issues/911</a></p>
+</li>
+</ol>
+<h2 id="为什么-seajs-define-模块中报错会出现函数调用栈无限递归？">为什么 seajs define 模块中报错会出现函数调用栈无限递归？</h2><p>这是 seajs 1.3.1 的 BUG，更准确的说，可能是 IE6,7,8闭包的问题。参考： <a href="https://github.com/seajs/seajs/issues/911">https://github.com/seajs/seajs/issues/911</a></p>
 ]]>
         </content>
     </entry><entry>
@@ -717,52 +643,42 @@ at function(fn)         ......-
 <p>团购活动已经结束，但你仍然可以自行印制或购买<br/>
 团捐活动已经结束，但你仍然可以 <a href="http://www.vim.org/sponsor/index.php">自行捐助</a></p>
 </blockquote>
-
-<hr/>
-
+<hr>
 <blockquote>
 <p>本次活动有 41人参加，团购 Tee 47件。<br/>
 最终以 <a href="http://www.vim.org/account/profile.php?user_id=66604">@vimcn</a> 的身份
 捐赠 159欧元，实际人民币 1377.94元。<br/>
 参加团捐的同学请查收邮件并于 2013年10月份之前行使您的 Vim 新特性赞同或反对票。</p>
 </blockquote>
-
 <p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
-
 <ol>
 <li>增强 Python 支持；</li>
 <li>内置更快的正则表达式引擎；</li>
 <li>bugs fix.</li>
 </ol>
-
 <p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
 活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
-
 <!--more-->
-<h2 id="tee">Tee</h2>
-<ul>
+
+<h2 id="tee">Tee</h2><ul>
 <li>初步确定为 POLO 男款（店家没有专门的女款，抱歉 :( 如果你不介意，这款女生穿着也很帅 ：)）</li>
 <li>个人觉得需要适当增大胸前的胶印 LOGO。待讨论确定。</li>
 <li><p>增加个性袖标。</p>
-
 <blockquote>
 <p>:version<br/>
 VIM - Vi IMproved 7.4 (2013 Aug 10)<br/>
 @hotoo</p>
-</blockquote></li>
+</blockquote>
+</li>
 </ul>
-
 <p>由于袖标需要使用正确的时间，所以 Tee 的印刷需要在 Vim 正式发布之后。</p>
-
-<p><img src="http://img02.taobaocdn.com/bao/uploaded/i6/T1ziidXfXxXXXjwAs._113128.jpg_310x310.jpg" alt="vimtee-green"/>
-<img src="http://img02.taobaocdn.com/imgextra/i2/54677444/T21zBqXbxMXXXXXXXX_!!54677444.jpg_310x310.jpg" alt="vimtee-blue"/>
-<img src="http://img03.taobaocdn.com/imgextra/i3/54677444/T2BjJqXaBMXXXXXXXX_!!54677444.jpg_310x310.jpg" alt="vimtee-black"/></p>
-<h3 id="局部特写：">局部特写：</h3>
-<p><img src="http://img03.taobaocdn.com/imgextra/i3/54677444/T2EnXpXa0MXXXXXXXX_!!54677444.jpg" alt=""/></p>
-<h3 id="尺码：">尺码：</h3>
-<p>我个人喜欢穿稍微宽松的 Tee，一般会买大一号的，仅作参考 :)</p>
-
-<table><thead>
+<p><img src="http://img02.taobaocdn.com/bao/uploaded/i6/T1ziidXfXxXXXjwAs._113128.jpg_310x310.jpg" alt="vimtee-green">
+<img src="http://img02.taobaocdn.com/imgextra/i2/54677444/T21zBqXbxMXXXXXXXX_!!54677444.jpg_310x310.jpg" alt="vimtee-blue">
+<img src="http://img03.taobaocdn.com/imgextra/i3/54677444/T2BjJqXaBMXXXXXXXX_!!54677444.jpg_310x310.jpg" alt="vimtee-black"></p>
+<h3 id="局部特写：">局部特写：</h3><p><img src="http://img03.taobaocdn.com/imgextra/i3/54677444/T2EnXpXa0MXXXXXXXX_!!54677444.jpg" alt=""></p>
+<h3 id="尺码：">尺码：</h3><p>我个人喜欢穿稍微宽松的 Tee，一般会买大一号的，仅作参考 :)</p>
+<table>
+<thead>
 <tr>
 <th>通用款</th>
 <th>M</th>
@@ -770,60 +686,55 @@ VIM - Vi IMproved 7.4 (2013 Aug 10)<br/>
 <th>XL</th>
 <th>XXL</th>
 </tr>
-</thead><tbody>
+</thead>
+<tbody>
 <tr>
-<td>适合身高</td>
+<td> 适合身高</td>
 <td>165~170</td>
 <td>170~175</td>
 <td>175~180</td>
 <td>180~190</td>
 </tr>
 <tr>
-<td>胸围</td>
+<td> 胸围</td>
 <td>98</td>
 <td>104</td>
 <td>116</td>
 <td>121</td>
 </tr>
 <tr>
-<td>衣长</td>
+<td> 衣长</td>
 <td>67</td>
 <td>70</td>
 <td>75</td>
 <td>78</td>
 </tr>
 <tr>
-<td>肩宽</td>
+<td> 肩宽</td>
 <td>42</td>
 <td>45</td>
 <td>48</td>
 <td>50</td>
 </tr>
-</tbody></table>
-
-<hr/>
-
+</tbody>
+</table>
+<hr>
 <p><a href="http://www.freewear.org/?page=show_item&amp;id=FW0041">官方推荐的 Tee</a> 要 18.5欧元，
 将近 150元人民币，其中每件会捐助 3欧元（相当于24元人民币）给 Vim。
 相对来说很贵，而且还需要从国外运到国内，会麻烦很多（可能还需要关税）。</p>
-
 <p>所以组织在国内自印，会划算靠谱很多。这个 Tee 的质量更好，大概只需要其 2/3 的价格，
 就可以捐助给 Vim 多一倍的爱心。</p>
-<h2 id="捐助">捐助</h2>
-<p>每件 Tee 需要额外的 20元左右的人民币，以 vimcn 团队的身份捐助给 Vim 以帮助乌干达
+<h2 id="捐助">捐助</h2><p>每件 Tee 需要额外的 20元左右的人民币，以 vimcn 团队的身份捐助给 Vim 以帮助乌干达
 可怜的儿童。</p>
-<h2 id="报名">报名</h2>
-<ul>
+<h2 id="报名">报名</h2><ul>
 <li>每件 Tee 的价格在 65~70 元左右；</li>
 <li>快递费另外算。可以同城合并快递，线下认识下也不错。</li>
 <li>我可以代收杭州的部分。</li>
 <li>其他地区的同学如果同意被代收，我会随机选同城的一位同学代收。</li>
 </ul>
-
 <p>邮件发送以下内容到
 <a href="mailto:hotoo.cn+vimtee@gmail.com?subject=VimTee(2013)&body=%E5%B0%BA%E7%A0%81%EF%BC%9A%0A%E9%A2%9C%E8%89%B2%EF%BC%9A%0A%E8%A2%96%E6%A0%87%E4%BF%A1%E6%81%AF%EF%BC%9A%0A%E4%BB%B6%E6%95%B0%EF%BC%9A%0A%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F%EF%BC%88%E6%89%8B%E6%9C%BA%E6%88%96%E5%9B%BA%E8%AF%9D%EF%BC%89%EF%BC%9A%0A%E6%94%B6%E8%B4%A7%E4%BA%BA%E5%A7%93%E5%90%8D%EF%BC%9A%0A%E6%94%B6%E8%B4%A7%E5%9C%B0%E5%9D%80%E5%92%8C%E9%82%AE%E7%BC%96%EF%BC%9A%0A%0A%E6%98%AF%E5%90%A6%E5%90%8C%E6%84%8F%E5%90%8C%E5%9F%8E%E4%BB%A3%E6%94%B6%E6%88%96%E8%A2%AB%E4%BB%A3%E6%94%B6%EF%BC%9F%0A%E6%98%AF%E5%90%A6%E6%9C%89%E5%BF%85%E8%A6%81%E9%80%82%E5%BD%93%E5%A2%9E%E5%A4%A7%E8%83%B8%E5%89%8D%20LOGO%EF%BC%9F%0A%E8%A2%96%E6%A0%87%E5%8D%B0%E5%9C%A8%E5%B7%A6%E6%89%8B%E8%BF%98%E6%98%AF%E5%8F%B3%E6%89%8B%EF%BC%9F">hotoo.cn+vimtee[AT]gmail.com</a>
 （点击链接即可）</p>
-
 <blockquote>
 <p>尺码：<br/>
 颜色：军绿色|蓝色|黑色|白色<br/>
@@ -832,27 +743,18 @@ VIM - Vi IMproved 7.4 (2013 Aug 10)<br/>
 联系方式（手机或固话）：<br/>
 收货人姓名：<br/>
 收货地址和邮编：<br/></p>
-
 <p>是否同意同城代收或被代收？<br/>
 是否有必要适当增大胸前 LOGO？<br/>
 袖标印在左手还是右手？<br/></p>
 </blockquote>
-
 <p>报名截至时间：Vim 7.4 正式发布之日。</p>
-
 <p>费用待团购数量及折扣程度，和快递费用确定之后通知大家。</p>
-<h2 id="声明">声明</h2>
-<p>这是一次庆祝、纪念的活动，另外还兼有公益的团队捐助活动。</p>
-
+<h2 id="声明">声明</h2><p>这是一次庆祝、纪念的活动，另外还兼有公益的团队捐助活动。</p>
 <p>如果你对 Tee 的设计不满意，可以自行设计印制。你也可以以个人身份捐助 Vim。</p>
-<h2 id="有图有真相">有图有真相</h2>
-<p><img src="../../images/vimtee74.png" alt="vimtee74"/></p>
-
-<p><img src="../../images/vimtee74-logo.png" alt="vimtee74-logo"/></p>
-
-<p><img src="../../images/vimtee74@hotoo.png" alt="vimtee74@hotoo"/></p>
-<h2 id="vimtee-回顾">VimTee 回顾</h2>
-<ol>
+<h2 id="有图有真相">有图有真相</h2><p><img src="../../images/vimtee74.png" alt="vimtee74"></p>
+<p><img src="../../images/vimtee74-logo.png" alt="vimtee74-logo"></p>
+<p><img src="../../images/vimtee74@hotoo.png" alt="vimtee74@hotoo"></p>
+<h2 id="vimtee-回顾">VimTee 回顾</h2><ol>
 <li>2010年7月，Vim 7.3 发布的时候，我组织了一次
 <a href="http://blog.hotoo.me/post/vim73-tee.html">团购 VimTee</a> 的活动。</li>
 <li>2011年应邀又组织了一次 <a href="http://blog.hotoo.me/post/vim-tee-2.html">趣味 Vim Tee</a>
@@ -869,12 +771,9 @@ VIM - Vi IMproved 7.4 (2013 Aug 10)<br/>
         <updated>2013-05-22T00:00:00.000Z</updated>
         <id>http://blog.hotoo.me/post/javascript-exceptions-archives</id>
         <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <p><img src="/static/images/ie6-en.jpg" alt="IE6"/></p>
-
-<p><img src="/static/images/ie8.jpg" alt="IE8"/></p>
-
+            <![CDATA[ <p><img src="/static/images/ie6-en.jpg" alt="IE6"></p>
+<p><img src="/static/images/ie8.jpg" alt="IE8"></p>
 <p>作为前端工程师，看到上面的异常，我们该如何进行排查？</p>
-
 <ol>
 <li>根据异常所在文件及其异常所在行，找到引发异常的相关代码附近，
 对代码进行分析？</li>
@@ -887,58 +786,43 @@ VIM - Vi IMproved 7.4 (2013 Aug 10)<br/>
 <li>还是不行啊，急，在线等。</li>
 <li>然后就没有了然后。。。</li>
 </ol>
-
-<p><img src="/static/images/bugs.png" alt="bugs"/></p>
-
+<p><img src="/static/images/bugs.png" alt="bugs"></p>
 <!--more-->
 
-<hr/>
-
+<hr>
 <p>各位同学，我们在排查调试 JavaScript 异常时，是不是经常感觉到乏力呢？</p>
-
 <ul>
 <li>JavaScript 作为一门弱类型动态编程语言，在调试、排查异常方面一直都非常薄弱。</li>
 <li>客户端浏览器种类、版本、用户语言环境繁多，同样一个异常，在不同浏览器中表现和反馈都不同。</li>
 <li>尤其面对某某大牌浏览器厂商埋下高质量的坑，一般人还真没办法发现或解决。</li>
 <li>每个浏览器厂商的开发者文档或社区都是独立的，各种异常文档或分享散落各个社区或者个人博客中。</li>
 </ul>
-
 <p>凡此种种，我都觉得有必要建立这样的一套异常档案，他可以：</p>
-
 <ul>
 <li>对于已知或未知的 JavaScript 异常，都存档有对应的异常信息、场景上下文、源码片段、
 对应的分析说明、及核心异常代码演示。</li>
 <li>长久的存在，不因时间的流逝、博客的关闭、URL 的变更等等原因而消逝。</li>
 <li>开放，分享和交流每个人的异常分析经验，让异常分析经验和知识更为普及和提升。</li>
 </ul>
-
-<p><img src="/static/images/no_bugs.jpg" alt="bugs"/></p>
-
-<hr/>
-
+<p><img src="/static/images/no_bugs.jpg" alt="bugs"></p>
+<hr>
 <p>因此，我们在 Github 上初步建立了一个
 『 <a href="https://github.com/totorojs/javascript-exception-archives">JavaScript 异常档案</a> 』
 的开源项目。任何人都可以 fork、提交 issues、评论、邮件、或社区推广等各种方式来参与。</p>
-
 <p>等一下，你突然发现了这么一个页面：
 <a href="http://errors.totorojs.org/wiki/object-doesnot-support-this-property-or-method"><strong style="font-size:1.3em;font-weight:bolder;">对象不支持此属性或方法</strong></a>
 <a href="https://github.com/totorojs/javascript-exception-archives/blob/master/content/wiki/object-doesnot-support-this-property-or-method"><sub>@github</sub></a>
 这个页面里有这个异常在各个语种下的异常消息描述，同一个异常代码在不同浏览器里的
 详细分析，还有有血有肉的实际案例分析，关键代码，实际异常演示页，，，
 可能还很不完善，还需要我们一起来参与，但是泪奔的感觉有木有~</p>
-
-<hr/>
-
+<hr>
 <p>希望有一天：</p>
-
 <ul>
 <li>我们遇到的脚本异常都可以在这个档案中找到原因、解决或规避的方案。</li>
 <li>我们分析的脚本异常都可以出现在这个档案中以惠及他人。</li>
 </ul>
-
 <p>最良好的祝愿！</p>
-
-<p><img src="/static/images/exception.jpg" alt="bugs"/></p>
+<p><img src="/static/images/exception.jpg" alt="bugs"></p>
 ]]>
         </content>
     </entry><entry>
@@ -951,52 +835,39 @@ VIM - Vi IMproved 7.4 (2013 Aug 10)<br/>
             <![CDATA[ <blockquote>
 <p>代码是写给人看的，顺便给机器执行。[1]</p>
 </blockquote>
-<h2 id="引子">引子</h2>
-<p>上周有位前端同学周报里分享了段 for 循环的『好代码』：</p>
+<h2 id="引子">引子</h2><p>上周有位前端同学周报里分享了段 for 循环的『好代码』：</p>
 <div class="highlight"><pre><code class="javascript"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, item; item = list[i]; i++) {
   <span class="comment">// 将 ltem = list[i]当做条件判断语句，当i下标溢出时，返回undefined，循环结束</span>
   <span class="comment">// 居然省了一个变量呢～</span>
-}
-</code></pre></div>
-<p>这位同学是看了 jQuery 里类似下面这种用法之后做的这个分享：</p>
+}</code></pre></div><p>这位同学是看了 jQuery 里类似下面这种用法之后做的这个分享：</p>
 <div class="highlight"><pre><code class="javascript"><span class="comment">// If no nodeType, this is expected to be an array</span>
 <span class="keyword">for</span> ( ; (node = elem[i]); i++ ) {
     <span class="comment">// Do not traverse comment nodes</span>
     ret += getText( node );
-}
-</code></pre></div>
-<p>jQuery 还有不少地方使用这种用法，也有不少地方是传统的使用 length 方法。
+}</code></pre></div><p>jQuery 还有不少地方使用这种用法，也有不少地方是传统的使用 length 方法。
 但是 jQuery 这样用有其特定场景，需要正视。我回复说：</p>
-
 <ol>
 <li>如果数组项中有 0, false, null, undefined, &quot;&quot;，代码就出 bug 了。</li>
 <li>好像没看到少了变量，一定要少的话，典型的 for 写法也可以少（但是不推荐）。</li>
 <li>代码是写给人读的，顺便给机器执行。</li>
 <li>另外，对 list 本身有操作，尤其是长度有影响的操作要特别注意。</li>
 </ol>
-
 <p>我个人推荐下面这种写法：</p>
 <pre>for(var i=0,l=list.length; i&lt;l; i++){
   list[i]
 }
-</pre>
-<p>p.s. 使用 Vim snipMate 的同学可以参考
+
+</pre><p>p.s. 使用 Vim snipMate 的同学可以参考
 <a href="https://github.com/hotoo/snipmate.vim/blob/master/snippets/javascript.snippets#L56">javascript.snippet</a>
 这个代码片段模板。</p>
-
 <p>好了，使用溢出判断数组循环结束的讨论到此就结束了，但是好戏还在后头。</p>
-
 <p>由于 JavaScript 作用域的问题，有同学建议说将 <code>i</code>, <code>l</code> 变量定义在 <code>for</code> 循环之外。
 于是进入另一个变量定义的话题。</p>
-
 <!--more-->
 
-<hr/>
-<h2 id="如何定义块级作用域中使用的变量？">如何定义块级作用域中使用的变量？</h2>
-<p>持有变量应前置定义观点的同学，估计有不少是受了《JavaScript 权威指南》或其他权威著作的影响。</p>
-
+<hr>
+<h2 id="如何定义块级作用域中使用的变量？">如何定义块级作用域中使用的变量？</h2><p>持有变量应前置定义观点的同学，估计有不少是受了《JavaScript 权威指南》或其他权威著作的影响。</p>
 <p>《JavaScript 权威指南》第 4 章 4.3.1 小节 [2] 详细分析了块级作用域中变量定义的问题。</p>
-
 <p>由于 JavaScript 只有函数作用域，没有块级作用域，因此在 <code>for</code>, <code>if/else</code>,
 <code>do/while</code>, <code>switch/case</code>, <code>try/catch</code> 这些块中定义的变量，实际在块之外也可以使用。</p>
 <div class="highlight"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">functionScope</span><span class="params">()</span>{</span>
@@ -1005,32 +876,23 @@ VIM - Vi IMproved 7.4 (2013 Aug 10)<br/>
     }
     alert(i); <span class="comment">// 5</span>
     alert(blockVariable); <span class="comment">// 4</span>
-}
-</code></pre></div>
-<p>例如上面的代码，在 for 这个块之中定义的变量，在 for 之外也可以使用。
+}</code></pre></div><p>例如上面的代码，在 for 这个块之中定义的变量，在 for 之外也可以使用。
 这在其他支持块级作用域(如C/C++ [3], Java)的编程语言中是无法理解，甚至不可接受的。</p>
-
 <p>这是 JavaScript 设计的 BUG，书中作者建议将所有变量声明集中放置在函数开头，
 说这是个好习惯。</p>
-
 <blockquote>
 <p>This example illustrates why it is good programming practice to place all of
 your variable declarations together at the start of any function.</p>
 </blockquote>
-
 <p>JavaScript 传教士老道也有
-<a href="http://javascript.crockford.com/code.html#variable%20declarations">类似的教诲</a>：</p>
-
+[类似的教诲](<a href="http://javascript.crockford.com/code.html#variable">http://javascript.crockford.com/code.html#variable</a> declarations)：</p>
 <blockquote>
 <p>The var statements should be the first statements in the function body.</p>
-
 <p>...</p>
-
 <p>JavaScript does not have block scope, so defining variables in blocks can
 confuse programmers who are experienced with other C family languages.
 Define all variables at the top of the function.</p>
 </blockquote>
-
 <p>他们的理由是，既然在块级作用域之内定义的变量可以被块级作用域之外使用，
 那么就应该把变量定义在块级作用域之外，让它们看起来和它们实际的作用域表现一致。</p>
 <div class="highlight"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">functionScope</span><span class="params">()</span>{</span>
@@ -1041,63 +903,51 @@ Define all variables at the top of the function.</p>
     <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;l; i++){
         blockVariable = i;
     }
-}
-</code></pre></div>
-<hr/>
-
+}</code></pre></div><hr>
 <p>但是这个我稍微持不同的观点 ：）</p>
-
 <p>实际上我们定义 <code>i</code>, <code>l</code> 是为了给 <code>for</code> 用的，JavaScript 解释器在执行的时候可以
 给块级作用域外面用，不代表就应该定义在外面。
 定义在外面给人的暗示是这个变量是给整个 function 用的，而不只是 for 循环，
 就会给人『在外面用也没关系』的错觉。但这其实不是我们定义 <code>i</code>, <code>l</code> 的本意。</p>
-
 <p>另外变量前置声明，会导致变量声明、定义和使用之间分离，变量含义自我解释性被削弱，
 而且容易造成误清理、或遗漏清理变量的问题。</p>
-
 <p>对于 JavaScript 的这个糟粕，让人来适应机器的问题而修改代码，甚至改变本性习惯，
 和另一个使用逗号连续定义变量的话题是何其的相似。
 为什么不让机器来适应人，在编辑器中编辑、或在编译器中编译 JavaScript 代码时，
 发现块级作用域之外有使用块级作用域内部定义的变量时，给予恰当的警告。
 这是否更合理呢。</p>
-
 <p>如果遵循权威的教诲，把变量定义在函数前面，编辑器和编译器都没有办法帮我们了。</p>
-
 <p>我认为：</p>
-
 <ol>
 <li>定义在块级作用域之内的变量不应该被块级作用域之外使用。</li>
 <li><p>如果被块级作用域之外使用了：</p>
-
 <ol>
-<li>要么这是一个错误的用法，会带来隐患。<br/>
-<em>人、编辑器、编译器、甚至将来的解释器可以发现这个问题并给出警告。</em></li>
-<li>或者确实有这样的使用需求，那么这个变量应该被声明在块级作用域之外。</li>
-</ol></li>
+<li><p>要么这是一个错误的用法，会带来隐患。<br/>
+<em>人、编辑器、编译器、甚至将来的解释器可以发现这个问题并给出警告。</em></p>
+</li>
+<li><p>或者确实有这样的使用需求，那么这个变量应该被声明在块级作用域之外。</p>
+</li>
 </ol>
-
+</li>
+</ol>
 <p>所以我比较认同 <code>就近原则</code> [4] 这种更合理、更人性的风格。</p>
-
 <ul>
 <li>文档、注释应尽可能的靠近代码。</li>
 <li>变量声明应尽可能的靠近变量使用。</li>
 <li>应尽量限制变量的作用域。</li>
 </ul>
-<h2 id="那么">那么</h2>
-<p>请问你持什么样的观点呢？</p>
-
-<hr/>
-<h3 id="注">注</h3>
-<ol>
-<li>出自《Structure and Interpretation of Computer Programs》，中文版《计算机程序的构造和解释》
-&gt; Thus, programs must be written for people to read, and only incidentally
-&gt; for machines to execute.
-&gt;
-&gt; -- by Harold Abelson and Gerald Jay Sussman with Julie Sussman</li>
+<h2 id="那么">那么</h2><p>请问你持什么样的观点呢？</p>
+<hr>
+<h3 id="注">注</h3><ol>
+<li>出自《Structure and Interpretation of Computer Programs》，中文版《计算机程序的构造和解释》<blockquote>
+<p>Thus, programs must be written for people to read, and only incidentally
+for machines to execute.</p>
+<p>-- by Harold Abelson and Gerald Jay Sussman with Julie Sussman</p>
+</blockquote>
+</li>
 <li><p>《JavaScript 权威指南》第六版章节和标题有所变更。第六版对应章节在第 3 章
 第 3.10.1 小节：函数作用域和声明提前。
 第六版中，关于变量声明提前的结束语中相对中立了很多。</p>
-
 <blockquote>
 <p>In programming languages with block scope, it is generally good programming
 practice to declare variables as close as possible to where they are used and
@@ -1107,23 +957,23 @@ the function, rather than trying to declare them closer to the point at which
 they are used. This technique makes their source code accurately reflect the
 true scope of the variables.</p>
 </blockquote>
-
 <p>大意是说：<br/>
 在支持块级作用域的编程语言中，变量就近定义是一个非常好的编程实践。
 变量定义尽量靠近变量使用，变量尽量限制在最小的作用域之内。
 由于 JavaScript 没有块级作用域，一些程序员提出将变量定义在函数的顶部，
-而不是靠近使用变量的地方。这使得源码准确反映了其真正的作用域范围。</p></li>
+而不是靠近使用变量的地方。这使得源码准确反映了其真正的作用域范围。</p>
+</li>
 <li><p>早在 <a href="http://flash-gordon.me.uk/ansi.c.txt">C89 规范</a> 中，规定了变量必须声明在作用域的最前面，
 但是 <a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1336.pdf">C99</a>
 和 C++ 取消了这个限制，支持就近声明变量。</p>
-
 <p>由于就近声明可以让变量作用于恰当的作用域之中，而且变量声明更靠近变量的使用，
-因此也更容易理解。<code>就近原则</code> 在很多编程语言当中都是最佳实践，JavaScript 也不例外。</p></li>
-<li><p><a href="http://en.wikipedia.org/wiki/The_Proximity_Principle">就近原则(The Principle of Proximity)</a> 是一项社会心理学
+因此也更容易理解。<code>就近原则</code> 在很多编程语言当中都是最佳实践，JavaScript 也不例外。</p>
+</li>
+<li><a href="http://en.wikipedia.org/wiki/The_Proximity_Principle">就近原则(The Principle of Proximity)</a> 是一项社会心理学
 的理论，实际在 <a href="http://www.approxion.com/?p=120">计算机编程</a> 、
 <a href="http://desktoppub.about.com/od/designprinciples/tp/Principles_of_Design.htm">视觉设计</a> 、
 <a href="http://www.webdesignerdepot.com/2010/01/the-principle-of-proximity-in-web-design/">网页设计</a>
-领域也有很多的延伸与实践。</p></li>
+领域也有很多的延伸与实践。</li>
 </ol>
 ]]>
         </content>
@@ -1138,29 +988,21 @@ true scope of the variables.</p>
 转成可点击的链接，于是玉伯给 lifesinger.github.com Project 做了个 index.html
 页面：</p>
 <div class="highlight"><pre><code class="javascript">&lt;script&gt;
-  var id = parseInt(location.search.substring(1))
+  <span class="keyword">var</span> id = parseInt(location.search.substring(<span class="number">1</span>))
   location.replace(
-      'https://github.com/lifesinger/lifesinger.github.com/issues' +
-          (id ? '/' + id : '?labels=blog'))
-&lt;/script&gt;
-</code></pre></div>
-<p>然后就可以通过 <a href="http://lifesinger.github.com/?126">http://lifesinger.github.com/?126</a>
+      <span class="string">'https://github.com/lifesinger/lifesinger.github.com/issues'</span> +
+          (id ? <span class="string">'/'</span> + id : <span class="string">'?labels=blog'</span>))
+&lt;<span class="regexp">/script&gt;</span></code></pre></div><p>然后就可以通过 <a href="http://lifesinger.github.com/?126"><a href="http://lifesinger.github.com/?126">http://lifesinger.github.com/?126</a></a>
 这个链接来访问对应的 issues (玉伯的博客使用 Github 的 issues 管理发布)</p>
-
 <p>我看到这个 URL 第一感觉是不爽，立即想到可以用 404 页面来做路由跳转页，然后访问
 地址可以改成 <code>http://lifesinger.github.com/126</code> 这样。</p>
-
 <p>于是玉伯的分享完败，也为下一个我要做的分享加了分 XD</p>
-
 <p>今天仔细想了想，使用 404 页面做路由跳转的思路本身很不错，
 但是 <code>http://lifesinger.github.com/126</code> 这样的 URL 其实是不具有可扩展性的，
 也没有良好的语义性，而且也不是很好验证 URL 的业务合法性。于是可以改成如下：</p>
-
 <p><code>http://lifesinger.github.com/blog/126</code></p>
-
 <p>好了，根据 URL 前缀信息，404 页面可以扩展成你需要的任意路由跳转页，
 或者非路由的 404 原始页了。</p>
-
 <p>散花~</p>
 ]]>
         </content>
@@ -1173,57 +1015,41 @@ true scope of the variables.</p>
         <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <p>过年花掉不少钱，而其中有一部分是喜酒之类的礼金，按照礼尚往来的习俗，这些礼金
 早晚都是要被送回来的，而被送回来的途径，则是喜酒回请。</p>
-
 <p>这些俗礼，即使不是为了收回礼金，回请对方也是必须的。</p>
-
 <p>为了避免忘记吃过的酒席（前几年的都忘记差不多了），也为了对自己的资金有更清晰
 的掌握，于是开始记账。</p>
-
 <p>我现在用上了 Macbook Pro 和 iPhone，于是想找一个可以运行于 Mac OSX 和 iOS 平台
 的软件，两者同步数据是必须的要求。毕竟移动设备记账有很多的便利优势，而 PC 做
 更细致的管理与分析则更为方便和强大。</p>
-
 <!--more-->
-<h2 id="gnucash">GNUCash</h2>
-<p><a href="http://www.gnucash.org/">GNUCash</a> 非常有名，也是我最早知道的开源金融管理软件
+
+<h2 id="gnucash">GNUCash</h2><p><a href="http://www.gnucash.org/">GNUCash</a> 非常有名，也是我最早知道的开源金融管理软件
 之一，复式记账一直是我觉得很厉害但是又不明白的概念。后来看了一些金融相关不入门
 的信息，才有所了解。</p>
-
 <p>以前也在 Windows 下使用过 GNUCash，本身还是很不错的，但是当时我没有坚持下来。</p>
-
 <p>这次下载最新版回来在 Mac 上安装好之后发现，除了菜单之外，界面上中文全部是乱码，
 一行中文被缩挤到第一列。新建账户或者其他任何操作都是不知所以，完全没法用。
 最奇怪的是，网络上各个搜索引擎居然都搜索不到 GNUCash 乱码的内容，偶尔有一篇，
 还是将数据库的。原来 GNUCash 使用的是 MySQL 存储数据？</p>
-
 <p>GNUCash 目前支持 Windows, Mac, Linux, 和 Android 平台。</p>
-<h2 id="icash">iCash</h2>
-<p>后来看到有人推荐使用 <a href="http://www.maxprog.com/site/software/personal-finance/icash_sheet_us.php">iCash</a>，
+<h2 id="icash">iCash</h2><p>后来看到有人推荐使用 <a href="http://www.maxprog.com/site/software/personal-finance/icash_sheet_us.php">iCash</a>，
 Mac 下 <code>i</code> 系列的好像都不错，于是尝试了下。</p>
-
 <p>iCash 支持 Windows, Mac 平台，也有中文支持。</p>
-
 <p>但就是觉得操作不算便利，一大堆莫名其妙的表单，有些会自动根据后面的表单自动适配，
 不需要显示但居然安排在最前面，后来我才知道可以不填。</p>
-
 <p>界面有点点土，用户体验也不好。概览里管理资金账户，如果需要更新交易，则需要
 切换到『交易』页签，然后选择是哪个账户的交易。表单恐惧症~</p>
-
 <p>填了不到 50条左右（存储的 .icash 文件有 23.8M 这么大）就烦了，
 于是继续寻找其他软件。</p>
-<h2 id="money">Money</h2>
-<p>最后才找到 <a href="http://www.jumsoft.com/money/">Money by jumsoft</a> 界面设计非常赞，
+<h2 id="money">Money</h2><p>最后才找到 <a href="http://www.jumsoft.com/money/">Money by jumsoft</a> 界面设计非常赞，
 大部分使用体验也很棒，有部分瑕疵，而最要命的启动速度非常慢，导入从 iCash
 导出的 QIF 格式数据(.money 文件 500+KB) 启动时间大概需要 10秒。</p>
-
 <p>另外如果上次退出 Money 的时候没有打开的文档（每个 .money 文件是一个文档）的话，
 下次启动会要求创建新文档，只好打开最近的文档，再等 10秒钟。所以建议直接
 <code>&lt;Command-q&gt;</code> 退出文档 &amp; 程序，不要使用 <code>&lt;Command-w</code> 之类的关闭文档。</p>
-
 <p>另外还有 iOS(iPhone, iPad)版本，收费也不贵。可以通过 Wi-Fi 或 iCloud 同步数据。
 虽然呼声很高，目前还不支持 Dropbox 同步。不过像其他重要资料一样，我的 .money
 文件存储在 Dropbox 中。</p>
-
 <p>总之是很赞啦，如果解决了性能问题就更好了，还有就是缺少中文本地化，另外 Mac 版
 显示全部交易也不好，还有那啥~</p>
 ]]>
@@ -1235,68 +1061,57 @@ Mac 下 <code>i</code> 系列的好像都不错，于是尝试了下。</p>
         <updated>2013-02-13T00:00:00.000Z</updated>
         <id>http://blog.hotoo.me/post/start-jekyll-for-blog</id>
         <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <h2 id="posts-文件结构">_posts 文件结构</h2>
-<p>Jekyll 支持两种结构：</p>
-
+            <![CDATA[ <h2 id="posts-文件结构">_posts 文件结构</h2><p>Jekyll 支持两种结构：</p>
 <ol>
 <li>平铺所有文件，每个文件使用日期前缀。</li>
 <li>按照完整的日期目录结构。</li>
 </ol>
-<h2 id="静态链接-permalink">静态链接(Permalink)</h2>
-<p>我的个人博客并非用于发布新闻，即使非常旧的博客，也会不断更新维护，
+<h2 id="静态链接-permalink">静态链接(Permalink)</h2><p>我的个人博客并非用于发布新闻，即使非常旧的博客，也会不断更新维护，
 所以无需添加时间标识，直接使用 title 即可。</p>
-
 <p>如果需要多个版本，为避免出现冲突，可以在 title 中添加序号。如 <code>II</code> 或 <code>2</code>。</p>
-<h2 id="草稿-draft">草稿(Draft)</h2>
-<p>Jekyll 支持 <code>published</code> 标记，设置为 <code>false</code> 就可以避免被转换发布。
+<h2 id="草稿-draft">草稿(Draft)</h2><p>Jekyll 支持 <code>published</code> 标记，设置为 <code>false</code> 就可以避免被转换发布。
 这本身很不错，但是这些草稿和正常发布的文件混淆在一起，无法清晰区分。</p>
-
 <p>所以我创建了 <code>_draft</code> 目录，用于存放草稿。在文章准备好之后拷贝到 <code>_posts</code>
 目录即可。</p>
-
 <p>p.s. 话说相比 <code>published</code> 标记，我更喜欢 <code>draft</code>，如果支持的话。</p>
-<h2 id="more">more</h2>
-<p><a href="http://www.jacquesf.com/2011/03/creating-excerpts-in-jekyll-with-wordpress-style-more-html-comments/">Creating Excerpts in Jekyll with Wordpress-style &lt;!--more--&gt; HTML Comments</a></p>
-
+<h2 id="more">more</h2><p><a href="http://www.jacquesf.com/2011/03/creating-excerpts-in-jekyll-with-wordpress-style-more-html-comments/">Creating Excerpts in Jekyll with Wordpress-style &lt;!--more--&gt; HTML Comments</a></p>
 <!--more-->
-<h2 id="存档-archive">存档(Archive)</h2>
-<p><a href="https://gist.github.com/enaeher/88cda643aa7e3b0ca1e5">enaeher / tiered_archives.rb</a></p>
-<h2 id="目录-toc">目录(TOC)</h2>
-<p><a href="http://stackoverflow.com/questions/9602936/how-to-add-a-table-of-contents-to-jekyll-blog-post">http://stackoverflow.com/questions/9602936/how-to-add-a-table-of-contents-to-jekyll-blog-post</a>
+
+<h2 id="存档-archive">存档(Archive)</h2><p><a href="https://gist.github.com/enaeher/88cda643aa7e3b0ca1e5">enaeher / tiered_archives.rb</a></p>
+<h2 id="目录-toc">目录(TOC)</h2><p><a href="http://stackoverflow.com/questions/9602936/how-to-add-a-table-of-contents-to-jekyll-blog-post">http://stackoverflow.com/questions/9602936/how-to-add-a-table-of-contents-to-jekyll-blog-post</a>
 <a href="http://stackoverflow.com/questions/13481572/jekyll-automatic-table-of-contents">http://stackoverflow.com/questions/13481572/jekyll-automatic-table-of-contents</a>
 <a href="http://du1abadd.org/2010/usr/make_toc_support_for_jekyll_with_rdiscount.html">http://du1abadd.org/2010/usr/make_toc_support_for_jekyll_with_rdiscount.html</a></p>
 <h2 id="标签-tags">标签(Tags)</h2><h2 id="代码高亮">代码高亮</h2><h2 id="分页">分页</h2><pre>&lt;div class=&quot;pagination&quot;&gt;
   {.% if paginator.previous_page == 1 %}
-    &lt;a href=&quot;&#47;&quot; class=&quot;previous&quot;&gt;上一页&lt;&#47;a&gt;
+    &lt;a href=&quot;/&quot; class=&quot;previous&quot;&gt;上一页&lt;/a&gt;
   {.% else if paginator.previous_page %}
-    &lt;a href=&quot;&#47;page{.{paginator.previous_page}}&quot; class=&quot;previous&quot;&gt;上一页&lt;&#47;a&gt;
+    &lt;a href=&quot;/page{.{paginator.previous_page}}&quot; class=&quot;previous&quot;&gt;上一页&lt;/a&gt;
   {.% else %}
-    &lt;span class=&quot;previous&quot;&gt;上一页&lt;&#47;span&gt;
+    &lt;span class=&quot;previous&quot;&gt;上一页&lt;/span&gt;
   {.% endif %}
-  &lt;span class=&quot;page_number&quot;&gt;页码：{.{paginator.page}} &#47; {.{paginator.total_pages}}&lt;&#47;span&gt;
+  &lt;span class=&quot;page_number&quot;&gt;页码：{.{paginator.page}} / {.{paginator.total_pages}}&lt;/span&gt;
   {.% if paginator.next_page %}
-    &lt;a href=&quot;&#47;page{.{paginator.next_page}}&quot; class=&quot;next&quot;&gt;下一页&lt;&#47;a&gt;
+    &lt;a href=&quot;/page{.{paginator.next_page}}&quot; class=&quot;next&quot;&gt;下一页&lt;/a&gt;
   {.% else %}
-    &lt;span class=&quot;next&quot;&gt;下一页&lt;&#47;span&gt;
+    &lt;span class=&quot;next&quot;&gt;下一页&lt;/span&gt;
   {.% endif %}
-&lt;&#47;div&gt;
-</pre><h3 id="参考：">参考：</h3>
-<ul>
+&lt;/div&gt;
+
+</pre><h3 id="参考：">参考：</h3><ul>
 <li><a href="http://jeffreysambells.com/2013/02/01/jekyll-draft-publishing-plugin">Jekyll Draft Publishing Plugin</a></li>
 <li><a href="http://tqcblog.com/2012/08/22/jekyll-drafts/">Jekyll Draft Posts</a></li>
 </ul>
-<h2 id="与-vimwiki-结合">与 Vimwiki 结合</h2>
-<p>之前的博客使用 Vimwiki 管理，可以无需转换或发布，直接使用 Vim 即可简单浏览。</p>
+<h2 id="与-vimwiki-结合">与 Vimwiki 结合</h2><p>之前的博客使用 Vimwiki 管理，可以无需转换或发布，直接使用 Vim 即可简单浏览。</p>
 <pre>let g:vimwiki_list = [
   \ {
-    \ &#39;path&#39;        : &#39;~&#47;Dropbox&#47;blog.hotoo.me&#47;_posts&#39;,
+    \ &#39;path&#39;        : &#39;~/Dropbox/blog.hotoo.me/_posts&#39;,
     \ &#39;index&#39;       : &#39;_index&#39;,
     \ &#39;ext&#39;         : &#39;.md&#39;,
     \ &#39;nested_syntaxes&#39; : {&#39;javascript&#39;: &#39;javascript&#39;, &#39;python&#39;: &#39;python&#39;, &#39;c++&#39;: &#39;cpp&#39;}
   \ }
 \]
-</pre><h2 id="不足">不足</h2>
-<p><code>_posts/*.md</code> 文档理论上只会作为内容输出，其中的代码（尤其是 Jekyll 使用的模板
+
+</pre><h2 id="不足">不足</h2><p><code>_posts/*.md</code> 文档理论上只会作为内容输出，其中的代码（尤其是 Jekyll 使用的模板
 代码，及其 <code>pre &gt; code</code> 中的代码，应该合理转义处理。但是实际上 Jekyll 没有这样
 做，导致一些代码没有符合期望。</p>
 ]]>
@@ -1308,32 +1123,27 @@ Mac 下 <code>i</code> 系列的好像都不错，于是尝试了下。</p>
         <updated>2012-10-31T00:00:00.000Z</updated>
         <id>http://blog.hotoo.me/post/macvim-svndiff</id>
         <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <h2 id="对于终端的-vim">对于终端的 vim</h2>
-<ol>
+            <![CDATA[ <h2 id="对于终端的-vim">对于终端的 vim</h2><ol>
 <li><p><code>~/.subversion/config</code></p>
 <pre>[helpers]
-diff-cmd = &#47;usr&#47;local&#47;bin&#47;svndiff
-</pre></li>
+diff-cmd = /usr/local/bin/svndiff</pre></li>
 <li><p>将下面的代码保存为 svndiff：</p>
-<pre>#!&#47;bin&#47;sh
+<pre>#!/bin/sh
 
-DIFF=&quot;&#47;usr&#47;bin&#47;vimdiff&quot;
+DIFF=&quot;/usr/bin/vimdiff&quot;
 LEFT=${6}
 RIGHT=${7}
-$DIFF $LEFT $RIGHT
-</pre></li>
+$DIFF $LEFT $RIGHT</pre></li>
 <li><p>拷贝到 <code>/usr/local/bin/svndiff</code> 并设置权限：</p>
-<pre>sudo chmod +a &#47;usr&#47;local&#47;bin&#47;svndiff
-</pre></li>
+<pre>sudo chmod +a /usr/local/bin/svndiff</pre></li>
 </ol>
-<h2 id="对于-macvim">对于 MacVim</h2>
-<p>修改 <code>/usr/local/bin/svndiff</code> 内容如下：</p>
-<pre>#!&#47;bin&#47;bash
+<h2 id="对于-macvim">对于 MacVim</h2><p>修改 <code>/usr/local/bin/svndiff</code> 内容如下：</p>
+<pre>#!/bin/bash
 
 LEFT=${6}
 RIGHT=${7}
-TMPLEFT=&quot;&#47;tmp&#47;${LEFT##*&#47;}.$$&quot;
-TMPRIGHT=&quot;&#47;tmp&#47;${RIGHT##*&#47;}.$$&quot;
+TMPLEFT=&quot;/tmp/${LEFT##*/}.$$&quot;
+TMPRIGHT=&quot;/tmp/${RIGHT##*/}.$$&quot;
 
 cp &quot;$LEFT&quot; &quot;$TMPLEFT&quot;
 cp &quot;$RIGHT&quot; &quot;$TMPRIGHT&quot;
@@ -1347,22 +1157,14 @@ until [ &quot;$SN&quot; == &quot;SVNDIFF&quot; ]; do
   SN=`mvim --serverlist | grep &quot;SVNDIFF&quot;`
 done
 
-rm -f &quot;$TMPLEFT&quot; &quot;$TMPRIGHT&quot;
-</pre>
-<p>之前尝试过修改终端方案中的</p>
-<pre>DIFF=&quot;&#47;usr&#47;bin&#47;vimdiff&quot;
-</pre>
-<p>为：</p>
-<pre>DIFF=&quot;gvim -d&quot;
-</pre>
-<p>未遂，右侧的代码会为空。</p>
-<h2 id="see-also">See Also</h2>
-<ul>
-<li><a href="http://twitter.com/ntakushima/statuses/27518378028">svn diffの結果をMacVimで。</a>
-
-<ul>
+rm -f &quot;$TMPLEFT&quot; &quot;$TMPRIGHT&quot;</pre><p>之前尝试过修改终端方案中的</p>
+<pre>DIFF=&quot;/usr/bin/vimdiff&quot;</pre><p>为：</p>
+<pre>DIFF=&quot;gvim -d&quot;</pre><p>未遂，右侧的代码会为空。</p>
+<h2 id="see-also">See Also</h2><ul>
+<li><a href="http://twitter.com/ntakushima/statuses/27518378028">svn diffの結果をMacVimで。</a><ul>
 <li><a href="https://gist.github.com/629457">diffwrap.sh</a></li>
-</ul></li>
+</ul>
+</li>
 </ul>
 ]]>
         </content>
@@ -1373,14 +1175,10 @@ rm -f &quot;$TMPLEFT&quot; &quot;$TMPRIGHT&quot;
         <updated>2012-10-28T00:00:00.000Z</updated>
         <id>http://blog.hotoo.me/post/vim-install-tagbar</id>
         <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <pre>git clone https:&#47;&#47;github.com&#47;mozilla&#47;doctorjs.git –recursive
+            <![CDATA[ <pre>git clone https://github.com/mozilla/doctorjs.git –recursive
 cd doctorjs
-sudo make install
-</pre>
-<p>会提示将 NODE_PATH 加入到环境变量 ~/.bash_profile ：</p>
-<pre>export NODE_PATH=&#47;usr&#47;local&#47;lib&#47;jsctags&#47;:$NODE_PATH
-</pre><h2 id="see-also">See Also</h2>
-<ul>
+sudo make install</pre><p>会提示将 NODE_PATH 加入到环境变量 ~/.bash_profile ：</p>
+<pre>export NODE_PATH=/usr/local/lib/jsctags/:$NODE_PATH</pre><h2 id="see-also">See Also</h2><ul>
 <li><a href="http://majutsushi.github.com/tagbar/">Tagbar</a></li>
 <li><a href="https://github.com/majutsushi/tagbar/wiki">Support for additional filetypes</a></li>
 <li><a href="http://ahchoo.me/blog/2012/03/08/learn-vim-3-post/">Vim学习 Jsctags</a></li>
@@ -1401,14 +1199,11 @@ sudo make install
             <![CDATA[ <p>从驴友哪里知道杭州附近有个无人村，网上看了帖子盘山公路很风景都很吸引人，
 但是地图山就是搜索不到在哪里，后来才知道地图上是狮山村，大概是后来没有人住了
 才被大家称为无人村的。</p>
-
 <p>骑行路线：</p>
-
 <p><iframe width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
   src="https://ditu.google.com/maps/ms?msa=0&amp;msid=201867621321994349317.0004ccf3731b6db4167b5&amp;brcurrent=3,0x344bb629439aaa99:0xa7bfd183824de83a,0%3B5,0,0&amp;ie=UTF8&amp;t=h&amp;ll=30.123883,120.152439&amp;spn=0.296055,0.075098&amp;output=embed">
 </iframe><br /><small>View <a href="https://ditu.google.com/maps/ms?msa=0&amp;msid=201867621321994349317.0004ccf3731b6db4167b5&amp;brcurrent=3,0x344bb629439aaa99:0xa7bfd183824de83a,0%3B5,0,0&amp;ie=UTF8&amp;t=h&amp;ll=30.123883,120.152439&amp;spn=0.296055,0.075098&amp;source=embed"
     style="color:#0000FF;text-align:left">狮山村（无人村）</a> in a larger map</small></p>
-
 <p>其他同学都有事没能一起，只有一个测试好基友 <a href="http://weibo.com/n/peacefulgoose">@peacefulgoose</a> 一起。</p>
 ]]>
         </content>
@@ -1420,9 +1215,7 @@ sudo make install
         <id>http://blog.hotoo.me/post/logical-conjunction</id>
         <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <p>一直很想实现 WebForms2 的语义化表单验证，最近才开始动手，执行力真差啊。</p>
-
 <p>一个表单元素可以同时存在多种校验方案，比如：</p>
-
 <ul>
 <li>required.</li>
 <li>data type: number, date, url, email...</li>
@@ -1431,7 +1224,6 @@ sudo make install
 <li>用户自定义验证函数。</li>
 <li>异步访问服务器进行业务校验。</li>
 </ul>
-
 <p>通常可以通过逻辑判断进行处理：</p>
 <div class="highlight"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">verifyFormInput</span><span class="params">(input)</span>{</span>
   <span class="keyword">if</span>(!verifyRequired()){<span class="keyword">return</span> <span class="literal">false</span>;}
@@ -1459,31 +1251,21 @@ sudo make install
         <span class="keyword">if</span>(!flags[i]){<span class="keyword">return</span> <span class="literal">false</span>;}
     }
     <span class="keyword">return</span> <span class="literal">true</span>;
-}
-</code></pre></div>
-<p>实际代码中，各个 <code>verifyXXX</code> 函数可能内联在 <code>verifyFormInput</code> 函数中，
+}</code></pre></div><p>实际代码中，各个 <code>verifyXXX</code> 函数可能内联在 <code>verifyFormInput</code> 函数中，
 代码显得多而有点乱，甚至有点冗余。</p>
-
 <p>想起模拟电路课程上学到的『与门』，只有所有电路都是通路时，整个电路才是通路。</p>
-
 <p>而表单验证也是这样：</p>
-
 <ul>
 <li>某个表单元素的所有验证逻辑都通过验证时，这个表单元素才算通过验证。</li>
 <li>整个表单的所有表单元素都通过验证时，才算这个表单通过验证。</li>
 </ul>
-
 <p>同时基于『逻辑与』表达式的语言特性，一旦前面的条件可以判断逻辑失败，立即返回
 失败，不再进行后面的条件判断。</p>
-
 <p>LogicalANDExpression:</p>
-
 <blockquote>
 <p><em>Semantics</em></p>
-
 <p>The production LogicalANDExpression : LogicalANDExpression &amp;&amp;
 BitwiseORExpression is evaluated as follows:</p>
-
 <ol>
 <li>Evaluate LogicalANDExpression.</li>
 <li>Call GetValue(Result(1)).</li>
@@ -1494,15 +1276,11 @@ BitwiseORExpression is evaluated as follows:</p>
 <li>Return Result(6).</li>
 </ol>
 </blockquote>
-
 <p>BitwiseORExpression:</p>
-
 <blockquote>
-<p><em>Semantics</em></p>
-
-<p>The production A : A@B, where @ is one of the bitwise operators in the
+<p>  <em>Semantics</em></p>
+<p>  The production A : A@B, where @ is one of the bitwise operators in the
   productions above, is evaluated as follows:</p>
-
 <ol>
 <li>Evaluate A.</li>
 <li>Call GetValue(Result(1)).</li>
@@ -1515,7 +1293,6 @@ a signed 32 bit integer.</li>
 <li>Return Result(7).</li>
 </ol>
 </blockquote>
-
 <p>于是验证算法改良如下：</p>
 <div class="highlight"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">verifyFormInput</span><span class="params">(input)</span>{</span>
     <span class="keyword">var</span> certified = <span class="literal">true</span>;
@@ -1541,48 +1318,14 @@ a signed 32 bit integer.</li>
         certified = certified &amp;&amp; flag;
     }
     <span class="keyword">return</span> certified;
-}
-</code></pre></div><h2 id="延伸">延伸</h2>
-<p>以前也 Hack 的用过逻辑与表达式，比如：</p>
-<div class="highlight"><pre><code class="javascript">flag &amp;&amp; action();
-</code></pre></div>
-<p>但这个用法只是用到了条件判断的作用，类似于：</p>
-<div class="highlight"><pre><code class="javascript"><span class="keyword">if</span>(flag){action();}
-</code></pre></div><h2 id="参考阅读">参考阅读</h2>
-<ul>
+}</code></pre></div><h2 id="延伸">延伸</h2><p>以前也 Hack 的用过逻辑与表达式，比如：</p>
+<div class="highlight"><pre><code class="javascript">flag &amp;&amp; action();</code></pre></div><p>但这个用法只是用到了条件判断的作用，类似于：</p>
+<div class="highlight"><pre><code class="javascript"><span class="keyword">if</span>(flag){action();}</code></pre></div><h2 id="参考阅读">参考阅读</h2><ul>
 <li><a href="http://www.ecmascript.org/">ECMAScript</a></li>
 <li><a href="http://zh.wikipedia.org/wiki/%E9%80%BB%E8%BE%91%E4%B8%8E">逻辑与</a>
 <a href="http://en.wikipedia.org/wiki/Logical_conjunction">Logical_conjunction</a></li>
 <li><a href="http://zh.wikipedia.org/wiki/%E4%B8%8E%E9%97%A8">与门</a>
 <a href="http://en.wikipedia.org/wiki/AND_gate">AND_gate</a></li>
-</ul>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[千里走单骑]]></title>
-        <link href="http://blog.hotoo.me/post/bicycle-travel"/>
-        <published>2012-04-02T00:00:00.000Z</published>
-        <updated>2012-04-02T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/bicycle-travel</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <p>今天和 5 个同事一起从公司出发，骑车去径山寺。</p>
-<h2 id="路线-amp-定位">路线&amp;定位</h2>
-<ul>
-<li>Google Maps for iPhone.
-可以自动搜索匹配路线，参考价值还是很高的。</li>
-<li>Google Maps 手机 Web 版(iPhone)
-这个不错，支持 My Places。就是每次动作都可能下载数据会比较费流量，体验也相对下降。</li>
-<li><a href="http://itunes.apple.com/us/app/my-maps-editor/id389114621?mt=8">My Maps Editor</a>
-支持 Google Maps My Places，但是对于用 Google Maps 自动搜索到的路线，保存到
-My Places 的数据，这个支持还不行，会被拉成直线。</li>
-<li><a href="http://itunes.apple.com/us/app/my-place-for-google-maps/id492861440?mt=8">My Place for Google Maps</a>
-这个就垃圾了，纯粹骗钱偷窃的货，又不要脸又没种。</li>
-</ul>
-<h2 id="参考">参考</h2>
-<ul>
-<li><a href="http://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E9%99%86%E8%B7%AF%E8%BE%B9%E5%A2%83%E5%8F%A3%E5%B2%B8%E5%88%97%E8%A1%A8">中国陆路边境口岸列表</a></li>
-<li><a href="http://www.withbike.com/article/51-475.html">杭州及周边骑行路线集</a></li>
-<li><a href="http://www.51766.com/img/jingshansi/">余杭径山寺</a></li>
 </ul>
 ]]>
         </content>

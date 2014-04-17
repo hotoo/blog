@@ -42,15 +42,10 @@
   <div id="content" class="document">
 <div class="hentry">
   <h1 class="entry-title">在 Vim 上安装使用 Tagbar</h1>
-  <div class="entry-content"><div class="highlight"><div class="codes"><div class="code"><pre>git clone https:&#47;&#47;github.com&#47;mozilla&#47;doctorjs.git –recursive
+  <div class="entry-content"><div class="highlight"><div class="codes"><div class="code"><pre>git clone https://github.com/mozilla/doctorjs.git –recursive
 cd doctorjs
-sudo make install
-</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
-<a name="L1-2" href="#L1-2">2</a>
-<a name="L1-3" href="#L1-3">3</a></pre></div></div>
-<p>会提示将 NODE_PATH 加入到环境变量 ~/.bash_profile ：</p><div class="highlight"><div class="codes"><div class="code"><pre>export NODE_PATH=&#47;usr&#47;local&#47;lib&#47;jsctags&#47;:$NODE_PATH
-</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div><h2 id="see-also">See Also</h2>
-<ul>
+sudo make install</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a></pre></div></div><p>会提示将 NODE_PATH 加入到环境变量 ~/.bash_profile ：</p><div class="highlight"><div class="codes"><div class="code"><pre>export NODE_PATH=/usr/local/lib/jsctags/:$NODE_PATH</pre></div><pre class="line"></pre></div></div><h2 id="see-also">See Also</h2><ul>
 <li><a href="http://majutsushi.github.com/tagbar/">Tagbar</a></li>
 <li><a href="https://github.com/majutsushi/tagbar/wiki">Support for additional filetypes</a></li>
 <li><a href="http://ahchoo.me/blog/2012/03/08/learn-vim-3-post/">Vim学习 Jsctags</a></li>

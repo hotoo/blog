@@ -42,51 +42,42 @@
   <div id="content" class="document">
 <div class="hentry">
   <h1 class="entry-title">迁移博客到 Jekyll</h1>
-  <div class="entry-content"><h2 id="posts-文件结构">_posts 文件结构</h2>
-<p>Jekyll 支持两种结构：</p>
-
+  <div class="entry-content"><h2 id="posts-文件结构">_posts 文件结构</h2><p>Jekyll 支持两种结构：</p>
 <ol>
 <li>平铺所有文件，每个文件使用日期前缀。</li>
 <li>按照完整的日期目录结构。</li>
 </ol>
-<h2 id="静态链接-permalink">静态链接(Permalink)</h2>
-<p>我的个人博客并非用于发布新闻，即使非常旧的博客，也会不断更新维护，
+<h2 id="静态链接-permalink">静态链接(Permalink)</h2><p>我的个人博客并非用于发布新闻，即使非常旧的博客，也会不断更新维护，
 所以无需添加时间标识，直接使用 title 即可。</p>
-
 <p>如果需要多个版本，为避免出现冲突，可以在 title 中添加序号。如 <code>II</code> 或 <code>2</code>。</p>
-<h2 id="草稿-draft">草稿(Draft)</h2>
-<p>Jekyll 支持 <code>published</code> 标记，设置为 <code>false</code> 就可以避免被转换发布。
+<h2 id="草稿-draft">草稿(Draft)</h2><p>Jekyll 支持 <code>published</code> 标记，设置为 <code>false</code> 就可以避免被转换发布。
 这本身很不错，但是这些草稿和正常发布的文件混淆在一起，无法清晰区分。</p>
-
 <p>所以我创建了 <code>_draft</code> 目录，用于存放草稿。在文章准备好之后拷贝到 <code>_posts</code>
 目录即可。</p>
-
 <p>p.s. 话说相比 <code>published</code> 标记，我更喜欢 <code>draft</code>，如果支持的话。</p>
-<h2 id="more">more</h2>
-<p><a href="http://www.jacquesf.com/2011/03/creating-excerpts-in-jekyll-with-wordpress-style-more-html-comments/">Creating Excerpts in Jekyll with Wordpress-style &lt;!--more--&gt; HTML Comments</a></p>
-
+<h2 id="more">more</h2><p><a href="http://www.jacquesf.com/2011/03/creating-excerpts-in-jekyll-with-wordpress-style-more-html-comments/">Creating Excerpts in Jekyll with Wordpress-style &lt;!--more--&gt; HTML Comments</a></p>
 <a name="more"></a>
-<h2 id="存档-archive">存档(Archive)</h2>
-<p><a href="https://gist.github.com/enaeher/88cda643aa7e3b0ca1e5">enaeher / tiered_archives.rb</a></p>
-<h2 id="目录-toc">目录(TOC)</h2>
-<p><a href="http://stackoverflow.com/questions/9602936/how-to-add-a-table-of-contents-to-jekyll-blog-post">http://stackoverflow.com/questions/9602936/how-to-add-a-table-of-contents-to-jekyll-blog-post</a>
+
+<h2 id="存档-archive">存档(Archive)</h2><p><a href="https://gist.github.com/enaeher/88cda643aa7e3b0ca1e5">enaeher / tiered_archives.rb</a></p>
+<h2 id="目录-toc">目录(TOC)</h2><p><a href="http://stackoverflow.com/questions/9602936/how-to-add-a-table-of-contents-to-jekyll-blog-post">http://stackoverflow.com/questions/9602936/how-to-add-a-table-of-contents-to-jekyll-blog-post</a>
 <a href="http://stackoverflow.com/questions/13481572/jekyll-automatic-table-of-contents">http://stackoverflow.com/questions/13481572/jekyll-automatic-table-of-contents</a>
 <a href="http://du1abadd.org/2010/usr/make_toc_support_for_jekyll_with_rdiscount.html">http://du1abadd.org/2010/usr/make_toc_support_for_jekyll_with_rdiscount.html</a></p>
 <h2 id="标签-tags">标签(Tags)</h2><h2 id="代码高亮">代码高亮</h2><h2 id="分页">分页</h2><div class="highlight"><div class="codes"><div class="code"><pre>&lt;div class=&quot;pagination&quot;&gt;
   {.% if paginator.previous_page == 1 %}
-    &lt;a href=&quot;&#47;&quot; class=&quot;previous&quot;&gt;上一页&lt;&#47;a&gt;
+    &lt;a href=&quot;/&quot; class=&quot;previous&quot;&gt;上一页&lt;/a&gt;
   {.% else if paginator.previous_page %}
-    &lt;a href=&quot;&#47;page{.{paginator.previous_page}}&quot; class=&quot;previous&quot;&gt;上一页&lt;&#47;a&gt;
+    &lt;a href=&quot;/page{.{paginator.previous_page}}&quot; class=&quot;previous&quot;&gt;上一页&lt;/a&gt;
   {.% else %}
-    &lt;span class=&quot;previous&quot;&gt;上一页&lt;&#47;span&gt;
+    &lt;span class=&quot;previous&quot;&gt;上一页&lt;/span&gt;
   {.% endif %}
-  &lt;span class=&quot;page_number&quot;&gt;页码：{.{paginator.page}} &#47; {.{paginator.total_pages}}&lt;&#47;span&gt;
+  &lt;span class=&quot;page_number&quot;&gt;页码：{.{paginator.page}} / {.{paginator.total_pages}}&lt;/span&gt;
   {.% if paginator.next_page %}
-    &lt;a href=&quot;&#47;page{.{paginator.next_page}}&quot; class=&quot;next&quot;&gt;下一页&lt;&#47;a&gt;
+    &lt;a href=&quot;/page{.{paginator.next_page}}&quot; class=&quot;next&quot;&gt;下一页&lt;/a&gt;
   {.% else %}
-    &lt;span class=&quot;next&quot;&gt;下一页&lt;&#47;span&gt;
+    &lt;span class=&quot;next&quot;&gt;下一页&lt;/span&gt;
   {.% endif %}
-&lt;&#47;div&gt;
+&lt;/div&gt;
+
 </pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
@@ -101,20 +92,20 @@
 <a name="L1-12" href="#L1-12">12</a>
 <a name="L1-13" href="#L1-13">13</a>
 <a name="L1-14" href="#L1-14">14</a>
-<a name="L1-15" href="#L1-15">15</a></pre></div></div><h3 id="参考：">参考：</h3>
-<ul>
+<a name="L1-15" href="#L1-15">15</a>
+<a name="L1-16" href="#L1-16">16</a></pre></div></div><h3 id="参考：">参考：</h3><ul>
 <li><a href="http://jeffreysambells.com/2013/02/01/jekyll-draft-publishing-plugin">Jekyll Draft Publishing Plugin</a></li>
 <li><a href="http://tqcblog.com/2012/08/22/jekyll-drafts/">Jekyll Draft Posts</a></li>
 </ul>
-<h2 id="与-vimwiki-结合">与 Vimwiki 结合</h2>
-<p>之前的博客使用 Vimwiki 管理，可以无需转换或发布，直接使用 Vim 即可简单浏览。</p><div class="highlight"><div class="codes"><div class="code"><pre>let g:vimwiki_list = [
+<h2 id="与-vimwiki-结合">与 Vimwiki 结合</h2><p>之前的博客使用 Vimwiki 管理，可以无需转换或发布，直接使用 Vim 即可简单浏览。</p><div class="highlight"><div class="codes"><div class="code"><pre>let g:vimwiki_list = [
   \ {
-    \ &#39;path&#39;        : &#39;~&#47;Dropbox&#47;blog.hotoo.me&#47;_posts&#39;,
+    \ &#39;path&#39;        : &#39;~/Dropbox/blog.hotoo.me/_posts&#39;,
     \ &#39;index&#39;       : &#39;_index&#39;,
     \ &#39;ext&#39;         : &#39;.md&#39;,
     \ &#39;nested_syntaxes&#39; : {&#39;javascript&#39;: &#39;javascript&#39;, &#39;python&#39;: &#39;python&#39;, &#39;c++&#39;: &#39;cpp&#39;}
   \ }
 \]
+
 </pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
@@ -122,8 +113,8 @@
 <a name="L2-5" href="#L2-5">5</a>
 <a name="L2-6" href="#L2-6">6</a>
 <a name="L2-7" href="#L2-7">7</a>
-<a name="L2-8" href="#L2-8">8</a></pre></div></div><h2 id="不足">不足</h2>
-<p><code>_posts/*.md</code> 文档理论上只会作为内容输出，其中的代码（尤其是 Jekyll 使用的模板
+<a name="L2-8" href="#L2-8">8</a>
+<a name="L2-9" href="#L2-9">9</a></pre></div></div><h2 id="不足">不足</h2><p><code>_posts/*.md</code> 文档理论上只会作为内容输出，其中的代码（尤其是 Jekyll 使用的模板
 代码，及其 <code>pre &gt; code</code> 中的代码，应该合理转义处理。但是实际上 Jekyll 没有这样
 做，导致一些代码没有符合期望。</p>
 </div>

@@ -44,48 +44,34 @@
   <h1 class="entry-title">阶乘(factorial) &amp; 尾递归(Tail Recursion)</h1>
   <div class="entry-content"><p>今天看了dennis的《<a href="http://www.blogjava.net/killme2008/archive/2008/03/18/187071.html">用递归计算阶乘咋不行呢？</a>》
 受益良多，这里做下小结。</p>
-
 <p>传统的递归算法写起来很漂亮，代码很简洁，但是每递归一次就需要更深一层的堆栈支持，
 可能会造成内存溢出而失败，所以递归和goto语句一样声名狼藉。</p>
-
 <blockquote>
 <p>甚至《代码大全》的作者有这样一句话：如果为我工作的程序员用递归去计算阶乘，那么我宁愿换人。
 作者对递归的态度相当谨慎，这在静态命令式语言中显然是正确的，但是在函数式语言中，
 由于有尾递归优化的存在，递归反而是最自然的形式，况且我打心里认为递归更符合人类思维。
 (by dennis)</p>
 </blockquote>
-
 <p>尾递归就是从最后开始计算，每递归一次就算出相应的结果，
 也就是说，函数调用出现在调用者函数的尾部，因为是尾部，
 所以根本没有必要去保存任何局部变量，直接让被调用的函数返回时越过调用者，
 返回到调用者的调用者去。举例说明。</p>
-
 <p>线性递归（传统递归方式）：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">recursion</span><span class="params">(n)</span>{</span>
     <span class="keyword">return</span> n==<span class="number">1</span>?<span class="number">1</span>:n*recursion(n-<span class="number">1</span>);
-}
-</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
-<a name="L1-2" href="#L1-2">2</a>
-<a name="L1-3" href="#L1-3">3</a></pre></div></div>
-<p>尾递归：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">tailRecursion</span><span class="params">(n, a)</span>{</span>
+}</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a></pre></div></div><p>尾递归：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">tailRecursion</span><span class="params">(n, a)</span>{</span>
     a = a||<span class="number">1</span>; <span class="comment">// 尾递归之尾，即上次递归结果。</span>
     <span class="keyword">return</span> n==<span class="number">1</span>?a:tailRecursion(n-<span class="number">1</span>, a*n);
-}
-</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+}</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
-<a name="L2-3" href="#L2-3">3</a>
-<a name="L2-4" href="#L2-4">4</a></pre></div></div>
-<p>这里将基于尾递归的求数值阶乘算法贴下：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">Math.factorial_III = <span class="function"><span class="keyword">function</span><span class="params">(n)</span>{</span>
+<a name="L2-3" href="#L2-3">3</a></pre></div></div><p>这里将基于尾递归的求数值阶乘算法贴下：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">Math.factorial_III = <span class="function"><span class="keyword">function</span><span class="params">(n)</span>{</span>
     <span class="keyword">var</span> a = arguments[<span class="number">1</span>]||<span class="number">1</span>;
     <span class="keyword">return</span> n&lt;=<span class="number">1</span>?a:Math.factorial_III(n-<span class="number">1</span>, a*n);
-};
-</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+};</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
-<a name="L3-3" href="#L3-3">3</a>
-<a name="L3-4" href="#L3-4">4</a></pre></div></div>
-<p>效率上和循环迭代、<a href="http://blog.xianyun.org/2007/12/26/improved-factorial/">阶乘改进算法</a>
+<a name="L3-3" href="#L3-3">3</a></pre></div></div><p>效率上和循环迭代、<a href="http://blog.xianyun.org/2007/12/26/improved-factorial/">阶乘改进算法</a>
 相当甚至稍胜出（ie6,firefox2,safari3），普通递归的效率最为底下，且需要深入堆栈。</p>
-<h1 id="参考">参考</h1>
-<ul>
+<h1 id="参考">参考</h1><ul>
 <li>《<a href="http://baike.baidu.com/view/1439396.htm">尾递归</a>》-百度百科</li>
 <li>《<a href="http://www.blogjava.net/killme2008/archive/2008/03/18/187071.html">用递归计算阶乘咋不行呢？</a>》-dennis</li>
 </ul>

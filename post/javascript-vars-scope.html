@@ -44,37 +44,26 @@
   <h1 class="entry-title">JavaScript 无块级作用域</h1>
   <div class="entry-content"><p>最近在做一系列JavaScript压缩工具，语法压缩，语义压缩，字符串压缩均有涉及（p.s.有趣的是，
 压缩变量名之类的“有损压缩”不影响代码执行，但是字符串压缩这样的“无损压缩”却总是需要解压消耗）。</p>
-
 <p>在实现压缩局部变量名时，最初的实现是将 if/else, for/in, do/while, switch/case/default,
 try/catch/finally, with和Object实例对象（后面统称为“块级作用域”）与function一样，
 都作为独立的作用域，但是测试发现在JavaScript中并不是这么回事。</p>
-
 <p>尝试着在块级作用域里声明定义变量：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">if</span>(<span class="literal">true</span>){
 <span class="keyword">var</span> bool=<span class="literal">true</span>;
 }
-document.write(bool); <span class="comment">// output:true</span>
-</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+document.write(bool); <span class="comment">// output:true</span></code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
-<a name="L1-3" href="#L1-3">3</a>
-<a name="L1-4" href="#L1-4">4</a></pre></div></div>
-<p>会发现输出true，而且不论嵌套多深，也不论使用任何块级作用域进行嵌套，最后变量
+<a name="L1-3" href="#L1-3">3</a></pre></div></div><p>会发现输出true，而且不论嵌套多深，也不论使用任何块级作用域进行嵌套，最后变量
 依然如同在调用处之前，而且同级的作用域中定义的一样；值为在此之前，在块级作用域中所做改变的结果。
 注意：如果块级作用域未被执行，则其中声明定义的变量会被声明（var name），但不被定义
 （即未被初始化，此时name为undefined，引用name时不抛异常）。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">if</span>(<span class="literal">false</span>){<span class="keyword">var</span> bool=<span class="literal">true</span>;}
-document.write(bool); <span class="comment">// output:undefined</span>
-</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
-<a name="L2-2" href="#L2-2">2</a></pre></div></div>
-<p>之前虽知道，IE里for(var i=0;...)里定义的i，在for之外也是可以使用的，但是现在才知道这种情况更为猖獗，
+document.write(bool); <span class="comment">// output:undefined</span></code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div><p>之前虽知道，IE里for(var i=0;...)里定义的i，在for之外也是可以使用的，但是现在才知道这种情况更为猖獗，
 大出我的意料之外，而更意外的是，IE 7(IE6?), Firefox 3(FF1,FF2?), Opera 9, Chrome 1, Safari 3表现均丝毫不差。</p>
-
 <p>虽然与某些编程规范不同，但是js就是这样了，唉。早知道这样，压缩变量名这部分也就不用那么费劲了，只得重写了。</p>
-
 <p>另外还有一些JavaScript作用域方面的文章：<br />
 [<a href="http://www.blueidea.com/tech/web/2007/4855.asp">http://www.blueidea.com/tech/web/2007/4855.asp</a> JavaScript中的作用域]，好像是realazy翻译的，
 文章很好，虽然有点文不对题（主要阐述this的作用域链问题）。<br />
 [<a href="http://www.cnblogs.com/3zfp/archive/2008/10/24/528644.html">http://www.cnblogs.com/3zfp/archive/2008/10/24/528644.html</a> js变量作用域及可访问性的探讨]，
 详细介绍了各种变量的作用域及其可访问性问题。</p>
-
 <p>附A 测试代码：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">// Global Scope</span>
 <span class="keyword">if</span> (<span class="literal">true</span>){
   <span class="keyword">var</span> v10 = <span class="literal">true</span>;
@@ -220,8 +209,7 @@ document.write(<span class="string">"&lt;hr /&gt;"</span>);
 <span class="keyword">try</span>{alert(v08);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
 <span class="keyword">try</span>{alert(v09);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
 <span class="keyword">try</span>{alert(v0a);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
-<span class="keyword">try</span>{alert(v0b);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
-</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+<span class="keyword">try</span>{alert(v0b);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
 <a name="L3-3" href="#L3-3">3</a>
 <a name="L3-4" href="#L3-4">4</a>
@@ -365,9 +353,7 @@ document.write(<span class="string">"&lt;hr /&gt;"</span>);
 <a name="L3-142" href="#L3-142">142</a>
 <a name="L3-143" href="#L3-143">143</a>
 <a name="L3-144" href="#L3-144">144</a>
-<a name="L3-145" href="#L3-145">145</a>
-<a name="L3-146" href="#L3-146">146</a></pre></div></div>
-<p>附B 测试结果（IE 7, FF 3, Opera 9, Safari 3, Chorme 1均同）：</p><div class="highlight"><div class="codes"><div class="code"><pre>    v10 : true
+<a name="L3-145" href="#L3-145">145</a></pre></div></div><p>附B 测试结果（IE 7, FF 3, Opera 9, Safari 3, Chorme 1均同）：</p><div class="highlight"><div class="codes"><div class="code"><pre>    v10 : true
     v00 : undefined
     v11 : true
     v12 : true
@@ -414,8 +400,7 @@ document.write(<span class="string">"&lt;hr /&gt;"</span>);
     &#39;v08&#39; 未定义
     &#39;v09&#39; 未定义
     &#39;v0a&#39; 未定义
-    &#39;v0b&#39; 未定义
-</pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
+    &#39;v0b&#39; 未定义</pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
 <a name="L4-2" href="#L4-2">2</a>
 <a name="L4-3" href="#L4-3">3</a>
 <a name="L4-4" href="#L4-4">4</a>
@@ -461,8 +446,7 @@ document.write(<span class="string">"&lt;hr /&gt;"</span>);
 <a name="L4-44" href="#L4-44">44</a>
 <a name="L4-45" href="#L4-45">45</a>
 <a name="L4-46" href="#L4-46">46</a>
-<a name="L4-47" href="#L4-47">47</a>
-<a name="L4-48" href="#L4-48">48</a></pre></div></div></div>
+<a name="L4-47" href="#L4-47">47</a></pre></div></div></div>
 
   <footer class="entry-meta post clearfix">
     <span class="tags"><a href="/tag">Tags</a>:

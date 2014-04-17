@@ -42,9 +42,7 @@
   <div id="content" class="document">
 <div class="hentry">
   <h1 class="entry-title">用 gvim 比较 git diff</h1>
-  <div class="entry-content"><h2 id="for-windows">for Windows</h2>
-<p>参考 [<a href="http://gist.github.com/502217">http://gist.github.com/502217</a> gist:502217]</p>
-
+  <div class="entry-content"><h2 id="for-windows">for Windows</h2><p>参考 [<a href="http://gist.github.com/502217">http://gist.github.com/502217</a> gist:502217]</p>
 <ol>
 <li><p>在用户目录下的 .gitconfig 中加入：</p><div class="highlight"><div class="codes"><div class="code"><pre>[diff]
   external = git_diff_wrapper.bat
@@ -56,14 +54,18 @@
 <a name="L1-4" href="#L1-4">4</a></pre></div></div></li>
 <li><p>创建 git_diff_wrapper.bat 文件放到 $PATH 目录下，内容为：</p><div class="highlight"><div class="codes"><div class="code"><pre>path\to\gvim.exe -d &quot;%2&quot; &quot;%5&quot;
 
-gvim -d &quot;$2&quot; &quot;$5&quot;
+
 </pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
-<a name="L2-3" href="#L2-3">3</a></pre></div></div>
-<p>注意其中的 path\to\ 要改为 gvim.exe 所在目录。</p></li>
-</ol>
-<h2 id="for-linux">for Linux</h2>
-<p>参考 <a href="http://technotales.wordpress.com/2009/05/17/git-diff-with-vimdiff/">Git Diff with Vimdiff</a></p>
+<a name="L2-3" href="#L2-3">3</a></pre></div></div></li>
+</ol><div class="highlight"><div class="codes"><div class="code"><pre>    gvim -d &quot;$2&quot; &quot;$5&quot;
+
+注意其中的 path\to\ 要改为 gvim.exe 所在目录。
+
+</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+<a name="L3-2" href="#L3-2">2</a>
+<a name="L3-3" href="#L3-3">3</a>
+<a name="L3-4" href="#L3-4">4</a></pre></div></div><h2 id="for-linux">for Linux</h2><p>参考 <a href="http://technotales.wordpress.com/2009/05/17/git-diff-with-vimdiff/">Git Diff with Vimdiff</a></p>
 </div>
 
   <footer class="entry-meta post clearfix">

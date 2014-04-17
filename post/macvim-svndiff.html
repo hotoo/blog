@@ -42,34 +42,27 @@
   <div id="content" class="document">
 <div class="hentry">
   <h1 class="entry-title">使用 MacVim 做 svn diff</h1>
-  <div class="entry-content"><h2 id="对于终端的-vim">对于终端的 vim</h2>
-<ol>
+  <div class="entry-content"><h2 id="对于终端的-vim">对于终端的 vim</h2><ol>
 <li><p><code>~/.subversion/config</code></p><div class="highlight"><div class="codes"><div class="code"><pre>[helpers]
-diff-cmd = &#47;usr&#47;local&#47;bin&#47;svndiff
-</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
-<a name="L1-2" href="#L1-2">2</a></pre></div></div></li>
-<li><p>将下面的代码保存为 svndiff：</p><div class="highlight"><div class="codes"><div class="code"><pre>#!&#47;bin&#47;sh
+diff-cmd = /usr/local/bin/svndiff</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a></pre></div></div></li>
+<li><p>将下面的代码保存为 svndiff：</p><div class="highlight"><div class="codes"><div class="code"><pre>#!/bin/sh
 
-DIFF=&quot;&#47;usr&#47;bin&#47;vimdiff&quot;
+DIFF=&quot;/usr/bin/vimdiff&quot;
 LEFT=${6}
 RIGHT=${7}
-$DIFF $LEFT $RIGHT
-</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+$DIFF $LEFT $RIGHT</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
 <a name="L2-4" href="#L2-4">4</a>
-<a name="L2-5" href="#L2-5">5</a>
-<a name="L2-6" href="#L2-6">6</a></pre></div></div></li>
-<li><p>拷贝到 <code>/usr/local/bin/svndiff</code> 并设置权限：</p><div class="highlight"><div class="codes"><div class="code"><pre>sudo chmod +a &#47;usr&#47;local&#47;bin&#47;svndiff
-</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a></pre></div></div></li>
+<a name="L2-5" href="#L2-5">5</a></pre></div></div></li>
+<li><p>拷贝到 <code>/usr/local/bin/svndiff</code> 并设置权限：</p><div class="highlight"><div class="codes"><div class="code"><pre>sudo chmod +a /usr/local/bin/svndiff</pre></div><pre class="line"></pre></div></div></li>
 </ol>
-<h2 id="对于-macvim">对于 MacVim</h2>
-<p>修改 <code>/usr/local/bin/svndiff</code> 内容如下：</p><div class="highlight"><div class="codes"><div class="code"><pre>#!&#47;bin&#47;bash
+<h2 id="对于-macvim">对于 MacVim</h2><p>修改 <code>/usr/local/bin/svndiff</code> 内容如下：</p><div class="highlight"><div class="codes"><div class="code"><pre>#!/bin/bash
 
 LEFT=${6}
 RIGHT=${7}
-TMPLEFT=&quot;&#47;tmp&#47;${LEFT##*&#47;}.$$&quot;
-TMPRIGHT=&quot;&#47;tmp&#47;${RIGHT##*&#47;}.$$&quot;
+TMPLEFT=&quot;/tmp/${LEFT##*/}.$$&quot;
+TMPRIGHT=&quot;/tmp/${RIGHT##*/}.$$&quot;
 
 cp &quot;$LEFT&quot; &quot;$TMPLEFT&quot;
 cp &quot;$RIGHT&quot; &quot;$TMPRIGHT&quot;
@@ -83,8 +76,7 @@ until [ &quot;$SN&quot; == &quot;SVNDIFF&quot; ]; do
   SN=`mvim --serverlist | grep &quot;SVNDIFF&quot;`
 done
 
-rm -f &quot;$TMPLEFT&quot; &quot;$TMPRIGHT&quot;
-</pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
+rm -f &quot;$TMPLEFT&quot; &quot;$TMPRIGHT&quot;</pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
 <a name="L4-2" href="#L4-2">2</a>
 <a name="L4-3" href="#L4-3">3</a>
 <a name="L4-4" href="#L4-4">4</a>
@@ -102,20 +94,12 @@ rm -f &quot;$TMPLEFT&quot; &quot;$TMPRIGHT&quot;
 <a name="L4-16" href="#L4-16">16</a>
 <a name="L4-17" href="#L4-17">17</a>
 <a name="L4-18" href="#L4-18">18</a>
-<a name="L4-19" href="#L4-19">19</a>
-<a name="L4-20" href="#L4-20">20</a></pre></div></div>
-<p>之前尝试过修改终端方案中的</p><div class="highlight"><div class="codes"><div class="code"><pre>DIFF=&quot;&#47;usr&#47;bin&#47;vimdiff&quot;
-</pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a></pre></div></div>
-<p>为：</p><div class="highlight"><div class="codes"><div class="code"><pre>DIFF=&quot;gvim -d&quot;
-</pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a></pre></div></div>
-<p>未遂，右侧的代码会为空。</p>
-<h2 id="see-also">See Also</h2>
-<ul>
-<li><a href="http://twitter.com/ntakushima/statuses/27518378028">svn diffの結果をMacVimで。</a>
-
-<ul>
+<a name="L4-19" href="#L4-19">19</a></pre></div></div><p>之前尝试过修改终端方案中的</p><div class="highlight"><div class="codes"><div class="code"><pre>DIFF=&quot;/usr/bin/vimdiff&quot;</pre></div><pre class="line"></pre></div></div><p>为：</p><div class="highlight"><div class="codes"><div class="code"><pre>DIFF=&quot;gvim -d&quot;</pre></div><pre class="line"></pre></div></div><p>未遂，右侧的代码会为空。</p>
+<h2 id="see-also">See Also</h2><ul>
+<li><a href="http://twitter.com/ntakushima/statuses/27518378028">svn diffの結果をMacVimで。</a><ul>
 <li><a href="https://gist.github.com/629457">diffwrap.sh</a></li>
-</ul></li>
+</ul>
+</li>
 </ul>
 </div>
 

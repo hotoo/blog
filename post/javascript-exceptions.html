@@ -48,12 +48,10 @@
 <li>window.onerror / window.addEventListener(&quot;error&quot;)</li>
 <li>on(&quot;error&quot;) events</li>
 </ul>
-
-<hr/>
-
+<hr>
 <p>异常处理</p>
-
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Browser</th>
 <th>message</th>
@@ -65,7 +63,8 @@
 <th>fileName</th>
 <th>stack</th>
 </tr>
-</thead><tbody>
+</thead>
+<tbody>
 <tr>
 <td>IE8</td>
 <td>√</td>
@@ -121,10 +120,9 @@
 <td>×</td>
 <td>√</td>
 </tr>
-</tbody></table>
-
+</tbody>
+</table>
 <p>属性描述：</p>
-
 <p>message:: {String} 异常消息描述，全部浏览器都支持。
 name:: 错误名称，一般等同于错误类型名，如 Error, TypeError, ReferenceError...。不过实际抛出的同一个错误，不同浏览器的 name 值可能不一致(下面讲述)。
 description:: 异常描述，IE 中同 message，其他浏览器不支持。
@@ -132,17 +130,17 @@ line:: 错误行号，仅 Safari 支持。
 number:: 错误编号，例如“缺少对象”是 -2146823281。“xx未定义”是 -2146823279。仅 IE 支持。
 lineNumber:: 错误发生所在行号，仅 Firefox 支持。
 fileName:: 发生错误的所在文件地址，仅 Firefox 支持。</p>
-
 <p>构造函数的参数&amp;顺序：</p>
-
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>参数</th>
 <th>1(个)</th>
 <th>2(个)</th>
 <th>3(个)</th>
 </tr>
-</thead><tbody>
+</thead>
+<tbody>
 <tr>
 <td>Firefox</td>
 <td><code>Error(message)</code></td>
@@ -179,14 +177,12 @@ fileName:: 发生错误的所在文件地址，仅 Firefox 支持。</p>
 <td>&gt;</td>
 <td>&gt;</td>
 </tr>
-</tbody></table>
-
+</tbody>
+</table>
 <p>Note: IE, <code>new Error(String message)</code> - <code>&lt;Object,Array,RegExp,...&gt;.toString()</code></p>
-
 <p>JavaScript 有多种原生异常类型，包括最常见的 Error 和 EvalError, RangeError,
 ReferenceError, SyntaxError, TypeError, URIError. 这些原生异常类型分别对应的
 意义是：</p>
-
 <p>Error:: 异常的基类。
 EvalError:: 发生在 eval() 函数中的异常。
 RangeError:: 数值超出 JavaScript 可表示的范围。
@@ -194,44 +190,33 @@ ReferenceError:: 使用了非法的引用。
 SyntaxError:: 在 eval() 中发生了语法错误的异常。除此之外的语法错误异常，均无法通过 try/catch 和 onerror 捕获，这类异常会直接报告给浏览器。
 TypeError:: 变量类型不是预期的。
 URIError:: 在 encodeURI() 和 decodeURI() 函数中发生异常。</p>
-
 <p>TODO: 每种异常类型都带有以下成员/方法。
 message::
 line::</p>
-
 <p>值得注意的是，直接掷出 Error 之外的其他原生异常（如 <code>throw new EvalError(&quot;msg&quot;)</code>）
 时，IE 浏览器是无法捕获异常消息的，统一的异常消息是“例外被抛出且未被接住”。</p>
-
 <p>而在 try{}catch(ex){} 中可以拿到更详细的异常信息。</p>
-
 <p>JavaScript 也可以掷出其他类型的异常，如 throw &quot;xx error.&quot;</p>
-<h2 id="捕获异常">捕获异常</h2>
-<p>推荐的异常捕获方法是 <code>try/catch</code>，不过也可以简单使用全局异常捕获方式：</p><div class="highlight"><div class="codes"><div class="code"><pre>window.onerror = function(msg, file, line){
+<h2 id="捕获异常">捕获异常</h2><p>推荐的异常捕获方法是 <code>try/catch</code>，不过也可以简单使用全局异常捕获方式：</p><div class="highlight"><div class="codes"><div class="code"><pre>window.onerror = function(msg, file, line){
     return true;
 };
+
 </pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
-<a name="L1-3" href="#L1-3">3</a></pre></div></div>
-<p><code>window.onerror</code> 事件可以捕获浏览器端掷出的所有异常，并可以拿到错误消息，所在文件，
+<a name="L1-3" href="#L1-3">3</a>
+<a name="L1-4" href="#L1-4">4</a></pre></div></div><p><code>window.onerror</code> 事件可以捕获浏览器端掷出的所有异常，并可以拿到错误消息，所在文件，
 及错误所在行。但是无法获得异常对象本身，及触发异常的事件对象。</p>
-
 <p>注意：onerror 事件不在早期的 HTML4 规范中，只有 IE, Firefox 和后续的 Chrome 才有
 支持，Safari, Opera 至今没有支持这个事件。</p>
-
 <p>一般来说，绑定事件(addEventListener/attachEvent)的方式比给 HTML DOM 元素直接连接事件处理函数的方式要好。</p>
-
 <p>但是为 window 绑定 error 事件却似乎不太理想。
 IE 浏览器能得到 4 个参数（比 onerror 多一个），但有效的还是前面 3 个（跟 onerror 一致）。
 而其他浏览器却只能得到一个参数，即错误事件（FF 得到的是 Error，Chrome 得到的 ErrorEvent。</p>
-
 <p>题外话，对于 HTML 元素的 onerror 事件一般会触发在加载外部资源时。</p>
-<h2 id="无法捕获的异常">无法捕获的异常</h2>
-<p>如果 <code>onerror</code> 所在 <code>&lt;script&gt;</code> 块本身有语法错误，会导致 <code>onerror</code> 错误处理脚本本身无法
+<h2 id="无法捕获的异常">无法捕获的异常</h2><p>如果 <code>onerror</code> 所在 <code>&lt;script&gt;</code> 块本身有语法错误，会导致 <code>onerror</code> 错误处理脚本本身无法
 被执行，也就无法初始化全局异常处理函数。</p>
-
 <p>或者异常发生在初始化全局异常处理函数之前，这个异常也无法被全局处理函数捕获。</p>
-<h2 id="延伸阅读">延伸阅读</h2>
-<ul>
+<h2 id="延伸阅读">延伸阅读</h2><ul>
 <li><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Error">Error - MDC Doc Center</a></li>
 <li><a href="https://developer.mozilla.org/en/DOM/window.onerror">window.onerror - MDC Doc Center</a></li>
 <li><a href="http://msdn.microsoft.com/en-us/library/cc197053%28VS.85%29.aspx">onerror Event</a></li>

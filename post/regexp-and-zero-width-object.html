@@ -46,7 +46,6 @@
 生成 api 文档时才看到。
 心里想这样的方法实际应用中大概没什么意义，但是出于好奇就拿出来玩了一下，
 这一玩不要紧啊，这么精炼的东西差点成垃圾。</p>
-
 <p>可能是网络编辑器的原因，原始代码有bug，经过修正和测试，现在的代码如下：代码I</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">/**
  * 连接两个正则表达式。
  * 题外话：获得字符串常量""的长度，比构建空数组再求其长度效率高（忽略构建过程，求长度消耗时间相同）。
@@ -59,8 +58,7 @@ RegExp.prototype.concat = <span class="function"><span class="keyword">function<
   <span class="keyword">return</span> <span class="keyword">new</span> RegExp(<span class="keyword">this</span>.source+r.source.replace(<span class="regexp">/\\(\d)/g</span>, <span class="function"><span class="keyword">function</span><span class="params">($0, $1)</span>{</span>
     <span class="keyword">return</span> <span class="string">"\\"</span> + (i+($<span class="number">1</span> | <span class="number">0</span>)); <span class="comment">// 修正第二个表达式中的反向引用。注意这里的位运算。</span>
   }), p);
-};
-</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+};</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
 <a name="L1-4" href="#L1-4">4</a>
@@ -71,11 +69,8 @@ RegExp.prototype.concat = <span class="function"><span class="keyword">function<
 <a name="L1-9" href="#L1-9">9</a>
 <a name="L1-10" href="#L1-10">10</a>
 <a name="L1-11" href="#L1-11">11</a>
-<a name="L1-12" href="#L1-12">12</a>
-<a name="L1-13" href="#L1-13">13</a></pre></div></div>
-<p>原方法名是contact，现在为了和字符串类的一致，换为concat，至于bug/不足这里不做解读。
+<a name="L1-12" href="#L1-12">12</a></pre></div></div><p>原方法名是contact，现在为了和字符串类的一致，换为concat，至于bug/不足这里不做解读。
 这个实际应用意义不大的小程式却有值得称道的几点：</p>
-
 <ul>
 <li>正向预搜索匹配第一个表达式里左括号（不包括非捕获组(?:)）的个数。</li>
 <li>当第一个表达式没有匹配时返回 0 长度对象（再求其长度），
@@ -83,7 +78,6 @@ RegExp.prototype.concat = <span class="function"><span class="keyword">function<
 <li>修正反向引用时用的位运算（），这里将匹配到的数值字符串与0位或没有其他意义，
 只是将数值字符串转型为数值，相当于 <code>parseInt()</code> 函数。</li>
 </ul>
-
 <p>下面介绍为什么使用空字符串而不是空数组构建0长度对象。代码II</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">var</span> I = <span class="number">10000</span>;
 
 <span class="keyword">var</span> d = <span class="keyword">new</span> Date();
@@ -98,8 +92,7 @@ d = <span class="keyword">new</span> Date()-d;
 }
 d2 = <span class="keyword">new</span> Date()-d2;
 
-document.write(d+<span class="string">":"</span>+d2);
-</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+document.write(d+<span class="string">":"</span>+d2);</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
 <a name="L2-4" href="#L2-4">4</a>
@@ -112,10 +105,7 @@ document.write(d+<span class="string">":"</span>+d2);
 <a name="L2-11" href="#L2-11">11</a>
 <a name="L2-12" href="#L2-12">12</a>
 <a name="L2-13" href="#L2-13">13</a>
-<a name="L2-14" href="#L2-14">14</a>
-<a name="L2-15" href="#L2-15">15</a></pre></div></div>
-<p>一万次循环叠加可以发现构建空字符串比构建空数组求长度快1到3倍。</p>
-
+<a name="L2-14" href="#L2-14">14</a></pre></div></div><p>一万次循环叠加可以发现构建空字符串比构建空数组求长度快1到3倍。</p>
 <p>再将代码改为：代码III</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">var</span> I = <span class="number">10000</span>;
 <span class="keyword">var</span> s=<span class="string">""</span>;
 <span class="keyword">var</span> d = <span class="keyword">new</span> Date();
@@ -131,8 +121,7 @@ a.length;
 }
 d2 = <span class="keyword">new</span> Date()-d2;
 
-document.write(d+<span class="string">":"</span>+d2);
-</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+document.write(d+<span class="string">":"</span>+d2);</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
 <a name="L3-3" href="#L3-3">3</a>
 <a name="L3-4" href="#L3-4">4</a>
@@ -146,9 +135,7 @@ document.write(d+<span class="string">":"</span>+d2);
 <a name="L3-12" href="#L3-12">12</a>
 <a name="L3-13" href="#L3-13">13</a>
 <a name="L3-14" href="#L3-14">14</a>
-<a name="L3-15" href="#L3-15">15</a>
-<a name="L3-16" href="#L3-16">16</a></pre></div></div>
-<p>可以发现，求空字符串长度与空数组长度的过程效率相当。可见，代码 II 处空数组效率
+<a name="L3-15" href="#L3-15">15</a></pre></div></div><p>可以发现，求空字符串长度与空数组长度的过程效率相当。可见，代码 II 处空数组效率
 多余的消耗主要在构建空数组对象上。</p>
 </div>
 

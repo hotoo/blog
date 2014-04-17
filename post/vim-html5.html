@@ -43,32 +43,24 @@
 <div class="hentry">
   <h1 class="entry-title">让Vim支持html5</h1>
   <div class="entry-content"><p><a href="http://www.w3.org/TR/html5/">html5</a> 呼之已出，众多的现代浏览器也已支持其大半新特性。</p>
-<h2 id="html5-语法高亮">HTML5 语法高亮</h2>
-<p>网上已有让 Vim 支持新的标签和属性的语法文件，安装好语法文件即可正确的高亮显示
+<h2 id="html5-语法高亮">HTML5 语法高亮</h2><p>网上已有让 Vim 支持新的标签和属性的语法文件，安装好语法文件即可正确的高亮显示
 HTML5 标记和属性。</p>
-
 <p>详细方法参考 <a href="http://rm.blog.br/2009/09/vim-syntax-highlight-para-html-5/">VIM syntax highlight para HTML 5</a>，
 下载其 <a href="http://rm.blog.br/wp-content/uploads/2009/09/html.vim">html.vim</a> 语法文件，
 放至 <code>$VIM/vimfiles/syntax/</code> 目录下即可。</p>
-
 <p>注：因为 html5 本身在不断更新，所以上面的脚本并不完整，我将持续关注并更新这个
 <a href="http://hotoo.googlecode.com/svn/trunk/vim/vimfiles/syntax/html.vim">html.vim</a> 脚本。</p>
-<h2 id="html5-自动补全">html5 自动补全</h2>
-<p>不过貌似目前还未有让 Vim 完整支持 html5 自动完成（又称自动补全）之脚本。</p>
-
+<h2 id="html5-自动补全">html5 自动补全</h2><p>不过貌似目前还未有让 Vim 完整支持 html5 自动完成（又称自动补全）之脚本。</p>
 <p>我初步研究并修改了 <code>$VIM/vim72/autoload/htmlcomplete.vim</code> ，使其支持 html5
 的自动完成。目前这个脚本逻辑基本可用，不过针对 html5 自动完成的数据
 （ <code>$VIM/vim72/autoload/xml/html5.vim</code> ）还在收集调整中，
 我也趁此机会深入学习一些 html5 知识。</p>
-<h2 id="安装详情">安装详情</h2>
-<p>将 <a href="http://hotoo.googlecode.com/svn/trunk/vim/vim72/autoload/htmlcomplete.vim">htmlcomplete.vim</a>
+<h2 id="安装详情">安装详情</h2><p>将 <a href="http://hotoo.googlecode.com/svn/trunk/vim/vim72/autoload/htmlcomplete.vim">htmlcomplete.vim</a>
 下载放至 <code>$VIM/vim72/autoload/</code> 目录下，覆盖原文件即可，
 再将 <a href="http://hotoo.googlecode.com/svn/trunk/vim/vim72/autoload/xml/html5.vim">html5.vim</a>
 下载放至 <code>$VIM/vim72/autoload/xml/</code> 目录下即可。</p>
-
 <p>注：这个 html5.vim近期会做一些更新补充，以支持更完整正确的 html5 语法。</p>
-<h2 id="html5-合法性验证">html5 合法性验证</h2>
-<p>参考我的前一篇 <a href="validator-for-vim.html">在 Vim 中验证 X/HTML, Javascript 和 CSS</a>。</p>
+<h2 id="html5-合法性验证">html5 合法性验证</h2><p>参考我的前一篇 <a href="validator-for-vim.html">在 Vim 中验证 X/HTML, Javascript 和 CSS</a>。</p>
 </div>
 
   <footer class="entry-meta post clearfix">

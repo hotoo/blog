@@ -45,7 +45,6 @@
   <div class="entry-content"><p>上次在Google+ 上说 <a href="https://plus.google.com/108314985261981078822/posts/ithY3w7tEWR">实现了非递归遍历 DOM 结构</a>，
 有朋友想让分享，我当然很高兴，但是很遗憾这本身没有什么值得分享的，大致如下，
 给大家随便看一下：</p>
-
 <p>常见的递归方式遍历方式，下面是 Douglas Crockford 写的递归实现：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">walkTheDOM</span> <span class="params">(node, func)</span> {</span>
     func(node);
     node = node.firstChild;
@@ -53,34 +52,25 @@
         walkTheDOM(node, func);
         node = node.nextSibling;
     }
-}
-</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+}</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
 <a name="L1-4" href="#L1-4">4</a>
 <a name="L1-5" href="#L1-5">5</a>
 <a name="L1-6" href="#L1-6">6</a>
-<a name="L1-7" href="#L1-7">7</a>
-<a name="L1-8" href="#L1-8">8</a></pre></div></div>
-<p>然后有人自称写出了更快的遍历 DOM 方式。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">var</span> elems = document.getElementsByTagName(<span class="string">"*"</span>);
+<a name="L1-7" href="#L1-7">7</a></pre></div></div><p>然后有人自称写出了更快的遍历 DOM 方式。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">var</span> elems = document.getElementsByTagName(<span class="string">"*"</span>);
 <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,l=elems.length; i&lt;l; i++){
     handler(elems[i]);
-}
-</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+}</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
-<a name="L2-3" href="#L2-3">3</a>
-<a name="L2-4" href="#L2-4">4</a></pre></div></div>
-<p>最初找到有详细对照的文章地址没有找到，这个是
+<a name="L2-3" href="#L2-3">3</a></pre></div></div><p>最初找到有详细对照的文章地址没有找到，这个是
 <a href="http://geekswithblogs.net/mparsons/archive/2006/03/02/71175.aspx">类似的一篇</a>，
 而且也是非递归式的。</p>
-
 <p>确实是很快的，但只是快还是不够的，这个实现有很多弊端：</p>
-
 <ol>
-<li> 注释等元素未必会被遍历。</li>
-<li> 树形数据结构被整理成了平板结构，无法实现遍历过程的 in/out 处理。</li>
+<li>注释等元素未必会被遍历。</li>
+<li>树形数据结构被整理成了平板结构，无法实现遍历过程的 in/out 处理。</li>
 </ol>
-
 <p>然后今天的主角隆重登场：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">walk</span><span class="params">(node, enter, leave)</span>{</span>
     <span class="keyword">var</span> tmp, n=node;
     label:
@@ -104,8 +94,7 @@
             <span class="keyword">break</span>;
         }
     }<span class="keyword">while</span>(n &amp;&amp; n!=node);
-}
-</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+}</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
 <a name="L3-3" href="#L3-3">3</a>
 <a name="L3-4" href="#L3-4">4</a>
@@ -127,14 +116,10 @@
 <a name="L3-20" href="#L3-20">20</a>
 <a name="L3-21" href="#L3-21">21</a>
 <a name="L3-22" href="#L3-22">22</a>
-<a name="L3-23" href="#L3-23">23</a>
-<a name="L3-24" href="#L3-24">24</a></pre></div></div>
-<p>上面只是一个精简版，实际过程中还需要考虑节点类型的问题，一般会过滤
+<a name="L3-23" href="#L3-23">23</a></pre></div></div><p>上面只是一个精简版，实际过程中还需要考虑节点类型的问题，一般会过滤
 1:HTMLElement, 8:Comment, 9:Document Type, 10:DocType 之外的节点。</p>
-
 <p>其实也不过如此嘛，飘过~~</p>
-<h2 id="see-also">See Also</h2>
-<ul>
+<h2 id="see-also">See Also</h2><ul>
 <li><a href="http://www.quirksmode.org/dom/intro.html">W3C DOM -Introduction - ppk</a></li>
 </ul>
 </div>

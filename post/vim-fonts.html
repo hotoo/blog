@@ -45,65 +45,47 @@
   <div class="entry-content"><p>明城有 “<a href="http://www.gracecode.com/archives/1545/">苹果的 Courier 字体不错</a>”
 和“<a href="http://www.gracecode.com/archives/2402/">Windows 下 gVim 的雅黑字体配置</a>”
 两篇介绍 Vim 下设置推荐字体的文章，里面提供的设置代码及提高的下载资源都很赞。</p>
-
 <p>家里的 Windows 7 用了 Courier New 字体后，体验很好。</p>
-
 <p>但是搬到公司的 Windows XP 上却比原来 Windows 自身的 Courier New 没多大提高。</p>
-
 <p>今天看了蟠盛写的“<a href="http://blog.htmlor.com/2007/10/14/good_programming_fonts/">几种不错的编程字体</a>”，
 顺便看了下 <a href="http://support.microsoft.com/kb/306527/zh-cn">使用 ClearType 增强屏幕字体</a>，按步骤 果然好了很多。</p>
-
 <p>这里记录完整的设置：</p>
-
 <ol>
 <li>下载 <a href="http://hotoo.googlecode.com/svn/trunk/fonts/Apple_Courier_Gracecode.zip">Apple Courier字体</a>
 <a href="http://www.box.net/shared/zf08nmhc8g">2</a>
-<a href="http://lifesinger.googlecode.com/files/apple_courier_font.zip">3</a> ，并安装。安装方法：
-
-<ul>
+<a href="http://lifesinger.googlecode.com/files/apple_courier_font.zip">3</a> ，并安装。安装方法：<ul>
 <li>for Windows 7: 右键字体文件，安装即可。</li>
-<li>for Windows XP:
-
-<ol>
+<li>for Windows XP:<ol>
 <li>资源管理器中打开系统盘下的 fonts 目录（如<code>C:\WINDOWS\Fonts</code>，或运行 <code>fonts</code>）</li>
 <li>文件 -&gt; 安装新字体；</li>
 <li>驱动器和文件夹定位到字体所在位置，字体列表将自动列出找到的字体；</li>
 <li>选中要安装的字体，点击确定即可。</li>
 <li>或直接将字体文件拷贝到Fonts文件夹亦可，系统将自动启动安装过程。</li>
-</ol></li>
-</ul></li>
-<li>ClearType
-
-<ol>
+</ol>
+</li>
+</ul>
+</li>
+<li>ClearType<ol>
 <li>控制面板 -&gt; 显示（或右键桌面 -&gt; 属性） -&gt; 外观 -&gt; 效果；</li>
 <li>选中“☑ 使用下列方式使屏幕字体的边缘平滑”；</li>
 <li>并切换下面的下拉框，选中“清晰(ClearType)”；</li>
 <li>确定即可。</li>
-</ol></li>
-<li>Vim设置
-
-<ol>
-<li>在 _vimrc 中加入如下代码：
-<code>
-set guifont=Courier_New:h11:cANSI
-</code></li>
-<li>中文的宋体已经非常好了，不过仍然可以单独设置中文字体：
-<code>
-set guifontwide=YouYuan:h11:cGB2312
-</code></li>
-<li>此时，新启动vim即可使用新设置的字体了。</li>
-</ol></li>
 </ol>
-
-<p><img src="http://farm4.static.flickr.com/3462/3919344550_f5cd6656c8_o.png" alt="pic"/></p>
-
+</li>
+<li>Vim设置<ol>
+<li>在 _vimrc 中加入如下代码：<div class="highlight"><div class="codes"><div class="code"><pre>set guifont=Courier_New:h11:cANSI</pre></div><pre class="line"></pre></div></div></li>
+<li>中文的宋体已经非常好了，不过仍然可以单独设置中文字体：<div class="highlight"><div class="codes"><div class="code"><pre>set guifontwide=YouYuan:h11:cGB2312</pre></div><pre class="line"></pre></div></div></li>
+<li>此时，新启动vim即可使用新设置的字体了。</li>
+</ol>
+</li>
+</ol>
+<p><img src="http://farm4.static.flickr.com/3462/3919344550_f5cd6656c8_o.png" alt="pic"></p>
 <p><a href="http://www.flickr.com/photos/hotoo/3919344550/">ref</a></p>
-<h2 id="白露非提供的字体">白露非提供的字体</h2>
-<p><a href="http://8.nf/dxa">下载</a></p>
-
+<h2 id="白露非提供的字体">白露非提供的字体</h2><p><a href="http://8.nf/dxa">下载</a></p>
 <p>设置：</p><div class="highlight"><div class="codes"><div class="code"><pre>guifont=Microsoft_YaHei_Mono:h11:cANSI
-</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a></pre></div></div><h2 id="see-also">See Also</h2>
-<ul>
+
+</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+<a name="L3-2" href="#L3-2">2</a></pre></div></div><h2 id="see-also">See Also</h2><ul>
 <li><a href="https://twitter.com/#!/belleveinvis/status/19308677508894720">@twitter</a></li>
 </ul>
 </div>

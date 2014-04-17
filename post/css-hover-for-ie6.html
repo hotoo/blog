@@ -43,11 +43,9 @@
 <div class="hentry">
   <h1 class="entry-title">IE6 的 CSS:hover 伪类</h1>
   <div class="entry-content"><p>众所周知，IE6 不支持 a:hover 以外的 CSS 伪类，解决办法一般有 3 种方案：</p>
-<h2 id="使用-javascript-事件">使用 JavaScript 事件</h2>
-<p>直接使用 JavaScript 的 onmouseover/onmouseenter 和 onmouseout/onmouseleave
+<h2 id="使用-javascript-事件">使用 JavaScript 事件</h2><p>直接使用 JavaScript 的 onmouseover/onmouseenter 和 onmouseout/onmouseleave
 事件进行针对性开发，这大概没什么好详细介绍的。</p>
-<h2 id="使用-css-表达式">使用 CSS 表达式</h2>
-<p>辅以 CSS 表达式中 JScript 同样也有 onmouseover/onmouseenter 和
+<h2 id="使用-css-表达式">使用 CSS 表达式</h2><p>辅以 CSS 表达式中 JScript 同样也有 onmouseover/onmouseenter 和
 onmouseout/onmouseleave 事件，用以实现 :hover 效果。<br />
 注意：其中冒号之前的事件名称可以随意，关键是 expression() 里面的事件。</p><div class="highlight"><div class="codes"><div class="code"><pre>ul li{
     onmouseout:expression(onmouseout=function(){this.style.backgroundColor=&#39;&#39;});
@@ -57,6 +55,7 @@ ol li{
     onmouseleave:expression(onmouseleave=function(){this.style.backgroundColor=&#39;&#39;});
     onmouseenter:expression(onmouseenter=function(){this.style.backgroundColor=&#39;yellow&#39;});
 }
+
 </pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
@@ -64,20 +63,21 @@ ol li{
 <a name="L1-5" href="#L1-5">5</a>
 <a name="L1-6" href="#L1-6">6</a>
 <a name="L1-7" href="#L1-7">7</a>
-<a name="L1-8" href="#L1-8">8</a></pre></div></div>
-<p>不过应该说使用 CSS class 是更好的实践。</p><div class="highlight"><div class="codes"><div class="code"><pre>table tr{
+<a name="L1-8" href="#L1-8">8</a>
+<a name="L1-9" href="#L1-9">9</a></pre></div></div><p>不过应该说使用 CSS class 是更好的实践。</p><div class="highlight"><div class="codes"><div class="code"><pre>table tr{
   onmouseout:expression(onmouseout=function(){
     try{this.className=this.className.replace(&#39; hover&#39;,&#39;&#39;)}catch(ex){}});
   onmouseover:expression(onmouseover=function(){this.className+=&#39; hover&#39;});
 }
 table tr.hover td{background:yellow;}
+
 </pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
 <a name="L2-4" href="#L2-4">4</a>
 <a name="L2-5" href="#L2-5">5</a>
-<a name="L2-6" href="#L2-6">6</a></pre></div></div>
-<p>onmouseout 事件处理函数中加了 try/catch 是为了避免 IE5.5 因为不支持 <code>replace()</code>
+<a name="L2-6" href="#L2-6">6</a>
+<a name="L2-7" href="#L2-7">7</a></pre></div></div><p>onmouseout 事件处理函数中加了 try/catch 是为了避免 IE5.5 因为不支持 <code>replace()</code>
 而报脚本错误。当然为了避免这个错误，还是其他的实现方式：</p><div class="highlight"><div class="codes"><div class="code"><pre>table tr{
     onmouseenter:expression(onmouseout=function(){
         var c=this.className, h=&#39; hover&#39;, l=h.length;
@@ -87,6 +87,7 @@ table tr.hover td{background:yellow;}
     onmouseleave:expression(onmouseover=function(){this.className+=&#39; hover&#39;});
 }
 table tr.hover td{background:yellow;}
+
 </pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
 <a name="L3-3" href="#L3-3">3</a>
@@ -95,20 +96,20 @@ table tr.hover td{background:yellow;}
 <a name="L3-6" href="#L3-6">6</a>
 <a name="L3-7" href="#L3-7">7</a>
 <a name="L3-8" href="#L3-8">8</a>
-<a name="L3-9" href="#L3-9">9</a></pre></div></div><h2 id="使用-css-behavior-行为">使用 CSS behavior 行为</h2>
-<p>使用 <a href="http://www.xs4all.nl/%7Epeterned/csshover.html">Whatever:hover</a></p>
-
-<p><a href="http://www.xs4all.nl/%7Epeterned/htc/csshover3.htc">csshover3.htc</a></p><div class="highlight"><div class="codes"><div class="code"><pre>&lt;!--[if lte IE 6]&gt;
-&lt;style type=&quot;text&#47;css&quot;&gt;
+<a name="L3-9" href="#L3-9">9</a>
+<a name="L3-10" href="#L3-10">10</a></pre></div></div><h2 id="使用-css-behavior-行为">使用 CSS behavior 行为</h2><p>使用 <a href="http://www.xs4all.nl/~peterned/csshover.html">Whatever:hover</a></p>
+<p><a href="http://www.xs4all.nl/~peterned/htc/csshover3.htc">csshover3.htc</a></p><div class="highlight"><div class="codes"><div class="code"><pre>&lt;!--[if lte IE 6]&gt;
+&lt;style type=&quot;text/css&quot;&gt;
 body{behavior:url(&quot;csshover3.htc&quot;); }
-&lt;&#47;style&gt;
+&lt;/style&gt;
 &lt;![endif]--&gt;
+
 </pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
 <a name="L4-2" href="#L4-2">2</a>
 <a name="L4-3" href="#L4-3">3</a>
 <a name="L4-4" href="#L4-4">4</a>
-<a name="L4-5" href="#L4-5">5</a></pre></div></div><h2 id="延伸阅读">延伸阅读</h2>
-<ol>
+<a name="L4-5" href="#L4-5">5</a>
+<a name="L4-6" href="#L4-6">6</a></pre></div></div><h2 id="延伸阅读">延伸阅读</h2><ol>
 <li><a href="http://blog.csdn.net/andyyukun/archive/2007/07/03/1676963.aspx">强大的CSS表达式 -- expression</a></li>
 <li><a href="http://www.planabc.net/2009/09/21/optimization_of_css_eexpression/">CSS Expression 的优化</a></li>
 </ol>

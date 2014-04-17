@@ -45,14 +45,11 @@
   <div class="entry-content"><p>由于 <a href="Dropbox-died-in-China.html">Dropbox 的墙掉</a>，https 协议访问 dl 或 dl-web 子域
 的方法也随之失效，虽然可以通过修改 hosts 来继续同步文件，但是 Public 目录再也
 不能输出文化了。</p>
-
 <p>我之前 <a href="use-vimwiki-for-blog.html">在 Dropbox Public 目录搭建的博客和 Wiki 系统</a>
 也无法在线浏览了，为了能够继续 辅助文化局输出文化，我便利用万恶的资本主义国家
 的 Google Code 来为我们服务了。</p>
-
 <p>由于可以继续使用 Dropbox 来自动同步私有文件，所以可以保持 .wiki 文件在 Dropbox
 中，其他自动同步的软件也可以用来做类似的事情。</p>
-
 <p>将 Vimwiki 的 <code>path_html</code> 修改为 Google Code 的某个 svn 或 Hg 目录：</p><div class="highlight"><div class="codes"><div class="code"><pre>let g:vimwiki_list = [{...},
     \ {...},
     \ {...},
@@ -62,8 +59,7 @@
         \ &#39;html_header&#39; : &#39;D:\My Dropbox\blog\template\header.tpl&#39;,
         \ &#39;html_footer&#39; : &#39;D:\My Dropbox\blog\template\footer.tpl&#39;
     \ }
-    \ ]
-</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+    \ ]</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
 <a name="L1-4" href="#L1-4">4</a>
@@ -71,19 +67,14 @@
 <a name="L1-6" href="#L1-6">6</a>
 <a name="L1-7" href="#L1-7">7</a>
 <a name="L1-8" href="#L1-8">8</a>
-<a name="L1-9" href="#L1-9">9</a>
-<a name="L1-10" href="#L1-10">10</a></pre></div></div>
-<p>虽然 Vimwiki 目前的 toHTML 方法还不支持重新生成仅更新过的 wiki 文件，但是 svn
+<a name="L1-9" href="#L1-9">9</a></pre></div></div><p>虽然 Vimwiki 目前的 toHTML 方法还不支持重新生成仅更新过的 wiki 文件，但是 svn
 可以判断文件是否有真正被修改过。</p>
-
 <p>另外 <a href="http://hotoo.googlecode.com/svn/wiki">http://hotoo.googlecode.com/svn/wiki</a> 目录存放的是 Google Code 的 Wiki 文件，
 这里面的 wiki 文件无需通过 Vimwiki 导出 HTML，Google Code 会自动完成这一工作，
 并可以通过 <a href="http://code.google.com/p/hotoo/w/list">http://code.google.com/p/hotoo/w/list</a> 浏览。而 Vimwiki 是 Google Code
 Wiki 语法的一个子集，所以基本可以天衣无缝的配合使用。</p>
-
 <p>这也是不错的一个方案，除了需要 commit 之外，Google Code 比 Dropbox 的 Public
 有过之而无不足，域名也是杠杠的。</p>
-
 <p>另外不小心发现还有其他的托管方案，让防火墙筑的更高些吧，当局者把自己当猪圈养起来
 比较好，做个专职的脑子又笨，目光又短浅的墙脚之猪也可以提高幸福指数的。</p>
 </div>

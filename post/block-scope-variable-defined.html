@@ -45,58 +45,44 @@
   <div class="entry-content"><blockquote>
 <p>代码是写给人看的，顺便给机器执行。[1]</p>
 </blockquote>
-<h2 id="引子">引子</h2>
-<p>上周有位前端同学周报里分享了段 for 循环的『好代码』：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, item; item = list[i]; i++) {
+<h2 id="引子">引子</h2><p>上周有位前端同学周报里分享了段 for 循环的『好代码』：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, item; item = list[i]; i++) {
   <span class="comment">// 将 ltem = list[i]当做条件判断语句，当i下标溢出时，返回undefined，循环结束</span>
   <span class="comment">// 居然省了一个变量呢～</span>
-}
-</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+}</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
-<a name="L1-3" href="#L1-3">3</a>
-<a name="L1-4" href="#L1-4">4</a></pre></div></div>
-<p>这位同学是看了 jQuery 里类似下面这种用法之后做的这个分享：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">// If no nodeType, this is expected to be an array</span>
+<a name="L1-3" href="#L1-3">3</a></pre></div></div><p>这位同学是看了 jQuery 里类似下面这种用法之后做的这个分享：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">// If no nodeType, this is expected to be an array</span>
 <span class="keyword">for</span> ( ; (node = elem[i]); i++ ) {
     <span class="comment">// Do not traverse comment nodes</span>
     ret += getText( node );
-}
-</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+}</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
-<a name="L2-4" href="#L2-4">4</a>
-<a name="L2-5" href="#L2-5">5</a></pre></div></div>
-<p>jQuery 还有不少地方使用这种用法，也有不少地方是传统的使用 length 方法。
+<a name="L2-4" href="#L2-4">4</a></pre></div></div><p>jQuery 还有不少地方使用这种用法，也有不少地方是传统的使用 length 方法。
 但是 jQuery 这样用有其特定场景，需要正视。我回复说：</p>
-
 <ol>
 <li>如果数组项中有 0, false, null, undefined, &quot;&quot;，代码就出 bug 了。</li>
 <li>好像没看到少了变量，一定要少的话，典型的 for 写法也可以少（但是不推荐）。</li>
 <li>代码是写给人读的，顺便给机器执行。</li>
 <li>另外，对 list 本身有操作，尤其是长度有影响的操作要特别注意。</li>
 </ol>
-
 <p>我个人推荐下面这种写法：</p><div class="highlight"><div class="codes"><div class="code"><pre>for(var i=0,l=list.length; i&lt;l; i++){
   list[i]
 }
+
 </pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
-<a name="L3-3" href="#L3-3">3</a></pre></div></div>
-<p>p.s. 使用 Vim snipMate 的同学可以参考
+<a name="L3-3" href="#L3-3">3</a>
+<a name="L3-4" href="#L3-4">4</a></pre></div></div><p>p.s. 使用 Vim snipMate 的同学可以参考
 <a href="https://github.com/hotoo/snipmate.vim/blob/master/snippets/javascript.snippets#L56">javascript.snippet</a>
 这个代码片段模板。</p>
-
 <p>好了，使用溢出判断数组循环结束的讨论到此就结束了，但是好戏还在后头。</p>
-
 <p>由于 JavaScript 作用域的问题，有同学建议说将 <code>i</code>, <code>l</code> 变量定义在 <code>for</code> 循环之外。
 于是进入另一个变量定义的话题。</p>
-
 <a name="more"></a>
 
-<hr/>
-<h2 id="如何定义块级作用域中使用的变量？">如何定义块级作用域中使用的变量？</h2>
-<p>持有变量应前置定义观点的同学，估计有不少是受了《JavaScript 权威指南》或其他权威著作的影响。</p>
-
+<hr>
+<h2 id="如何定义块级作用域中使用的变量？">如何定义块级作用域中使用的变量？</h2><p>持有变量应前置定义观点的同学，估计有不少是受了《JavaScript 权威指南》或其他权威著作的影响。</p>
 <p>《JavaScript 权威指南》第 4 章 4.3.1 小节 [2] 详细分析了块级作用域中变量定义的问题。</p>
-
 <p>由于 JavaScript 只有函数作用域，没有块级作用域，因此在 <code>for</code>, <code>if/else</code>,
 <code>do/while</code>, <code>switch/case</code>, <code>try/catch</code> 这些块中定义的变量，实际在块之外也可以使用。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">functionScope</span><span class="params">()</span>{</span>
     <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,l=<span class="number">5</span>; i&lt;l; i++){
@@ -104,38 +90,28 @@
     }
     alert(i); <span class="comment">// 5</span>
     alert(blockVariable); <span class="comment">// 4</span>
-}
-</code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
+}</code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
 <a name="L4-2" href="#L4-2">2</a>
 <a name="L4-3" href="#L4-3">3</a>
 <a name="L4-4" href="#L4-4">4</a>
 <a name="L4-5" href="#L4-5">5</a>
-<a name="L4-6" href="#L4-6">6</a>
-<a name="L4-7" href="#L4-7">7</a></pre></div></div>
-<p>例如上面的代码，在 for 这个块之中定义的变量，在 for 之外也可以使用。
+<a name="L4-6" href="#L4-6">6</a></pre></div></div><p>例如上面的代码，在 for 这个块之中定义的变量，在 for 之外也可以使用。
 这在其他支持块级作用域(如C/C++ [3], Java)的编程语言中是无法理解，甚至不可接受的。</p>
-
 <p>这是 JavaScript 设计的 BUG，书中作者建议将所有变量声明集中放置在函数开头，
 说这是个好习惯。</p>
-
 <blockquote>
 <p>This example illustrates why it is good programming practice to place all of
 your variable declarations together at the start of any function.</p>
 </blockquote>
-
 <p>JavaScript 传教士老道也有
-<a href="http://javascript.crockford.com/code.html#variable%20declarations">类似的教诲</a>：</p>
-
+[类似的教诲](<a href="http://javascript.crockford.com/code.html#variable">http://javascript.crockford.com/code.html#variable</a> declarations)：</p>
 <blockquote>
 <p>The var statements should be the first statements in the function body.</p>
-
 <p>...</p>
-
 <p>JavaScript does not have block scope, so defining variables in blocks can
 confuse programmers who are experienced with other C family languages.
 Define all variables at the top of the function.</p>
 </blockquote>
-
 <p>他们的理由是，既然在块级作用域之内定义的变量可以被块级作用域之外使用，
 那么就应该把变量定义在块级作用域之外，让它们看起来和它们实际的作用域表现一致。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">functionScope</span><span class="params">()</span>{</span>
     <span class="keyword">var</span> i, l=<span class="number">5</span>, blockVariable;
@@ -145,71 +121,58 @@ Define all variables at the top of the function.</p>
     <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;l; i++){
         blockVariable = i;
     }
-}
-</code></pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
+}</code></pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
 <a name="L5-2" href="#L5-2">2</a>
 <a name="L5-3" href="#L5-3">3</a>
 <a name="L5-4" href="#L5-4">4</a>
 <a name="L5-5" href="#L5-5">5</a>
 <a name="L5-6" href="#L5-6">6</a>
 <a name="L5-7" href="#L5-7">7</a>
-<a name="L5-8" href="#L5-8">8</a>
-<a name="L5-9" href="#L5-9">9</a></pre></div></div>
-<hr/>
-
+<a name="L5-8" href="#L5-8">8</a></pre></div></div><hr>
 <p>但是这个我稍微持不同的观点 ：）</p>
-
 <p>实际上我们定义 <code>i</code>, <code>l</code> 是为了给 <code>for</code> 用的，JavaScript 解释器在执行的时候可以
 给块级作用域外面用，不代表就应该定义在外面。
 定义在外面给人的暗示是这个变量是给整个 function 用的，而不只是 for 循环，
 就会给人『在外面用也没关系』的错觉。但这其实不是我们定义 <code>i</code>, <code>l</code> 的本意。</p>
-
 <p>另外变量前置声明，会导致变量声明、定义和使用之间分离，变量含义自我解释性被削弱，
 而且容易造成误清理、或遗漏清理变量的问题。</p>
-
 <p>对于 JavaScript 的这个糟粕，让人来适应机器的问题而修改代码，甚至改变本性习惯，
 和另一个使用逗号连续定义变量的话题是何其的相似。
 为什么不让机器来适应人，在编辑器中编辑、或在编译器中编译 JavaScript 代码时，
 发现块级作用域之外有使用块级作用域内部定义的变量时，给予恰当的警告。
 这是否更合理呢。</p>
-
 <p>如果遵循权威的教诲，把变量定义在函数前面，编辑器和编译器都没有办法帮我们了。</p>
-
 <p>我认为：</p>
-
 <ol>
 <li>定义在块级作用域之内的变量不应该被块级作用域之外使用。</li>
 <li><p>如果被块级作用域之外使用了：</p>
-
 <ol>
-<li>要么这是一个错误的用法，会带来隐患。<br/>
-<em>人、编辑器、编译器、甚至将来的解释器可以发现这个问题并给出警告。</em></li>
-<li>或者确实有这样的使用需求，那么这个变量应该被声明在块级作用域之外。</li>
-</ol></li>
+<li><p>要么这是一个错误的用法，会带来隐患。<br/>
+<em>人、编辑器、编译器、甚至将来的解释器可以发现这个问题并给出警告。</em></p>
+</li>
+<li><p>或者确实有这样的使用需求，那么这个变量应该被声明在块级作用域之外。</p>
+</li>
 </ol>
-
+</li>
+</ol>
 <p>所以我比较认同 <code>就近原则</code> [4] 这种更合理、更人性的风格。</p>
-
 <ul>
 <li>文档、注释应尽可能的靠近代码。</li>
 <li>变量声明应尽可能的靠近变量使用。</li>
 <li>应尽量限制变量的作用域。</li>
 </ul>
-<h2 id="那么">那么</h2>
-<p>请问你持什么样的观点呢？</p>
-
-<hr/>
-<h3 id="注">注</h3>
-<ol>
-<li>出自《Structure and Interpretation of Computer Programs》，中文版《计算机程序的构造和解释》
-&gt; Thus, programs must be written for people to read, and only incidentally
-&gt; for machines to execute.
-&gt;
-&gt; -- by Harold Abelson and Gerald Jay Sussman with Julie Sussman</li>
+<h2 id="那么">那么</h2><p>请问你持什么样的观点呢？</p>
+<hr>
+<h3 id="注">注</h3><ol>
+<li>出自《Structure and Interpretation of Computer Programs》，中文版《计算机程序的构造和解释》<blockquote>
+<p>Thus, programs must be written for people to read, and only incidentally
+for machines to execute.</p>
+<p>-- by Harold Abelson and Gerald Jay Sussman with Julie Sussman</p>
+</blockquote>
+</li>
 <li><p>《JavaScript 权威指南》第六版章节和标题有所变更。第六版对应章节在第 3 章
 第 3.10.1 小节：函数作用域和声明提前。
 第六版中，关于变量声明提前的结束语中相对中立了很多。</p>
-
 <blockquote>
 <p>In programming languages with block scope, it is generally good programming
 practice to declare variables as close as possible to where they are used and
@@ -219,23 +182,23 @@ the function, rather than trying to declare them closer to the point at which
 they are used. This technique makes their source code accurately reflect the
 true scope of the variables.</p>
 </blockquote>
-
 <p>大意是说：<br/>
 在支持块级作用域的编程语言中，变量就近定义是一个非常好的编程实践。
 变量定义尽量靠近变量使用，变量尽量限制在最小的作用域之内。
 由于 JavaScript 没有块级作用域，一些程序员提出将变量定义在函数的顶部，
-而不是靠近使用变量的地方。这使得源码准确反映了其真正的作用域范围。</p></li>
+而不是靠近使用变量的地方。这使得源码准确反映了其真正的作用域范围。</p>
+</li>
 <li><p>早在 <a href="http://flash-gordon.me.uk/ansi.c.txt">C89 规范</a> 中，规定了变量必须声明在作用域的最前面，
 但是 <a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1336.pdf">C99</a>
 和 C++ 取消了这个限制，支持就近声明变量。</p>
-
 <p>由于就近声明可以让变量作用于恰当的作用域之中，而且变量声明更靠近变量的使用，
-因此也更容易理解。<code>就近原则</code> 在很多编程语言当中都是最佳实践，JavaScript 也不例外。</p></li>
-<li><p><a href="http://en.wikipedia.org/wiki/The_Proximity_Principle">就近原则(The Principle of Proximity)</a> 是一项社会心理学
+因此也更容易理解。<code>就近原则</code> 在很多编程语言当中都是最佳实践，JavaScript 也不例外。</p>
+</li>
+<li><a href="http://en.wikipedia.org/wiki/The_Proximity_Principle">就近原则(The Principle of Proximity)</a> 是一项社会心理学
 的理论，实际在 <a href="http://www.approxion.com/?p=120">计算机编程</a> 、
 <a href="http://desktoppub.about.com/od/designprinciples/tp/Principles_of_Design.htm">视觉设计</a> 、
 <a href="http://www.webdesignerdepot.com/2010/01/the-principle-of-proximity-in-web-design/">网页设计</a>
-领域也有很多的延伸与实践。</p></li>
+领域也有很多的延伸与实践。</li>
 </ol>
 </div>
 

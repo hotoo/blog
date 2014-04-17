@@ -58,8 +58,7 @@ function ClosePair(char)
     else
         return a:char
     endif
-endf
-</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+endf</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
 <a name="L1-4" href="#L1-4">4</a>
@@ -73,20 +72,14 @@ endf
 <a name="L1-12" href="#L1-12">12</a>
 <a name="L1-13" href="#L1-13">13</a>
 <a name="L1-14" href="#L1-14">14</a>
-<a name="L1-15" href="#L1-15">15</a>
-<a name="L1-16" href="#L1-16">16</a></pre></div></div>
-<p>经启发我增加了对括号和引号更为智能的补全支持，
+<a name="L1-15" href="#L1-15">15</a></pre></div></div><p>经启发我增加了对括号和引号更为智能的补全支持，
 不过中文全角的括号和引号目前无法通过映射来实现，
 对于转义的符号对的支持不佳。</p>
-
 <p>支持 2000 行以内（可以根据系统性能自行配置）文档的全局括号对识别能力。
 也就是 2000 行以内的文档，支持跨行的括号对智能匹配能力；当文档行数超出预设值，
 则使用行内括号对智能补全。</p>
-
 <ul>
-<li>OpenPair:
-
-<ol>
+<li>OpenPair:<ol>
 <li>如果当前行的括号已经成对匹配，则自动补全右括号 <code>(I)</code></li>
 <li>如果左括号比右括号多，则自动补全  <code>I(()</code> <code>(I()</code> <code>((I)</code> <code>(()I</code></li>
 <li>如果左括号比右括号少，<br />
@@ -94,18 +87,16 @@ endf
 <code>(I))</code> 同上<br />
 <code>()I)</code> 同上<br />
 <code>())I</code> 自动补全：左括号较少，且光标之后字符串进行一次递归上面的条件</li>
-</ol></li>
-<li>ClosePair:
-
-<ol>
+</ol>
+</li>
+<li>ClosePair:<ol>
 <li>如果光标之后是一个右括号，向右移动一列 <code>(I)</code> <code>((I)</code> <code>(I))</code> <code>()I)</code></li>
 <li>否则原样输出。</li>
-</ol></li>
+</ol>
+</li>
 </ul>
-
 <p>代码见 <a href="http://gist.github.com/449512">gist: 449512</a></p>
-<h2 id="更新-2010-6-24">更新 (2010/6/24)</h2><h2 id="最后更新-2010-7-9">最后更新 (2010/7/9)</h2><h2 id="相关脚本">相关脚本</h2>
-<ul>
+<h2 id="更新-2010-6-24">更新 (2010/6/24)</h2><h2 id="最后更新-2010-7-9">最后更新 (2010/7/9)</h2><h2 id="相关脚本">相关脚本</h2><ul>
 <li><a href="http://www.vim.org/scripts/script.php?script_id=2754">delimitMate.vim</a>
 (<a href="http://github.com/Raimondi/delimitMate">src</a>)</li>
 <li><a href="http://vim.wikia.com/wiki/Making_Parenthesis_And_Brackets_Handling_Easier">Making Parenthesis And Brackets Handling Easier</a></li>
