@@ -14,6 +14,10 @@ watch:
 build:
 	@nico build
 publish: clean build
+	@git st
+	@git add .
+	@git ci -m "Update blogpost."
+	@git push origin master
 	@ghp-import ${sitefolder}
 	@git push origin gh-pages
 clean:
