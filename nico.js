@@ -2,7 +2,7 @@ module.exports = {
   "sitename": "闲耘™.博客",
   "siteurl": "http://blog.hotoo.me",
   "source": "content",
-  "output": "/Users/hotoo/Sites/blog.hotoo.me",
+  "output": "_site",
   "theme": "theme",
   "permalink": "post/{{filename}}",
   "navigation":[
