@@ -1,0 +1,52 @@
+---
+layout: default
+title: 项目(Projects)
+---
+
+<h2>项目(Projects)</h2>
+<div>
+  <h4><a href="http://github.com/hotoo">@hotoo</a>(<span id="hotoo-repos-count">...</span>)</h4>
+  <div id="hotoo-calendar"></div>
+  <div id="hotoo-repos">Loading...</div>
+  <h4><a href="http://github.com/vimcn">@vimcn</a>(<span id="vimcn-repos-count">...</span>)</h4>
+  <div id="vimcn-repos">Loading...</div>
+</div>
+
+<script type="text/javascript">/*<![CDATA[*/
+  seajs.use(["jquery"], function(){
+    function loadRepos(user_name, container, counter){
+      jQuery.getJSON("https://api.github.com/users/"+user_name+"/repos?callback=?",
+        {
+          type: "sources",
+          per_page: 100
+        },
+        function(repos){
+          var html = ['<ul class="project-list">'];
+          var len = 0;
+          var data = repos.data.sort(function(a, b){
+            return String(b.updated_at).localeCompare(a.updated_at);
+
+            return (new Date(b.updated_at.replace(/-/g,"/")).getTime() -
+                new Date(a.updated_at.replace(/-/g,"/")).getTime()) ||
+              (b.watchers - a.watchers) ||
+              (b.forks - a.forks);
+          });
+          jQuery(data).each(function(){
+            if(this.fork){return;}
+            html.push('<li><div><a href="', this.html_url, '">', this.name, '</a>',
+              '<span class="extinal">watchers:', this.watchers, ', forks:', this.forks,
+              '</span></div><div>', this.description, '</div></li>');
+            len++;
+          });
+          html.push('</ul>');
+
+          jQuery(container).html(html.join(''));
+          jQuery(counter).html(len);
+        }
+      );
+    }
+
+    loadRepos("hotoo", "#hotoo-repos", "#hotoo-repos-count");
+    loadRepos("vimcn", "#vimcn-repos", "#vimcn-repos-count");
+  });
+/*]]>*/</script>

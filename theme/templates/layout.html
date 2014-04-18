@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="{{system.name}} {{system.version}}">
+    <meta name="theme" content="{{theme.name}} {{theme.version}}">
+    <title>{% block title%}{% endblock %} - {{config.sitename}}</title>
+    {%- if config.feedurl %}
+    <link rel="alternate" type="application/rss+xml" href="{{config.siteurl}}{{config.feedurl}}" title="{{config.sitename}}" />
+    {%- endif %}
+    <link rel="stylesheet" href="{{static_url('syntax.css')}}" />
+    <link type="text/css" rel="stylesheet" href="{{static_url('template.css')}}" />
+    {%- block afterstyle %}{% endblock %}
+    {%- if config.google %}
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', '{{config.google}}']);
+      _gaq.push(['_trackPageview']);
+      _gaq.push(['_trackPageLoadTime']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = 'https://ssl.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    {%- endif %}
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="{{content_url('index.html')}}">{{config.sitename}}</a>-->
+
+      {%- if post.meta.nosearch != "true" %}
+      <div style="float:right;">
+        <form action="/search.html">
+          <input type="text" name="q" autocomplete="off" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      {%- endif %}
+
+      {%- if config.navigation %}
+      <nav class="menu">
+        <ul>
+          {%- for item in config.navigation %}
+          <li class="{%- if loop.first %}first{%- endif %}{%- if loop.last %}last{%- endif %}{%- if item.active %} actived{%- endif %}"><a href="{{item.link}}"
+            title="{{item.title}}">{{item.title}}</a></li>
+          {%- endfor %}
+        </ul>
+      </nav>
+      {%- endif %}
+    </header>
+
+<div id="container">
+  <div id="content" class="document">
+      {%- block document %}
+      {%- endblock %}
+  </div>
+
+    <!-- Vimlike status bar -->
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
+<footer>
+  <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
+    alt="Creative Commons License" style="border-width: 0pt;"
+    src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"/></a>
+  This work is licensed under a
+  <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
+    Commons Attribution 2.5 Generic License</a>.<br/>
+  Copyleft &copy; 2005-2013, Power by
+  <a href="{{system.homepage}}">{{system.name}}@{{system.version}}</a>, Theme by 闲耘™(@hotoo).
+  </p>
+</footer>
+</div>
+<script type="text/javascript">
+var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
+}catch(err){}</script>
+
+  </body>
+</html>

@@ -1,0 +1,22 @@
+{%- extends "layout.html" -%}
+{%- block title %}{{post.title}}{% endblock %}
+
+{%- block document %}
+
+<link type="text/css" rel="stylesheet" href="{{static_url('search.css')}}" />
+
+<div class="hentry">
+  <h1 class="entry-title">{{post.title}}</h1>
+  {%- if post.description %}
+  <blockquote class="entry-description">{{post.description}}</blockquote>
+  {%- endif %}
+  <div class="entry-content">{{post.html|more|codeline}}</div>
+</div>
+
+
+<!--http://fis.io/ajax-google-custom-search-engine.html-->
+<!--<script src="https://www.google.com/jsapi" type="text/javascript"></script>-->
+<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>-->
+<!--<script type="text/javascript" src="{{static_url('search.js')}}"></script>-->
+
+{% endblock -%}

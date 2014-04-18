@@ -1,0 +1,42 @@
+{%- extends "layout.html" -%}
+{%- block title %}{{post.title}}{% endblock %}
+
+{%- block document %}
+<div class="hentry">
+  <h1 class="entry-title">{{post.title}}</h1>
+  {%- if post.description %}
+  <blockquote class="entry-description">{{post.description}}</blockquote>
+  {%- endif %}
+  <div class="entry-content">{{post.html|more|codeline}}</div>
+
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+      {%- for tag in post.tags %}
+      {% if loop.index != 1 %}, {% endif %}
+      <a href="/tag/#{{ tag }}">{{ tag }}</a>
+      {% endfor %}
+    </span>
+
+    <time datetime="{{post.pubdate|xmldatetime}}">
+      <a href="/{{ post.pubdate|date('Y') }}">{{ post.pubdate|date('Y年') }}</a>{{ post.pubdate|date('m月d日') }}
+    </time>
+  </footer>
+    <section>
+      <div id="disqus_thread"></div>
+      <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+      </noscript>
+    </section>
+  <script type="text/javascript">
+    {% if post.disqus_identifier %}
+    var disqus_identifier = "{{ post.disqus_identifier }}";
+    {% else %}
+    var disqus_identifier = "{{ permalink_url(post) | disqus_identifier }}";
+    {% endif %}
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://hotoo.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  </script>
+</div>
+{% endblock -%}

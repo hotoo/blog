@@ -1,0 +1,62 @@
+{%- extends "layout.html" -%}
+
+{%- block title %}{{post.title}}{% endblock %}
+
+{%- block document %}
+<div class="hentry">
+  <!--<h1 class="entry-title">{{post.title}}</h1>-->
+  {%- if post.description %}
+  <blockquote class="entry-description">{{post.description}}</blockquote>
+  {%- endif %}
+
+  <div class="container">
+    <div class="post">
+      {% for post in resource.posts|sortby('-pubdate')|public -%}
+        {%- set postItem = post|read %}
+        {%- if loop.first %}
+          <h1>{{post.title}} <a href="{{permalink_url(post)}}" class="title-permalink">¶</a></h1>
+          <section>
+            {%- set postItemUrl = permalink_url(post) %}
+            {{ postItem.html|less(postItemUrl, '阅读详情...') }}
+          </section>
+          <footer class="post clearfix">
+            <span class="tags"><a href="/tag">Tags</a>:
+              {%- for tag in postItem.tags %}
+                {% if loop.index != 1 %}, {% endif %}
+                <a href="/tag/#{{ tag }}">{{ tag }}</a>
+              {% endfor %}
+            </span>
+
+            <time>
+              <a href="/{{ post.pubdate|date('Y') }}">{{ post.pubdate|date('Y年') }}</a>{{ postItem.pubdate|date('m月d日') }}
+            </time>
+          </footer>
+        {%- endif %}
+      {%- endfor %}
+    </div>
+
+    <h2>最近文章</h2>
+
+    <ul class="posts">
+      {%- set postIndex = 0 %}
+      {% for post in resource.posts|sortby('-pubdate')|public -%}
+        {%- if loop.index != 1 && loop.index <= 6 %}
+          <li class="posts-item">
+            <a href="{{permalink_url(post)}}">{{post.title}}</a>
+            (<time class="datetime">{{ post.pubdate|date('Y-m-d') }}</time>)
+          </li>
+        {%- endif %}
+        {%- set postIndex = 1 %}
+      {% endfor %}
+    </ul>
+
+    <div>
+      <a href="/tag">Tags</a> |
+      <a href="/2013">Archive</a>
+    </div>
+    <p/>
+
+  </div>
+
+</div>
+{% endblock -%}
