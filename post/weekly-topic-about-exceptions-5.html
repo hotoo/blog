@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.5.0">
+    <meta name="theme" content="KISS 0.1">
+    <title>每周异常：第 5期，由静态资源异常引发的质疑 - 闲耘™.博客</title>
+    <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../">闲耘™.博客</a>-->
+      <div style="float:right;">
+        <form action="/search.html">
+          <input type="text" name="q" autocomplete="off" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
+
+<div id="container">
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">每周异常：第 5期，由静态资源异常引发的质疑</h1>
+  <div class="entry-content"><p>今天要说的是一个『静态资源异常监控』的话题。虽然静态资源异常可以非常有效的跟
+JavaScript 异常结合起来做有力的分析，但是今天这个话题跟 JavaScript 异常没什么关系。</p>
+<hr>
+<p>传说某著名公司的网站监控方案是申请了专利的技术，我有幸看到过，真的是非常牛逼。</p>
+<p>这个网站监控方案中提供了网页的访问量、页面访问流向、页面有效点击量、点击热图，
+灰度发布（包括 ABTest）等都有完善的支持。</p>
+<p>这个方案总体上是用 JavaScript 通过 new Image() 发送监控的数据到日志服务器，
+然后由数据仓库做数据清洗。</p>
+<p>通过业务系统服务器端的日志分析，这套方案的数据质量有确实有一定的问题，
+比如它统计到的访问量要比业务系统服务器端统计到的少，丢失率一般在 5% ~ 10% 左右，
+少量特殊页面（比如跳转页）丢失率会高达 50% ~ 60%。</p>
+<p>尽管如此我们也基本上可以接受这样的误差，而且部分从理论上讲，『应该』大部分是
+无效或无意义的访问（比如爬虫、快速跳转等），丢掉是合理的。</p>
+<p>一直以来，我们都认为这个方案的数据是相对比较可靠的，虽然偶尔有些不正常的丢失率
+让业务方质疑，但是我们总是用上面的理论和理由解释给对方听，让他们接受我们的现实。</p>
+<p>这样过了好多年，他们过着幸福的生活~</p>
+<hr>
+<p>直到有个家伙的膝盖被射了一箭，搞出来个静态资源监控系统。</p>
+<p>静态资源监控系统是通过分析静态服务器的访问日志，来统计各个资源状态的趋势及其分布情况。</p>
+<p>因为静态资源监控是通过静态服务器访问日志来分析的，理论上和业务服务端的日志是一致的。</p>
+<p>但是我们惊奇的发现某个静态页面引用了某个不存在的静态资源，异常率理论上应该是 100%，
+但是对照网站监控方案统计的数据发现，这个静态资源异常率高达 200%。</p>
+<p>我的第一直觉是网站监控丢失率高达 50%。遂跟网站监控相关同学沟通，然后他们第一反映
+是质疑我对他们的质疑。</p>
+<p>让业务服务端同学统计日志发现他们的访问量确实要大于网站监控访问量，但又小于静态资源异常量。</p>
+<p>我虽然毫不怀疑自己的数据，但一时也无法质疑业务服务端的数据。</p>
+<p>业务服务端同学随意说了一句：『难道有缓存？』</p>
+<p>于是这个疑惑破解了：</p>
+<ol>
+<li>用户访问页面时，有一部分可能是读取的本地缓存，这部分业务服务端无法统计到。</li>
+<li>有些读取缓存的场景不会执行初始化 JavaScript，这些场景网站监控没有统计到。</li>
+<li>外联的 404 资源是不会被缓存的。</li>
+</ol>
+<p>因此这些有缓存的静态页面（这个知名公司有不少页面是这种纯静态、伪静态页面）的场景下，使用 JavaScript 发送监控的监控手段目前丢失率是 50% 左右。</p>
+<h3 id="参考">参考</h3><ul>
+<li><a href="http://stackoverflow.com/questions/3674830/caching-problem-with-asynchronous-javascript-loading-with-onload-event">Caching problem with asynchronous javascript loading with onload event</a></li>
+<li><a href="http://www.360doc.com/content/11/1219/17/2633_173430718.shtml">IE6 加载不执行 JS</a></li>
+<li><a href="http://www.360doc.com/content/12/0306/16/2633_192235974.shtml">IE6 加载不执行 JS 2</a></li>
+<li><a href="http://blog.csdn.net/mlitest/article/details/7368712">因为缓存Page_Load不执行的情况</a></li>
+<li><a href="http://segmentfault.com/q/1010000000123673">Opera在点击回退按钮后，原来页面的js都不执行了吗?</a></li>
+<li><a href="http://monket.net/blog/2010/02/detecting-when-a-page-is-loaded-from-the-browser-cache/">Detecting when a page is loaded from the browser cache</a></li>
+</ul>
+</div>
+
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/#每周异常">每周异常</a>
+      
+    </span>
+
+    <time datetime="2013-08-16T00:00:00.000Z">
+      <a href="/2013">2013年</a>08月16日
+    </time>
+  </footer>
+    <section>
+      <div id="disqus_thread"></div>
+      <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+      </noscript>
+    </section>
+  <script type="text/javascript">
+    
+    var disqus_identifier = "weekly-topic-about-exceptions-5";
+    
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://hotoo.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  </script>
+</div>
+</div>
+
+    <!-- Vimlike status bar -->
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
+<footer>
+  <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
+    alt="Creative Commons License" style="border-width: 0pt;"
+    src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"/></a>
+  This work is licensed under a
+  <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
+    Commons Attribution 2.5 Generic License</a>.<br/>
+  Copyleft &copy; 2005-2013, Power by
+  <a href="http://lab.lepture.com/nico/">nico@0.5.0</a>, Theme by 闲耘™(@hotoo).
+  </p>
+</footer>
+</div>
+<script type="text/javascript">
+var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
+}catch(err){}</script>
+
+  </body>
+</html>

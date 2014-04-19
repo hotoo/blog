@@ -1,0 +1,876 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.5.0">
+    <meta name="theme" content="KISS 0.1">
+    <title>每周异常：第 2 期（续） - 闲耘™.博客</title>
+    <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../">闲耘™.博客</a>-->
+      <div style="float:right;">
+        <form action="/search.html">
+          <input type="text" name="q" autocomplete="off" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
+
+<div id="container">
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">每周异常：第 2 期（续）</h1>
+  <div class="entry-content"><p><a href="weekly-topic-about-exceptions-2.md">上篇</a> 分析了上周的异常 TOP4，顺便发现 TOP3
+和 TOP5 是同一个问题造成的异常。</p>
+<p>下面我们来分析 TOP1 和 TOP 2 的异常，事实上，这两个异常也是由同一个问题造成的。</p>
+<h2 id="top1">TOP1</h2><table>
+<thead>
+<tr>
+<th>KEY</th>
+<th>VALUE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>URL</td>
+<td><a href="https://memberprod.alipay.com/account/reg/complete/complete.htm">https://memberprod.alipay.com/account/reg/complete/complete.htm</a></td>
+</tr>
+<tr>
+<td>File</td>
+<td><a href="https://a.alipayobjects.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js">https://a.alipayobjects.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js</a></td>
+</tr>
+<tr>
+<td>Line</td>
+<td>35</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>无法获取未定义或 null 引用的属性“length”</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>stack trace</th>
+<th>device</th>
+<th>os</th>
+<th>browser</th>
+<th>engine</th>
+<th>count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>ie/10.0</td>
+<td>trident/6.0</td>
+<td>2740</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>sg/2.x</td>
+<td>trident/6.0</td>
+<td>868</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>ie/10.0</td>
+<td>trident/6.0</td>
+<td>538</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>tao/3.2</td>
+<td>trident/6.0</td>
+<td>236</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>baidu/2.x</td>
+<td>trident/6.0</td>
+<td>113</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>tw/3.6.1.1</td>
+<td>trident/6.0</td>
+<td>36</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>tao/3.2</td>
+<td>trident/6.0</td>
+<td>26</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.0.5.2000</td>
+<td>trident/6.0</td>
+<td>25</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.1.0.2000</td>
+<td>trident/6.0</td>
+<td>20</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.0.6.2000</td>
+<td>trident/6.0</td>
+<td>15</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>na/-1</td>
+<td>ie/10.0</td>
+<td>trident/6.0</td>
+<td>14</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/5.0</td>
+<td>ie/10.0</td>
+<td>trident/6.0</td>
+<td>12</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.1.1.600</td>
+<td>trident/6.0</td>
+<td>10</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>tw/3.6.1.0</td>
+<td>trident/6.0</td>
+<td>10</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.0.3.1000</td>
+<td>trident/6.0</td>
+<td>8</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>mx/4.0.6.2000</td>
+<td>trident/6.0</td>
+<td>8</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>tao/3.0</td>
+<td>trident/6.0</td>
+<td>7</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/3.4.5.2000</td>
+<td>trident/6.0</td>
+<td>6</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>qq/6.14.15493.201</td>
+<td>trident/6.0</td>
+<td>6</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>qq/7.3.11251.400</td>
+<td>trident/6.0</td>
+<td>6</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/5.1</td>
+<td>ie/10.0</td>
+<td>trident/6.0</td>
+<td>4</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.0</td>
+<td>ie/10.0</td>
+<td>trident/6.0</td>
+<td>4</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>360/3.2.0.6</td>
+<td>trident/6.0</td>
+<td>4</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>lb/3.1.15.3877</td>
+<td>trident/6.0</td>
+<td>4</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/3.5.2.1000</td>
+<td>trident/6.0</td>
+<td>4</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.0.5.4000</td>
+<td>trident/6.0</td>
+<td>4</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>tao/3.1</td>
+<td>trident/6.0</td>
+<td>4</td>
+</tr>
+<tr>
+<td>at function setCaretToInput(input)<CR>at function(event)<CR>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>sg/2.x</td>
+<td>trident/6.0</td>
+<td>3</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>tao/3.0</td>
+<td>trident/6.0</td>
+<td>3</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>qq/7.3.8581.400</td>
+<td>trident/6.0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>at function setCaretToInput(input)<CR>at function (event)<CR>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>ie/10.0</td>
+<td>trident/6.0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>qq/6.14.14517.201</td>
+<td>trident/6.0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>at function setCaretToInput(input)<CR>at function (event)<CR>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>sg/2.x</td>
+<td>trident/6.0</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>4744</td>
+</tr>
+</tbody>
+</table>
+<h2 id="top2">TOP2</h2><table>
+<thead>
+<tr>
+<th>KEY</th>
+<th>VALUE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>URL</td>
+<td><a href="https://memberprod.alipay.com/account/reg/index.htm">https://memberprod.alipay.com/account/reg/index.htm</a></td>
+</tr>
+<tr>
+<td>File</td>
+<td><a href="https://a.alipayobjects.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js">https://a.alipayobjects.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js</a></td>
+</tr>
+<tr>
+<td>Line</td>
+<td>35</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>无法获取未定义或 null 引用的属性“length”</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>stack trace</th>
+<th>device</th>
+<th>os</th>
+<th>browser</th>
+<th>engine</th>
+<th>count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>ie/10.0</td>
+<td>trident/6.0</td>
+<td>2192</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>sg/2.x</td>
+<td>trident/6.0</td>
+<td>1255</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>ie/10.0</td>
+<td>trident/6.0</td>
+<td>352</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>baidu/2.x</td>
+<td>trident/6.0</td>
+<td>143</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>tw/3.6.1.1</td>
+<td>trident/6.0</td>
+<td>42</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.0.6.2000</td>
+<td>trident/6.0</td>
+<td>33</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>tw/3.6.1.0</td>
+<td>trident/6.0</td>
+<td>32</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>tao/3.0</td>
+<td>trident/6.0</td>
+<td>13</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>tw/3.6.1.1</td>
+<td>trident/6.0</td>
+<td>13</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/3.4.5.2000</td>
+<td>trident/6.0</td>
+<td>11</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>qq/7.3.8126.400</td>
+<td>trident/6.0</td>
+<td>9</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>tao/3.0</td>
+<td>trident/6.0</td>
+<td>9</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>360/3.9.1.5</td>
+<td>trident/6.0</td>
+<td>6</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/3.4.1.1000</td>
+<td>trident/6.0</td>
+<td>6</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.0.3.3000</td>
+<td>trident/6.0</td>
+<td>6</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>qq/6.14.14517.201</td>
+<td>trident/6.0</td>
+<td>6</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>qq/6.14.15493.201</td>
+<td>trident/6.0</td>
+<td>5</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>360/3.2.0.2</td>
+<td>trident/6.0</td>
+<td>4</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>qq/7.3.11251.400</td>
+<td>trident/6.0</td>
+<td>4</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>360/3.1.6.7</td>
+<td>trident/6.0</td>
+<td>3</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>sy/-1</td>
+<td>trident/6.0</td>
+<td>3</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>4147</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>TOP1 和 TOP2 两个异常都是中 memberprod 系统的注册页面上（重要程度不想而知），
+一个页面是注册的起始页，一个是注册的完成页。我们先分析起始页。</p>
+<p>打开异常所在文件第 35行，搜索异常栈信息中的 <code>function(a,c,d)</code>，我们发现有 3 个如下：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">each:<span class="function"><span class="keyword">function</span><span class="params">(a,c,d)</span>{</span><span class="keyword">var</span> f,g=<span class="number">0</span>,h=a.length,i=h===b||e.isFunction(a);<span class="keyword">if</span>(d){<span class="keyword">if</span>(i){<span class="keyword">for</span>(f <span class="keyword">in</span> a)<span class="keyword">if</span>(c.apply(a[f],d)===!<span class="number">1</span>)<span class="keyword">break</span>}<span class="keyword">else</span> <span class="keyword">for</span>(;g&lt;h;)<span class="keyword">if</span>(c.apply(a[g++],d)===!<span class="number">1</span>)<span class="keyword">break</span>}<span class="keyword">else</span> <span class="keyword">if</span>(i){<span class="keyword">for</span>(f <span class="keyword">in</span> a)<span class="keyword">if</span>(c.call(a[f],f,a[f])===!<span class="number">1</span>)<span class="keyword">break</span>}<span class="keyword">else</span> <span class="keyword">for</span>(;g&lt;h;)<span class="keyword">if</span>(c.call(a[g],g,a[g++])===!<span class="number">1</span>)<span class="keyword">break</span>;<span class="keyword">return</span> a}
+map:<span class="function"><span class="keyword">function</span><span class="params">(a,c,d)</span>{</span><span class="keyword">var</span> f,g,h=[],i=<span class="number">0</span>,j=a.length,k=a <span class="keyword">instanceof</span> e||j!==b&amp;&amp;<span class="keyword">typeof</span> j==<span class="string">"number"</span>&amp;&amp;(j&gt;<span class="number">0</span>&amp;&amp;a[<span class="number">0</span>]&amp;&amp;a[j-<span class="number">1</span>]||j===<span class="number">0</span>||e.isArray(a));<span class="keyword">if</span>(k)<span class="keyword">for</span>(;i&lt;j;i++)f=c(a[i],i,d),f!=<span class="literal">null</span>&amp;&amp;(h[h.length]=f);<span class="keyword">else</span> <span class="keyword">for</span>(g <span class="keyword">in</span> a)f=c(a[g],g,d),f!=<span class="literal">null</span>&amp;&amp;(h[h.length]=f);<span class="keyword">return</span> h.concat.apply([],h)}
+prop:<span class="function"><span class="keyword">function</span><span class="params">(a,c,d)</span>{</span><span class="keyword">var</span> e,g,h,i=a.nodeType;<span class="keyword">if</span>(!!a&amp;&amp;i!==<span class="number">3</span>&amp;&amp;i!==<span class="number">8</span>&amp;&amp;i!==<span class="number">2</span>){h=i!==<span class="number">1</span>||!f.isXMLDoc(a),h&amp;&amp;(c=f.propFix[c]||c,g=f.propHooks[c]);<span class="keyword">return</span> d!==b?g&amp;&amp;<span class="string">"set"</span><span class="keyword">in</span> g&amp;&amp;(e=g.set(a,d,c))!==b?e:a[c]=d:g&amp;&amp;<span class="string">"get"</span><span class="keyword">in</span> g&amp;&amp;(e=g.get(a,c))!==<span class="literal">null</span>?e:a[c]}}</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a></pre></div></div><p>再找异常信息中的关键字 <code>length</code>，发现上面的 prop 方法中并没有这个关键字，
+所以可以排除。剩下的两个函数对应的原始码如下：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">// args is for internal usage only</span>
+each: <span class="function"><span class="keyword">function</span><span class="params">( object, callback, args )</span> {</span>
+  <span class="keyword">var</span> name, i = <span class="number">0</span>,
+      length = object.length,
+      isObj = length === <span class="literal">undefined</span> || jQuery.isFunction( object );
+
+  <span class="keyword">if</span> ( args ) {
+    <span class="keyword">if</span> ( isObj ) {
+      <span class="keyword">for</span> ( name <span class="keyword">in</span> object ) {
+        <span class="keyword">if</span> ( callback.apply( object[ name ], args ) === <span class="literal">false</span> ) {
+          <span class="keyword">break</span>;
+        }
+      }
+    } <span class="keyword">else</span> {
+      <span class="keyword">for</span> ( ; i &lt; length; ) {
+        <span class="keyword">if</span> ( callback.apply( object[ i++ ], args ) === <span class="literal">false</span> ) {
+          <span class="keyword">break</span>;
+        }
+      }
+    }
+
+    <span class="comment">// A special, fast, case for the most common use of each</span>
+  } <span class="keyword">else</span> {
+    <span class="keyword">if</span> ( isObj ) {
+      <span class="keyword">for</span> ( name <span class="keyword">in</span> object ) {
+        <span class="keyword">if</span> ( callback.call( object[ name ], name, object[ name ] ) === <span class="literal">false</span> ) {
+          <span class="keyword">break</span>;
+        }
+      }
+    } <span class="keyword">else</span> {
+      <span class="keyword">for</span> ( ; i &lt; length; ) {
+        <span class="keyword">if</span> ( callback.call( object[ i ], i, object[ i++ ] ) === <span class="literal">false</span> ) {
+          <span class="keyword">break</span>;
+        }
+      }
+    }
+  }
+
+  <span class="keyword">return</span> object;
+},
+
+<span class="comment">// arg is for internal usage only</span>
+map: <span class="function"><span class="keyword">function</span><span class="params">( elems, callback, arg )</span> {</span>
+  <span class="keyword">var</span> value, key, ret = [],
+    i = <span class="number">0</span>,
+    length = elems.length,
+    <span class="comment">// jquery objects are treated as arrays</span>
+    isArray = elems <span class="keyword">instanceof</span> jQuery || length !== <span class="literal">undefined</span> &amp;&amp; <span class="keyword">typeof</span> length === <span class="string">"number"</span> &amp;&amp; ( ( length &gt; <span class="number">0</span> &amp;&amp; elems[ <span class="number">0</span> ] &amp;&amp; elems[ length -<span class="number">1</span> ] ) || length === <span class="number">0</span> || jQuery.isArray( elems ) ) ;
+
+  <span class="comment">// Go through the array, translating each of the items to their</span>
+  <span class="keyword">if</span> ( isArray ) {
+    <span class="keyword">for</span> ( ; i &lt; length; i++ ) {
+      value = callback( elems[ i ], i, arg );
+
+      <span class="keyword">if</span> ( value != <span class="literal">null</span> ) {
+        ret[ ret.length ] = value;
+      }
+    }
+
+  <span class="comment">// Go through every key on the object,</span>
+  } <span class="keyword">else</span> {
+    <span class="keyword">for</span> ( key <span class="keyword">in</span> elems ) {
+      value = callback( elems[ key ], key, arg );
+
+      <span class="keyword">if</span> ( value != <span class="literal">null</span> ) {
+        ret[ ret.length ] = value;
+      }
+    }
+  }
+
+  <span class="comment">// Flatten any nested arrays</span>
+  <span class="keyword">return</span> ret.concat.apply( [], ret );
+},</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+<a name="L2-2" href="#L2-2">2</a>
+<a name="L2-3" href="#L2-3">3</a>
+<a name="L2-4" href="#L2-4">4</a>
+<a name="L2-5" href="#L2-5">5</a>
+<a name="L2-6" href="#L2-6">6</a>
+<a name="L2-7" href="#L2-7">7</a>
+<a name="L2-8" href="#L2-8">8</a>
+<a name="L2-9" href="#L2-9">9</a>
+<a name="L2-10" href="#L2-10">10</a>
+<a name="L2-11" href="#L2-11">11</a>
+<a name="L2-12" href="#L2-12">12</a>
+<a name="L2-13" href="#L2-13">13</a>
+<a name="L2-14" href="#L2-14">14</a>
+<a name="L2-15" href="#L2-15">15</a>
+<a name="L2-16" href="#L2-16">16</a>
+<a name="L2-17" href="#L2-17">17</a>
+<a name="L2-18" href="#L2-18">18</a>
+<a name="L2-19" href="#L2-19">19</a>
+<a name="L2-20" href="#L2-20">20</a>
+<a name="L2-21" href="#L2-21">21</a>
+<a name="L2-22" href="#L2-22">22</a>
+<a name="L2-23" href="#L2-23">23</a>
+<a name="L2-24" href="#L2-24">24</a>
+<a name="L2-25" href="#L2-25">25</a>
+<a name="L2-26" href="#L2-26">26</a>
+<a name="L2-27" href="#L2-27">27</a>
+<a name="L2-28" href="#L2-28">28</a>
+<a name="L2-29" href="#L2-29">29</a>
+<a name="L2-30" href="#L2-30">30</a>
+<a name="L2-31" href="#L2-31">31</a>
+<a name="L2-32" href="#L2-32">32</a>
+<a name="L2-33" href="#L2-33">33</a>
+<a name="L2-34" href="#L2-34">34</a>
+<a name="L2-35" href="#L2-35">35</a>
+<a name="L2-36" href="#L2-36">36</a>
+<a name="L2-37" href="#L2-37">37</a>
+<a name="L2-38" href="#L2-38">38</a>
+<a name="L2-39" href="#L2-39">39</a>
+<a name="L2-40" href="#L2-40">40</a>
+<a name="L2-41" href="#L2-41">41</a>
+<a name="L2-42" href="#L2-42">42</a>
+<a name="L2-43" href="#L2-43">43</a>
+<a name="L2-44" href="#L2-44">44</a>
+<a name="L2-45" href="#L2-45">45</a>
+<a name="L2-46" href="#L2-46">46</a>
+<a name="L2-47" href="#L2-47">47</a>
+<a name="L2-48" href="#L2-48">48</a>
+<a name="L2-49" href="#L2-49">49</a>
+<a name="L2-50" href="#L2-50">50</a>
+<a name="L2-51" href="#L2-51">51</a>
+<a name="L2-52" href="#L2-52">52</a>
+<a name="L2-53" href="#L2-53">53</a>
+<a name="L2-54" href="#L2-54">54</a>
+<a name="L2-55" href="#L2-55">55</a>
+<a name="L2-56" href="#L2-56">56</a>
+<a name="L2-57" href="#L2-57">57</a>
+<a name="L2-58" href="#L2-58">58</a>
+<a name="L2-59" href="#L2-59">59</a>
+<a name="L2-60" href="#L2-60">60</a>
+<a name="L2-61" href="#L2-61">61</a>
+<a name="L2-62" href="#L2-62">62</a>
+<a name="L2-63" href="#L2-63">63</a>
+<a name="L2-64" href="#L2-64">64</a>
+<a name="L2-65" href="#L2-65">65</a>
+<a name="L2-66" href="#L2-66">66</a>
+<a name="L2-67" href="#L2-67">67</a>
+<a name="L2-68" href="#L2-68">68</a>
+<a name="L2-69" href="#L2-69">69</a>
+<a name="L2-70" href="#L2-70">70</a>
+<a name="L2-71" href="#L2-71">71</a>
+<a name="L2-72" href="#L2-72">72</a></pre></div></div><p>这两个函数都有可能性，但是从经验上 each 方法用的更多，我猜这个命中率更高。
+但是单纯的从这些异常信息字面量来看，已经没有了更多信息。我们当时还没有注意到
+异常都是 Trident 6.0 抛出的。</p>
+<hr>
+<p>打开页面标准模式或兼容模式下都没有抛出这个异常，只是兼容模式下有个
+『找不到成员。』的异常。</p>
+<p>手贱点了表单第一个输入框，终于重现了梦寐以求的异常。它就是 each 方法中抛出的。
+从调用堆栈信息中可以看到 <code>this.items</code> 是 undefined，导致 each 失败。</p>
+<p><img src="https://f.cloud.github.com/assets/143572/860087/e82abdc4-f595-11e2-9f61-abdee317416e.png" alt="2013-07-23 9 12 58"></p>
+<p>而 <code>this.items</code> 为 undefined 是由于 validator 的 core 模块中 setup() 函数中
+设置 novalidator 属性异常导致后续代码没有执行造成。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">setup: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+
+  <span class="comment">//disable html5 form validation</span>
+  <span class="keyword">this</span>.element.attr(<span class="string">'novalidate'</span>, <span class="string">'novalidate'</span>);
+
+  <span class="comment">//Validation will be executed according to configurations stored in items.</span>
+  <span class="keyword">this</span>.items = [];
+
+  <span class="comment">//...</span>
+
+}</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+<a name="L3-2" href="#L3-2">2</a>
+<a name="L3-3" href="#L3-3">3</a>
+<a name="L3-4" href="#L3-4">4</a>
+<a name="L3-5" href="#L3-5">5</a>
+<a name="L3-6" href="#L3-6">6</a>
+<a name="L3-7" href="#L3-7">7</a>
+<a name="L3-8" href="#L3-8">8</a>
+<a name="L3-9" href="#L3-9">9</a>
+<a name="L3-10" href="#L3-10">10</a></pre></div></div><p>至此，上周支付宝全站 TOP5 的异常均已告破，他们都是同一个问题造成的。</p>
+<h2 id="如何解决这个异常？">如何解决这个异常？</h2><p>Validator 组件已于 3个月前的 v0.9.3 版本得到修复，请升级到 Validator 最新版。
+升级过程中遇到问题，请联系 @乔花。</p>
+<h2 id="一个问题？">一个问题？</h2><p>基础组件中小版本升级修复各种 BUG 的过程中，如何同步推动业务代码的对应升级？</p>
+</div>
+
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/#每周异常">每周异常</a>
+      
+    </span>
+
+    <time datetime="2013-07-23T00:00:00.000Z">
+      <a href="/2013">2013年</a>07月23日
+    </time>
+  </footer>
+    <section>
+      <div id="disqus_thread"></div>
+      <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+      </noscript>
+    </section>
+  <script type="text/javascript">
+    
+    var disqus_identifier = "weekly-topic-about-exceptions-2-2";
+    
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://hotoo.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  </script>
+</div>
+</div>
+
+    <!-- Vimlike status bar -->
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
+<footer>
+  <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
+    alt="Creative Commons License" style="border-width: 0pt;"
+    src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"/></a>
+  This work is licensed under a
+  <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
+    Commons Attribution 2.5 Generic License</a>.<br/>
+  Copyleft &copy; 2005-2013, Power by
+  <a href="http://lab.lepture.com/nico/">nico@0.5.0</a>, Theme by 闲耘™(@hotoo).
+  </p>
+</footer>
+</div>
+<script type="text/javascript">
+var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker=_gat._getTracker("UA-2048484-1");
+  pageTracker._trackPageview();
+}catch(err){}</script>
+
+  </body>
+</html>

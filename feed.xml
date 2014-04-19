@@ -656,6 +656,1254 @@ at function(fn)         ......-</pre><p>这也就是为什么用户的浏览器�
 ]]>
         </content>
     </entry><entry>
+        <title type="html"><![CDATA[每周异常：第 5期，由静态资源异常引发的质疑]]></title>
+        <link href="http://blog.hotoo.me/post/weekly-topic-about-exceptions-5"/>
+        <published>2013-08-16T00:00:00.000Z</published>
+        <updated>2013-08-16T00:00:00.000Z</updated>
+        <id>http://blog.hotoo.me/post/weekly-topic-about-exceptions-5</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+            <![CDATA[ <p>今天要说的是一个『静态资源异常监控』的话题。虽然静态资源异常可以非常有效的跟
+JavaScript 异常结合起来做有力的分析，但是今天这个话题跟 JavaScript 异常没什么关系。</p>
+<hr>
+<p>传说某著名公司的网站监控方案是申请了专利的技术，我有幸看到过，真的是非常牛逼。</p>
+<p>这个网站监控方案中提供了网页的访问量、页面访问流向、页面有效点击量、点击热图，
+灰度发布（包括 ABTest）等都有完善的支持。</p>
+<p>这个方案总体上是用 JavaScript 通过 new Image() 发送监控的数据到日志服务器，
+然后由数据仓库做数据清洗。</p>
+<p>通过业务系统服务器端的日志分析，这套方案的数据质量有确实有一定的问题，
+比如它统计到的访问量要比业务系统服务器端统计到的少，丢失率一般在 5% ~ 10% 左右，
+少量特殊页面（比如跳转页）丢失率会高达 50% ~ 60%。</p>
+<p>尽管如此我们也基本上可以接受这样的误差，而且部分从理论上讲，『应该』大部分是
+无效或无意义的访问（比如爬虫、快速跳转等），丢掉是合理的。</p>
+<p>一直以来，我们都认为这个方案的数据是相对比较可靠的，虽然偶尔有些不正常的丢失率
+让业务方质疑，但是我们总是用上面的理论和理由解释给对方听，让他们接受我们的现实。</p>
+<p>这样过了好多年，他们过着幸福的生活~</p>
+<hr>
+<p>直到有个家伙的膝盖被射了一箭，搞出来个静态资源监控系统。</p>
+<p>静态资源监控系统是通过分析静态服务器的访问日志，来统计各个资源状态的趋势及其分布情况。</p>
+<p>因为静态资源监控是通过静态服务器访问日志来分析的，理论上和业务服务端的日志是一致的。</p>
+<p>但是我们惊奇的发现某个静态页面引用了某个不存在的静态资源，异常率理论上应该是 100%，
+但是对照网站监控方案统计的数据发现，这个静态资源异常率高达 200%。</p>
+<p>我的第一直觉是网站监控丢失率高达 50%。遂跟网站监控相关同学沟通，然后他们第一反映
+是质疑我对他们的质疑。</p>
+<p>让业务服务端同学统计日志发现他们的访问量确实要大于网站监控访问量，但又小于静态资源异常量。</p>
+<p>我虽然毫不怀疑自己的数据，但一时也无法质疑业务服务端的数据。</p>
+<p>业务服务端同学随意说了一句：『难道有缓存？』</p>
+<p>于是这个疑惑破解了：</p>
+<ol>
+<li>用户访问页面时，有一部分可能是读取的本地缓存，这部分业务服务端无法统计到。</li>
+<li>有些读取缓存的场景不会执行初始化 JavaScript，这些场景网站监控没有统计到。</li>
+<li>外联的 404 资源是不会被缓存的。</li>
+</ol>
+<p>因此这些有缓存的静态页面（这个知名公司有不少页面是这种纯静态、伪静态页面）的场景下，使用 JavaScript 发送监控的监控手段目前丢失率是 50% 左右。</p>
+<h3 id="参考">参考</h3><ul>
+<li><a href="http://stackoverflow.com/questions/3674830/caching-problem-with-asynchronous-javascript-loading-with-onload-event">Caching problem with asynchronous javascript loading with onload event</a></li>
+<li><a href="http://www.360doc.com/content/11/1219/17/2633_173430718.shtml">IE6 加载不执行 JS</a></li>
+<li><a href="http://www.360doc.com/content/12/0306/16/2633_192235974.shtml">IE6 加载不执行 JS 2</a></li>
+<li><a href="http://blog.csdn.net/mlitest/article/details/7368712">因为缓存Page_Load不执行的情况</a></li>
+<li><a href="http://segmentfault.com/q/1010000000123673">Opera在点击回退按钮后，原来页面的js都不执行了吗?</a></li>
+<li><a href="http://monket.net/blog/2010/02/detecting-when-a-page-is-loaded-from-the-browser-cache/">Detecting when a page is loaded from the browser cache</a></li>
+</ul>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[每周异常：第 4期，如何避免客户端攻击造成的大量异常报警]]></title>
+        <link href="http://blog.hotoo.me/post/weekly-topic-about-exceptions-4"/>
+        <published>2013-08-07T00:00:00.000Z</published>
+        <updated>2013-08-07T00:00:00.000Z</updated>
+        <id>http://blog.hotoo.me/post/weekly-topic-about-exceptions-4</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+            <![CDATA[ <p>在 JavaScript 异常监控过程中，发现有很多由于客户端连续攻击造成的大量异常，导致
+监控系统报警。</p>
+<p><img src="https://f.cloud.github.com/assets/143572/921735/fe39d910-ff04-11e2-93f2-ca5bb222be8f.png" alt="2013-08-07 9 58 37"></p>
+<p>（图中大量不连续的波动，都是攻击造成的）</p>
+<p>这种少量用户(UV)发起攻击造成的大量异常(PV)波动，不是我们实时监控需要关注的部分。
+我们实时监控最重要的是要发现由于系统发布过程中，我们的发布的代码有问题导致大量
+用户受影响而出现的波动（波形可能跟上图的每一个异常波形相似）。</p>
+<p>理论上导致异常数据波动的场景包括：</p>
+<ul>
+<li>少量用户发起大量攻击。</li>
+<li>大量用户同时涌入或离开。</li>
+<li>发布问题代码影响到大量用户。</li>
+</ul>
+<p>少量用户发起大量攻击造成数据波动，是我们可以不必实时关注实时报警的部分。</p>
+<p>大量用户同时涌入或离开造成的异常数量(PV)波动，也是我们无需实时关注的部分，
+另外我们也可以通过异常率规避波动。</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>异常 PV</th>
+<th>异常 UV</th>
+<th>异常率(PV)</th>
+<th>异常率(UV)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>攻击</td>
+<td>波动</td>
+<td>无波动</td>
+<td>波动</td>
+<td>无波动</td>
+</tr>
+<tr>
+<td>涌入</td>
+<td>波动</td>
+<td>波动</td>
+<td>无波动</td>
+<td>无波动</td>
+</tr>
+<tr>
+<td>发布</td>
+<td>波动</td>
+<td>波动</td>
+<td>波动</td>
+<td>波动</td>
+</tr>
+</tbody>
+</table>
+<p>注：</p>
+<ul>
+<li>异常率(PV) = 异常PV / 所在页面PV</li>
+<li>异常率(UV) = 异常UV / 所在页面UV</li>
+</ul>
+<p>从上面的对照表可以看出，理论上我们只需要关注异常率(UV) 是否正常波动就可以了。</p>
+<p>理想很性感，现实很骨感。</p>
+<p>我们的数据仓库、数据分析系统对于实时 PV 有很强的处理能力，但是对于 UV 就感觉力有不逮。</p>
+<p>起初想到在实时日志处理逻辑中使用缓存（伪代码）：</p>
+<div class="highlight"><pre><code class="javascript">class LogParse(){
+
+  <span class="keyword">var</span> user_cache = {};
+  <span class="keyword">var</span> MINUTES_FORMAT = <span class="string">"YYYYMMDDHHmm"</span>;
+  <span class="keyword">var</span> lastTime = moment().format(MINUTES_FORMAT);
+
+  <span class="function"><span class="keyword">function</span> <span class="title">parse</span><span class="params">(log)</span>{</span>
+    <span class="comment">// PV 统计</span>
+
+    <span class="keyword">var</span> now = moment().format(MINUTES_FORMAT);
+    <span class="keyword">if</span>(now !== lastTime){
+      user_cache = {};
+      lastTime = now;
+    }
+    <span class="keyword">if</span>(user_cache.hasOwnProperty(user_id)){<span class="keyword">return</span>;}
+    <span class="comment">// UV 统计</span>
+  }
+
+}</code></pre></div><ul>
+<li>但是实时数据分析系统是分布式的，由多台服务器组成的集群同时处理日志，所以里面
+的内部状态只有本机有效</li>
+<li>另外更致命的是，实时数据分析系统是无状态的，下次执行会 new 新的 LogParser 实例，
+同一台机器的状态也保证不了。</li>
+</ul>
+<p>于是我们又想到一种从客户端来标识用户的方法：</p>
+<ol>
+<li>客户端单位时间内同一个页面抛出的同一个异常，第一次打上 uv 标记。</li>
+<li>数据处理时遇到 uv 标记的日志，同时统计算做一个异常 uv。</li>
+</ol>
+<p>由于客户端时间和服务端有时间差，每个客户端时间和服务端时间差也不一致，导致这种
+方案会有稍大误差，但也基本能解决问题。</p>
+<p>但是要在客户端打标记，则需要在客户端（cookie 或其他本地存储）记录每个异常
+（url, file, line, message 相同被当作同一个异常）最后抛出的时间，每次抛出异常
+都需要读写本地存储，稍嫌臃肿。</p>
+<p>通过深入分析实际的攻击案例，发现攻击引发大量异常的场景中，客户端页面是不刷新或
+重新访问的，都是直接在当前访问的页面执行上批量脚本。</p>
+<p>因此我们可以使用局部变量，将当前访问的页面的每个异常最后抛出时间记录在内存中，
+重新访问页面则重新开始记录。</p>
+<p>这种方案对于防范攻击造成的大量异常非常有效；对于大量用户涌入引起的异常也有一定
+效用，毕竟正常用户较少会频繁触发异常。</p>
+<p>总之，通过这个方案，我们可以非常有效的实时监控异常波动，较少误报。</p>
+<p>p.s. 这个想法是早上洗澡的时候想到的，还没开始实践。但是我信心满满写下这篇，
+数据会来证明我是对的。</p>
+<h2 id="续-on-2013-08-20">续 on 2013-08-20</h2><p>是时候结帐了。正好发布一天，大家看数据：</p>
+<p><img src="https://f.cloud.github.com/assets/143572/991796/2e2038c2-096e-11e3-9008-e21d3b9e354a.png" alt="2013-08-20 3 55 10"></p>
+<p>图中的灰色竖线是发布点，橙色是 JavaScript 异常，绿色是静态资源异常。</p>
+<p>妈妈再也不用担心我的手机会收到误报的报警短信了。</p>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[每周异常：第 3期，宏观异常分析方法]]></title>
+        <link href="http://blog.hotoo.me/post/weekly-topic-about-exceptions-3"/>
+        <published>2013-08-02T00:00:00.000Z</published>
+        <updated>2013-08-02T00:00:00.000Z</updated>
+        <id>http://blog.hotoo.me/post/weekly-topic-about-exceptions-3</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+            <![CDATA[ <p>为了有效的分析 JavaScript 异常，我们从宏观的统计数据中做了大量的分析，初步结果如下：</p>
+<h2 id="全站每日异常统计">全站每日异常统计</h2><p>首先我们从每天的全站总体数据进行分析，得到下面这些报表。其中：</p>
+<ul>
+<li>all_pv: 全站所有有效异常次数 (PV)</li>
+<li>all_uv: 全站所有有效异常人数 (UV)</li>
+<li>all_pv_rate: 全站所有异常率 (按 PV 统计)</li>
+<li>all_uv_rate: 全站所有异常率 (按 UV 统计)</li>
+<li>valid_rate_pv: 有效异常率（按 PV 统计）</li>
+<li>valid_rate_uv: 有效异常率（按 UV 统计）</li>
+</ul>
+<p><img src="https://f.cloud.github.com/assets/143572/900597/98aa3094-fb68-11e2-9f9e-c3809ea15b48.png" alt="2013-08-02 7 42 02"></p>
+<p><img src="https://f.cloud.github.com/assets/143572/900599/ac59ccb2-fb68-11e2-89c3-4e0d6db7261f.png" alt="2013-08-02 7 42 37"></p>
+<p><img src="https://f.cloud.github.com/assets/143572/900625/c145cbac-fb69-11e2-80c7-d1f9152ddeb4.png" alt="2013-08-02 7 50 11"></p>
+<p><img src="https://f.cloud.github.com/assets/143572/900601/bbc1e3a6-fb68-11e2-85e7-b6443f502860.png" alt="2013-08-02 7 43 04"></p>
+<p><img src="https://f.cloud.github.com/assets/143572/900602/cd4f7f0c-fb68-11e2-96b8-2de40b5d2882.png" alt="2013-08-02 7 43 31"></p>
+<p>从趋势图中我们可以明显的看到第 2天和最后一天，异常 PV 有较大波动，这是由于用户
+攻击爆发大量异常造成的。</p>
+<p>我们在 <a href="https://github.com/totorojs/javascript-exception-archives/issues/12">异常评分算法</a>
+的讨论中有提到，即使是少量用户进行攻击，异常 UV 也不应该有波动的（除非页面 UV
+本身有较大波动），但是实际上我们看到最后一天的异常 UV 也有明显波动，因此粗略
+分析这个异常 PV 的上升是由于页面访问人数增多造成的。</p>
+<p>事后我们查了当天的页面访问 PV 和 UV，可惜并没有明显波动。</p>
+<p>实际经过细致的异常日志分析，我们看到攻击用户同时没过一段时间就更换 IP 地址或清理
+Cookie，因此全天的综合数据中异常 PV  和异常 UV 有了一些明显波动。</p>
+<p>而且实际上，每天都有攻击造成的异常波动。
+- 每天都有攻击造成的异常，累加在一起好像每天都没什么问题。
+- 由于攻击造成异常总数相对一天的异常总数太小，从全天异常总数的层面来看，
+  无法发现，甚至排除攻击造成的异常。
+- T+1 的统计数据，对于异常监控来说，太迟钝了。</p>
+<h2 id="全站每分钟异常统计">全站每分钟异常统计</h2><p>从上面每日异常总和的分析我们可以看出，一天的总和数据能发现的问题还是比较有限的。
+于是我从分钟的粒度来统计异常。</p>
+<p><img src="https://f.cloud.github.com/assets/143572/900781/7496f1e6-fb6e-11e2-854f-1a0f685bea15.png" alt="2013-08-02 7 24 54"></p>
+<p>图有点大，点击可以看大图。</p>
+<p>从图中我们可以看到，凌晨 2点多到 3点多期间，有少量用户发起了猛烈的攻击；
+凌晨 4点多到凌晨7点多期间也有少量温和的攻击。攻击时全站异常 PV （绿色）
+和全站有效异常（深红色）明显飙升，但是异常 UV 和有效异常 UV 都没有太大波动，
+而且与前后的时间切片有较好的连贯性，没有大起大落。</p>
+<p>而如果异常 UV 出现较大波动，在很可能是由于我们正在发布的新代码影响大面积用户。</p>
+<p>合适的时间粒度对于及时发现真正有效的异常有非常重要的意义。</p>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[每周异常：第 2 期（续）]]></title>
+        <link href="http://blog.hotoo.me/post/weekly-topic-about-exceptions-2-2"/>
+        <published>2013-07-23T00:00:00.000Z</published>
+        <updated>2013-07-23T00:00:00.000Z</updated>
+        <id>http://blog.hotoo.me/post/weekly-topic-about-exceptions-2-2</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+            <![CDATA[ <p><a href="weekly-topic-about-exceptions-2">上篇</a> 分析了上周的异常 TOP4，顺便发现 TOP3
+和 TOP5 是同一个问题造成的异常。</p>
+<p>下面我们来分析 TOP1 和 TOP 2 的异常，事实上，这两个异常也是由同一个问题造成的。</p>
+<h2 id="top1">TOP1</h2><table>
+<thead>
+<tr>
+<th>KEY</th>
+<th>VALUE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>URL</td>
+<td><a href="https://memberprod.alipay.com/account/reg/complete/complete.htm">https://memberprod.alipay.com/account/reg/complete/complete.htm</a></td>
+</tr>
+<tr>
+<td>File</td>
+<td><a href="https://a.alipayobjects.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js">https://a.alipayobjects.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js</a></td>
+</tr>
+<tr>
+<td>Line</td>
+<td>35</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>无法获取未定义或 null 引用的属性“length”</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>stack trace</th>
+<th>device</th>
+<th>os</th>
+<th>browser</th>
+<th>engine</th>
+<th>count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>ie/10.0</td>
+<td>trident/6.0</td>
+<td>2740</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>sg/2.x</td>
+<td>trident/6.0</td>
+<td>868</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>ie/10.0</td>
+<td>trident/6.0</td>
+<td>538</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>tao/3.2</td>
+<td>trident/6.0</td>
+<td>236</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>baidu/2.x</td>
+<td>trident/6.0</td>
+<td>113</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>tw/3.6.1.1</td>
+<td>trident/6.0</td>
+<td>36</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>tao/3.2</td>
+<td>trident/6.0</td>
+<td>26</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.0.5.2000</td>
+<td>trident/6.0</td>
+<td>25</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.1.0.2000</td>
+<td>trident/6.0</td>
+<td>20</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.0.6.2000</td>
+<td>trident/6.0</td>
+<td>15</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>na/-1</td>
+<td>ie/10.0</td>
+<td>trident/6.0</td>
+<td>14</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/5.0</td>
+<td>ie/10.0</td>
+<td>trident/6.0</td>
+<td>12</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.1.1.600</td>
+<td>trident/6.0</td>
+<td>10</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>tw/3.6.1.0</td>
+<td>trident/6.0</td>
+<td>10</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.0.3.1000</td>
+<td>trident/6.0</td>
+<td>8</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>mx/4.0.6.2000</td>
+<td>trident/6.0</td>
+<td>8</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>tao/3.0</td>
+<td>trident/6.0</td>
+<td>7</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/3.4.5.2000</td>
+<td>trident/6.0</td>
+<td>6</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>qq/6.14.15493.201</td>
+<td>trident/6.0</td>
+<td>6</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>qq/7.3.11251.400</td>
+<td>trident/6.0</td>
+<td>6</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/5.1</td>
+<td>ie/10.0</td>
+<td>trident/6.0</td>
+<td>4</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.0</td>
+<td>ie/10.0</td>
+<td>trident/6.0</td>
+<td>4</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>360/3.2.0.6</td>
+<td>trident/6.0</td>
+<td>4</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>lb/3.1.15.3877</td>
+<td>trident/6.0</td>
+<td>4</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/3.5.2.1000</td>
+<td>trident/6.0</td>
+<td>4</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.0.5.4000</td>
+<td>trident/6.0</td>
+<td>4</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>tao/3.1</td>
+<td>trident/6.0</td>
+<td>4</td>
+</tr>
+<tr>
+<td>at function setCaretToInput(input)<CR>at function(event)<CR>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>sg/2.x</td>
+<td>trident/6.0</td>
+<td>3</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>tao/3.0</td>
+<td>trident/6.0</td>
+<td>3</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>qq/7.3.8581.400</td>
+<td>trident/6.0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>at function setCaretToInput(input)<CR>at function (event)<CR>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>ie/10.0</td>
+<td>trident/6.0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>qq/6.14.14517.201</td>
+<td>trident/6.0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>at function setCaretToInput(input)<CR>at function (event)<CR>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>sg/2.x</td>
+<td>trident/6.0</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>4744</td>
+</tr>
+</tbody>
+</table>
+<h2 id="top2">TOP2</h2><table>
+<thead>
+<tr>
+<th>KEY</th>
+<th>VALUE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>URL</td>
+<td><a href="https://memberprod.alipay.com/account/reg/index.htm">https://memberprod.alipay.com/account/reg/index.htm</a></td>
+</tr>
+<tr>
+<td>File</td>
+<td><a href="https://a.alipayobjects.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js">https://a.alipayobjects.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js</a></td>
+</tr>
+<tr>
+<td>Line</td>
+<td>35</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>无法获取未定义或 null 引用的属性“length”</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>stack trace</th>
+<th>device</th>
+<th>os</th>
+<th>browser</th>
+<th>engine</th>
+<th>count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>ie/10.0</td>
+<td>trident/6.0</td>
+<td>2192</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>sg/2.x</td>
+<td>trident/6.0</td>
+<td>1255</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>ie/10.0</td>
+<td>trident/6.0</td>
+<td>352</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>baidu/2.x</td>
+<td>trident/6.0</td>
+<td>143</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>tw/3.6.1.1</td>
+<td>trident/6.0</td>
+<td>42</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.0.6.2000</td>
+<td>trident/6.0</td>
+<td>33</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>tw/3.6.1.0</td>
+<td>trident/6.0</td>
+<td>32</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>tao/3.0</td>
+<td>trident/6.0</td>
+<td>13</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>tw/3.6.1.1</td>
+<td>trident/6.0</td>
+<td>13</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/3.4.5.2000</td>
+<td>trident/6.0</td>
+<td>11</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>qq/7.3.8126.400</td>
+<td>trident/6.0</td>
+<td>9</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>tao/3.0</td>
+<td>trident/6.0</td>
+<td>9</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>360/3.9.1.5</td>
+<td>trident/6.0</td>
+<td>6</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/3.4.1.1000</td>
+<td>trident/6.0</td>
+<td>6</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.0.3.3000</td>
+<td>trident/6.0</td>
+<td>6</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>qq/6.14.14517.201</td>
+<td>trident/6.0</td>
+<td>6</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>qq/6.14.15493.201</td>
+<td>trident/6.0</td>
+<td>5</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>360/3.2.0.2</td>
+<td>trident/6.0</td>
+<td>4</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>qq/7.3.11251.400</td>
+<td>trident/6.0</td>
+<td>4</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>360/3.1.6.7</td>
+<td>trident/6.0</td>
+<td>3</td>
+</tr>
+<tr>
+<td>at function(a,c,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>sy/-1</td>
+<td>trident/6.0</td>
+<td>3</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>4147</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>TOP1 和 TOP2 两个异常都是中 memberprod 系统的注册页面上（重要程度不想而知），
+一个页面是注册的起始页，一个是注册的完成页。我们先分析起始页。</p>
+<p>打开异常所在文件第 35行，搜索异常栈信息中的 <code>function(a,c,d)</code>，我们发现有 3 个如下：</p>
+<div class="highlight"><pre><code class="javascript">each:<span class="function"><span class="keyword">function</span><span class="params">(a,c,d)</span>{</span><span class="keyword">var</span> f,g=<span class="number">0</span>,h=a.length,i=h===b||e.isFunction(a);<span class="keyword">if</span>(d){<span class="keyword">if</span>(i){<span class="keyword">for</span>(f <span class="keyword">in</span> a)<span class="keyword">if</span>(c.apply(a[f],d)===!<span class="number">1</span>)<span class="keyword">break</span>}<span class="keyword">else</span> <span class="keyword">for</span>(;g&lt;h;)<span class="keyword">if</span>(c.apply(a[g++],d)===!<span class="number">1</span>)<span class="keyword">break</span>}<span class="keyword">else</span> <span class="keyword">if</span>(i){<span class="keyword">for</span>(f <span class="keyword">in</span> a)<span class="keyword">if</span>(c.call(a[f],f,a[f])===!<span class="number">1</span>)<span class="keyword">break</span>}<span class="keyword">else</span> <span class="keyword">for</span>(;g&lt;h;)<span class="keyword">if</span>(c.call(a[g],g,a[g++])===!<span class="number">1</span>)<span class="keyword">break</span>;<span class="keyword">return</span> a}
+map:<span class="function"><span class="keyword">function</span><span class="params">(a,c,d)</span>{</span><span class="keyword">var</span> f,g,h=[],i=<span class="number">0</span>,j=a.length,k=a <span class="keyword">instanceof</span> e||j!==b&amp;&amp;<span class="keyword">typeof</span> j==<span class="string">"number"</span>&amp;&amp;(j&gt;<span class="number">0</span>&amp;&amp;a[<span class="number">0</span>]&amp;&amp;a[j-<span class="number">1</span>]||j===<span class="number">0</span>||e.isArray(a));<span class="keyword">if</span>(k)<span class="keyword">for</span>(;i&lt;j;i++)f=c(a[i],i,d),f!=<span class="literal">null</span>&amp;&amp;(h[h.length]=f);<span class="keyword">else</span> <span class="keyword">for</span>(g <span class="keyword">in</span> a)f=c(a[g],g,d),f!=<span class="literal">null</span>&amp;&amp;(h[h.length]=f);<span class="keyword">return</span> h.concat.apply([],h)}
+prop:<span class="function"><span class="keyword">function</span><span class="params">(a,c,d)</span>{</span><span class="keyword">var</span> e,g,h,i=a.nodeType;<span class="keyword">if</span>(!!a&amp;&amp;i!==<span class="number">3</span>&amp;&amp;i!==<span class="number">8</span>&amp;&amp;i!==<span class="number">2</span>){h=i!==<span class="number">1</span>||!f.isXMLDoc(a),h&amp;&amp;(c=f.propFix[c]||c,g=f.propHooks[c]);<span class="keyword">return</span> d!==b?g&amp;&amp;<span class="string">"set"</span><span class="keyword">in</span> g&amp;&amp;(e=g.set(a,d,c))!==b?e:a[c]=d:g&amp;&amp;<span class="string">"get"</span><span class="keyword">in</span> g&amp;&amp;(e=g.get(a,c))!==<span class="literal">null</span>?e:a[c]}}</code></pre></div><p>再找异常信息中的关键字 <code>length</code>，发现上面的 prop 方法中并没有这个关键字，
+所以可以排除。剩下的两个函数对应的原始码如下：</p>
+<div class="highlight"><pre><code class="javascript"><span class="comment">// args is for internal usage only</span>
+each: <span class="function"><span class="keyword">function</span><span class="params">( object, callback, args )</span> {</span>
+  <span class="keyword">var</span> name, i = <span class="number">0</span>,
+      length = object.length,
+      isObj = length === <span class="literal">undefined</span> || jQuery.isFunction( object );
+
+  <span class="keyword">if</span> ( args ) {
+    <span class="keyword">if</span> ( isObj ) {
+      <span class="keyword">for</span> ( name <span class="keyword">in</span> object ) {
+        <span class="keyword">if</span> ( callback.apply( object[ name ], args ) === <span class="literal">false</span> ) {
+          <span class="keyword">break</span>;
+        }
+      }
+    } <span class="keyword">else</span> {
+      <span class="keyword">for</span> ( ; i &lt; length; ) {
+        <span class="keyword">if</span> ( callback.apply( object[ i++ ], args ) === <span class="literal">false</span> ) {
+          <span class="keyword">break</span>;
+        }
+      }
+    }
+
+    <span class="comment">// A special, fast, case for the most common use of each</span>
+  } <span class="keyword">else</span> {
+    <span class="keyword">if</span> ( isObj ) {
+      <span class="keyword">for</span> ( name <span class="keyword">in</span> object ) {
+        <span class="keyword">if</span> ( callback.call( object[ name ], name, object[ name ] ) === <span class="literal">false</span> ) {
+          <span class="keyword">break</span>;
+        }
+      }
+    } <span class="keyword">else</span> {
+      <span class="keyword">for</span> ( ; i &lt; length; ) {
+        <span class="keyword">if</span> ( callback.call( object[ i ], i, object[ i++ ] ) === <span class="literal">false</span> ) {
+          <span class="keyword">break</span>;
+        }
+      }
+    }
+  }
+
+  <span class="keyword">return</span> object;
+},
+
+<span class="comment">// arg is for internal usage only</span>
+map: <span class="function"><span class="keyword">function</span><span class="params">( elems, callback, arg )</span> {</span>
+  <span class="keyword">var</span> value, key, ret = [],
+    i = <span class="number">0</span>,
+    length = elems.length,
+    <span class="comment">// jquery objects are treated as arrays</span>
+    isArray = elems <span class="keyword">instanceof</span> jQuery || length !== <span class="literal">undefined</span> &amp;&amp; <span class="keyword">typeof</span> length === <span class="string">"number"</span> &amp;&amp; ( ( length &gt; <span class="number">0</span> &amp;&amp; elems[ <span class="number">0</span> ] &amp;&amp; elems[ length -<span class="number">1</span> ] ) || length === <span class="number">0</span> || jQuery.isArray( elems ) ) ;
+
+  <span class="comment">// Go through the array, translating each of the items to their</span>
+  <span class="keyword">if</span> ( isArray ) {
+    <span class="keyword">for</span> ( ; i &lt; length; i++ ) {
+      value = callback( elems[ i ], i, arg );
+
+      <span class="keyword">if</span> ( value != <span class="literal">null</span> ) {
+        ret[ ret.length ] = value;
+      }
+    }
+
+  <span class="comment">// Go through every key on the object,</span>
+  } <span class="keyword">else</span> {
+    <span class="keyword">for</span> ( key <span class="keyword">in</span> elems ) {
+      value = callback( elems[ key ], key, arg );
+
+      <span class="keyword">if</span> ( value != <span class="literal">null</span> ) {
+        ret[ ret.length ] = value;
+      }
+    }
+  }
+
+  <span class="comment">// Flatten any nested arrays</span>
+  <span class="keyword">return</span> ret.concat.apply( [], ret );
+},</code></pre></div><p>这两个函数都有可能性，但是从经验上 each 方法用的更多，我猜这个命中率更高。
+但是单纯的从这些异常信息字面量来看，已经没有了更多信息。我们当时还没有注意到
+异常都是 Trident 6.0 抛出的。</p>
+<hr>
+<p>打开页面标准模式或兼容模式下都没有抛出这个异常，只是兼容模式下有个
+『找不到成员。』的异常。</p>
+<p>手贱点了表单第一个输入框，终于重现了梦寐以求的异常。它就是 each 方法中抛出的。
+从调用堆栈信息中可以看到 <code>this.items</code> 是 undefined，导致 each 失败。</p>
+<p><img src="https://f.cloud.github.com/assets/143572/860087/e82abdc4-f595-11e2-9f61-abdee317416e.png" alt="2013-07-23 9 12 58"></p>
+<p>而 <code>this.items</code> 为 undefined 是由于 validator 的 core 模块中 setup() 函数中
+设置 novalidator 属性异常导致后续代码没有执行造成。</p>
+<div class="highlight"><pre><code class="javascript">setup: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+
+  <span class="comment">//disable html5 form validation</span>
+  <span class="keyword">this</span>.element.attr(<span class="string">'novalidate'</span>, <span class="string">'novalidate'</span>);
+
+  <span class="comment">//Validation will be executed according to configurations stored in items.</span>
+  <span class="keyword">this</span>.items = [];
+
+  <span class="comment">//...</span>
+
+}</code></pre></div><p>至此，上周支付宝全站 TOP5 的异常均已告破，他们都是同一个问题造成的。</p>
+<h2 id="如何解决这个异常？">如何解决这个异常？</h2><p>Validator 组件已于 3个月前的 v0.9.3 版本得到修复，请升级到 Validator 最新版。
+升级过程中遇到问题，请联系 @乔花。</p>
+<h2 id="一个问题？">一个问题？</h2><p>基础组件中小版本升级修复各种 BUG 的过程中，如何同步推动业务代码的对应升级？</p>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[每周异常：第 2 期]]></title>
+        <link href="http://blog.hotoo.me/post/weekly-topic-about-exceptions-2"/>
+        <published>2013-07-22T00:00:00.000Z</published>
+        <updated>2013-07-22T00:00:00.000Z</updated>
+        <id>http://blog.hotoo.me/post/weekly-topic-about-exceptions-2</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+            <![CDATA[ <p>这是全站排名第 4 的一个异常，详情如下：</p>
+<table>
+<thead>
+<tr>
+<th>KEY</th>
+<th>VALUE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>URL</td>
+<td><a href="https://accounts.alipay.com/console/selectStrategy.htm">https://accounts.alipay.com/console/selectStrategy.htm</a></td>
+</tr>
+<tr>
+<td>File</td>
+<td><a href="https://a.alipayobjects.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js">https://a.alipayobjects.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js</a></td>
+</tr>
+<tr>
+<td>Line</td>
+<td>35</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>找不到成员。<CR><CR></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Stack Trace</th>
+<th>Device</th>
+<th>OS</th>
+<th>Browser</th>
+<th>Engine</th>
+<th>Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>ie/10.0</td>
+<td>trident/6.0</td>
+<td>826</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>sg/2.x</td>
+<td>trident/6.0</td>
+<td>423</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>ie/10.0</td>
+<td>trident/6.0</td>
+<td>151</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>baidu/2.x</td>
+<td>trident/6.0</td>
+<td>27</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/3.4.5.2000</td>
+<td>trident/6.0</td>
+<td>10</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>tw/3.6.1.1</td>
+<td>trident/6.0</td>
+<td>10</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>mx/4.0.6.2000</td>
+<td>trident/6.0</td>
+<td>3</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>lb/undefined</td>
+<td>trident/6.0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/3.5.2.1000</td>
+<td>trident/6.0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.0.5.3000</td>
+<td>trident/6.0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.0.5.4000</td>
+<td>trident/6.0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.0.6.2000</td>
+<td>trident/6.0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>qq/7.3.11251.400</td>
+<td>trident/6.0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>tw/-1</td>
+<td>trident/6.0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>360/3.7.1.6</td>
+<td>trident/6.0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>360/4.0.3.6</td>
+<td>trident/6.0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>360/4.0.5.2</td>
+<td>trident/6.0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/2.5.15.1000</td>
+<td>trident/6.0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/2.5.16.100</td>
+<td>trident/6.0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.0.3.6000</td>
+<td>trident/6.0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.0.5.2000</td>
+<td>trident/6.0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>mx/4.1.0.2000</td>
+<td>trident/6.0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>qq/6.13.13719.201</td>
+<td>trident/6.0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>qq/6.14.15493.201</td>
+<td>trident/6.0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>tw/3.4.0.5</td>
+<td>trident/6.0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.1</td>
+<td>tw/3.6.1.0</td>
+<td>trident/6.0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>mx/3.5.2.1000</td>
+<td>trident/6.0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>at function(a,b,d)</td>
+<td>pc/-1</td>
+<td>windows/6.2</td>
+<td>mx/4.0.5.3000</td>
+<td>trident/6.0</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>1478</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>首先我们找到异常所在文件的第 35行，在上面的异常栈信息中我们可以知道异常从
+压缩后的匿名函数 <code>function(a,b,d)</code> 中抛出，这个函数是：</p>
+<div class="highlight"><pre><code class="javascript">set:<span class="function"><span class="keyword">function</span><span class="params">(a,b,d)</span>{</span><span class="keyword">var</span> e=a.getAttributeNode(d);e||(e=c.createAttribute(d),a.setAttributeNode(e));<span class="keyword">return</span> e.nodeValue=b+<span class="string">""</span>}</code></pre></div><p>对应压缩前的源码是：</p>
+<div class="highlight"><pre><code class="javascript">    <span class="comment">// Use this for any attribute in IE6/7</span>
+    <span class="comment">// This fixes almost every IE6/7 issue</span>
+    nodeHook = jQuery.valHooks.button = {
+        get: <span class="function"><span class="keyword">function</span><span class="params">( elem, name )</span> {</span>
+            <span class="keyword">var</span> ret;
+            ret = elem.getAttributeNode( name );
+            <span class="keyword">return</span> ret &amp;&amp; ( fixSpecified[ name ] ? ret.nodeValue !== <span class="string">""</span> : ret.specified ) ?
+                ret.nodeValue :
+                <span class="literal">undefined</span>;
+        },
+        set: <span class="function"><span class="keyword">function</span><span class="params">( elem, value, name )</span> {</span>
+            <span class="comment">// Set the existing or create a new attribute node</span>
+            <span class="keyword">var</span> ret = elem.getAttributeNode( name );
+            <span class="keyword">if</span> ( !ret ) {
+                ret = document.createAttribute( name );
+                elem.setAttributeNode( ret );
+            }
+            <span class="keyword">return</span> ( ret.nodeValue = value + <span class="string">""</span> );
+        }
+    };</code></pre></div><p>这个代码是用来兼容 IE6/7 的属性操作（代码注释中号称几乎修复了 IE6/7 所有的问题），
+页面中的业务源码中我们找到不少 DOM 属性的操作，其中有一些看起来几乎不会有问题，
+另外一些则出现问题的可能性更高。</p>
+<p>我们从这些可能性更高的部分着手，最终发现 IE10 兼容模式下会抛出『<a href="https://github.com/totorojs/javascript-exception-archives/blob/master/content/wiki/member-not-found">找不到成员。</a>』
+的异常，这时我们注意到，异常详情中全部都是 Trident 6.0 内核的浏览器抛出的异常。
+看来我们这个增加兼容模式信息的 <a href="https://github.com/totorojs/monitor.js/issues/13">Issues#13</a>
+是正确的。</p>
+<p>我们看到兼容模式下表单中的 Select 模拟组件显示不正常，最初以为是 Select 组件设置属性造成的异常。</p>
+<p><img src="https://f.cloud.github.com/assets/143572/834321/3db467be-f2bb-11e2-93c0-007ec07ba729.png" alt="1c00b54eaad3a6f45ffec0d7526abc6e"></p>
+<p>（正常情况下的 Select 模拟组件）</p>
+<p><img src="https://f.cloud.github.com/assets/143572/834325/57343714-f2bb-11e2-84aa-fb8834763fce.png" alt="0aafc43da07d07423e1f67199cf5c5b9"></p>
+<p>（兼容模式下的 Select 模拟组件）</p>
+<p>IE10 的调试工具还是不错的，最终我们发现在设置 &quot;novalidate&quot; 属性时抛出这个异常，
+想到 Validator 的相关 <a href="https://github.com/aralejs/validator/issues/30">Issues#30</a></p>
+<p><img src="https://f.cloud.github.com/assets/143572/834340/6db729a6-f2bb-11e2-8558-a8f9681f99bf.png" alt="edde87186b5919bd49a4d74874c7ce36"></p>
+<p>于是这个异常就破解完成。</p>
+<h2 id="如何修复这个异常？">如何修复这个异常？</h2><p>找回密码的这个页面使用的 Validator@0.8.9，而 novalidate 属性造成的异常在
+Validator@0.9.3 及其后续版本中得到修复。建议升级到最新版本，如果升级过程中
+遇到问题，请咨询组件负责人 @乔花。</p>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[每周异常：第 1 期]]></title>
+        <link href="http://blog.hotoo.me/post/weekly-topic-about-exceptions-1"/>
+        <published>2013-07-15T00:00:00.000Z</published>
+        <updated>2013-07-15T00:00:00.000Z</updated>
+        <id>http://blog.hotoo.me/post/weekly-topic-about-exceptions-1</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+            <![CDATA[ <p>2013-07-15 14:00~14:03，来自<a href="http://www.ip.cn/?q=180.184.99.37">北京市时代互联(180.184.99.37)</a>
+的 pc/-1|windows/6.2|firefox/22.0|gecko/20100101 用户向支付宝 katongweb 系统发起
+1480次猛烈的总攻，详情如下：</p>
+<table>
+<thead>
+<tr>
+<th>KEY</th>
+<th>VALUE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ref</td>
+<td><a href="https://zht.alipay.com/asset/bankList.htm">https://zht.alipay.com/asset/bankList.htm</a></td>
+</tr>
+<tr>
+<td>URL</td>
+<td><a href="https://katongweb.alipay.com/moto/motoEntry.htm">https://katongweb.alipay.com/moto/motoEntry.htm</a></td>
+</tr>
+<tr>
+<td>File</td>
+<td>chrome://grabword/content/grabword.js</td>
+</tr>
+<tr>
+<td>Line</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Script error.</td>
+</tr>
+<tr>
+<td>stacktrace</td>
+</tr>
+</tbody>
+</table>
+<p>该用户通过 Ref 页面到目标 URL 之后，连续不断的通过 Firefox 插件脚本触发脚本异常。</p>
+<hr>
+<p>通过最近的几次异常报警来看，由客户端连续发起攻击引起的 JavaScript 异常 PV
+非正常波动，对异常监控数据有比较大的影响。</p>
+<p>因此考虑以下方案来提升监控数据的稳定有效性：</p>
+<ul>
+<li>监控 JavaScript 异常 UV(根据 Session)</li>
+<li>监控 JavaScript 异常独立 IP 数。</li>
+<li>排除客户端本地脚本引起的异常（多数攻击是由客户端脚本发起）<ul>
+<li>今日客户端脚本异常率：45.14%</li>
+<li>正常情况下客户端脚本异常率：3.45%</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>下图是排除了客户端本地脚本抛出的异常之后的结果：</p>
+<p><img src="https://f.cloud.github.com/assets/143572/803190/d77e2dea-ede7-11e2-92cb-1717857ecdbc.png" alt="2013-07-16 3 14 24"></p>
+<p>（当天数据对比，图中圆点是开启过滤客户端本地异常的时间点，下同）</p>
+<p><img src="https://f.cloud.github.com/assets/143572/803189/d77f22cc-ede7-11e2-9412-25920ec1c4d6.png" alt="2013-07-16 3 16 22"></p>
+<p>（相近2天数据对比）</p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[『已结束』庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)]]></title>
         <link href="http://blog.hotoo.me/post/vim74-tee"/>
         <published>2013-05-26T00:00:00.000Z</published>
@@ -1027,329 +2275,6 @@ true scope of the variables.</p>
 <p>好了，根据 URL 前缀信息，404 页面可以扩展成你需要的任意路由跳转页，
 或者非路由的 404 原始页了。</p>
 <p>散花~</p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[个人资金管理软件]]></title>
-        <link href="http://blog.hotoo.me/post/personal-financial-manage-soft"/>
-        <published>2013-02-17T00:00:00.000Z</published>
-        <updated>2013-02-17T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/personal-financial-manage-soft</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <p>过年花掉不少钱，而其中有一部分是喜酒之类的礼金，按照礼尚往来的习俗，这些礼金
-早晚都是要被送回来的，而被送回来的途径，则是喜酒回请。</p>
-<p>这些俗礼，即使不是为了收回礼金，回请对方也是必须的。</p>
-<p>为了避免忘记吃过的酒席（前几年的都忘记差不多了），也为了对自己的资金有更清晰
-的掌握，于是开始记账。</p>
-<p>我现在用上了 Macbook Pro 和 iPhone，于是想找一个可以运行于 Mac OSX 和 iOS 平台
-的软件，两者同步数据是必须的要求。毕竟移动设备记账有很多的便利优势，而 PC 做
-更细致的管理与分析则更为方便和强大。</p>
-<!--more-->
-
-<h2 id="gnucash">GNUCash</h2><p><a href="http://www.gnucash.org/">GNUCash</a> 非常有名，也是我最早知道的开源金融管理软件
-之一，复式记账一直是我觉得很厉害但是又不明白的概念。后来看了一些金融相关不入门
-的信息，才有所了解。</p>
-<p>以前也在 Windows 下使用过 GNUCash，本身还是很不错的，但是当时我没有坚持下来。</p>
-<p>这次下载最新版回来在 Mac 上安装好之后发现，除了菜单之外，界面上中文全部是乱码，
-一行中文被缩挤到第一列。新建账户或者其他任何操作都是不知所以，完全没法用。
-最奇怪的是，网络上各个搜索引擎居然都搜索不到 GNUCash 乱码的内容，偶尔有一篇，
-还是将数据库的。原来 GNUCash 使用的是 MySQL 存储数据？</p>
-<p>GNUCash 目前支持 Windows, Mac, Linux, 和 Android 平台。</p>
-<h2 id="icash">iCash</h2><p>后来看到有人推荐使用 <a href="http://www.maxprog.com/site/software/personal-finance/icash_sheet_us.php">iCash</a>，
-Mac 下 <code>i</code> 系列的好像都不错，于是尝试了下。</p>
-<p>iCash 支持 Windows, Mac 平台，也有中文支持。</p>
-<p>但就是觉得操作不算便利，一大堆莫名其妙的表单，有些会自动根据后面的表单自动适配，
-不需要显示但居然安排在最前面，后来我才知道可以不填。</p>
-<p>界面有点点土，用户体验也不好。概览里管理资金账户，如果需要更新交易，则需要
-切换到『交易』页签，然后选择是哪个账户的交易。表单恐惧症~</p>
-<p>填了不到 50条左右（存储的 .icash 文件有 23.8M 这么大）就烦了，
-于是继续寻找其他软件。</p>
-<h2 id="money">Money</h2><p>最后才找到 <a href="http://www.jumsoft.com/money/">Money by jumsoft</a> 界面设计非常赞，
-大部分使用体验也很棒，有部分瑕疵，而最要命的启动速度非常慢，导入从 iCash
-导出的 QIF 格式数据(.money 文件 500+KB) 启动时间大概需要 10秒。</p>
-<p>另外如果上次退出 Money 的时候没有打开的文档（每个 .money 文件是一个文档）的话，
-下次启动会要求创建新文档，只好打开最近的文档，再等 10秒钟。所以建议直接
-<code>&lt;Command-q&gt;</code> 退出文档 &amp; 程序，不要使用 <code>&lt;Command-w</code> 之类的关闭文档。</p>
-<p>另外还有 iOS(iPhone, iPad)版本，收费也不贵。可以通过 Wi-Fi 或 iCloud 同步数据。
-虽然呼声很高，目前还不支持 Dropbox 同步。不过像其他重要资料一样，我的 .money
-文件存储在 Dropbox 中。</p>
-<p>总之是很赞啦，如果解决了性能问题就更好了，还有就是缺少中文本地化，另外 Mac 版
-显示全部交易也不好，还有那啥~</p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[迁移博客到 Jekyll]]></title>
-        <link href="http://blog.hotoo.me/post/start-jekyll-for-blog"/>
-        <published>2013-02-13T00:00:00.000Z</published>
-        <updated>2013-02-13T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/start-jekyll-for-blog</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <h2 id="posts-文件结构">_posts 文件结构</h2><p>Jekyll 支持两种结构：</p>
-<ol>
-<li>平铺所有文件，每个文件使用日期前缀。</li>
-<li>按照完整的日期目录结构。</li>
-</ol>
-<h2 id="静态链接-permalink">静态链接(Permalink)</h2><p>我的个人博客并非用于发布新闻，即使非常旧的博客，也会不断更新维护，
-所以无需添加时间标识，直接使用 title 即可。</p>
-<p>如果需要多个版本，为避免出现冲突，可以在 title 中添加序号。如 <code>II</code> 或 <code>2</code>。</p>
-<h2 id="草稿-draft">草稿(Draft)</h2><p>Jekyll 支持 <code>published</code> 标记，设置为 <code>false</code> 就可以避免被转换发布。
-这本身很不错，但是这些草稿和正常发布的文件混淆在一起，无法清晰区分。</p>
-<p>所以我创建了 <code>_draft</code> 目录，用于存放草稿。在文章准备好之后拷贝到 <code>_posts</code>
-目录即可。</p>
-<p>p.s. 话说相比 <code>published</code> 标记，我更喜欢 <code>draft</code>，如果支持的话。</p>
-<h2 id="more">more</h2><p><a href="http://www.jacquesf.com/2011/03/creating-excerpts-in-jekyll-with-wordpress-style-more-html-comments/">Creating Excerpts in Jekyll with Wordpress-style &lt;!--more--&gt; HTML Comments</a></p>
-<!--more-->
-
-<h2 id="存档-archive">存档(Archive)</h2><p><a href="https://gist.github.com/enaeher/88cda643aa7e3b0ca1e5">enaeher / tiered_archives.rb</a></p>
-<h2 id="目录-toc">目录(TOC)</h2><p><a href="http://stackoverflow.com/questions/9602936/how-to-add-a-table-of-contents-to-jekyll-blog-post">http://stackoverflow.com/questions/9602936/how-to-add-a-table-of-contents-to-jekyll-blog-post</a>
-<a href="http://stackoverflow.com/questions/13481572/jekyll-automatic-table-of-contents">http://stackoverflow.com/questions/13481572/jekyll-automatic-table-of-contents</a>
-<a href="http://du1abadd.org/2010/usr/make_toc_support_for_jekyll_with_rdiscount.html">http://du1abadd.org/2010/usr/make_toc_support_for_jekyll_with_rdiscount.html</a></p>
-<h2 id="标签-tags">标签(Tags)</h2><h2 id="代码高亮">代码高亮</h2><h2 id="分页">分页</h2><pre>&lt;div class=&quot;pagination&quot;&gt;
-  {.% if paginator.previous_page == 1 %}
-    &lt;a href=&quot;/&quot; class=&quot;previous&quot;&gt;上一页&lt;/a&gt;
-  {.% else if paginator.previous_page %}
-    &lt;a href=&quot;/page{.{paginator.previous_page}}&quot; class=&quot;previous&quot;&gt;上一页&lt;/a&gt;
-  {.% else %}
-    &lt;span class=&quot;previous&quot;&gt;上一页&lt;/span&gt;
-  {.% endif %}
-  &lt;span class=&quot;page_number&quot;&gt;页码：{.{paginator.page}} / {.{paginator.total_pages}}&lt;/span&gt;
-  {.% if paginator.next_page %}
-    &lt;a href=&quot;/page{.{paginator.next_page}}&quot; class=&quot;next&quot;&gt;下一页&lt;/a&gt;
-  {.% else %}
-    &lt;span class=&quot;next&quot;&gt;下一页&lt;/span&gt;
-  {.% endif %}
-&lt;/div&gt;
-
-</pre><h3 id="参考：">参考：</h3><ul>
-<li><a href="http://jeffreysambells.com/2013/02/01/jekyll-draft-publishing-plugin">Jekyll Draft Publishing Plugin</a></li>
-<li><a href="http://tqcblog.com/2012/08/22/jekyll-drafts/">Jekyll Draft Posts</a></li>
-</ul>
-<h2 id="与-vimwiki-结合">与 Vimwiki 结合</h2><p>之前的博客使用 Vimwiki 管理，可以无需转换或发布，直接使用 Vim 即可简单浏览。</p>
-<pre>let g:vimwiki_list = [
-  \ {
-    \ &#39;path&#39;        : &#39;~/Dropbox/blog.hotoo.me/_posts&#39;,
-    \ &#39;index&#39;       : &#39;_index&#39;,
-    \ &#39;ext&#39;         : &#39;.md&#39;,
-    \ &#39;nested_syntaxes&#39; : {&#39;javascript&#39;: &#39;javascript&#39;, &#39;python&#39;: &#39;python&#39;, &#39;c++&#39;: &#39;cpp&#39;}
-  \ }
-\]
-
-</pre><h2 id="不足">不足</h2><p><code>_posts/*.md</code> 文档理论上只会作为内容输出，其中的代码（尤其是 Jekyll 使用的模板
-代码，及其 <code>pre &gt; code</code> 中的代码，应该合理转义处理。但是实际上 Jekyll 没有这样
-做，导致一些代码没有符合期望。</p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[使用 MacVim 做 svn diff]]></title>
-        <link href="http://blog.hotoo.me/post/macvim-svndiff"/>
-        <published>2012-10-31T00:00:00.000Z</published>
-        <updated>2012-10-31T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/macvim-svndiff</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <h2 id="对于终端的-vim">对于终端的 vim</h2><ol>
-<li><p><code>~/.subversion/config</code></p>
-<pre>[helpers]
-diff-cmd = /usr/local/bin/svndiff</pre></li>
-<li><p>将下面的代码保存为 svndiff：</p>
-<pre>#!/bin/sh
-
-DIFF=&quot;/usr/bin/vimdiff&quot;
-LEFT=${6}
-RIGHT=${7}
-$DIFF $LEFT $RIGHT</pre></li>
-<li><p>拷贝到 <code>/usr/local/bin/svndiff</code> 并设置权限：</p>
-<pre>sudo chmod +a /usr/local/bin/svndiff</pre></li>
-</ol>
-<h2 id="对于-macvim">对于 MacVim</h2><p>修改 <code>/usr/local/bin/svndiff</code> 内容如下：</p>
-<pre>#!/bin/bash
-
-LEFT=${6}
-RIGHT=${7}
-TMPLEFT=&quot;/tmp/${LEFT##*/}.$$&quot;
-TMPRIGHT=&quot;/tmp/${RIGHT##*/}.$$&quot;
-
-cp &quot;$LEFT&quot; &quot;$TMPLEFT&quot;
-cp &quot;$RIGHT&quot; &quot;$TMPRIGHT&quot;
-
-mvim --servername SVNDIFF --remote-tab-silent +&quot;vertical diffsplit $TMPLEFT|wincmd w&quot; &quot;$TMPRIGHT&quot;
-sleep 0.1
-
-SN=`mvim --serverlist | grep &quot;SVNDIFF&quot;`
-until [ &quot;$SN&quot; == &quot;SVNDIFF&quot; ]; do
-  sleep 0.1
-  SN=`mvim --serverlist | grep &quot;SVNDIFF&quot;`
-done
-
-rm -f &quot;$TMPLEFT&quot; &quot;$TMPRIGHT&quot;</pre><p>之前尝试过修改终端方案中的</p>
-<pre>DIFF=&quot;/usr/bin/vimdiff&quot;</pre><p>为：</p>
-<pre>DIFF=&quot;gvim -d&quot;</pre><p>未遂，右侧的代码会为空。</p>
-<h2 id="see-also">See Also</h2><ul>
-<li><a href="http://twitter.com/ntakushima/statuses/27518378028">svn diffの結果をMacVimで。</a><ul>
-<li><a href="https://gist.github.com/629457">diffwrap.sh</a></li>
-</ul>
-</li>
-</ul>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[在 Vim 上安装使用 Tagbar]]></title>
-        <link href="http://blog.hotoo.me/post/vim-install-tagbar"/>
-        <published>2012-10-28T00:00:00.000Z</published>
-        <updated>2012-10-28T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/vim-install-tagbar</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <pre>git clone https://github.com/mozilla/doctorjs.git –recursive
-cd doctorjs
-sudo make install</pre><p>会提示将 NODE_PATH 加入到环境变量 ~/.bash_profile ：</p>
-<pre>export NODE_PATH=/usr/local/lib/jsctags/:$NODE_PATH</pre><h2 id="see-also">See Also</h2><ul>
-<li><a href="http://majutsushi.github.com/tagbar/">Tagbar</a></li>
-<li><a href="https://github.com/majutsushi/tagbar/wiki">Support for additional filetypes</a></li>
-<li><a href="http://ahchoo.me/blog/2012/03/08/learn-vim-3-post/">Vim学习 Jsctags</a></li>
-<li><a href="https://github.com/mozilla/doctorjs">Doctor.js</a> - jsctags.</li>
-<li><a href="https://github.com/hotoo/dotfiles/blob/master/.ctags">.ctags</a></li>
-<li><a href="http://jezng.com/2011/03/vim-support-javascript-taglist-plus/">Awesome vim support for javascript with jsctags and taglist-plus</a></li>
-<li><a href="http://hikejun.com/blog/2011/05/07/%E6%9B%B4%E5%A5%BD%E7%9A%84%E7%94%A8vim%E6%B5%8F%E8%A7%88javascript%E4%BB%A3%E7%A0%81/">更好的用vim浏览Javascript代码</a></li>
-</ul>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[杭州萧山无人村骑行]]></title>
-        <link href="http://blog.hotoo.me/post/wurencun"/>
-        <published>2012-10-27T00:00:00.000Z</published>
-        <updated>2012-10-27T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/wurencun</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <p>从驴友哪里知道杭州附近有个无人村，网上看了帖子盘山公路很风景都很吸引人，
-但是地图山就是搜索不到在哪里，后来才知道地图上是狮山村，大概是后来没有人住了
-才被大家称为无人村的。</p>
-<p>骑行路线：</p>
-<p><iframe width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-  src="https://ditu.google.com/maps/ms?msa=0&amp;msid=201867621321994349317.0004ccf3731b6db4167b5&amp;brcurrent=3,0x344bb629439aaa99:0xa7bfd183824de83a,0%3B5,0,0&amp;ie=UTF8&amp;t=h&amp;ll=30.123883,120.152439&amp;spn=0.296055,0.075098&amp;output=embed">
-</iframe><br /><small>View <a href="https://ditu.google.com/maps/ms?msa=0&amp;msid=201867621321994349317.0004ccf3731b6db4167b5&amp;brcurrent=3,0x344bb629439aaa99:0xa7bfd183824de83a,0%3B5,0,0&amp;ie=UTF8&amp;t=h&amp;ll=30.123883,120.152439&amp;spn=0.296055,0.075098&amp;source=embed"
-    style="color:#0000FF;text-align:left">狮山村（无人村）</a> in a larger map</small></p>
-<p>其他同学都有事没能一起，只有一个测试好基友 <a href="http://weibo.com/n/peacefulgoose">@peacefulgoose</a> 一起。</p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[『逻辑与』是个好东西]]></title>
-        <link href="http://blog.hotoo.me/post/logical-conjunction"/>
-        <published>2012-05-01T00:00:00.000Z</published>
-        <updated>2012-05-01T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/logical-conjunction</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <p>一直很想实现 WebForms2 的语义化表单验证，最近才开始动手，执行力真差啊。</p>
-<p>一个表单元素可以同时存在多种校验方案，比如：</p>
-<ul>
-<li>required.</li>
-<li>data type: number, date, url, email...</li>
-<li>minlength, maxlength, min, max.</li>
-<li>pattern</li>
-<li>用户自定义验证函数。</li>
-<li>异步访问服务器进行业务校验。</li>
-</ul>
-<p>通常可以通过逻辑判断进行处理：</p>
-<div class="highlight"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">verifyFormInput</span><span class="params">(input)</span>{</span>
-  <span class="keyword">if</span>(!verifyRequired()){<span class="keyword">return</span> <span class="literal">false</span>;}
-  <span class="keyword">if</span>(!verifyMinLength()){<span class="keyword">return</span> <span class="literal">false</span>;}
-  <span class="keyword">if</span>(!verifyMaxLength()){<span class="keyword">return</span> <span class="literal">false</span>;}
-  <span class="keyword">if</span>(!verifyInputType()){<span class="keyword">return</span> <span class="literal">false</span>;}
-  <span class="keyword">if</span>(!verifyMin()){<span class="keyword">return</span> <span class="literal">false</span>;}
-  <span class="keyword">if</span>(!verifyMax()){<span class="keyword">return</span> <span class="literal">false</span>;}
-  <span class="keyword">if</span>(!verifyPattern()){<span class="keyword">return</span> <span class="literal">false</span>;}
-  <span class="keyword">if</span>(!verifyUserRules()){<span class="keyword">return</span> <span class="literal">false</span>;}
-  <span class="keyword">if</span>(!verifySync()){<span class="keyword">return</span> <span class="literal">false</span>;}
-  <span class="keyword">return</span> <span class="literal">true</span>;
-}
-<span class="function"><span class="keyword">function</span> <span class="title">verifyForm</span><span class="params">(form)</span>{</span>
-    <span class="keyword">var</span> flags = [];
-    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,l=form.elements.length; i&lt;l; i++){
-        <span class="comment">// 一次只能校验一个表单元素异常。</span>
-        <span class="comment">//if(!verifyFormInput(form.elements[i])){return false;}</span>
-
-        <span class="comment">// 可以同时校验所有元素异常。但是需要辅助循环进行检查。</span>
-        flags[i] = verifyFormInput(form.elements[i]);
-    }
-    <span class="comment">// 辅助循环检查。</span>
-    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,l=flags.length; i&lt;l; i++){
-        <span class="keyword">if</span>(!flags[i]){<span class="keyword">return</span> <span class="literal">false</span>;}
-    }
-    <span class="keyword">return</span> <span class="literal">true</span>;
-}</code></pre></div><p>实际代码中，各个 <code>verifyXXX</code> 函数可能内联在 <code>verifyFormInput</code> 函数中，
-代码显得多而有点乱，甚至有点冗余。</p>
-<p>想起模拟电路课程上学到的『与门』，只有所有电路都是通路时，整个电路才是通路。</p>
-<p>而表单验证也是这样：</p>
-<ul>
-<li>某个表单元素的所有验证逻辑都通过验证时，这个表单元素才算通过验证。</li>
-<li>整个表单的所有表单元素都通过验证时，才算这个表单通过验证。</li>
-</ul>
-<p>同时基于『逻辑与』表达式的语言特性，一旦前面的条件可以判断逻辑失败，立即返回
-失败，不再进行后面的条件判断。</p>
-<p>LogicalANDExpression:</p>
-<blockquote>
-<p><em>Semantics</em></p>
-<p>The production LogicalANDExpression : LogicalANDExpression &amp;&amp;
-BitwiseORExpression is evaluated as follows:</p>
-<ol>
-<li>Evaluate LogicalANDExpression.</li>
-<li>Call GetValue(Result(1)).</li>
-<li>Call ToBoolean(Result(2)).</li>
-<li>If Result(3) is <em>false</em>, return Result(2).</li>
-<li>Evaluate BitwiseORExpression.</li>
-<li>Call GetValue(Result(5)).</li>
-<li>Return Result(6).</li>
-</ol>
-</blockquote>
-<p>BitwiseORExpression:</p>
-<blockquote>
-<p>  <em>Semantics</em></p>
-<p>  The production A : A@B, where @ is one of the bitwise operators in the
-  productions above, is evaluated as follows:</p>
-<ol>
-<li>Evaluate A.</li>
-<li>Call GetValue(Result(1)).</li>
-<li>Evaluate B.</li>
-<li>Call GetValue(Result(3)).</li>
-<li>Call ToInt32(Result(2)).</li>
-<li>Call ToInt32(Result(4)).</li>
-<li>Apply the bitwise operator @ to Result(5) and Result(6). The result is
-a signed 32 bit integer.</li>
-<li>Return Result(7).</li>
-</ol>
-</blockquote>
-<p>于是验证算法改良如下：</p>
-<div class="highlight"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">verifyFormInput</span><span class="params">(input)</span>{</span>
-    <span class="keyword">var</span> certified = <span class="literal">true</span>;
-    certified = certified &amp;&amp; verifyRequired();
-    certified = certified &amp;&amp; verifyMinLength();
-    certified = certified &amp;&amp; verifyMaxLength();
-    certified = certified &amp;&amp; verifyInputType();
-    certified = certified &amp;&amp; verifyMin();
-    certified = certified &amp;&amp; verifyMax();
-    certified = certified &amp;&amp; verifyPattern();
-    certified = certified &amp;&amp; verifyUserRules();
-    certified = certified &amp;&amp; verifySync();
-    <span class="keyword">return</span> certified;
-}
-<span class="function"><span class="keyword">function</span> <span class="title">verifyForm</span><span class="params">(form)</span>{</span>
-    <span class="keyword">var</span> certified = <span class="literal">true</span>;
-    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,flag,l=form.elements.length; i&lt;l; i++){
-        <span class="comment">// 一次只能校验一个表单元素异常。</span>
-        <span class="comment">//certified = certified &amp;&amp; verifyFormInput(form.elements[i]);</span>
-
-        <span class="comment">// 可以同时校验所有元素异常。无需辅助循环进行检查。</span>
-        flag = verifyFormInput(form.elements[i]);
-        certified = certified &amp;&amp; flag;
-    }
-    <span class="keyword">return</span> certified;
-}</code></pre></div><h2 id="延伸">延伸</h2><p>以前也 Hack 的用过逻辑与表达式，比如：</p>
-<div class="highlight"><pre><code class="javascript">flag &amp;&amp; action();</code></pre></div><p>但这个用法只是用到了条件判断的作用，类似于：</p>
-<div class="highlight"><pre><code class="javascript"><span class="keyword">if</span>(flag){action();}</code></pre></div><h2 id="参考阅读">参考阅读</h2><ul>
-<li><a href="http://www.ecmascript.org/">ECMAScript</a></li>
-<li><a href="http://zh.wikipedia.org/wiki/%E9%80%BB%E8%BE%91%E4%B8%8E">逻辑与</a>
-<a href="http://en.wikipedia.org/wiki/Logical_conjunction">Logical_conjunction</a></li>
-<li><a href="http://zh.wikipedia.org/wiki/%E4%B8%8E%E9%97%A8">与门</a>
-<a href="http://en.wikipedia.org/wiki/AND_gate">AND_gate</a></li>
-</ul>
 ]]>
         </content>
     </entry>
