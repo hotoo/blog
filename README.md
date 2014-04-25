@@ -6,19 +6,12 @@
 ## 目录结构
 
 ```
-/post/:title.html
-/archives/:year           指定年份的存档列表
-/archives/:year/:month    指定月份的存档列表
-/tags                     标签云列表
-/tag/:tag-name            特定标签的博文列表
-/categorys                分类名列表
-/category/:category-name  特定分类的博文列表
+/                         博客首页
+/:year                    博客按年份归档页
+/tags                     博客按标签归档页
+/post/:title.html         博文详情页
 /search                   搜索首页
-/projects
-/twitter
-/movies
-/musices
-/404
+/404                      公共 404 页面
 ```
 
 ## 致谢
@@ -30,7 +23,11 @@
 
 本博客以下目录中的内容版权归`闲耘`所有。在没有许可的情况下，不得引用。
 
-* content/
+* /content
+
+本博客的模板，使用时请引用来源。
+
+* /theme
 
 其他目录的内容遵循 MIT 协议许可，您可以自由使用模板等文件。
 如果您使用了这些资源，请提供一个说明并链接到 http://blog.hotoo.me 。
