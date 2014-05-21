@@ -60,7 +60,7 @@
 其他发布才顺便解决。</p>
 <p><img src="https://i.alipayobjects.com/i/localhost/png/201404/2TD6uw5N0n.png" alt="realtile-error-trend"></p>
 <p>上图有两个造成异常的发布，分别是『CMS 发布』和『后台系统发布』。</p>
-<p>红色是 JavaScript 实时异常，绿色是静态资源 404 异常。</p>
+<p>橙色是 JavaScript 实时异常，绿色是静态资源 404 异常。</p>
 <h2 id="方案">方案</h2><p>事后我们坐下来讨论如何解决这个问题，避免在以后遇到类似问题时能快速有效的应对。</p>
 <p><img src="https://i.alipayobjects.com/i/localhost/png/201404/2Tdj3TmMdR.png" alt="异常过程序列图"></p>
 <p>如上图，问题出在某个问题业务应用服务器节点配置文件未生效，拼接出来的 JavaScript
@@ -113,7 +113,7 @@
 <li>增加网络请求和流量。</li>
 </ul>
 </li>
-<li>方案八：客户端脚本监听今天资源异常事件。HTML5 现在提供了 Performance Timing
+<li>方案八：客户端脚本监听静态资源异常事件。HTML5 现在提供了 Performance Timing
 API，可以用来监控网页及其引用的外部资源加载时间，将来提供类似的 API 可以监听
 静态资源的 error 事件也未可知。『期待』</li>
 <li>方案九：Web 服务器端输出时拦截器扫描。尤其目前前端往后端延伸，能做的事情更多
