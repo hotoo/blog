@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width">
     <meta name="generator" content="nico 0.5.0">
     <meta name="theme" content="KISS 0.1">
-    <title>首页 - 闲耘™.博客</title>
+    <title>GitHub, GitLab, or BitBucket? - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
-    <link rel="stylesheet" href="./static/syntax.css" />
-    <link type="text/css" rel="stylesheet" href="./static/template.css" />
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
   </head>
   <body>
   <div id="wrapper">
     <header class="navigation" role="navigation">
-      <!--<a class="home" href="./">闲耘™.博客</a>-->
+      <!--<a class="home" href="../">闲耘™.博客</a>-->
       <div style="float:right;">
         <form action="/search.html">
           <input type="text" name="q" autocomplete="off" />
@@ -41,14 +41,8 @@
 <div id="container">
   <div id="content" class="document">
 <div class="hentry">
-  <!--<h1 class="entry-title">首页</h1>-->
-
-  <div class="container">
-    <div class="post">
-      
-          <h1>GitHub, GitLab, or BitBucket? <a href="post/github-gitlab-or-bitbucket" class="title-permalink">¶</a></h1>
-          <section>
- <blockquote>
+  <h1 class="entry-title">GitHub, GitLab, or BitBucket?</h1>
+  <div class="entry-content"><blockquote>
 <p>GitHub 是汇集了众多开源项目的闭源系统，</p>
 <p>GitLab 是汇聚了较多闭源项目的开源系统。</p>
 <p>-- <a href="https://twitter.com/hotoo/status/417483811212238848">@hotoo</a></p>
@@ -61,213 +55,123 @@
 <li>BitBucket</li>
 </ul>
 <p>下面我们稍做评比。</p>
-<p class="more"><a href="post/github-gitlab-or-bitbucket#more">阅读详情...</a></p>
-          </section>
-          <footer class="post clearfix">
-            <span class="tags"><a href="/tag">Tags</a>:
- 
-                <a href="/tag/#Git">Git</a>
-              
-            </span>
+<a name="more"></a>
 
-            <time>
-              <a href="/2014">2014年</a>08月03日
-            </time>
-          </footer>
-    </div>
+<h2 id="github">GitHub</h2><p>Github 当下大红大紫，主要在于其社交性质。</p>
+<p>对于开源项目来说，上面大量的开发者参与带来了非常活跃的开发氛围。</p>
+<p>但是对于私有仓库来说，个人觉得价格偏贵（屌丝气质暴露）。</p>
+<p>而且个人账户下的私有仓库，不能共享给个人所拥有的团队账户，因此如果团队账户需要
+私有仓库，则需要另外再为团队账户购买。</p>
+<p>如果不缺钱，可以考虑 GitHub，甚至还有 Enterprise 版本。</p>
+<h2 id="gitlab">GitLab</h2><p>GitLab 是当下最火的 Git 仓库管理的开源项目，有提供的 <a href="https://gitlab.com/">gitlab.com</a>
+服务，同时可以自行部署。</p>
+<p>gitlab.com 服务可以创建不限数量的私有仓库，除了少量的缺点外，GitLab 几乎可以
+媲美 GitHub。</p>
+<p>但是，作为完美主义者，真的受不了 GitLab 的一些小伤疤。</p>
+<h2 id="bitbucket">BitBucket</h2><p>BitBucket 是 <a href="https://www.atlassian.com/">Atlassian</a> 公司的产品
+（还有 Confluence，JIRA， HipChat 等著名产品）。</p>
+<p>个人觉得除了 Issues 不够简洁之外，其他都很完美。
+适合小团队私有项目托管。</p>
+<h2 id="对比">对比</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>Github</th>
+<th>Gitlab</th>
+<th>BitBucket</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>私有仓库</td>
+<td>收费<br/>教育身份赞助 2年的 Micro Plan</td>
+<td>免费，无限制</td>
+<td>免费，限制协作人数</td>
+</tr>
+<tr>
+<td>权限控制</td>
+<td>个人账户无控制<br/>团队账户有限控制</td>
+<td>仓库级控制<br/>指定一个保护分支</td>
+<td>分支级控制</td>
+</tr>
+<tr>
+<td>Transfer</td>
+<td>完美</td>
+<td>几乎完美</td>
+<td>完美</td>
+</tr>
+<tr>
+<td>仓库重命名</td>
+<td>完美</td>
+<td>不能修改 clone 地址</td>
+<td>完美</td>
+</tr>
+<tr>
+<td>仓库名</td>
+<td>完美</td>
+<td>不能使用 <code>.</code>，自动修改为 <code>-</code></td>
+<td>完美</td>
+</tr>
+<tr>
+<td>Issues</td>
+<td>完美</td>
+<td>功能复杂，但界面简洁<br/>早期有 Issues ID 缺陷，已修复</td>
+<td>功能复杂，界面不够简洁</td>
+</tr>
+<tr>
+<td>Issues URL</td>
+<td>完美</td>
+<td>完美</td>
+<td>默认附加可选的标题信息</td>
+</tr>
+<tr>
+<td>Pages</td>
+<td>username.github.io 仓库<br/>gh-page 分支</td>
+<td>demo 分支</td>
+<td>username.bitbucket.org 仓库</td>
+</tr>
+<tr>
+<td>自定义域名</td>
+<td>每个仓库都可以自定义域名</td>
+<td>无</td>
+<td>个人 Profile 页</td>
+</tr>
+</tbody>
+</table>
+<h2 id="小结">小结</h2><ul>
+<li>GitHub 适合开源项目管理。不缺钱的同学，私有项目也适合统一在 GitHub 管理。</li>
+<li>GitLab 和 BitBucket 都很适合私有项目的管理。</li>
+<li>GitLab 是开源项目，活跃程度很高，未来很有潜力，如果不在乎那些小硬伤，个人更推荐 GitLab。</li>
+<li>BitBucket 系出名门，产品本身也非常好，没有明显的伤疤，作为完美主义者，我目前稍喜欢这个。</li>
+</ul>
+</div>
 
-    <h2>最近文章</h2>
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/#Git">Git</a>
+      
+    </span>
 
-    <ul class="posts">
- 
- 
-          <li class="posts-item">
-            <a href="post/find-nodes-from-server-cluster">定位到服务器集群的特定节点</a>
-            (<time class="datetime">2014-04-17</time>)
-          </li>
- 
-          <li class="posts-item">
-            <a href="post/convert-vimwiki-to-markdown">转换 Vimwiki 为 Markdown</a>
-            (<time class="datetime">2014-03-31</time>)
-          </li>
- 
-          <li class="posts-item">
-            <a href="post/alibaba-3-years">阿里巴巴三年醇</a>
-            (<time class="datetime">2014-02-25</time>)
-          </li>
- 
-          <li class="posts-item">
-            <a href="post/lunar-calendar">中国农历</a>
-            (<time class="datetime">2013-11-13</time>)
-          </li>
- 
-          <li class="posts-item">
-            <a href="post/vim-talk-laiwangzhadui">Vim Talk in 来往扎堆</a>
-            (<time class="datetime">2013-10-23</time>)
-          </li>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-    </ul>
-
-    <div>
-      <a href="/tag">Tags</a> |
-      <a href="/2013">Archive</a>
-    </div>
-    <p/>
-
-  </div>
-
+    <time datetime="2014-08-03T00:00:00.000Z">
+      <a href="/2014">2014年</a>08月03日
+    </time>
+  </footer>
+    <section>
+      <div id="disqus_thread"></div>
+      <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+      </noscript>
+    </section>
+  <script type="text/javascript">
+    
+    var disqus_identifier = "github-gitlab-or-bitbucket";
+    
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://hotoo.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  </script>
 </div>
 </div>
 
