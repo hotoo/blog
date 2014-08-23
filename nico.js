@@ -4,6 +4,7 @@ module.exports = {
   "source": "content",
   "output": "_site",
   "theme": "theme",
+  "google": "UA-2048484-1",
   "permalink": "post/{{filename}}",
   "navigation":[
     {
