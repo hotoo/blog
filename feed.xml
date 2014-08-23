@@ -963,11 +963,13 @@ JavaScript 异常结合起来做有力的分析，但是今天这个话题跟 Ja
 <p>事后我们查了当天的页面访问 PV 和 UV，可惜并没有明显波动。</p>
 <p>实际经过细致的异常日志分析，我们看到攻击用户同时没过一段时间就更换 IP 地址或清理
 Cookie，因此全天的综合数据中异常 PV  和异常 UV 有了一些明显波动。</p>
-<p>而且实际上，每天都有攻击造成的异常波动。
-- 每天都有攻击造成的异常，累加在一起好像每天都没什么问题。
-- 由于攻击造成异常总数相对一天的异常总数太小，从全天异常总数的层面来看，
-  无法发现，甚至排除攻击造成的异常。
-- T+1 的统计数据，对于异常监控来说，太迟钝了。</p>
+<p>而且实际上，每天都有攻击造成的异常波动。</p>
+<ul>
+<li>每天都有攻击造成的异常，累加在一起好像每天都没什么问题。</li>
+<li>由于攻击造成异常总数相对一天的异常总数太小，从全天异常总数的层面来看，
+无法发现，甚至排除攻击造成的异常。</li>
+<li>T+1 的统计数据，对于异常监控来说，太迟钝了。</li>
+</ul>
 <h2 id="全站每分钟异常统计">全站每分钟异常统计</h2><p>从上面每日异常总和的分析我们可以看出，一天的总和数据能发现的问题还是比较有限的。
 于是我从分钟的粒度来统计异常。</p>
 <p><img src="https://f.cloud.github.com/assets/143572/900781/7496f1e6-fb6e-11e2-854f-1a0f685bea15.png" alt="2013-08-02 7 24 54"></p>
@@ -1000,11 +1002,11 @@ Cookie，因此全天的综合数据中异常 PV  和异常 UV 有了一些明�
 <tbody>
 <tr>
 <td>URL</td>
-<td><a href="https://memberprod.alipay.com/account/reg/complete/complete.htm">https://memberprod.alipay.com/account/reg/complete/complete.htm</a></td>
+<td><a href="https://www.example.com/index.htm">https://www.example.com/index.htm</a></td>
 </tr>
 <tr>
 <td>File</td>
-<td><a href="https://a.alipayobjects.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js">https://a.alipayobjects.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js</a></td>
+<td><a href="https://a.example.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js">https://a.example.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js</a></td>
 </tr>
 <tr>
 <td>Line</td>
@@ -1312,11 +1314,11 @@ Cookie，因此全天的综合数据中异常 PV  和异常 UV 有了一些明�
 <tbody>
 <tr>
 <td>URL</td>
-<td><a href="https://memberprod.alipay.com/account/reg/index.htm">https://memberprod.alipay.com/account/reg/index.htm</a></td>
+<td><a href="https://www.example.com/index.htm">https://www.example.com/index.htm</a></td>
 </tr>
 <tr>
 <td>File</td>
-<td><a href="https://a.alipayobjects.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js">https://a.alipayobjects.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js</a></td>
+<td><a href="https://a.example.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js">https://a.example.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js</a></td>
 </tr>
 <tr>
 <td>Line</td>
@@ -1620,8 +1622,7 @@ map: <span class="function"><span class="keyword">function</span><span class="pa
   <span class="comment">//...</span>
 
 }</code></pre></div><p>至此，上周支付宝全站 TOP5 的异常均已告破，他们都是同一个问题造成的。</p>
-<h2 id="如何解决这个异常？">如何解决这个异常？</h2><p>Validator 组件已于 3个月前的 v0.9.3 版本得到修复，请升级到 Validator 最新版。
-升级过程中遇到问题，请联系 @乔花。</p>
+<h2 id="如何解决这个异常？">如何解决这个异常？</h2><p>Validator 组件已于 3个月前的 v0.9.3 版本得到修复，请升级到 Validator 最新版。</p>
 <h2 id="一个问题？">一个问题？</h2><p>基础组件中小版本升级修复各种 BUG 的过程中，如何同步推动业务代码的对应升级？</p>
 ]]>
         </content>
@@ -1643,11 +1644,11 @@ map: <span class="function"><span class="keyword">function</span><span class="pa
 <tbody>
 <tr>
 <td>URL</td>
-<td><a href="https://accounts.alipay.com/console/selectStrategy.htm">https://accounts.alipay.com/console/selectStrategy.htm</a></td>
+<td><a href="https://www.example.com/console/selectStrategy.htm">https://www.example.com/console/selectStrategy.htm</a></td>
 </tr>
 <tr>
 <td>File</td>
-<td><a href="https://a.alipayobjects.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js">https://a.alipayobjects.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js</a></td>
+<td><a href="https://a.example.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js">https://a.example.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js</a></td>
 </tr>
 <tr>
 <td>Line</td>
@@ -1945,8 +1946,7 @@ map: <span class="function"><span class="keyword">function</span><span class="pa
 <p><img src="https://f.cloud.github.com/assets/143572/834340/6db729a6-f2bb-11e2-8558-a8f9681f99bf.png" alt="edde87186b5919bd49a4d74874c7ce36"></p>
 <p>于是这个异常就破解完成。</p>
 <h2 id="如何修复这个异常？">如何修复这个异常？</h2><p>找回密码的这个页面使用的 Validator@0.8.9，而 novalidate 属性造成的异常在
-Validator@0.9.3 及其后续版本中得到修复。建议升级到最新版本，如果升级过程中
-遇到问题，请咨询组件负责人 @乔花。</p>
+Validator@0.9.3 及其后续版本中得到修复。建议升级到最新版本。</p>
 ]]>
         </content>
     </entry><entry>
@@ -1969,11 +1969,11 @@ Validator@0.9.3 及其后续版本中得到修复。建议升级到最新版本�
 <tbody>
 <tr>
 <td>Ref</td>
-<td><a href="https://zht.alipay.com/asset/bankList.htm">https://zht.alipay.com/asset/bankList.htm</a></td>
+<td><a href="https://ref.example.com/ref.htm">https://ref.example.com/ref.htm</a></td>
 </tr>
 <tr>
 <td>URL</td>
-<td><a href="https://katongweb.alipay.com/moto/motoEntry.htm">https://katongweb.alipay.com/moto/motoEntry.htm</a></td>
+<td><a href="https://www.example.com/index.htm">https://www.example.com/index.htm</a></td>
 </tr>
 <tr>
 <td>File</td>
@@ -2267,7 +2267,7 @@ VIM - Vi IMproved 7.4 (2013 Aug 10)<br/>
 your variable declarations together at the start of any function.</p>
 </blockquote>
 <p>JavaScript 传教士老道也有
-[类似的教诲](<a href="http://javascript.crockford.com/code.html#variable">http://javascript.crockford.com/code.html#variable</a> declarations)：</p>
+<a href="http://javascript.crockford.com/code.html#variable declarations">类似的教诲</a>：</p>
 <blockquote>
 <p>The var statements should be the first statements in the function body.</p>
 <p>...</p>

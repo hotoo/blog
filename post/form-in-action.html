@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta name="generator" content="nico 0.5.0">
+    <meta name="generator" content="nico 0.5.1">
     <meta name="theme" content="KISS 0.1">
     <title>Form 表单最佳实践 - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
@@ -87,13 +87,13 @@ post 提交后，刷新仍是 post 提交相同的数据。</p>
 <li>.vm 文件本身保存为 utf-8 编码。</li>
 <li><p>修改编码设置：
 milan-web-base-2.0-SNAPSHOT.jar\META-INF\webx\pipeline.xml</p>
-<valve class="com.alibaba.turbine.pipeline.SetLocaleValve"
+<valve class="com.example.turbine.pipeline.SetLocaleValve"
     defaultLocale="zh_CN" defaultCharset="UTF-8"/>
 
 </li>
 </ul>
 <p>milan-web-base-2.0-SNAPSHOT.jar\META-INF\webx\webx-default.xml</p><div class="highlight"><div class="codes"><div class="code"><pre>&lt;service name=&quot;VelocityService&quot;
-    class=&quot;com.alibaba.service.velocity.DefaultVelocityService&quot; earlyInit=&quot;true&quot;&gt;
+    class=&quot;com.example.service.velocity.DefaultVelocityService&quot; earlyInit=&quot;true&quot;&gt;
 
     &lt;property name=&quot;input.encoding&quot; value=&quot;UTF-8&quot;/&gt;
     &lt;property name=&quot;parser.pool.size&quot; value=&quot;100&quot;/&gt;
@@ -112,34 +112,32 @@ Hack in IE: <code>onsubmit=&quot;document.charset=&#39;utf-8&#39;;&quot;</code><
 </ol>
 <h2 id="onsubmit">onsubmit</h2><p>Form 表单的 onsubmit 事件在表单真正向服务器发送请求之前执行，一般用于验证表单
 的数据完整性和合法性。如果处理函数返回 false，则不向服务器发送请求。</p>
-<p>绑定 onsubmit 事件处理函数的方法有 3 种：
-<em> 一般简单的页面，直接在 form 标签中添加 onsubmit 属性:
-    <code>&lt;form onsubmit=&quot;return validater(this);&quot;&gt;...&lt;/form&gt;</code>
-</em> 按照“内容与行为分离”的思想，我们一般可以在 JavaScript 加载完成后对表单进行
-    事件绑定：</p><div class="highlight"><div class="codes"><div class="code"><pre>  //var form = document.getElementById(&quot;formId&quot;);
-  form.onsubmit = function(){
-      if(ie){document.charset=&quot;utf-8&quot;;}
-      return !!this[&quot;k&quot;].value;
-  };
-
+<p>绑定 onsubmit 事件处理函数的方法有 3 种：</p>
+<ul>
+<li>一般简单的页面，直接在 form 标签中添加 onsubmit 属性:
+<code>&lt;form onsubmit=&quot;return validater(this);&quot;&gt;...&lt;/form&gt;</code></li>
+<li><p>按照“内容与行为分离”的思想，我们一般可以在 JavaScript 加载完成后对表单进行
+事件绑定：</p>
+<p>  //var form = document.getElementById(&quot;formId&quot;);
+  form.onsubmit = function(){</p><div class="highlight"><div class="codes"><div class="code"><pre>  if(ie){document.charset=&quot;utf-8&quot;;}
+  return !!this[&quot;k&quot;].value;
 </pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
-<a name="L4-2" href="#L4-2">2</a>
-<a name="L4-3" href="#L4-3">3</a>
-<a name="L4-4" href="#L4-4">4</a>
-<a name="L4-5" href="#L4-5">5</a>
-<a name="L4-6" href="#L4-6">6</a></pre></div></div><ul>
+<a name="L4-2" href="#L4-2">2</a></pre></div></div><p>  };</p>
+</li>
 <li><p>更专业的事件绑定方法（考虑到兼容性问题，这里使用 jQuery 代码）：</p>
 <p>  $(&quot;#formId&quot;).submit(function(){</p><div class="highlight"><div class="codes"><div class="code"><pre>  return this.k.value;
 </pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a></pre></div></div><p>  });</p>
 </li>
 </ul>
 <h2 id="普通提交数据的表单">普通提交数据的表单</h2><p>对于普通提交数据的表单，比如新增、修改数据，使用 POST 方式提交数据即可。
-删除的方式一般有两种：
-1. 删除链接的 href 指向执行删除操作的地址，链接元素绑定 onclick 事件：
-    <code>&lt;a href=&quot;del.html?id=1&quot; onclick=&quot;return window.confirm(&#39;确认删除？&#39;);&quot;&gt;</code><br />
-    这是 GET 提交方式。绑定事件处理函数的技巧同上面的 onsubmit。
-1. 绑定 onclick 事件，并执行 AJAX 提交， return false；回调函数中可以使用动态
-    更新 DOM 的方式或其他。</p>
+删除的方式一般有两种：</p>
+<ol>
+<li>删除链接的 href 指向执行删除操作的地址，链接元素绑定 onclick 事件：
+<code>&lt;a href=&quot;del.html?id=1&quot; onclick=&quot;return window.confirm(&#39;确认删除？&#39;);&quot;&gt;</code><br />
+这是 GET 提交方式。绑定事件处理函数的技巧同上面的 onsubmit。</li>
+<li>绑定 onclick 事件，并执行 AJAX 提交， return false；回调函数中可以使用动态
+更新 DOM 的方式或其他。</li>
+</ol>
 <p>呃，其实最好体验也许是：删除操作时不要求确认（弹出确认对话框），但在事后可以
 执行 <a href="cancel-vs-undo.html">撤销</a> 删除操作。</p>
 <h2 id="多个提交按钮的表单">多个提交按钮的表单</h2><p>某些时候，单个表单中可能存在 2 个及其以上的提交按钮。</p>
@@ -342,19 +340,20 @@ function validater(form){
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://lab.lepture.com/nico/">nico@0.5.0</a>, Theme by 闲耘™(@hotoo).
+  <a href="http://lab.lepture.com/nico/">nico@0.5.1</a>, Theme by 闲耘™(@hotoo).
   </p>
 </footer>
 </div>
-<script type="text/javascript">
-var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-2048484-1', 'auto');
+  ga('send', 'pageview');
+
 </script>
-<script type="text/javascript">
-try {
-  var pageTracker=_gat._getTracker("UA-2048484-1");
-  pageTracker._trackPageview();
-}catch(err){}</script>
 
   </body>
 </html>
