@@ -47,18 +47,35 @@ var r0 = performance.getEntriesByType("resource")[0],
 
 在使用 Resource Timing 来获取当前页面的资源集合的资源耗时性能对象时，许多 Resource
 Timing 示例都是使用 `performance.getEntries()`，这意味着唯一的 resource timing 对象
-由该调用进行返回。但是 `getEntries()` 会一并返回潜在的 4 种类型的 timing 对象：
+由该调用进行返回。但是 `getEntries()` 会一并返回潜在的 [4 种类型的 timing 对象](http://www.w3.org/wiki/Web_Performance/EntryType)：
 `resource`（资源），`navigation` （导航）, `mark` （标记）, 和 `measure` （测量）。
 
 这并没有造成多大问题，因为目前 `resource` 是大多数网页的唯一类型。
-`navigation` 类型是 Navigation Timing 2 的一部分，目前没有被任何浏览器所实现。
-`mark` 和 `measure` 类型是从 User Timing 规范衍生出来的，在部分浏览器中可用，
+`navigation` 类型是 [Navigation Timing 2](http://www.w3.org/TR/navigation-timing-2/) 的一部分，据我所知目前没有被任何浏览器所实现。
+`mark` 和 `measure` 类型是从 [User Timing](http://www.w3.org/TR/user-timing/) 规范衍生出来的，在部分浏览器中可用，
 但是还没有被广泛使用。
 
 也就是说，`getEntriesByType("resource")` 以及 `getEntries()` 在今天可能返回相同
 的结果，但是可能 `getEntries()` 将很快返回多种性能对象的混合集合，所以最好是
 使用 `performance.getEntriesByType("resource")`，你可以明确的只获取 resource
-timing 对象。（感谢 Andy Davies 给我解释这一点）
+timing 对象。（感谢 [Andy Davies](http://calendar.perfplanet.com/2012/an-introduction-to-the-resource-timing-api/) 给我解释这一点）
+
+## 2. 使用 Navigation Timing 测量主页面的请求。
+
+当通过典型的请求获取一个网页的主 HTML 文档，但是这个资源并不能通过
+`performance.getEntriesByType("resource")` 得到返回，要得到这个主页面 HTML 文档
+的 timing 信息，需要使用 Navigation Timing 对象（`performance.timing`）。
+
+虽然不太可能，当页面上没有其他资源时，这可能会导致错误发生。
+例如，刚才 Resource Timing 示例使用如下代码：
+
+```js
+performance.getEntriesByType("resource")[0]
+```
+
+如果一个页面唯一的资源就是主页面的 HTML 文档，然后 `getEntriesByType("resource")`
+返回一个空数组，这时候应用 `element[0]` 会引起 JavaScript 异常。如果你找不到
+没有引用子资源的页面，你可以试试 http://fast.stevesouders.com/
 
 ## 译者补充
 
