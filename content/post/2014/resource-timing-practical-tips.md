@@ -77,6 +77,42 @@ performance.getEntriesByType("resource")[0]
 返回一个空数组，这时候应用 `element[0]` 会引起 JavaScript 异常。如果你找不到
 没有引用子资源的页面，你可以试试 http://fast.stevesouders.com/
 
+## 3. 小心 `secureConnectionStart` 的问题。
+
+[`secureConnectionStart`](http://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-secureconnectionstart)
+属性我们衡量 SSL 协商需要多长时间。这非常重要，我经常
+看到 500 毫秒以上的 SSL 协商时间，甚至更多。`secureConnectionStart` 有 3 种
+可能的值：
+
+* 如果该属性不可用，则必须设置为 `undefined`。
+* 如果不使用 HTTPS 的，则必须设置为 0.
+* 如果该属性可用，并且使用了 HTTPS，则必须设置为一个时间戳。
+
+关于 `secureConnectionStart`，有三件事情需要了解下：
+
+首先，在 Internet Explorer 中，`secureConnectionStart` 的值总是 `undefined`，
+因为它是不可用的（该值被埋在 [WinINet](http://msdn.microsoft.com/en-us/library/windows/desktop/aa383630(v=vs.85\).aspx) 之下）。
+
+其次，在 Chrome 中有个 BUG 会导致 `secureConnectionStart` 被错误的设置为 0 的问题。
+如果获取一个资源时使用预先存在的 HTTPS 连接，则 `secureConnectionStart` 将被设置
+为 0，而实际上它应该是一个时间戳。（详情请参考 [bug 404501](https://code.google.com/p/chromium/issues/detail?id=404501) ）
+为了避免这个问题，测量 SSL 协商时间时，一定要检查 `secureConnectionStart` 既不是
+`undefined` 也不是 `0`：
+
+```js
+var r0 = performance.getEntriesByType("resource")[0];
+if ( r0.secureConnectionStart ) {
+    var ssl = r0.connectEnd - r0.secureConnectionStart;
+}
+```
+
+第三，规范中关于 [这一行](http://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-secureconnectionstart)
+有一些误导：“...如果当前页面的协议是 HTTPS，这个属性必须立即返回用户代理(user agent)开始握手过程的时间...”
+（我的重点）。有可能当前页面是 HTTP，但仍然包含我们需要测量 SSL 协商时间的 HTTPS 资源。
+规范应该改为：“...如果资源的协议是 HTTPS 协议，该属性必须立即返回用户代理开始握手过程的时间...”。
+幸运的是，浏览器是使用纠正后的行为，而已就是说， `secureConnectionStart` 可用于
+HTTP 页面中的 HTTPS 资源。
+
 ## 译者补充
 
 * [Resource Timing practical tips](http://www.stevesouders.com/blog/2014/08/21/resource-timing-practical-tips/) - 原文出处。
