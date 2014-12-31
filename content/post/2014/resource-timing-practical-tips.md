@@ -3,7 +3,7 @@
 
 - template: post.html
 - pubdate: 2014-12-30
-- tags: HTML5
+- tags: HTML5, 翻译
 
 ----
 
@@ -20,6 +20,8 @@ var t = performance.timing,
     tcp = t.connectEnd - t.connectStart,
     ttfb = t.responseStart - t.navigationStart;
 ```
+
+<!--more-->
 
 能够度量主页面的时间消耗真是太棒了，但是要诊断现实当中的性能问题，往往需要深入
 到各个资源当中。所以我们拥有了更进一步的 Resource Timing （资源计时）规范，
@@ -112,6 +114,68 @@ if ( r0.secureConnectionStart ) {
 规范应该改为：“...如果资源的协议是 HTTPS 协议，该属性必须立即返回用户代理开始握手过程的时间...”。
 幸运的是，浏览器是使用纠正后的行为，而已就是说， `secureConnectionStart` 可用于
 HTTP 页面中的 HTTPS 资源。
+
+## 4. 给跨域资源添加 `Timing-Allow-Origin` HTTP 响应头
+
+出于隐私保护的原因，在获得资源的 Resource Timing 详情时有[跨域限制](http://www.w3.org/TR/resource-timing/#cross-origin-resources)。
+默认情况下，与主页面不同域的资源，下列属性被设置为 0：
+
+* redirectStart
+* redirectEnd
+* domainLookupStart
+* domainLookupEnd
+* connectStart
+* connectEnd
+* secureConnectionStart
+* requestStart
+* responseStart
+
+在某些情况下，仍然希望测量跨域资源的性能，例如，当网站使用不用域名的 CDN（例如
+"youtube.com" 使用 "s.ytimg.com"），以及某些第三方资源（例如 "ajax.googleapis.com"）。
+如果资源返回 [Timing-Allow-Origin](http://www.w3.org/TR/resource-timing/#timing-allow-origin)
+响应头，跨域资源的 timing 详情将被授权访问。这个头信息指定了被允许访问 timing
+详情的（主页面）来源列表，多数情况下，会使用通配符(`*`) 允许所有来源访问。
+举个例子，http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js 返回
+的 Timing-Allow-Origin 响应头信息是：
+
+```
+Timing-Allow-Origin: *
+```
+
+当第三方添加这个响应头信息时，真是太棒了。它允许站长来统计在他们网页上使用的
+第三方资源的性能。感谢 [Ilya Grigorik](http://googledevelopers.blogspot.com/2013/12/measuring-network-performance-with.html)
+报告了一些添加了这个响应头的第三方资讯，下面是一些指定了 `Timing-Allow-Origin: *`
+的资源例子：
+
+* Google Hosted Libraries: http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
+* Google+ widgets: https://apis.google.com/js/plusone.js
+* Google Fonts:  http://fonts.gstatic.com/s/opensans/v9/DXI[snip...]N3Vs.woff2
+* Facebook widgets: http://connect.facebook.net/en_US/all.js
+* Disqus widgets: http://go.disqus.com/embed.js
+
+当需要访问有限制的 timing 属性时，决定统计 Resource Timing 是非常重要的。
+可以通过检测（上面列出的，secureConnectionStart 除外）限制性属性是否为 0 的方式
+来避免限制性问题，我总是使用 `requestStart`。下面是用于在计算详细的性能指标之前，
+检测和计算限制性属性是否可用的代码片段：
+
+```js
+// Resource Timing
+var r0 = performance.getEntriesByType("resource")[0],
+    loadtime = r0.duration;
+if ( r0.requestStart ) {
+    var dns = r0.domainLookupEnd - r0.domainLookupStart,
+        tcp = r0.connectEnd - r0.connectStart,
+        ttfb = r0.responseStart - r0.startTime;
+}
+if ( r0.secureConnectionStart ) {
+    var ssl = r0.connectEnd - r0.secureConnectionStart;
+}
+```
+
+做这些检测是非常重要的，否则，当访问这些受限属性时，你不会得到任何异常，除了
+这些虚假的数据。当属性受限访问时，它们的值被设置为 0，例如 `domainLookupEnd - domainLookupStart`
+翻译成 `0 - 0`，它返回一个似是而非的结果 `0`，而这可能并不是真实 DNS 查询时间。
+这将导致过多的指标为 `0` 而让你过于乐观。
 
 ## 译者补充
 
