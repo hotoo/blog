@@ -201,6 +201,37 @@ TCP 连接耗时为 0。关键点：TCP 连接耗时为 0 意味着重复使用�
 
 最后，如果属性持续的为 0，这可能意味资源是从缓存中读取的。
 
+## 6. 确定 304 是否被测量。
+
+这是另一个 Chrome 稳定版（版本号 36）的 BUG，这个 BUG 在 37 版时被修复。
+这个问题已经被修复了，但是由于大多数用户还是使用 Chrome 稳定版，你当前的性能
+指标可能跟实际上的并不相同。这个 BUG 是：一个拥有 Timing-Allow-Origin 的跨域
+页面，200 响应状态并不会考虑 304 响应状态，因此，304 响应下所有的受限属性都
+将显示为 0，例如 [这个测试页面](http://stevesouders.com/tests/tao.php)。
+
+这是不应该发生的，因为从 200 响应的缓存中读取的 Timing-Allow-Origin 头信息
+应该应用到 304 响应中。在 Internet Explorer 浏览器中就是这样。（可以在 IE 10
+或者 11 中尝试 [这个页面](http://stevesouders.com/tests/tao.php) 来确认。）
+（感谢 [Eric Lawrence](https://twitter.com/ericlaw) 指出这一点。）
+
+这会影响你的 Chrome Resource Timing 结果如下：
+
+* 如果（如第 4 节所述）使用检查 0 值的方式来判断受限字段，则会跳过测量 304 响应，
+  也就是说值测量了 200 状态响应，但是由于 200 状态响应比 304 要慢，所以 Resource
+  Timing 测量总量会比实际的要大。
+* 反之如果不检查受限字段为 0 的情况，会得到许多的 0 值记录，
+  这实际上又比 304 响应要快，这样 Resource Timing 统计结果又会过于乐观。
+
+没有简单的方式来避免这些偏见，但是好消息是这个 BUG 被修复了。另外还可以尝试做的
+事情是，304 响应头中发送 Timing-Allow-Origin 头，不幸的是，流行的 Apache Web
+服务器不支持在 304 响应头中发送这个头信息（查看 [BUG 51223](https://issues.apache.org/bugzilla/show_bug.cgi?id=51223)）。
+缺乏进一步证件证明第 4 节提到那些第三方资源的 304 响应头中的 Timing-Allow-Origin
+可以被找到。如前所述，这些第三方资源在 200 响应头中返回 Timing-Allow-Origin 头，
+但是 304 响应头中不返回 Timing-Allow-Origin 头，这真是太好了。
+到 Chrome 37 成为稳定版之前，因为缺少了受限属性的细节，Resource Timing 测量结果
+可能偏高或偏低。幸运的是，时间会改变一切。
+
+
 ## 译者补充
 
 * [Resource Timing practical tips](http://www.stevesouders.com/blog/2014/08/21/resource-timing-practical-tips/) - 原文出处。
