@@ -46,32 +46,31 @@
   <div class="container">
     <div class="post">
       
-          <h1>GitHub, GitLab, or BitBucket? <a href="post/github-gitlab-or-bitbucket" class="title-permalink">¶</a></h1>
+          <h1>译：Resource Timing (资源计时) 使用技巧 <a href="post/resource-timing-practical-tips" class="title-permalink">¶</a></h1>
           <section>
- <blockquote>
-<p>GitHub 是汇集了众多开源项目的闭源系统，</p>
-<p>GitLab 是汇聚了较多闭源项目的开源系统。</p>
-<p>-- <a href="https://twitter.com/hotoo/status/417483811212238848">@hotoo</a></p>
-</blockquote>
-<p>对于个人开发者，不可避免的会有私有项目的需求。</p>
-<p>目前比较靠谱的私有项目托管服务有：</p>
-<ul>
-<li>GitHub</li>
-<li>GitLab</li>
-<li>BitBucket</li>
-</ul>
-<p>下面我们稍做评比。</p>
-<p class="more"><a href="post/github-gitlab-or-bitbucket#more">阅读详情...</a></p>
+ <p><a href="http://www.w3.org/2010/webperf/">W3C Web 性能工作组</a> 在 2012 年给我们带来了
+<a href="http://www.w3.org/TR/navigation-timing/">Navigation Timing</a>，这个 API 现在
+基本上在主流浏览器上都可用。Navigation Timing 定义了一套用于测量主页面性能的
+JavaScript API。例如：</p>
+<div class="highlight"><pre><code class="javascript"><span class="comment">// Navigation Timing</span>
+<span class="keyword">var</span> t = performance.timing,
+    pageloadtime = t.loadEventStart - t.navigationStart,
+    dns = t.domainLookupEnd - t.domainLookupStart,
+    tcp = t.connectEnd - t.connectStart,
+    ttfb = t.responseStart - t.navigationStart;</code></pre></div><p class="more"><a href="post/resource-timing-practical-tips#more">阅读详情...</a></p>
           </section>
           <footer class="post clearfix">
             <span class="tags"><a href="/tag">Tags</a>:
  
-                <a href="/tag/#Git">Git</a>
+                <a href="/tag/#HTML5">HTML5</a>
+              
+ , 
+                <a href="/tag/#翻译">翻译</a>
               
             </span>
 
             <time>
-              <a href="/2014">2014年</a>08月03日
+              <a href="/2014">2014年</a>12月30日
             </time>
           </footer>
     </div>
@@ -80,6 +79,11 @@
 
     <ul class="posts">
  
+ 
+          <li class="posts-item">
+            <a href="post/github-gitlab-or-bitbucket">GitHub, GitLab, or BitBucket?</a>
+            (<time class="datetime">2014-08-03</time>)
+          </li>
  
           <li class="posts-item">
             <a href="post/find-nodes-from-server-cluster">定位到服务器集群的特定节点</a>
@@ -101,10 +105,6 @@
             (<time class="datetime">2013-11-13</time>)
           </li>
  
-          <li class="posts-item">
-            <a href="post/vim-talk-laiwangzhadui">Vim Talk in 来往扎堆</a>
-            (<time class="datetime">2013-10-23</time>)
-          </li>
  
  
  
