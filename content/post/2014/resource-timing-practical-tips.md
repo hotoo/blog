@@ -231,6 +231,20 @@ TCP 连接耗时为 0。关键点：TCP 连接耗时为 0 意味着重复使用�
 到 Chrome 37 成为稳定版之前，因为缺少了受限属性的细节，Resource Timing 测量结果
 可能偏高或偏低。幸运的是，时间会改变一切。
 
+## 7. 看看 Boomerang（回旋镖）.
+
+如果你准备写自己 Resource Timing 代码，建议你最好看看 [Resource Timing 插件 Boomerang](http://www.lognormal.com/boomerang/doc/api/restiming.html)。
+（代码在 [GitHub](https://github.com/lognormal/boomerang/blob/master/plugins/restiming.js) 上。）
+Boomerang 是 Philip Tellis 维护的一个非常流行的开源 RUM 包。他起初在 Yahoo 工作
+的时候就开源了 Boomerang，而现在作为在 SOASTA 工作的商业版的一部分（mPulse），
+他仍然在持续的提供维护和增强。t它的代码很清晰、简洁和健壮，并解决了上面提到的许多问题。
+
+总之，Navigation Timing 和 Resource Timing 都是非常优秀的新规范，为站长了解他们
+的页面性能提供了很好的支持。Resource Timing 是这两个规范中更新的一个规范，因此
+还是会有一些问题待解决。这些小提示将帮助你充分的利用 Resource Timing 指标。
+我建议你现在就开始监控这些指标，以理解你的网站性能，为了最关心这个问题的真实用户。
+
+
 
 ## 译者补充
 
