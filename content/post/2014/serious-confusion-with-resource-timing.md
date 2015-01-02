@@ -1,5 +1,5 @@
 
-# 译：严重的 Resource Timing 混乱
+# 译：严重混乱的 Resource Timing
 
 - template: post.html
 - pubdate: 2014-12-30
@@ -14,6 +14,43 @@
 而且他们都没有意识到 `duration` 包含了 blocking 时间。结果 `duration` 时间
 比实际的下载时间要长很多，超出了开发者意料之外的结果。这个问题在跨域资源中
 尤为糟糕，`duration` 是唯一可用的。在这篇博文中我将解释这个问题，并提出解决方案。
+
+## Resource Timing 回顾
+
+[Resource Timing 规范](http://www.w3.org/TR/resource-timing/) 定义了收集网页中
+所有资源耗时统计的 API。现在可用于 Chrome, Chrome for Android, IE 10-11, 和 Opera。
+可以通过 `getEntries()`, `getEntriesByType()` 和 `getEntriesByName()` 得到一个
+`PerformanceEntry` 列表，一个 `PerformanceEntry` 对象包含以下属性：
+
+* `name` – URL 地址
+* `entryType` – 通常是 “resource”
+* `startTime` – 开始处理这个资源的时间（相对开始导航到页面时的毫秒数）
+* `duration` – 处理这个资源的总耗时（毫秒）
+
+上面的属性在所有的资源中都可用，包括同域和跨域的。而同域的资源拥有另外一些可以
+访问的附加属性，这些属性定义在 `PerformanceResourceTiming` 接口中。这些属性名称
+很简洁清晰，完全可以见名思意，并且以时间顺序排序：
+
+* redirectStart
+* redirectEnd
+* fetchStart
+* domainLookupStart
+* domainLookupEnd
+* connectStart
+* connectEnd
+* secureConnectionStart
+* requestStart
+* responseStart
+* responseEnd
+
+这里有个权威的 [处理模型(processing model)](http://www.w3.org/TR/resource-timing/#processing-model) 图
+显示了这些属性所在的各个不同阶段。备注：`duration` 相当于 `responseEnd - startTime`。
+
+![processing model graphic](http://www.w3.org/TR/resource-timing/resource-timing-overview.png)
+
+如何使用 Resource Timing 的详细信息，可以参考我的文章 [Resource Timing Practical Tips](http://www.stevesouders.com/blog/2014/08/21/resource-timing-practical-tips/) 『[译者的中文翻译](./resource-timing-practical-tips)』
+
+
 
 
 ## 译者补充
