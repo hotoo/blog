@@ -96,7 +96,7 @@ module.exports = {
           startLine = parseInt(startLine, 10);
         }
         var htmlines = [];
-        var lines = codes.split(/(?:\r\n|\r|\n)/).length - 1;
+        var lines = codes.split(/(?:\r\n|\r|\n)/).length;
         for(var i=startLine,l=startLine+lines; i<l; i++){
           htmlines.push('<a name="L'+snipIndex+'-'+i+'" href="#L'+snipIndex+'-'+i+'">'+i+'</a>');
         }
