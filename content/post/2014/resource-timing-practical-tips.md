@@ -25,8 +25,8 @@ var t = performance.timing,
 
 能够度量主页面的时间消耗真是太棒了，但是要诊断现实当中的性能问题，往往需要深入
 到各个资源当中。所以我们拥有了更进一步的 Resource Timing （资源计时）规范，
-这个 JavaScript API 提供类似 Navigation Timing 类似，但是精确到每一个资源的
-计时信息。举个例子：
+这个 JavaScript API 提供类似 Navigation Timing 的功能，但是能精确到每一个资源的
+耗时。举个例子：
 
 ```js
 // Resource Timing
@@ -37,12 +37,12 @@ var r0 = performance.getEntriesByType("resource")[0],
     ttfb = r0.responseStart - r0.startTime;
 ```
 
-到目前为止，Resource Timing 被 Chrome, Chrome for Android, Opera, IE10 和 IE11
-浏览器所支持，这可能超过了你的网站 50% 的流量，应该可以提供足够的数据来揭示这些
-执行缓慢的资源。
+到目前为止，Chrome, Chrome for Android, Opera, IE10 和 IE11
+浏览器都支持 Resource Timing，这也许超过了你的网站 50% 的流量。
+这应该可以提供足够的数据，来揭示这些资源缓慢的原因。
 
-使用 Resource Timing 看似很简单，但是当我写第一个达到生产环境品质的资源计时代码
-时，我遇到了许多问题。这里我想分享一些现实当中记录 Resource Timing 指标的实用技巧。
+使用 Resource Timing 看似很简单，但是当我在写第一个用于生产环境的 Resource Timing 代码
+时，遇到了许多问题。这里我想分享一些现实当中记录 Resource Timing 指标的实用技巧。
 
 
 ## 1. 使用 `getEntriesByType("resource")` 而不是 `getEntries()`
