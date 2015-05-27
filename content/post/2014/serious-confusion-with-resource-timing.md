@@ -51,6 +51,28 @@
 如何使用 Resource Timing 的详细信息，可以参考我的文章 [Resource Timing Practical Tips](http://www.stevesouders.com/blog/2014/08/21/resource-timing-practical-tips/) 『[译者的中文翻译](./resource-timing-practical-tips)』
 
 
+## `duration` 中出乎意外的 blocking 膨胀
+
+出于隐私的考虑，同源资源的 PerformanceResourceTiming 属性是受限的。（备注：
+任何资源可以通过 `Timing-Allow-Origin` 响应头达到“同源”效果。）现在大约有一半
+的资源是跨域的，因此 `duration` 是度量加载时间的唯一方式。而且即使是同源资源，
+`duration` 也是唯一以增量方式提供的属性，大概是因为它度量了最重要的阶段。
+这样一来，所有我见过的 Resource Timing 实现都以 `duration` 做为主要的性能指标。
+
+不幸的是，`duration` 比下载时间要大，它包含了阻塞时间（blocking time）—— 浏览器
+意识到需要下载一个资源，到这个资源实际被下载直接的时间延迟。阻塞会在几种情况时
+发生，最典型的资源数量比 TCP 连接数要多的情况。大多数浏览器为每个主机开放了 6
+个 TCP 连接，IE10（8个连接）和 IE11（12个连接）例外。
+
+这个 [Resource Timing 阻塞测试页面](http://stevesouders.com/tests/rt-blocking.php)
+有 16 个图片，因此无论哪个浏览器都会阻塞一部分图片。每个图片被编程为在服务器
+有 1 秒的延迟，这 16 个图片，每个图片都显示了 `startTime` 和 `duration`。
+另外还有这个测试页面在 WebPagetest 中通过 [Chrome](http://www.webpagetest.org/result/141125_4T_11FT/),
+[IE10](http://www.webpagetest.org/result/141125_BN_11FY/) 和
+[IE11](http://www.webpagetest.org/result/141125_5K_11CB/) 加载的测试结果，
+可以通过查看截屏来分析时序结果。注，为什么所有的图片的 `startTime` 大致都相同？
+英文这个时间是浏览器解析 IMG 标签并意识到需要下载改资源的时间，由于先下载的图片
+阻塞的原因，但在页面出现后，图片的 `duration` 值大约步进 1 秒左右。
 
 
 ## 译者补充
