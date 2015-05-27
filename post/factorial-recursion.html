@@ -59,17 +59,20 @@
 <p>线性递归（传统递归方式）：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">recursion</span><span class="params">(n)</span>{</span>
     <span class="keyword">return</span> n==<span class="number">1</span>?<span class="number">1</span>:n*recursion(n-<span class="number">1</span>);
 }</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
-<a name="L1-2" href="#L1-2">2</a></pre></div></div><p>尾递归：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">tailRecursion</span><span class="params">(n, a)</span>{</span>
+<a name="L1-2" href="#L1-2">2</a>
+<a name="L1-3" href="#L1-3">3</a></pre></div></div><p>尾递归：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">tailRecursion</span><span class="params">(n, a)</span>{</span>
     a = a||<span class="number">1</span>; <span class="comment">// 尾递归之尾，即上次递归结果。</span>
     <span class="keyword">return</span> n==<span class="number">1</span>?a:tailRecursion(n-<span class="number">1</span>, a*n);
 }</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
-<a name="L2-3" href="#L2-3">3</a></pre></div></div><p>这里将基于尾递归的求数值阶乘算法贴下：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">Math.factorial_III = <span class="function"><span class="keyword">function</span><span class="params">(n)</span>{</span>
+<a name="L2-3" href="#L2-3">3</a>
+<a name="L2-4" href="#L2-4">4</a></pre></div></div><p>这里将基于尾递归的求数值阶乘算法贴下：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">Math.factorial_III = <span class="function"><span class="keyword">function</span><span class="params">(n)</span>{</span>
     <span class="keyword">var</span> a = arguments[<span class="number">1</span>]||<span class="number">1</span>;
     <span class="keyword">return</span> n&lt;=<span class="number">1</span>?a:Math.factorial_III(n-<span class="number">1</span>, a*n);
 };</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
-<a name="L3-3" href="#L3-3">3</a></pre></div></div><p>效率上和循环迭代、<a href="http://blog.xianyun.org/2007/12/26/improved-factorial/">阶乘改进算法</a>
+<a name="L3-3" href="#L3-3">3</a>
+<a name="L3-4" href="#L3-4">4</a></pre></div></div><p>效率上和循环迭代、<a href="http://blog.xianyun.org/2007/12/26/improved-factorial/">阶乘改进算法</a>
 相当甚至稍胜出（ie6,firefox2,safari3），普通递归的效率最为底下，且需要深入堆栈。</p>
 <h1 id="参考">参考</h1><ul>
 <li>《<a href="http://baike.baidu.com/view/1439396.htm">尾递归</a>》-百度百科</li>

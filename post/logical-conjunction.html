@@ -103,7 +103,8 @@
 <a name="L1-23" href="#L1-23">23</a>
 <a name="L1-24" href="#L1-24">24</a>
 <a name="L1-25" href="#L1-25">25</a>
-<a name="L1-26" href="#L1-26">26</a></pre></div></div><p>实际代码中，各个 <code>verifyXXX</code> 函数可能内联在 <code>verifyFormInput</code> 函数中，
+<a name="L1-26" href="#L1-26">26</a>
+<a name="L1-27" href="#L1-27">27</a></pre></div></div><p>实际代码中，各个 <code>verifyXXX</code> 函数可能内联在 <code>verifyFormInput</code> 函数中，
 代码显得多而有点乱，甚至有点冗余。</p>
 <p>想起模拟电路课程上学到的『与门』，只有所有电路都是通路时，整个电路才是通路。</p>
 <p>而表单验证也是这样：</p>
@@ -192,7 +193,8 @@ a signed 32 bit integer.</li>
 <a name="L2-21" href="#L2-21">21</a>
 <a name="L2-22" href="#L2-22">22</a>
 <a name="L2-23" href="#L2-23">23</a>
-<a name="L2-24" href="#L2-24">24</a></pre></div></div><h2 id="延伸">延伸</h2><p>以前也 Hack 的用过逻辑与表达式，比如：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">flag &amp;&amp; action();</code></pre></div><pre class="line"></pre></div></div><p>但这个用法只是用到了条件判断的作用，类似于：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">if</span>(flag){action();}</code></pre></div><pre class="line"></pre></div></div><h2 id="参考阅读">参考阅读</h2><ul>
+<a name="L2-24" href="#L2-24">24</a>
+<a name="L2-25" href="#L2-25">25</a></pre></div></div><h2 id="延伸">延伸</h2><p>以前也 Hack 的用过逻辑与表达式，比如：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">flag &amp;&amp; action();</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a></pre></div></div><p>但这个用法只是用到了条件判断的作用，类似于：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">if</span>(flag){action();}</code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a></pre></div></div><h2 id="参考阅读">参考阅读</h2><ul>
 <li><a href="http://www.ecmascript.org/">ECMAScript</a></li>
 <li><a href="http://zh.wikipedia.org/wiki/%E9%80%BB%E8%BE%91%E4%B8%8E">逻辑与</a>
 <a href="http://en.wikipedia.org/wiki/Logical_conjunction">Logical_conjunction</a></li>

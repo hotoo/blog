@@ -50,17 +50,20 @@ XX宝-技术部-数据仓库
 </pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
-<a name="L1-4" href="#L1-4">4</a></pre></div></div><p>我们的系统有一个根据用户所在部门进行过滤的功能，所以我们用了类似下面的查询语句：</p><div class="highlight"><div class="codes"><div class="code"><pre>SELECT * FROM users WHERE dept LIKE &quot;XX宝-技术部%&quot;;
+<a name="L1-4" href="#L1-4">4</a>
+<a name="L1-5" href="#L1-5">5</a></pre></div></div><p>我们的系统有一个根据用户所在部门进行过滤的功能，所以我们用了类似下面的查询语句：</p><div class="highlight"><div class="codes"><div class="code"><pre>SELECT * FROM users WHERE dept LIKE &quot;XX宝-技术部%&quot;;
 
 
 </pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
-<a name="L2-3" href="#L2-3">3</a></pre></div></div><p>这样的性能还好，但是今天发现一个问题是，当有两个部门名称很相似，比如：</p><div class="highlight"><div class="codes"><div class="code"><pre>XX宝-CEO
+<a name="L2-3" href="#L2-3">3</a>
+<a name="L2-4" href="#L2-4">4</a></pre></div></div><p>这样的性能还好，但是今天发现一个问题是，当有两个部门名称很相似，比如：</p><div class="highlight"><div class="codes"><div class="code"><pre>XX宝-CEO
 XX宝-CEO办公室
 
 </pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
-<a name="L3-3" href="#L3-3">3</a></pre></div></div><p>这时在查询 <code>XX宝CEO</code> 的时候就会把 <code>XX宝-CEO办公室</code> 的用户也查询出来。</p>
+<a name="L3-3" href="#L3-3">3</a>
+<a name="L3-4" href="#L3-4">4</a></pre></div></div><p>这时在查询 <code>XX宝CEO</code> 的时候就会把 <code>XX宝-CEO办公室</code> 的用户也查询出来。</p>
 <p>于是想到正则表达式：</p><div class="highlight"><div class="codes"><div class="code"><pre>SELECT *
 FROM users
 WHERE REGEXP_LIKE(dept, &quot;^XX宝-CEO$&quot;)
@@ -70,14 +73,16 @@ OR REGEXP_LIKE(dept, &quot;^XX宝-CEO-[\w\-]+&quot;);
 <a name="L4-2" href="#L4-2">2</a>
 <a name="L4-3" href="#L4-3">3</a>
 <a name="L4-4" href="#L4-4">4</a>
-<a name="L4-5" href="#L4-5">5</a></pre></div></div><p>合并正则表达式的另一解：</p><div class="highlight"><div class="codes"><div class="code"><pre>SELECT *
+<a name="L4-5" href="#L4-5">5</a>
+<a name="L4-6" href="#L4-6">6</a></pre></div></div><p>合并正则表达式的另一解：</p><div class="highlight"><div class="codes"><div class="code"><pre>SELECT *
 FROM users
 WHERE REGEXP_LIKE(dept, &quot;^XX宝-CEO($|-[\w\-]+)&quot;);
 
 </pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
 <a name="L5-2" href="#L5-2">2</a>
 <a name="L5-3" href="#L5-3">3</a>
-<a name="L5-4" href="#L5-4">4</a></pre></div></div><p>杯具的性能问题。</p>
+<a name="L5-4" href="#L5-4">4</a>
+<a name="L5-5" href="#L5-5">5</a></pre></div></div><p>杯具的性能问题。</p>
 <p>突然想到</p><div class="highlight"><div class="codes"><div class="code"><pre>SELECT *
 FROM users
 WHERE dept=&quot;XX宝-CEO&quot;
@@ -87,7 +92,8 @@ OR dept LIKE &quot;XX宝-CEO-%&quot;;
 <a name="L6-2" href="#L6-2">2</a>
 <a name="L6-3" href="#L6-3">3</a>
 <a name="L6-4" href="#L6-4">4</a>
-<a name="L6-5" href="#L6-5">5</a></pre></div></div><p>于是简单有效的解决了这个问题。</p>
+<a name="L6-5" href="#L6-5">5</a>
+<a name="L6-6" href="#L6-6">6</a></pre></div></div><p>于是简单有效的解决了这个问题。</p>
 </div>
 
   <footer class="entry-meta post clearfix">

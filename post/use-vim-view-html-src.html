@@ -46,7 +46,7 @@
 这里将相关技巧一并整理于此。</p>
 <h2 id="针对internet-explorer：">针对Internet Explorer：</h2><h3 id="快捷方式-注册表-1">快捷方式+注册表^1^</h3><ul>
 <li>创建 gvim 快捷方式，例如重命名为 ieVim，并置于 Vim 安装目录($VIMRUNTIME，如 D:\Vim\vim72)。</li>
-<li>右键该快捷方式，属性，目标文本框中加入参数：<div class="highlight"><div class="codes"><div class="code"><pre>&quot;D:\Vim\vim72\gvim.exe&quot; -c &quot;set filetype=html&quot; &quot;%*&quot;</pre></div><pre class="line"></pre></div></div></li>
+<li>右键该快捷方式，属性，目标文本框中加入参数：<div class="highlight"><div class="codes"><div class="code"><pre>&quot;D:\Vim\vim72\gvim.exe&quot; -c &quot;set filetype=html&quot; &quot;%*&quot;</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a></pre></div></div></li>
 <li><p>修改注册表：
 <code>[Explorer\View Source Editor\Editor Name](HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet)=D:\\Vim\\vim72\\ieVim.lnk</code> <br />
 注意最后要加上 .lnk 后缀。</p><div class="highlight"><div class="codes"><div class="code"><pre>HKEY_LOCAL_MACHINE
@@ -58,18 +58,20 @@
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
 <a name="L2-4" href="#L2-4">4</a>
-<a name="L2-5" href="#L2-5">5</a></pre></div></div><p>另外也可以将如下代码保存为 .reg 文件，引号中路径改成 Vim 安装路径即可</p><div class="highlight"><div class="codes"><div class="code"><pre>Windows Registry Editor Version 5.00
+<a name="L2-5" href="#L2-5">5</a>
+<a name="L2-6" href="#L2-6">6</a></pre></div></div><p>另外也可以将如下代码保存为 .reg 文件，引号中路径改成 Vim 安装路径即可</p><div class="highlight"><div class="codes"><div class="code"><pre>Windows Registry Editor Version 5.00
 
 [Explorer\View Source Editor\Editor Name](HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet)
 @=&quot;D:\\Vim\\vim72\\ieVim.lnk&quot;</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
-<a name="L3-3" href="#L3-3">3</a></pre></div></div><p>或者下载这个 <a href="http://hotoo.googlecode.com/svn/trunk/vim/vim72/ievim.reg">注册表文件</a>，
+<a name="L3-3" href="#L3-3">3</a>
+<a name="L3-4" href="#L3-4">4</a></pre></div></div><p>或者下载这个 <a href="http://hotoo.googlecode.com/svn/trunk/vim/vim72/ievim.reg">注册表文件</a>，
 双击运行，或右键“合并”即可。</p>
 </li>
 <li>现在在IE里使用右键，“查看源代码”就可以使用 Vim 打开 html 源码。</li>
 </ul>
 <h3 id="批处理-注册表-2">批处理+注册表^2^</h3><ul>
-<li>将如下代码保存为批处理文件，如 ievim.bat，例如放到 $VIMRUNTIME 下。<div class="highlight"><div class="codes"><div class="code"><pre>&quot;D:\\Vim\\vim72\\gvim.exe&quot; --servername &quot;VIEW SOURCE&quot; --remote-silent &quot;+set syn=html&quot; %1</pre></div><pre class="line"></pre></div></div></li>
+<li>将如下代码保存为批处理文件，如 ievim.bat，例如放到 $VIMRUNTIME 下。<div class="highlight"><div class="codes"><div class="code"><pre>&quot;D:\\Vim\\vim72\\gvim.exe&quot; --servername &quot;VIEW SOURCE&quot; --remote-silent &quot;+set syn=html&quot; %1</pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a></pre></div></div></li>
 <li>参照第 1 个方法的第 3 步，修改注册表的值为这个批处理文件的地址，如 <code>D:\Vim\vim72\ievim.bat</code>。</li>
 <li>现在就可以使用 Vim 或其他外部编辑器打开 IE 的页面源代码了。</li>
 <li>缺点：打开的批处理命令行窗口不会自动关闭，直到被打开的页面源代码编辑器被关闭。</li>

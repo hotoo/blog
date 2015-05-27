@@ -89,7 +89,8 @@
 <a name="L1-16" href="#L1-16">16</a>
 <a name="L1-17" href="#L1-17">17</a>
 <a name="L1-18" href="#L1-18">18</a>
-<a name="L1-19" href="#L1-19">19</a></pre></div></div><p>但是即使如此，直接修改 input.value 同样会有一个几乎无法避免的问题：假如用户在必填项中没有
+<a name="L1-19" href="#L1-19">19</a>
+<a name="L1-20" href="#L1-20">20</a></pre></div></div><p>但是即使如此，直接修改 input.value 同样会有一个几乎无法避免的问题：假如用户在必填项中没有
 输入任何内容，但是占位符会填充其内容，在提交表单时，当然也可以通过判断 input 是否包含
 <code>placeholder</code> 样式类来针对性处理。但是特殊地，当页面出现脚本错误（这应该说不少见），导致
 表单验证函数未能正确处理而直接提交到服务器，这时服务器是较难准确确认输入框中的内容是占位符，
@@ -160,14 +161,16 @@
 <a name="L2-26" href="#L2-26">26</a>
 <a name="L2-27" href="#L2-27">27</a>
 <a name="L2-28" href="#L2-28">28</a>
-<a name="L2-29" href="#L2-29">29</a></pre></div></div><p>另外对于已经支持 <code>placeholder</code> 的浏览器可以忽略上面的代码，而使用浏览器的默认实现。</p><div class="highlight"><div class="codes"><div class="code"><pre>if(!(&quot;placeholder&quot; in document.createElement(&quot;input&quot;))){
+<a name="L2-29" href="#L2-29">29</a>
+<a name="L2-30" href="#L2-30">30</a></pre></div></div><p>另外对于已经支持 <code>placeholder</code> 的浏览器可以忽略上面的代码，而使用浏览器的默认实现。</p><div class="highlight"><div class="codes"><div class="code"><pre>if(!(&quot;placeholder&quot; in document.createElement(&quot;input&quot;))){
     // ...
 }
 
 </pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
 <a name="L3-3" href="#L3-3">3</a>
-<a name="L3-4" href="#L3-4">4</a></pre></div></div><h2 id="延伸阅读">延伸阅读</h2><ul>
+<a name="L3-4" href="#L3-4">4</a>
+<a name="L3-5" href="#L3-5">5</a></pre></div></div><h2 id="延伸阅读">延伸阅读</h2><ul>
 <li><a href="http://diveintohtml5.org/forms.html#placeholder">diveintohtml5.org#placeholder</a></li>
 <li><a href="http://cssrainbow.cn/demos/892.html">让所有的浏览器都支持 HTML5 placeholder 属性，基于MooTools</a></li>
 <li><a href="http://www.quanlei.com/2010/09/%E8%B7%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84html5-placeholder-%E5%AE%9E%E7%8E%B0/">跨浏览器的HTML5 placeholder 实现</a></li>

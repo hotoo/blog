@@ -317,7 +317,7 @@
 </table>
 <hr>
 <p>首先我们找到异常所在文件的第 35行，在上面的异常栈信息中我们可以知道异常从
-压缩后的匿名函数 <code>function(a,b,d)</code> 中抛出，这个函数是：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">set:<span class="function"><span class="keyword">function</span><span class="params">(a,b,d)</span>{</span><span class="keyword">var</span> e=a.getAttributeNode(d);e||(e=c.createAttribute(d),a.setAttributeNode(e));<span class="keyword">return</span> e.nodeValue=b+<span class="string">""</span>}</code></pre></div><pre class="line"></pre></div></div><p>对应压缩前的源码是：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">    <span class="comment">// Use this for any attribute in IE6/7</span>
+压缩后的匿名函数 <code>function(a,b,d)</code> 中抛出，这个函数是：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">set:<span class="function"><span class="keyword">function</span><span class="params">(a,b,d)</span>{</span><span class="keyword">var</span> e=a.getAttributeNode(d);e||(e=c.createAttribute(d),a.setAttributeNode(e));<span class="keyword">return</span> e.nodeValue=b+<span class="string">""</span>}</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a></pre></div></div><p>对应压缩前的源码是：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">    <span class="comment">// Use this for any attribute in IE6/7</span>
     <span class="comment">// This fixes almost every IE6/7 issue</span>
     nodeHook = jQuery.valHooks.button = {
         get: <span class="function"><span class="keyword">function</span><span class="params">( elem, name )</span> {</span>
@@ -354,7 +354,8 @@
 <a name="L2-16" href="#L2-16">16</a>
 <a name="L2-17" href="#L2-17">17</a>
 <a name="L2-18" href="#L2-18">18</a>
-<a name="L2-19" href="#L2-19">19</a></pre></div></div><p>这个代码是用来兼容 IE6/7 的属性操作（代码注释中号称几乎修复了 IE6/7 所有的问题），
+<a name="L2-19" href="#L2-19">19</a>
+<a name="L2-20" href="#L2-20">20</a></pre></div></div><p>这个代码是用来兼容 IE6/7 的属性操作（代码注释中号称几乎修复了 IE6/7 所有的问题），
 页面中的业务源码中我们找到不少 DOM 属性的操作，其中有一些看起来几乎不会有问题，
 另外一些则出现问题的可能性更高。</p>
 <p>我们从这些可能性更高的部分着手，最终发现 IE10 兼容模式下会抛出『<a href="https://github.com/totorojs/javascript-exception-archives/blob/master/content/wiki/member-not-found.md">找不到成员。</a>』

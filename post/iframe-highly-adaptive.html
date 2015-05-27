@@ -160,10 +160,12 @@ XHTML1.0 Frameset, XHTML1.0 Strict, XHTML1.0 Transitional, XHTML1.1.</p>
 <h1 id="计算高度的时机">计算高度的时机</h1><p>父窗口检测子窗口：</p><div class="highlight"><div class="codes"><div class="code"><pre>iframe[onload=handler]
 
 </pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
-<a name="L1-2" href="#L1-2">2</a></pre></div></div><p>本窗口自检测：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">dom-ready = handler;
+<a name="L1-2" href="#L1-2">2</a>
+<a name="L1-3" href="#L1-3">3</a></pre></div></div><p>本窗口自检测：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">dom-ready = handler;
 window.onload = handler;
 body[onload=handler]</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
-<a name="L2-2" href="#L2-2">2</a></pre></div></div><h2 id="子窗口获取自身在父窗口的-iframe-元素">子窗口获取自身在父窗口的 iframe 元素</h2><p>如果父窗口有名字的话，可以直接通过 frames[name] 直接引用。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">// 求教更恰当的命名。</span>
+<a name="L2-2" href="#L2-2">2</a>
+<a name="L2-3" href="#L2-3">3</a></pre></div></div><h2 id="子窗口获取自身在父窗口的-iframe-元素">子窗口获取自身在父窗口的 iframe 元素</h2><p>如果父窗口有名字的话，可以直接通过 frames[name] 直接引用。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">// 求教更恰当的命名。</span>
 <span class="function"><span class="keyword">function</span> <span class="title">getParentFrame</span><span class="params">()</span>{</span>
   <span class="keyword">if</span>(parent == window){<span class="keyword">return</span> <span class="literal">null</span>;}
   <span class="keyword">if</span>(window.name){<span class="keyword">return</span> parent.frames[window.name];}
@@ -196,7 +198,8 @@ body[onload=handler]</code></pre></div><pre class="line"><a name="L2-1" href="#L
 <a name="L3-14" href="#L3-14">14</a>
 <a name="L3-15" href="#L3-15">15</a>
 <a name="L3-16" href="#L3-16">16</a>
-<a name="L3-17" href="#L3-17">17</a></pre></div></div><h2 id="其他相关">其他相关</h2><p>上面的 <code>getParentFrame</code> 通过窗口名字直接取得元素本身，这里要注意的一点，
+<a name="L3-17" href="#L3-17">17</a>
+<a name="L3-18" href="#L3-18">18</a></pre></div></div><h2 id="其他相关">其他相关</h2><p>上面的 <code>getParentFrame</code> 通过窗口名字直接取得元素本身，这里要注意的一点，
 以前写代码的时候有这样的代码定义：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
   <span class="keyword">var</span> elem = <span class="string">"elem"</span>,
       name = <span class="string">"name"</span>,
@@ -204,7 +207,8 @@ body[onload=handler]</code></pre></div><pre class="line"><a name="L2-1" href="#L
 }</code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
 <a name="L4-2" href="#L4-2">2</a>
 <a name="L4-3" href="#L4-3">3</a>
-<a name="L4-4" href="#L4-4">4</a></pre></div></div><p>后来要增加一个变量，但是不小心写错标点符号。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">  <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+<a name="L4-4" href="#L4-4">4</a>
+<a name="L4-5" href="#L4-5">5</a></pre></div></div><p>后来要增加一个变量，但是不小心写错标点符号。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">  <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
       <span class="keyword">var</span> elem = <span class="string">"elem"</span>,
 +         id = elem.id;
           name = <span class="string">"name"</span>,
@@ -213,7 +217,8 @@ body[onload=handler]</code></pre></div><pre class="line"><a name="L2-1" href="#L
 <a name="L5-2" href="#L5-2">2</a>
 <a name="L5-3" href="#L5-3">3</a>
 <a name="L5-4" href="#L5-4">4</a>
-<a name="L5-5" href="#L5-5">5</a></pre></div></div><p>然后 name 就成了全局变量，无意中修改了 <code>window.name</code> 的值。
+<a name="L5-5" href="#L5-5">5</a>
+<a name="L5-6" href="#L5-6">6</a></pre></div></div><p>然后 name 就成了全局变量，无意中修改了 <code>window.name</code> 的值。
 所以如果使用 name 作为局部变量的时候，千万要小心，否则执行这段代码之后，
 <code>a[target=oldName]</code> 的链接会因为找不到 <code>frames[oldName]</code> 而弹出新窗口。</p>
 <h2 id="延伸阅读">延伸阅读</h2><ul>

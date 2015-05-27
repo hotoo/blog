@@ -5,6 +5,103 @@
     <link href="http://blog.hotoo.me/feed.xml" />
     <id>http://blog.hotoo.me/feed.xml</id>
     <entry>
+        <title type="html"><![CDATA[git+, a hack of git, smart for you.]]></title>
+        <link href="http://blog.hotoo.me/post/gitplus"/>
+        <published>2015-05-27T00:00:00.000Z</published>
+        <updated>2015-05-27T00:00:00.000Z</updated>
+        <id>http://blog.hotoo.me/post/gitplus</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+            <![CDATA[ <p>为了信息安全，公司搭建了 gitlab.company.com 管理代码，同时限制了必须使用工作邮箱
+hotoo@company.com 进行提交。</p>
+<p>公司 gitlab 有大大小小很多仓库，不时的需要 clone 代码下来，有时忘记设置就开始提交，
+提交了几次开始 push 到 gitlab 并准备提交 MR 时发现，push 被拒绝，或者 MR 无法
+自动合并，因为没有使用公司的邮箱进行提交。只好取消之前的提交操作，修改邮箱配置
+之后重新提交。</p>
+<p>虽然 clone 下来配置一次就可以了，但是每个仓库都需要配置，每次 clone 都需要配置，
+忘记设置了需要取消之前的提交并再来一次。</p>
+<p>有没有办法自动进行配置呢？</p>
+<p>于是 <a href="https://github.com/hotoo/gitplus">gitplus</a> 出现了，它可以根据 git
+的子操作命令，及其所在的仓库信息，自动的执行指定命令，帮助你完成一些自动化任务。
+例如：</p>
+<pre>post-clone:
+  gitlab.company.com:
+    - git config user.name hotoo
+    - git config user.email hotoo@company.com
+pre-commit:
+  &#39;*&#39;:
+    - jshint .</pre><ul>
+<li>有了 gitplus，你再也不会忘记设置公司邮箱。因此也不需要取消提交再重复提交了。</li>
+<li>还可以在提交前自动做校验工作。没有 gitplus 之前你只能给每个仓库设置 pre-commit hooks。</li>
+<li>你也可以发挥自己的想象力，做更多其他的事情。</li>
+</ul>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[译：严重混乱的 Resource Timing]]></title>
+        <link href="http://blog.hotoo.me/post/serious-confusion-with-resource-timing"/>
+        <published>2014-12-30T00:00:00.000Z</published>
+        <updated>2014-12-30T00:00:00.000Z</updated>
+        <id>http://blog.hotoo.me/post/serious-confusion-with-resource-timing</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+            <![CDATA[ <h1 id="或者说『耗时包含了-blocking-部分的时间』">或者说『耗时包含了 Blocking 部分的时间』</h1><p>用 <a href="http://www.w3.org/TR/resource-timing/">Resource Timing</a> 来同统计资源下载性能
+是非常赞的方式，但不幸的是，几乎所有和我聊过的人都是使用 <a href="http://www.w3.org/TR/resource-timing/#duration-attribute"><code>duration</code> 属性</a>，
+而且他们都没有意识到 <code>duration</code> 包含了 blocking 时间。结果 <code>duration</code> 时间
+比实际的下载时间要长很多，超出了开发者意料之外的结果。这个问题在跨域资源中
+尤为糟糕，<code>duration</code> 是唯一可用的。在这篇博文中我将解释这个问题，并提出解决方案。</p>
+<h2 id="resource-timing-回顾">Resource Timing 回顾</h2><p><a href="http://www.w3.org/TR/resource-timing/">Resource Timing 规范</a> 定义了收集网页中
+所有资源耗时统计的 API。现在可用于 Chrome, Chrome for Android, IE 10-11, 和 Opera。
+可以通过 <code>getEntries()</code>, <code>getEntriesByType()</code> 和 <code>getEntriesByName()</code> 得到一个
+<code>PerformanceEntry</code> 列表，一个 <code>PerformanceEntry</code> 对象包含以下属性：</p>
+<ul>
+<li><code>name</code> – URL 地址</li>
+<li><code>entryType</code> – 通常是 “resource”</li>
+<li><code>startTime</code> – 开始处理这个资源的时间（相对开始导航到页面时的毫秒数）</li>
+<li><code>duration</code> – 处理这个资源的总耗时（毫秒）</li>
+</ul>
+<p>上面的属性在所有的资源中都可用，包括同域和跨域的。而同域的资源拥有另外一些可以
+访问的附加属性，这些属性定义在 <code>PerformanceResourceTiming</code> 接口中。这些属性名称
+很简洁清晰，完全可以见名思意，并且以时间顺序排序：</p>
+<ul>
+<li>redirectStart</li>
+<li>redirectEnd</li>
+<li>fetchStart</li>
+<li>domainLookupStart</li>
+<li>domainLookupEnd</li>
+<li>connectStart</li>
+<li>connectEnd</li>
+<li>secureConnectionStart</li>
+<li>requestStart</li>
+<li>responseStart</li>
+<li>responseEnd</li>
+</ul>
+<p>这里有个权威的 <a href="http://www.w3.org/TR/resource-timing/#processing-model">处理模型(processing model)</a> 图
+显示了这些属性所在的各个不同阶段。备注：<code>duration</code> 相当于 <code>responseEnd - startTime</code>。</p>
+<p><img src="http://www.w3.org/TR/resource-timing/resource-timing-overview.png" alt="processing model graphic"></p>
+<p>如何使用 Resource Timing 的详细信息，可以参考我的文章 <a href="http://www.stevesouders.com/blog/2014/08/21/resource-timing-practical-tips/">Resource Timing Practical Tips</a> 『<a href="./resource-timing-practical-tips">译者的中文翻译</a>』</p>
+<h2 id="duration-中出乎意外的-blocking-膨胀"><code>duration</code> 中出乎意外的 blocking 膨胀</h2><p>出于隐私的考虑，同源资源的 PerformanceResourceTiming 属性是受限的。（备注：
+任何资源可以通过 <code>Timing-Allow-Origin</code> 响应头达到“同源”效果。）现在大约有一半
+的资源是跨域的，因此 <code>duration</code> 是度量加载时间的唯一方式。而且即使是同源资源，
+<code>duration</code> 也是唯一以增量方式提供的属性，大概是因为它度量了最重要的阶段。
+这样一来，所有我见过的 Resource Timing 实现都以 <code>duration</code> 做为主要的性能指标。</p>
+<p>不幸的是，<code>duration</code> 比下载时间要大，它包含了阻塞时间（blocking time）—— 浏览器
+意识到需要下载一个资源，到这个资源实际被下载直接的时间延迟。阻塞会在几种情况时
+发生，最典型的资源数量比 TCP 连接数要多的情况。大多数浏览器为每个主机开放了 6
+个 TCP 连接，IE10（8个连接）和 IE11（12个连接）例外。</p>
+<p>这个 <a href="http://stevesouders.com/tests/rt-blocking.php">Resource Timing 阻塞测试页面</a>
+有 16 个图片，因此无论哪个浏览器都会阻塞一部分图片。每个图片被编程为在服务器
+有 1 秒的延迟，这 16 个图片，每个图片都显示了 <code>startTime</code> 和 <code>duration</code>。
+另外还有这个测试页面在 WebPagetest 中通过 <a href="http://www.webpagetest.org/result/141125_4T_11FT/">Chrome</a>,
+<a href="http://www.webpagetest.org/result/141125_BN_11FY/">IE10</a> 和
+<a href="http://www.webpagetest.org/result/141125_5K_11CB/">IE11</a> 加载的测试结果，
+可以通过查看截屏来分析时序结果。注，为什么所有的图片的 <code>startTime</code> 大致都相同？
+英文这个时间是浏览器解析 IMG 标签并意识到需要下载改资源的时间，由于先下载的图片
+阻塞的原因，但在页面出现后，图片的 <code>duration</code> 值大约步进 1 秒左右。</p>
+<h2 id="译者补充">译者补充</h2><ul>
+<li><a href="http://www.stevesouders.com/blog/2014/11/25/serious-confusion-with-resource-timing/">SERIOUS CONFUSION with Resource Timing</a> - 原文出处。</li>
+</ul>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[译：Resource Timing (资源计时) 使用技巧]]></title>
         <link href="http://blog.hotoo.me/post/resource-timing-practical-tips"/>
         <published>2014-12-30T00:00:00.000Z</published>
@@ -24,18 +121,18 @@ JavaScript API。例如：</p>
 
 <p>能够度量主页面的时间消耗真是太棒了，但是要诊断现实当中的性能问题，往往需要深入
 到各个资源当中。所以我们拥有了更进一步的 Resource Timing （资源计时）规范，
-这个 JavaScript API 提供类似 Navigation Timing 类似，但是精确到每一个资源的
-计时信息。举个例子：</p>
+这个 JavaScript API 提供类似 Navigation Timing 的功能，但是能精确到每一个资源的
+耗时。举个例子：</p>
 <div class="highlight"><pre><code class="javascript"><span class="comment">// Resource Timing</span>
 <span class="keyword">var</span> r0 = performance.getEntriesByType(<span class="string">"resource"</span>)[<span class="number">0</span>],
     loadtime = r0.duration,
     dns = r0.domainLookupEnd - r0.domainLookupStart,
     tcp = r0.connectEnd - r0.connectStart,
-    ttfb = r0.responseStart - r0.startTime;</code></pre></div><p>到目前为止，Resource Timing 被 Chrome, Chrome for Android, Opera, IE10 和 IE11
-浏览器所支持，这可能超过了你的网站 50% 的流量，应该可以提供足够的数据来揭示这些
-执行缓慢的资源。</p>
-<p>使用 Resource Timing 看似很简单，但是当我写第一个达到生产环境品质的资源计时代码
-时，我遇到了许多问题。这里我想分享一些现实当中记录 Resource Timing 指标的实用技巧。</p>
+    ttfb = r0.responseStart - r0.startTime;</code></pre></div><p>到目前为止，Chrome, Chrome for Android, Opera, IE10 和 IE11
+浏览器都支持 Resource Timing，这也许超过了你的网站 50% 的流量。
+这应该可以提供足够的数据，来揭示这些资源缓慢的原因。</p>
+<p>使用 Resource Timing 看似很简单，但是当我在写第一个用于生产环境的 Resource Timing 代码
+时，遇到了许多问题。这里我想分享一些现实当中记录 Resource Timing 指标的实用技巧。</p>
 <h2 id="1-使用-getentriesbytype-quot-resource-quot-而不是-getentries">1. 使用 <code>getEntriesByType(&quot;resource&quot;)</code> 而不是 <code>getEntries()</code></h2><p>在使用 Resource Timing 来获取当前页面的资源集合的资源耗时性能对象时，许多 Resource
 Timing 示例都是使用 <code>performance.getEntries()</code>，这意味着唯一的 resource timing 对象
 由该调用进行返回。但是 <code>getEntries()</code> 会一并返回潜在的 <a href="http://www.w3.org/wiki/Web_Performance/EntryType">4 种类型的 timing 对象</a>：
@@ -183,7 +280,7 @@ Boomerang 是 Philip Tellis 维护的一个非常流行的开源 RUM 包。他�
 还是会有一些问题待解决。这些小提示将帮助你充分的利用 Resource Timing 指标。
 我建议你现在就开始监控这些指标，以理解你的网站性能，为了最关心这个问题的真实用户。</p>
 <blockquote>
-<p>更新：y有一些第三方资源提供了 Timing-Allow-Origin 响应头，以允许站长测量这些
+<p>更新：有一些第三方资源提供了 Timing-Allow-Origin 响应头，以允许站长测量这些
 第三方资源的性能：</p>
 <ul>
 <li>Boomerang: <a href="http://c.go-mpulse.net/boomerang/CEN[snip...]YQE">http://c.go-mpulse.net/boomerang/CEN[snip...]YQE</a></li>
@@ -2210,199 +2307,6 @@ Validator@0.9.3 及其后续版本中得到修复。建议升级到最新版本�
 <p>（当天数据对比，图中圆点是开启过滤客户端本地异常的时间点，下同）</p>
 <p><img src="https://f.cloud.github.com/assets/143572/803189/d77f22cc-ede7-11e2-9412-25920ec1c4d6.png" alt="2013-07-16 3 16 22"></p>
 <p>（相近2天数据对比）</p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[『已结束』庆祝 Vim 7.4 发布，发起团购 Tee + 团捐活动(2013)]]></title>
-        <link href="http://blog.hotoo.me/post/vim74-tee"/>
-        <published>2013-05-26T00:00:00.000Z</published>
-        <updated>2013-05-26T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/vim74-tee</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <blockquote>
-<p>团购活动已经结束，但你仍然可以自行印制或购买<br/>
-团捐活动已经结束，但你仍然可以 <a href="http://www.vim.org/sponsor/index.php">自行捐助</a></p>
-</blockquote>
-<hr>
-<blockquote>
-<p>本次活动有 41人参加，团购 Tee 47件。<br/>
-最终以 <a href="http://www.vim.org/account/profile.php?user_id=66604">@vimcn</a> 的身份
-捐赠 159欧元，实际人民币 1377.94元。<br/>
-参加团捐的同学请查收邮件并于 2013年10月份之前行使您的 Vim 新特性赞同或反对票。</p>
-</blockquote>
-<p>于 2013年08月10日发发布的 Vim 7.4 的主要特性更新如下：</p>
-<ol>
-<li>增强 Python 支持；</li>
-<li>内置更快的正则表达式引擎；</li>
-<li>bugs fix.</li>
-</ol>
-<p>为了庆祝这一重大的事件，发起这次团购 VimTee + 团队捐助的活动。
-活动截至 2013年08月15日，请有兴趣的同学火速参与。</p>
-<!--more-->
-
-<h2 id="tee">Tee</h2><ul>
-<li>初步确定为 POLO 男款（店家没有专门的女款，抱歉 :( 如果你不介意，这款女生穿着也很帅 ：)）</li>
-<li>个人觉得需要适当增大胸前的胶印 LOGO。待讨论确定。</li>
-<li><p>增加个性袖标。</p>
-<blockquote>
-<p>:version<br/>
-VIM - Vi IMproved 7.4 (2013 Aug 10)<br/>
-@hotoo</p>
-</blockquote>
-</li>
-</ul>
-<p>由于袖标需要使用正确的时间，所以 Tee 的印刷需要在 Vim 正式发布之后。</p>
-<p><img src="http://img02.taobaocdn.com/bao/uploaded/i6/T1ziidXfXxXXXjwAs._113128.jpg_310x310.jpg" alt="vimtee-green">
-<img src="http://img02.taobaocdn.com/imgextra/i2/54677444/T21zBqXbxMXXXXXXXX_!!54677444.jpg_310x310.jpg" alt="vimtee-blue">
-<img src="http://img03.taobaocdn.com/imgextra/i3/54677444/T2BjJqXaBMXXXXXXXX_!!54677444.jpg_310x310.jpg" alt="vimtee-black"></p>
-<h3 id="局部特写：">局部特写：</h3><p><img src="http://img03.taobaocdn.com/imgextra/i3/54677444/T2EnXpXa0MXXXXXXXX_!!54677444.jpg" alt=""></p>
-<h3 id="尺码：">尺码：</h3><p>我个人喜欢穿稍微宽松的 Tee，一般会买大一号的，仅作参考 :)</p>
-<table>
-<thead>
-<tr>
-<th>通用款</th>
-<th>M</th>
-<th>L</th>
-<th>XL</th>
-<th>XXL</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td> 适合身高</td>
-<td>165~170</td>
-<td>170~175</td>
-<td>175~180</td>
-<td>180~190</td>
-</tr>
-<tr>
-<td> 胸围</td>
-<td>98</td>
-<td>104</td>
-<td>116</td>
-<td>121</td>
-</tr>
-<tr>
-<td> 衣长</td>
-<td>67</td>
-<td>70</td>
-<td>75</td>
-<td>78</td>
-</tr>
-<tr>
-<td> 肩宽</td>
-<td>42</td>
-<td>45</td>
-<td>48</td>
-<td>50</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<p><a href="http://www.freewear.org/?page=show_item&amp;id=FW0041">官方推荐的 Tee</a> 要 18.5欧元，
-将近 150元人民币，其中每件会捐助 3欧元（相当于24元人民币）给 Vim。
-相对来说很贵，而且还需要从国外运到国内，会麻烦很多（可能还需要关税）。</p>
-<p>所以组织在国内自印，会划算靠谱很多。这个 Tee 的质量更好，大概只需要其 2/3 的价格，
-就可以捐助给 Vim 多一倍的爱心。</p>
-<h2 id="捐助">捐助</h2><p>每件 Tee 需要额外的 20元左右的人民币，以 vimcn 团队的身份捐助给 Vim 以帮助乌干达
-可怜的儿童。</p>
-<h2 id="报名">报名</h2><ul>
-<li>每件 Tee 的价格在 65~70 元左右；</li>
-<li>快递费另外算。可以同城合并快递，线下认识下也不错。</li>
-<li>我可以代收杭州的部分。</li>
-<li>其他地区的同学如果同意被代收，我会随机选同城的一位同学代收。</li>
-</ul>
-<p>邮件发送以下内容到
-<a href="mailto:hotoo.cn+vimtee@gmail.com?subject=VimTee(2013)&body=%E5%B0%BA%E7%A0%81%EF%BC%9A%0A%E9%A2%9C%E8%89%B2%EF%BC%9A%0A%E8%A2%96%E6%A0%87%E4%BF%A1%E6%81%AF%EF%BC%9A%0A%E4%BB%B6%E6%95%B0%EF%BC%9A%0A%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F%EF%BC%88%E6%89%8B%E6%9C%BA%E6%88%96%E5%9B%BA%E8%AF%9D%EF%BC%89%EF%BC%9A%0A%E6%94%B6%E8%B4%A7%E4%BA%BA%E5%A7%93%E5%90%8D%EF%BC%9A%0A%E6%94%B6%E8%B4%A7%E5%9C%B0%E5%9D%80%E5%92%8C%E9%82%AE%E7%BC%96%EF%BC%9A%0A%0A%E6%98%AF%E5%90%A6%E5%90%8C%E6%84%8F%E5%90%8C%E5%9F%8E%E4%BB%A3%E6%94%B6%E6%88%96%E8%A2%AB%E4%BB%A3%E6%94%B6%EF%BC%9F%0A%E6%98%AF%E5%90%A6%E6%9C%89%E5%BF%85%E8%A6%81%E9%80%82%E5%BD%93%E5%A2%9E%E5%A4%A7%E8%83%B8%E5%89%8D%20LOGO%EF%BC%9F%0A%E8%A2%96%E6%A0%87%E5%8D%B0%E5%9C%A8%E5%B7%A6%E6%89%8B%E8%BF%98%E6%98%AF%E5%8F%B3%E6%89%8B%EF%BC%9F">hotoo.cn+vimtee[AT]gmail.com</a>
-（点击链接即可）</p>
-<blockquote>
-<p>尺码：<br/>
-颜色：军绿色|蓝色|黑色|白色<br/>
-袖标信息：例如 <code>@hotoo</code><br/>
-件数：默认 1件<br/>
-联系方式（手机或固话）：<br/>
-收货人姓名：<br/>
-收货地址和邮编：<br/></p>
-<p>是否同意同城代收或被代收？<br/>
-是否有必要适当增大胸前 LOGO？<br/>
-袖标印在左手还是右手？<br/></p>
-</blockquote>
-<p>报名截至时间：Vim 7.4 正式发布之日。</p>
-<p>费用待团购数量及折扣程度，和快递费用确定之后通知大家。</p>
-<h2 id="声明">声明</h2><p>这是一次庆祝、纪念的活动，另外还兼有公益的团队捐助活动。</p>
-<p>如果你对 Tee 的设计不满意，可以自行设计印制。你也可以以个人身份捐助 Vim。</p>
-<h2 id="有图有真相">有图有真相</h2><p><img src="../../images/vimtee74.png" alt="vimtee74"></p>
-<p><img src="../../images/vimtee74-logo.png" alt="vimtee74-logo"></p>
-<p><img src="../../images/vimtee74@hotoo.png" alt="vimtee74@hotoo"></p>
-<h2 id="vimtee-回顾">VimTee 回顾</h2><ol>
-<li>2010年7月，Vim 7.3 发布的时候，我组织了一次
-<a href="http://blog.hotoo.me/post/vim73-tee.html">团购 VimTee</a> 的活动。</li>
-<li>2011年应邀又组织了一次 <a href="http://blog.hotoo.me/post/vim-tee-2.html">趣味 Vim Tee</a>
-的活动。</li>
-<li>2012年由于种种原因我没有组织。</li>
-<li>2013年5月，Vim 7.4 即将发布，我想再发起一次组织团购 VimTee 的活动。</li>
-</ol>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[JavaScript 异常档案]]></title>
-        <link href="http://blog.hotoo.me/post/javascript-exceptions-archives"/>
-        <published>2013-05-22T00:00:00.000Z</published>
-        <updated>2013-05-22T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/javascript-exceptions-archives</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <p><img src="/static/images/ie6-en.jpg" alt="IE6"></p>
-<p><img src="/static/images/ie8.jpg" alt="IE8"></p>
-<p>作为前端工程师，看到上面的异常，我们该如何进行排查？</p>
-<ol>
-<li>根据异常所在文件及其异常所在行，找到引发异常的相关代码附近，
-对代码进行分析？</li>
-<li>然后呢？就只能依靠我们以往的经验进行猜测和尝试了。</li>
-<li>没有这个异常的相关经验？哪有这么巧的事情？好吧，那你悲剧了。</li>
-<li>呃，Google 吧，也许 Bing 或 Baidu 也有点答案。</li>
-<li>试过了各种各样的关键词，打开了 N 多个 tab 页。。。</li>
-<li>然后也许你搜索到了散落在 MSDN，CSDN，蓝色理想，某某个人博客的一些只言片语？</li>
-<li>看到楼主给出的好多行无关代码，接下来是其他热心观众的猜测，试试这个、试试那个。</li>
-<li>还是不行啊，急，在线等。</li>
-<li>然后就没有了然后。。。</li>
-</ol>
-<p><img src="/static/images/bugs.png" alt="bugs"></p>
-<!--more-->
-
-<hr>
-<p>各位同学，我们在排查调试 JavaScript 异常时，是不是经常感觉到乏力呢？</p>
-<ul>
-<li>JavaScript 作为一门弱类型动态编程语言，在调试、排查异常方面一直都非常薄弱。</li>
-<li>客户端浏览器种类、版本、用户语言环境繁多，同样一个异常，在不同浏览器中表现和反馈都不同。</li>
-<li>尤其面对某某大牌浏览器厂商埋下高质量的坑，一般人还真没办法发现或解决。</li>
-<li>每个浏览器厂商的开发者文档或社区都是独立的，各种异常文档或分享散落各个社区或者个人博客中。</li>
-</ul>
-<p>凡此种种，我都觉得有必要建立这样的一套异常档案，他可以：</p>
-<ul>
-<li>对于已知或未知的 JavaScript 异常，都存档有对应的异常信息、场景上下文、源码片段、
-对应的分析说明、及核心异常代码演示。</li>
-<li>长久的存在，不因时间的流逝、博客的关闭、URL 的变更等等原因而消逝。</li>
-<li>开放，分享和交流每个人的异常分析经验，让异常分析经验和知识更为普及和提升。</li>
-</ul>
-<p><img src="/static/images/no_bugs.jpg" alt="bugs"></p>
-<hr>
-<p>因此，我们在 Github 上初步建立了一个
-『 <a href="https://github.com/totorojs/javascript-exception-archives">JavaScript 异常档案</a> 』
-的开源项目。任何人都可以 fork、提交 issues、评论、邮件、或社区推广等各种方式来参与。</p>
-<p>等一下，你突然发现了这么一个页面：
-<a href="http://errors.totorojs.org/wiki/object-doesnot-support-this-property-or-method"><strong style="font-size:1.3em;font-weight:bolder;">对象不支持此属性或方法</strong></a>
-<a href="https://github.com/totorojs/javascript-exception-archives/blob/master/content/wiki/object-doesnot-support-this-property-or-method"><sub>@github</sub></a>
-这个页面里有这个异常在各个语种下的异常消息描述，同一个异常代码在不同浏览器里的
-详细分析，还有有血有肉的实际案例分析，关键代码，实际异常演示页，，，
-可能还很不完善，还需要我们一起来参与，但是泪奔的感觉有木有~</p>
-<hr>
-<p>希望有一天：</p>
-<ul>
-<li>我们遇到的脚本异常都可以在这个档案中找到原因、解决或规避的方案。</li>
-<li>我们分析的脚本异常都可以出现在这个档案中以惠及他人。</li>
-</ul>
-<p>最良好的祝愿！</p>
-<p><img src="/static/images/exception.jpg" alt="bugs"></p>
 ]]>
         </content>
     </entry>

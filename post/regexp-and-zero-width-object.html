@@ -69,7 +69,8 @@ RegExp.prototype.concat = <span class="function"><span class="keyword">function<
 <a name="L1-9" href="#L1-9">9</a>
 <a name="L1-10" href="#L1-10">10</a>
 <a name="L1-11" href="#L1-11">11</a>
-<a name="L1-12" href="#L1-12">12</a></pre></div></div><p>原方法名是contact，现在为了和字符串类的一致，换为concat，至于bug/不足这里不做解读。
+<a name="L1-12" href="#L1-12">12</a>
+<a name="L1-13" href="#L1-13">13</a></pre></div></div><p>原方法名是contact，现在为了和字符串类的一致，换为concat，至于bug/不足这里不做解读。
 这个实际应用意义不大的小程式却有值得称道的几点：</p>
 <ul>
 <li>正向预搜索匹配第一个表达式里左括号（不包括非捕获组(?:)）的个数。</li>
@@ -105,7 +106,8 @@ document.write(d+<span class="string">":"</span>+d2);</code></pre></div><pre cla
 <a name="L2-11" href="#L2-11">11</a>
 <a name="L2-12" href="#L2-12">12</a>
 <a name="L2-13" href="#L2-13">13</a>
-<a name="L2-14" href="#L2-14">14</a></pre></div></div><p>一万次循环叠加可以发现构建空字符串比构建空数组求长度快1到3倍。</p>
+<a name="L2-14" href="#L2-14">14</a>
+<a name="L2-15" href="#L2-15">15</a></pre></div></div><p>一万次循环叠加可以发现构建空字符串比构建空数组求长度快1到3倍。</p>
 <p>再将代码改为：代码III</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">var</span> I = <span class="number">10000</span>;
 <span class="keyword">var</span> s=<span class="string">""</span>;
 <span class="keyword">var</span> d = <span class="keyword">new</span> Date();
@@ -135,7 +137,8 @@ document.write(d+<span class="string">":"</span>+d2);</code></pre></div><pre cla
 <a name="L3-12" href="#L3-12">12</a>
 <a name="L3-13" href="#L3-13">13</a>
 <a name="L3-14" href="#L3-14">14</a>
-<a name="L3-15" href="#L3-15">15</a></pre></div></div><p>可以发现，求空字符串长度与空数组长度的过程效率相当。可见，代码 II 处空数组效率
+<a name="L3-15" href="#L3-15">15</a>
+<a name="L3-16" href="#L3-16">16</a></pre></div></div><p>可以发现，求空字符串长度与空数组长度的过程效率相当。可见，代码 II 处空数组效率
 多余的消耗主要在构建空数组对象上。</p>
 </div>
 

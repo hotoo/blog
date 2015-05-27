@@ -58,12 +58,14 @@
 <a name="L1-4" href="#L1-4">4</a>
 <a name="L1-5" href="#L1-5">5</a>
 <a name="L1-6" href="#L1-6">6</a>
-<a name="L1-7" href="#L1-7">7</a></pre></div></div><p>然后有人自称写出了更快的遍历 DOM 方式。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">var</span> elems = document.getElementsByTagName(<span class="string">"*"</span>);
+<a name="L1-7" href="#L1-7">7</a>
+<a name="L1-8" href="#L1-8">8</a></pre></div></div><p>然后有人自称写出了更快的遍历 DOM 方式。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">var</span> elems = document.getElementsByTagName(<span class="string">"*"</span>);
 <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,l=elems.length; i&lt;l; i++){
     handler(elems[i]);
 }</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
-<a name="L2-3" href="#L2-3">3</a></pre></div></div><p>最初找到有详细对照的文章地址没有找到，这个是
+<a name="L2-3" href="#L2-3">3</a>
+<a name="L2-4" href="#L2-4">4</a></pre></div></div><p>最初找到有详细对照的文章地址没有找到，这个是
 <a href="http://geekswithblogs.net/mparsons/archive/2006/03/02/71175.aspx">类似的一篇</a>，
 而且也是非递归式的。</p>
 <p>确实是很快的，但只是快还是不够的，这个实现有很多弊端：</p>
@@ -116,7 +118,8 @@
 <a name="L3-20" href="#L3-20">20</a>
 <a name="L3-21" href="#L3-21">21</a>
 <a name="L3-22" href="#L3-22">22</a>
-<a name="L3-23" href="#L3-23">23</a></pre></div></div><p>上面只是一个精简版，实际过程中还需要考虑节点类型的问题，一般会过滤
+<a name="L3-23" href="#L3-23">23</a>
+<a name="L3-24" href="#L3-24">24</a></pre></div></div><p>上面只是一个精简版，实际过程中还需要考虑节点类型的问题，一般会过滤
 1:HTMLElement, 8:Comment, 9:Document Type, 10:DocType 之外的节点。</p>
 <p>其实也不过如此嘛，飘过~~</p>
 <h2 id="see-also">See Also</h2><ul>

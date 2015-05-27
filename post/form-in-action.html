@@ -56,7 +56,8 @@
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
 <a name="L1-4" href="#L1-4">4</a>
-<a name="L1-5" href="#L1-5">5</a></pre></div></div><p>这个表单提交之后，地址栏就包含了所有的提交信息：
+<a name="L1-5" href="#L1-5">5</a>
+<a name="L1-6" href="#L1-6">6</a></pre></div></div><p>这个表单提交之后，地址栏就包含了所有的提交信息：
 <code>http://example.com/get.html?key=value&amp;search=%CB%D1%CB%F7</code></p>
 <p>可以直接在地址栏修改：
 action: 即 <code>http://example.com/get.html</code> 部分。
@@ -72,7 +73,8 @@ data/param: 即 key=value&amp;search=%CB%D1%CB%F7 这些参数部分。</p>
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
 <a name="L2-4" href="#L2-4">4</a>
-<a name="L2-5" href="#L2-5">5</a></pre></div></div><p>这个表单提交之后，地址栏除了 <code>http://example.com/post.html</code> 外不包含其他信息。</p>
+<a name="L2-5" href="#L2-5">5</a>
+<a name="L2-6" href="#L2-6">6</a></pre></div></div><p>这个表单提交之后，地址栏除了 <code>http://example.com/post.html</code> 外不包含其他信息。</p>
 <p>广义上，通俗的讲，method=&quot;post&quot; 的表单，AJAX post 都是 post 方式。
 post 提交后，刷新仍是 post 提交相同的数据。</p>
 <h2 id="编码-encoding">编码(Encoding)</h2><p>在客户端页面和服务器端程序编码不同时，提交数据非常容易出现编码问题，即所谓的
@@ -103,7 +105,8 @@ milan-web-base-2.0-SNAPSHOT.jar\META-INF\webx\pipeline.xml</p>
 <a name="L3-3" href="#L3-3">3</a>
 <a name="L3-4" href="#L3-4">4</a>
 <a name="L3-5" href="#L3-5">5</a>
-<a name="L3-6" href="#L3-6">6</a></pre></div></div></li>
+<a name="L3-6" href="#L3-6">6</a>
+<a name="L3-7" href="#L3-7">7</a></pre></div></div></li>
 <li>设置 form 元素的 accept-charset 属性为服务器接收数据使用的编码。<br />
 Hack in IE: <code>onsubmit=&quot;document.charset=&#39;utf-8&#39;;&quot;</code></li>
 <li>通过 JavaScript 的 <code>encodeURIComponent(key)</code> 函数转码，一般用于 AJAX 提交。<br />
@@ -122,11 +125,13 @@ Hack in IE: <code>onsubmit=&quot;document.charset=&#39;utf-8&#39;;&quot;</code><
   form.onsubmit = function(){</p><div class="highlight"><div class="codes"><div class="code"><pre>  if(ie){document.charset=&quot;utf-8&quot;;}
   return !!this[&quot;k&quot;].value;
 </pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
-<a name="L4-2" href="#L4-2">2</a></pre></div></div><p>  };</p>
+<a name="L4-2" href="#L4-2">2</a>
+<a name="L4-3" href="#L4-3">3</a></pre></div></div><p>  };</p>
 </li>
 <li><p>更专业的事件绑定方法（考虑到兼容性问题，这里使用 jQuery 代码）：</p>
 <p>  $(&quot;#formId&quot;).submit(function(){</p><div class="highlight"><div class="codes"><div class="code"><pre>  return this.k.value;
-</pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a></pre></div></div><p>  });</p>
+</pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
+<a name="L5-2" href="#L5-2">2</a></pre></div></div><p>  });</p>
 </li>
 </ul>
 <h2 id="普通提交数据的表单">普通提交数据的表单</h2><p>对于普通提交数据的表单，比如新增、修改数据，使用 POST 方式提交数据即可。
@@ -147,7 +152,8 @@ form.submit()
 
 </pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a>
 <a name="L6-2" href="#L6-2">2</a>
-<a name="L6-3" href="#L6-3">3</a></pre></div></div><p>或 <code>location.href=&quot;back.html&quot;</code> 这样的按钮。</p>
+<a name="L6-3" href="#L6-3">3</a>
+<a name="L6-4" href="#L6-4">4</a></pre></div></div><p>或 <code>location.href=&quot;back.html&quot;</code> 这样的按钮。</p>
 <p>这些按钮在实践上使用链接来实现更好更简单：<code>&lt;a href=&quot;back.html&quot;&gt;后退&lt;/a&gt;</code></p>
 <p>对于确实需要多个提交操作的按钮，可以通过提交按钮的 name 来区分。</p><div class="highlight"><div class="codes"><div class="code"><pre>&lt;input type=&quot;submit&quot; name=&quot;event_submit_do_publish&quot; value=&quot;发布&quot; /&gt;
 &lt;input type=&quot;submit&quot; name=&quot;event_submit_do_draft&quot; value=&quot;保存为草稿&quot; /&gt;
@@ -156,7 +162,8 @@ form.submit()
 </pre></div><pre class="line"><a name="L7-1" href="#L7-1">1</a>
 <a name="L7-2" href="#L7-2">2</a>
 <a name="L7-3" href="#L7-3">3</a>
-<a name="L7-4" href="#L7-4">4</a></pre></div></div><h2 id="多个相同操作的表单">多个相同操作的表单</h2><p>类似于搜索引擎结果页，页面上、下均有功能相同的搜索框（为方便用户使用，虽然
+<a name="L7-4" href="#L7-4">4</a>
+<a name="L7-5" href="#L7-5">5</a></pre></div></div><h2 id="多个相同操作的表单">多个相同操作的表单</h2><p>类似于搜索引擎结果页，页面上、下均有功能相同的搜索框（为方便用户使用，虽然
 实际受惠的用户可能并不多），这两个搜索框分别由两个表单组成，但是可以统一使用
 同一个 onsubmit 事件处理函数。</p><div class="highlight"><div class="codes"><div class="code"><pre>&lt;form onsubmit=&quot;return validater(this);&quot;&gt;
     &lt;input type=&quot;text&quot; name=&quot;k&quot; /&gt;
@@ -191,7 +198,8 @@ function validater(form){
 <a name="L8-14" href="#L8-14">14</a>
 <a name="L8-15" href="#L8-15">15</a>
 <a name="L8-16" href="#L8-16">16</a>
-<a name="L8-17" href="#L8-17">17</a></pre></div></div><h2 id="搜索">搜索</h2><p>搜索建议使用 GET 方式提交，过滤参数和当前页码这些信息全部带在地址中。
+<a name="L8-17" href="#L8-17">17</a>
+<a name="L8-18" href="#L8-18">18</a></pre></div></div><h2 id="搜索">搜索</h2><p>搜索建议使用 GET 方式提交，过滤参数和当前页码这些信息全部带在地址中。
 <code>http://example.com/search.html?k=keywrod</code></p>
 <p>翻页链接（上一页，下一页...）
 <code>http://example.com/search.html?k=keywrod&amp;p=2</code></p>
@@ -228,7 +236,8 @@ function validater(form){
 <a name="L9-13" href="#L9-13">13</a>
 <a name="L9-14" href="#L9-14">14</a>
 <a name="L9-15" href="#L9-15">15</a>
-<a name="L9-16" href="#L9-16">16</a></pre></div></div><h2 id="可爱的陋习">可爱的陋习</h2><p>不要在表单中为 button 类型的按钮绑定 onclick 事件，并在事件处理函数中执行
+<a name="L9-16" href="#L9-16">16</a>
+<a name="L9-17" href="#L9-17">17</a></pre></div></div><h2 id="可爱的陋习">可爱的陋习</h2><p>不要在表单中为 button 类型的按钮绑定 onclick 事件，并在事件处理函数中执行
 <code>form.submit();</code> ，然后费尽心思实现“在输入框中也可以回车提交”这种蠢事。</p>
 <p>也不要为了<del>解决</del>避免编码问题而在 onsubmit 处理函数中做
 <code>input.value=encodeURIComponent(input.value);</code>，然后为了避免这个带来的

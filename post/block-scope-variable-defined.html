@@ -50,14 +50,16 @@
   <span class="comment">// 居然省了一个变量呢～</span>
 }</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
-<a name="L1-3" href="#L1-3">3</a></pre></div></div><p>这位同学是看了 jQuery 里类似下面这种用法之后做的这个分享：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">// If no nodeType, this is expected to be an array</span>
+<a name="L1-3" href="#L1-3">3</a>
+<a name="L1-4" href="#L1-4">4</a></pre></div></div><p>这位同学是看了 jQuery 里类似下面这种用法之后做的这个分享：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">// If no nodeType, this is expected to be an array</span>
 <span class="keyword">for</span> ( ; (node = elem[i]); i++ ) {
     <span class="comment">// Do not traverse comment nodes</span>
     ret += getText( node );
 }</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
-<a name="L2-4" href="#L2-4">4</a></pre></div></div><p>jQuery 还有不少地方使用这种用法，也有不少地方是传统的使用 length 方法。
+<a name="L2-4" href="#L2-4">4</a>
+<a name="L2-5" href="#L2-5">5</a></pre></div></div><p>jQuery 还有不少地方使用这种用法，也有不少地方是传统的使用 length 方法。
 但是 jQuery 这样用有其特定场景，需要正视。我回复说：</p>
 <ol>
 <li>如果数组项中有 0, false, null, undefined, &quot;&quot;，代码就出 bug 了。</li>
@@ -72,7 +74,8 @@
 </pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
 <a name="L3-3" href="#L3-3">3</a>
-<a name="L3-4" href="#L3-4">4</a></pre></div></div><p>p.s. 使用 Vim snipMate 的同学可以参考
+<a name="L3-4" href="#L3-4">4</a>
+<a name="L3-5" href="#L3-5">5</a></pre></div></div><p>p.s. 使用 Vim snipMate 的同学可以参考
 <a href="https://github.com/hotoo/snipmate.vim/blob/master/snippets/javascript.snippets#L56">javascript.snippet</a>
 这个代码片段模板。</p>
 <p>好了，使用溢出判断数组循环结束的讨论到此就结束了，但是好戏还在后头。</p>
@@ -95,7 +98,8 @@
 <a name="L4-3" href="#L4-3">3</a>
 <a name="L4-4" href="#L4-4">4</a>
 <a name="L4-5" href="#L4-5">5</a>
-<a name="L4-6" href="#L4-6">6</a></pre></div></div><p>例如上面的代码，在 for 这个块之中定义的变量，在 for 之外也可以使用。
+<a name="L4-6" href="#L4-6">6</a>
+<a name="L4-7" href="#L4-7">7</a></pre></div></div><p>例如上面的代码，在 for 这个块之中定义的变量，在 for 之外也可以使用。
 这在其他支持块级作用域(如C/C++ [3], Java)的编程语言中是无法理解，甚至不可接受的。</p>
 <p>这是 JavaScript 设计的 BUG，书中作者建议将所有变量声明集中放置在函数开头，
 说这是个好习惯。</p>
@@ -128,7 +132,8 @@ Define all variables at the top of the function.</p>
 <a name="L5-5" href="#L5-5">5</a>
 <a name="L5-6" href="#L5-6">6</a>
 <a name="L5-7" href="#L5-7">7</a>
-<a name="L5-8" href="#L5-8">8</a></pre></div></div><hr>
+<a name="L5-8" href="#L5-8">8</a>
+<a name="L5-9" href="#L5-9">9</a></pre></div></div><hr>
 <p>但是这个我稍微持不同的观点 ：）</p>
 <p>实际上我们定义 <code>i</code>, <code>l</code> 是为了给 <code>for</code> 用的，JavaScript 解释器在执行的时候可以
 给块级作用域外面用，不代表就应该定义在外面。

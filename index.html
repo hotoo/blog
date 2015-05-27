@@ -46,31 +46,42 @@
   <div class="container">
     <div class="post">
       
-          <h1>译：Resource Timing (资源计时) 使用技巧 <a href="post/resource-timing-practical-tips" class="title-permalink">¶</a></h1>
+          <h1>git+, a hack of git, smart for you. <a href="post/gitplus" class="title-permalink">¶</a></h1>
           <section>
- <p><a href="http://www.w3.org/2010/webperf/">W3C Web 性能工作组</a> 在 2012 年给我们带来了
-<a href="http://www.w3.org/TR/navigation-timing/">Navigation Timing</a>，这个 API 现在
-基本上在主流浏览器上都可用。Navigation Timing 定义了一套用于测量主页面性能的
-JavaScript API。例如：</p>
-<div class="highlight"><pre><code class="javascript"><span class="comment">// Navigation Timing</span>
-<span class="keyword">var</span> t = performance.timing,
-    pageloadtime = t.loadEventStart - t.navigationStart,
-    dns = t.domainLookupEnd - t.domainLookupStart,
-    tcp = t.connectEnd - t.connectStart,
-    ttfb = t.responseStart - t.navigationStart;</code></pre></div><p class="more"><a href="post/resource-timing-practical-tips#more">阅读详情...</a></p>
+ <p>为了信息安全，公司搭建了 gitlab.company.com 管理代码，同时限制了必须使用工作邮箱
+hotoo@company.com 进行提交。</p>
+<p>公司 gitlab 有大大小小很多仓库，不时的需要 clone 代码下来，有时忘记设置就开始提交，
+提交了几次开始 push 到 gitlab 并准备提交 MR 时发现，push 被拒绝，或者 MR 无法
+自动合并，因为没有使用公司的邮箱进行提交。只好取消之前的提交操作，修改邮箱配置
+之后重新提交。</p>
+<p>虽然 clone 下来配置一次就可以了，但是每个仓库都需要配置，每次 clone 都需要配置，
+忘记设置了需要取消之前的提交并再来一次。</p>
+<p>有没有办法自动进行配置呢？</p>
+<p>于是 <a href="https://github.com/hotoo/gitplus">gitplus</a> 出现了，它可以根据 git
+的子操作命令，及其所在的仓库信息，自动的执行指定命令，帮助你完成一些自动化任务。
+例如：</p>
+<pre>post-clone:
+  gitlab.company.com:
+    - git config user.name hotoo
+    - git config user.email hotoo@company.com
+pre-commit:
+  &#39;*&#39;:
+    - jshint .</pre><ul>
+<li>有了 gitplus，你再也不会忘记设置公司邮箱。因此也不需要取消提交再重复提交了。</li>
+<li>还可以在提交前自动做校验工作。没有 gitplus 之前你只能给每个仓库设置 pre-commit hooks。</li>
+<li>你也可以发挥自己的想象力，做更多其他的事情。</li>
+</ul>
+
           </section>
           <footer class="post clearfix">
             <span class="tags"><a href="/tag">Tags</a>:
  
-                <a href="/tag/#HTML5">HTML5</a>
-              
- , 
-                <a href="/tag/#翻译">翻译</a>
+                <a href="/tag/#git">git</a>
               
             </span>
 
             <time>
-              <a href="/2014">2014年</a>12月30日
+              <a href="/2015">2015年</a>05月27日
             </time>
           </footer>
     </div>
@@ -79,6 +90,16 @@ JavaScript API。例如：</p>
 
     <ul class="posts">
  
+ 
+          <li class="posts-item">
+            <a href="post/serious-confusion-with-resource-timing">译：严重混乱的 Resource Timing</a>
+            (<time class="datetime">2014-12-30</time>)
+          </li>
+ 
+          <li class="posts-item">
+            <a href="post/resource-timing-practical-tips">译：Resource Timing (资源计时) 使用技巧</a>
+            (<time class="datetime">2014-12-30</time>)
+          </li>
  
           <li class="posts-item">
             <a href="post/github-gitlab-or-bitbucket">GitHub, GitLab, or BitBucket?</a>
@@ -95,15 +116,7 @@ JavaScript API。例如：</p>
             (<time class="datetime">2014-03-31</time>)
           </li>
  
-          <li class="posts-item">
-            <a href="post/alibaba-3-years">阿里巴巴三年醇</a>
-            (<time class="datetime">2014-02-25</time>)
-          </li>
  
-          <li class="posts-item">
-            <a href="post/lunar-calendar">中国农历</a>
-            (<time class="datetime">2013-11-13</time>)
-          </li>
  
  
  

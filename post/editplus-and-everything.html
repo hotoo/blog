@@ -48,7 +48,7 @@
 <p>虽然 Editplus 本身也有文件搜索功能，而且支持内容搜索，不过这个集成也非常有意思。</p>
 <ul>
 <li>首先需要安装（绿色的也可以）有Everything本身。</li>
-<li>下载面向命令行界面的 <a href="http://www.voidtools.com/download.php">es.exe</a><div class="highlight"><div class="codes"><div class="code"><pre>^[2](http://xbeta.info/everything/download.htm)^ 程序，放至 Everything 安装目录。</pre></div><pre class="line"></pre></div></div></li>
+<li>下载面向命令行界面的 <a href="http://www.voidtools.com/download.php">es.exe</a><div class="highlight"><div class="codes"><div class="code"><pre>^[2](http://xbeta.info/everything/download.htm)^ 程序，放至 Everything 安装目录。</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a></pre></div></div></li>
 <li>打开 Editplus ， “工具” -&gt; “配置用户工具” -&gt; “添加工具”</li>
 <li>“菜单文本”可以随便命名，</li>
 <li>“命令”填入 es.exe 所在的完整路径，如 E:\Everything\es.exe</li>
@@ -58,7 +58,8 @@
 </ul>
 <p>谢谢晓东的分享。有时间的话可以为 Vim 也写一个插件，搜索结果在 QuickFix 窗口中输出。</p>
 <p>注意：一定要记得先选定文本一串，否则会搜索出所有的文件，如果参数没有加入当前文件所在的目录，还会更惨 ^_^! 。不过作为 Vim 插件就可以更灵活了，不需要选定文本，直接执行类似命令就可以了。</p><div class="highlight"><div class="codes"><div class="code"><pre>:ES ${keyword}[ ${path}]
-</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div></div>
+</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+<a name="L2-2" href="#L2-2">2</a></pre></div></div></div>
 
   <footer class="entry-meta post clearfix">
     <span class="tags"><a href="/tag">Tags</a>:

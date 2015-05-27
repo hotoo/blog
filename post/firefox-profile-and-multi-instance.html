@@ -43,12 +43,13 @@
 <div class="hentry">
   <h1 class="entry-title">Firefox Profile 及多实例运行</h1>
   <div class="entry-content"><p>之前就知道Firefox 支持多账户，并允许各账户安装不同的插件，会话信息也完全独立。</p>
-<p>方法是制作快捷方式，目标指向Firefox的安装路径，并加上 <code>-P</code> 参数：</p><div class="highlight"><div class="codes"><div class="code"><pre>&quot;C:\Program Files\Mozilla Firefox\firefox.exe&quot; -P</pre></div><pre class="line"></pre></div></div><p>加引号是为了防止空格问题。这样会启动选择账户的对话框，如果想直接指定账户启动，
-而不出现对话框，可以在 <code>-P</code> 参数后直接带账户的名称，如默认的 default：</p><div class="highlight"><div class="codes"><div class="code"><pre>&quot;C:\Program Files\Mozilla Firefox\firefox.exe&quot; -P default</pre></div><pre class="line"></pre></div></div><p>如果想同时启动多个Firefox独立的账户实例，可以加上 <code>-no-remote</code> 参数。</p><div class="highlight"><div class="codes"><div class="code"><pre>&quot;C:\Program Files\Mozilla Firefox\firefox.exe&quot; -no-remote -P debug</pre></div><pre class="line"></pre></div></div><p>受 Editplus 的影响，其<code>&lt;C-b&gt;</code> 快捷键可以使用内置的IE核心浏览器预览和 html
+<p>方法是制作快捷方式，目标指向Firefox的安装路径，并加上 <code>-P</code> 参数：</p><div class="highlight"><div class="codes"><div class="code"><pre>&quot;C:\Program Files\Mozilla Firefox\firefox.exe&quot; -P</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a></pre></div></div><p>加引号是为了防止空格问题。这样会启动选择账户的对话框，如果想直接指定账户启动，
+而不出现对话框，可以在 <code>-P</code> 参数后直接带账户的名称，如默认的 default：</p><div class="highlight"><div class="codes"><div class="code"><pre>&quot;C:\Program Files\Mozilla Firefox\firefox.exe&quot; -P default</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div><p>如果想同时启动多个Firefox独立的账户实例，可以加上 <code>-no-remote</code> 参数。</p><div class="highlight"><div class="codes"><div class="code"><pre>&quot;C:\Program Files\Mozilla Firefox\firefox.exe&quot; -no-remote -P debug</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a></pre></div></div><p>受 Editplus 的影响，其<code>&lt;C-b&gt;</code> 快捷键可以使用内置的IE核心浏览器预览和 html
 源码间快速切换（也可以使用外部浏览器）。</p>
 <p>最近在定义 vimrc 时映射了 Cpp 的快速编译和运行快捷键，顺手一并映射了批处理和
 X/HTML 文件类型的运行/预览快捷键，如下：</p><div class="highlight"><div class="codes"><div class="code"><pre>autocmd FileType xhtml,html nmap &lt;F5&gt; :exe &#39;!start &quot;C:\Program Files\Mozilla Firefox\firefox.exe&quot; &quot;&#39;.expand(&quot;%&quot;).&#39;&quot;&#39;&lt;cr&gt;
-autocmd FileType dosbatch nmap &lt;F5&gt; :exe &#39;!&quot;&#39;.expand(&quot;%&quot;).&#39;&quot;&#39;&lt;cr&gt;&lt;cr&gt;</pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a></pre></div></div><p>由于 default 和 debug 账户都加上了 <code>-no-remote</code> 参数，Firefox 被设置为默认浏览器，
+autocmd FileType dosbatch nmap &lt;F5&gt; :exe &#39;!&quot;&#39;.expand(&quot;%&quot;).&#39;&quot;&#39;&lt;cr&gt;&lt;cr&gt;</pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
+<a name="L4-2" href="#L4-2">2</a></pre></div></div><p>由于 default 和 debug 账户都加上了 <code>-no-remote</code> 参数，Firefox 被设置为默认浏览器，
 并使用外部程序打开链接是，会弹出如下警告：</p>
 <blockquote>
 <p>“Firefox 已经在运行，但是没有响应。如要打开新窗口，您必须先关闭该 Firefox

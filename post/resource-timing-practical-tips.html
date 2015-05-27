@@ -54,12 +54,13 @@ JavaScript API。例如：</p><div class="highlight"><div class="codes"><div cla
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
 <a name="L1-4" href="#L1-4">4</a>
-<a name="L1-5" href="#L1-5">5</a></pre></div></div><a name="more"></a>
+<a name="L1-5" href="#L1-5">5</a>
+<a name="L1-6" href="#L1-6">6</a></pre></div></div><a name="more"></a>
 
 <p>能够度量主页面的时间消耗真是太棒了，但是要诊断现实当中的性能问题，往往需要深入
 到各个资源当中。所以我们拥有了更进一步的 Resource Timing （资源计时）规范，
-这个 JavaScript API 提供类似 Navigation Timing 类似，但是精确到每一个资源的
-计时信息。举个例子：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">// Resource Timing</span>
+这个 JavaScript API 提供类似 Navigation Timing 的功能，但是能精确到每一个资源的
+耗时。举个例子：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">// Resource Timing</span>
 <span class="keyword">var</span> r0 = performance.getEntriesByType(<span class="string">"resource"</span>)[<span class="number">0</span>],
     loadtime = r0.duration,
     dns = r0.domainLookupEnd - r0.domainLookupStart,
@@ -68,11 +69,12 @@ JavaScript API。例如：</p><div class="highlight"><div class="codes"><div cla
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
 <a name="L2-4" href="#L2-4">4</a>
-<a name="L2-5" href="#L2-5">5</a></pre></div></div><p>到目前为止，Resource Timing 被 Chrome, Chrome for Android, Opera, IE10 和 IE11
-浏览器所支持，这可能超过了你的网站 50% 的流量，应该可以提供足够的数据来揭示这些
-执行缓慢的资源。</p>
-<p>使用 Resource Timing 看似很简单，但是当我写第一个达到生产环境品质的资源计时代码
-时，我遇到了许多问题。这里我想分享一些现实当中记录 Resource Timing 指标的实用技巧。</p>
+<a name="L2-5" href="#L2-5">5</a>
+<a name="L2-6" href="#L2-6">6</a></pre></div></div><p>到目前为止，Chrome, Chrome for Android, Opera, IE10 和 IE11
+浏览器都支持 Resource Timing，这也许超过了你的网站 50% 的流量。
+这应该可以提供足够的数据，来揭示这些资源缓慢的原因。</p>
+<p>使用 Resource Timing 看似很简单，但是当我在写第一个用于生产环境的 Resource Timing 代码
+时，遇到了许多问题。这里我想分享一些现实当中记录 Resource Timing 指标的实用技巧。</p>
 <h2 id="1-使用-getentriesbytype-quot-resource-quot-而不是-getentries">1. 使用 <code>getEntriesByType(&quot;resource&quot;)</code> 而不是 <code>getEntries()</code></h2><p>在使用 Resource Timing 来获取当前页面的资源集合的资源耗时性能对象时，许多 Resource
 Timing 示例都是使用 <code>performance.getEntries()</code>，这意味着唯一的 resource timing 对象
 由该调用进行返回。但是 <code>getEntries()</code> 会一并返回潜在的 <a href="http://www.w3.org/wiki/Web_Performance/EntryType">4 种类型的 timing 对象</a>：
@@ -89,7 +91,7 @@ timing 对象。（感谢 <a href="http://calendar.perfplanet.com/2012/an-introd
 <code>performance.getEntriesByType(&quot;resource&quot;)</code> 得到返回，要得到这个主页面 HTML 文档
 的 timing 信息，需要使用 Navigation Timing 对象（<code>performance.timing</code>）。</p>
 <p>虽然不太可能，当页面上没有其他资源时，这可能会导致错误发生。
-例如，刚才 Resource Timing 示例使用如下代码：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">performance.getEntriesByType(<span class="string">"resource"</span>)[<span class="number">0</span>]</code></pre></div><pre class="line"></pre></div></div><p>如果一个页面唯一的资源就是主页面的 HTML 文档，然后 <code>getEntriesByType(&quot;resource&quot;)</code>
+例如，刚才 Resource Timing 示例使用如下代码：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">performance.getEntriesByType(<span class="string">"resource"</span>)[<span class="number">0</span>]</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a></pre></div></div><p>如果一个页面唯一的资源就是主页面的 HTML 文档，然后 <code>getEntriesByType(&quot;resource&quot;)</code>
 返回一个空数组，这时候应用 <code>element[0]</code> 会引起 JavaScript 异常。如果你找不到
 没有引用子资源的页面，你可以试试 <a href="http://fast.stevesouders.com/">http://fast.stevesouders.com/</a></p>
 <h2 id="3-小心-secureconnectionstart-的问题。">3. 小心 <code>secureConnectionStart</code> 的问题。</h2><p><a href="http://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-secureconnectionstart"><code>secureConnectionStart</code></a>
@@ -113,7 +115,8 @@ timing 对象。（感谢 <a href="http://calendar.perfplanet.com/2012/an-introd
     <span class="keyword">var</span> ssl = r0.connectEnd - r0.secureConnectionStart;
 }</code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
 <a name="L4-2" href="#L4-2">2</a>
-<a name="L4-3" href="#L4-3">3</a></pre></div></div><p>第三，规范中关于 <a href="http://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-secureconnectionstart">这一行</a>
+<a name="L4-3" href="#L4-3">3</a>
+<a name="L4-4" href="#L4-4">4</a></pre></div></div><p>第三，规范中关于 <a href="http://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-secureconnectionstart">这一行</a>
 有一些误导：“...如果当前页面的协议是 HTTPS，这个属性必须立即返回用户代理(user agent)开始握手过程的时间...”
 （我的重点）。有可能当前页面是 HTTP，但仍然包含我们需要测量 SSL 协商时间的 HTTPS 资源。
 规范应该改为：“...如果资源的协议是 HTTPS 协议，该属性必须立即返回用户代理开始握手过程的时间...”。
@@ -138,7 +141,7 @@ HTTP 页面中的 HTTPS 资源。</p>
 响应头，跨域资源的 timing 详情将被授权访问。这个头信息指定了被允许访问 timing
 详情的（主页面）来源列表，多数情况下，会使用通配符(<code>*</code>) 允许所有来源访问。
 举个例子，<a href="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js</a> 返回
-的 Timing-Allow-Origin 响应头信息是：</p><div class="highlight"><div class="codes"><div class="code"><pre>Timing-Allow-Origin: *</pre></div><pre class="line"></pre></div></div><p>当第三方添加这个响应头信息时，真是太棒了。它允许站长来统计在他们网页上使用的
+的 Timing-Allow-Origin 响应头信息是：</p><div class="highlight"><div class="codes"><div class="code"><pre>Timing-Allow-Origin: *</pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a></pre></div></div><p>当第三方添加这个响应头信息时，真是太棒了。它允许站长来统计在他们网页上使用的
 第三方资源的性能。感谢 <a href="http://googledevelopers.blogspot.com/2013/12/measuring-network-performance-with.html">Ilya Grigorik</a>
 报告了一些添加了这个响应头的第三方资讯，下面是一些指定了 <code>Timing-Allow-Origin: *</code>
 的资源例子：</p>
@@ -171,7 +174,8 @@ HTTP 页面中的 HTTPS 资源。</p>
 <a name="L6-7" href="#L6-7">7</a>
 <a name="L6-8" href="#L6-8">8</a>
 <a name="L6-9" href="#L6-9">9</a>
-<a name="L6-10" href="#L6-10">10</a></pre></div></div><p>做这些检测是非常重要的，否则，当访问这些受限属性时，你不会得到任何异常，除了
+<a name="L6-10" href="#L6-10">10</a>
+<a name="L6-11" href="#L6-11">11</a></pre></div></div><p>做这些检测是非常重要的，否则，当访问这些受限属性时，你不会得到任何异常，除了
 这些虚假的数据。当属性受限访问时，它们的值被设置为 0，例如 <code>domainLookupEnd - domainLookupStart</code>
 翻译成 <code>0 - 0</code>，它返回一个似是而非的结果 <code>0</code>，而这可能并不是真实 DNS 查询时间。
 这将导致过多的指标为 <code>0</code> 而让你过于乐观。</p>
@@ -227,7 +231,7 @@ Boomerang 是 Philip Tellis 维护的一个非常流行的开源 RUM 包。他�
 还是会有一些问题待解决。这些小提示将帮助你充分的利用 Resource Timing 指标。
 我建议你现在就开始监控这些指标，以理解你的网站性能，为了最关心这个问题的真实用户。</p>
 <blockquote>
-<p>更新：y有一些第三方资源提供了 Timing-Allow-Origin 响应头，以允许站长测量这些
+<p>更新：有一些第三方资源提供了 Timing-Allow-Origin 响应头，以允许站长测量这些
 第三方资源的性能：</p>
 <ul>
 <li>Boomerang: <a href="http://c.go-mpulse.net/boomerang/CEN[snip...]YQE">http://c.go-mpulse.net/boomerang/CEN[snip...]YQE</a></li>

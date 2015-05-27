@@ -53,7 +53,8 @@
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
 <a name="L1-4" href="#L1-4">4</a>
-<a name="L1-5" href="#L1-5">5</a></pre></div></div><p>最近写了个原理简单的基于 Select+Input 的可编辑 <a href="http://hotoo.me/labs/combox.html">Combox</a>
+<a name="L1-5" href="#L1-5">5</a>
+<a name="L1-6" href="#L1-6">6</a></pre></div></div><p>最近写了个原理简单的基于 Select+Input 的可编辑 <a href="http://hotoo.me/labs/combox.html">Combox</a>
 控件，用到了这个方法来检查目标 select
 对象是否存在如 multiple, editable 这样的属性，来实现不同的 Combox 版本。其他
 浏览器上跑的很好，但是在 IE6 上却总是被初始化为 multiple 的实例，很明显，这个
@@ -100,7 +101,8 @@ hasAttribute 的实现出问题了。</p>
 <a name="L2-12" href="#L2-12">12</a>
 <a name="L2-13" href="#L2-13">13</a>
 <a name="L2-14" href="#L2-14">14</a>
-<a name="L2-15" href="#L2-15">15</a></pre></div></div><p>-- Update 2011/07/26 --</p>
+<a name="L2-15" href="#L2-15">15</a>
+<a name="L2-16" href="#L2-16">16</a></pre></div></div><p>-- Update 2011/07/26 --</p>
 <p>继续发现新坑：IE 中下面的代码</p><div class="highlight"><div class="codes"><div class="code"><pre>&lt;p&gt;&lt;/p&gt;
 &lt;q onclick=&quot;alert(0);&quot;&gt;&lt;/q&gt;
 
@@ -120,7 +122,8 @@ hasAttribute 的实现出问题了。</p>
 <a name="L3-7" href="#L3-7">7</a>
 <a name="L3-8" href="#L3-8">8</a>
 <a name="L3-9" href="#L3-9">9</a>
-<a name="L3-10" href="#L3-10">10</a></pre></div></div><p>输出：</p><div class="highlight"><div class="codes"><div class="code"><pre>function(){}
+<a name="L3-10" href="#L3-10">10</a>
+<a name="L3-11" href="#L3-11">11</a></pre></div></div><p>输出：</p><div class="highlight"><div class="codes"><div class="code"><pre>function(){}
 
 function onclick()
 {
@@ -133,7 +136,8 @@ alert(0);
 <a name="L4-4" href="#L4-4">4</a>
 <a name="L4-5" href="#L4-5">5</a>
 <a name="L4-6" href="#L4-6">6</a>
-<a name="L4-7" href="#L4-7">7</a></pre></div></div><p>所以上面的 <code>hasAttr</code> 函数是无法正确返回这种在脚本中设置 <code>onclick</code> 值的。</p>
+<a name="L4-7" href="#L4-7">7</a>
+<a name="L4-8" href="#L4-8">8</a></pre></div></div><p>所以上面的 <code>hasAttr</code> 函数是无法正确返回这种在脚本中设置 <code>onclick</code> 值的。</p>
 <p>对策：</p><div class="highlight"><div class="codes"><div class="code"><pre>var hasAttr = function(elem, attr){
     if(!elem || 1!=elem.nodeType){return false;}
     if(elem.hasAttribute){return elem.hasAttribute(attr);}
@@ -173,7 +177,8 @@ alert(0);
 <a name="L5-17" href="#L5-17">17</a>
 <a name="L5-18" href="#L5-18">18</a>
 <a name="L5-19" href="#L5-19">19</a>
-<a name="L5-20" href="#L5-20">20</a></pre></div></div><p>----- Update 2011/10/26 ------</p>
+<a name="L5-20" href="#L5-20">20</a>
+<a name="L5-21" href="#L5-21">21</a></pre></div></div><p>----- Update 2011/10/26 ------</p>
 <p>继续新坑，IE5,6,7 的 <code>script.getAttribute(&quot;src&quot;) === &quot;&quot;</code>，正常的 DOM 方法已经
 阻止不了 IE 了，hack 方案可以解析 wrapHTML(node){return outerHTML.startTag;}，
 判断是否有 src 属性。</p>

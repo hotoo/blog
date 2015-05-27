@@ -61,7 +61,8 @@
 
 </pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
-<a name="L1-3" href="#L1-3">3</a></pre></div></div><p>是关键项，他根据 gvimext.dll 来附加右键菜单的动态项，包括 Diff with Vim。
+<a name="L1-3" href="#L1-3">3</a>
+<a name="L1-4" href="#L1-4">4</a></pre></div></div><p>是关键项，他根据 gvimext.dll 来附加右键菜单的动态项，包括 Diff with Vim。
 如果你不想有默认的新窗口中打开文件的“用 Vim 编辑 (&amp;V)”(Edit with Vim)，
 就需要把上面这项删除，不过这也会殃及 Diff with Vim。</p>
 <p>我实在没有特别好的办法，我在注册表中做了一个 &quot;Diff with Vim&quot; 的项，但是这个菜单命令
@@ -77,7 +78,8 @@
 
 </pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
-<a name="L2-3" href="#L2-3">3</a></pre></div></div><p>尤其是在设置了这样的快捷键之后：</p><div class="highlight"><div class="codes"><div class="code"><pre>imap &lt;C-tab&gt; :tabnext&lt;cr&gt;
+<a name="L2-3" href="#L2-3">3</a>
+<a name="L2-4" href="#L2-4">4</a></pre></div></div><p>尤其是在设置了这样的快捷键之后：</p><div class="highlight"><div class="codes"><div class="code"><pre>imap &lt;C-tab&gt; :tabnext&lt;cr&gt;
 nmap &lt;C-tab&gt; :tabnext&lt;cr&gt;
 imap &lt;C-S-tab&gt; :tabprevious&lt;cr&gt;
 nmap &lt;C-S-tab&gt; :tabprevious&lt;cr&gt;
@@ -126,7 +128,8 @@ nmap &lt;M-0&gt; :tablast&lt;cr&gt;
 <a name="L3-22" href="#L3-22">22</a>
 <a name="L3-23" href="#L3-23">23</a>
 <a name="L3-24" href="#L3-24">24</a>
-<a name="L3-25" href="#L3-25">25</a></pre></div></div><p>更多，但是不推荐(因为跟默认快捷键冲突)的快捷键设置：</p><div class="highlight"><div class="codes"><div class="code"><pre>&quot; [CONFLICT] back tag history
+<a name="L3-25" href="#L3-25">25</a>
+<a name="L3-26" href="#L3-26">26</a></pre></div></div><p>更多，但是不推荐(因为跟默认快捷键冲突)的快捷键设置：</p><div class="highlight"><div class="codes"><div class="code"><pre>&quot; [CONFLICT] back tag history
 imap &lt;C-t&gt; &lt;Esc&gt;:tabnew&lt;cr&gt;
 nmap &lt;C-t&gt; :tabnew&lt;cr&gt;
 &quot; [CONFLICT] window shortcut key.
@@ -143,7 +146,8 @@ nmap &lt;C-S-w&gt; :tabonly&lt;cr&gt;
 <a name="L4-6" href="#L4-6">6</a>
 <a name="L4-7" href="#L4-7">7</a>
 <a name="L4-8" href="#L4-8">8</a>
-<a name="L4-9" href="#L4-9">9</a></pre></div></div><h2 id="更新-2010-6-26">更新 (2010/6/26)</h2><p>今天想折腾一下 gvimext.dll ，因为这个是问题的本源，只要将它里面的“用 Vim 编辑”(Edit with Vim)加上参数，
+<a name="L4-9" href="#L4-9">9</a>
+<a name="L4-10" href="#L4-10">10</a></pre></div></div><h2 id="更新-2010-6-26">更新 (2010/6/26)</h2><p>今天想折腾一下 gvimext.dll ，因为这个是问题的本源，只要将它里面的“用 Vim 编辑”(Edit with Vim)加上参数，
 改成新页签中打开的方式就好了，而且选中多个文件进行比较，好像也必须使用动态连接库的方式实现，
 于是找到了这个 <a href="http://www.vim.org/scripts/script.php?script_id=1720">gvimext.dll</a>
 它让 Vim 7 支持新页签中打开。试用了一下，感觉有点啰嗦了，它让新窗口和新页签打开文件的方式共存，并且快捷键

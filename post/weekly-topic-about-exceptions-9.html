@@ -65,7 +65,8 @@
     at function ()</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
-<a name="L1-4" href="#L1-4">4</a></pre></div></div><p>分析过程非常艰辛，重现异常的过程也是一波三折，这里不做赘述，最终分析得出：</p>
+<a name="L1-4" href="#L1-4">4</a>
+<a name="L1-5" href="#L1-5">5</a></pre></div></div><p>分析过程非常艰辛，重现异常的过程也是一波三折，这里不做赘述，最终分析得出：</p>
 <ul>
 <li>搜狗浏览器的 userAgent 太坑爹，几乎所有版本都是 2.x，开发者太不专业了。最终找到内核为 webkit/535.1 的是 3.2 版。</li>
 <li><p>重现到老版 arale 中的 ajax 模块中对 JSON 有特殊的处理，如果浏览器内置的 JSON 不支持非标准的 JSON （如 <code>{a:1}</code>）则 hack 做兼容。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">W3CParse</span><span class="params">(data)</span> {</span>
@@ -133,7 +134,8 @@
 <a name="L2-30" href="#L2-30">30</a>
 <a name="L2-31" href="#L2-31">31</a>
 <a name="L2-32" href="#L2-32">32</a>
-<a name="L2-33" href="#L2-33">33</a></pre></div></div></li>
+<a name="L2-33" href="#L2-33">33</a>
+<a name="L2-34" href="#L2-34">34</a></pre></div></div></li>
 <li>抛出异常的代码是 <code>JSON.parse(&quot;{a: 1}&quot;)</code></li>
 <li>但奇怪的是这段代码是放在 try/catch 中，为什么还会有异常被监控捕获？</li>
 <li>最终发现这是搜狗浏览器 3.2版极速(webkit)模式中的特性：即使 try/catch 住的异常，

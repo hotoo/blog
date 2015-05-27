@@ -74,13 +74,16 @@
 <a name="L1-4" href="#L1-4">4</a>
 <a name="L1-5" href="#L1-5">5</a>
 <a name="L1-6" href="#L1-6">6</a>
-<a name="L1-7" href="#L1-7">7</a></pre></div></div></li>
+<a name="L1-7" href="#L1-7">7</a>
+<a name="L1-8" href="#L1-8">8</a></pre></div></div></li>
 <li><p>因为 Vimwiki 和 snipMate 的 <code>&lt;Tab&gt;</code> 热键冲突，
 可以将 $VIM/vimfiles/ftplugin/vimwiki.vim 中的</p><div class="highlight"><div class="codes"><div class="code"><pre>inoremap &lt;expr&gt; &lt;buffer&gt; &lt;Tab&gt; vimwiki_tbl#kbd_tab()
 
 </pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
-<a name="L2-2" href="#L2-2">2</a></pre></div></div><p>换成其他的热键，例如：</p><div class="highlight"><div class="codes"><div class="code"><pre>inoremap &lt;expr&gt; &lt;buffer&gt; &lt;C-Tab&gt; vimwiki_tbl#kbd_tab()
-</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a></pre></div></div></li>
+<a name="L2-2" href="#L2-2">2</a>
+<a name="L2-3" href="#L2-3">3</a></pre></div></div><p>换成其他的热键，例如：</p><div class="highlight"><div class="codes"><div class="code"><pre>inoremap &lt;expr&gt; &lt;buffer&gt; &lt;C-Tab&gt; vimwiki_tbl#kbd_tab()
+</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+<a name="L3-2" href="#L3-2">2</a></pre></div></div></li>
 <li><p>到此，在 .wiki 文件中输入 <code>blog&lt;Tab&gt;</code> 就展开博客模板了。</p>
 </li>
 <li><p>在 vimrc 的 <code>g:vimwiki_list</code> 中加入一个 wiki，例如我的：</p><div class="highlight"><div class="codes"><div class="code"><pre>let g:vimwiki_list = [
@@ -110,7 +113,8 @@
 <a name="L4-11" href="#L4-11">11</a>
 <a name="L4-12" href="#L4-12">12</a>
 <a name="L4-13" href="#L4-13">13</a>
-<a name="L4-14" href="#L4-14">14</a></pre></div></div></li>
+<a name="L4-14" href="#L4-14">14</a>
+<a name="L4-15" href="#L4-15">15</a></pre></div></div></li>
 </ol>
 <h2 id="技巧">技巧</h2><p>这样我使用 <code>4&lt;leader&gt;ww</code>(一般是<code>4\ww</code>) 就可以快速启动博客 Wiki 首页并进行编辑了。
 Wiki 文件保存在 Dropbox 私有目录下，生成的 html 文件保存在公开目录。</p>

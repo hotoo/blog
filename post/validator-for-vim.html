@@ -83,11 +83,12 @@ curl -s -F laxtype=yes -F parser=html5 -F level=error -F out=gnu -F doc=@%1 &quo
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
 <a name="L1-4" href="#L1-4">4</a>
-<a name="L1-5" href="#L1-5">5</a></pre></div></div><p>上面指定以 html5 标准来校验，如果你使用其他标准，可以自行修改。</p>
+<a name="L1-5" href="#L1-5">5</a>
+<a name="L1-6" href="#L1-6">6</a></pre></div></div><p>上面指定以 html5 标准来校验，如果你使用其他标准，可以自行修改。</p>
 </li>
-<li><p>下载这个 <a href="http://svn.natalian.org/projects/html5/html.vim">html.vim</a> ，将里面的</p><div class="highlight"><div class="codes"><div class="code"><pre>set makeprg=validate-html.sh\ %</pre></div><pre class="line"></pre></div></div><p>改成</p><div class="highlight"><div class="codes"><div class="code"><pre>set makeprg=validate-html.bat\ %</pre></div><pre class="line"></pre></div></div><p>放至 <code>$VIM/vimfiles/ftplugin/</code> 目录下。</p>
+<li><p>下载这个 <a href="http://svn.natalian.org/projects/html5/html.vim">html.vim</a> ，将里面的</p><div class="highlight"><div class="codes"><div class="code"><pre>set makeprg=validate-html.sh\ %</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div><p>改成</p><div class="highlight"><div class="codes"><div class="code"><pre>set makeprg=validate-html.bat\ %</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a></pre></div></div><p>放至 <code>$VIM/vimfiles/ftplugin/</code> 目录下。</p>
 </li>
-<li><p>修改 _vimrc，加入如下代码：</p><div class="highlight"><div class="codes"><div class="code"><pre>autocmd FileType html,xhtml nmap &lt;F9&gt; :make&lt;cr&gt;&lt;cr&gt;:copen&lt;cr&gt;</pre></div><pre class="line"></pre></div></div></li>
+<li><p>修改 _vimrc，加入如下代码：</p><div class="highlight"><div class="codes"><div class="code"><pre>autocmd FileType html,xhtml nmap &lt;F9&gt; :make&lt;cr&gt;&lt;cr&gt;:copen&lt;cr&gt;</pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a></pre></div></div></li>
 <li><p>现在，打开.html类型的文件，按<F9>键既可校验当前的html文档合法性了。</p>
 </li>
 </ol>
@@ -97,9 +98,10 @@ curl -s -F laxtype=yes -F parser=html5 -F level=error -F out=gnu -F doc=@%1 &quo
 <ol>
 <li><p>下载这个 validate-css.sh ，重命名为 validate-css.bat 放至 Path 环境变量所在目录，
 并修改为如下代码：</p><div class="highlight"><div class="codes"><div class="code"><pre>:: WORK-IN-PROGRESS
-curl -s -F &quot;file=@%1;type=text/css&quot; -F output=text &quot;http://jigsaw.w3.org/css-validator/validator/&quot;</pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a></pre></div></div></li>
-<li><p>复制一份 $VIM/vimfile/ftplugin/ 下的 html.vim，重命名为 css.vim，并修改以下内容为：</p><div class="highlight"><div class="codes"><div class="code"><pre>set makeprg=validate-css.bat\ %</pre></div><pre class="line"></pre></div></div></li>
-<li><p>修改 _vimrc 加入如下代码：</p><div class="highlight"><div class="codes"><div class="code"><pre>autocmd FileType css nmap &lt;F9&gt; :make&lt;cr&gt;&lt;cr&gt;:copen&lt;cr&gt;</pre></div><pre class="line"></pre></div></div></li>
+curl -s -F &quot;file=@%1;type=text/css&quot; -F output=text &quot;http://jigsaw.w3.org/css-validator/validator/&quot;</pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
+<a name="L5-2" href="#L5-2">2</a></pre></div></div></li>
+<li><p>复制一份 $VIM/vimfile/ftplugin/ 下的 html.vim，重命名为 css.vim，并修改以下内容为：</p><div class="highlight"><div class="codes"><div class="code"><pre>set makeprg=validate-css.bat\ %</pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a></pre></div></div></li>
+<li><p>修改 _vimrc 加入如下代码：</p><div class="highlight"><div class="codes"><div class="code"><pre>autocmd FileType css nmap &lt;F9&gt; :make&lt;cr&gt;&lt;cr&gt;:copen&lt;cr&gt;</pre></div><pre class="line"><a name="L7-1" href="#L7-1">1</a></pre></div></div></li>
 <li><p>至此，打开CSS文件，按下<F9>就可以校验CSS代码了。</p>
 </li>
 </ol>

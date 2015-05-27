@@ -54,13 +54,15 @@
 </pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
-<a name="L1-4" href="#L1-4">4</a></pre></div></div><ul>
+<a name="L1-4" href="#L1-4">4</a>
+<a name="L1-5" href="#L1-5">5</a></pre></div></div><ul>
 <li>另外关于转换不存在的日期（如2月31日）时，在这里其实没有什么用处的，<div class="highlight"><div class="codes"><div class="code"><pre>转出来的日期基本也不会是用户期望的日期（用户期望是2月某日，却跑到了3月），
 遇到这种情况，变成2月1日或2月28日就可以了，而无需给出任何（讨厌的alert）提示。
 
 </pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
-<a name="L2-3" href="#L2-3">3</a></pre></div></div></li>
+<a name="L2-3" href="#L2-3">3</a>
+<a name="L2-4" href="#L2-4">4</a></pre></div></div></li>
 </ul>
 <p>这都不是造成这个bug的原因，打印各个关键的运行时变量值都是正常的，但在界面是就是没有显示出来。</p>
 <p>今天 5 号，把昨天没有确定（是当时机器，或者当时浏览器）的问题拿出来再看，
@@ -84,7 +86,8 @@
 <a name="L3-6" href="#L3-6">6</a>
 <a name="L3-7" href="#L3-7">7</a>
 <a name="L3-8" href="#L3-8">8</a>
-<a name="L3-9" href="#L3-9">9</a></pre></div></div><p>但是淘宝紧邻预订机票左侧页签的“游戏快冲”却没有这个问题，于是怀疑是跟 Option 的个数有关。</p>
+<a name="L3-9" href="#L3-9">9</a>
+<a name="L3-10" href="#L3-10">10</a></pre></div></div><p>但是淘宝紧邻预订机票左侧页签的“游戏快冲”却没有这个问题，于是怀疑是跟 Option 的个数有关。</p>
 <p>经过更多的实验分析， <em>结论</em> 是超出24个 Option 之后的选项，渲染就会出问题，
 而恰巧? Safari 4 默认最大下拉长度也是24个。</p>
 </div>
