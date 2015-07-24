@@ -5,7 +5,7 @@
     <link href="http://blog.hotoo.me/feed.xml" />
     <id>http://blog.hotoo.me/feed.xml</id>
     <entry>
-        <title type="html"><![CDATA[gitopen, smart partner of git, hg and svn.]]></title>
+        <title type="html"><![CDATA[gitopen, Smart partner of git, hg and svn.]]></title>
         <link href="http://blog.hotoo.me/post/gitopen"/>
         <published>2015-07-24T00:00:00.000Z</published>
         <updated>2015-07-24T00:00:00.000Z</updated>
@@ -27,8 +27,8 @@ $ git push origin feat-sample</pre><p>咦，我想立即提交一个 Pull/Merge 
 <pre>$ git tag 1.0.0
 $ git push origin 1.0.0
 $ gitopen release new 1.0.0</pre><p>咦，有个新的想法，提交个 Issue 先：</p>
-<pre>$ gitopen issue</pre><p>再来个 milestone 尝尝：</p>
-<pre>$ gitopen milestone</pre><p>这货支持</p>
+<pre>$ gitopen issue 我有个好想法</pre><p>再来个 milestone 尝尝：</p>
+<pre>$ gitopen milestone</pre><p>这货支持：</p>
 <ul>
 <li>git, hg, svn.</li>
 <li>Mac OS X, Linux, Windows.</li>
