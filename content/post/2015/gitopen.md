@@ -58,7 +58,7 @@ $ gitopen milestone
 
 * git, hg, svn.
 * Mac OS X, Linux, Windows.
-* GitHub (Enterprise), GitLab (CE, EE), BitBucket (Atlassian), GitCafe (Enterprise) ...
+* GitHub (Enterprise), GitLab (CE, EE), BitBucket (Atlassian Stash), GitCafe (Enterprise) ...
 
 更多功能参考：
 
