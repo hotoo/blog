@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width">
     <meta name="generator" content="nico 0.5.1">
     <meta name="theme" content="KISS 0.1">
-    <title>2015 / 1 - 闲耘™.博客</title>
+    <title>gitopen, smart partner of git, hg and svn. - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
-    <link rel="stylesheet" href="../../static/syntax.css" />
-    <link type="text/css" rel="stylesheet" href="../../static/template.css" />
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
   </head>
   <body>
   <div id="wrapper">
     <header class="navigation" role="navigation">
-      <!--<a class="home" href="../../">闲耘™.博客</a>-->
+      <!--<a class="home" href="../">闲耘™.博客</a>-->
       <div style="float:right;">
         <form action="/search.html">
           <input type="text" name="q" autocomplete="off" />
@@ -40,11 +40,62 @@
 
 <div id="container">
   <div id="content" class="document">
-<h1 class="entry-title">2015 / 1</h1>
-<ol class="entry-list">
-  <li><a href="../../post/gitopen">gitopen, smart partner of git, hg and svn.</a> (<time datetime="2015-07-24T00:00:00.000Z">2015-07-24</time>)</li>
-  <li><a href="../../post/gitplus">git+, a hack of git, smart for you.</a> (<time datetime="2015-05-27T00:00:00.000Z">2015-05-27</time>)</li>
-</ol>
+<div class="hentry">
+  <h1 class="entry-title">gitopen, smart partner of git, hg and svn.</h1>
+  <div class="entry-content"><p>使用 Git 的你，想必会更喜欢在终端（命令行）中使用 Git。在终端中，可以将 Git
+的特性发挥的淋漓尽致。</p><div class="highlight"><div class="codes"><div class="code"><pre>$ git co -b feat-sample
+$ git add .
+$ git ci -m &quot;feat(sample): Add sample commit.&quot;
+$ git push origin feat-sample</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a>
+<a name="L1-3" href="#L1-3">3</a>
+<a name="L1-4" href="#L1-4">4</a></pre></div></div><p>咦，我想立即提交一个 Pull/Merge Request 怎么办，还要打开浏览器，输入 Git
+仓库的 URL 地址，点击进入 PR 列表，再点击新建 PR，选择 feat-sample 分支，
+点击确认按钮，balabala...</p>
+<p>嗯，好麻烦。</p>
+<p>于是 Git 的最佳伴侣 <a href="https://github.com/hotoo/gitopen">gitopen</a> 横空出世了。</p>
+<p>push 了新分支，想立即提交 PR/MR，So simple.</p><div class="highlight"><div class="codes"><div class="code"><pre>$ gitopen pr</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div><p>她会把当前分支提交一个新的 PR。</p>
+<p>如果你是使用的 GitHub，在发布了新版时可能还想写个 Release Note：</p><div class="highlight"><div class="codes"><div class="code"><pre>$ git tag 1.0.0
+$ git push origin 1.0.0
+$ gitopen release new 1.0.0</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+<a name="L3-2" href="#L3-2">2</a>
+<a name="L3-3" href="#L3-3">3</a></pre></div></div><p>咦，有个新的想法，提交个 Issue 先：</p><div class="highlight"><div class="codes"><div class="code"><pre>$ gitopen issue</pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a></pre></div></div><p>再来个 milestone 尝尝：</p><div class="highlight"><div class="codes"><div class="code"><pre>$ gitopen milestone</pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a></pre></div></div><p>这货支持</p>
+<ul>
+<li>git, hg, svn.</li>
+<li>Mac OS X, Linux, Windows.</li>
+<li>GitHub (Enterprise), GitLab (CE, EE), BitBucket (Atlassian), GitCafe (Enterprise) ...</li>
+</ul>
+<p>更多功能参考：</p><div class="highlight"><div class="codes"><div class="code"><pre>$ npm install gitopen -g
+$ gitopen @hotoo/gitopen</pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a>
+<a name="L6-2" href="#L6-2">2</a></pre></div></div></div>
+
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/#git">git</a>
+      
+    </span>
+
+    <time datetime="2015-07-24T00:00:00.000Z">
+      <a href="/2015">2015年</a>07月24日
+    </time>
+  </footer>
+    <section>
+      <div id="disqus_thread"></div>
+      <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+      </noscript>
+    </section>
+  <script type="text/javascript">
+    
+    var disqus_identifier = "gitopen";
+    
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://hotoo.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  </script>
+</div>
 </div>
 
     <!-- Vimlike status bar -->

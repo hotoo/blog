@@ -5,6 +5,40 @@
     <link href="http://blog.hotoo.me/feed.xml" />
     <id>http://blog.hotoo.me/feed.xml</id>
     <entry>
+        <title type="html"><![CDATA[gitopen, smart partner of git, hg and svn.]]></title>
+        <link href="http://blog.hotoo.me/post/gitopen"/>
+        <published>2015-07-24T00:00:00.000Z</published>
+        <updated>2015-07-24T00:00:00.000Z</updated>
+        <id>http://blog.hotoo.me/post/gitopen</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+            <![CDATA[ <p>使用 Git 的你，想必会更喜欢在终端（命令行）中使用 Git。在终端中，可以将 Git
+的特性发挥的淋漓尽致。</p>
+<pre>$ git co -b feat-sample
+$ git add .
+$ git ci -m &quot;feat(sample): Add sample commit.&quot;
+$ git push origin feat-sample</pre><p>咦，我想立即提交一个 Pull/Merge Request 怎么办，还要打开浏览器，输入 Git
+仓库的 URL 地址，点击进入 PR 列表，再点击新建 PR，选择 feat-sample 分支，
+点击确认按钮，balabala...</p>
+<p>嗯，好麻烦。</p>
+<p>于是 Git 的最佳伴侣 <a href="https://github.com/hotoo/gitopen">gitopen</a> 横空出世了。</p>
+<p>push 了新分支，想立即提交 PR/MR，So simple.</p>
+<pre>$ gitopen pr</pre><p>她会把当前分支提交一个新的 PR。</p>
+<p>如果你是使用的 GitHub，在发布了新版时可能还想写个 Release Note：</p>
+<pre>$ git tag 1.0.0
+$ git push origin 1.0.0
+$ gitopen release new 1.0.0</pre><p>咦，有个新的想法，提交个 Issue 先：</p>
+<pre>$ gitopen issue</pre><p>再来个 milestone 尝尝：</p>
+<pre>$ gitopen milestone</pre><p>这货支持</p>
+<ul>
+<li>git, hg, svn.</li>
+<li>Mac OS X, Linux, Windows.</li>
+<li>GitHub (Enterprise), GitLab (CE, EE), BitBucket (Atlassian), GitCafe (Enterprise) ...</li>
+</ul>
+<p>更多功能参考：</p>
+<pre>$ npm install gitopen -g
+$ gitopen @hotoo/gitopen</pre>]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[git+, a hack of git, smart for you.]]></title>
         <link href="http://blog.hotoo.me/post/gitplus"/>
         <published>2015-05-27T00:00:00.000Z</published>
@@ -2242,71 +2276,6 @@ map: <span class="function"><span class="keyword">function</span><span class="pa
 <p>于是这个异常就破解完成。</p>
 <h2 id="如何修复这个异常？">如何修复这个异常？</h2><p>找回密码的这个页面使用的 Validator@0.8.9，而 novalidate 属性造成的异常在
 Validator@0.9.3 及其后续版本中得到修复。建议升级到最新版本。</p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[每周异常：第 1 期]]></title>
-        <link href="http://blog.hotoo.me/post/weekly-topic-about-exceptions-1"/>
-        <published>2013-07-15T00:00:00.000Z</published>
-        <updated>2013-07-15T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/weekly-topic-about-exceptions-1</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <p>2013-07-15 14:00~14:03，来自<a href="http://www.ip.cn/?q=180.184.99.37">北京市时代互联(180.184.99.37)</a>
-的 pc/-1|windows/6.2|firefox/22.0|gecko/20100101 用户向支付宝 katongweb 系统发起
-1480次猛烈的总攻，详情如下：</p>
-<table>
-<thead>
-<tr>
-<th>KEY</th>
-<th>VALUE</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Ref</td>
-<td><a href="https://ref.example.com/ref.htm">https://ref.example.com/ref.htm</a></td>
-</tr>
-<tr>
-<td>URL</td>
-<td><a href="https://www.example.com/index.htm">https://www.example.com/index.htm</a></td>
-</tr>
-<tr>
-<td>File</td>
-<td>chrome://grabword/content/grabword.js</td>
-</tr>
-<tr>
-<td>Line</td>
-<td>0</td>
-</tr>
-<tr>
-<td>Message</td>
-<td>Script error.</td>
-</tr>
-<tr>
-<td>stacktrace</td>
-</tr>
-</tbody>
-</table>
-<p>该用户通过 Ref 页面到目标 URL 之后，连续不断的通过 Firefox 插件脚本触发脚本异常。</p>
-<hr>
-<p>通过最近的几次异常报警来看，由客户端连续发起攻击引起的 JavaScript 异常 PV
-非正常波动，对异常监控数据有比较大的影响。</p>
-<p>因此考虑以下方案来提升监控数据的稳定有效性：</p>
-<ul>
-<li>监控 JavaScript 异常 UV(根据 Session)</li>
-<li>监控 JavaScript 异常独立 IP 数。</li>
-<li>排除客户端本地脚本引起的异常（多数攻击是由客户端脚本发起）<ul>
-<li>今日客户端脚本异常率：45.14%</li>
-<li>正常情况下客户端脚本异常率：3.45%</li>
-</ul>
-</li>
-</ul>
-<hr>
-<p>下图是排除了客户端本地脚本抛出的异常之后的结果：</p>
-<p><img src="https://f.cloud.github.com/assets/143572/803190/d77e2dea-ede7-11e2-92cb-1717857ecdbc.png" alt="2013-07-16 3 14 24"></p>
-<p>（当天数据对比，图中圆点是开启过滤客户端本地异常的时间点，下同）</p>
-<p><img src="https://f.cloud.github.com/assets/143572/803189/d77f22cc-ede7-11e2-9412-25920ec1c4d6.png" alt="2013-07-16 3 16 22"></p>
-<p>（相近2天数据对比）</p>
 ]]>
         </content>
     </entry>
