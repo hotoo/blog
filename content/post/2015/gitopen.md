@@ -1,5 +1,5 @@
 
-# gitopen, smart partner of git, hg and svn.
+# gitopen, Smart partner of git, hg and svn.
 
 - template: post.html
 - pubdate: 2015-07-24
@@ -44,7 +44,7 @@ $ gitopen release new 1.0.0
 咦，有个新的想法，提交个 Issue 先：
 
 ```
-$ gitopen issue
+$ gitopen issue 我有个好想法
 ```
 
 再来个 milestone 尝尝：
