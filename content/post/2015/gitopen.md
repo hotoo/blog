@@ -54,7 +54,7 @@ $ gitopen issue
 $ gitopen milestone
 ```
 
-这货支持
+这货支持：
 
 * git, hg, svn.
 * Mac OS X, Linux, Windows.
