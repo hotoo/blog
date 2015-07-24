@@ -32,7 +32,7 @@ $ gitopen release new 1.0.0</pre><p>咦，有个新的想法，提交个 Issue �
 <ul>
 <li>git, hg, svn.</li>
 <li>Mac OS X, Linux, Windows.</li>
-<li>GitHub (Enterprise), GitLab (CE, EE), BitBucket (Atlassian), GitCafe (Enterprise) ...</li>
+<li>GitHub (Enterprise), GitLab (CE, EE), BitBucket (Atlassian Stash), GitCafe (Enterprise) ...</li>
 </ul>
 <p>更多功能参考：</p>
 <pre>$ npm install gitopen -g
