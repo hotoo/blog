@@ -1,0 +1,276 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.5.1">
+    <meta name="theme" content="KISS 0.1">
+    <title>末尾的逗号 - 闲耘™.博客</title>
+    <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../">闲耘™.博客</a>-->
+      <div style="float:right;">
+        <form action="/search.html">
+          <input type="text" name="q" autocomplete="off" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="http://hotoo.me/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="http://wiki.hotoo.me/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="http://twitter.hotoo.me/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
+
+<div id="container">
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">末尾的逗号</h1>
+  <div class="entry-content"><p><img src="../../images/trailing-commas.png" alt="trailing commas"></p>
+<a name="more"></a>
+
+<p>早期的 JavaScript 运行环境大都不支持末尾多出来的逗号，或者会抛出异常，或者不符合期望。</p>
+<p>比如：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">var</span> obj = {
+  a: <span class="number">0</span>, <span class="comment">// 抛出异常。</span>
+};
+
+<span class="keyword">var</span> arr = [
+  <span class="number">0</span>, <span class="comment">// arr.length === 2</span>
+];</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a>
+<a name="L1-3" href="#L1-3">3</a>
+<a name="L1-4" href="#L1-4">4</a>
+<a name="L1-5" href="#L1-5">5</a>
+<a name="L1-6" href="#L1-6">6</a>
+<a name="L1-7" href="#L1-7">7</a></pre></div></div><p>由于不支持尾逗号，我们以前写代码都需要手动去除尾逗号（工具最多提示你这里多了个逗号）。
+因此我们增加、删除一个属性、数组项时，总是需要担心相邻项的逗号问题。</p>
+<p>比如增加一项：</p>
+<ul>
+<li>在末尾增加一项时，你要注意前一项缺少了尾逗号。（这跟新增的这一项没关系，
+新增的这一项本身上并没有修改前一项，但是在代码中就需要做这样的修改。）
+这很麻烦，也很容易导致错误。</li>
+<li>实际你只是增加了一项，但你在 diff 中会看到又是删除项，又是增加项。review
+时你就需要关注这些无谓的变更。</li>
+</ul><div class="highlight"><div class="codes"><div class="code"><pre><code class="diff"> var obj = {
+<span class="deletion">-  a: 0</span>
+<span class="addition">+  a: 0,</span>
+<span class="addition">+  b: 1</span>
+ };
+
+ var arr = [
+<span class="deletion">-  0</span>
+<span class="addition">+  0,</span>
+<span class="addition">+  1</span>
+ ];</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+<a name="L2-2" href="#L2-2">2</a>
+<a name="L2-3" href="#L2-3">3</a>
+<a name="L2-4" href="#L2-4">4</a>
+<a name="L2-5" href="#L2-5">5</a>
+<a name="L2-6" href="#L2-6">6</a>
+<a name="L2-7" href="#L2-7">7</a>
+<a name="L2-8" href="#L2-8">8</a>
+<a name="L2-9" href="#L2-9">9</a>
+<a name="L2-10" href="#L2-10">10</a>
+<a name="L2-11" href="#L2-11">11</a></pre></div></div><p>删除一项也是：</p>
+<ul>
+<li>你本来只是要删除了最后一项，但你不得不修改前一项。麻烦，容易出问题。</li>
+<li>你本来只是删除了一项，但在 diff 中也是看到又是删除，又是增加。</li>
+</ul><div class="highlight"><div class="codes"><div class="code"><pre><code class="diff"> var obj = {
+<span class="deletion">-  a: 0,</span>
+<span class="deletion">-  b: 1</span>
+<span class="addition">+  a: 0</span>
+ };
+
+ var arr = [
+<span class="deletion">-  0,</span>
+<span class="deletion">-  1</span>
+<span class="addition">+  0</span>
+ ];</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+<a name="L3-2" href="#L3-2">2</a>
+<a name="L3-3" href="#L3-3">3</a>
+<a name="L3-4" href="#L3-4">4</a>
+<a name="L3-5" href="#L3-5">5</a>
+<a name="L3-6" href="#L3-6">6</a>
+<a name="L3-7" href="#L3-7">7</a>
+<a name="L3-8" href="#L3-8">8</a>
+<a name="L3-9" href="#L3-9">9</a>
+<a name="L3-10" href="#L3-10">10</a>
+<a name="L3-11" href="#L3-11">11</a></pre></div></div><p>值得高兴的是，现在的 JavaScript 运行环境、预编译工具、语法检查工具都支持了尾逗号。
+一旦我们统一使用尾逗号风格：</p>
+<ul>
+<li>我们在增加或删除一项时，再也不需要关心相邻项了。</li>
+<li>diff 看起来也更直观清爽。</li>
+</ul>
+<p>新增一项：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="diff"> var obj = {
+   a: 0,
+<span class="addition">+  b: 1,</span>
+ };
+
+ var arr = [
+   0,
+<span class="addition">+  1,</span>
+ ];</code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
+<a name="L4-2" href="#L4-2">2</a>
+<a name="L4-3" href="#L4-3">3</a>
+<a name="L4-4" href="#L4-4">4</a>
+<a name="L4-5" href="#L4-5">5</a>
+<a name="L4-6" href="#L4-6">6</a>
+<a name="L4-7" href="#L4-7">7</a>
+<a name="L4-8" href="#L4-8">8</a>
+<a name="L4-9" href="#L4-9">9</a></pre></div></div><p>删除一项：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="diff"> var obj = {
+   a: 0,
+<span class="deletion">-  b: 1,</span>
+ };
+
+ var arr = [
+   0,
+<span class="deletion">-  1,</span>
+ ];</code></pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
+<a name="L5-2" href="#L5-2">2</a>
+<a name="L5-3" href="#L5-3">3</a>
+<a name="L5-4" href="#L5-4">4</a>
+<a name="L5-5" href="#L5-5">5</a>
+<a name="L5-6" href="#L5-6">6</a>
+<a name="L5-7" href="#L5-7">7</a>
+<a name="L5-8" href="#L5-8">8</a>
+<a name="L5-9" href="#L5-9">9</a></pre></div></div><p>另外也有些语言是不需要逗号的，每一项都不需要。</p>
+<p>全要逗号，或者全不要逗号，他们的共同点就是<strong>一致性</strong>。这种一致性让书写和阅读都非常简洁清晰。</p>
+<p>你觉得呢？</p>
+</div>
+
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
+ 
+      <a href="/tag/#Code">Code</a>
+      
+ , 
+      <a href="/tag/#Style">Style</a>
+      
+    </span>
+
+    <time datetime="2015-08-10T00:00:00.000Z">
+      <a href="/2015">2015年</a>08月10日
+    </time>
+  </footer>
+    <section>
+      <div id="disqus_thread"></div>
+      <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+      </noscript>
+    </section>
+  <script type="text/javascript">
+    
+    var disqus_identifier = "trailing-commas";
+    
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://hotoo.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  </script>
+</div>
+</div>
+
+    <!-- Vimlike status bar -->
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/static/js/Vimlike.js"></script>
+<footer>
+  <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
+    alt="Creative Commons License" style="border-width: 0pt;"
+    src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"/></a>
+  This work is licensed under a
+  <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
+    Commons Attribution 2.5 Generic License</a>.<br/>
+  Copyleft &copy; 2005-2013, Power by
+  <a href="http://lab.lepture.com/nico/">nico@0.5.1</a>, Theme by 闲耘™(@hotoo).
+  </p>
+</footer>
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-2048484-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  </body>
+</html>

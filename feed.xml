@@ -5,6 +5,88 @@
     <link href="http://blog.hotoo.me/feed.xml" />
     <id>http://blog.hotoo.me/feed.xml</id>
     <entry>
+        <title type="html"><![CDATA[末尾的逗号]]></title>
+        <link href="http://blog.hotoo.me/post/trailing-commas"/>
+        <published>2015-08-10T00:00:00.000Z</published>
+        <updated>2015-08-10T00:00:00.000Z</updated>
+        <id>http://blog.hotoo.me/post/trailing-commas</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+            <![CDATA[ <p><img src="../../images/trailing-commas.png" alt="trailing commas"></p>
+<!--more-->
+
+<p>早期的 JavaScript 运行环境大都不支持末尾多出来的逗号，或者会抛出异常，或者不符合期望。</p>
+<p>比如：</p>
+<div class="highlight"><pre><code class="javascript"><span class="keyword">var</span> obj = {
+  a: <span class="number">0</span>, <span class="comment">// 抛出异常。</span>
+};
+
+<span class="keyword">var</span> arr = [
+  <span class="number">0</span>, <span class="comment">// arr.length === 2</span>
+];</code></pre></div><p>由于不支持尾逗号，我们以前写代码都需要手动去除尾逗号（工具最多提示你这里多了个逗号）。
+因此我们增加、删除一个属性、数组项时，总是需要担心相邻项的逗号问题。</p>
+<p>比如增加一项：</p>
+<ul>
+<li>在末尾增加一项时，你要注意前一项缺少了尾逗号。（这跟新增的这一项没关系，
+新增的这一项本身上并没有修改前一项，但是在代码中就需要做这样的修改。）
+这很麻烦，也很容易导致错误。</li>
+<li>实际你只是增加了一项，但你在 diff 中会看到又是删除项，又是增加项。review
+时你就需要关注这些无谓的变更。</li>
+</ul>
+<div class="highlight"><pre><code class="diff"> var obj = {
+<span class="deletion">-  a: 0</span>
+<span class="addition">+  a: 0,</span>
+<span class="addition">+  b: 1</span>
+ };
+
+ var arr = [
+<span class="deletion">-  0</span>
+<span class="addition">+  0,</span>
+<span class="addition">+  1</span>
+ ];</code></pre></div><p>删除一项也是：</p>
+<ul>
+<li>你本来只是要删除了最后一项，但你不得不修改前一项。麻烦，容易出问题。</li>
+<li>你本来只是删除了一项，但在 diff 中也是看到又是删除，又是增加。</li>
+</ul>
+<div class="highlight"><pre><code class="diff"> var obj = {
+<span class="deletion">-  a: 0,</span>
+<span class="deletion">-  b: 1</span>
+<span class="addition">+  a: 0</span>
+ };
+
+ var arr = [
+<span class="deletion">-  0,</span>
+<span class="deletion">-  1</span>
+<span class="addition">+  0</span>
+ ];</code></pre></div><p>值得高兴的是，现在的 JavaScript 运行环境、预编译工具、语法检查工具都支持了尾逗号。
+一旦我们统一使用尾逗号风格：</p>
+<ul>
+<li>我们在增加或删除一项时，再也不需要关心相邻项了。</li>
+<li>diff 看起来也更直观清爽。</li>
+</ul>
+<p>新增一项：</p>
+<div class="highlight"><pre><code class="diff"> var obj = {
+   a: 0,
+<span class="addition">+  b: 1,</span>
+ };
+
+ var arr = [
+   0,
+<span class="addition">+  1,</span>
+ ];</code></pre></div><p>删除一项：</p>
+<div class="highlight"><pre><code class="diff"> var obj = {
+   a: 0,
+<span class="deletion">-  b: 1,</span>
+ };
+
+ var arr = [
+   0,
+<span class="deletion">-  1,</span>
+ ];</code></pre></div><p>另外也有些语言是不需要逗号的，每一项都不需要。</p>
+<p>全要逗号，或者全不要逗号，他们的共同点就是<strong>一致性</strong>。这种一致性让书写和阅读都非常简洁清晰。</p>
+<p>你觉得呢？</p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[gitopen, Smart partner of git, hg and svn.]]></title>
         <link href="http://blog.hotoo.me/post/gitopen"/>
         <published>2015-07-24T00:00:00.000Z</published>
@@ -1953,329 +2035,6 @@ map: <span class="function"><span class="keyword">function</span><span class="pa
 }</code></pre></div><p>至此，上周支付宝全站 TOP5 的异常均已告破，他们都是同一个问题造成的。</p>
 <h2 id="如何解决这个异常？">如何解决这个异常？</h2><p>Validator 组件已于 3个月前的 v0.9.3 版本得到修复，请升级到 Validator 最新版。</p>
 <h2 id="一个问题？">一个问题？</h2><p>基础组件中小版本升级修复各种 BUG 的过程中，如何同步推动业务代码的对应升级？</p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[每周异常：第 2 期]]></title>
-        <link href="http://blog.hotoo.me/post/weekly-topic-about-exceptions-2"/>
-        <published>2013-07-22T00:00:00.000Z</published>
-        <updated>2013-07-22T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/weekly-topic-about-exceptions-2</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <p>这是全站排名第 4 的一个异常，详情如下：</p>
-<table>
-<thead>
-<tr>
-<th>KEY</th>
-<th>VALUE</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>URL</td>
-<td><a href="https://www.example.com/console/selectStrategy.htm">https://www.example.com/console/selectStrategy.htm</a></td>
-</tr>
-<tr>
-<td>File</td>
-<td><a href="https://a.example.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js">https://a.example.com/??seajs/1.3.1/sea.js,seajs/1.3.1/plugin-combo.js,jquery/jquery/1.7.2/jquery.js</a></td>
-</tr>
-<tr>
-<td>Line</td>
-<td>35</td>
-</tr>
-<tr>
-<td>Message</td>
-<td>找不到成员。<CR><CR></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>Stack Trace</th>
-<th>Device</th>
-<th>OS</th>
-<th>Browser</th>
-<th>Engine</th>
-<th>Count</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>ie/10.0</td>
-<td>trident/6.0</td>
-<td>826</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>sg/2.x</td>
-<td>trident/6.0</td>
-<td>423</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.2</td>
-<td>ie/10.0</td>
-<td>trident/6.0</td>
-<td>151</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>baidu/2.x</td>
-<td>trident/6.0</td>
-<td>27</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>mx/3.4.5.2000</td>
-<td>trident/6.0</td>
-<td>10</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>tw/3.6.1.1</td>
-<td>trident/6.0</td>
-<td>10</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.2</td>
-<td>mx/4.0.6.2000</td>
-<td>trident/6.0</td>
-<td>3</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>lb/undefined</td>
-<td>trident/6.0</td>
-<td>2</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>mx/3.5.2.1000</td>
-<td>trident/6.0</td>
-<td>2</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>mx/4.0.5.3000</td>
-<td>trident/6.0</td>
-<td>2</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>mx/4.0.5.4000</td>
-<td>trident/6.0</td>
-<td>2</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>mx/4.0.6.2000</td>
-<td>trident/6.0</td>
-<td>2</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>qq/7.3.11251.400</td>
-<td>trident/6.0</td>
-<td>2</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.2</td>
-<td>tw/-1</td>
-<td>trident/6.0</td>
-<td>2</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>360/3.7.1.6</td>
-<td>trident/6.0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>360/4.0.3.6</td>
-<td>trident/6.0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>360/4.0.5.2</td>
-<td>trident/6.0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>mx/2.5.15.1000</td>
-<td>trident/6.0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>mx/2.5.16.100</td>
-<td>trident/6.0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>mx/4.0.3.6000</td>
-<td>trident/6.0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>mx/4.0.5.2000</td>
-<td>trident/6.0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>mx/4.1.0.2000</td>
-<td>trident/6.0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>qq/6.13.13719.201</td>
-<td>trident/6.0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>qq/6.14.15493.201</td>
-<td>trident/6.0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>tw/3.4.0.5</td>
-<td>trident/6.0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.1</td>
-<td>tw/3.6.1.0</td>
-<td>trident/6.0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.2</td>
-<td>mx/3.5.2.1000</td>
-<td>trident/6.0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>at function(a,b,d)</td>
-<td>pc/-1</td>
-<td>windows/6.2</td>
-<td>mx/4.0.5.3000</td>
-<td>trident/6.0</td>
-<td>1</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>1478</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<p>首先我们找到异常所在文件的第 35行，在上面的异常栈信息中我们可以知道异常从
-压缩后的匿名函数 <code>function(a,b,d)</code> 中抛出，这个函数是：</p>
-<div class="highlight"><pre><code class="javascript">set:<span class="function"><span class="keyword">function</span><span class="params">(a,b,d)</span>{</span><span class="keyword">var</span> e=a.getAttributeNode(d);e||(e=c.createAttribute(d),a.setAttributeNode(e));<span class="keyword">return</span> e.nodeValue=b+<span class="string">""</span>}</code></pre></div><p>对应压缩前的源码是：</p>
-<div class="highlight"><pre><code class="javascript">    <span class="comment">// Use this for any attribute in IE6/7</span>
-    <span class="comment">// This fixes almost every IE6/7 issue</span>
-    nodeHook = jQuery.valHooks.button = {
-        get: <span class="function"><span class="keyword">function</span><span class="params">( elem, name )</span> {</span>
-            <span class="keyword">var</span> ret;
-            ret = elem.getAttributeNode( name );
-            <span class="keyword">return</span> ret &amp;&amp; ( fixSpecified[ name ] ? ret.nodeValue !== <span class="string">""</span> : ret.specified ) ?
-                ret.nodeValue :
-                <span class="literal">undefined</span>;
-        },
-        set: <span class="function"><span class="keyword">function</span><span class="params">( elem, value, name )</span> {</span>
-            <span class="comment">// Set the existing or create a new attribute node</span>
-            <span class="keyword">var</span> ret = elem.getAttributeNode( name );
-            <span class="keyword">if</span> ( !ret ) {
-                ret = document.createAttribute( name );
-                elem.setAttributeNode( ret );
-            }
-            <span class="keyword">return</span> ( ret.nodeValue = value + <span class="string">""</span> );
-        }
-    };</code></pre></div><p>这个代码是用来兼容 IE6/7 的属性操作（代码注释中号称几乎修复了 IE6/7 所有的问题），
-页面中的业务源码中我们找到不少 DOM 属性的操作，其中有一些看起来几乎不会有问题，
-另外一些则出现问题的可能性更高。</p>
-<p>我们从这些可能性更高的部分着手，最终发现 IE10 兼容模式下会抛出『<a href="https://github.com/totorojs/javascript-exception-archives/blob/master/content/wiki/member-not-found">找不到成员。</a>』
-的异常，这时我们注意到，异常详情中全部都是 Trident 6.0 内核的浏览器抛出的异常。
-看来我们这个增加兼容模式信息的 <a href="https://github.com/totorojs/monitor.js/issues/13">Issues#13</a>
-是正确的。</p>
-<p>我们看到兼容模式下表单中的 Select 模拟组件显示不正常，最初以为是 Select 组件设置属性造成的异常。</p>
-<p><img src="https://f.cloud.github.com/assets/143572/834321/3db467be-f2bb-11e2-93c0-007ec07ba729.png" alt="1c00b54eaad3a6f45ffec0d7526abc6e"></p>
-<p>（正常情况下的 Select 模拟组件）</p>
-<p><img src="https://f.cloud.github.com/assets/143572/834325/57343714-f2bb-11e2-84aa-fb8834763fce.png" alt="0aafc43da07d07423e1f67199cf5c5b9"></p>
-<p>（兼容模式下的 Select 模拟组件）</p>
-<p>IE10 的调试工具还是不错的，最终我们发现在设置 &quot;novalidate&quot; 属性时抛出这个异常，
-想到 Validator 的相关 <a href="https://github.com/aralejs/validator/issues/30">Issues#30</a></p>
-<p><img src="https://f.cloud.github.com/assets/143572/834340/6db729a6-f2bb-11e2-8558-a8f9681f99bf.png" alt="edde87186b5919bd49a4d74874c7ce36"></p>
-<p>于是这个异常就破解完成。</p>
-<h2 id="如何修复这个异常？">如何修复这个异常？</h2><p>找回密码的这个页面使用的 Validator@0.8.9，而 novalidate 属性造成的异常在
-Validator@0.9.3 及其后续版本中得到修复。建议升级到最新版本。</p>
 ]]>
         </content>
     </entry>
