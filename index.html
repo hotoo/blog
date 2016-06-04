@@ -46,22 +46,28 @@
   <div class="container">
     <div class="post">
       
-          <h1>杭州购车记 <a href="post/buying-a-car-in-hangzhou" class="title-permalink">¶</a></h1>
+          <h1>测试代码和可测试代码 <a href="post/test-code-and-testable-code" class="title-permalink">¶</a></h1>
           <section>
- <p>终于在年前把车的事情搞定了，这是 2015 年做成的唯一一件大事，经历了不少坎坷，一路摸索过来，很多都是懵懂，
-因此想通过这篇流水记录，帮助到一点大家，如果有写的不好不对的地方，大家可以给我提出，我尽力改进。</p>
-<p>『车图』</p>
-<p class="more"><a href="post/buying-a-car-in-hangzhou#more">阅读详情...</a></p>
+ <p>项目中有一个要将指定时间和当前时间比较，计算相对时间的逻辑（比如显示 <code>3 分钟前</code>），
+由于当前时间和执行测试用例的时机有关，每次执行用例都会不同，如何让这个代码可测试呢？
+有些人可能想到 Mock 当前时间，测试的时候让当前时间凝固，于是有了如下代码：</p>
+<div class="highlight"><pre><code class="javascript"><span class="comment">// 实际业务代码中：</span>
+<span class="comment">// 虽然本来只需要 moment() 就可以了，但是为了方便测试，传入了一个可 Mock 的 Date.now</span>
+<span class="keyword">const</span> now = moment(Date.now());
+
+<span class="comment">// 测试用例中，Mock Date.now 方法：</span>
+mm(Date, <span class="string">'now'</span>, () =&gt; <span class="number">1464969293129</span>);</code></pre></div><p>这个业务代码是 <strong>可测试</strong> 的代码吗？我认为不是。</p>
+<p class="more"><a href="post/test-code-and-testable-code#more">阅读详情...</a></p>
           </section>
           <footer class="post clearfix">
             <span class="tags"><a href="/tag">Tags</a>:
  
-                <a href="/tag/#车，车牌">车，车牌</a>
+                <a href="/tag/#Code">Code</a>
               
             </span>
 
             <time>
-              <a href="/2016">2016年</a>01月27日
+              <a href="/2016">2016年</a>06月04日
             </time>
           </footer>
     </div>
@@ -70,6 +76,11 @@
 
     <ul class="posts">
  
+ 
+          <li class="posts-item">
+            <a href="post/buying-a-car-in-hangzhou">杭州购车记</a>
+            (<time class="datetime">2016-01-27</time>)
+          </li>
  
           <li class="posts-item">
             <a href="post/trailing-commas">末尾的逗号</a>
@@ -91,10 +102,6 @@
             (<time class="datetime">2014-12-30</time>)
           </li>
  
-          <li class="posts-item">
-            <a href="post/resource-timing-practical-tips">译：Resource Timing (资源计时) 使用技巧</a>
-            (<time class="datetime">2014-12-30</time>)
-          </li>
  
  
  

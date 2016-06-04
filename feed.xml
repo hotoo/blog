@@ -5,6 +5,60 @@
     <link href="http://blog.hotoo.me/feed.xml" />
     <id>http://blog.hotoo.me/feed.xml</id>
     <entry>
+        <title type="html"><![CDATA[测试代码和可测试代码]]></title>
+        <link href="http://blog.hotoo.me/post/test-code-and-testable-code"/>
+        <published>2016-06-04T00:00:00.000Z</published>
+        <updated>2016-06-04T00:00:00.000Z</updated>
+        <id>http://blog.hotoo.me/post/test-code-and-testable-code</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+            <![CDATA[ <p>项目中有一个要将指定时间和当前时间比较，计算相对时间的逻辑（比如显示 <code>3 分钟前</code>），
+由于当前时间和执行测试用例的时机有关，每次执行用例都会不同，如何让这个代码可测试呢？
+有些人可能想到 Mock 当前时间，测试的时候让当前时间凝固，于是有了如下代码：</p>
+<div class="highlight"><pre><code class="javascript"><span class="comment">// 实际业务代码中：</span>
+<span class="comment">// 虽然本来只需要 moment() 就可以了，但是为了方便测试，传入了一个可 Mock 的 Date.now</span>
+<span class="keyword">const</span> now = moment(Date.now());
+
+<span class="comment">// 测试用例中，Mock Date.now 方法：</span>
+mm(Date, <span class="string">'now'</span>, () =&gt; <span class="number">1464969293129</span>);</code></pre></div><p>这个业务代码是 <strong>可测试</strong> 的代码吗？我认为不是。</p>
+<!--more-->
+
+<p>这个业务代码为了测试，使用了一个不必要的方法，而且让测试代码和业务逻辑相互依赖，
+一旦业务代码重构，测试代码将不可测试。这个代码是为测试写的，称之为 <strong>测试</strong> 代码
+而不是 <strong>可测试</strong> 代码更合适点。</p>
+<p>再举一个例子，还是时间相关的动态数据输入问题：</p>
+<p>项目中有一个今日收益更新的提醒消息，只有是今天的更新才显示，所以第一直觉应该是造一个
+收益更新时间是今天的测试数据，而不是造一个固定的数据（可能固定测试数据比较偷懒方便），
+然后篡改业务逻辑中当前时间的计算。</p>
+<div class="highlight"><pre><code class="javascript"><span class="comment">// 业务代码正常该怎么写怎么写，不用管测试怎么活。</span>
+<span class="keyword">const</span> today = moment().format(<span class="string">'YYYYMMDD'</span>);
+<span class="keyword">if</span> (data.updateDate === today) {
+  <span class="comment">// show message.</span>
+}
+
+<span class="comment">// 活的测试数据</span>
+data.updateDate = moment().format(<span class="string">'YYYYMMDD'</span>);</code></pre></div><blockquote>
+<p>测试代码应该只关注正常的数据输入和输出 <em>（即使输入、输出是难以预测的）</em>。</p>
+<p>而不应该关注业务实现逻辑，试图篡改业务代码，让测试可以进行。</p>
+</blockquote>
+<p>更好一点的可测试代码，可以将当前时间传入以便让输入、输出可以预测：</p>
+<div class="highlight"><pre><code class="javascript">// 业务抽象
+// 计算两个时间差，格式化为 `3 分钟前` 等相对时间。
+// @param {Date|Number} date1 较早的时间或时间戳。
+// @param {Date|Number} date2 较晚的时间或时间戳，默认当前时间。
+// @return {String} 相对时间差
+function dateDiff(date1, date2 = Date.now()) {
+  // ...
+}
+
+// 业务调用
+dateDiff(data.datetime);
+
+// 测试代码
+assert(dateDiff(new Date(2016,0,1,0,0,0,0), new Date(2016,0,1,0,0,0,10)) === '刚刚');
+assert(dateDiff(new Date(2016,0,1,0,0,0,0), new Date(2016,0,1,0,3,0,0)) === '3 分钟前');
+assert(dateDiff(new Date(2016,0,1,0,0,0,0), new Date(2016,0,1,1,0,0,0)) === '1 小时前');</code></pre></div>]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[杭州购车记]]></title>
         <link href="http://blog.hotoo.me/post/buying-a-car-in-hangzhou"/>
         <published>2016-01-27T00:00:00.000Z</published>
@@ -27,6 +81,7 @@
 考试时不知道怎么关双闪，好紧张，挂科一次。当场补考，很紧张慢腾腾的开，考官说这么好的路况开快点，
 于是加油门、变道、超车，行云流水，把平时学车时的状态发挥出来了，满分通过。
 事后同考的同事说，还好你补考 HOLD 住了，表现不错。</p>
+<p>从开始学车，到拿到驾照，差不多 3 个月时间，挺快的。</p>
 <h2 id="购车">购车</h2><p>老婆喜欢 SUV，汽车之家上看的也基本都是 SUV，然后去 4S 店看实体车试驾。</p>
 <ul>
 <li>马自达 CX-5，说实话，外观确实漂亮，操纵也非常好。但是老婆晕车，说坐着头晕。</li>
@@ -118,7 +173,7 @@
 代办没有太多必要。</p>
 </li>
 <li><p>开车进南门后往前，沿入口指示牌方向右转直走到底，再右转到底就到 2 号楼门口了，排队，车轮打正，下车，
-看到有拿卡片机牌照的工作人员就找他帮你牌照（4S 店提供的照片不能用）。</p>
+看到有拿卡片机拍照的工作人员就找他帮你拍照（4S 店提供的照片不能用）。</p>
 </li>
 <li>去 2 好大厅拍照的几个窗口找给你牌照的工作人员拿照片和《机动车检查记录表》，把车架号拓印贴上，照片留着办理行驶证时要用。</li>
 <li>拿到后排队并把车往前挪到车棚下，打开发动机仓，解锁车门。<ul>
@@ -130,7 +185,7 @@
 但国产车和进口车验车交警不同，所以交警可能直接跳过前面的进口车。</li>
 <li><p>将《检查记录表》和车辆合格证原件交给验车交警，解开前后车门锁，方便验车。交警主要检查发动机仓、
 副驾驶座底下看了半天不知道看什么，副驾驶座后面的座位底下也看了下，新车一般没什么问题。</p>
-<p>注：因为我的车轮毂被 4S 店挂坏了，多问了 4S 店的销售几句，说他们有个客户，因为车门撞了红色车漆花了，
+<p>注：因为我的车轮毂被 4S 店刮坏了，多问了 4S 店的销售几句，说他们有个客户，因为车门撞了红色车漆花了，
 产生了明显的不一致，被要求修车重新喷了新漆，所以未上牌期间开车尽量小心，避免给上牌带来麻烦。</p>
 </li>
 <li><p>验车 OK 之后，交警会让你把车开走，开到停车场停好，然后回到 2 号楼 1 号窗口等拿回《检查记录表》。
@@ -150,9 +205,11 @@
 </li>
 <li>去大厅东侧的缴费窗口缴费，125 元上牌费再加 10 元的金黄色全国临牌费，总共 135 元。</li>
 <li>在缴费窗口旁边的窗口等待发放行驶证、登记证书、临牌。</li>
+<li>旁边的另一个窗口拿环保标志。</li>
+<li>收工。</li>
 </ol>
 <h2 id="安装车牌">安装车牌</h2><p>邮寄是 EMS 到付 10 元，市区内还是不慢的，上周五邻近中午办理好的，周一中午就收到邮寄的车牌了。
-因为是防盗螺栓没装过，而且需要专用的螺丝刀，所以花 20 元请修车工作人员帮忙装好了。
+因为是防盗螺栓没装过，而且需要专用的螺丝刀，所以花 20 元请修车工作人员帮忙装好了。另外 4S 店也可以帮忙安装。
 其实如果有专用螺丝刀，和安装普通螺丝没太多差别：</p>
 <ol>
 <li>将垫片和螺丝拧紧。</li>
@@ -160,6 +217,44 @@
 </ol>
 <p>注：新的交通法规要求每块车牌安装四个螺丝，否则按照无牌判罚（12 分、扣车、罚款），
 安装不是很麻烦，请人安装也不会因为这个多加钱，没必要把车管所寄给你的螺丝放那里备用。</p>
+<h2 id="贴标">贴标</h2><p>车辆合格标志、环保标志、交强险标志都是要贴到前挡风玻璃上的（一般贴在右上角位置）。
+直接贴玻璃上后续换新标会比较难揭下来，一般 4S 店、保险公司、网购汽车用品的商家都会附送静电贴膜，
+把车标粘在静电贴膜上，再把静电贴膜贴到车窗上会比较方便。</p>
+<h2 id="贴膜">贴膜</h2><p>一般防晒防紫外线，但是不宜颜色过深，否则光线暗的地方看不清后视镜，有安全隐患。
+同时，2004 年 10 月 1 日实施的国家标准《机动车运行安全技术条件》（GB7258—2004）第 11.6.4 条规定，
+机动车驾驶室必须保证驾驶员前方视野和侧方视野，
+前挡风窗玻璃及风窗以外玻璃用于驾驶员视区部位的可见光透射比不允许小于 70%，
+所有车窗玻璃不允许张贴镜面反光遮阳膜。</p>
+<p>据悉，车辆进行年检时，检测人员会对车辆驾驶室的“透光率”进行检测，
+一般来说，在车辆两侧玻璃上张贴反光膜的车辆都不可能通过“透光率”这个标准。</p>
+<h2 id="加油卡">加油卡</h2><p>大部分加油站的营业店里都可以办理加油卡，带好身份证原件和 15 元现金作为押金即可，办好后可以当场使用信用卡充值加油。</p>
+<p>淘宝有折扣充值的，9.8 折看起来不多，但每加 1 箱汽油的钱，大约可以多加 1、2 升汽油，还是挺不错的了。
+支付宝等网上充值也很方便。但是因为加油卡是芯片卡，网上充值后要去圈存下比较麻烦，不过很多加油站可以自助圈存。</p>
+<p>有加油卡的用户，可以自助加油。自助加油要注意安全，静电、明火要小心。</p>
+<h2 id="汽车用品">汽车用品</h2><ul>
+<li>盲区镜：贴在两侧后视镜上的小圆镜，我个人喜欢有万向节无边的。</li>
+<li>方向盘助力器：大角度打方向盘会非常顺利。</li>
+<li>手机支架：个人推荐夹在空调出风口、万向节、吸铁石的这种，小巧简洁实用。</li>
+<li>空气清新剂：香水不错，固态的也行。</li>
+<li>吸尘器：家用的即可，换个稍小的吸嘴。</li>
+<li>免清洗抹布：自己洗车、擦个雨水污渍什么的还是很有用的，比较容易清洗。</li>
+<li>后备箱或后排挂钩：挂些不能倒的东西很有用，买不到合适的也可以考虑自制。</li>
+<li>对讲机：2 辆车及其以上的车队，沟通起来会比较方便，没有信号的地方也不愁。</li>
+<li>陈皮糖、橙子、橘子、晕车贴：防晕车、防饿。</li>
+</ul>
+<h2 id="其他">其他</h2><ul>
+<li>汽车之家的《用车小百科》系列不错，可以挑些自己不了解的看看，像车灯语义、山路行车注意事项等。</li>
+<li>多看看交通事故视频，自己多想想什么场景应该注意什么，出现状况时应该如何正确应对等。</li>
+<li>放平心态，遇到不平用喇叭或车灯提示下就好了，不要太计较。</li>
+<li>不要犹豫，该快快、该慢慢；能通过毫不犹豫的快速通过，不能通过也要毫不犹豫的减速停下。</li>
+</ul>
+<h2 id="灯语">灯语</h2><ul>
+<li>提示后车（大灯、车距等）：短暂雾灯，或危险警告灯（双跳灯）。</li>
+<li>提示前车（信号灯变化、注意压线行驶、并线等）：大灯闪两次。</li>
+<li>不可超车：左转向灯。</li>
+<li>可以超车：右转向灯。</li>
+<li>前方盲区：大灯闪一下，比如车库直角转弯处等。</li>
+</ul>
 <h2 id="todo">TODO</h2><p>快没电了，后面抽空再补充附图。</p>
 <h2 id="参考资料">参考资料</h2><ul>
 <li><a href="http://www.19lou.com/forum-464848-thread-6561443007363713-1-1.html">http://www.19lou.com/forum-464848-thread-6561443007363713-1-1.html</a></li>
@@ -318,71 +413,6 @@ pre-commit:
 <li>有了 gitplus，你再也不会忘记设置公司邮箱。因此也不需要取消提交再重复提交了。</li>
 <li>还可以在提交前自动做校验工作。没有 gitplus 之前你只能给每个仓库设置 pre-commit hooks。</li>
 <li>你也可以发挥自己的想象力，做更多其他的事情。</li>
-</ul>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[译：严重混乱的 Resource Timing]]></title>
-        <link href="http://blog.hotoo.me/post/serious-confusion-with-resource-timing"/>
-        <published>2014-12-30T00:00:00.000Z</published>
-        <updated>2014-12-30T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/serious-confusion-with-resource-timing</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <h1 id="或者说『耗时包含了-blocking-部分的时间』">或者说『耗时包含了 Blocking 部分的时间』</h1><p>用 <a href="http://www.w3.org/TR/resource-timing/">Resource Timing</a> 来同统计资源下载性能
-是非常赞的方式，但不幸的是，几乎所有和我聊过的人都是使用 <a href="http://www.w3.org/TR/resource-timing/#duration-attribute"><code>duration</code> 属性</a>，
-而且他们都没有意识到 <code>duration</code> 包含了 blocking 时间。结果 <code>duration</code> 时间
-比实际的下载时间要长很多，超出了开发者意料之外的结果。这个问题在跨域资源中
-尤为糟糕，<code>duration</code> 是唯一可用的。在这篇博文中我将解释这个问题，并提出解决方案。</p>
-<h2 id="resource-timing-回顾">Resource Timing 回顾</h2><p><a href="http://www.w3.org/TR/resource-timing/">Resource Timing 规范</a> 定义了收集网页中
-所有资源耗时统计的 API。现在可用于 Chrome, Chrome for Android, IE 10-11, 和 Opera。
-可以通过 <code>getEntries()</code>, <code>getEntriesByType()</code> 和 <code>getEntriesByName()</code> 得到一个
-<code>PerformanceEntry</code> 列表，一个 <code>PerformanceEntry</code> 对象包含以下属性：</p>
-<ul>
-<li><code>name</code> – URL 地址</li>
-<li><code>entryType</code> – 通常是 “resource”</li>
-<li><code>startTime</code> – 开始处理这个资源的时间（相对开始导航到页面时的毫秒数）</li>
-<li><code>duration</code> – 处理这个资源的总耗时（毫秒）</li>
-</ul>
-<p>上面的属性在所有的资源中都可用，包括同域和跨域的。而同域的资源拥有另外一些可以
-访问的附加属性，这些属性定义在 <code>PerformanceResourceTiming</code> 接口中。这些属性名称
-很简洁清晰，完全可以见名思意，并且以时间顺序排序：</p>
-<ul>
-<li>redirectStart</li>
-<li>redirectEnd</li>
-<li>fetchStart</li>
-<li>domainLookupStart</li>
-<li>domainLookupEnd</li>
-<li>connectStart</li>
-<li>connectEnd</li>
-<li>secureConnectionStart</li>
-<li>requestStart</li>
-<li>responseStart</li>
-<li>responseEnd</li>
-</ul>
-<p>这里有个权威的 <a href="http://www.w3.org/TR/resource-timing/#processing-model">处理模型(processing model)</a> 图
-显示了这些属性所在的各个不同阶段。备注：<code>duration</code> 相当于 <code>responseEnd - startTime</code>。</p>
-<p><img src="http://www.w3.org/TR/resource-timing/resource-timing-overview.png" alt="processing model graphic"></p>
-<p>如何使用 Resource Timing 的详细信息，可以参考我的文章 <a href="http://www.stevesouders.com/blog/2014/08/21/resource-timing-practical-tips/">Resource Timing Practical Tips</a> 『<a href="./resource-timing-practical-tips">译者的中文翻译</a>』</p>
-<h2 id="duration-中出乎意外的-blocking-膨胀"><code>duration</code> 中出乎意外的 blocking 膨胀</h2><p>出于隐私的考虑，同源资源的 PerformanceResourceTiming 属性是受限的。（备注：
-任何资源可以通过 <code>Timing-Allow-Origin</code> 响应头达到“同源”效果。）现在大约有一半
-的资源是跨域的，因此 <code>duration</code> 是度量加载时间的唯一方式。而且即使是同源资源，
-<code>duration</code> 也是唯一以增量方式提供的属性，大概是因为它度量了最重要的阶段。
-这样一来，所有我见过的 Resource Timing 实现都以 <code>duration</code> 做为主要的性能指标。</p>
-<p>不幸的是，<code>duration</code> 比下载时间要大，它包含了阻塞时间（blocking time）—— 浏览器
-意识到需要下载一个资源，到这个资源实际被下载直接的时间延迟。阻塞会在几种情况时
-发生，最典型的资源数量比 TCP 连接数要多的情况。大多数浏览器为每个主机开放了 6
-个 TCP 连接，IE10（8个连接）和 IE11（12个连接）例外。</p>
-<p>这个 <a href="http://stevesouders.com/tests/rt-blocking.php">Resource Timing 阻塞测试页面</a>
-有 16 个图片，因此无论哪个浏览器都会阻塞一部分图片。每个图片被编程为在服务器
-有 1 秒的延迟，这 16 个图片，每个图片都显示了 <code>startTime</code> 和 <code>duration</code>。
-另外还有这个测试页面在 WebPagetest 中通过 <a href="http://www.webpagetest.org/result/141125_4T_11FT/">Chrome</a>,
-<a href="http://www.webpagetest.org/result/141125_BN_11FY/">IE10</a> 和
-<a href="http://www.webpagetest.org/result/141125_5K_11CB/">IE11</a> 加载的测试结果，
-可以通过查看截屏来分析时序结果。注，为什么所有的图片的 <code>startTime</code> 大致都相同？
-英文这个时间是浏览器解析 IMG 标签并意识到需要下载改资源的时间，由于先下载的图片
-阻塞的原因，但在页面出现后，图片的 <code>duration</code> 值大约步进 1 秒左右。</p>
-<h2 id="译者补充">译者补充</h2><ul>
-<li><a href="http://www.stevesouders.com/blog/2014/11/25/serious-confusion-with-resource-timing/">SERIOUS CONFUSION with Resource Timing</a> - 原文出处。</li>
 </ul>
 ]]>
         </content>
@@ -581,6 +611,71 @@ Boomerang 是 Philip Tellis 维护的一个非常流行的开源 RUM 包。他�
 </blockquote>
 <h2 id="译者补充">译者补充</h2><ul>
 <li><a href="http://www.stevesouders.com/blog/2014/08/21/resource-timing-practical-tips/">Resource Timing practical tips</a> - 原文出处。</li>
+</ul>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[译：严重混乱的 Resource Timing]]></title>
+        <link href="http://blog.hotoo.me/post/serious-confusion-with-resource-timing"/>
+        <published>2014-12-30T00:00:00.000Z</published>
+        <updated>2014-12-30T00:00:00.000Z</updated>
+        <id>http://blog.hotoo.me/post/serious-confusion-with-resource-timing</id>
+        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+            <![CDATA[ <h1 id="或者说『耗时包含了-blocking-部分的时间』">或者说『耗时包含了 Blocking 部分的时间』</h1><p>用 <a href="http://www.w3.org/TR/resource-timing/">Resource Timing</a> 来同统计资源下载性能
+是非常赞的方式，但不幸的是，几乎所有和我聊过的人都是使用 <a href="http://www.w3.org/TR/resource-timing/#duration-attribute"><code>duration</code> 属性</a>，
+而且他们都没有意识到 <code>duration</code> 包含了 blocking 时间。结果 <code>duration</code> 时间
+比实际的下载时间要长很多，超出了开发者意料之外的结果。这个问题在跨域资源中
+尤为糟糕，<code>duration</code> 是唯一可用的。在这篇博文中我将解释这个问题，并提出解决方案。</p>
+<h2 id="resource-timing-回顾">Resource Timing 回顾</h2><p><a href="http://www.w3.org/TR/resource-timing/">Resource Timing 规范</a> 定义了收集网页中
+所有资源耗时统计的 API。现在可用于 Chrome, Chrome for Android, IE 10-11, 和 Opera。
+可以通过 <code>getEntries()</code>, <code>getEntriesByType()</code> 和 <code>getEntriesByName()</code> 得到一个
+<code>PerformanceEntry</code> 列表，一个 <code>PerformanceEntry</code> 对象包含以下属性：</p>
+<ul>
+<li><code>name</code> – URL 地址</li>
+<li><code>entryType</code> – 通常是 “resource”</li>
+<li><code>startTime</code> – 开始处理这个资源的时间（相对开始导航到页面时的毫秒数）</li>
+<li><code>duration</code> – 处理这个资源的总耗时（毫秒）</li>
+</ul>
+<p>上面的属性在所有的资源中都可用，包括同域和跨域的。而同域的资源拥有另外一些可以
+访问的附加属性，这些属性定义在 <code>PerformanceResourceTiming</code> 接口中。这些属性名称
+很简洁清晰，完全可以见名思意，并且以时间顺序排序：</p>
+<ul>
+<li>redirectStart</li>
+<li>redirectEnd</li>
+<li>fetchStart</li>
+<li>domainLookupStart</li>
+<li>domainLookupEnd</li>
+<li>connectStart</li>
+<li>connectEnd</li>
+<li>secureConnectionStart</li>
+<li>requestStart</li>
+<li>responseStart</li>
+<li>responseEnd</li>
+</ul>
+<p>这里有个权威的 <a href="http://www.w3.org/TR/resource-timing/#processing-model">处理模型(processing model)</a> 图
+显示了这些属性所在的各个不同阶段。备注：<code>duration</code> 相当于 <code>responseEnd - startTime</code>。</p>
+<p><img src="http://www.w3.org/TR/resource-timing/resource-timing-overview.png" alt="processing model graphic"></p>
+<p>如何使用 Resource Timing 的详细信息，可以参考我的文章 <a href="http://www.stevesouders.com/blog/2014/08/21/resource-timing-practical-tips/">Resource Timing Practical Tips</a> 『<a href="./resource-timing-practical-tips">译者的中文翻译</a>』</p>
+<h2 id="duration-中出乎意外的-blocking-膨胀"><code>duration</code> 中出乎意外的 blocking 膨胀</h2><p>出于隐私的考虑，同源资源的 PerformanceResourceTiming 属性是受限的。（备注：
+任何资源可以通过 <code>Timing-Allow-Origin</code> 响应头达到“同源”效果。）现在大约有一半
+的资源是跨域的，因此 <code>duration</code> 是度量加载时间的唯一方式。而且即使是同源资源，
+<code>duration</code> 也是唯一以增量方式提供的属性，大概是因为它度量了最重要的阶段。
+这样一来，所有我见过的 Resource Timing 实现都以 <code>duration</code> 做为主要的性能指标。</p>
+<p>不幸的是，<code>duration</code> 比下载时间要大，它包含了阻塞时间（blocking time）—— 浏览器
+意识到需要下载一个资源，到这个资源实际被下载直接的时间延迟。阻塞会在几种情况时
+发生，最典型的资源数量比 TCP 连接数要多的情况。大多数浏览器为每个主机开放了 6
+个 TCP 连接，IE10（8个连接）和 IE11（12个连接）例外。</p>
+<p>这个 <a href="http://stevesouders.com/tests/rt-blocking.php">Resource Timing 阻塞测试页面</a>
+有 16 个图片，因此无论哪个浏览器都会阻塞一部分图片。每个图片被编程为在服务器
+有 1 秒的延迟，这 16 个图片，每个图片都显示了 <code>startTime</code> 和 <code>duration</code>。
+另外还有这个测试页面在 WebPagetest 中通过 <a href="http://www.webpagetest.org/result/141125_4T_11FT/">Chrome</a>,
+<a href="http://www.webpagetest.org/result/141125_BN_11FY/">IE10</a> 和
+<a href="http://www.webpagetest.org/result/141125_5K_11CB/">IE11</a> 加载的测试结果，
+可以通过查看截屏来分析时序结果。注，为什么所有的图片的 <code>startTime</code> 大致都相同？
+英文这个时间是浏览器解析 IMG 标签并意识到需要下载改资源的时间，由于先下载的图片
+阻塞的原因，但在页面出现后，图片的 <code>duration</code> 值大约步进 1 秒左右。</p>
+<h2 id="译者补充">译者补充</h2><ul>
+<li><a href="http://www.stevesouders.com/blog/2014/11/25/serious-confusion-with-resource-timing/">SERIOUS CONFUSION with Resource Timing</a> - 原文出处。</li>
 </ul>
 ]]>
         </content>
@@ -1510,56 +1605,6 @@ JavaScript 异常结合起来做有力的分析，但是今天这个话题跟 Ja
 <p><img src="https://f.cloud.github.com/assets/143572/991796/2e2038c2-096e-11e3-9008-e21d3b9e354a.png" alt="2013-08-20 3 55 10"></p>
 <p>图中的灰色竖线是发布点，橙色是 JavaScript 异常，绿色是静态资源异常。</p>
 <p>妈妈再也不用担心我的手机会收到误报的报警短信了。</p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[每周异常：第 3期，宏观异常分析方法]]></title>
-        <link href="http://blog.hotoo.me/post/weekly-topic-about-exceptions-3"/>
-        <published>2013-08-02T00:00:00.000Z</published>
-        <updated>2013-08-02T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/weekly-topic-about-exceptions-3</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <p>为了有效的分析 JavaScript 异常，我们从宏观的统计数据中做了大量的分析，初步结果如下：</p>
-<h2 id="全站每日异常统计">全站每日异常统计</h2><p>首先我们从每天的全站总体数据进行分析，得到下面这些报表。其中：</p>
-<ul>
-<li>all_pv: 全站所有有效异常次数 (PV)</li>
-<li>all_uv: 全站所有有效异常人数 (UV)</li>
-<li>all_pv_rate: 全站所有异常率 (按 PV 统计)</li>
-<li>all_uv_rate: 全站所有异常率 (按 UV 统计)</li>
-<li>valid_rate_pv: 有效异常率（按 PV 统计）</li>
-<li>valid_rate_uv: 有效异常率（按 UV 统计）</li>
-</ul>
-<p><img src="https://f.cloud.github.com/assets/143572/900597/98aa3094-fb68-11e2-9f9e-c3809ea15b48.png" alt="2013-08-02 7 42 02"></p>
-<p><img src="https://f.cloud.github.com/assets/143572/900599/ac59ccb2-fb68-11e2-89c3-4e0d6db7261f.png" alt="2013-08-02 7 42 37"></p>
-<p><img src="https://f.cloud.github.com/assets/143572/900625/c145cbac-fb69-11e2-80c7-d1f9152ddeb4.png" alt="2013-08-02 7 50 11"></p>
-<p><img src="https://f.cloud.github.com/assets/143572/900601/bbc1e3a6-fb68-11e2-85e7-b6443f502860.png" alt="2013-08-02 7 43 04"></p>
-<p><img src="https://f.cloud.github.com/assets/143572/900602/cd4f7f0c-fb68-11e2-96b8-2de40b5d2882.png" alt="2013-08-02 7 43 31"></p>
-<p>从趋势图中我们可以明显的看到第 2天和最后一天，异常 PV 有较大波动，这是由于用户
-攻击爆发大量异常造成的。</p>
-<p>我们在 <a href="https://github.com/totorojs/javascript-exception-archives/issues/12">异常评分算法</a>
-的讨论中有提到，即使是少量用户进行攻击，异常 UV 也不应该有波动的（除非页面 UV
-本身有较大波动），但是实际上我们看到最后一天的异常 UV 也有明显波动，因此粗略
-分析这个异常 PV 的上升是由于页面访问人数增多造成的。</p>
-<p>事后我们查了当天的页面访问 PV 和 UV，可惜并没有明显波动。</p>
-<p>实际经过细致的异常日志分析，我们看到攻击用户同时没过一段时间就更换 IP 地址或清理
-Cookie，因此全天的综合数据中异常 PV  和异常 UV 有了一些明显波动。</p>
-<p>而且实际上，每天都有攻击造成的异常波动。</p>
-<ul>
-<li>每天都有攻击造成的异常，累加在一起好像每天都没什么问题。</li>
-<li>由于攻击造成异常总数相对一天的异常总数太小，从全天异常总数的层面来看，
-无法发现，甚至排除攻击造成的异常。</li>
-<li>T+1 的统计数据，对于异常监控来说，太迟钝了。</li>
-</ul>
-<h2 id="全站每分钟异常统计">全站每分钟异常统计</h2><p>从上面每日异常总和的分析我们可以看出，一天的总和数据能发现的问题还是比较有限的。
-于是我从分钟的粒度来统计异常。</p>
-<p><img src="https://f.cloud.github.com/assets/143572/900781/7496f1e6-fb6e-11e2-854f-1a0f685bea15.png" alt="2013-08-02 7 24 54"></p>
-<p>图有点大，点击可以看大图。</p>
-<p>从图中我们可以看到，凌晨 2点多到 3点多期间，有少量用户发起了猛烈的攻击；
-凌晨 4点多到凌晨7点多期间也有少量温和的攻击。攻击时全站异常 PV （绿色）
-和全站有效异常（深红色）明显飙升，但是异常 UV 和有效异常 UV 都没有太大波动，
-而且与前后的时间切片有较好的连贯性，没有大起大落。</p>
-<p>而如果异常 UV 出现较大波动，在很可能是由于我们正在发布的新代码影响大面积用户。</p>
-<p>合适的时间粒度对于及时发现真正有效的异常有非常重要的意义。</p>
 ]]>
         </content>
     </entry>
