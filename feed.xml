@@ -6,10 +6,10 @@
     <id>http://blog.hotoo.me/feed.xml</id>
     <entry>
         <title type="html"><![CDATA[使用 GPG 签名 Git Commits]]></title>
-        <link href="http://blog.hotoo.me/post/gpg-sign-for-github"/>
+        <link href="http://blog.hotoo.me/post/gpg-sign-for-git-comments"/>
         <published>2016-06-11T00:00:00.000Z</published>
         <updated>2016-06-11T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/gpg-sign-for-github</id>
+        <id>http://blog.hotoo.me/post/gpg-sign-for-git-comments</id>
         <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <p>前段时间 GitHub 支持在 Git Commits 中使用 GPG 签名验证，可以避免其他人使用你的
 Email 进行 commit。</p>
