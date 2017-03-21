@@ -69,3 +69,23 @@ assert(dateDiff(new Date(2016,0,1,0,0,0,0), new Date(2016,0,1,0,0,0,10)) === '�
 assert(dateDiff(new Date(2016,0,1,0,0,0,0), new Date(2016,0,1,0,3,0,0)) === '3 分钟前');
 assert(dateDiff(new Date(2016,0,1,0,0,0,0), new Date(2016,0,1,1,0,0,0)) === '1 小时前');
 ```
+
+## 2017-02-09 更新
+
+群里又有了类似的一个案例，开发想写测试用例来测 location.href 的赋值是否正确，
+用以测试页面跳转逻辑是否正确。于是想通过重载 location 对象来监听给 location.href
+赋值时，所赋值是否符合期望。
+
+还辛苦找到 [Chrome 出了个小 bug：论如何在 Chrome 下劫持原生只读对象](https://zhuanlan.zhihu.com/p/24342684)
+这么牛逼变态到令人折服的方法。但是，这是正确的方法吗？我认为不是。
+
+location 的案例中，我觉得应该是测试赋值给 location.href 的 **值**本身是否正确，
+而不是测试企图篡改 location 来监听 href 属性是否正确。即：
+
+```js
+// 业务代码
+function getUrl(){}
+location.href = getUrl(...args);
+```
+
+单元测试用例只需要测试 getUrl 在各种边界输入条件下，输出是否符合期望就可以了。
