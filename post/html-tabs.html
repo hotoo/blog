@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="generator" content="nico 0.5.2">
     <meta name="theme" content="KISS 0.1">
-    <title>迁移博客到 Jekyll - 闲耘™.博客</title>
+    <title>HTML Tabs 最佳实践 - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
     <link rel="stylesheet" href="../static/syntax.css" />
     <link type="text/css" rel="stylesheet" href="../static/template.css" />
@@ -41,44 +41,28 @@
 <div id="container">
   <div id="content" class="document">
 <div class="hentry">
-  <h1 class="entry-title">迁移博客到 Jekyll</h1>
-  <div class="entry-content"><h2 id="posts-文件结构">_posts 文件结构</h2><p>Jekyll 支持两种结构：</p>
-<ol>
-<li>平铺所有文件，每个文件使用日期前缀。</li>
-<li>按照完整的日期目录结构。</li>
-</ol>
-<h2 id="静态链接-permalink">静态链接(Permalink)</h2><p>我的个人博客并非用于发布新闻，即使非常旧的博客，也会不断更新维护，
-所以无需添加时间标识，直接使用 title 即可。</p>
-<p>如果需要多个版本，为避免出现冲突，可以在 title 中添加序号。如 <code>II</code> 或 <code>2</code>。</p>
-<h2 id="草稿-draft">草稿(Draft)</h2><p>Jekyll 支持 <code>published</code> 标记，设置为 <code>false</code> 就可以避免被转换发布。
-这本身很不错，但是这些草稿和正常发布的文件混淆在一起，无法清晰区分。</p>
-<p>所以我创建了 <code>_draft</code> 目录，用于存放草稿。在文章准备好之后拷贝到 <code>_posts</code>
-目录即可。</p>
-<p>p.s. 话说相比 <code>published</code> 标记，我更喜欢 <code>draft</code>，如果支持的话。</p>
-<h2 id="more">more</h2><p><a href="http://www.jacquesf.com/2011/03/creating-excerpts-in-jekyll-with-wordpress-style-more-html-comments/">Creating Excerpts in Jekyll with Wordpress-style &lt;!--more--&gt; HTML Comments</a></p>
+  <h1 class="entry-title">HTML Tabs 最佳实践</h1>
+  <div class="entry-content"><p>Tabs 面板的显示和隐藏一般以 display 来控制显示和隐藏，但是如果默认未显示的 Tabs 面板中渲染需要知道面板宽高的组件
+（如 Canvas，某些轮播组件等）时，就会因为面板在 display:none 的状态下无法拿到宽高导致渲染组件异常。</p>
+<p>这里建议 Tabs 使用 position:absolute 来将不可见的组件移动到用户不可见的负坐标区域，需要时再将面板移动到可见区域，
+来避免面板不可见时渲染内部组件异常的问题。而且也可以做一些滑动显示的动画效果。</p>
 <a name="more"></a>
 
-<h2 id="存档-archive">存档(Archive)</h2><p><a href="https://gist.github.com/enaeher/88cda643aa7e3b0ca1e5">enaeher / tiered_archives.rb</a></p>
-<h2 id="目录-toc">目录(TOC)</h2><p><a href="http://stackoverflow.com/questions/9602936/how-to-add-a-table-of-contents-to-jekyll-blog-post">http://stackoverflow.com/questions/9602936/how-to-add-a-table-of-contents-to-jekyll-blog-post</a>
-<a href="http://stackoverflow.com/questions/13481572/jekyll-automatic-table-of-contents">http://stackoverflow.com/questions/13481572/jekyll-automatic-table-of-contents</a>
-<a href="http://du1abadd.org/2010/usr/make_toc_support_for_jekyll_with_rdiscount.html">http://du1abadd.org/2010/usr/make_toc_support_for_jekyll_with_rdiscount.html</a></p>
-<h2 id="标签-tags">标签(Tags)</h2><h2 id="代码高亮">代码高亮</h2><h2 id="分页">分页</h2><div class="highlight"><div class="codes"><div class="code"><pre>&lt;div class=&quot;pagination&quot;&gt;
-  {.% if paginator.previous_page == 1 %}
-    &lt;a href=&quot;/&quot; class=&quot;previous&quot;&gt;上一页&lt;/a&gt;
-  {.% else if paginator.previous_page %}
-    &lt;a href=&quot;/page{.{paginator.previous_page}}&quot; class=&quot;previous&quot;&gt;上一页&lt;/a&gt;
-  {.% else %}
-    &lt;span class=&quot;previous&quot;&gt;上一页&lt;/span&gt;
-  {.% endif %}
-  &lt;span class=&quot;page_number&quot;&gt;页码：{.{paginator.page}} / {.{paginator.total_pages}}&lt;/span&gt;
-  {.% if paginator.next_page %}
-    &lt;a href=&quot;/page{.{paginator.next_page}}&quot; class=&quot;next&quot;&gt;下一页&lt;/a&gt;
-  {.% else %}
-    &lt;span class=&quot;next&quot;&gt;下一页&lt;/span&gt;
-  {.% endif %}
-&lt;/div&gt;
-
-</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<p>简单示例代码：</p>
+<p>HTML:</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tabs"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ol</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tabbar"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"active"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#tab1"</span>&gt;</span>Tab 1<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#tab2"</span>&gt;</span>Tab 2<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ol</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ol</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tabpanel"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"active"</span>&gt;</span>
+      Tab Panel 1
+    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+      Tab Panel 2
+    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ol</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
 <a name="L1-4" href="#L1-4">4</a>
@@ -91,23 +75,23 @@
 <a name="L1-11" href="#L1-11">11</a>
 <a name="L1-12" href="#L1-12">12</a>
 <a name="L1-13" href="#L1-13">13</a>
-<a name="L1-14" href="#L1-14">14</a>
-<a name="L1-15" href="#L1-15">15</a>
-<a name="L1-16" href="#L1-16">16</a>
-<a name="L1-17" href="#L1-17">17</a></pre></div></div><h3 id="参考：">参考：</h3><ul>
-<li><a href="http://jeffreysambells.com/2013/02/01/jekyll-draft-publishing-plugin">Jekyll Draft Publishing Plugin</a></li>
-<li><a href="http://tqcblog.com/2012/08/22/jekyll-drafts/">Jekyll Draft Posts</a></li>
-</ul>
-<h2 id="与-vimwiki-结合">与 Vimwiki 结合</h2><p>之前的博客使用 Vimwiki 管理，可以无需转换或发布，直接使用 Vim 即可简单浏览。</p><div class="highlight"><div class="codes"><div class="code"><pre>let g:vimwiki_list = [
-  \ {
-    \ &#39;path&#39;        : &#39;~/Dropbox/blog.hotoo.me/_posts&#39;,
-    \ &#39;index&#39;       : &#39;_index&#39;,
-    \ &#39;ext&#39;         : &#39;.md&#39;,
-    \ &#39;nested_syntaxes&#39; : {&#39;javascript&#39;: &#39;javascript&#39;, &#39;python&#39;: &#39;python&#39;, &#39;c++&#39;: &#39;cpp&#39;}
-  \ }
-\]
-
-</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+<a name="L1-14" href="#L1-14">14</a></pre></div></div><p>LESS:</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="less"><span class="hljs-selector-class">.tabs</span> {
+  <span class="hljs-selector-class">.tabpanel</span> {
+    <span class="hljs-attribute">position</span>: relative;
+    <span class="hljs-selector-tag">li</span> {
+      <span class="hljs-attribute">position</span>: absolute;
+      <span class="hljs-attribute">top</span>: -<span class="hljs-number">999999px</span>;
+      <span class="hljs-attribute">left</span>: -<span class="hljs-number">9999px</span>;
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>; <span class="hljs-comment">/* 避免浮动导致宽度不对 */</span>
+    }
+    <span class="hljs-selector-tag">li</span><span class="hljs-selector-class">.active</span> {
+      <span class="hljs-comment">/* 不要使用 position:absolute 并且改变坐标的方式，
+       * 避免 Tabs 脱离文档流，父元素高度为 0，导致下面的其他元素错位。
+       */</span>
+      <span class="hljs-attribute">position</span>: static;
+    }
+  }
+}</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
 <a name="L2-4" href="#L2-4">4</a>
@@ -116,23 +100,35 @@
 <a name="L2-7" href="#L2-7">7</a>
 <a name="L2-8" href="#L2-8">8</a>
 <a name="L2-9" href="#L2-9">9</a>
-<a name="L2-10" href="#L2-10">10</a></pre></div></div><h2 id="不足">不足</h2><p><code>_posts/*.md</code> 文档理论上只会作为内容输出，其中的代码（尤其是 Jekyll 使用的模板
-代码，及其 <code>pre &gt; code</code> 中的代码，应该合理转义处理。但是实际上 Jekyll 没有这样
-做，导致一些代码没有符合期望。</p>
+<a name="L2-10" href="#L2-10">10</a>
+<a name="L2-11" href="#L2-11">11</a>
+<a name="L2-12" href="#L2-12">12</a>
+<a name="L2-13" href="#L2-13">13</a>
+<a name="L2-14" href="#L2-14">14</a>
+<a name="L2-15" href="#L2-15">15</a>
+<a name="L2-16" href="#L2-16">16</a>
+<a name="L2-17" href="#L2-17">17</a></pre></div></div><h2 id="切换-tab-时，面板所在位置问题">切换 Tab 时，面板所在位置问题</h2><p>无论使用 display 还是 position 方案，切换 tab 的时候，面板的位置会停留在上个显示的面板离开时的同一位置（默认是 0）。</p>
+<p>有两个解决方案：</p>
+<ol>
+<li>对于可以固定面板高度的场景（如整个页面都是 Tab），固定面板容器的高度，则 position 方案在切换 Tab 的时候，
+默认就定位在当前面板之前停留的位置，但是需要使用 iScroll 类似的方案来实现上下拉回弹，及刷新、加载更多的功能
+（也可以使用 Native 默认的上下拉回弹功能，但是 Tabbar 会随着整个 webview 一起拉动，体验不是太好）。</li>
+<li>切换 Tab 时，记录各个面板的所在位置，切换回来时使用 scrollTo(x, y) 的方式来滚动到面板上次的位置。</li>
+</ol>
 </div>
 
   <footer class="entry-meta post clearfix">
     <span class="tags"><a href="/tag">Tags</a>:
  
-      <a href="/tag/#Blog">Blog</a>
+      <a href="/tag/#Code">Code</a>
       
  , 
-      <a href="/tag/#Jekyll">Jekyll</a>
+      <a href="/tag/#Tabs">Tabs</a>
       
     </span>
 
-    <time datetime="2013-02-13T00:00:00.000Z">
-      <a href="/2013">2013年</a>02月13日
+    <time datetime="2017-03-21T00:00:00.000Z">
+      <a href="/2017">2017年</a>03月21日
     </time>
   </footer>
     <section>
@@ -144,7 +140,7 @@
     </section>
   <script type="text/javascript">
     
-    var disqus_identifier = "start-jekyll-for-blog";
+    var disqus_identifier = "html-tabs";
     
     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
     dsq.src = 'http://hotoo.disqus.com/embed.js';

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta name="generator" content="nico 0.5.1">
+    <meta name="generator" content="nico 0.5.2">
     <meta name="theme" content="KISS 0.1">
     <title>测试代码和可测试代码 - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
@@ -44,12 +44,12 @@
   <h1 class="entry-title">测试代码和可测试代码</h1>
   <div class="entry-content"><p>项目中有一个要将指定时间和当前时间比较，计算相对时间的逻辑（比如显示 <code>3 分钟前</code>），
 由于当前时间和执行测试用例的时机有关，每次执行用例都会不同，如何让这个代码可测试呢？
-有些人可能想到 Mock 当前时间，测试的时候让当前时间凝固，于是有了如下代码：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">// 实际业务代码中：</span>
-<span class="comment">// 虽然本来只需要 moment() 就可以了，但是为了方便测试，传入了一个可 Mock 的 Date.now</span>
-<span class="keyword">const</span> now = moment(Date.now());
+有些人可能想到 Mock 当前时间，测试的时候让当前时间凝固，于是有了如下代码：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-comment">// 实际业务代码中：</span>
+<span class="hljs-comment">// 虽然本来只需要 moment() 就可以了，但是为了方便测试，传入了一个可 Mock 的 Date.now</span>
+<span class="hljs-keyword">const</span> now = moment(<span class="hljs-built_in">Date</span>.now());
 
-<span class="comment">// 测试用例中，Mock Date.now 方法：</span>
-mm(Date, <span class="string">'now'</span>, () =&gt; <span class="number">1464969293129</span>);</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<span class="hljs-comment">// 测试用例中，Mock Date.now 方法：</span>
+mm(<span class="hljs-built_in">Date</span>, <span class="hljs-string">'now'</span>, () =&gt; <span class="hljs-number">1464969293129</span>);</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
 <a name="L1-4" href="#L1-4">4</a>
@@ -63,14 +63,14 @@ mm(Date, <span class="string">'now'</span>, () =&gt; <span class="number">146496
 <p>再举一个例子，还是时间相关的动态数据输入问题：</p>
 <p>项目中有一个今日收益更新的提醒消息，只有是今天的更新才显示，所以第一直觉应该是造一个
 收益更新时间是今天的测试数据，而不是造一个固定的数据（可能固定测试数据比较偷懒方便），
-然后篡改业务逻辑中当前时间的计算。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">// 业务代码正常该怎么写怎么写，不用管测试怎么活。</span>
-<span class="keyword">const</span> today = moment().format(<span class="string">'YYYYMMDD'</span>);
-<span class="keyword">if</span> (data.updateDate === today) {
-  <span class="comment">// show message.</span>
+然后篡改业务逻辑中当前时间的计算。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-comment">// 业务代码正常该怎么写怎么写，不用管测试怎么活。</span>
+<span class="hljs-keyword">const</span> today = moment().format(<span class="hljs-string">'YYYYMMDD'</span>);
+<span class="hljs-keyword">if</span> (data.updateDate === today) {
+  <span class="hljs-comment">// show message.</span>
 }
 
-<span class="comment">// 活的测试数据</span>
-data.updateDate = moment().format(<span class="string">'YYYYMMDD'</span>);</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+<span class="hljs-comment">// 活的测试数据</span>
+data.updateDate = moment().format(<span class="hljs-string">'YYYYMMDD'</span>);</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
 <a name="L2-4" href="#L2-4">4</a>
@@ -81,22 +81,22 @@ data.updateDate = moment().format(<span class="string">'YYYYMMDD'</span>);</code
 <p>测试代码应该只关注正常的数据输入和输出 <em>（即使输入、输出是难以预测的）</em>。</p>
 <p>而不应该关注业务实现逻辑，试图篡改业务代码，让测试可以进行。</p>
 </blockquote>
-<p>更好一点的可测试代码，可以将当前时间传入以便让输入、输出可以预测：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">// 业务抽象
-// 计算两个时间差，格式化为 `3 分钟前` 等相对时间。
-// @param {Date|Number} date1 较早的时间或时间戳。
-// @param {Date|Number} date2 较晚的时间或时间戳，默认当前时间。
-// @return {String} 相对时间差
-function dateDiff(date1, date2 = Date.now()) {
-  // ...
+<p>更好一点的可测试代码，可以将当前时间传入以便让输入、输出可以预测：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-comment">// 业务抽象</span>
+<span class="hljs-comment">// 计算两个时间差，格式化为 `3 分钟前` 等相对时间。</span>
+<span class="hljs-comment">// @param {Date|Number} date1 较早的时间或时间戳。</span>
+<span class="hljs-comment">// @param {Date|Number} date2 较晚的时间或时间戳，默认当前时间。</span>
+<span class="hljs-comment">// @return {String} 相对时间差</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dateDiff</span>(<span class="hljs-params">date1, date2 = Date.now(</span>)) </span>{
+  <span class="hljs-comment">// ...</span>
 }
 
-// 业务调用
+<span class="hljs-comment">// 业务调用</span>
 dateDiff(data.datetime);
 
-// 测试代码
-assert(dateDiff(new Date(2016,0,1,0,0,0,0), new Date(2016,0,1,0,0,0,10)) === '刚刚');
-assert(dateDiff(new Date(2016,0,1,0,0,0,0), new Date(2016,0,1,0,3,0,0)) === '3 分钟前');
-assert(dateDiff(new Date(2016,0,1,0,0,0,0), new Date(2016,0,1,1,0,0,0)) === '1 小时前');</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+<span class="hljs-comment">// 测试代码</span>
+assert(dateDiff(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2016</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>), <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2016</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">10</span>)) === <span class="hljs-string">'刚刚'</span>);
+assert(dateDiff(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2016</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>), <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2016</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">3</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>)) === <span class="hljs-string">'3 分钟前'</span>);
+assert(dateDiff(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2016</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>), <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2016</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>)) === <span class="hljs-string">'1 小时前'</span>);</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
 <a name="L3-3" href="#L3-3">3</a>
 <a name="L3-4" href="#L3-4">4</a>
@@ -111,7 +111,18 @@ assert(dateDiff(new Date(2016,0,1,0,0,0,0), new Date(2016,0,1,1,0,0,0)) === '1 �
 <a name="L3-13" href="#L3-13">13</a>
 <a name="L3-14" href="#L3-14">14</a>
 <a name="L3-15" href="#L3-15">15</a>
-<a name="L3-16" href="#L3-16">16</a></pre></div></div></div>
+<a name="L3-16" href="#L3-16">16</a></pre></div></div><h2 id="2017-02-09-更新">2017-02-09 更新</h2><p>群里又有了类似的一个案例，开发想写测试用例来测 location.href 的赋值是否正确，
+用以测试页面跳转逻辑是否正确。于是想通过重载 location 对象来监听给 location.href
+赋值时，所赋值是否符合期望。</p>
+<p>还辛苦找到 <a href="https://zhuanlan.zhihu.com/p/24342684">Chrome 出了个小 bug：论如何在 Chrome 下劫持原生只读对象</a>
+这么牛逼变态到令人折服的方法。但是，这是正确的方法吗？我认为不是。</p>
+<p>location 的案例中，我觉得应该是测试赋值给 location.href 的 <strong>值</strong>本身是否正确，
+而不是测试企图篡改 location 来监听 href 属性是否正确。即：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-comment">// 业务代码</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getUrl</span>(<span class="hljs-params"></span>)</span>{}
+location.href = getUrl(...args);</code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
+<a name="L4-2" href="#L4-2">2</a>
+<a name="L4-3" href="#L4-3">3</a></pre></div></div><p>单元测试用例只需要测试 getUrl 在各种边界输入条件下，输出是否符合期望就可以了。</p>
+</div>
 
   <footer class="entry-meta post clearfix">
     <span class="tags"><a href="/tag">Tags</a>:
@@ -213,7 +224,7 @@ assert(dateDiff(new Date(2016,0,1,0,0,0,0), new Date(2016,0,1,1,0,0,0)) === '1 �
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://lab.lepture.com/nico/">nico@0.5.1</a>, Theme by 闲耘™(@hotoo).
+  <a href="http://lab.lepture.com/nico/">nico@0.5.2</a>, Theme by 闲耘™(@hotoo).
   </p>
 </footer>
 </div>

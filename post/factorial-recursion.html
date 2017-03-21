@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta name="generator" content="nico 0.5.1">
+    <meta name="generator" content="nico 0.5.2">
     <meta name="theme" content="KISS 0.1">
     <title>阶乘(factorial) &amp; 尾递归(Tail Recursion) - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
@@ -56,19 +56,19 @@
 也就是说，函数调用出现在调用者函数的尾部，因为是尾部，
 所以根本没有必要去保存任何局部变量，直接让被调用的函数返回时越过调用者，
 返回到调用者的调用者去。举例说明。</p>
-<p>线性递归（传统递归方式）：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">recursion</span><span class="params">(n)</span>{</span>
-    <span class="keyword">return</span> n==<span class="number">1</span>?<span class="number">1</span>:n*recursion(n-<span class="number">1</span>);
+<p>线性递归（传统递归方式）：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">recursion</span>(<span class="hljs-params">n</span>)</span>{
+    <span class="hljs-keyword">return</span> n==<span class="hljs-number">1</span>?<span class="hljs-number">1</span>:n*recursion(n<span class="hljs-number">-1</span>);
 }</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
-<a name="L1-3" href="#L1-3">3</a></pre></div></div><p>尾递归：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">tailRecursion</span><span class="params">(n, a)</span>{</span>
-    a = a||<span class="number">1</span>; <span class="comment">// 尾递归之尾，即上次递归结果。</span>
-    <span class="keyword">return</span> n==<span class="number">1</span>?a:tailRecursion(n-<span class="number">1</span>, a*n);
+<a name="L1-3" href="#L1-3">3</a></pre></div></div><p>尾递归：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">tailRecursion</span>(<span class="hljs-params">n, a</span>)</span>{
+    a = a||<span class="hljs-number">1</span>; <span class="hljs-comment">// 尾递归之尾，即上次递归结果。</span>
+    <span class="hljs-keyword">return</span> n==<span class="hljs-number">1</span>?a:tailRecursion(n<span class="hljs-number">-1</span>, a*n);
 }</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
-<a name="L2-4" href="#L2-4">4</a></pre></div></div><p>这里将基于尾递归的求数值阶乘算法贴下：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">Math.factorial_III = <span class="function"><span class="keyword">function</span><span class="params">(n)</span>{</span>
-    <span class="keyword">var</span> a = arguments[<span class="number">1</span>]||<span class="number">1</span>;
-    <span class="keyword">return</span> n&lt;=<span class="number">1</span>?a:Math.factorial_III(n-<span class="number">1</span>, a*n);
+<a name="L2-4" href="#L2-4">4</a></pre></div></div><p>这里将基于尾递归的求数值阶乘算法贴下：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-built_in">Math</span>.factorial_III = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">n</span>)</span>{
+    <span class="hljs-keyword">var</span> a = <span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>]||<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">return</span> n&lt;=<span class="hljs-number">1</span>?a:<span class="hljs-built_in">Math</span>.factorial_III(n<span class="hljs-number">-1</span>, a*n);
 };</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
 <a name="L3-3" href="#L3-3">3</a>
@@ -180,7 +180,7 @@
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://lab.lepture.com/nico/">nico@0.5.1</a>, Theme by 闲耘™(@hotoo).
+  <a href="http://lab.lepture.com/nico/">nico@0.5.2</a>, Theme by 闲耘™(@hotoo).
   </p>
 </footer>
 </div>

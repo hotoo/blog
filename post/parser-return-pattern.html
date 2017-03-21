@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta name="generator" content="nico 0.5.1">
+    <meta name="generator" content="nico 0.5.2">
     <meta name="theme" content="KISS 0.1">
     <title>多种不同结果的返回模式 - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
@@ -45,41 +45,41 @@
   <div class="entry-content"><p>探讨个问题哈，我现在再做一个 HTML 校验工具，先将 HMTL 源码解析成 DOM 树，
 其间可能遇到语法错误，为了发现更多的错误，会跳到下一个分界点继续解析；
 然后将解析得到的 DOM 树返回给 lint 工具继续进行进一步的语法、语义解析。
-其过程是：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">var</span> dom = parse(html){cap(err); <span class="keyword">return</span> dom;};
-<span class="keyword">var</span> lintErr = lint(dom){<span class="keyword">return</span> err;};</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+其过程是：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-keyword">var</span> dom = parse(html){cap(err); <span class="hljs-keyword">return</span> dom;};
+<span class="hljs-keyword">var</span> lintErr = lint(dom){<span class="hljs-keyword">return</span> err;};</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a></pre></div></div><p>最终需要将 parse 和 lint 的错误收集到一起反馈给服务端。</p>
 <p>请问，parse 有什么好的方式来返回解析时错误信息？</p>
-<p>之前先是将 parse 设计成了函数式，但是我觉得下面这种返回方式很不好：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">return</span> {
+<p>之前先是将 parse 设计成了函数式，但是我觉得下面这种返回方式很不好：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-keyword">return</span> {
     dom: dom,
     err: err
 };</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
-<a name="L2-4" href="#L2-4">4</a></pre></div></div><h2 id="另外一种思路">另外一种思路</h2><p>HTMLParser 设计成独立的类（而不是上面的函数方式）</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">var</span> HTMLParser = <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
-    <span class="keyword">var</span> err = [];
-    <span class="keyword">this</span>.parse = <span class="function"><span class="keyword">function</span><span class="params">(html)</span>{</span>
-        <span class="keyword">var</span> dom = {};
+<a name="L2-4" href="#L2-4">4</a></pre></div></div><h2 id="另外一种思路">另外一种思路</h2><p>HTMLParser 设计成独立的类（而不是上面的函数方式）</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-keyword">var</span> HTMLParser = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">var</span> err = [];
+    <span class="hljs-keyword">this</span>.parse = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">html</span>)</span>{
+        <span class="hljs-keyword">var</span> dom = {};
 
-        err.push(<span class="keyword">new</span> Error(<span class="string">"this is not error."</span>));
-        err.push(<span class="keyword">new</span> Error(<span class="string">"err is not error."</span>));
+        err.push(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"this is not error."</span>));
+        err.push(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"err is not error."</span>));
 
-        <span class="keyword">return</span> dom;
+        <span class="hljs-keyword">return</span> dom;
     };
-    <span class="keyword">this</span>.getErrors = <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
-        <span class="keyword">return</span> err;
+    <span class="hljs-keyword">this</span>.getErrors = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+        <span class="hljs-keyword">return</span> err;
     };
 };
 
-<span class="function"><span class="keyword">function</span> <span class="title">main</span><span class="params">(html)</span>{</span>
-    <span class="keyword">var</span> parser = <span class="keyword">new</span> HTMLParser();
-    <span class="keyword">var</span> dom = parser.parse(html);
-    <span class="keyword">var</span> err = parser.getErrors();
-    <span class="keyword">var</span> result = HTMLint(dom);
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params">html</span>)</span>{
+    <span class="hljs-keyword">var</span> parser = <span class="hljs-keyword">new</span> HTMLParser();
+    <span class="hljs-keyword">var</span> dom = parser.parse(html);
+    <span class="hljs-keyword">var</span> err = parser.getErrors();
+    <span class="hljs-keyword">var</span> result = HTMLint(dom);
 
-    <span class="comment">// concat array to err.</span>
-    Array.prototype.push.apply(err, result);
+    <span class="hljs-comment">// concat array to err.</span>
+    <span class="hljs-built_in">Array</span>.prototype.push.apply(err, result);
 
-    <span class="keyword">return</span> err;
+    <span class="hljs-keyword">return</span> err;
 };</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
 <a name="L3-3" href="#L3-3">3</a>
@@ -107,40 +107,40 @@
 <a name="L3-25" href="#L3-25">25</a>
 <a name="L3-26" href="#L3-26">26</a></pre></div></div><p>貌似这种方式比上面的稍好一点，不过我又不想为此将原本很简单的函数式改成
 对象式。</p>
-<h2 id="外部数据存储">外部数据存储</h2><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">var</span> Console = (<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
-    <span class="keyword">var</span> _err = [];
-    <span class="function"><span class="keyword">function</span> <span class="title">log</span><span class="params">(err)</span>{</span>
+<h2 id="外部数据存储">外部数据存储</h2><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-keyword">var</span> Console = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">var</span> _err = [];
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">log</span>(<span class="hljs-params">err</span>)</span>{
         _err.push(err);
     }
-    <span class="function"><span class="keyword">function</span> <span class="title">getErr</span><span class="params">()</span>{</span>
-        <span class="keyword">return</span> _err;
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getErr</span>(<span class="hljs-params"></span>)</span>{
+        <span class="hljs-keyword">return</span> _err;
     }
 
-    <span class="keyword">return</span> {
+    <span class="hljs-keyword">return</span> {
         log: log,
         getErrors: getErr
     };
 });
-<span class="keyword">var</span> HTMLParse = <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
-    Console.log(<span class="keyword">new</span> Error(<span class="string">"syntax error."</span>));
-    Console.log(<span class="keyword">new</span> Error(<span class="string">"parse error"</span>));
+<span class="hljs-keyword">var</span> HTMLParse = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    Console.log(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"syntax error."</span>));
+    Console.log(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"parse error"</span>));
 
-    <span class="keyword">return</span> dom;
+    <span class="hljs-keyword">return</span> dom;
 };
-<span class="keyword">var</span> HTMLint = <span class="function"><span class="keyword">function</span><span class="params">(dom)</span>{</span>
-    <span class="keyword">var</span> err = [];
-    err.push(<span class="keyword">new</span> Error(<span class="string">"lint error."</span>));
-    err.push(<span class="keyword">new</span> Error(<span class="string">"lint error."</span>));
-    <span class="keyword">return</span> err;
+<span class="hljs-keyword">var</span> HTMLint = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">dom</span>)</span>{
+    <span class="hljs-keyword">var</span> err = [];
+    err.push(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"lint error."</span>));
+    err.push(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"lint error."</span>));
+    <span class="hljs-keyword">return</span> err;
 };
-<span class="function"><span class="keyword">function</span> <span class="title">main</span><span class="params">(html)</span>{</span>
-    <span class="keyword">var</span> dom = HTMLParse(html);
-    <span class="keyword">var</span> parseErr = Console.getErrors();
-    <span class="keyword">var</span> lintErr = HTMLint(dom);
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params">html</span>)</span>{
+    <span class="hljs-keyword">var</span> dom = HTMLParse(html);
+    <span class="hljs-keyword">var</span> parseErr = Console.getErrors();
+    <span class="hljs-keyword">var</span> lintErr = HTMLint(dom);
 
-    Array.prototype.push.apply(parseErr, lintErr);
+    <span class="hljs-built_in">Array</span>.prototype.push.apply(parseErr, lintErr);
 
-    <span class="keyword">return</span> parseErr;
+    <span class="hljs-keyword">return</span> parseErr;
 }</code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
 <a name="L4-2" href="#L4-2">2</a>
 <a name="L4-3" href="#L4-3">3</a>
@@ -184,7 +184,7 @@ err1 = parseError1 + lintError1;</pre></div><pre class="line"><a name="L5-1" hre
 <a name="L5-2" href="#L5-2">2</a></pre></div></div><p>err0 和 err1 是各自独立的，实例化多个第三方独立的有专用的Console，不如用类的方式好了。</p>
 <h2 id="寻求指教">寻求指教</h2><p>对于这种需要返回多种不同数据的函数式，
 如果你有其他的方案，欢迎回帖、回邮，或回博交流指导 ：）</p>
-<h2 id="更新-2013">更新 (2013)</h2><p>事件机制可能是最好的选择：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">parser.on(<span class="string">"error"</span>, <span class="function"><span class="keyword">function</span><span class="params">(err)</span>{</span>
+<h2 id="更新-2013">更新 (2013)</h2><p>事件机制可能是最好的选择：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">parser.on(<span class="hljs-string">"error"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>)</span>{
 });</code></pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a>
 <a name="L6-2" href="#L6-2">2</a></pre></div></div></div>
 
@@ -288,7 +288,7 @@ err1 = parseError1 + lintError1;</pre></div><pre class="line"><a name="L5-1" hre
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://lab.lepture.com/nico/">nico@0.5.1</a>, Theme by 闲耘™(@hotoo).
+  <a href="http://lab.lepture.com/nico/">nico@0.5.2</a>, Theme by 闲耘™(@hotoo).
   </p>
 </footer>
 </div>

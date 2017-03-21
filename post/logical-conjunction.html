@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta name="generator" content="nico 0.5.1">
+    <meta name="generator" content="nico 0.5.2">
     <meta name="theme" content="KISS 0.1">
     <title>『逻辑与』是个好东西 - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
@@ -52,32 +52,32 @@
 <li>用户自定义验证函数。</li>
 <li>异步访问服务器进行业务校验。</li>
 </ul>
-<p>通常可以通过逻辑判断进行处理：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">verifyFormInput</span><span class="params">(input)</span>{</span>
-  <span class="keyword">if</span>(!verifyRequired()){<span class="keyword">return</span> <span class="literal">false</span>;}
-  <span class="keyword">if</span>(!verifyMinLength()){<span class="keyword">return</span> <span class="literal">false</span>;}
-  <span class="keyword">if</span>(!verifyMaxLength()){<span class="keyword">return</span> <span class="literal">false</span>;}
-  <span class="keyword">if</span>(!verifyInputType()){<span class="keyword">return</span> <span class="literal">false</span>;}
-  <span class="keyword">if</span>(!verifyMin()){<span class="keyword">return</span> <span class="literal">false</span>;}
-  <span class="keyword">if</span>(!verifyMax()){<span class="keyword">return</span> <span class="literal">false</span>;}
-  <span class="keyword">if</span>(!verifyPattern()){<span class="keyword">return</span> <span class="literal">false</span>;}
-  <span class="keyword">if</span>(!verifyUserRules()){<span class="keyword">return</span> <span class="literal">false</span>;}
-  <span class="keyword">if</span>(!verifySync()){<span class="keyword">return</span> <span class="literal">false</span>;}
-  <span class="keyword">return</span> <span class="literal">true</span>;
+<p>通常可以通过逻辑判断进行处理：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">verifyFormInput</span>(<span class="hljs-params">input</span>)</span>{
+  <span class="hljs-keyword">if</span>(!verifyRequired()){<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;}
+  <span class="hljs-keyword">if</span>(!verifyMinLength()){<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;}
+  <span class="hljs-keyword">if</span>(!verifyMaxLength()){<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;}
+  <span class="hljs-keyword">if</span>(!verifyInputType()){<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;}
+  <span class="hljs-keyword">if</span>(!verifyMin()){<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;}
+  <span class="hljs-keyword">if</span>(!verifyMax()){<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;}
+  <span class="hljs-keyword">if</span>(!verifyPattern()){<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;}
+  <span class="hljs-keyword">if</span>(!verifyUserRules()){<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;}
+  <span class="hljs-keyword">if</span>(!verifySync()){<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;}
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
 }
-<span class="function"><span class="keyword">function</span> <span class="title">verifyForm</span><span class="params">(form)</span>{</span>
-    <span class="keyword">var</span> flags = [];
-    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,l=form.elements.length; i&lt;l; i++){
-        <span class="comment">// 一次只能校验一个表单元素异常。</span>
-        <span class="comment">//if(!verifyFormInput(form.elements[i])){return false;}</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">verifyForm</span>(<span class="hljs-params">form</span>)</span>{
+    <span class="hljs-keyword">var</span> flags = [];
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span>,l=form.elements.length; i&lt;l; i++){
+        <span class="hljs-comment">// 一次只能校验一个表单元素异常。</span>
+        <span class="hljs-comment">//if(!verifyFormInput(form.elements[i])){return false;}</span>
 
-        <span class="comment">// 可以同时校验所有元素异常。但是需要辅助循环进行检查。</span>
+        <span class="hljs-comment">// 可以同时校验所有元素异常。但是需要辅助循环进行检查。</span>
         flags[i] = verifyFormInput(form.elements[i]);
     }
-    <span class="comment">// 辅助循环检查。</span>
-    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,l=flags.length; i&lt;l; i++){
-        <span class="keyword">if</span>(!flags[i]){<span class="keyword">return</span> <span class="literal">false</span>;}
+    <span class="hljs-comment">// 辅助循环检查。</span>
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span>,l=flags.length; i&lt;l; i++){
+        <span class="hljs-keyword">if</span>(!flags[i]){<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;}
     }
-    <span class="keyword">return</span> <span class="literal">true</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
 }</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
@@ -146,8 +146,8 @@ a signed 32 bit integer.</li>
 <li>Return Result(7).</li>
 </ol>
 </blockquote>
-<p>于是验证算法改良如下：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">verifyFormInput</span><span class="params">(input)</span>{</span>
-    <span class="keyword">var</span> certified = <span class="literal">true</span>;
+<p>于是验证算法改良如下：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">verifyFormInput</span>(<span class="hljs-params">input</span>)</span>{
+    <span class="hljs-keyword">var</span> certified = <span class="hljs-literal">true</span>;
     certified = certified &amp;&amp; verifyRequired();
     certified = certified &amp;&amp; verifyMinLength();
     certified = certified &amp;&amp; verifyMaxLength();
@@ -157,19 +157,19 @@ a signed 32 bit integer.</li>
     certified = certified &amp;&amp; verifyPattern();
     certified = certified &amp;&amp; verifyUserRules();
     certified = certified &amp;&amp; verifySync();
-    <span class="keyword">return</span> certified;
+    <span class="hljs-keyword">return</span> certified;
 }
-<span class="function"><span class="keyword">function</span> <span class="title">verifyForm</span><span class="params">(form)</span>{</span>
-    <span class="keyword">var</span> certified = <span class="literal">true</span>;
-    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,flag,l=form.elements.length; i&lt;l; i++){
-        <span class="comment">// 一次只能校验一个表单元素异常。</span>
-        <span class="comment">//certified = certified &amp;&amp; verifyFormInput(form.elements[i]);</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">verifyForm</span>(<span class="hljs-params">form</span>)</span>{
+    <span class="hljs-keyword">var</span> certified = <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span>,flag,l=form.elements.length; i&lt;l; i++){
+        <span class="hljs-comment">// 一次只能校验一个表单元素异常。</span>
+        <span class="hljs-comment">//certified = certified &amp;&amp; verifyFormInput(form.elements[i]);</span>
 
-        <span class="comment">// 可以同时校验所有元素异常。无需辅助循环进行检查。</span>
+        <span class="hljs-comment">// 可以同时校验所有元素异常。无需辅助循环进行检查。</span>
         flag = verifyFormInput(form.elements[i]);
         certified = certified &amp;&amp; flag;
     }
-    <span class="keyword">return</span> certified;
+    <span class="hljs-keyword">return</span> certified;
 }</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
@@ -194,7 +194,7 @@ a signed 32 bit integer.</li>
 <a name="L2-22" href="#L2-22">22</a>
 <a name="L2-23" href="#L2-23">23</a>
 <a name="L2-24" href="#L2-24">24</a>
-<a name="L2-25" href="#L2-25">25</a></pre></div></div><h2 id="延伸">延伸</h2><p>以前也 Hack 的用过逻辑与表达式，比如：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">flag &amp;&amp; action();</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a></pre></div></div><p>但这个用法只是用到了条件判断的作用，类似于：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">if</span>(flag){action();}</code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a></pre></div></div><h2 id="参考阅读">参考阅读</h2><ul>
+<a name="L2-25" href="#L2-25">25</a></pre></div></div><h2 id="延伸">延伸</h2><p>以前也 Hack 的用过逻辑与表达式，比如：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">flag &amp;&amp; action();</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a></pre></div></div><p>但这个用法只是用到了条件判断的作用，类似于：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-keyword">if</span>(flag){action();}</code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a></pre></div></div><h2 id="参考阅读">参考阅读</h2><ul>
 <li><a href="http://www.ecmascript.org/">ECMAScript</a></li>
 <li><a href="http://zh.wikipedia.org/wiki/%E9%80%BB%E8%BE%91%E4%B8%8E">逻辑与</a>
 <a href="http://en.wikipedia.org/wiki/Logical_conjunction">Logical_conjunction</a></li>
@@ -303,7 +303,7 @@ a signed 32 bit integer.</li>
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://lab.lepture.com/nico/">nico@0.5.1</a>, Theme by 闲耘™(@hotoo).
+  <a href="http://lab.lepture.com/nico/">nico@0.5.2</a>, Theme by 闲耘™(@hotoo).
   </p>
 </footer>
 </div>

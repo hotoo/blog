@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta name="generator" content="nico 0.5.1">
+    <meta name="generator" content="nico 0.5.2">
     <meta name="theme" content="KISS 0.1">
     <title>鼠标事件研究(Mouse Event) - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
@@ -61,12 +61,12 @@ IE8, FF5, Chrome12, Safari5, Opera11.</p>
 <li><code>document.onmousedown</code> === <code>document.addEventListener</code> === <code>document.attachEvent(&quot;onmousedown&quot;)</code></li>
 <li><code>document.onmouseup</code> === <code>document.addEventListener(&quot;mouseup&quot;)</code> == <code>document.attachEvent(&quot;onmouseup&quot;)</code></li>
 <li><code>document.onclick</code> === <code>document.addEventListener(&quot;click&quot;)</code> == <code>document.attachEvent(&quot;onclick&quot;)</code></li>
-</ul><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">document.onmousedown = <span class="function"><span class="keyword">function</span><span class="params">(evt)</span>{</span>
-    evt = window.event || evt;
-    <span class="keyword">var</span> mouse = {
-        left:   evt.which ? evt.which==<span class="number">1</span> : evt.button==<span class="number">1</span>,
-        middle: evt.which ? evt.which==<span class="number">2</span> : evt.button==<span class="number">4</span>,
-        right:  evt.which ? evt.which==<span class="number">3</span> : evt.button==<span class="number">2</span>
+</ul><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-built_in">document</span>.onmousedown = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">evt</span>)</span>{
+    evt = <span class="hljs-built_in">window</span>.event || evt;
+    <span class="hljs-keyword">var</span> mouse = {
+        left:   evt.which ? evt.which==<span class="hljs-number">1</span> : evt.button==<span class="hljs-number">1</span>,
+        middle: evt.which ? evt.which==<span class="hljs-number">2</span> : evt.button==<span class="hljs-number">4</span>,
+        right:  evt.which ? evt.which==<span class="hljs-number">3</span> : evt.button==<span class="hljs-number">2</span>
     };
 };</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
@@ -181,7 +181,7 @@ IE8, FF5, Chrome12, Safari5, Opera11.</p>
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://lab.lepture.com/nico/">nico@0.5.1</a>, Theme by 闲耘™(@hotoo).
+  <a href="http://lab.lepture.com/nico/">nico@0.5.2</a>, Theme by 闲耘™(@hotoo).
   </p>
 </footer>
 </div>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta name="generator" content="nico 0.5.1">
+    <meta name="generator" content="nico 0.5.2">
     <meta name="theme" content="KISS 0.1">
     <title>译：Resource Timing (资源计时) 使用技巧 - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
@@ -45,8 +45,8 @@
   <div class="entry-content"><p><a href="http://www.w3.org/2010/webperf/">W3C Web 性能工作组</a> 在 2012 年给我们带来了
 <a href="http://www.w3.org/TR/navigation-timing/">Navigation Timing</a>，这个 API 现在
 基本上在主流浏览器上都可用。Navigation Timing 定义了一套用于测量主页面性能的
-JavaScript API。例如：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">// Navigation Timing</span>
-<span class="keyword">var</span> t = performance.timing,
+JavaScript API。例如：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-comment">// Navigation Timing</span>
+<span class="hljs-keyword">var</span> t = performance.timing,
     pageloadtime = t.loadEventStart - t.navigationStart,
     dns = t.domainLookupEnd - t.domainLookupStart,
     tcp = t.connectEnd - t.connectStart,
@@ -60,8 +60,8 @@ JavaScript API。例如：</p><div class="highlight"><div class="codes"><div cla
 <p>能够度量主页面的时间消耗真是太棒了，但是要诊断现实当中的性能问题，往往需要深入
 到各个资源当中。所以我们拥有了更进一步的 Resource Timing （资源计时）规范，
 这个 JavaScript API 提供类似 Navigation Timing 的功能，但是能精确到每一个资源的
-耗时。举个例子：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">// Resource Timing</span>
-<span class="keyword">var</span> r0 = performance.getEntriesByType(<span class="string">"resource"</span>)[<span class="number">0</span>],
+耗时。举个例子：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-comment">// Resource Timing</span>
+<span class="hljs-keyword">var</span> r0 = performance.getEntriesByType(<span class="hljs-string">"resource"</span>)[<span class="hljs-number">0</span>],
     loadtime = r0.duration,
     dns = r0.domainLookupEnd - r0.domainLookupStart,
     tcp = r0.connectEnd - r0.connectStart,
@@ -91,7 +91,7 @@ timing 对象。（感谢 <a href="http://calendar.perfplanet.com/2012/an-introd
 <code>performance.getEntriesByType(&quot;resource&quot;)</code> 得到返回，要得到这个主页面 HTML 文档
 的 timing 信息，需要使用 Navigation Timing 对象（<code>performance.timing</code>）。</p>
 <p>虽然不太可能，当页面上没有其他资源时，这可能会导致错误发生。
-例如，刚才 Resource Timing 示例使用如下代码：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">performance.getEntriesByType(<span class="string">"resource"</span>)[<span class="number">0</span>]</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a></pre></div></div><p>如果一个页面唯一的资源就是主页面的 HTML 文档，然后 <code>getEntriesByType(&quot;resource&quot;)</code>
+例如，刚才 Resource Timing 示例使用如下代码：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">performance.getEntriesByType(<span class="hljs-string">"resource"</span>)[<span class="hljs-number">0</span>]</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a></pre></div></div><p>如果一个页面唯一的资源就是主页面的 HTML 文档，然后 <code>getEntriesByType(&quot;resource&quot;)</code>
 返回一个空数组，这时候应用 <code>element[0]</code> 会引起 JavaScript 异常。如果你找不到
 没有引用子资源的页面，你可以试试 <a href="http://fast.stevesouders.com/">http://fast.stevesouders.com/</a></p>
 <h2 id="3-小心-secureconnectionstart-的问题。">3. 小心 <code>secureConnectionStart</code> 的问题。</h2><p><a href="http://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-secureconnectionstart"><code>secureConnectionStart</code></a>
@@ -110,9 +110,9 @@ timing 对象。（感谢 <a href="http://calendar.perfplanet.com/2012/an-introd
 如果获取一个资源时使用预先存在的 HTTPS 连接，则 <code>secureConnectionStart</code> 将被设置
 为 0，而实际上它应该是一个时间戳。（详情请参考 <a href="https://code.google.com/p/chromium/issues/detail?id=404501">bug 404501</a> ）
 为了避免这个问题，测量 SSL 协商时间时，一定要检查 <code>secureConnectionStart</code> 既不是
-<code>undefined</code> 也不是 <code>0</code>：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">var</span> r0 = performance.getEntriesByType(<span class="string">"resource"</span>)[<span class="number">0</span>];
-<span class="keyword">if</span> ( r0.secureConnectionStart ) {
-    <span class="keyword">var</span> ssl = r0.connectEnd - r0.secureConnectionStart;
+<code>undefined</code> 也不是 <code>0</code>：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-keyword">var</span> r0 = performance.getEntriesByType(<span class="hljs-string">"resource"</span>)[<span class="hljs-number">0</span>];
+<span class="hljs-keyword">if</span> ( r0.secureConnectionStart ) {
+    <span class="hljs-keyword">var</span> ssl = r0.connectEnd - r0.secureConnectionStart;
 }</code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
 <a name="L4-2" href="#L4-2">2</a>
 <a name="L4-3" href="#L4-3">3</a>
@@ -155,16 +155,16 @@ HTTP 页面中的 HTTPS 资源。</p>
 <p>当需要访问有限制的 timing 属性时，决定统计 Resource Timing 是非常重要的。
 可以通过检测（上面列出的，secureConnectionStart 除外）限制性属性是否为 0 的方式
 来避免限制性问题，我总是使用 <code>requestStart</code>。下面是用于在计算详细的性能指标之前，
-检测和计算限制性属性是否可用的代码片段：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">// Resource Timing</span>
-<span class="keyword">var</span> r0 = performance.getEntriesByType(<span class="string">"resource"</span>)[<span class="number">0</span>],
+检测和计算限制性属性是否可用的代码片段：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-comment">// Resource Timing</span>
+<span class="hljs-keyword">var</span> r0 = performance.getEntriesByType(<span class="hljs-string">"resource"</span>)[<span class="hljs-number">0</span>],
     loadtime = r0.duration;
-<span class="keyword">if</span> ( r0.requestStart ) {
-    <span class="keyword">var</span> dns = r0.domainLookupEnd - r0.domainLookupStart,
+<span class="hljs-keyword">if</span> ( r0.requestStart ) {
+    <span class="hljs-keyword">var</span> dns = r0.domainLookupEnd - r0.domainLookupStart,
         tcp = r0.connectEnd - r0.connectStart,
         ttfb = r0.responseStart - r0.startTime;
 }
-<span class="keyword">if</span> ( r0.secureConnectionStart ) {
-    <span class="keyword">var</span> ssl = r0.connectEnd - r0.secureConnectionStart;
+<span class="hljs-keyword">if</span> ( r0.secureConnectionStart ) {
+    <span class="hljs-keyword">var</span> ssl = r0.connectEnd - r0.secureConnectionStart;
 }</code></pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a>
 <a name="L6-2" href="#L6-2">2</a>
 <a name="L6-3" href="#L6-3">3</a>
@@ -353,7 +353,7 @@ Boomerang 是 Philip Tellis 维护的一个非常流行的开源 RUM 包。他�
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://lab.lepture.com/nico/">nico@0.5.1</a>, Theme by 闲耘™(@hotoo).
+  <a href="http://lab.lepture.com/nico/">nico@0.5.2</a>, Theme by 闲耘™(@hotoo).
   </p>
 </footer>
 </div>

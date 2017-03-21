@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta name="generator" content="nico 0.5.1">
+    <meta name="generator" content="nico 0.5.2">
     <meta name="theme" content="KISS 0.1">
     <title>笔试后双方最好能当面讨论题解 - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
@@ -50,19 +50,19 @@
 将数值格式化为指定长度的字符串（另外还有一个条件，淘宝UED给的是“能指定格式最好”，
 阿里妈妈则是“能指定进制最好”）。</p>
 <p>淘宝UED：
-想到数值可能是小数，但题目没有知道小数保留长度等条件，这里只考虑整数位。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">Number.prototype.format = <span class="function"><span class="keyword">function</span><span class="params">(len, format)</span>{</span>
-  <span class="keyword">var</span> a=<span class="keyword">this</span>.toString().split(<span class="string">"."</span>), l=a[<span class="number">0</span>].length;
-  <span class="keyword">if</span>(l&gt;=len) <span class="keyword">return</span> a.join(<span class="string">"."</span>);
-  <span class="keyword">return</span> <span class="keyword">new</span> Array(len-l+<span class="number">1</span>).join(<span class="string">"0"</span>)+a[<span class="number">0</span>] + (a[<span class="number">1</span>]?<span class="string">"."</span>+a[<span class="number">1</span>]:<span class="string">""</span>);
+想到数值可能是小数，但题目没有知道小数保留长度等条件，这里只考虑整数位。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-built_in">Number</span>.prototype.format = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">len, format</span>)</span>{
+  <span class="hljs-keyword">var</span> a=<span class="hljs-keyword">this</span>.toString().split(<span class="hljs-string">"."</span>), l=a[<span class="hljs-number">0</span>].length;
+  <span class="hljs-keyword">if</span>(l&gt;=len) <span class="hljs-keyword">return</span> a.join(<span class="hljs-string">"."</span>);
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(len-l+<span class="hljs-number">1</span>).join(<span class="hljs-string">"0"</span>)+a[<span class="hljs-number">0</span>] + (a[<span class="hljs-number">1</span>]?<span class="hljs-string">"."</span>+a[<span class="hljs-number">1</span>]:<span class="hljs-string">""</span>);
 };</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
 <a name="L1-4" href="#L1-4">4</a>
 <a name="L1-5" href="#L1-5">5</a></pre></div></div><p>阿里妈妈：
-同样有小数问题，而且小数转进制的话也有特殊的地方，这里忽略小数。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">Number.prototype.format = <span class="function"><span class="keyword">function</span><span class="params">(len, dem)</span>{</span>
-  <span class="keyword">var</span> s = <span class="keyword">this</span>.toString(dem), l=s.length;
-  <span class="keyword">if</span>(l&gt;=len) <span class="keyword">return</span> s;
-  <span class="keyword">return</span> <span class="keyword">new</span> Array(l-len+<span class="number">1</span>).join(<span class="string">"0"</span>) + s;
+同样有小数问题，而且小数转进制的话也有特殊的地方，这里忽略小数。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-built_in">Number</span>.prototype.format = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">len, dem</span>)</span>{
+  <span class="hljs-keyword">var</span> s = <span class="hljs-keyword">this</span>.toString(dem), l=s.length;
+  <span class="hljs-keyword">if</span>(l&gt;=len) <span class="hljs-keyword">return</span> s;
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(l-len+<span class="hljs-number">1</span>).join(<span class="hljs-string">"0"</span>) + s;
 };</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
@@ -74,27 +74,27 @@
 <p><img src="http://3.bp.blogspot.com/_POl6bUDELqY/ScpP_IbKQOI/AAAAAAAAH94/2CpARReFJww/s320/Alibaba-CSS.jpg" alt="图"></p>
 <p>当时解答的时候，在我看来，似乎是只给3个兄弟关系的div，没有辅助标记，让写css控制布局。</p>
 <p>css虽不是我所最擅长，但是这个布局还是可以做出来的，但是难点只在于不使用辅助标记，哪怕是div。
-当时我的解法如下（这里是调试后正确的代码，当时思想相同，但代码没有写完整，也没有经过调试验证）：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="css"><span class="id">#box0</span><span class="rules">{<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1</span>px solid <span class="hexcolor">#f00</span></span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200</span>px</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">400</span>px</span></span>;<span class="rule"><span class="attribute">margin-bottom</span>:<span class="value"><span class="number">10</span>px</span></span>;<span class="rule">}</span></span>
-<span class="id">#box1</span><span class="rules">{<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1</span>px solid <span class="hexcolor">#0f0</span></span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200</span>px</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">250</span>px</span></span>;<span class="rule">}</span></span>
-<span class="id">#box2</span><span class="rules">{<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1</span>px solid <span class="hexcolor">#00f</span></span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">600</span>px</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">650</span>px</span></span>;<span class="rule"><span class="attribute">position</span>:<span class="value">relative</span></span>;<span class="rule"><span class="attribute">top</span>:<span class="value">-<span class="number">664</span>px</span></span>;<span class="rule"><span class="attribute">left</span>:<span class="value"><span class="number">210</span>px</span></span>;<span class="rule">}</span></span></code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+当时我的解法如下（这里是调试后正确的代码，当时思想相同，但代码没有写完整，也没有经过调试验证）：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="css"><span class="hljs-selector-id">#box0</span>{<span class="hljs-attribute">border</span>:<span class="hljs-number">1px</span> solid <span class="hljs-number">#f00</span>;<span class="hljs-attribute">width</span>:<span class="hljs-number">200px</span>;<span class="hljs-attribute">height</span>:<span class="hljs-number">400px</span>;<span class="hljs-attribute">margin-bottom</span>:<span class="hljs-number">10px</span>;}
+<span class="hljs-selector-id">#box1</span>{<span class="hljs-attribute">border</span>:<span class="hljs-number">1px</span> solid <span class="hljs-number">#0f0</span>;<span class="hljs-attribute">width</span>:<span class="hljs-number">200px</span>;<span class="hljs-attribute">height</span>:<span class="hljs-number">250px</span>;}
+<span class="hljs-selector-id">#box2</span>{<span class="hljs-attribute">border</span>:<span class="hljs-number">1px</span> solid <span class="hljs-number">#00f</span>;<span class="hljs-attribute">width</span>:<span class="hljs-number">600px</span>;<span class="hljs-attribute">height</span>:<span class="hljs-number">650px</span>;<span class="hljs-attribute">position</span>:relative;<span class="hljs-attribute">top</span>:-<span class="hljs-number">664px</span>;<span class="hljs-attribute">left</span>:<span class="hljs-number">210px</span>;}</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
-<a name="L3-3" href="#L3-3">3</a></pre></div></div><div class="highlight"><div class="codes"><div class="code"><pre><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"box0"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"box1"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"box2"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
+<a name="L3-3" href="#L3-3">3</a></pre></div></div><div class="highlight"><div class="codes"><div class="code"><pre><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"box0"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"box1"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"box2"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
 <a name="L4-2" href="#L4-2">2</a>
 <a name="L4-3" href="#L4-3">3</a></pre></div></div><p>虽然效果基本相同，而且没有使用辅助标签，但总觉得有点ugly，因为这里的区域尺寸都是固定像素的，
 所以较好控制，当遇到未知高度时，#box2的top就不知道要设置为多少了，还是加一个辅助标签简单灵活。</p>
-<p>如果可以使用辅助标记，我的题解如下：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="css"><span class="id">#box</span><span class="rules">{<span class="rule"><span class="attribute">float</span>:<span class="value">left</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200</span>px</span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">0</span>px solid <span class="hexcolor">#000</span></span></span>;<span class="rule">}</span></span>
-<span class="id">#space0</span><span class="rules">{<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200</span>px</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">400</span>px</span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1</span>px solid <span class="hexcolor">#f00</span></span></span>;<span class="rule"><span class="attribute">margin-bottom</span>:<span class="value"><span class="number">10</span>px</span></span>;<span class="rule">}</span></span>
-<span class="id">#space1</span><span class="rules">{<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">200</span>px</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">250</span>px</span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1</span>px solid <span class="hexcolor">#0f0</span></span></span>;<span class="rule">}</span></span>
-<span class="id">#space2</span><span class="rules">{<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">600</span>px</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">650</span>px</span></span>;<span class="rule"><span class="attribute">float</span>:<span class="value">left</span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1</span>px solid <span class="hexcolor">#00f</span></span></span>;<span class="rule"><span class="attribute">margin-left</span>:<span class="value"><span class="number">10</span>px</span></span>;<span class="rule">}</span></span></code></pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
+<p>如果可以使用辅助标记，我的题解如下：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="css"><span class="hljs-selector-id">#box</span>{<span class="hljs-attribute">float</span>:left;<span class="hljs-attribute">width</span>:<span class="hljs-number">200px</span>;<span class="hljs-attribute">border</span>:<span class="hljs-number">0px</span> solid <span class="hljs-number">#000</span>;}
+<span class="hljs-selector-id">#space0</span>{<span class="hljs-attribute">width</span>:<span class="hljs-number">200px</span>;<span class="hljs-attribute">height</span>:<span class="hljs-number">400px</span>;<span class="hljs-attribute">border</span>:<span class="hljs-number">1px</span> solid <span class="hljs-number">#f00</span>;<span class="hljs-attribute">margin-bottom</span>:<span class="hljs-number">10px</span>;}
+<span class="hljs-selector-id">#space1</span>{<span class="hljs-attribute">width</span>:<span class="hljs-number">200px</span>;<span class="hljs-attribute">height</span>:<span class="hljs-number">250px</span>;<span class="hljs-attribute">border</span>:<span class="hljs-number">1px</span> solid <span class="hljs-number">#0f0</span>;}
+<span class="hljs-selector-id">#space2</span>{<span class="hljs-attribute">width</span>:<span class="hljs-number">600px</span>;<span class="hljs-attribute">height</span>:<span class="hljs-number">650px</span>;<span class="hljs-attribute">float</span>:left;<span class="hljs-attribute">border</span>:<span class="hljs-number">1px</span> solid <span class="hljs-number">#00f</span>;<span class="hljs-attribute">margin-left</span>:<span class="hljs-number">10px</span>;}</code></pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
 <a name="L5-2" href="#L5-2">2</a>
 <a name="L5-3" href="#L5-3">3</a>
-<a name="L5-4" href="#L5-4">4</a></pre></div></div><div class="highlight"><div class="codes"><div class="code"><pre><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"box"</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"space0"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"space1"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"space2"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a>
+<a name="L5-4" href="#L5-4">4</a></pre></div></div><div class="highlight"><div class="codes"><div class="code"><pre><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"box"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"space0"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"space1"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"space2"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a>
 <a name="L6-2" href="#L6-2">2</a>
 <a name="L6-3" href="#L6-3">3</a>
 <a name="L6-4" href="#L6-4">4</a>
@@ -207,7 +207,7 @@
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://lab.lepture.com/nico/">nico@0.5.1</a>, Theme by 闲耘™(@hotoo).
+  <a href="http://lab.lepture.com/nico/">nico@0.5.2</a>, Theme by 闲耘™(@hotoo).
   </p>
 </footer>
 </div>

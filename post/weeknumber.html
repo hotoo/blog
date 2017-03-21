@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta name="generator" content="nico 0.5.1">
+    <meta name="generator" content="nico 0.5.2">
     <meta name="theme" content="KISS 0.1">
     <title>周数(Week Number, WeekNum)计算 - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
@@ -45,17 +45,17 @@
   <div class="entry-content"><p>jQuery UI v1.8rc 版的日历控件已经非常完善，比之 v1.7.1 已经支持显示周数(WeekNum)，
 而且计算 WeekNum 的算法可以自定义；而 <a href="http://www.my97.net/dp/demo/index.htm">My97DatePicker</a>
 的算法又有Bug。对于两年交接的周，有两种常见的算法：</p>
-<p>每年 1月 1日所在的周均为该年的第 1周（如MS Excel的WeekNum()函数和 jQuery 实现）；</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">/* Set as calculateWeek to determine the week of the year based on the ISO 8601 definition.
+<p>每年 1月 1日所在的周均为该年的第 1周（如MS Excel的WeekNum()函数和 jQuery 实现）；</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-comment">/* Set as calculateWeek to determine the week of the year based on the ISO 8601 definition.
    @param  date  Date - the date to get the week for
    @return  number - the number of the week within the year that contains this date */</span>
-iso8601Week: <span class="function"><span class="keyword">function</span><span class="params">(date)</span> {</span>
-    <span class="keyword">var</span> checkDate = <span class="keyword">new</span> Date(date.getTime());
-    <span class="comment">// Find Thursday of this week starting on Monday</span>
-    checkDate.setDate(checkDate.getDate() + <span class="number">4</span> - (checkDate.getDay() || <span class="number">7</span>));
-    <span class="keyword">var</span> time = checkDate.getTime();
-    checkDate.setMonth(<span class="number">0</span>); <span class="comment">// Compare with Jan 1</span>
-    checkDate.setDate(<span class="number">1</span>);
-    <span class="keyword">return</span> Math.floor(Math.round((time - checkDate) / <span class="number">86400000</span>) / <span class="number">7</span>) + <span class="number">1</span>;
+iso8601Week: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">date</span>) </span>{
+    <span class="hljs-keyword">var</span> checkDate = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(date.getTime());
+    <span class="hljs-comment">// Find Thursday of this week starting on Monday</span>
+    checkDate.setDate(checkDate.getDate() + <span class="hljs-number">4</span> - (checkDate.getDay() || <span class="hljs-number">7</span>));
+    <span class="hljs-keyword">var</span> time = checkDate.getTime();
+    checkDate.setMonth(<span class="hljs-number">0</span>); <span class="hljs-comment">// Compare with Jan 1</span>
+    checkDate.setDate(<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.round((time - checkDate) / <span class="hljs-number">86400000</span>) / <span class="hljs-number">7</span>) + <span class="hljs-number">1</span>;
 },</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
@@ -67,14 +67,14 @@ iso8601Week: <span class="function"><span class="keyword">function</span><span c
 <a name="L1-9" href="#L1-9">9</a>
 <a name="L1-10" href="#L1-10">10</a>
 <a name="L1-11" href="#L1-11">11</a>
-<a name="L1-12" href="#L1-12">12</a></pre></div></div><p>每年最后 1天所在的周</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">/**
+<a name="L1-12" href="#L1-12">12</a></pre></div></div><p>每年最后 1天所在的周</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-comment">/**
  * @param date {Date} 每周第 1天。
  * @return {Number}
  */</span>
-calculateWeek:<span class="function"><span class="keyword">function</span><span class="params">(date)</span>{</span>
-    <span class="keyword">var</span> d = <span class="keyword">new</span> Date(date.getTime()+(<span class="number">6</span>*<span class="number">86400000</span>)), t=d.getTime();
-    <span class="keyword">var</span> start = <span class="keyword">new</span> Date(d.getTime()); start.setMonth(<span class="number">0</span>); start.setDate(<span class="number">1</span>);
-    <span class="keyword">return</span> Math.floor((t - start.getTime())/<span class="number">86400000</span>/<span class="number">7</span>)+<span class="number">1</span>;
+calculateWeek:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">date</span>)</span>{
+    <span class="hljs-keyword">var</span> d = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(date.getTime()+(<span class="hljs-number">6</span>*<span class="hljs-number">86400000</span>)), t=d.getTime();
+    <span class="hljs-keyword">var</span> start = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(d.getTime()); start.setMonth(<span class="hljs-number">0</span>); start.setDate(<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.floor((t - start.getTime())/<span class="hljs-number">86400000</span>/<span class="hljs-number">7</span>)+<span class="hljs-number">1</span>;
 }</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
@@ -189,7 +189,7 @@ calculateWeek:<span class="function"><span class="keyword">function</span><span 
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://lab.lepture.com/nico/">nico@0.5.1</a>, Theme by 闲耘™(@hotoo).
+  <a href="http://lab.lepture.com/nico/">nico@0.5.2</a>, Theme by 闲耘™(@hotoo).
   </p>
 </footer>
 </div>

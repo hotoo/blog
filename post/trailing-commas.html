@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta name="generator" content="nico 0.5.1">
+    <meta name="generator" content="nico 0.5.2">
     <meta name="theme" content="KISS 0.1">
     <title>末尾的逗号 - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
@@ -46,12 +46,12 @@
 <a name="more"></a>
 
 <p>早期的 JavaScript 运行环境大都不支持末尾多出来的逗号，或者会抛出异常，或者不符合期望。</p>
-<p>比如：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">var</span> obj = {
-  a: <span class="number">0</span>, <span class="comment">// 抛出异常。</span>
+<p>比如：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-keyword">var</span> obj = {
+  a: <span class="hljs-number">0</span>, <span class="hljs-comment">// 抛出异常。</span>
 };
 
-<span class="keyword">var</span> arr = [
-  <span class="number">0</span>, <span class="comment">// arr.length === 2</span>
+<span class="hljs-keyword">var</span> arr = [
+  <span class="hljs-number">0</span>, <span class="hljs-comment">// arr.length === 2</span>
 ];</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
@@ -70,15 +70,15 @@
 </li>
 <li>如果被添加项不是列表的最后一项，则被添加项要加上逗号。</li>
 </ul><div class="highlight"><div class="codes"><div class="code"><pre><code class="diff"> var obj = {
-<span class="deletion">-  a: 0</span>
-<span class="addition">+  a: 0,</span>
-<span class="addition">+  b: 1</span>
+<span class="hljs-deletion">-  a: 0</span>
+<span class="hljs-addition">+  a: 0,</span>
+<span class="hljs-addition">+  b: 1</span>
  };
 
  var arr = [
-<span class="deletion">-  0</span>
-<span class="addition">+  0,</span>
-<span class="addition">+  1</span>
+<span class="hljs-deletion">-  0</span>
+<span class="hljs-addition">+  0,</span>
+<span class="hljs-addition">+  1</span>
  ];</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
@@ -94,15 +94,15 @@
 <li>你本来只是要删除了最后一项，但你不得不修改前一项。麻烦，容易出问题。</li>
 <li>你本来只是删除了一项，但在 diff 中也是看到又是删除，又是增加。</li>
 </ul><div class="highlight"><div class="codes"><div class="code"><pre><code class="diff"> var obj = {
-<span class="deletion">-  a: 0,</span>
-<span class="deletion">-  b: 1</span>
-<span class="addition">+  a: 0</span>
+<span class="hljs-deletion">-  a: 0,</span>
+<span class="hljs-deletion">-  b: 1</span>
+<span class="hljs-addition">+  a: 0</span>
  };
 
  var arr = [
-<span class="deletion">-  0,</span>
-<span class="deletion">-  1</span>
-<span class="addition">+  0</span>
+<span class="hljs-deletion">-  0,</span>
+<span class="hljs-deletion">-  1</span>
+<span class="hljs-addition">+  0</span>
  ];</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
 <a name="L3-3" href="#L3-3">3</a>
@@ -121,12 +121,12 @@
 </ul>
 <p>新增一项：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="diff"> var obj = {
    a: 0,
-<span class="addition">+  b: 1,</span>
+<span class="hljs-addition">+  b: 1,</span>
  };
 
  var arr = [
    0,
-<span class="addition">+  1,</span>
+<span class="hljs-addition">+  1,</span>
  ];</code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
 <a name="L4-2" href="#L4-2">2</a>
 <a name="L4-3" href="#L4-3">3</a>
@@ -137,12 +137,12 @@
 <a name="L4-8" href="#L4-8">8</a>
 <a name="L4-9" href="#L4-9">9</a></pre></div></div><p>删除一项：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="diff"> var obj = {
    a: 0,
-<span class="deletion">-  b: 1,</span>
+<span class="hljs-deletion">-  b: 1,</span>
  };
 
  var arr = [
    0,
-<span class="deletion">-  1,</span>
+<span class="hljs-deletion">-  1,</span>
  ];</code></pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
 <a name="L5-2" href="#L5-2">2</a>
 <a name="L5-3" href="#L5-3">3</a>
@@ -261,7 +261,7 @@ xml，html 等。</p>
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://lab.lepture.com/nico/">nico@0.5.1</a>, Theme by 闲耘™(@hotoo).
+  <a href="http://lab.lepture.com/nico/">nico@0.5.2</a>, Theme by 闲耘™(@hotoo).
   </p>
 </footer>
 </div>

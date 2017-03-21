@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width">
     <meta name="generator" content="nico 0.5.2">
     <meta name="theme" content="KISS 0.1">
-    <title>面积分割算法 - 闲耘™.博客</title>
+    <title>2017 / 1 - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
-    <link rel="stylesheet" href="../static/syntax.css" />
-    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+    <link rel="stylesheet" href="../../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../../static/template.css" />
   </head>
   <body>
   <div id="wrapper">
     <header class="navigation" role="navigation">
-      <!--<a class="home" href="../">闲耘™.博客</a>-->
+      <!--<a class="home" href="../../">闲耘™.博客</a>-->
       <div style="float:right;">
         <form action="/search.html">
           <input type="text" name="q" autocomplete="off" />
@@ -40,54 +40,10 @@
 
 <div id="container">
   <div id="content" class="document">
-<div class="hentry">
-  <h1 class="entry-title">面积分割算法</h1>
-  <div class="entry-content"><p>做用户点击行为分析的展现时，用了一个透明的层覆盖在页面上，然后覆盖一层 canvas
-画布，使用稀疏矩阵算法绘制热点分布图。</p>
-<p>预蒙上一层透明蒙版，然后只对需要的区域进行绘制热点图，本是非常不错的方案，我
-本机上也一直无问题。但是测试提交了一个 bug，说 IE 下看到点击热点图及轨迹图背后
-一片漆黑，我就猜测滤镜问题，最先猜想的是浏览器安全设置导致的滤镜无效，但是又
-发现有些类似的图形有没有问题。</p>
-<p>结果发现是某些显卡下，IE 中超大面积的区域滤镜会失效。</p>
-<p>首先想到的解决办法就是针对 IE 进行切割蒙版，由多个蒙版拼接而成，类似于铺地板。</p>
-<p>普通的算法有两种：</p>
-<ol>
-<li>将整块蒙版区域划分成多个 2000*2000 的蒙版，最后一列和最后一行不足指数，取余
-设置宽高。</li>
-<li>将整块蒙版划分成多个不超过 2000*2000 的等份蒙版。这种算法比较简单，稍微的不足
-之处在于，不能除断的情况，无法等分。</li>
+<h1 class="entry-title">2017 / 1</h1>
+<ol class="entry-list">
+  <li><a href="../../post/html-tabs">HTML Tabs 最佳实践</a> (<time datetime="2017-03-21T00:00:00.000Z">2017-03-21</time>)</li>
 </ol>
-<p>TODO: 有更灵巧的算法么，当然有了，只是我还不知道而已。</p>
-<h2 id="后来想到">后来想到</h2><p>用 canvas 绘制一个透明的区域也未尝不可。</p>
-</div>
-
-  <footer class="entry-meta post clearfix">
-    <span class="tags"><a href="/tag">Tags</a>:
- 
-      <a href="/tag/#算法">算法</a>
-      
-    </span>
-
-    <time datetime="2011-08-25T00:00:00.000Z">
-      <a href="/2011">2011年</a>08月25日
-    </time>
-  </footer>
-    <section>
-      <div id="disqus_thread"></div>
-      <noscript>
-        要查看或参与评论，请启用 JavaScript 支持。<br />
-        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
-      </noscript>
-    </section>
-  <script type="text/javascript">
-    
-    var disqus_identifier = "area-split";
-    
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    dsq.src = 'http://hotoo.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  </script>
-</div>
 </div>
 
     <!-- Vimlike status bar -->

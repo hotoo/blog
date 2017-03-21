@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta name="generator" content="nico 0.5.1">
+    <meta name="generator" content="nico 0.5.2">
     <meta name="theme" content="KISS 0.1">
     <title>首页 - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
@@ -46,28 +46,26 @@
   <div class="container">
     <div class="post">
       
-          <h1>使用 GPG 签名 Git Commits <a href="post/gpg-sign-for-git-comments" class="title-permalink">¶</a></h1>
+          <h1>HTML Tabs 最佳实践 <a href="post/html-tabs" class="title-permalink">¶</a></h1>
           <section>
- <p>前段时间 GitHub 支持在 Git Commits 中使用 GPG 签名验证，可以避免其他人使用你的
-Email 进行 commit。</p>
-<h2 id="安装-gpg">安装 GPG</h2><p>下载地址： <a href="https://www.gnupg.org/download/">https://www.gnupg.org/download/</a></p>
-<p>Mac 下有两个可选工具，分别是 <a href="http://gpgtools.org/">Mac GPG</a> 和 GnuPG for OS X，我都尝试了下，觉得
-Mac GPG 相对比较容易点，安装过程中同时引导创建一个 GPG key 存储到 GPG keychain
-中，并且在 Git 提交时记住 passphrase，避免每次提交输入 passphrase。</p>
-<p class="more"><a href="post/gpg-sign-for-git-comments#more">阅读详情...</a></p>
+ <p>Tabs 面板的显示和隐藏一般以 display 来控制显示和隐藏，但是如果默认未显示的 Tabs 面板中渲染需要知道面板宽高的组件
+（如 Canvas，某些轮播组件等）时，就会因为面板在 display:none 的状态下无法拿到宽高导致渲染组件异常。</p>
+<p>这里建议 Tabs 使用 position:absolute 来将不可见的组件移动到用户不可见的负坐标区域，需要时再将面板移动到可见区域，
+来避免面板不可见时渲染内部组件异常的问题。而且也可以做一些滑动显示的动画效果。</p>
+<p class="more"><a href="post/html-tabs#more">阅读详情...</a></p>
           </section>
           <footer class="post clearfix">
             <span class="tags"><a href="/tag">Tags</a>:
  
-                <a href="/tag/#Git">Git</a>
+                <a href="/tag/#Code">Code</a>
               
  , 
-                <a href="/tag/#GPG">GPG</a>
+                <a href="/tag/#Tabs">Tabs</a>
               
             </span>
 
             <time>
-              <a href="/2016">2016年</a>06月11日
+              <a href="/2017">2017年</a>03月21日
             </time>
           </footer>
     </div>
@@ -76,6 +74,11 @@ Mac GPG 相对比较容易点，安装过程中同时引导创建一个 GPG key 
 
     <ul class="posts">
  
+ 
+          <li class="posts-item">
+            <a href="post/gpg-sign-for-git-comments">使用 GPG 签名 Git Commits</a>
+            (<time class="datetime">2016-06-11</time>)
+          </li>
  
           <li class="posts-item">
             <a href="post/test-code-and-testable-code">测试代码和可测试代码</a>
@@ -97,10 +100,6 @@ Mac GPG 相对比较容易点，安装过程中同时引导创建一个 GPG key 
             (<time class="datetime">2015-07-24</time>)
           </li>
  
-          <li class="posts-item">
-            <a href="post/gitplus">git+, a hack of git, smart for you.</a>
-            (<time class="datetime">2015-05-27</time>)
-          </li>
  
  
  
@@ -346,7 +345,7 @@ Mac GPG 相对比较容易点，安装过程中同时引导创建一个 GPG key 
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://lab.lepture.com/nico/">nico@0.5.1</a>, Theme by 闲耘™(@hotoo).
+  <a href="http://lab.lepture.com/nico/">nico@0.5.2</a>, Theme by 闲耘™(@hotoo).
   </p>
 </footer>
 </div>

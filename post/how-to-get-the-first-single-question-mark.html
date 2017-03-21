@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta name="generator" content="nico 0.5.1">
+    <meta name="generator" content="nico 0.5.2">
     <meta name="theme" content="KISS 0.1">
     <title>如何取 URL 中第一个单独的问号(?) 位置 - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
@@ -45,21 +45,21 @@
   <div class="entry-content"><p>新版 Arale 通过 nginx 服务支持使用双问号的访问方式：</p><div class="highlight"><div class="codes"><div class="code"><pre>https://www.example.com/??module.js</pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a></pre></div></div><p>访问 <code>https://www.example.com/module.js</code></p>
 <p>通过正则的正向预搜索有办法获得第一个单问号的位置么？</p><div class="highlight"><div class="codes"><div class="code"><pre>var r = /\?(?!\?)/;</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div><p>会匹配双问号的第 2 个问号：</p><div class="highlight"><div class="codes"><div class="code"><pre>https://www.example.com/??modu.js
                          ^</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
-<a name="L3-2" href="#L3-2">2</a></pre></div></div><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">var</span> path = <span class="function"><span class="keyword">function</span><span class="params">(uri)</span>{</span>
-    <span class="keyword">var</span> idx = uri.indexOf(<span class="string">";jsessionid="</span>);
-    <span class="keyword">if</span>(idx &gt;= <span class="number">0</span>){<span class="keyword">return</span> uri.substr(<span class="number">0</span>, idx);}
+<a name="L3-2" href="#L3-2">2</a></pre></div></div><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-keyword">var</span> path = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">uri</span>)</span>{
+    <span class="hljs-keyword">var</span> idx = uri.indexOf(<span class="hljs-string">";jsessionid="</span>);
+    <span class="hljs-keyword">if</span>(idx &gt;= <span class="hljs-number">0</span>){<span class="hljs-keyword">return</span> uri.substr(<span class="hljs-number">0</span>, idx);}
 
-    <span class="keyword">do</span>{
-        idx = uri.indexOf(<span class="string">"?"</span>, idx);
-        <span class="keyword">if</span>(idx &lt; <span class="number">0</span>){<span class="keyword">break</span>;}
-        <span class="keyword">if</span>(<span class="string">"?"</span> == uri.charAt(idx+<span class="number">1</span>)){
-            idx += <span class="number">2</span>;
-        }<span class="keyword">else</span>{
-            <span class="keyword">break</span>;
+    <span class="hljs-keyword">do</span>{
+        idx = uri.indexOf(<span class="hljs-string">"?"</span>, idx);
+        <span class="hljs-keyword">if</span>(idx &lt; <span class="hljs-number">0</span>){<span class="hljs-keyword">break</span>;}
+        <span class="hljs-keyword">if</span>(<span class="hljs-string">"?"</span> == uri.charAt(idx+<span class="hljs-number">1</span>)){
+            idx += <span class="hljs-number">2</span>;
+        }<span class="hljs-keyword">else</span>{
+            <span class="hljs-keyword">break</span>;
         }
-    }<span class="keyword">while</span>(idx &gt;= <span class="number">0</span>);
+    }<span class="hljs-keyword">while</span>(idx &gt;= <span class="hljs-number">0</span>);
 
-    <span class="keyword">return</span> idx &lt; <span class="number">0</span> ? uri : uri.substr(<span class="number">0</span>, idx);
+    <span class="hljs-keyword">return</span> idx &lt; <span class="hljs-number">0</span> ? uri : uri.substr(<span class="hljs-number">0</span>, idx);
 };</code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
 <a name="L4-2" href="#L4-2">2</a>
 <a name="L4-3" href="#L4-3">3</a>
@@ -77,14 +77,14 @@
 <a name="L4-15" href="#L4-15">15</a>
 <a name="L4-16" href="#L4-16">16</a></pre></div></div><p>目前是通过循环方式计算的，无心比较遍历和正则之间无优劣，
 纯粹对于正则的实现很有兴趣 :)</p>
-<h2 id="答案一：">答案一：</h2><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">var</span> path = <span class="function"><span class="keyword">function</span><span class="params">(uri)</span>{</span>
-    <span class="keyword">return</span> uri.replace(<span class="regexp">/;jsessionid=.*$/</span>, <span class="string">""</span>)
-        .replace(<span class="regexp">/^(.*?[^?])\?[^?]/</span>, <span class="string">"$1"</span>);
+<h2 id="答案一：">答案一：</h2><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-keyword">var</span> path = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">uri</span>)</span>{
+    <span class="hljs-keyword">return</span> uri.replace(<span class="hljs-regexp">/;jsessionid=.*$/</span>, <span class="hljs-string">""</span>)
+        .replace(<span class="hljs-regexp">/^(.*?[^?])\?[^?]/</span>, <span class="hljs-string">"$1"</span>);
 };</code></pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
 <a name="L5-2" href="#L5-2">2</a>
 <a name="L5-3" href="#L5-3">3</a>
-<a name="L5-4" href="#L5-4">4</a></pre></div></div><h2 id="答案二：">答案二：</h2><p>上面用了两个相同规则的分组，这里可以减少到一个分组</p><div class="highlight"><div class="codes"><div class="code"><pre>&quot;asdfadf??a?a&quot;.replace(/([^\s])\?\1/, &#39;$1*$1&#39;); // &quot;asdfadf??a*a&quot;</pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a></pre></div></div><p>但是这种做法对于问号(?)在字符串首尾时没有办法匹配</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">var</span> temp= <span class="string">"12345???89?asdf"</span>.search(<span class="regexp">/(?:[^?]|^)\?(?!\?)/</span>);
-<span class="keyword">var</span> index = temp ? temp + <span class="number">1</span> : temp; <span class="comment">// index的就想要的索引值</span></code></pre></div><pre class="line"><a name="L7-1" href="#L7-1">1</a>
+<a name="L5-4" href="#L5-4">4</a></pre></div></div><h2 id="答案二：">答案二：</h2><p>上面用了两个相同规则的分组，这里可以减少到一个分组</p><div class="highlight"><div class="codes"><div class="code"><pre>&quot;asdfadf??a?a&quot;.replace(/([^\s])\?\1/, &#39;$1*$1&#39;); // &quot;asdfadf??a*a&quot;</pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a></pre></div></div><p>但是这种做法对于问号(?)在字符串首尾时没有办法匹配</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-keyword">var</span> temp= <span class="hljs-string">"12345???89?asdf"</span>.search(<span class="hljs-regexp">/(?:[^?]|^)\?(?!\?)/</span>);
+<span class="hljs-keyword">var</span> index = temp ? temp + <span class="hljs-number">1</span> : temp; <span class="hljs-comment">// index的就想要的索引值</span></code></pre></div><pre class="line"><a name="L7-1" href="#L7-1">1</a>
 <a name="L7-2" href="#L7-2">2</a></pre></div></div></div>
 
   <footer class="entry-meta post clearfix">
@@ -190,7 +190,7 @@
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://lab.lepture.com/nico/">nico@0.5.1</a>, Theme by 闲耘™(@hotoo).
+  <a href="http://lab.lepture.com/nico/">nico@0.5.2</a>, Theme by 闲耘™(@hotoo).
   </p>
 </footer>
 </div>

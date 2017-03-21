@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta name="generator" content="nico 0.5.1">
+    <meta name="generator" content="nico 0.5.2">
     <meta name="theme" content="KISS 0.1">
     <title>非递归遍历 DOM 结构 - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
@@ -45,10 +45,10 @@
   <div class="entry-content"><p>上次在Google+ 上说 <a href="https://plus.google.com/108314985261981078822/posts/ithY3w7tEWR">实现了非递归遍历 DOM 结构</a>，
 有朋友想让分享，我当然很高兴，但是很遗憾这本身没有什么值得分享的，大致如下，
 给大家随便看一下：</p>
-<p>常见的递归方式遍历方式，下面是 Douglas Crockford 写的递归实现：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">walkTheDOM</span> <span class="params">(node, func)</span> {</span>
+<p>常见的递归方式遍历方式，下面是 Douglas Crockford 写的递归实现：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">walkTheDOM</span> (<span class="hljs-params">node, func</span>) </span>{
     func(node);
     node = node.firstChild;
-    <span class="keyword">while</span> (node) {
+    <span class="hljs-keyword">while</span> (node) {
         walkTheDOM(node, func);
         node = node.nextSibling;
     }
@@ -59,8 +59,8 @@
 <a name="L1-5" href="#L1-5">5</a>
 <a name="L1-6" href="#L1-6">6</a>
 <a name="L1-7" href="#L1-7">7</a>
-<a name="L1-8" href="#L1-8">8</a></pre></div></div><p>然后有人自称写出了更快的遍历 DOM 方式。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">var</span> elems = document.getElementsByTagName(<span class="string">"*"</span>);
-<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,l=elems.length; i&lt;l; i++){
+<a name="L1-8" href="#L1-8">8</a></pre></div></div><p>然后有人自称写出了更快的遍历 DOM 方式。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-keyword">var</span> elems = <span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">"*"</span>);
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span>,l=elems.length; i&lt;l; i++){
     handler(elems[i]);
 }</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
@@ -73,29 +73,29 @@
 <li>注释等元素未必会被遍历。</li>
 <li>树形数据结构被整理成了平板结构，无法实现遍历过程的 in/out 处理。</li>
 </ol>
-<p>然后今天的主角隆重登场：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">walk</span><span class="params">(node, enter, leave)</span>{</span>
-    <span class="keyword">var</span> tmp, n=node;
+<p>然后今天的主角隆重登场：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">walk</span>(<span class="hljs-params">node, enter, leave</span>)</span>{
+    <span class="hljs-keyword">var</span> tmp, n=node;
     label:
-    <span class="keyword">do</span>{
+    <span class="hljs-keyword">do</span>{
         enter(n);
-        <span class="keyword">if</span>(tmp = firstNode(node)){ <span class="comment">// firstChild(HTMLElement)</span>
+        <span class="hljs-keyword">if</span>(tmp = firstNode(node)){ <span class="hljs-comment">// firstChild(HTMLElement)</span>
             n = tmp;
-        }<span class="keyword">else</span> <span class="keyword">if</span>(tmp = nextNode(n)){ <span class="comment">// nextSibling(HTMLElement)</span>
+        }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(tmp = nextNode(n)){ <span class="hljs-comment">// nextSibling(HTMLElement)</span>
             n = tmp;
-        }<span class="keyword">else</span> <span class="keyword">if</span>(n.parentNode){
-            <span class="keyword">do</span>{
+        }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(n.parentNode){
+            <span class="hljs-keyword">do</span>{
                 n = n.parentNode;
                 leave(n);
-                <span class="keyword">if</span>(n == node){<span class="keyword">break</span> label;}
-                <span class="keyword">if</span>(tmp = nextNode(n)){
+                <span class="hljs-keyword">if</span>(n == node){<span class="hljs-keyword">break</span> label;}
+                <span class="hljs-keyword">if</span>(tmp = nextNode(n)){
                     n = tmp;
-                    <span class="keyword">continue</span> label;
+                    <span class="hljs-keyword">continue</span> label;
                 }
-            }<span class="keyword">while</span>(node);
-        }<span class="keyword">else</span>{
-            <span class="keyword">break</span>;
+            }<span class="hljs-keyword">while</span>(node);
+        }<span class="hljs-keyword">else</span>{
+            <span class="hljs-keyword">break</span>;
         }
-    }<span class="keyword">while</span>(n &amp;&amp; n!=node);
+    }<span class="hljs-keyword">while</span>(n &amp;&amp; n!=node);
 }</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
 <a name="L3-3" href="#L3-3">3</a>
@@ -230,7 +230,7 @@
   <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
     Commons Attribution 2.5 Generic License</a>.<br/>
   Copyleft &copy; 2005-2013, Power by
-  <a href="http://lab.lepture.com/nico/">nico@0.5.1</a>, Theme by 闲耘™(@hotoo).
+  <a href="http://lab.lepture.com/nico/">nico@0.5.2</a>, Theme by 闲耘™(@hotoo).
   </p>
 </footer>
 </div>
