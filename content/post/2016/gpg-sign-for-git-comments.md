@@ -172,3 +172,4 @@ Comment: GPGTools - https://gpgtools.org
 - [A Git Horror Story: Repository Integrity With Signed Commits](https://mikegerwitz.com/papers/git-horror-story)
 - [Git 使用中的教训：签名提交确保代码完整可信](http://www.oschina.net/translate/git-horror-story)
 - [使用 GPG 签名 Git 提交和标签](http://arondight.me/2016/04/17/%E4%BD%BF%E7%94%A8GPG%E7%AD%BE%E5%90%8DGit%E6%8F%90%E4%BA%A4%E5%92%8C%E6%A0%87%E7%AD%BE/)
+- [Step-by-step guide on how to create a GPG key on keybase.io, adding it to a local GPG setup and use it with Git and GitHub](https://github.com/pstadler/keybase-gpg-github)
