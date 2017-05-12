@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width">
     <meta name="generator" content="nico 0.5.2">
     <meta name="theme" content="KISS 0.1">
-    <title>首页 - 闲耘™.博客</title>
+    <title>Git 提效篇 - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="http://blog.hotoo.me/feed.xml" title="闲耘™.博客" />
-    <link rel="stylesheet" href="./static/syntax.css" />
-    <link type="text/css" rel="stylesheet" href="./static/template.css" />
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
   </head>
   <body>
   <div id="wrapper">
     <header class="navigation" role="navigation">
-      <!--<a class="home" href="./">闲耘™.博客</a>-->
+      <!--<a class="home" href="../">闲耘™.博客</a>-->
       <div style="float:right;">
         <form action="/search.html">
           <input type="text" name="q" autocomplete="off" />
@@ -41,256 +41,75 @@
 <div id="container">
   <div id="content" class="document">
 <div class="hentry">
-  <!--<h1 class="entry-title">首页</h1>-->
-
-  <div class="container">
-    <div class="post">
-      
-          <h1>Git 提效篇 <a href="post/git-branch" class="title-permalink">¶</a></h1>
-          <section>
- <h2 id="分支备注">分支备注</h2><p>集团的流程工具会生成一团奇形怪状的分支名称，要记忆这些分支名是一项难题，默认的 <code>git branch</code> 列出的本地分支都是几乎无法识别的乱码，如果快速标识并识别出这些分支呢？</p>
-<h3 id="备注分支">备注分支</h3><div class="highlight"><pre><code class="bash">$ git config branch.ANT01942367_20170510_wealthbffweb.description <span class="hljs-string">"小聚宝 2.1"</span>
+  <h1 class="entry-title">Git 提效篇</h1>
+  <div class="entry-content"><h2 id="分支备注">分支备注</h2><p>集团的流程工具会生成一团奇形怪状的分支名称，要记忆这些分支名是一项难题，默认的 <code>git branch</code> 列出的本地分支都是几乎无法识别的乱码，如果快速标识并识别出这些分支呢？</p>
+<h3 id="备注分支">备注分支</h3><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">$ git config branch.ANT01942367_20170510_wealthbffweb.description <span class="hljs-string">"小聚宝 2.1"</span>
 $ git branch
   ANT01730954_20170224_wealthbffweb
   ANT01785082_20170316_wealthbffweb
   ANT01824187_20170329_wealthbffweb
 * ANT01942367_20170510_wealthbffweb
 $ git config branch.ANT01942367_20170510_wealthbffweb.description
-小聚宝 2.1</code></pre></div><p>还可以使用 <code>git branch --edit-description</code> 命令编辑复杂的备注信息。</p>
+小聚宝 2.1</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a>
+<a name="L1-3" href="#L1-3">3</a>
+<a name="L1-4" href="#L1-4">4</a>
+<a name="L1-5" href="#L1-5">5</a>
+<a name="L1-6" href="#L1-6">6</a>
+<a name="L1-7" href="#L1-7">7</a>
+<a name="L1-8" href="#L1-8">8</a></pre></div></div><p>还可以使用 <code>git branch --edit-description</code> 命令编辑复杂的备注信息。</p>
 <h3 id="显示备注">显示备注</h3><p>默认 <code>git branch</code> 列出的本地分支不会附带备注信息，git 内置的 <code>git config branch.{branch_name}.description</code> 可以显示单个分支的备注。</p>
-<p>以下方法可以一次性列出所有分支，并附上各个分支对应的备注信息。</p>
-<div class="highlight"><pre><code class="bash">$ npm install git-br -g
+<p>以下方法可以一次性列出所有分支，并附上各个分支对应的备注信息。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">$ npm install git-br -g
 $ git config --global alias.br !git-br
 $ git br
   ANT01730954_20170224_wealthbffweb 资产质押 250
   ANT01785082_20170316_wealthbffweb 小聚宝 2.0
   ANT01824187_20170329_wealthbffweb 中间页
-* ANT01942367_20170510_wealthbffweb 小聚宝 2.1</code></pre></div><h2 id="分支别名">分支别名</h2><p>上面的方法备注了一团乱码的分支名，但真正要切换到这种分支时，仍然需要 <code>git br</code> 列出所有分支，并从中找出目标分支，复制，<code>git co &lt;C-v&gt;</code>，有没有更便捷的方法呢，答案是肯定的。</p>
-<h3 id="git-symbolic-ref">git symbolic-ref</h3><p>Git 内置了强大的 symbolic-ref 方法，可以给分支增加引用（别名）：</p>
-<div class="highlight"><pre><code class="bash">$ git symbolic-ref refs/heads/{<span class="hljs-built_in">alias</span>Name} refs/heads/{未知分支}
+* ANT01942367_20170510_wealthbffweb 小聚宝 2.1</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+<a name="L2-2" href="#L2-2">2</a>
+<a name="L2-3" href="#L2-3">3</a>
+<a name="L2-4" href="#L2-4">4</a>
+<a name="L2-5" href="#L2-5">5</a>
+<a name="L2-6" href="#L2-6">6</a>
+<a name="L2-7" href="#L2-7">7</a></pre></div></div><h2 id="分支别名">分支别名</h2><p>上面的方法备注了一团乱码的分支名，但真正要切换到这种分支时，仍然需要 <code>git br</code> 列出所有分支，并从中找出目标分支，复制，<code>git co &lt;C-v&gt;</code>，有没有更便捷的方法呢，答案是肯定的。</p>
+<h3 id="git-symbolic-ref">git symbolic-ref</h3><p>Git 内置了强大的 symbolic-ref 方法，可以给分支增加引用（别名）：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">$ git symbolic-ref refs/heads/{<span class="hljs-built_in">alias</span>Name} refs/heads/{未知分支}
 $ git co {<span class="hljs-built_in">alias</span>Name}
 Switched to branch <span class="hljs-string">'{aliasName}'</span>
-; 这时候会切换到 {未知分支}</code></pre></div><h2 id="参考">参考</h2><ul>
+; 这时候会切换到 {未知分支}</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+<a name="L3-2" href="#L3-2">2</a>
+<a name="L3-3" href="#L3-3">3</a>
+<a name="L3-4" href="#L3-4">4</a></pre></div></div><h2 id="参考">参考</h2><ul>
 <li><a href="https://github.com/bahmutov/git-branches">https://github.com/bahmutov/git-branches</a></li>
 <li><a href="https://gist.github.com/mauricerkelly/0b12b20a870d1e38081e">https://gist.github.com/mauricerkelly/0b12b20a870d1e38081e</a></li>
 </ul>
+</div>
 
-          </section>
-          <footer class="post clearfix">
-            <span class="tags"><a href="/tag">Tags</a>:
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="/tag">Tags</a>:
  
-                <a href="/tag/#Git">Git</a>
-              
-            </span>
+      <a href="/tag/#Git">Git</a>
+      
+    </span>
 
-            <time>
-              <a href="/2017">2017年</a>05月21日
-            </time>
-          </footer>
-    </div>
-
-    <h2>最近文章</h2>
-
-    <ul class="posts">
- 
- 
-          <li class="posts-item">
-            <a href="post/html-tabs">HTML Tabs 最佳实践</a>
-            (<time class="datetime">2017-03-21</time>)
-          </li>
- 
-          <li class="posts-item">
-            <a href="post/gpg-sign-for-git-comments">使用 GPG 签名 Git Commits</a>
-            (<time class="datetime">2016-06-11</time>)
-          </li>
- 
-          <li class="posts-item">
-            <a href="post/test-code-and-testable-code">测试代码和可测试代码</a>
-            (<time class="datetime">2016-06-04</time>)
-          </li>
- 
-          <li class="posts-item">
-            <a href="post/buying-a-car-in-hangzhou">杭州购车记</a>
-            (<time class="datetime">2016-01-27</time>)
-          </li>
- 
-          <li class="posts-item">
-            <a href="post/trailing-commas">末尾的逗号</a>
-            (<time class="datetime">2015-08-10</time>)
-          </li>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-    </ul>
-
-    <div>
-      <a href="/tag">Tags</a> |
-      <a href="/2013">Archive</a>
-    </div>
-    <p/>
-
-  </div>
-
+    <time datetime="2017-05-21T00:00:00.000Z">
+      <a href="/2017">2017年</a>05月21日
+    </time>
+  </footer>
+    <section>
+      <div id="disqus_thread"></div>
+      <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+      </noscript>
+    </section>
+  <script type="text/javascript">
+    
+    var disqus_identifier = "git-branch";
+    
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://hotoo.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  </script>
 </div>
 </div>
 
