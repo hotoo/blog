@@ -7,8 +7,8 @@
     <entry>
         <title type="html"><![CDATA[Git 提效篇]]></title>
         <link href="http://blog.hotoo.me/post/git-branch"/>
-        <published>2017-05-21T00:00:00.000Z</published>
-        <updated>2017-05-21T00:00:00.000Z</updated>
+        <published>2017-05-12T00:00:00.000Z</published>
+        <updated>2017-05-12T00:00:00.000Z</updated>
         <id>http://blog.hotoo.me/post/git-branch</id>
         <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
             <![CDATA[ <h2 id="分支备注">分支备注</h2><p>集团的流程工具会生成一团奇形怪状的分支名称，要记忆这些分支名是一项难题，默认的 <code>git branch</code> 列出的本地分支都是几乎无法识别的乱码，如果快速标识并识别出这些分支呢？</p>
@@ -20,6 +20,8 @@ $ git branch
 * ANT01942367_20170510_wealthbffweb
 $ git config branch.ANT01942367_20170510_wealthbffweb.description
 小聚宝 2.1</code></pre></div><p>还可以使用 <code>git branch --edit-description</code> 命令编辑复杂的备注信息。</p>
+<!--more-->
+
 <h3 id="显示备注">显示备注</h3><p>默认 <code>git branch</code> 列出的本地分支不会附带备注信息，git 内置的 <code>git config branch.{branch_name}.description</code> 可以显示单个分支的备注。</p>
 <p>以下方法可以一次性列出所有分支，并附上各个分支对应的备注信息。</p>
 <div class="highlight"><pre><code class="bash">$ npm install git-br -g

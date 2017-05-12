@@ -57,24 +57,7 @@ $ git branch
 * ANT01942367_20170510_wealthbffweb
 $ git config branch.ANT01942367_20170510_wealthbffweb.description
 小聚宝 2.1</code></pre></div><p>还可以使用 <code>git branch --edit-description</code> 命令编辑复杂的备注信息。</p>
-<h3 id="显示备注">显示备注</h3><p>默认 <code>git branch</code> 列出的本地分支不会附带备注信息，git 内置的 <code>git config branch.{branch_name}.description</code> 可以显示单个分支的备注。</p>
-<p>以下方法可以一次性列出所有分支，并附上各个分支对应的备注信息。</p>
-<div class="highlight"><pre><code class="bash">$ npm install git-br -g
-$ git config --global alias.br !git-br
-$ git br
-  ANT01730954_20170224_wealthbffweb 资产质押 250
-  ANT01785082_20170316_wealthbffweb 小聚宝 2.0
-  ANT01824187_20170329_wealthbffweb 中间页
-* ANT01942367_20170510_wealthbffweb 小聚宝 2.1</code></pre></div><h2 id="分支别名">分支别名</h2><p>上面的方法备注了一团乱码的分支名，但真正要切换到这种分支时，仍然需要 <code>git br</code> 列出所有分支，并从中找出目标分支，复制，<code>git co &lt;C-v&gt;</code>，有没有更便捷的方法呢，答案是肯定的。</p>
-<h3 id="git-symbolic-ref">git symbolic-ref</h3><p>Git 内置了强大的 symbolic-ref 方法，可以给分支增加引用（别名）：</p>
-<div class="highlight"><pre><code class="bash">$ git symbolic-ref refs/heads/{<span class="hljs-built_in">alias</span>Name} refs/heads/{未知分支}
-$ git co {<span class="hljs-built_in">alias</span>Name}
-Switched to branch <span class="hljs-string">'{aliasName}'</span>
-; 这时候会切换到 {未知分支}</code></pre></div><h2 id="参考">参考</h2><ul>
-<li><a href="https://github.com/bahmutov/git-branches">https://github.com/bahmutov/git-branches</a></li>
-<li><a href="https://gist.github.com/mauricerkelly/0b12b20a870d1e38081e">https://gist.github.com/mauricerkelly/0b12b20a870d1e38081e</a></li>
-</ul>
-
+<p class="more"><a href="post/git-branch#more">阅读详情...</a></p>
           </section>
           <footer class="post clearfix">
             <span class="tags"><a href="/tag">Tags</a>:
@@ -84,7 +67,7 @@ Switched to branch <span class="hljs-string">'{aliasName}'</span>
             </span>
 
             <time>
-              <a href="/2017">2017年</a>05月21日
+              <a href="/2017">2017年</a>05月12日
             </time>
           </footer>
     </div>
