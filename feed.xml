@@ -11,32 +11,58 @@
         <updated>2017-05-12T00:00:00.000Z</updated>
         <id>http://blog.hotoo.me/post/git-branch</id>
         <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
-            <![CDATA[ <h2 id="分支备注">分支备注</h2><p>集团的流程工具会生成一团奇形怪状的分支名称，要记忆这些分支名是一项难题，默认的 <code>git branch</code> 列出的本地分支都是几乎无法识别的乱码，如果快速标识并识别出这些分支呢？</p>
-<h3 id="备注分支">备注分支</h3><div class="highlight"><pre><code class="bash">$ git config branch.ANT01942367_20170510_wealthbffweb.description <span class="hljs-string">"小聚宝 2.1"</span>
+            <![CDATA[ <p>集团的流程工具会生成一团奇形怪状的分支名称，要记忆这些分支名是一项难题，默认的
+<code>git branch</code> 列出的本地分支都是几乎无法识别的乱码，如何快速标识、识别、打开这些丑陋的分支名呢？</p>
+<h2 id="1-备注分支">1. 备注分支</h2><div class="highlight"><pre><code class="bash">$ git config branch.WTF01942367_20170510_wealthbffweb.description <span class="hljs-string">"什么鬼迭代 1.0"</span>
 $ git branch
-  ANT01730954_20170224_wealthbffweb
-  ANT01785082_20170316_wealthbffweb
-  ANT01824187_20170329_wealthbffweb
-* ANT01942367_20170510_wealthbffweb
-$ git config branch.ANT01942367_20170510_wealthbffweb.description
-小聚宝 2.1</code></pre></div><p>还可以使用 <code>git branch --edit-description</code> 命令编辑复杂的备注信息。</p>
+  WTF01730954_20170224_wealthbffweb
+  WTF01785082_20170316_wealthbffweb
+  WTF01824187_20170329_wealthbffweb
+* WTF01942367_20170510_wealthbffweb
+$ git config branch.WTF01942367_20170510_wealthbffweb.description
+什么鬼迭代 1.0</code></pre></div><p>还可以使用 <code>git branch --edit-description</code> 命令编辑复杂的备注信息。</p>
 <!--more-->
 
-<h3 id="显示备注">显示备注</h3><p>默认 <code>git branch</code> 列出的本地分支不会附带备注信息，git 内置的 <code>git config branch.{branch_name}.description</code> 可以显示单个分支的备注。</p>
+<h2 id="2-显示备注">2. 显示备注</h2><p>默认 <code>git branch</code> 列出的本地分支不会附带备注信息，git 内置的
+<code>git config branch.{branch_name}.description</code> 可以显示单个分支的备注。</p>
 <p>以下方法可以一次性列出所有分支，并附上各个分支对应的备注信息。</p>
-<div class="highlight"><pre><code class="bash">$ npm install git-br -g
-$ git config --global alias.br !git-br
+<div class="highlight"><pre><code class="bash">$ npm i -g git-br
+
 $ git br
-  ANT01730954_20170224_wealthbffweb 资产质押 250
-  ANT01785082_20170316_wealthbffweb 小聚宝 2.0
-  ANT01824187_20170329_wealthbffweb 中间页
-* ANT01942367_20170510_wealthbffweb 小聚宝 2.1</code></pre></div><h2 id="分支别名">分支别名</h2><p>上面的方法备注了一团乱码的分支名，但真正要切换到这种分支时，仍然需要 <code>git br</code> 列出所有分支，并从中找出目标分支，复制，<code>git co &lt;C-v&gt;</code>，有没有更便捷的方法呢，答案是肯定的。</p>
+  WTF01730954_20170224_wealthbffweb 什么鬼迭代 0.1
+  WTF01785082_20170316_wealthbffweb 什么鬼迭代 0.2
+  WTF01824187_20170329_wealthbffweb 什么鬼迭代 0.3
+* WTF01942367_20170510_wealthbffweb 什么鬼迭代 1.0</code></pre></div><h2 id="2-分支别名">2. 分支别名</h2><p>上面的方法备注了一团乱码的分支名，但真正要切换到这种分支时，仍然需要 <code>git br</code>
+列出所有分支，并从中找出目标分支，复制，<code>git co &lt;C-v&gt;</code>。</p>
+<p>有没有更便捷的方法呢，答案是肯定的。</p>
 <h3 id="git-symbolic-ref">git symbolic-ref</h3><p>Git 内置了强大的 symbolic-ref 方法，可以给分支增加引用（别名）：</p>
-<div class="highlight"><pre><code class="bash">$ git symbolic-ref refs/heads/{<span class="hljs-built_in">alias</span>Name} refs/heads/{未知分支}
-$ git co {<span class="hljs-built_in">alias</span>Name}
-Switched to branch <span class="hljs-string">'{aliasName}'</span>
-; 这时候会切换到 {未知分支}</code></pre></div><h2 id="参考">参考</h2><ul>
+<div class="highlight"><pre><code class="bash">$ git symbolic-ref refs/heads/{分支别名} refs/heads/{目标分支名}
+$ git symbolic-ref refs/heads/v1.0 refs/heads/WTF01942367_20170510_wealthbffweb
+$ git co v1.0
+Switched to branch <span class="hljs-string">'v1.0'</span>
+; 这时候会切换到 WTF01942367_20170510_wealthbffweb
+$ git pull origin v1.0
+$ git checkout feat/one
+$ git rebase v1.0</code></pre></div><h3 id="git-branch-alias">git-branch-alias</h3><p>直接使用 symboilc-ref 虽然可以满足需求，但是用起来非常不方便，这时候可以使用
+git-branch-alias 工具来方便管理分支别名。</p>
+<div class="highlight"><pre><code class="bash">$ npm i -g git-branch-alias
+
+; 给当前分支设置别名
+$ git co WTF01942367_20170510_wealthbffweb
+$ git bralias v1.0
+
+; 或者指定目标分支名称
+$ git branch-alias v1.0 WTF01942367_20170510_wealthbffweb</code></pre></div><h2 id="提交-mr-pr-时自动找到找到目标分支">提交 MR/PR 时自动找到找到目标分支</h2><p>特性分支需要合并到迭代分支、主干分支时，要手工找到目标分支也是很困难的，这时候
+可以使用 <a href="https://github.com/hotoo/gitopen">gitopen</a> 这个小工具来帮忙。</p>
+<div class="highlight"><pre><code class="bash">$ npm i -g gitopen
+$ git checkout feat/one
+$ git push origin feat/one
+$ gitopen mr</code></pre></div><p>gitopen 会自动找到目标分支，并打开创建 MR 的在线地址，一键提交 MR。</p>
+<p>gitopen 还有很多其他方便的特性。</p>
+<h2 id="参考">参考</h2><ul>
 <li><a href="https://github.com/bahmutov/git-branches">https://github.com/bahmutov/git-branches</a></li>
+<li><a href="https://github.com/hotoo/gitopen">https://github.com/hotoo/gitopen</a></li>
+<li><a href="https://github.com/hotoo/git-branch-alias">https://github.com/hotoo/git-branch-alias</a></li>
 <li><a href="https://gist.github.com/mauricerkelly/0b12b20a870d1e38081e">https://gist.github.com/mauricerkelly/0b12b20a870d1e38081e</a></li>
 </ul>
 ]]>

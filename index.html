@@ -48,15 +48,16 @@
       
           <h1>Git 提效篇 <a href="post/git-branch" class="title-permalink">¶</a></h1>
           <section>
- <h2 id="分支备注">分支备注</h2><p>集团的流程工具会生成一团奇形怪状的分支名称，要记忆这些分支名是一项难题，默认的 <code>git branch</code> 列出的本地分支都是几乎无法识别的乱码，如果快速标识并识别出这些分支呢？</p>
-<h3 id="备注分支">备注分支</h3><div class="highlight"><pre><code class="bash">$ git config branch.ANT01942367_20170510_wealthbffweb.description <span class="hljs-string">"小聚宝 2.1"</span>
+ <p>集团的流程工具会生成一团奇形怪状的分支名称，要记忆这些分支名是一项难题，默认的
+<code>git branch</code> 列出的本地分支都是几乎无法识别的乱码，如何快速标识、识别、打开这些丑陋的分支名呢？</p>
+<h2 id="1-备注分支">1. 备注分支</h2><div class="highlight"><pre><code class="bash">$ git config branch.WTF01942367_20170510_wealthbffweb.description <span class="hljs-string">"什么鬼迭代 1.0"</span>
 $ git branch
-  ANT01730954_20170224_wealthbffweb
-  ANT01785082_20170316_wealthbffweb
-  ANT01824187_20170329_wealthbffweb
-* ANT01942367_20170510_wealthbffweb
-$ git config branch.ANT01942367_20170510_wealthbffweb.description
-小聚宝 2.1</code></pre></div><p>还可以使用 <code>git branch --edit-description</code> 命令编辑复杂的备注信息。</p>
+  WTF01730954_20170224_wealthbffweb
+  WTF01785082_20170316_wealthbffweb
+  WTF01824187_20170329_wealthbffweb
+* WTF01942367_20170510_wealthbffweb
+$ git config branch.WTF01942367_20170510_wealthbffweb.description
+什么鬼迭代 1.0</code></pre></div><p>还可以使用 <code>git branch --edit-description</code> 命令编辑复杂的备注信息。</p>
 <p class="more"><a href="post/git-branch#more">阅读详情...</a></p>
           </section>
           <footer class="post clearfix">
