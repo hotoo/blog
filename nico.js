@@ -112,5 +112,8 @@ module.exports = {
           '</div>';
       });
     },
+    'lastPostPubdate': function(posts) {
+      return posts[0].pubdate;
+    },
   },
 };

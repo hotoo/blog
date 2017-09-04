@@ -52,7 +52,7 @@
 
     <div>
       <a href="/tag">Tags</a> |
-      <a href="/2017">Archive</a>
+      <a href="/{{ resource.posts|sortby('-pubdate')|public|lastPostPubdate|date('Y') }}">Archive</a>
     </div>
     <p/>
 
