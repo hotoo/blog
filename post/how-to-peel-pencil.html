@@ -88,16 +88,30 @@ p.s. 2. 文具店的阿姨也在讲求用户体验呢，正准备装修外面的
       <div id="disqus_thread"></div>
       <noscript>
         要查看或参与评论，请启用 JavaScript 支持。<br />
-        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=hotoo">comments powered by Disqus.</a>
+        Please enable JavaScript to view the <a href="https://github.com/hotoo/blog.hotoo.me/issues">comments powered by Gitment.</a>
       </noscript>
     </section>
+  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
   <script type="text/javascript">
     
     var disqus_identifier = "how-to-peel-pencil";
     
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    dsq.src = 'http://hotoo.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+
+    var gitment = new Gitment({
+      id: disqus_identifier, // 可选。默认为 location.href
+      owner: 'hotoo',
+      repo: 'blog.hotoo.me',
+      oauth: {
+        client_id: '2ac185fc670562ffa0aa',
+        client_secret: '248f4f2d70ed28b1e3e70113db27d46067a981a8',
+      },
+    })
+    gitment.render('disqus_thread');
+
+    // var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    // dsq.src = 'http://hotoo.disqus.com/embed.js';
+    // (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   </script>
 </div>
 </div>
