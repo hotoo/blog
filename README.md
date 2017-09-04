@@ -17,6 +17,7 @@
 ## 致谢
 
 本博客由 [nico](https://github.com/lepture/nico) 驱动，
+评论系统由 [Gitment](https://github.com/imsun/gitment) 驱动，
 托管在 [GitHub](https://github.com)。
 
 ## LICENSE
