@@ -44,6 +44,7 @@
   <h1 class="entry-title">使用 GPG 签名 Git Commits</h1>
   <div class="entry-content"><p>前段时间 GitHub 支持在 Git Commits 中使用 GPG 签名验证，可以避免其他人使用你的
 Email 进行 commit。</p>
+<p><img src="../../images/2016/gpg.png" alt="GPG"></p>
 <h2 id="安装-gpg">安装 GPG</h2><p>下载地址： <a href="https://www.gnupg.org/download/">https://www.gnupg.org/download/</a></p>
 <p>Mac 下有两个可选工具，分别是 <a href="http://gpgtools.org/">Mac GPG</a> 和 GnuPG for OS X，我都尝试了下，觉得
 Mac GPG 相对比较容易点，安装过程中同时引导创建一个 GPG key 存储到 GPG keychain
@@ -161,7 +162,7 @@ sub   2048R/1F4A9B85 2016-06-11 [expires: 2017-06-11]</code></pre></div><pre cla
 <a name="L1-52" href="#L1-52">52</a>
 <a name="L1-53" href="#L1-53">53</a>
 <a name="L1-54" href="#L1-54">54</a>
-<a name="L1-55" href="#L1-55">55</a></pre></div></div><h2 id="配置-git">配置 Git</h2><p>配置好 GPG key 之后，可以配置让 git 在某个仓库所有的 commits 都添加 GPG key 验证：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">git config commit.gpgsign <span class="hljs-literal">true</span></code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div><p>也可以让本地所有的仓库都进行 GPG 验证：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">$ git config --globall commit.gpgsign <span class="hljs-literal">true</span></code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a></pre></div></div><h2 id="验证-git-commits">验证 Git commits</h2><p>如果没有设置局部仓库或全局仓库默认开启 commits GPG 验证，提交时可以附加 <code>-S</code> 参考，
+<a name="L1-55" href="#L1-55">55</a></pre></div></div><h2 id="配置-git">配置 Git</h2><p>配置好 GPG key 之后，可以配置让 git 在某个仓库所有的 commits 都添加 GPG key 验证：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">git config commit.gpgsign <span class="hljs-literal">true</span></code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div><p>也可以让本地所有的仓库都进行 GPG 验证：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">$ git config --global commit.gpgsign <span class="hljs-literal">true</span></code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a></pre></div></div><h2 id="验证-git-commits">验证 Git commits</h2><p>如果没有设置局部仓库或全局仓库默认开启 commits GPG 验证，提交时可以附加 <code>-S</code> 参考，
 要求进行 GPG 验证。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">$ git commit -S -m <span class="hljs-string">"comment"</span></code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a></pre></div></div><p>如果提交使用的账户信息和 GPG 签名不一致，则无法通过 GPG 验证，会导致提交失败。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">$ git ci -m <span class="hljs-string">"test"</span>
 gpg: skipped <span class="hljs-string">"ZZZ &lt;xxx@yyy.com&gt;"</span>: No secret key
 gpg: signing failed: No secret key
