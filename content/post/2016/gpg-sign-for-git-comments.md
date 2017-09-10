@@ -10,6 +10,8 @@
 前段时间 GitHub 支持在 Git Commits 中使用 GPG 签名验证，可以避免其他人使用你的
 Email 进行 commit。
 
+![GPG](../../images/2016/gpg.png)
+
 ## 安装 GPG
 
 下载地址： https://www.gnupg.org/download/
@@ -95,7 +97,7 @@ git config commit.gpgsign true
 也可以让本地所有的仓库都进行 GPG 验证：
 
 ```bash
-$ git config --globall commit.gpgsign true
+$ git config --global commit.gpgsign true
 ```
 
 ## 验证 Git commits
