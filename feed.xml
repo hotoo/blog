@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title>闲耘™.博客</title>
-    <link href="http://blog.hotoo.me/feed.xml" rel="self" />
-    <link href="http://blog.hotoo.me/feed.xml" />
-    <id>http://blog.hotoo.me/feed.xml</id>
+    <link href="https://hotoo.github.io/blog/feed.xml" rel="self" />
+    <link href="https://hotoo.github.io/blog/feed.xml" />
+    <id>https://hotoo.github.io/blog/feed.xml</id>
     <entry>
         <title type="html"><![CDATA[Git 提效篇]]></title>
-        <link href="http://blog.hotoo.me/post/git-branch"/>
+        <link href="https://hotoo.github.io/blog/post/git-branch"/>
         <published>2017-05-12T00:00:00.000Z</published>
         <updated>2017-05-12T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/git-branch</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+        <id>https://hotoo.github.io/blog/post/git-branch</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
             <![CDATA[ <p>集团的流程工具会生成一团奇形怪状的分支名称，要记忆这些分支名是一项难题，默认的
 <code>git branch</code> 列出的本地分支都是几乎无法识别的乱码，如何快速标识、识别、打开这些丑陋的分支名呢？</p>
 <h2 id="1-备注分支">1. 备注分支</h2><div class="highlight"><pre><code class="bash">$ git config branch.WTF01942367_20170510_wtfbffweb.description <span class="hljs-string">"什么鬼迭代 1.0"</span>
@@ -69,11 +69,11 @@ $ gitopen mr</code></pre></div><p>gitopen 会自动找到目标分支，并打�
         </content>
     </entry><entry>
         <title type="html"><![CDATA[HTML Tabs 最佳实践]]></title>
-        <link href="http://blog.hotoo.me/post/html-tabs"/>
+        <link href="https://hotoo.github.io/blog/post/html-tabs"/>
         <published>2017-03-21T00:00:00.000Z</published>
         <updated>2017-03-21T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/html-tabs</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+        <id>https://hotoo.github.io/blog/post/html-tabs</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
             <![CDATA[ <p>Tabs 面板的显示和隐藏一般以 display 来控制显示和隐藏，但是如果默认未显示的 Tabs 面板中渲染需要知道面板宽高的组件
 （如 Canvas，某些轮播组件等）时，就会因为面板在 display:none 的状态下无法拿到宽高导致渲染组件异常。</p>
 <p>这里建议 Tabs 使用 position:absolute 来将不可见的组件移动到用户不可见的负坐标区域，需要时再将面板移动到可见区域，
@@ -124,11 +124,11 @@ $ gitopen mr</code></pre></div><p>gitopen 会自动找到目标分支，并打�
         </content>
     </entry><entry>
         <title type="html"><![CDATA[使用 GPG 签名 Git Commits]]></title>
-        <link href="http://blog.hotoo.me/post/gpg-sign-for-git-comments"/>
+        <link href="https://hotoo.github.io/blog/post/gpg-sign-for-git-comments"/>
         <published>2016-06-11T00:00:00.000Z</published>
         <updated>2016-06-11T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/gpg-sign-for-git-comments</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+        <id>https://hotoo.github.io/blog/post/gpg-sign-for-git-comments</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
             <![CDATA[ <p>前段时间 GitHub 支持在 Git Commits 中使用 GPG 签名验证，可以避免其他人使用你的
 Email 进行 commit。</p>
 <p><img src="../../images/2016/gpg.png" alt="GPG"></p>
@@ -251,11 +251,11 @@ Comment: GPGTools - https://gpgtools.org
         </content>
     </entry><entry>
         <title type="html"><![CDATA[测试代码和可测试代码]]></title>
-        <link href="http://blog.hotoo.me/post/test-code-and-testable-code"/>
+        <link href="https://hotoo.github.io/blog/post/test-code-and-testable-code"/>
         <published>2016-06-04T00:00:00.000Z</published>
         <updated>2016-06-04T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/test-code-and-testable-code</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+        <id>https://hotoo.github.io/blog/post/test-code-and-testable-code</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
             <![CDATA[ <p>项目中有一个要将指定时间和当前时间比较，计算相对时间的逻辑（比如显示 <code>3 分钟前</code>），
 由于当前时间和执行测试用例的时机有关，每次执行用例都会不同，如何让这个代码可测试呢？
 有些人可能想到 Mock 当前时间，测试的时候让当前时间凝固，于是有了如下代码：</p>
@@ -315,11 +315,11 @@ location.href = getUrl(...args);</code></pre></div><p>单元测试用例只需�
         </content>
     </entry><entry>
         <title type="html"><![CDATA[杭州购车记]]></title>
-        <link href="http://blog.hotoo.me/post/buying-a-car-in-hangzhou"/>
+        <link href="https://hotoo.github.io/blog/post/buying-a-car-in-hangzhou"/>
         <published>2016-01-27T00:00:00.000Z</published>
         <updated>2016-01-27T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/buying-a-car-in-hangzhou</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+        <id>https://hotoo.github.io/blog/post/buying-a-car-in-hangzhou</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
             <![CDATA[ <p>终于在年前把车的事情搞定了，这是 2015 年做成的唯一一件大事，经历了不少坎坷，一路摸索过来，很多都是懵懂，
 因此想通过这篇流水记录，帮助到一点大家，如果有写的不好不对的地方，大家可以给我提出，我尽力改进。</p>
 <p>『车图』</p>
@@ -521,11 +521,11 @@ location.href = getUrl(...args);</code></pre></div><p>单元测试用例只需�
         </content>
     </entry><entry>
         <title type="html"><![CDATA[末尾的逗号]]></title>
-        <link href="http://blog.hotoo.me/post/trailing-commas"/>
+        <link href="https://hotoo.github.io/blog/post/trailing-commas"/>
         <published>2015-08-10T00:00:00.000Z</published>
         <updated>2015-08-10T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/trailing-commas</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+        <id>https://hotoo.github.io/blog/post/trailing-commas</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
             <![CDATA[ <p><img src="../../images/trailing-commas.png" alt="trailing commas"></p>
 <!--more-->
 
@@ -607,11 +607,11 @@ xml，html 等。</p>
         </content>
     </entry><entry>
         <title type="html"><![CDATA[gitopen, Smart partner of git, hg and svn.]]></title>
-        <link href="http://blog.hotoo.me/post/gitopen"/>
+        <link href="https://hotoo.github.io/blog/post/gitopen"/>
         <published>2015-07-24T00:00:00.000Z</published>
         <updated>2015-07-24T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/gitopen</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+        <id>https://hotoo.github.io/blog/post/gitopen</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
             <![CDATA[ <p>使用 Git 的你，想必会更喜欢在终端（命令行）中使用 Git。在终端中，可以将 Git
 的特性发挥的淋漓尽致。</p>
 <pre>$ git co -b feat-sample
@@ -641,11 +641,11 @@ $ gitopen @hotoo/gitopen</pre>]]>
         </content>
     </entry><entry>
         <title type="html"><![CDATA[git+, a hack of git, smart for you.]]></title>
-        <link href="http://blog.hotoo.me/post/gitplus"/>
+        <link href="https://hotoo.github.io/blog/post/gitplus"/>
         <published>2015-05-27T00:00:00.000Z</published>
         <updated>2015-05-27T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/gitplus</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+        <id>https://hotoo.github.io/blog/post/gitplus</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
             <![CDATA[ <p>为了信息安全，公司搭建了 gitlab.company.com 管理代码，同时限制了必须使用工作邮箱
 hotoo@company.com 进行提交。</p>
 <p>公司 gitlab 有大大小小很多仓库，不时的需要 clone 代码下来，有时忘记设置就开始提交，
@@ -673,11 +673,11 @@ pre-commit:
         </content>
     </entry><entry>
         <title type="html"><![CDATA[译：Resource Timing (资源计时) 使用技巧]]></title>
-        <link href="http://blog.hotoo.me/post/resource-timing-practical-tips"/>
+        <link href="https://hotoo.github.io/blog/post/resource-timing-practical-tips"/>
         <published>2014-12-30T00:00:00.000Z</published>
         <updated>2014-12-30T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/resource-timing-practical-tips</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+        <id>https://hotoo.github.io/blog/post/resource-timing-practical-tips</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
             <![CDATA[ <p><a href="http://www.w3.org/2010/webperf/">W3C Web 性能工作组</a> 在 2012 年给我们带来了
 <a href="http://www.w3.org/TR/navigation-timing/">Navigation Timing</a>，这个 API 现在
 基本上在主流浏览器上都可用。Navigation Timing 定义了一套用于测量主页面性能的
@@ -871,11 +871,11 @@ Boomerang 是 Philip Tellis 维护的一个非常流行的开源 RUM 包。他�
         </content>
     </entry><entry>
         <title type="html"><![CDATA[译：严重混乱的 Resource Timing]]></title>
-        <link href="http://blog.hotoo.me/post/serious-confusion-with-resource-timing"/>
+        <link href="https://hotoo.github.io/blog/post/serious-confusion-with-resource-timing"/>
         <published>2014-12-30T00:00:00.000Z</published>
         <updated>2014-12-30T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/serious-confusion-with-resource-timing</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+        <id>https://hotoo.github.io/blog/post/serious-confusion-with-resource-timing</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
             <![CDATA[ <h1 id="或者说『耗时包含了-blocking-部分的时间』">或者说『耗时包含了 Blocking 部分的时间』</h1><p>用 <a href="http://www.w3.org/TR/resource-timing/">Resource Timing</a> 来同统计资源下载性能
 是非常赞的方式，但不幸的是，几乎所有和我聊过的人都是使用 <a href="http://www.w3.org/TR/resource-timing/#duration-attribute"><code>duration</code> 属性</a>，
 而且他们都没有意识到 <code>duration</code> 包含了 blocking 时间。结果 <code>duration</code> 时间
@@ -936,11 +936,11 @@ Boomerang 是 Philip Tellis 维护的一个非常流行的开源 RUM 包。他�
         </content>
     </entry><entry>
         <title type="html"><![CDATA[GitHub, GitLab, or BitBucket?]]></title>
-        <link href="http://blog.hotoo.me/post/github-gitlab-or-bitbucket"/>
+        <link href="https://hotoo.github.io/blog/post/github-gitlab-or-bitbucket"/>
         <published>2014-08-03T00:00:00.000Z</published>
         <updated>2014-08-03T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/github-gitlab-or-bitbucket</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+        <id>https://hotoo.github.io/blog/post/github-gitlab-or-bitbucket</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
             <![CDATA[ <blockquote>
 <p>GitHub 是汇集了众多开源项目的闭源系统，</p>
 <p>GitLab 是汇聚了较多闭源项目的开源系统。</p>
@@ -1047,11 +1047,11 @@ Boomerang 是 Philip Tellis 维护的一个非常流行的开源 RUM 包。他�
         </content>
     </entry><entry>
         <title type="html"><![CDATA[定位到服务器集群的特定节点]]></title>
-        <link href="http://blog.hotoo.me/post/find-nodes-from-server-cluster"/>
+        <link href="https://hotoo.github.io/blog/post/find-nodes-from-server-cluster"/>
         <published>2014-04-17T00:00:00.000Z</published>
         <updated>2014-04-17T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/find-nodes-from-server-cluster</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+        <id>https://hotoo.github.io/blog/post/find-nodes-from-server-cluster</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
             <![CDATA[ <blockquote>
 <p>齐宣王使人吹竽，必三百人。南郭处士请为王吹竽，宣王说之，廪食以数百人。
 宣王死，湣王立，好一一听之，处士逃。</p>
@@ -1139,11 +1139,11 @@ API，可以用来监控网页及其引用的外部资源加载时间，将来�
         </content>
     </entry><entry>
         <title type="html"><![CDATA[转换 Vimwiki 为 Markdown]]></title>
-        <link href="http://blog.hotoo.me/post/convert-vimwiki-to-markdown"/>
+        <link href="https://hotoo.github.io/blog/post/convert-vimwiki-to-markdown"/>
         <published>2014-03-31T00:00:00.000Z</published>
         <updated>2014-03-31T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/convert-vimwiki-to-markdown</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+        <id>https://hotoo.github.io/blog/post/convert-vimwiki-to-markdown</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
             <![CDATA[ <blockquote>
 <p><code>sed -f ex -i *.md</code></p>
 </blockquote>
@@ -1203,11 +1203,11 @@ s/%nohtml/- status: draft/g</pre>]]>
         </content>
     </entry><entry>
         <title type="html"><![CDATA[阿里巴巴三年醇]]></title>
-        <link href="http://blog.hotoo.me/post/alibaba-3-years"/>
+        <link href="https://hotoo.github.io/blog/post/alibaba-3-years"/>
         <published>2014-02-25T00:00:00.000Z</published>
         <updated>2014-02-25T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/alibaba-3-years</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+        <id>https://hotoo.github.io/blog/post/alibaba-3-years</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
             <![CDATA[ <p>今天 <a href="https://github.com/lifesinger">@玉伯</a> 给我送来的三年醇礼物。</p>
 <p>一个阿里真棒玉坠。</p>
 <p><img src="https://f.cloud.github.com/assets/143572/2257303/db0a08fa-9e16-11e3-90b3-5b9cea307a2a.png" alt="阿里真棒"></p>
@@ -1222,11 +1222,11 @@ s/%nohtml/- status: draft/g</pre>]]>
         </content>
     </entry><entry>
         <title type="html"><![CDATA[中国农历]]></title>
-        <link href="http://blog.hotoo.me/post/lunar-calendar"/>
+        <link href="https://hotoo.github.io/blog/post/lunar-calendar"/>
         <published>2013-11-13T00:00:00.000Z</published>
         <updated>2013-11-13T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/lunar-calendar</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+        <id>https://hotoo.github.io/blog/post/lunar-calendar</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
             <![CDATA[ <p>Google 日历内置了中国农历的支持，但是各种桌面客户端如 Mac iCal, iPhone 默认日历
 都无法正常使用，网上搜索了一遍也没有更好的订阅地址，大都不更新了。</p>
 <p>而且我又不想装各种乱七八糟的第三方日历应用。</p>
@@ -1291,11 +1291,11 @@ Google Calendar 中可以隐藏这个日历，只是在各个客户端中显示�
         </content>
     </entry><entry>
         <title type="html"><![CDATA[Vim Talk in 来往扎堆]]></title>
-        <link href="http://blog.hotoo.me/post/vim-talk-laiwangzhadui"/>
+        <link href="https://hotoo.github.io/blog/post/vim-talk-laiwangzhadui"/>
         <published>2013-10-23T00:00:00.000Z</published>
         <updated>2013-10-23T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/vim-talk-laiwangzhadui</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+        <id>https://hotoo.github.io/blog/post/vim-talk-laiwangzhadui</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
             <![CDATA[ <blockquote>
 <p>首先感谢支持加我的『来往』好友们，你们太让人感动了。</p>
 </blockquote>
@@ -1314,11 +1314,11 @@ Google Calendar 中可以隐藏这个日历，只是在各个客户端中显示�
         </content>
     </entry><entry>
         <title type="html"><![CDATA[不缓存 CDN 静态资源方案]]></title>
-        <link href="http://blog.hotoo.me/post/no-cache-in-cdn"/>
+        <link href="https://hotoo.github.io/blog/post/no-cache-in-cdn"/>
         <published>2013-09-21T00:00:00.000Z</published>
         <updated>2013-09-21T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/no-cache-in-cdn</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+        <id>https://hotoo.github.io/blog/post/no-cache-in-cdn</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
             <![CDATA[ <h2 id="背景">背景</h2><p>支付宝目前使用淘宝提供的 CDN 服务，这个服务中的 CDN 节点在自身找不到对应资源时
 主动到源服务器拉取的策略。</p>
 <p><img src="/images/no-cache-in-cdn.png" alt="图"></p>
@@ -1368,11 +1368,11 @@ CDN 缓存大量无意义资源的问题。</p>
         </content>
     </entry><entry>
         <title type="html"><![CDATA[每周异常：第 9期，搜狗浏览器中神一样的 try/catch 特性]]></title>
-        <link href="http://blog.hotoo.me/post/weekly-topic-about-exceptions-9"/>
+        <link href="https://hotoo.github.io/blog/post/weekly-topic-about-exceptions-9"/>
         <published>2013-09-13T00:00:00.000Z</published>
         <updated>2013-09-13T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/weekly-topic-about-exceptions-9</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+        <id>https://hotoo.github.io/blog/post/weekly-topic-about-exceptions-9</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
             <![CDATA[ <h2 id="背景">背景</h2><p>某日 16时 30分，监控实时大盘中全站 JavaScript 异常和 404 异常分别朝着不同的方向延伸，
 橙色的 JavaScript 异常急剧上升。</p>
 <p><img src="https://f.cloud.github.com/assets/143572/1136611/435cbfac-1c48-11e3-8856-8fc7ef13ce5a.png" alt="bac3c01389cadbb12d4873520b3bd2a9"></p>
@@ -1457,11 +1457,11 @@ try/catch 异常处理流程进行，所以对业务本身没有影响。</li>
         </content>
     </entry><entry>
         <title type="html"><![CDATA[每周异常：第 8期，异常象限]]></title>
-        <link href="http://blog.hotoo.me/post/weekly-topic-about-exceptions-8"/>
+        <link href="https://hotoo.github.io/blog/post/weekly-topic-about-exceptions-8"/>
         <published>2013-09-05T00:00:00.000Z</published>
         <updated>2013-09-05T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/weekly-topic-about-exceptions-8</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+        <id>https://hotoo.github.io/blog/post/weekly-topic-about-exceptions-8</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
             <![CDATA[ <p>上周的 <a href="weekly-topic-about-exceptions-7">每周异常：第 7期，保持简单，保持拙朴</a>
 中介绍了通过页面关键的 URL/ID 信息，简单有效的发现异常的方案。
 本周我们在这个异常分析方法之上，再稍微深入下：</p>
@@ -1512,11 +1512,11 @@ try/catch 异常处理流程进行，所以对业务本身没有影响。</li>
         </content>
     </entry><entry>
         <title type="html"><![CDATA[每周异常：第 7期，保持简单，保持拙朴]]></title>
-        <link href="http://blog.hotoo.me/post/weekly-topic-about-exceptions-7"/>
+        <link href="https://hotoo.github.io/blog/post/weekly-topic-about-exceptions-7"/>
         <published>2013-08-28T00:00:00.000Z</published>
         <updated>2013-08-28T00:00:00.000Z</updated>
-        <id>http://blog.hotoo.me/post/weekly-topic-about-exceptions-7</id>
-        <content type="html" xml:base="http://blog.hotoo.me" xml:lang="en">
+        <id>https://hotoo.github.io/blog/post/weekly-topic-about-exceptions-7</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
             <![CDATA[ <h2 id="副标题：如何简单有效的发现最重要的有效异常">副标题：如何简单有效的发现最重要的有效异常</h2><blockquote>
 <p>Keep It Simple, Stupid.</p>
 <p>-- U.S. Navy (1960)</p>
