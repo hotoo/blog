@@ -31,4 +31,4 @@
 * /theme
 
 其他目录的内容遵循 MIT 协议许可，您可以自由使用模板等文件。
-如果您使用了这些资源，请提供一个说明并链接到 http://blog.hotoo.me 。
+如果您使用了这些资源，请提供一个说明并链接到 https://hotoo.github.io/blog/ 。

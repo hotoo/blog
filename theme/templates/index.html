@@ -20,15 +20,15 @@
             {{ postItem.html|less(postItemUrl, '阅读详情...') }}
           </section>
           <footer class="post clearfix">
-            <span class="tags"><a href="/tag">Tags</a>:
+            <span class="tags"><a href="./tag">Tags</a>:
               {%- for tag in postItem.tags %}
                 {% if loop.index != 1 %}, {% endif %}
-                <a href="/tag/#{{ tag }}">{{ tag }}</a>
+                <a href="./tag/#{{ tag }}">{{ tag }}</a>
               {% endfor %}
             </span>
 
             <time>
-              <a href="/{{ post.pubdate|date('Y') }}">{{ post.pubdate|date('Y年') }}</a>{{ postItem.pubdate|date('m月d日') }}
+              <a href="./{{ post.pubdate|date('Y') }}">{{ post.pubdate|date('Y年') }}</a>{{ postItem.pubdate|date('m月d日') }}
             </time>
           </footer>
         {%- endif %}
@@ -51,8 +51,8 @@
     </ul>
 
     <div>
-      <a href="/tag">Tags</a> |
-      <a href="/{{ resource.posts|sortby('-pubdate')|public|lastPostPubdate|date('Y') }}">Archive</a>
+      <a href="./tag">Tags</a> |
+      <a href="./{{ resource.posts|sortby('-pubdate')|public|lastPostPubdate|date('Y') }}">Archive</a>
     </div>
     <p/>
 

@@ -2,7 +2,7 @@
 
 module.exports = {
   'sitename': '闲耘™.博客',
-  'siteurl': 'http://blog.hotoo.me',
+  'siteurl': 'https://hotoo.github.io/blog/',
   'source': 'content',
   'output': '_site',
   'theme': 'theme',
@@ -10,24 +10,24 @@ module.exports = {
   'permalink': 'post/{{filename}}',
   'navigation': [
     {
-      'link': 'http://hotoo.me/',
+      'link': 'https://hotoo.github.io/',
       'title': 'Home',
     },
     {
-      'link': '/',
+      'link': '/blog/',
       'title': 'Blog',
       'active': true,
     },
     {
-      'link': 'http://wiki.hotoo.me/',
+      'link': 'https://hotoo.github.io/wiki/',
       'title': 'Wiki',
     },
     {
-      'link': 'http://wiki.hotoo.me/Vim.html',
+      'link': 'https://hotoo.github.io/wiki/Vim.html',
       'title': 'Vim',
     },
     {
-      'link': 'http://twitter.hotoo.me/',
+      'link': 'https://hotoo.github.io/twitter/',
       'title': 'Twitter',
     },
     {
