@@ -59,20 +59,20 @@
 </li>
 <li>首先考虑自身的问题。return 整个 factory，性能无问题，因此不是模块过多导致 seajs 性能问题。</li>
 <li><p>逐步修改 return 位置（其实可以打断点），终于发现问题出在 <a href="https://github.com/totorojs/monitor.js/blob/2.2.0/src/monitor.js#L23">初始化事件绑定函数部分</a>。</p>
-<p><!-- baseline:11 --></p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-comment">// 避免未引用先行脚本抛出异常。</span>
-<span class="hljs-keyword">if</span>(!win.monitor){
+<p><!-- baseline:11 --></p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">// 避免未引用先行脚本抛出异常。</span>
+<span class="keyword">if</span>(!win.monitor){
   M = win.monitor = {};
   M._DATAS = [];
   M._EVENTS = [];
 }
 
-<span class="hljs-keyword">var</span> _events = M._EVENTS;
-<span class="hljs-keyword">var</span> _evt = <span class="hljs-keyword">new</span> Events();
-M.on = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">evt, handler</span>)</span>{
+<span class="keyword">var</span> _events = M._EVENTS;
+<span class="keyword">var</span> _evt = <span class="keyword">new</span> Events();
+M.on = <span class="function"><span class="keyword">function</span><span class="params">(evt, handler)</span>{</span>
   _evt.on(evt, handler);
 };
-<span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span>,l=_events.length; i&lt;l; i++){
-  M.on(_events[i][<span class="hljs-number">0</span>], _events[i][<span class="hljs-number">1</span>]);
+<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,l=_events.length; i&lt;l; i++){
+  M.on(_events[i][<span class="number">0</span>], _events[i][<span class="number">1</span>]);
 }</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>

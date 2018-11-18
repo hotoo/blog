@@ -100,22 +100,22 @@
 <p>从上面的对照表可以看出，理论上我们只需要关注异常率(UV) 是否正常波动就可以了。</p>
 <p>理想很性感，现实很骨感。</p>
 <p>我们的数据仓库、数据分析系统对于实时 PV 有很强的处理能力，但是对于 UV 就感觉力有不逮。</p>
-<p>起初想到在实时日志处理逻辑中使用缓存（伪代码）：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LogParse</span>()</span>{
+<p>起初想到在实时日志处理逻辑中使用缓存（伪代码）：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">class LogParse(){
 
-  <span class="hljs-keyword">var</span> user_cache = {};
-  <span class="hljs-keyword">var</span> MINUTES_FORMAT = <span class="hljs-string">"YYYYMMDDHHmm"</span>;
-  <span class="hljs-keyword">var</span> lastTime = moment().format(MINUTES_FORMAT);
+  <span class="keyword">var</span> user_cache = {};
+  <span class="keyword">var</span> MINUTES_FORMAT = <span class="string">"YYYYMMDDHHmm"</span>;
+  <span class="keyword">var</span> lastTime = moment().format(MINUTES_FORMAT);
 
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">parse</span>(<span class="hljs-params">log</span>)</span>{
-    <span class="hljs-comment">// PV 统计</span>
+  <span class="function"><span class="keyword">function</span> <span class="title">parse</span><span class="params">(log)</span>{</span>
+    <span class="comment">// PV 统计</span>
 
-    <span class="hljs-keyword">var</span> now = moment().format(MINUTES_FORMAT);
-    <span class="hljs-keyword">if</span>(now !== lastTime){
+    <span class="keyword">var</span> now = moment().format(MINUTES_FORMAT);
+    <span class="keyword">if</span>(now !== lastTime){
       user_cache = {};
       lastTime = now;
     }
-    <span class="hljs-keyword">if</span>(user_cache.hasOwnProperty(user_id)){<span class="hljs-keyword">return</span>;}
-    <span class="hljs-comment">// UV 统计</span>
+    <span class="keyword">if</span>(user_cache.hasOwnProperty(user_id)){<span class="keyword">return</span>;}
+    <span class="comment">// UV 统计</span>
   }
 
 }</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>

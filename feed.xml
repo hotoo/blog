@@ -5,6 +5,46 @@
     <link href="https://hotoo.github.io/blog/feed.xml" />
     <id>https://hotoo.github.io/blog/feed.xml</id>
     <entry>
+        <title type="html"><![CDATA[钱塘之怪现状]]></title>
+        <link href="https://hotoo.github.io/blog/post/dogs-cars"/>
+        <published>2018-11-18T00:00:00.000Z</published>
+        <updated>2018-11-18T00:00:00.000Z</updated>
+        <id>https://hotoo.github.io/blog/post/dogs-cars</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
+            <![CDATA[ <p>戊戌年癸亥月某日，钱塘某妇人因小轿车司机未让行遂踹轿车，司机恼怒成羞狠揍妇人，
+妇人遂通过记者新闻、微博、论坛等多种途径发声爆光，众键盘侠也假正义之名义声讨
+谴责车主，同时对小轿车、小客车、大客车、大货车、中华田园车、叉车、铲车、自行车、
+电动车、摩托车、碰碰车、火车、动车等全国众多车辆，及不文明驾车行为进行了猛烈的
+舆论抨击。</p>
+<p>钱塘衙门立即援引十四年前之交规法令，要求所有车辆注册登记上牌，但大客车、大货车、
+铲车、中华田园车等车辆因为体型较大不予登记上牌。准予登记上牌者，首年上牌费千元，
+次年及以后每年五百。另外火车、动车虽然体型更大，但是体制属于国有编制，不在此限。</p>
+<p>同时衙门还限制所有车辆上路时间（已登记上牌车辆），所有车辆均仅允许在卯时之前，
+戌时之后上路，否则扣车。按规定时间上路者，亦不允许进入公路、高速、土路、地面停车场、
+地下车库等路段和场所。</p>
+<p>恶人因车而行恶事，却罪怪全中华车辆，怪者乎？</p>
+<p>妇人弱者乎？非也。除了鸣笛之外，无法发声的车辆才是弱者，孰来为其发声？
+（备注：鸣笛亦属于违反衙门规定之行为）</p>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[带滑块的进度条]]></title>
+        <link href="https://hotoo.github.io/blog/post/process-with-bar"/>
+        <published>2018-04-11T00:00:00.000Z</published>
+        <updated>2018-04-11T00:00:00.000Z</updated>
+        <id>https://hotoo.github.io/blog/post/process-with-bar</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
+            <![CDATA[ <p>在支付宝钱包，“我的 - 总资产”里面，有一个累计收益的卡片，其中还有一个带滑块的进度条，
+显示我的收益对比同地区理财的用户中，处于什么样的一个水平。</p>
+<p><img src="https://gw.alipayobjects.com/zos/rmsportal/YKAjtnKzJWUpuLWOaMkK.PNG" alt="我的 - 总资产 - 累计收益卡片"></p>
+<p>这种带滑块的卡片，如果不假思索简单处理，做出的效果就会出现进度 0% 和 100% 时在左右超出顶格，滑块只显示一半。</p>
+<p>为了解决这个问题，开发者最早的方案考虑的特别复杂，</p>
+<h2 id="纯-css-实现">纯 CSS 实现</h2><p><a href="http://gitlab.alipay-inc.com/h5_release/wealth/blob/3.6.11/src/index/asset/components/profitRate/index.jsx">http://gitlab.alipay-inc.com/h5_release/wealth/blob/3.6.11/src/index/asset/components/profitRate/index.jsx</a>
+<a href="http://gitlab.alipay-inc.com/h5_release/wealth/blob/3.6.11/src/index/asset/components/profitRate/index.less">http://gitlab.alipay-inc.com/h5_release/wealth/blob/3.6.11/src/index/asset/components/profitRate/index.less</a></p>
+<h2 id="js-css-的复杂不完美实现">JS + CSS 的复杂不完美实现</h2><h2 id="js-css-的简单完美实现">JS + CSS 的简单完美实现</h2><p><img src="https://gw.alipayobjects.com/zos/rmsportal/bvsIRbcSHMcpsyBSnoKc.png" alt="算法示意图"></p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Git 提效篇]]></title>
         <link href="https://hotoo.github.io/blog/post/git-branch"/>
         <published>2017-05-12T00:00:00.000Z</published>
@@ -13,14 +53,14 @@
         <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
             <![CDATA[ <p>集团的流程工具会生成一团奇形怪状的分支名称，要记忆这些分支名是一项难题，默认的
 <code>git branch</code> 列出的本地分支都是几乎无法识别的乱码，如何快速标识、识别、打开这些丑陋的分支名呢？</p>
-<h2 id="1-备注分支">1. 备注分支</h2><div class="highlight"><pre><code class="bash">$ git config branch.WTF01942367_20170510_wtfbffweb.description <span class="hljs-string">"什么鬼迭代 1.0"</span>
+<h2 id="1-备注分支">1. 备注分支</h2><div class="highlight"><pre><code class="bash">$ git config branch.WTF01942367_20170510_wtfbffweb.description <span class="string">"什么鬼迭代 1.0"</span>
 $ git branch
   WTF01730954_20170224_wtfbffweb
   WTF01785082_20170316_wtfbffweb
   WTF01824187_20170329_wtfbffweb
 * WTF01942367_20170510_wtfbffweb
 $ git config branch.WTF01942367_20170510_wtfbffweb.description
-什么鬼迭代 1.0</code></pre></div><p>还可以使用 <code>git branch --edit-description</code> 命令编辑复杂的备注信息。</p>
+什么鬼迭代 <span class="number">1.0</span></code></pre></div><p>还可以使用 <code>git branch --edit-description</code> 命令编辑复杂的备注信息。</p>
 <!--more-->
 
 <h2 id="2-显示备注">2. 显示备注</h2><p>默认 <code>git branch</code> 列出的本地分支不会附带备注信息，git 内置的
@@ -29,30 +69,30 @@ $ git config branch.WTF01942367_20170510_wtfbffweb.description
 <div class="highlight"><pre><code class="bash">$ npm i -g git-br
 
 $ git br
-  WTF01730954_20170224_wtfbffweb 什么鬼迭代 0.1
-  WTF01785082_20170316_wtfbffweb 什么鬼迭代 0.2
-  WTF01824187_20170329_wtfbffweb 什么鬼迭代 0.3
-* WTF01942367_20170510_wtfbffweb 什么鬼迭代 1.0</code></pre></div><h2 id="2-分支别名">2. 分支别名</h2><p>上面的方法备注了一团乱码的分支名，但真正要切换到这种分支时，仍然需要 <code>git br</code>
+  WTF01730954_20170224_wtfbffweb 什么鬼迭代 <span class="number">0.1</span>
+  WTF01785082_20170316_wtfbffweb 什么鬼迭代 <span class="number">0.2</span>
+  WTF01824187_20170329_wtfbffweb 什么鬼迭代 <span class="number">0.3</span>
+* WTF01942367_20170510_wtfbffweb 什么鬼迭代 <span class="number">1.0</span></code></pre></div><h2 id="2-分支别名">2. 分支别名</h2><p>上面的方法备注了一团乱码的分支名，但真正要切换到这种分支时，仍然需要 <code>git br</code>
 列出所有分支，并从中找出目标分支，复制，<code>git co &lt;C-v&gt;</code>。</p>
 <p>有没有更便捷的方法呢，答案是肯定的。</p>
 <h3 id="git-symbolic-ref">git symbolic-ref</h3><p>Git 内置了强大的 symbolic-ref 方法，可以给分支增加引用（别名）：</p>
 <div class="highlight"><pre><code class="bash">$ git symbolic-ref refs/heads/{分支别名} refs/heads/{目标分支名}
-$ git symbolic-ref refs/heads/v1.0 refs/heads/WTF01942367_20170510_wtfbffweb
-$ git co v1.0
-Switched to branch <span class="hljs-string">'v1.0'</span>
+$ git symbolic-ref refs/heads/v1.<span class="number">0</span> refs/heads/WTF01942367_20170510_wtfbffweb
+$ git co v1.<span class="number">0</span>
+Switched to branch <span class="string">'v1.0'</span>
 ; 这时候会切换到 WTF01942367_20170510_wtfbffweb
-$ git pull origin v1.0
+$ git pull origin v1.<span class="number">0</span>
 $ git checkout feat/one
-$ git rebase v1.0</code></pre></div><h3 id="git-branch-alias">git-branch-alias</h3><p>直接使用 symboilc-ref 虽然可以满足需求，但是用起来非常不方便，这时候可以使用
+$ git rebase v1.<span class="number">0</span></code></pre></div><h3 id="git-branch-alias">git-branch-alias</h3><p>直接使用 symboilc-ref 虽然可以满足需求，但是用起来非常不方便，这时候可以使用
 git-branch-alias 工具来方便管理分支别名。</p>
 <div class="highlight"><pre><code class="bash">$ npm i -g git-branch-alias
 
 ; 给当前分支设置别名
 $ git co WTF01942367_20170510_wtfbffweb
-$ git bralias v1.0
+$ git bralias v1.<span class="number">0</span>
 
 ; 或者指定目标分支名称
-$ git branch-alias v1.0 WTF01942367_20170510_wtfbffweb</code></pre></div><h2 id="提交-mr-pr-时自动找到找到目标分支">提交 MR/PR 时自动找到找到目标分支</h2><p>特性分支需要合并到迭代分支、主干分支时，要手工找到目标分支也是很困难的，这时候
+$ git branch-alias v1.<span class="number">0</span> WTF01942367_20170510_wtfbffweb</code></pre></div><h2 id="提交-mr-pr-时自动找到找到目标分支">提交 MR/PR 时自动找到找到目标分支</h2><p>特性分支需要合并到迭代分支、主干分支时，要手工找到目标分支也是很困难的，这时候
 可以使用 <a href="https://github.com/hotoo/gitopen">gitopen</a> 这个小工具来帮忙。</p>
 <div class="highlight"><pre><code class="bash">$ npm i -g gitopen
 $ git checkout feat/one
@@ -82,37 +122,37 @@ $ gitopen mr</code></pre></div><p>gitopen 会自动找到目标分支，并打�
 
 <p>简单示例代码：</p>
 <p>HTML:</p>
-<div class="highlight"><pre><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tabs"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">ol</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tabbar"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"active"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#tab1"</span>&gt;</span>Tab 1<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#tab2"</span>&gt;</span>Tab 2<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">ol</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">ol</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tabpanel"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"active"</span>&gt;</span>
+<div class="highlight"><pre><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"tabs"</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">ol</span> <span class="attribute">class</span>=<span class="value">"tabbar"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"active"</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#tab1"</span>&gt;</span>Tab 1<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#tab2"</span>&gt;</span>Tab 2<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">ol</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">ol</span> <span class="attribute">class</span>=<span class="value">"tabpanel"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"active"</span>&gt;</span>
       Tab Panel 1
-    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span>&gt;</span>
       Tab Panel 2
-    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">ol</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre></div><p>LESS:</p>
-<div class="highlight"><pre><code class="less"><span class="hljs-selector-class">.tabs</span> {
-  <span class="hljs-selector-class">.tabpanel</span> {
-    <span class="hljs-attribute">position</span>: relative;
-    <span class="hljs-selector-tag">li</span> {
-      <span class="hljs-attribute">position</span>: absolute;
-      <span class="hljs-attribute">top</span>: -<span class="hljs-number">999999px</span>;
-      <span class="hljs-attribute">left</span>: -<span class="hljs-number">9999px</span>;
-      <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>; <span class="hljs-comment">/* 避免浮动导致宽度不对 */</span>
+    <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">ol</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre></div><p>LESS:</p>
+<pre>.tabs {
+  .tabpanel {
+    position: relative;
+    li {
+      position: absolute;
+      top: -999999px;
+      left: -9999px;
+      width: 100%; /* 避免浮动导致宽度不对 */
     }
-    <span class="hljs-selector-tag">li</span><span class="hljs-selector-class">.active</span> {
-      <span class="hljs-comment">/* 不要使用 position:absolute 并且改变坐标的方式，
+    li.active {
+      /* 不要使用 position:absolute 并且改变坐标的方式，
        * 避免 Tabs 脱离文档流，父元素高度为 0，导致下面的其他元素错位。
-       */</span>
-      <span class="hljs-attribute">position</span>: static;
+       */
+      position: static;
     }
   }
-}</code></pre></div><h2 id="切换-tab-时，面板所在位置问题">切换 Tab 时，面板所在位置问题</h2><p>无论使用 display 还是 position 方案，切换 tab 的时候，面板的位置会停留在上个显示的面板离开时的同一位置（默认是 0）。</p>
+}</pre><h2 id="切换-tab-时，面板所在位置问题">切换 Tab 时，面板所在位置问题</h2><p>无论使用 display 还是 position 方案，切换 tab 的时候，面板的位置会停留在上个显示的面板离开时的同一位置（默认是 0）。</p>
 <p>有两个解决方案：</p>
 <ol>
 <li>对于可以固定面板高度的场景（如整个页面都是 Tab），固定面板容器的高度，则 position 方案在切换 Tab 的时候，
@@ -143,27 +183,27 @@ Mac GPG 相对比较容易点，安装过程中同时引导创建一个 GPG key 
 </blockquote>
 <p>除了安装时引导生成的 GPG key 之外，你还可以手动生成 GPG key：</p>
 <div class="highlight"><pre><code class="bash">$ gpg --gen-key
-gpg (GnuPG/MacGPG2) 2.0.28; Copyright (C) 2015 Free Software Foundation, Inc.
+gpg (GnuPG/MacGPG2) <span class="number">2.0</span>.<span class="number">28</span>; Copyright (C) <span class="number">2015</span> Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
 
 Please select what kind of key you want:
-   (1) RSA and RSA (default)
-   (2) DSA and Elgamal
-   (3) DSA (sign only)
-   (4) RSA (sign only)
+   (<span class="number">1</span>) RSA and RSA (default)
+   (<span class="number">2</span>) DSA and Elgamal
+   (<span class="number">3</span>) DSA (sign only)
+   (<span class="number">4</span>) RSA (sign only)
 Your selection?
-RSA keys may be between 1024 and 4096 bits long.
-What keysize <span class="hljs-keyword">do</span> you want? (2048)
-Requested keysize is 2048 bits
+RSA keys may be between <span class="number">1024</span> and <span class="number">4096</span> bits long.
+What keysize <span class="keyword">do</span> you want? (<span class="number">2048</span>)
+Requested keysize is <span class="number">2048</span> bits
 Please specify how long the key should be valid.
-         0 = key does not expire
-      &lt;n&gt;  = key expires <span class="hljs-keyword">in</span> n days
-      &lt;n&gt;w = key expires <span class="hljs-keyword">in</span> n weeks
-      &lt;n&gt;m = key expires <span class="hljs-keyword">in</span> n months
-      &lt;n&gt;y = key expires <span class="hljs-keyword">in</span> n years
-Key is valid <span class="hljs-keyword">for</span>? (0) 1y
-Key expires at 日  6/11 22:33:50 2017 CST
+         <span class="number">0</span> = key does not expire
+      &lt;n&gt;  = key expires <span class="keyword">in</span> n days
+      &lt;n&gt;w = key expires <span class="keyword">in</span> n weeks
+      &lt;n&gt;m = key expires <span class="keyword">in</span> n months
+      &lt;n&gt;y = key expires <span class="keyword">in</span> n years
+Key is valid <span class="keyword">for</span>? (<span class="number">0</span>) <span class="number">1</span>y
+Key expires at 日  <span class="number">6</span>/<span class="number">11</span> <span class="number">22</span>:<span class="number">33</span>:<span class="number">50</span> <span class="number">2017</span> CST
 Is this correct? (y/N) y
 
 GnuPG needs to construct a user ID to identify your key.
@@ -172,57 +212,57 @@ Real name: xxx
 Email address: xxx@yyy.com
 Comment:
 You selected this USER-ID:
-    <span class="hljs-string">"xxx &lt;xxx@yyy.com&gt;"</span>
+    <span class="string">"xxx &lt;xxx@yyy.com&gt;"</span>
 
 Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit?
 Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O
 You need a Passphrase to protect your secret key.
 
 We need to generate a lot of random bytes. It is a good idea to perform
-some other action (<span class="hljs-built_in">type</span> on the keyboard, move the mouse, utilize the
+some other action (<span class="built_in">type</span> on the keyboard, move the mouse, utilize the
 disks) during the prime generation; this gives the random number
 generator a better chance to gain enough entropy.
 We need to generate a lot of random bytes. It is a good idea to perform
-some other action (<span class="hljs-built_in">type</span> on the keyboard, move the mouse, utilize the
+some other action (<span class="built_in">type</span> on the keyboard, move the mouse, utilize the
 disks) during the prime generation; this gives the random number
 generator a better chance to gain enough entropy.
 gpg: key B5DB6617 marked as ultimately trusted
 public and secret key created and signed.
 
 gpg: checking the trustdb
-gpg: 3 marginal(s) needed, 1 complete(s) needed, PGP trust model
-gpg: depth: 0  valid:   3  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 3u
-gpg: next trustdb check due at 2017-06-11
-pub   2048R/B5DB6617 2016-06-11 [expires: 2017-06-11]
-      Key fingerprint = 3AE5 19D5 8A58 C59B B029  6CEA 8566 6A47 B5DB 6617
+gpg: <span class="number">3</span> marginal(s) needed, <span class="number">1</span> complete(s) needed, PGP trust model
+gpg: depth: <span class="number">0</span>  valid:   <span class="number">3</span>  signed:   <span class="number">0</span>  trust: <span class="number">0</span>-, <span class="number">0</span>q, <span class="number">0</span>n, <span class="number">0</span>m, <span class="number">0</span>f, <span class="number">3</span>u
+gpg: next trustdb check due at <span class="number">2017</span>-<span class="number">06</span>-<span class="number">11</span>
+pub   <span class="number">2048</span>R/B5DB6617 <span class="number">2016</span>-<span class="number">06</span>-<span class="number">11</span> [expires: <span class="number">2017</span>-<span class="number">06</span>-<span class="number">11</span>]
+      Key fingerprint = <span class="number">3</span>AE5 <span class="number">19</span>D5 <span class="number">8</span>A58 C59B B029  <span class="number">6</span>CEA <span class="number">8566</span> <span class="number">6</span>A47 B5DB <span class="number">6617</span>
 uid       [ultimate] xxx &lt;xxx@yyy.com&gt;
-sub   2048R/1F4A9B85 2016-06-11 [expires: 2017-06-11]</code></pre></div><h2 id="配置-git">配置 Git</h2><p>配置好 GPG key 之后，可以配置让 git 在某个仓库所有的 commits 都添加 GPG key 验证：</p>
-<div class="highlight"><pre><code class="bash">git config commit.gpgsign <span class="hljs-literal">true</span></code></pre></div><p>也可以让本地所有的仓库都进行 GPG 验证：</p>
-<div class="highlight"><pre><code class="bash">$ git config --global commit.gpgsign <span class="hljs-literal">true</span></code></pre></div><h2 id="验证-git-commits">验证 Git commits</h2><p>如果没有设置局部仓库或全局仓库默认开启 commits GPG 验证，提交时可以附加 <code>-S</code> 参考，
+sub   <span class="number">2048</span>R/<span class="number">1</span>F4A9B85 <span class="number">2016</span>-<span class="number">06</span>-<span class="number">11</span> [expires: <span class="number">2017</span>-<span class="number">06</span>-<span class="number">11</span>]</code></pre></div><h2 id="配置-git">配置 Git</h2><p>配置好 GPG key 之后，可以配置让 git 在某个仓库所有的 commits 都添加 GPG key 验证：</p>
+<div class="highlight"><pre><code class="bash">git config commit.gpgsign <span class="literal">true</span></code></pre></div><p>也可以让本地所有的仓库都进行 GPG 验证：</p>
+<div class="highlight"><pre><code class="bash">$ git config --global commit.gpgsign <span class="literal">true</span></code></pre></div><h2 id="验证-git-commits">验证 Git commits</h2><p>如果没有设置局部仓库或全局仓库默认开启 commits GPG 验证，提交时可以附加 <code>-S</code> 参考，
 要求进行 GPG 验证。</p>
-<div class="highlight"><pre><code class="bash">$ git commit -S -m <span class="hljs-string">"comment"</span></code></pre></div><p>如果提交使用的账户信息和 GPG 签名不一致，则无法通过 GPG 验证，会导致提交失败。</p>
-<div class="highlight"><pre><code class="bash">$ git ci -m <span class="hljs-string">"test"</span>
-gpg: skipped <span class="hljs-string">"ZZZ &lt;xxx@yyy.com&gt;"</span>: No secret key
+<div class="highlight"><pre><code class="bash">$ git commit -S -m <span class="string">"comment"</span></code></pre></div><p>如果提交使用的账户信息和 GPG 签名不一致，则无法通过 GPG 验证，会导致提交失败。</p>
+<div class="highlight"><pre><code class="bash">$ git ci -m <span class="string">"test"</span>
+gpg: skipped <span class="string">"ZZZ &lt;xxx@yyy.com&gt;"</span>: No secret key
 gpg: signing failed: No secret key
 error: gpg failed to sign the data
 fatal: failed to write commit object</code></pre></div><p>正常的话，会提示输入 passphrase 解锁 PGP 密钥，此时可以选中保存到 Mac OS X 系统
 的 Keychain 中，避免每次输入 passphrase。</p>
 <div class="highlight"><pre><code class="bash">$ git add .
-$ git ci -m <span class="hljs-string">"test"</span>
+$ git ci -m <span class="string">"test"</span>
 
-You need a passphrase to unlock the secret key <span class="hljs-keyword">for</span>
-user: <span class="hljs-string">"xxx &lt;xxx@yyy.com&gt;"</span>
-4096-bit RSA key, ID C0B176D7, created 2016-06-11
+You need a passphrase to unlock the secret key <span class="keyword">for</span>
+user: <span class="string">"xxx &lt;xxx@yyy.com&gt;"</span>
+<span class="number">4096</span>-bit RSA key, ID C0B176D7, created <span class="number">2016</span>-<span class="number">06</span>-<span class="number">11</span>
 
-[master (root-commit) 163d909] <span class="hljs-built_in">test</span>
- 1 file changed, 3 insertions(+)
- create mode 100644 README.md</code></pre></div><h2 id="将-gpg-密钥添加到-github">将 GPG 密钥添加到 GitHub</h2><p>这时 push 到 GitHub 仓库的 commits，查看 commits 记录会显示 <code>unverified</code>。</p>
+[master (root-commit) <span class="number">163</span>d909] test
+ <span class="number">1</span> file changed, <span class="number">3</span> insertions(+)
+ create mode <span class="number">100644</span> README.md</code></pre></div><h2 id="将-gpg-密钥添加到-github">将 GPG 密钥添加到 GitHub</h2><p>这时 push 到 GitHub 仓库的 commits，查看 commits 记录会显示 <code>unverified</code>。</p>
 <div class="highlight"><pre><code class="bash">$ gpg --list-secret-keys
 /Users/xxx/.gnupg/secring.gpg
 -------------------------------
-sec   4096R/C0B176D7 2016-06-11 [expires: 2020-06-11]
+sec   <span class="number">4096</span>R/C0B176D7 <span class="number">2016</span>-<span class="number">06</span>-<span class="number">11</span> [expires: <span class="number">2020</span>-<span class="number">06</span>-<span class="number">11</span>]
 uid                  xxx &lt;xxx@yyy.com&gt;
-ssb   4096R/E00F263F 2016-06-11
+ssb   <span class="number">4096</span>R/E00F263F <span class="number">2016</span>-<span class="number">06</span>-<span class="number">11</span>
 
 $ gpg --armor --export C0B176D7
 -----BEGIN PGP PUBLIC KEY BLOCK-----
@@ -259,12 +299,12 @@ Comment: GPGTools - https://gpgtools.org
             <![CDATA[ <p>项目中有一个要将指定时间和当前时间比较，计算相对时间的逻辑（比如显示 <code>3 分钟前</code>），
 由于当前时间和执行测试用例的时机有关，每次执行用例都会不同，如何让这个代码可测试呢？
 有些人可能想到 Mock 当前时间，测试的时候让当前时间凝固，于是有了如下代码：</p>
-<div class="highlight"><pre><code class="javascript"><span class="hljs-comment">// 实际业务代码中：</span>
-<span class="hljs-comment">// 虽然本来只需要 moment() 就可以了，但是为了方便测试，传入了一个可 Mock 的 Date.now</span>
-<span class="hljs-keyword">const</span> now = moment(<span class="hljs-built_in">Date</span>.now());
+<div class="highlight"><pre><code class="javascript"><span class="comment">// 实际业务代码中：</span>
+<span class="comment">// 虽然本来只需要 moment() 就可以了，但是为了方便测试，传入了一个可 Mock 的 Date.now</span>
+<span class="keyword">const</span> now = moment(Date.now());
 
-<span class="hljs-comment">// 测试用例中，Mock Date.now 方法：</span>
-mm(<span class="hljs-built_in">Date</span>, <span class="hljs-string">'now'</span>, () =&gt; <span class="hljs-number">1464969293129</span>);</code></pre></div><p>这个业务代码是 <strong>可测试</strong> 的代码吗？我认为不是。</p>
+<span class="comment">// 测试用例中，Mock Date.now 方法：</span>
+mm(Date, <span class="string">'now'</span>, () =&gt; <span class="number">1464969293129</span>);</code></pre></div><p>这个业务代码是 <strong>可测试</strong> 的代码吗？我认为不是。</p>
 <!--more-->
 
 <p>这个业务代码为了测试，使用了一个不必要的方法，而且让测试代码和业务逻辑相互依赖，
@@ -274,42 +314,42 @@ mm(<span class="hljs-built_in">Date</span>, <span class="hljs-string">'now'</spa
 <p>项目中有一个今日收益更新的提醒消息，只有是今天的更新才显示，所以第一直觉应该是造一个
 收益更新时间是今天的测试数据，而不是造一个固定的数据（可能固定测试数据比较偷懒方便），
 然后篡改业务逻辑中当前时间的计算。</p>
-<div class="highlight"><pre><code class="javascript"><span class="hljs-comment">// 业务代码正常该怎么写怎么写，不用管测试怎么活。</span>
-<span class="hljs-keyword">const</span> today = moment().format(<span class="hljs-string">'YYYYMMDD'</span>);
-<span class="hljs-keyword">if</span> (data.updateDate === today) {
-  <span class="hljs-comment">// show message.</span>
+<div class="highlight"><pre><code class="javascript"><span class="comment">// 业务代码正常该怎么写怎么写，不用管测试怎么活。</span>
+<span class="keyword">const</span> today = moment().format(<span class="string">'YYYYMMDD'</span>);
+<span class="keyword">if</span> (data.updateDate === today) {
+  <span class="comment">// show message.</span>
 }
 
-<span class="hljs-comment">// 活的测试数据</span>
-data.updateDate = moment().format(<span class="hljs-string">'YYYYMMDD'</span>);</code></pre></div><blockquote>
+<span class="comment">// 活的测试数据</span>
+data.updateDate = moment().format(<span class="string">'YYYYMMDD'</span>);</code></pre></div><blockquote>
 <p>测试代码应该只关注正常的数据输入和输出 <em>（即使输入、输出是难以预测的）</em>。</p>
 <p>而不应该关注业务实现逻辑，试图篡改业务代码，让测试可以进行。</p>
 </blockquote>
 <p>更好一点的可测试代码，可以将当前时间传入以便让输入、输出可以预测：</p>
-<div class="highlight"><pre><code class="javascript"><span class="hljs-comment">// 业务抽象</span>
-<span class="hljs-comment">// 计算两个时间差，格式化为 `3 分钟前` 等相对时间。</span>
-<span class="hljs-comment">// @param {Date|Number} date1 较早的时间或时间戳。</span>
-<span class="hljs-comment">// @param {Date|Number} date2 较晚的时间或时间戳，默认当前时间。</span>
-<span class="hljs-comment">// @return {String} 相对时间差</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dateDiff</span>(<span class="hljs-params">date1, date2 = Date.now(</span>)) </span>{
-  <span class="hljs-comment">// ...</span>
+<div class="highlight"><pre><code class="javascript">// 业务抽象
+// 计算两个时间差，格式化为 `3 分钟前` 等相对时间。
+// @param {Date|Number} date1 较早的时间或时间戳。
+// @param {Date|Number} date2 较晚的时间或时间戳，默认当前时间。
+// @return {String} 相对时间差
+function dateDiff(date1, date2 = Date.now()) {
+  // ...
 }
 
-<span class="hljs-comment">// 业务调用</span>
+// 业务调用
 dateDiff(data.datetime);
 
-<span class="hljs-comment">// 测试代码</span>
-assert(dateDiff(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2016</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>), <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2016</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">10</span>)) === <span class="hljs-string">'刚刚'</span>);
-assert(dateDiff(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2016</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>), <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2016</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">3</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>)) === <span class="hljs-string">'3 分钟前'</span>);
-assert(dateDiff(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2016</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>), <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2016</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>)) === <span class="hljs-string">'1 小时前'</span>);</code></pre></div><h2 id="2017-02-09-更新">2017-02-09 更新</h2><p>群里又有了类似的一个案例，开发想写测试用例来测 location.href 的赋值是否正确，
+// 测试代码
+assert(dateDiff(new Date(2016,0,1,0,0,0,0), new Date(2016,0,1,0,0,0,10)) === '刚刚');
+assert(dateDiff(new Date(2016,0,1,0,0,0,0), new Date(2016,0,1,0,3,0,0)) === '3 分钟前');
+assert(dateDiff(new Date(2016,0,1,0,0,0,0), new Date(2016,0,1,1,0,0,0)) === '1 小时前');</code></pre></div><h2 id="2017-02-09-更新">2017-02-09 更新</h2><p>群里又有了类似的一个案例，开发想写测试用例来测 location.href 的赋值是否正确，
 用以测试页面跳转逻辑是否正确。于是想通过重载 location 对象来监听给 location.href
 赋值时，所赋值是否符合期望。</p>
 <p>还辛苦找到 <a href="https://zhuanlan.zhihu.com/p/24342684">Chrome 出了个小 bug：论如何在 Chrome 下劫持原生只读对象</a>
 这么牛逼变态到令人折服的方法。但是，这是正确的方法吗？我认为不是。</p>
 <p>location 的案例中，我觉得应该是测试赋值给 location.href 的 <strong>值</strong>本身是否正确，
 而不是测试企图篡改 location 来监听 href 属性是否正确。即：</p>
-<div class="highlight"><pre><code class="javascript"><span class="hljs-comment">// 业务代码</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getUrl</span>(<span class="hljs-params"></span>)</span>{}
+<div class="highlight"><pre><code class="javascript"><span class="comment">// 业务代码</span>
+<span class="function"><span class="keyword">function</span> <span class="title">getUrl</span><span class="params">()</span>{</span>}
 location.href = getUrl(...args);</code></pre></div><p>单元测试用例只需要测试 getUrl 在各种边界输入条件下，输出是否符合期望就可以了。</p>
 ]]>
         </content>
@@ -531,12 +571,12 @@ location.href = getUrl(...args);</code></pre></div><p>单元测试用例只需�
 
 <p>早期的 JavaScript 运行环境大都不支持末尾多出来的逗号，或者会抛出异常，或者不符合期望。</p>
 <p>比如：</p>
-<div class="highlight"><pre><code class="javascript"><span class="hljs-keyword">var</span> obj = {
-  a: <span class="hljs-number">0</span>, <span class="hljs-comment">// 抛出异常。</span>
+<div class="highlight"><pre><code class="javascript"><span class="keyword">var</span> obj = {
+  a: <span class="number">0</span>, <span class="comment">// 抛出异常。</span>
 };
 
-<span class="hljs-keyword">var</span> arr = [
-  <span class="hljs-number">0</span>, <span class="hljs-comment">// arr.length === 2</span>
+<span class="keyword">var</span> arr = [
+  <span class="number">0</span>, <span class="comment">// arr.length === 2</span>
 ];</code></pre></div><p>由于不支持尾逗号，我们以前写代码都需要手动去除尾逗号（工具最多提示你这里多了个逗号）。
 因此我们增加、删除一个属性、数组项时，总是需要担心相邻项的逗号问题。</p>
 <p>比如增加一项：</p>
@@ -550,30 +590,30 @@ location.href = getUrl(...args);</code></pre></div><p>单元测试用例只需�
 <li>如果被添加项不是列表的最后一项，则被添加项要加上逗号。</li>
 </ul>
 <div class="highlight"><pre><code class="diff"> var obj = {
-<span class="hljs-deletion">-  a: 0</span>
-<span class="hljs-addition">+  a: 0,</span>
-<span class="hljs-addition">+  b: 1</span>
+<span class="deletion">-  a: 0</span>
+<span class="addition">+  a: 0,</span>
+<span class="addition">+  b: 1</span>
  };
 
  var arr = [
-<span class="hljs-deletion">-  0</span>
-<span class="hljs-addition">+  0,</span>
-<span class="hljs-addition">+  1</span>
+<span class="deletion">-  0</span>
+<span class="addition">+  0,</span>
+<span class="addition">+  1</span>
  ];</code></pre></div><p>删除一项也是：</p>
 <ul>
 <li>你本来只是要删除了最后一项，但你不得不修改前一项。麻烦，容易出问题。</li>
 <li>你本来只是删除了一项，但在 diff 中也是看到又是删除，又是增加。</li>
 </ul>
 <div class="highlight"><pre><code class="diff"> var obj = {
-<span class="hljs-deletion">-  a: 0,</span>
-<span class="hljs-deletion">-  b: 1</span>
-<span class="hljs-addition">+  a: 0</span>
+<span class="deletion">-  a: 0,</span>
+<span class="deletion">-  b: 1</span>
+<span class="addition">+  a: 0</span>
  };
 
  var arr = [
-<span class="hljs-deletion">-  0,</span>
-<span class="hljs-deletion">-  1</span>
-<span class="hljs-addition">+  0</span>
+<span class="deletion">-  0,</span>
+<span class="deletion">-  1</span>
+<span class="addition">+  0</span>
  ];</code></pre></div><p>值得高兴的是，现在的 JavaScript 运行环境、预编译工具、语法检查工具都支持了尾逗号。
 一旦我们统一使用尾逗号风格：</p>
 <ul>
@@ -583,21 +623,21 @@ location.href = getUrl(...args);</code></pre></div><p>单元测试用例只需�
 <p>新增一项：</p>
 <div class="highlight"><pre><code class="diff"> var obj = {
    a: 0,
-<span class="hljs-addition">+  b: 1,</span>
+<span class="addition">+  b: 1,</span>
  };
 
  var arr = [
    0,
-<span class="hljs-addition">+  1,</span>
+<span class="addition">+  1,</span>
  ];</code></pre></div><p>删除一项：</p>
 <div class="highlight"><pre><code class="diff"> var obj = {
    a: 0,
-<span class="hljs-deletion">-  b: 1,</span>
+<span class="deletion">-  b: 1,</span>
  };
 
  var arr = [
    0,
-<span class="hljs-deletion">-  1,</span>
+<span class="deletion">-  1,</span>
  ];</code></pre></div><p>另外也有些语言是不需要逗号的，每一项都不需要。比如 Markdown 的列表，yml，yaml，
 xml，html 等。</p>
 <p>全要逗号，或者全不要逗号，他们的共同点就是<strong>一致性</strong>。这种一致性让书写和阅读都非常简洁清晰。
@@ -682,8 +722,8 @@ pre-commit:
 <a href="http://www.w3.org/TR/navigation-timing/">Navigation Timing</a>，这个 API 现在
 基本上在主流浏览器上都可用。Navigation Timing 定义了一套用于测量主页面性能的
 JavaScript API。例如：</p>
-<div class="highlight"><pre><code class="javascript"><span class="hljs-comment">// Navigation Timing</span>
-<span class="hljs-keyword">var</span> t = performance.timing,
+<div class="highlight"><pre><code class="javascript"><span class="comment">// Navigation Timing</span>
+<span class="keyword">var</span> t = performance.timing,
     pageloadtime = t.loadEventStart - t.navigationStart,
     dns = t.domainLookupEnd - t.domainLookupStart,
     tcp = t.connectEnd - t.connectStart,
@@ -693,8 +733,8 @@ JavaScript API。例如：</p>
 到各个资源当中。所以我们拥有了更进一步的 Resource Timing （资源计时）规范，
 这个 JavaScript API 提供类似 Navigation Timing 的功能，但是能精确到每一个资源的
 耗时。举个例子：</p>
-<div class="highlight"><pre><code class="javascript"><span class="hljs-comment">// Resource Timing</span>
-<span class="hljs-keyword">var</span> r0 = performance.getEntriesByType(<span class="hljs-string">"resource"</span>)[<span class="hljs-number">0</span>],
+<div class="highlight"><pre><code class="javascript"><span class="comment">// Resource Timing</span>
+<span class="keyword">var</span> r0 = performance.getEntriesByType(<span class="string">"resource"</span>)[<span class="number">0</span>],
     loadtime = r0.duration,
     dns = r0.domainLookupEnd - r0.domainLookupStart,
     tcp = r0.connectEnd - r0.connectStart,
@@ -720,7 +760,7 @@ timing 对象。（感谢 <a href="http://calendar.perfplanet.com/2012/an-introd
 的 timing 信息，需要使用 Navigation Timing 对象（<code>performance.timing</code>）。</p>
 <p>虽然不太可能，当页面上没有其他资源时，这可能会导致错误发生。
 例如，刚才 Resource Timing 示例使用如下代码：</p>
-<div class="highlight"><pre><code class="javascript">performance.getEntriesByType(<span class="hljs-string">"resource"</span>)[<span class="hljs-number">0</span>]</code></pre></div><p>如果一个页面唯一的资源就是主页面的 HTML 文档，然后 <code>getEntriesByType(&quot;resource&quot;)</code>
+<div class="highlight"><pre><code class="javascript">performance.getEntriesByType(<span class="string">"resource"</span>)[<span class="number">0</span>]</code></pre></div><p>如果一个页面唯一的资源就是主页面的 HTML 文档，然后 <code>getEntriesByType(&quot;resource&quot;)</code>
 返回一个空数组，这时候应用 <code>element[0]</code> 会引起 JavaScript 异常。如果你找不到
 没有引用子资源的页面，你可以试试 <a href="http://fast.stevesouders.com/">http://fast.stevesouders.com/</a></p>
 <h2 id="3-小心-secureconnectionstart-的问题。">3. 小心 <code>secureConnectionStart</code> 的问题。</h2><p><a href="http://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-secureconnectionstart"><code>secureConnectionStart</code></a>
@@ -740,9 +780,9 @@ timing 对象。（感谢 <a href="http://calendar.perfplanet.com/2012/an-introd
 为 0，而实际上它应该是一个时间戳。（详情请参考 <a href="https://code.google.com/p/chromium/issues/detail?id=404501">bug 404501</a> ）
 为了避免这个问题，测量 SSL 协商时间时，一定要检查 <code>secureConnectionStart</code> 既不是
 <code>undefined</code> 也不是 <code>0</code>：</p>
-<div class="highlight"><pre><code class="javascript"><span class="hljs-keyword">var</span> r0 = performance.getEntriesByType(<span class="hljs-string">"resource"</span>)[<span class="hljs-number">0</span>];
-<span class="hljs-keyword">if</span> ( r0.secureConnectionStart ) {
-    <span class="hljs-keyword">var</span> ssl = r0.connectEnd - r0.secureConnectionStart;
+<div class="highlight"><pre><code class="javascript"><span class="keyword">var</span> r0 = performance.getEntriesByType(<span class="string">"resource"</span>)[<span class="number">0</span>];
+<span class="keyword">if</span> ( r0.secureConnectionStart ) {
+    <span class="keyword">var</span> ssl = r0.connectEnd - r0.secureConnectionStart;
 }</code></pre></div><p>第三，规范中关于 <a href="http://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-secureconnectionstart">这一行</a>
 有一些误导：“...如果当前页面的协议是 HTTPS，这个属性必须立即返回用户代理(user agent)开始握手过程的时间...”
 （我的重点）。有可能当前页面是 HTTP，但仍然包含我们需要测量 SSL 协商时间的 HTTPS 资源。
@@ -784,16 +824,16 @@ HTTP 页面中的 HTTPS 资源。</p>
 可以通过检测（上面列出的，secureConnectionStart 除外）限制性属性是否为 0 的方式
 来避免限制性问题，我总是使用 <code>requestStart</code>。下面是用于在计算详细的性能指标之前，
 检测和计算限制性属性是否可用的代码片段：</p>
-<div class="highlight"><pre><code class="javascript"><span class="hljs-comment">// Resource Timing</span>
-<span class="hljs-keyword">var</span> r0 = performance.getEntriesByType(<span class="hljs-string">"resource"</span>)[<span class="hljs-number">0</span>],
+<div class="highlight"><pre><code class="javascript"><span class="comment">// Resource Timing</span>
+<span class="keyword">var</span> r0 = performance.getEntriesByType(<span class="string">"resource"</span>)[<span class="number">0</span>],
     loadtime = r0.duration;
-<span class="hljs-keyword">if</span> ( r0.requestStart ) {
-    <span class="hljs-keyword">var</span> dns = r0.domainLookupEnd - r0.domainLookupStart,
+<span class="keyword">if</span> ( r0.requestStart ) {
+    <span class="keyword">var</span> dns = r0.domainLookupEnd - r0.domainLookupStart,
         tcp = r0.connectEnd - r0.connectStart,
         ttfb = r0.responseStart - r0.startTime;
 }
-<span class="hljs-keyword">if</span> ( r0.secureConnectionStart ) {
-    <span class="hljs-keyword">var</span> ssl = r0.connectEnd - r0.secureConnectionStart;
+<span class="keyword">if</span> ( r0.secureConnectionStart ) {
+    <span class="keyword">var</span> ssl = r0.connectEnd - r0.secureConnectionStart;
 }</code></pre></div><p>做这些检测是非常重要的，否则，当访问这些受限属性时，你不会得到任何异常，除了
 这些虚假的数据。当属性受限访问时，它们的值被设置为 0，例如 <code>domainLookupEnd - domainLookupStart</code>
 翻译成 <code>0 - 0</code>，它返回一个似是而非的结果 <code>0</code>，而这可能并不是真实 DNS 查询时间。
@@ -1174,13 +1214,13 @@ API，可以用来监控网页及其引用的外部资源加载时间，将来�
   |- index.wiki
   `- vim.wiki</pre><p>在 convert.sh 同级目录执行：</p>
 <pre>$ ./convert.sh vimwiki/*.wiki</pre><p>然后自动或手动调整之后，删除 <code>.wiki</code> 文件即可。</p>
-<h2 id="codes">Codes</h2><h3 id="convert-sh">convert.sh</h3><div class="highlight"><pre><code class="bash"><span class="hljs-meta">#!/usr/bin/env bash
+<h2 id="codes">Codes</h2><h3 id="convert-sh">convert.sh</h3><div class="highlight"><pre><code class="bash"><span class="shebang">#!/usr/bin/env bash
 </span>
-<span class="hljs-keyword">for</span> x
-<span class="hljs-keyword">do</span>
-  filename=$(<span class="hljs-built_in">echo</span> <span class="hljs-variable">$x</span>|sed <span class="hljs-_">-e</span> <span class="hljs-string">"s/\.wiki$/.md/"</span>)
-  sed <span class="hljs-_">-f</span> ex <span class="hljs-variable">$x</span> &gt; <span class="hljs-variable">$filename</span>
-<span class="hljs-keyword">done</span></code></pre></div><h3 id="ex">ex</h3><pre>s/# \(.*\)$/* \1/g
+<span class="keyword">for</span> x
+<span class="keyword">do</span>
+  filename=$(<span class="built_in">echo</span> <span class="variable">$x</span>|sed <span class="operator">-e</span> <span class="string">"s/\.wiki$/.md/"</span>)
+  sed <span class="operator">-f</span> ex <span class="variable">$x</span> &gt; <span class="variable">$filename</span>
+<span class="keyword">done</span></code></pre></div><h3 id="ex">ex</h3><pre>s/# \(.*\)$/* \1/g
 s/^= \(.*\) =$/# \1/g
 s/^== \(.*\) ==$/## \1/g
 s/^=== \(.*\) ===$/### \1/g
@@ -1398,38 +1438,38 @@ CDN 缓存大量无意义资源的问题。</p>
 <ul>
 <li>搜狗浏览器的 userAgent 太坑爹，几乎所有版本都是 2.x，开发者太不专业了。最终找到内核为 webkit/535.1 的是 3.2 版。</li>
 <li><p>重现到老版 arale 中的 ajax 模块中对 JSON 有特殊的处理，如果浏览器内置的 JSON 不支持非标准的 JSON （如 <code>{a:1}</code>）则 hack 做兼容。</p>
-<div class="highlight"><pre><code class="javascript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">W3CParse</span>(<span class="hljs-params">data</span>) </span>{
-        <span class="hljs-keyword">if</span> (validJSON(data)) {
-            <span class="hljs-keyword">return</span> <span class="hljs-built_in">window</span>.JSON.parse(data)
-        } <span class="hljs-keyword">else</span> {
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
-            arale.error(<span class="hljs-string">"Invalid JSON: "</span> + data)
+<div class="highlight"><pre><code class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">W3CParse</span><span class="params">(data)</span> {</span>
+        <span class="keyword">if</span> (validJSON(data)) {
+            <span class="keyword">return</span> window.JSON.parse(data)
+        } <span class="keyword">else</span> {
+            <span class="keyword">return</span> <span class="literal">null</span>;
+            arale.error(<span class="string">"Invalid JSON: "</span> + data)
         }
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">defaultParse</span>(<span class="hljs-params">data</span>) </span>{
-        <span class="hljs-keyword">if</span> (validJSON(data)) {
-            <span class="hljs-keyword">return</span> (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Function</span>(<span class="hljs-string">"return ("</span> + data + <span class="hljs-string">")"</span>))()
-        } <span class="hljs-keyword">else</span> {
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
-            arale.error(<span class="hljs-string">"Invalid JSON: "</span> + data)
+    <span class="function"><span class="keyword">function</span> <span class="title">defaultParse</span><span class="params">(data)</span> {</span>
+        <span class="keyword">if</span> (validJSON(data)) {
+            <span class="keyword">return</span> (<span class="keyword">new</span> Function(<span class="string">"return ("</span> + data + <span class="string">")"</span>))()
+        } <span class="keyword">else</span> {
+            <span class="keyword">return</span> <span class="literal">null</span>;
+            arale.error(<span class="string">"Invalid JSON: "</span> + data)
         }
     }
-    <span class="hljs-keyword">var</span> ok_wrong_json = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-        <span class="hljs-keyword">try</span> {
-            <span class="hljs-built_in">JSON</span>.parse(<span class="hljs-string">"{ a: 1 }"</span>);
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>
-        } <span class="hljs-keyword">catch</span> (x) {
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+    <span class="keyword">var</span> ok_wrong_json = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        <span class="keyword">try</span> {
+            JSON.parse(<span class="string">"{ a: 1 }"</span>);
+            <span class="keyword">return</span> <span class="literal">true</span>
+        } <span class="keyword">catch</span> (x) {
+            <span class="keyword">return</span> <span class="literal">false</span>
         }
     };
-    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">window</span>.JSON &amp;&amp; <span class="hljs-built_in">window</span>.JSON.parse &amp;&amp; ok_wrong_json()) {
-        parseJSON = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">data</span>) </span>{
-            <span class="hljs-keyword">return</span> W3CParse.call(<span class="hljs-keyword">this</span>, data)
+    <span class="keyword">if</span> (window.JSON &amp;&amp; window.JSON.parse &amp;&amp; ok_wrong_json()) {
+        parseJSON = <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> {</span>
+            <span class="keyword">return</span> W3CParse.call(<span class="keyword">this</span>, data)
         }
-    } <span class="hljs-keyword">else</span> {
-        parseJSON = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">data</span>) </span>{
-            <span class="hljs-keyword">return</span> defaultParse.call(<span class="hljs-keyword">this</span>, data)
+    } <span class="keyword">else</span> {
+        parseJSON = <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> {</span>
+            <span class="keyword">return</span> defaultParse.call(<span class="keyword">this</span>, data)
         }
     }</code></pre></div></li>
 <li>抛出异常的代码是 <code>JSON.parse(&quot;{a: 1}&quot;)</code></li>
@@ -1453,138 +1493,6 @@ try/catch 异常处理流程进行，所以对业务本身没有影响。</li>
 排查线上故 障、线下接⼝什么的都非常⽅方便。强烈建议⼤家都装上⽤用。</p>
 <h2 id="最后">最后</h2><p>我仅代表我自己，想说某些毫无责任心的国产浏览器壳厂商们，你们没有创造价值，
 只是在各种不同方式的索取。</p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[每周异常：第 8期，异常象限]]></title>
-        <link href="https://hotoo.github.io/blog/post/weekly-topic-about-exceptions-8"/>
-        <published>2013-09-05T00:00:00.000Z</published>
-        <updated>2013-09-05T00:00:00.000Z</updated>
-        <id>https://hotoo.github.io/blog/post/weekly-topic-about-exceptions-8</id>
-        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
-            <![CDATA[ <p>上周的 <a href="weekly-topic-about-exceptions-7">每周异常：第 7期，保持简单，保持拙朴</a>
-中介绍了通过页面关键的 URL/ID 信息，简单有效的发现异常的方案。
-本周我们在这个异常分析方法之上，再稍微深入下：</p>
-<p>对于整个网站来说，每个系统、页面是有重要级别的，比如支付宝收银台就是 A1 级系统。
-这些系统、页面一般可以按照以下方法来判断重要性：</p>
-<ul>
-<li>访问量极大，是最主要的业务，对用户影响极大。</li>
-<li>用户本身重要（例如商户，尤其是大商户），是最重要的业务，对企业影响巨大。</li>
-</ul>
-<p>对于前者，我们可以通过系统、域名的访问量来近似的划分；
-对于后者，我们可以建立白名单机制。</p>
-<p>对于异常来说，可以通过异常率来判断异常自身的紧急程度。</p>
-<hr>
-<ul>
-<li>系统、页面重要性作为『异常重要性』的一个指标。</li>
-<li>异常率及异常量作为『异常紧急程度』作为一个指标。<ul>
-<li>异常率超过阈值的为高发率异常。</li>
-<li>（可选）异常量超过阈值的也是高发量异常。</li>
-<li>并且以高发率为主。</li>
-</ul>
-</li>
-</ul>
-<p>我们画出以下异常象限：</p>
-<p><img src="/static/images/quadrant.png" alt="异常象限"></p>
-<ul>
-<li>图中一、二、三、四为象限代号。</li>
-<li>(0, 1, 2, 3) 为异常重要性序号。</li>
-</ul>
-<p>经过一些分析，我们可以得出结论：</p>
-<ul>
-<li>第一、第二象限的异常，是我们最需要关注的部分。尤其是第一象限的异常，
-实时高发异常一般也是在这个象限。</li>
-<li>第四、三象限的低发异常，则几乎可以不用关注。</li>
-<li>总之我们只需要关注高发异常，但应该以页面的重要性来排优先级。</li>
-</ul>
-<h2 id="如何设定阈值？">如何设定阈值？</h2><p>要确定异常象限，确定各个阈值是关键，这里只提供一些简单的参考。</p>
-<ul>
-<li>重要程度：全站重要页面占全站所有页面的 5% 左右，可以根据自身情况调整。</li>
-<li>紧迫程度：<ul>
-<li>目前的经验数据是异常率 4‰ 以上可以认为是高发率异常，但仍需继续
-分析实际数据做调整。</li>
-<li>（可选）异常 PV 超过 (全站访问最高页面 PV 乘以 1‰) 的也可以认为是高发量异常，
-实际可以根据自身情况调整。</li>
-</ul>
-</li>
-</ul>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[每周异常：第 7期，保持简单，保持拙朴]]></title>
-        <link href="https://hotoo.github.io/blog/post/weekly-topic-about-exceptions-7"/>
-        <published>2013-08-28T00:00:00.000Z</published>
-        <updated>2013-08-28T00:00:00.000Z</updated>
-        <id>https://hotoo.github.io/blog/post/weekly-topic-about-exceptions-7</id>
-        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
-            <![CDATA[ <h2 id="副标题：如何简单有效的发现最重要的有效异常">副标题：如何简单有效的发现最重要的有效异常</h2><blockquote>
-<p>Keep It Simple, Stupid.</p>
-<p>-- U.S. Navy (1960)</p>
-</blockquote>
-<p>在这之前，我一直苦苦寻求牛逼的算法 <a href="https://github.com/totorojs/javascript-exception-archives/issues/17">#12</a> ，
-来解决这个看似简单，其实不易；仿佛不易，最终简单的问题：
-找出最重要的有效异常。</p>
-<p>最早的时候，我们定义了『一个异常』由以下核心部分组成：</p>
-<ul>
-<li>URL: 异常所在页面。</li>
-<li>File: 异常代码所在文件。</li>
-<li>Line: 异常代码所在行数。</li>
-<li>Message: 异常消息。</li>
-</ul>
-<p>这些是不变的，相同页面中，同一个异常代码文件同一行，异常消息相同的异常，我们可以近似的认为它是同一个异常。</p>
-<!--more-->
-
-<p>另外还定义了异常率：</p>
-<ul>
-<li>异常率(PV)：『一个异常』的 PV，除以这个异常所在页面的 PV。</li>
-<li>异常率(UV)：『一个异常』的 UV，除以这个异常所在页面的 UV。</li>
-</ul>
-<p>于是我们通过 URL, File, Line, Message 四个核心信息来统计每一个异常的 PV, UV, PV异常率，UV异常率。
-并按照其中的某个字段为主进行排序。</p>
-<p>但是得到的结果总是让人不尽如人意，总会有很多无法排查，甚至还有一些显然不是我们代码的问题的异常排前排。</p>
-<p>我们尝试限制异常 PV, UV 的基数，尝试限制页面 PV, UV 的基数，结果仍然不理想。
-而且也没有想出其他牛逼的权重算法来评估每个异常。</p>
-<p>我们想过异常是跟代码所在文件和行号、异常消息有关系的，跟页面 URL 的关系不那么强，因为公共代码会在很多页面使用，把这同一个异常分散算到不同页面中会严重影响这个异常的排名。</p>
-<p>但是实际上公共代码（尤其是基础类库）的异常很多情况下是业务系统调用不当，或者使用的版本有 BUG 导致，最终还是需要这个页面的开发者调整调用方法，或升级使用更新的公共脚本来解决。所以忽略或弱化异常所在页面是不可接受的。</p>
-<p>而且排除了异常所在页面的信息，对于排查异常来说更为困难。</p>
-<p>够了，我已经受够了，脑袋一片浆糊。
-累、困，早点回家睡觉。</p>
-<hr>
-<p>回到家随手画了几笔，然后去洗澡。洗澡的时候想着刚刚画的思维草图，逐渐想清楚了很多。</p>
-<ul>
-<li>File: 由于是 seajs 自动管理依赖，以及 combo 的使用，异常所在文件本身具有不稳定性。</li>
-<li>Line: 由于上面 File 的原因，不仅仅是 HTML 代码中的异常行号不稳定，静态脚本异常行号也具有不稳定性。</li>
-<li>Message: 不同浏览器（包括不同版本，或者在不同操作系统中）对同一个异常有不同的消息反馈，另外还有本地化的原因，异常消息也具有不稳定性。</li>
-</ul>
-<p>最后，只有异常所在页面 URL（或者页面 ID，一个页面源文件可能有多个 URL 地址，但是它们是有关系的，ID 相同）才是最稳定的。</p>
-<hr>
-<p>于是我根据页面 URL 排列出每个页面的异常 PV, UV, PV异常率，UV异常率。并根据 PV 异常率为主进行倒序排序（每次访问都抛出的异常，比每个用户访问都抛出的异常的优先级更高）于是我们轻易得出了全站异常率最高的页面。</p>
-<p>根据这个关键的页面信息，再次查询出每『一个异常』的 PV, UV, PV异常率，UV异常率。</p>
-<p>以不变（页面 URL 或 ID），应万变。我们一个个把这些异常大户揪出来，各个击破。即使暂时没有发布解决，我们仍可以轻易识别排除这个已经揪出的异常。</p>
-<p>好了，妈妈再也不用操心我的每周异常 TOP 数据分析了。</p>
-<p>嗯， <a href="https://github.com/totorojs/javascript-exception-archives/issues/17">#12</a> 这个 issue 也可以关了。</p>
-<hr>
-<p>在做静态资源异常监控时，也有类似的经历。</p>
-<p>静态资源监控最重要的是发现哪个页面引用了哪个 404资源，尤其是漏发的资源。因此最重要的有两个关联维度：</p>
-<ul>
-<li>404资源所在页面</li>
-<li>404资源文件地址</li>
-</ul>
-<p>但是引起 404 的场景很多，包括：</p>
-<ul>
-<li>漏发文件。</li>
-<li>静态引用地址错误。</li>
-<li>动态引用地址错误。</li>
-</ul>
-<p>其中动态引用是由于动态脚本计算得出的静态资源地址，引发的 404 非常频繁，多样、而且分布的很散。因此这两个维度的排列组合结果就非常巨大。而且我们的分析系统是基于索引的，这些内容不确定、数量庞大的指标非常不适合用这个系统分析。（我们还有另一个非常时候实时异常分析的系统，这里不做介绍）</p>
-<p>因此我们把重心放在更为稳定的页面 URL，只关注出现 404 的页面，至于是什么资源可以直接根据 URL 查询日志，或直接访问这个页面。</p>
-<h2 id="小结">小结</h2><p>这篇讲的几个关键内容再强调下：</p>
-<ul>
-<li>保持简单，保持拙朴。</li>
-<li>抓住重点，真正的核心重点。</li>
-</ul>
-<hr>
-<p>终于可以睡了，晚安~</p>
 ]]>
         </content>
     </entry>

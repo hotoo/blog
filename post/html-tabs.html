@@ -49,20 +49,20 @@
 <a name="more"></a>
 
 <p>简单示例代码：</p>
-<p>HTML:</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tabs"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">ol</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tabbar"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"active"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#tab1"</span>&gt;</span>Tab 1<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#tab2"</span>&gt;</span>Tab 2<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">ol</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">ol</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tabpanel"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"active"</span>&gt;</span>
+<p>HTML:</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"tabs"</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">ol</span> <span class="attribute">class</span>=<span class="value">"tabbar"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"active"</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#tab1"</span>&gt;</span>Tab 1<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#tab2"</span>&gt;</span>Tab 2<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">ol</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">ol</span> <span class="attribute">class</span>=<span class="value">"tabpanel"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"active"</span>&gt;</span>
       Tab Panel 1
-    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span>&gt;</span>
       Tab Panel 2
-    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">ol</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+    <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">ol</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
 <a name="L1-4" href="#L1-4">4</a>
@@ -75,23 +75,23 @@
 <a name="L1-11" href="#L1-11">11</a>
 <a name="L1-12" href="#L1-12">12</a>
 <a name="L1-13" href="#L1-13">13</a>
-<a name="L1-14" href="#L1-14">14</a></pre></div></div><p>LESS:</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="less"><span class="hljs-selector-class">.tabs</span> {
-  <span class="hljs-selector-class">.tabpanel</span> {
-    <span class="hljs-attribute">position</span>: relative;
-    <span class="hljs-selector-tag">li</span> {
-      <span class="hljs-attribute">position</span>: absolute;
-      <span class="hljs-attribute">top</span>: -<span class="hljs-number">999999px</span>;
-      <span class="hljs-attribute">left</span>: -<span class="hljs-number">9999px</span>;
-      <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>; <span class="hljs-comment">/* 避免浮动导致宽度不对 */</span>
+<a name="L1-14" href="#L1-14">14</a></pre></div></div><p>LESS:</p><div class="highlight"><div class="codes"><div class="code"><pre>.tabs {
+  .tabpanel {
+    position: relative;
+    li {
+      position: absolute;
+      top: -999999px;
+      left: -9999px;
+      width: 100%; /* 避免浮动导致宽度不对 */
     }
-    <span class="hljs-selector-tag">li</span><span class="hljs-selector-class">.active</span> {
-      <span class="hljs-comment">/* 不要使用 position:absolute 并且改变坐标的方式，
+    li.active {
+      /* 不要使用 position:absolute 并且改变坐标的方式，
        * 避免 Tabs 脱离文档流，父元素高度为 0，导致下面的其他元素错位。
-       */</span>
-      <span class="hljs-attribute">position</span>: static;
+       */
+      position: static;
     }
   }
-}</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+}</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
 <a name="L2-4" href="#L2-4">4</a>

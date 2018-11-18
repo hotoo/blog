@@ -324,7 +324,17 @@ div.post{
   /*background:#f8f8f8;*/
   -moz-border-radius:16px; -khtml-border-radius:16px; -webkit-border-radius:16px; border-radius:16px;
 }
+.post img {
+  border: 1px solid #eee;
+  width: 100%;
+  background-color: #fff;
+}
 
 .entry-content {
   margin-bottom:3em;
+}
+.entry-content img {
+  border: 1px solid #eee;
+  width: 96%;
+  background-color: #fff;
 }

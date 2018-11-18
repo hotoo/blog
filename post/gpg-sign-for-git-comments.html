@@ -55,27 +55,27 @@ Mac GPG 相对比较容易点，安装过程中同时引导创建一个 GPG key 
 <p>如果在安装过程中，自动引导生成了 GPG key 的话，这一步可以省略。</p>
 </blockquote>
 <p>除了安装时引导生成的 GPG key 之外，你还可以手动生成 GPG key：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">$ gpg --gen-key
-gpg (GnuPG/MacGPG2) 2.0.28; Copyright (C) 2015 Free Software Foundation, Inc.
+gpg (GnuPG/MacGPG2) <span class="number">2.0</span>.<span class="number">28</span>; Copyright (C) <span class="number">2015</span> Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
 
 Please select what kind of key you want:
-   (1) RSA and RSA (default)
-   (2) DSA and Elgamal
-   (3) DSA (sign only)
-   (4) RSA (sign only)
+   (<span class="number">1</span>) RSA and RSA (default)
+   (<span class="number">2</span>) DSA and Elgamal
+   (<span class="number">3</span>) DSA (sign only)
+   (<span class="number">4</span>) RSA (sign only)
 Your selection?
-RSA keys may be between 1024 and 4096 bits long.
-What keysize <span class="hljs-keyword">do</span> you want? (2048)
-Requested keysize is 2048 bits
+RSA keys may be between <span class="number">1024</span> and <span class="number">4096</span> bits long.
+What keysize <span class="keyword">do</span> you want? (<span class="number">2048</span>)
+Requested keysize is <span class="number">2048</span> bits
 Please specify how long the key should be valid.
-         0 = key does not expire
-      &lt;n&gt;  = key expires <span class="hljs-keyword">in</span> n days
-      &lt;n&gt;w = key expires <span class="hljs-keyword">in</span> n weeks
-      &lt;n&gt;m = key expires <span class="hljs-keyword">in</span> n months
-      &lt;n&gt;y = key expires <span class="hljs-keyword">in</span> n years
-Key is valid <span class="hljs-keyword">for</span>? (0) 1y
-Key expires at 日  6/11 22:33:50 2017 CST
+         <span class="number">0</span> = key does not expire
+      &lt;n&gt;  = key expires <span class="keyword">in</span> n days
+      &lt;n&gt;w = key expires <span class="keyword">in</span> n weeks
+      &lt;n&gt;m = key expires <span class="keyword">in</span> n months
+      &lt;n&gt;y = key expires <span class="keyword">in</span> n years
+Key is valid <span class="keyword">for</span>? (<span class="number">0</span>) <span class="number">1</span>y
+Key expires at 日  <span class="number">6</span>/<span class="number">11</span> <span class="number">22</span>:<span class="number">33</span>:<span class="number">50</span> <span class="number">2017</span> CST
 Is this correct? (y/N) y
 
 GnuPG needs to construct a user ID to identify your key.
@@ -84,31 +84,31 @@ Real name: xxx
 Email address: xxx@yyy.com
 Comment:
 You selected this USER-ID:
-    <span class="hljs-string">"xxx &lt;xxx@yyy.com&gt;"</span>
+    <span class="string">"xxx &lt;xxx@yyy.com&gt;"</span>
 
 Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit?
 Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O
 You need a Passphrase to protect your secret key.
 
 We need to generate a lot of random bytes. It is a good idea to perform
-some other action (<span class="hljs-built_in">type</span> on the keyboard, move the mouse, utilize the
+some other action (<span class="built_in">type</span> on the keyboard, move the mouse, utilize the
 disks) during the prime generation; this gives the random number
 generator a better chance to gain enough entropy.
 We need to generate a lot of random bytes. It is a good idea to perform
-some other action (<span class="hljs-built_in">type</span> on the keyboard, move the mouse, utilize the
+some other action (<span class="built_in">type</span> on the keyboard, move the mouse, utilize the
 disks) during the prime generation; this gives the random number
 generator a better chance to gain enough entropy.
 gpg: key B5DB6617 marked as ultimately trusted
 public and secret key created and signed.
 
 gpg: checking the trustdb
-gpg: 3 marginal(s) needed, 1 complete(s) needed, PGP trust model
-gpg: depth: 0  valid:   3  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 3u
-gpg: next trustdb check due at 2017-06-11
-pub   2048R/B5DB6617 2016-06-11 [expires: 2017-06-11]
-      Key fingerprint = 3AE5 19D5 8A58 C59B B029  6CEA 8566 6A47 B5DB 6617
+gpg: <span class="number">3</span> marginal(s) needed, <span class="number">1</span> complete(s) needed, PGP trust model
+gpg: depth: <span class="number">0</span>  valid:   <span class="number">3</span>  signed:   <span class="number">0</span>  trust: <span class="number">0</span>-, <span class="number">0</span>q, <span class="number">0</span>n, <span class="number">0</span>m, <span class="number">0</span>f, <span class="number">3</span>u
+gpg: next trustdb check due at <span class="number">2017</span>-<span class="number">06</span>-<span class="number">11</span>
+pub   <span class="number">2048</span>R/B5DB6617 <span class="number">2016</span>-<span class="number">06</span>-<span class="number">11</span> [expires: <span class="number">2017</span>-<span class="number">06</span>-<span class="number">11</span>]
+      Key fingerprint = <span class="number">3</span>AE5 <span class="number">19</span>D5 <span class="number">8</span>A58 C59B B029  <span class="number">6</span>CEA <span class="number">8566</span> <span class="number">6</span>A47 B5DB <span class="number">6617</span>
 uid       [ultimate] xxx &lt;xxx@yyy.com&gt;
-sub   2048R/1F4A9B85 2016-06-11 [expires: 2017-06-11]</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+sub   <span class="number">2048</span>R/<span class="number">1</span>F4A9B85 <span class="number">2016</span>-<span class="number">06</span>-<span class="number">11</span> [expires: <span class="number">2017</span>-<span class="number">06</span>-<span class="number">11</span>]</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
 <a name="L1-4" href="#L1-4">4</a>
@@ -162,9 +162,9 @@ sub   2048R/1F4A9B85 2016-06-11 [expires: 2017-06-11]</code></pre></div><pre cla
 <a name="L1-52" href="#L1-52">52</a>
 <a name="L1-53" href="#L1-53">53</a>
 <a name="L1-54" href="#L1-54">54</a>
-<a name="L1-55" href="#L1-55">55</a></pre></div></div><h2 id="配置-git">配置 Git</h2><p>配置好 GPG key 之后，可以配置让 git 在某个仓库所有的 commits 都添加 GPG key 验证：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">git config commit.gpgsign <span class="hljs-literal">true</span></code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div><p>也可以让本地所有的仓库都进行 GPG 验证：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">$ git config --global commit.gpgsign <span class="hljs-literal">true</span></code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a></pre></div></div><h2 id="验证-git-commits">验证 Git commits</h2><p>如果没有设置局部仓库或全局仓库默认开启 commits GPG 验证，提交时可以附加 <code>-S</code> 参考，
-要求进行 GPG 验证。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">$ git commit -S -m <span class="hljs-string">"comment"</span></code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a></pre></div></div><p>如果提交使用的账户信息和 GPG 签名不一致，则无法通过 GPG 验证，会导致提交失败。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">$ git ci -m <span class="hljs-string">"test"</span>
-gpg: skipped <span class="hljs-string">"ZZZ &lt;xxx@yyy.com&gt;"</span>: No secret key
+<a name="L1-55" href="#L1-55">55</a></pre></div></div><h2 id="配置-git">配置 Git</h2><p>配置好 GPG key 之后，可以配置让 git 在某个仓库所有的 commits 都添加 GPG key 验证：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">git config commit.gpgsign <span class="literal">true</span></code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div><p>也可以让本地所有的仓库都进行 GPG 验证：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">$ git config --global commit.gpgsign <span class="literal">true</span></code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a></pre></div></div><h2 id="验证-git-commits">验证 Git commits</h2><p>如果没有设置局部仓库或全局仓库默认开启 commits GPG 验证，提交时可以附加 <code>-S</code> 参考，
+要求进行 GPG 验证。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">$ git commit -S -m <span class="string">"comment"</span></code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a></pre></div></div><p>如果提交使用的账户信息和 GPG 签名不一致，则无法通过 GPG 验证，会导致提交失败。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">$ git ci -m <span class="string">"test"</span>
+gpg: skipped <span class="string">"ZZZ &lt;xxx@yyy.com&gt;"</span>: No secret key
 gpg: signing failed: No secret key
 error: gpg failed to sign the data
 fatal: failed to write commit object</code></pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
@@ -173,15 +173,15 @@ fatal: failed to write commit object</code></pre></div><pre class="line"><a name
 <a name="L5-4" href="#L5-4">4</a>
 <a name="L5-5" href="#L5-5">5</a></pre></div></div><p>正常的话，会提示输入 passphrase 解锁 PGP 密钥，此时可以选中保存到 Mac OS X 系统
 的 Keychain 中，避免每次输入 passphrase。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">$ git add .
-$ git ci -m <span class="hljs-string">"test"</span>
+$ git ci -m <span class="string">"test"</span>
 
-You need a passphrase to unlock the secret key <span class="hljs-keyword">for</span>
-user: <span class="hljs-string">"xxx &lt;xxx@yyy.com&gt;"</span>
-4096-bit RSA key, ID C0B176D7, created 2016-06-11
+You need a passphrase to unlock the secret key <span class="keyword">for</span>
+user: <span class="string">"xxx &lt;xxx@yyy.com&gt;"</span>
+<span class="number">4096</span>-bit RSA key, ID C0B176D7, created <span class="number">2016</span>-<span class="number">06</span>-<span class="number">11</span>
 
-[master (root-commit) 163d909] <span class="hljs-built_in">test</span>
- 1 file changed, 3 insertions(+)
- create mode 100644 README.md</code></pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a>
+[master (root-commit) <span class="number">163</span>d909] test
+ <span class="number">1</span> file changed, <span class="number">3</span> insertions(+)
+ create mode <span class="number">100644</span> README.md</code></pre></div><pre class="line"><a name="L6-1" href="#L6-1">1</a>
 <a name="L6-2" href="#L6-2">2</a>
 <a name="L6-3" href="#L6-3">3</a>
 <a name="L6-4" href="#L6-4">4</a>
@@ -193,9 +193,9 @@ user: <span class="hljs-string">"xxx &lt;xxx@yyy.com&gt;"</span>
 <a name="L6-10" href="#L6-10">10</a></pre></div></div><h2 id="将-gpg-密钥添加到-github">将 GPG 密钥添加到 GitHub</h2><p>这时 push 到 GitHub 仓库的 commits，查看 commits 记录会显示 <code>unverified</code>。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">$ gpg --list-secret-keys
 /Users/xxx/.gnupg/secring.gpg
 -------------------------------
-sec   4096R/C0B176D7 2016-06-11 [expires: 2020-06-11]
+sec   <span class="number">4096</span>R/C0B176D7 <span class="number">2016</span>-<span class="number">06</span>-<span class="number">11</span> [expires: <span class="number">2020</span>-<span class="number">06</span>-<span class="number">11</span>]
 uid                  xxx &lt;xxx@yyy.com&gt;
-ssb   4096R/E00F263F 2016-06-11
+ssb   <span class="number">4096</span>R/E00F263F <span class="number">2016</span>-<span class="number">06</span>-<span class="number">11</span>
 
 $ gpg --armor --export C0B176D7
 -----BEGIN PGP PUBLIC KEY BLOCK-----

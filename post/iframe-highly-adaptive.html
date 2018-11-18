@@ -162,26 +162,26 @@ XHTML1.0 Frameset, XHTML1.0 Strict, XHTML1.0 Transitional, XHTML1.1.</p>
 </pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a></pre></div></div><p>本窗口自检测：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">dom-ready = handler;
-<span class="hljs-built_in">window</span>.onload = handler;
+window.onload = handler;
 body[onload=handler]</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
-<a name="L2-3" href="#L2-3">3</a></pre></div></div><h2 id="子窗口获取自身在父窗口的-iframe-元素">子窗口获取自身在父窗口的 iframe 元素</h2><p>如果父窗口有名字的话，可以直接通过 frames[name] 直接引用。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-comment">// 求教更恰当的命名。</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getParentFrame</span>(<span class="hljs-params"></span>)</span>{
-  <span class="hljs-keyword">if</span>(parent == <span class="hljs-built_in">window</span>){<span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;}
-  <span class="hljs-keyword">if</span>(<span class="hljs-built_in">window</span>.name){<span class="hljs-keyword">return</span> parent.frames[<span class="hljs-built_in">window</span>.name];}
-  <span class="hljs-keyword">var</span> ifr = parent.document.getElementsByTagName(<span class="hljs-string">"iframe"</span>);
-  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span>,l=ifr.length; i&lt;l; i++){
-    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">window</span> == ifr[i].contentWindow){
-      <span class="hljs-keyword">return</span> ifr[i];
+<a name="L2-3" href="#L2-3">3</a></pre></div></div><h2 id="子窗口获取自身在父窗口的-iframe-元素">子窗口获取自身在父窗口的 iframe 元素</h2><p>如果父窗口有名字的话，可以直接通过 frames[name] 直接引用。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">// 求教更恰当的命名。</span>
+<span class="function"><span class="keyword">function</span> <span class="title">getParentFrame</span><span class="params">()</span>{</span>
+  <span class="keyword">if</span>(parent == window){<span class="keyword">return</span> <span class="literal">null</span>;}
+  <span class="keyword">if</span>(window.name){<span class="keyword">return</span> parent.frames[window.name];}
+  <span class="keyword">var</span> ifr = parent.document.getElementsByTagName(<span class="string">"iframe"</span>);
+  <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,l=ifr.length; i&lt;l; i++){
+    <span class="keyword">if</span>(window == ifr[i].contentWindow){
+      <span class="keyword">return</span> ifr[i];
     }
   }
-  <span class="hljs-keyword">var</span> ifr = parent.document.getElementsByTagName(<span class="hljs-string">"frame"</span>);
-  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span>,l=ifr.length; i&lt;l; i++){
-    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">window</span> == ifr[i].contentWindow){
-      <span class="hljs-keyword">return</span> ifr[i];
+  <span class="keyword">var</span> ifr = parent.document.getElementsByTagName(<span class="string">"frame"</span>);
+  <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,l=ifr.length; i&lt;l; i++){
+    <span class="keyword">if</span>(window == ifr[i].contentWindow){
+      <span class="keyword">return</span> ifr[i];
     }
   }
-  <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+  <span class="keyword">return</span> <span class="literal">null</span>;
 };</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
 <a name="L3-3" href="#L3-3">3</a>
@@ -200,19 +200,19 @@ body[onload=handler]</code></pre></div><pre class="line"><a name="L2-1" href="#L
 <a name="L3-16" href="#L3-16">16</a>
 <a name="L3-17" href="#L3-17">17</a>
 <a name="L3-18" href="#L3-18">18</a></pre></div></div><h2 id="其他相关">其他相关</h2><p>上面的 <code>getParentFrame</code> 通过窗口名字直接取得元素本身，这里要注意的一点，
-以前写代码的时候有这样的代码定义：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
-  <span class="hljs-keyword">var</span> elem = <span class="hljs-string">"elem"</span>,
-      name = <span class="hljs-string">"name"</span>,
-      desc = <span class="hljs-string">"desc"</span>;
+以前写代码的时候有这样的代码定义：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+  <span class="keyword">var</span> elem = <span class="string">"elem"</span>,
+      name = <span class="string">"name"</span>,
+      desc = <span class="string">"desc"</span>;
 }</code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
 <a name="L4-2" href="#L4-2">2</a>
 <a name="L4-3" href="#L4-3">3</a>
 <a name="L4-4" href="#L4-4">4</a>
-<a name="L4-5" href="#L4-5">5</a></pre></div></div><p>后来要增加一个变量，但是不小心写错标点符号。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
-      <span class="hljs-keyword">var</span> elem = <span class="hljs-string">"elem"</span>,
+<a name="L4-5" href="#L4-5">5</a></pre></div></div><p>后来要增加一个变量，但是不小心写错标点符号。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">  <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+      <span class="keyword">var</span> elem = <span class="string">"elem"</span>,
 +         id = elem.id;
-          name = <span class="hljs-string">"name"</span>,
-          desc = <span class="hljs-string">"desc"</span>;
+          name = <span class="string">"name"</span>,
+          desc = <span class="string">"desc"</span>;
   }</code></pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
 <a name="L5-2" href="#L5-2">2</a>
 <a name="L5-3" href="#L5-3">3</a>

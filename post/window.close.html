@@ -42,17 +42,17 @@
   <div id="content" class="document">
 <div class="hentry">
   <h1 class="entry-title">window.close()</h1>
-  <div class="entry-content"><h1 id="window-close">window.close()</h1><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-built_in">window</span>.opener=<span class="hljs-literal">null</span>;
-<span class="hljs-built_in">window</span>.open(<span class="hljs-string">""</span>,<span class="hljs-string">"_self"</span>);
-<span class="hljs-built_in">window</span>.close();</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+  <div class="entry-content"><h1 id="window-close">window.close()</h1><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">window.opener=<span class="literal">null</span>;
+window.open(<span class="string">""</span>,<span class="string">"_self"</span>);
+window.close();</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a></pre></div></div><p>onclick
 return false;</p>
-<p>IE5.5以下</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">OBJECT</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"close"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"application/x-oleobject"</span>
-  <span class="hljs-attr">classid</span>=<span class="hljs-string">"clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">param</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"Command"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"CLOSE"</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">object</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"close.Click()"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"关闭窗口"</span>&gt;</span></code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+<p>IE5.5以下</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="xml"><span class="tag">&lt;<span class="title">OBJECT</span> <span class="attribute">id</span>=<span class="value">"close"</span> <span class="attribute">type</span>=<span class="value">"application/x-oleobject"</span>
+  <span class="attribute">classid</span>=<span class="value">"clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">param</span> <span class="attribute">name</span>=<span class="value">"Command"</span> <span class="attribute">value</span>=<span class="value">"CLOSE"</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">object</span>&gt;</span>
+<span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">onclick</span>=<span class="value">"close.Click()"</span> <span class="attribute">value</span>=<span class="value">"关闭窗口"</span>&gt;</span></code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
 <a name="L2-3" href="#L2-3">3</a>
 <a name="L2-4" href="#L2-4">4</a>

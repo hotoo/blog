@@ -75,13 +75,13 @@
 <a name="L1-4" href="#L1-4">4</a>
 <a name="L1-5" href="#L1-5">5</a>
 <a name="L1-6" href="#L1-6">6</a></pre></div></div><p>在 convert.sh 同级目录执行：</p><div class="highlight"><div class="codes"><div class="code"><pre>$ ./convert.sh vimwiki/*.wiki</pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a></pre></div></div><p>然后自动或手动调整之后，删除 <code>.wiki</code> 文件即可。</p>
-<h2 id="codes">Codes</h2><h3 id="convert-sh">convert.sh</h3><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash"><span class="hljs-meta">#!/usr/bin/env bash
+<h2 id="codes">Codes</h2><h3 id="convert-sh">convert.sh</h3><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash"><span class="shebang">#!/usr/bin/env bash
 </span>
-<span class="hljs-keyword">for</span> x
-<span class="hljs-keyword">do</span>
-  filename=$(<span class="hljs-built_in">echo</span> <span class="hljs-variable">$x</span>|sed <span class="hljs-_">-e</span> <span class="hljs-string">"s/\.wiki$/.md/"</span>)
-  sed <span class="hljs-_">-f</span> ex <span class="hljs-variable">$x</span> &gt; <span class="hljs-variable">$filename</span>
-<span class="hljs-keyword">done</span></code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+<span class="keyword">for</span> x
+<span class="keyword">do</span>
+  filename=$(<span class="built_in">echo</span> <span class="variable">$x</span>|sed <span class="operator">-e</span> <span class="string">"s/\.wiki$/.md/"</span>)
+  sed <span class="operator">-f</span> ex <span class="variable">$x</span> &gt; <span class="variable">$filename</span>
+<span class="keyword">done</span></code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
 <a name="L3-3" href="#L3-3">3</a>
 <a name="L3-4" href="#L3-4">4</a>

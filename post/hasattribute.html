@@ -44,11 +44,11 @@
   <h1 class="entry-title">深入 hasAttribute</h1>
   <div class="entry-content"><p>众所周知，IE 的 HTMLElement 对象不支持 hasAttribute 方法，于是有了如下实现：
 它针对不支持 hasAttribute 方法的浏览器，检查 getAttribute 得到的是否等于 null，
-如果是 null 则表明这个 HTMLElement 不存在指定的 Attribute。很聪明的一个方法。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">hasAttr</span>(<span class="hljs-params">elem, attr</span>)</span>{
-    <span class="hljs-keyword">if</span>(elem.hasAttribute){
-        <span class="hljs-keyword">return</span> elem.hasAttribute(attr);
+如果是 null 则表明这个 HTMLElement 不存在指定的 Attribute。很聪明的一个方法。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">hasAttr</span><span class="params">(elem, attr)</span>{</span>
+    <span class="keyword">if</span>(elem.hasAttribute){
+        <span class="keyword">return</span> elem.hasAttribute(attr);
     }
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>!=elem.getAttribute(attr);
+    <span class="keyword">return</span> <span class="literal">null</span>!=elem.getAttribute(attr);
 }</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>

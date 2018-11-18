@@ -47,17 +47,17 @@
 <p>在实现压缩局部变量名时，最初的实现是将 if/else, for/in, do/while, switch/case/default,
 try/catch/finally, with和Object实例对象（后面统称为“块级作用域”）与function一样，
 都作为独立的作用域，但是测试发现在JavaScript中并不是这么回事。</p>
-<p>尝试着在块级作用域里声明定义变量：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-keyword">if</span>(<span class="hljs-literal">true</span>){
-<span class="hljs-keyword">var</span> bool=<span class="hljs-literal">true</span>;
+<p>尝试着在块级作用域里声明定义变量：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">if</span>(<span class="literal">true</span>){
+<span class="keyword">var</span> bool=<span class="literal">true</span>;
 }
-<span class="hljs-built_in">document</span>.write(bool); <span class="hljs-comment">// output:true</span></code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+document.write(bool); <span class="comment">// output:true</span></code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
 <a name="L1-4" href="#L1-4">4</a></pre></div></div><p>会发现输出true，而且不论嵌套多深，也不论使用任何块级作用域进行嵌套，最后变量
 依然如同在调用处之前，而且同级的作用域中定义的一样；值为在此之前，在块级作用域中所做改变的结果。
 注意：如果块级作用域未被执行，则其中声明定义的变量会被声明（var name），但不被定义
-（即未被初始化，此时name为undefined，引用name时不抛异常）。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-keyword">if</span>(<span class="hljs-literal">false</span>){<span class="hljs-keyword">var</span> bool=<span class="hljs-literal">true</span>;}
-<span class="hljs-built_in">document</span>.write(bool); <span class="hljs-comment">// output:undefined</span></code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+（即未被初始化，此时name为undefined，引用name时不抛异常）。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">if</span>(<span class="literal">false</span>){<span class="keyword">var</span> bool=<span class="literal">true</span>;}
+document.write(bool); <span class="comment">// output:undefined</span></code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a></pre></div></div><p>之前虽知道，IE里for(var i=0;...)里定义的i，在for之外也是可以使用的，但是现在才知道这种情况更为猖獗，
 大出我的意料之外，而更意外的是，IE 7(IE6?), Firefox 3(FF1,FF2?), Opera 9, Chrome 1, Safari 3表现均丝毫不差。</p>
 <p>虽然与某些编程规范不同，但是js就是这样了，唉。早知道这样，压缩变量名这部分也就不用那么费劲了，只得重写了。</p>
@@ -66,152 +66,152 @@ try/catch/finally, with和Object实例对象（后面统称为“块级作用域
 文章很好，虽然有点文不对题（主要阐述this的作用域链问题）。<br />
 [<a href="http://www.cnblogs.com/3zfp/archive/2008/10/24/528644.html">http://www.cnblogs.com/3zfp/archive/2008/10/24/528644.html</a> js变量作用域及可访问性的探讨]，
 详细介绍了各种变量的作用域及其可访问性问题。</p>
-<p>附A 测试代码：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-comment">// Global Scope</span>
-<span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>){
-  <span class="hljs-keyword">var</span> v10 = <span class="hljs-literal">true</span>;
-}<span class="hljs-keyword">else</span> {
-  <span class="hljs-keyword">var</span> v00 = <span class="hljs-literal">false</span>;
+<p>附A 测试代码：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">// Global Scope</span>
+<span class="keyword">if</span> (<span class="literal">true</span>){
+  <span class="keyword">var</span> v10 = <span class="literal">true</span>;
+}<span class="keyword">else</span> {
+  <span class="keyword">var</span> v00 = <span class="literal">false</span>;
 }
-<span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v10 : "</span>+v10+<span class="hljs-string">"&lt;br /&gt;"</span>);
-<span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v00 : "</span>+v00+<span class="hljs-string">"&lt;br /&gt;"</span>);
-<span class="hljs-built_in">document</span>.write(<span class="hljs-string">"&lt;hr /&gt;"</span>);
+document.write(<span class="string">"v10 : "</span>+v10+<span class="string">"&lt;br /&gt;"</span>);
+document.write(<span class="string">"v00 : "</span>+v00+<span class="string">"&lt;br /&gt;"</span>);
+document.write(<span class="string">"&lt;hr /&gt;"</span>);
 
-<span class="hljs-comment">// Function Scope</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">functionScopes</span>(<span class="hljs-params"></span>)</span>{
-  <span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>){
-      <span class="hljs-comment">// 以下均执行</span>
-      <span class="hljs-keyword">var</span> v11 = <span class="hljs-literal">true</span>;
+<span class="comment">// Function Scope</span>
+<span class="function"><span class="keyword">function</span> <span class="title">functionScopes</span><span class="params">()</span>{</span>
+  <span class="keyword">if</span> (<span class="literal">true</span>){
+      <span class="comment">// 以下均执行</span>
+      <span class="keyword">var</span> v11 = <span class="literal">true</span>;
 
-      <span class="hljs-keyword">do</span>{
-          <span class="hljs-keyword">var</span> v12 = <span class="hljs-literal">true</span>;
-      }<span class="hljs-keyword">while</span> (<span class="hljs-literal">false</span>);
+      <span class="keyword">do</span>{
+          <span class="keyword">var</span> v12 = <span class="literal">true</span>;
+      }<span class="keyword">while</span> (<span class="literal">false</span>);
 
-      <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>){
-          <span class="hljs-keyword">var</span> v13 = <span class="hljs-literal">true</span>;
-          <span class="hljs-keyword">break</span>;
+      <span class="keyword">while</span> (<span class="literal">true</span>){
+          <span class="keyword">var</span> v13 = <span class="literal">true</span>;
+          <span class="keyword">break</span>;
       }
 
-      <span class="hljs-keyword">switch</span> (<span class="hljs-number">1</span>){
-      <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
-          <span class="hljs-keyword">var</span> v14 = <span class="hljs-literal">true</span>;
-      <span class="hljs-keyword">default</span>:
-          <span class="hljs-keyword">var</span> v15 = <span class="hljs-literal">true</span>;
+      <span class="keyword">switch</span> (<span class="number">1</span>){
+      <span class="keyword">case</span> <span class="number">1</span>:
+          <span class="keyword">var</span> v14 = <span class="literal">true</span>;
+      <span class="keyword">default</span>:
+          <span class="keyword">var</span> v15 = <span class="literal">true</span>;
       }
 
-      <span class="hljs-keyword">try</span>{
-          <span class="hljs-keyword">var</span> v16 = <span class="hljs-literal">true</span>;
-          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">""</span>);
-      }<span class="hljs-keyword">catch</span>(e){
-          <span class="hljs-keyword">var</span> v17 = <span class="hljs-literal">true</span>;
-      }<span class="hljs-keyword">finally</span>{
-          <span class="hljs-keyword">var</span> v18 = <span class="hljs-literal">true</span>;
+      <span class="keyword">try</span>{
+          <span class="keyword">var</span> v16 = <span class="literal">true</span>;
+          <span class="keyword">throw</span> <span class="keyword">new</span> Error(<span class="string">""</span>);
+      }<span class="keyword">catch</span>(e){
+          <span class="keyword">var</span> v17 = <span class="literal">true</span>;
+      }<span class="keyword">finally</span>{
+          <span class="keyword">var</span> v18 = <span class="literal">true</span>;
       }
 
-      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> v19=<span class="hljs-number">0</span>; v19&lt;<span class="hljs-number">1</span>; v19++){
-          <span class="hljs-keyword">var</span> v1a=<span class="hljs-literal">true</span>;
+      <span class="keyword">for</span> (<span class="keyword">var</span> v19=<span class="number">0</span>; v19&lt;<span class="number">1</span>; v19++){
+          <span class="keyword">var</span> v1a=<span class="literal">true</span>;
       }
 
-      <span class="hljs-keyword">with</span>(v11){
-          <span class="hljs-keyword">var</span> v1b = <span class="hljs-literal">true</span>;
+      <span class="keyword">with</span>(v11){
+          <span class="keyword">var</span> v1b = <span class="literal">true</span>;
       }
 
-      <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">inn1</span>(<span class="hljs-params"></span>)</span>{
-          <span class="hljs-keyword">var</span> inn11 = <span class="hljs-literal">false</span>;
+      <span class="function"><span class="keyword">function</span> <span class="title">inn1</span><span class="params">()</span>{</span>
+          <span class="keyword">var</span> inn11 = <span class="literal">false</span>;
       }
-  }<span class="hljs-keyword">else</span> {
-      <span class="hljs-comment">// 以下均未执行</span>
-      <span class="hljs-keyword">var</span> v01 = <span class="hljs-literal">false</span>;
+  }<span class="keyword">else</span> {
+      <span class="comment">// 以下均未执行</span>
+      <span class="keyword">var</span> v01 = <span class="literal">false</span>;
 
-      <span class="hljs-keyword">do</span>{
-          <span class="hljs-keyword">var</span> v02 = <span class="hljs-literal">false</span>;
-      }<span class="hljs-keyword">while</span> (<span class="hljs-literal">false</span>);
+      <span class="keyword">do</span>{
+          <span class="keyword">var</span> v02 = <span class="literal">false</span>;
+      }<span class="keyword">while</span> (<span class="literal">false</span>);
 
-      <span class="hljs-keyword">while</span> (<span class="hljs-literal">false</span>){
-          <span class="hljs-keyword">var</span> v03 = <span class="hljs-literal">false</span>;
-      }
-
-      <span class="hljs-keyword">try</span>{
-          <span class="hljs-keyword">var</span> v06 = <span class="hljs-literal">true</span>;
-          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">""</span>);
-      }<span class="hljs-keyword">catch</span>(e){
-          <span class="hljs-keyword">var</span> v07 = <span class="hljs-literal">true</span>;
-      }<span class="hljs-keyword">finally</span>{
-          <span class="hljs-keyword">var</span> v08 = <span class="hljs-literal">true</span>;
+      <span class="keyword">while</span> (<span class="literal">false</span>){
+          <span class="keyword">var</span> v03 = <span class="literal">false</span>;
       }
 
-      <span class="hljs-keyword">switch</span> (<span class="hljs-number">1</span>){
-      <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
-          <span class="hljs-keyword">var</span> v04 = <span class="hljs-literal">true</span>;
-      <span class="hljs-keyword">default</span>:
-          <span class="hljs-keyword">var</span> v05 = <span class="hljs-literal">false</span>;
+      <span class="keyword">try</span>{
+          <span class="keyword">var</span> v06 = <span class="literal">true</span>;
+          <span class="keyword">throw</span> <span class="keyword">new</span> Error(<span class="string">""</span>);
+      }<span class="keyword">catch</span>(e){
+          <span class="keyword">var</span> v07 = <span class="literal">true</span>;
+      }<span class="keyword">finally</span>{
+          <span class="keyword">var</span> v08 = <span class="literal">true</span>;
       }
 
-      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> v09=<span class="hljs-number">0</span>; v09&lt;<span class="hljs-number">1</span>; v09++){
-          <span class="hljs-keyword">var</span> v0a=<span class="hljs-literal">true</span>;
+      <span class="keyword">switch</span> (<span class="number">1</span>){
+      <span class="keyword">case</span> <span class="number">1</span>:
+          <span class="keyword">var</span> v04 = <span class="literal">true</span>;
+      <span class="keyword">default</span>:
+          <span class="keyword">var</span> v05 = <span class="literal">false</span>;
       }
 
-      <span class="hljs-keyword">with</span>(v01){
-          <span class="hljs-keyword">var</span> v0b = <span class="hljs-literal">true</span>;
+      <span class="keyword">for</span> (<span class="keyword">var</span> v09=<span class="number">0</span>; v09&lt;<span class="number">1</span>; v09++){
+          <span class="keyword">var</span> v0a=<span class="literal">true</span>;
       }
 
-      <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">inn0</span>(<span class="hljs-params"></span>)</span>{
-          <span class="hljs-keyword">var</span> inn01 = <span class="hljs-literal">false</span>;
+      <span class="keyword">with</span>(v01){
+          <span class="keyword">var</span> v0b = <span class="literal">true</span>;
+      }
+
+      <span class="function"><span class="keyword">function</span> <span class="title">inn0</span><span class="params">()</span>{</span>
+          <span class="keyword">var</span> inn01 = <span class="literal">false</span>;
       }
   }
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v11 : "</span>+v11+<span class="hljs-string">"&lt;br /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v12 : "</span>+v12+<span class="hljs-string">"&lt;br /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v13 : "</span>+v13+<span class="hljs-string">"&lt;br /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v14 : "</span>+v14+<span class="hljs-string">"&lt;br /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v15 : "</span>+v15+<span class="hljs-string">"&lt;br /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v16 : "</span>+v16+<span class="hljs-string">"&lt;br /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v17 : "</span>+v17+<span class="hljs-string">"&lt;br /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v18 : "</span>+v18+<span class="hljs-string">"&lt;br /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v19 : "</span>+v19+<span class="hljs-string">"&lt;br /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v1a : "</span>+v1a+<span class="hljs-string">"&lt;br /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v1b : "</span>+v1b+<span class="hljs-string">"&lt;br /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"&lt;hr /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v01 : "</span>+v01+<span class="hljs-string">"&lt;br /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v02 : "</span>+v02+<span class="hljs-string">"&lt;br /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v03 : "</span>+v03+<span class="hljs-string">"&lt;br /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v04 : "</span>+v04+<span class="hljs-string">"&lt;br /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v05 : "</span>+v05+<span class="hljs-string">"&lt;br /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v06 : "</span>+v06+<span class="hljs-string">"&lt;br /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v07 : "</span>+v07+<span class="hljs-string">"&lt;br /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v08 : "</span>+v08+<span class="hljs-string">"&lt;br /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v09 : "</span>+v09+<span class="hljs-string">"&lt;br /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v0a : "</span>+v0a+<span class="hljs-string">"&lt;br /&gt;"</span>);
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"v0b : "</span>+v0b+<span class="hljs-string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"v11 : "</span>+v11+<span class="string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"v12 : "</span>+v12+<span class="string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"v13 : "</span>+v13+<span class="string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"v14 : "</span>+v14+<span class="string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"v15 : "</span>+v15+<span class="string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"v16 : "</span>+v16+<span class="string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"v17 : "</span>+v17+<span class="string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"v18 : "</span>+v18+<span class="string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"v19 : "</span>+v19+<span class="string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"v1a : "</span>+v1a+<span class="string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"v1b : "</span>+v1b+<span class="string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"&lt;hr /&gt;"</span>);
+  document.write(<span class="string">"v01 : "</span>+v01+<span class="string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"v02 : "</span>+v02+<span class="string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"v03 : "</span>+v03+<span class="string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"v04 : "</span>+v04+<span class="string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"v05 : "</span>+v05+<span class="string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"v06 : "</span>+v06+<span class="string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"v07 : "</span>+v07+<span class="string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"v08 : "</span>+v08+<span class="string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"v09 : "</span>+v09+<span class="string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"v0a : "</span>+v0a+<span class="string">"&lt;br /&gt;"</span>);
+  document.write(<span class="string">"v0b : "</span>+v0b+<span class="string">"&lt;br /&gt;"</span>);
 
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"&lt;hr /&gt;"</span>);
-  <span class="hljs-keyword">try</span>{alert(inn11);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
-  <span class="hljs-keyword">try</span>{alert(inn01);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
+  document.write(<span class="string">"&lt;hr /&gt;"</span>);
+  <span class="keyword">try</span>{alert(inn11);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
+  <span class="keyword">try</span>{alert(inn01);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
 }
 functionScopes();
 
-<span class="hljs-built_in">document</span>.write(<span class="hljs-string">"&lt;hr /&gt;"</span>);
-<span class="hljs-keyword">try</span>{alert(v11);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
-<span class="hljs-keyword">try</span>{alert(v12);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
-<span class="hljs-keyword">try</span>{alert(v13);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
-<span class="hljs-keyword">try</span>{alert(v14);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
-<span class="hljs-keyword">try</span>{alert(v15);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
-<span class="hljs-keyword">try</span>{alert(v16);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
-<span class="hljs-keyword">try</span>{alert(v17);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
-<span class="hljs-keyword">try</span>{alert(v18);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
-<span class="hljs-keyword">try</span>{alert(v19);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
-<span class="hljs-keyword">try</span>{alert(v1a);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
-<span class="hljs-keyword">try</span>{alert(v1b);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
+document.write(<span class="string">"&lt;hr /&gt;"</span>);
+<span class="keyword">try</span>{alert(v11);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
+<span class="keyword">try</span>{alert(v12);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
+<span class="keyword">try</span>{alert(v13);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
+<span class="keyword">try</span>{alert(v14);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
+<span class="keyword">try</span>{alert(v15);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
+<span class="keyword">try</span>{alert(v16);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
+<span class="keyword">try</span>{alert(v17);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
+<span class="keyword">try</span>{alert(v18);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
+<span class="keyword">try</span>{alert(v19);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
+<span class="keyword">try</span>{alert(v1a);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
+<span class="keyword">try</span>{alert(v1b);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
 
-<span class="hljs-keyword">try</span>{alert(v01);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
-<span class="hljs-keyword">try</span>{alert(v02);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
-<span class="hljs-keyword">try</span>{alert(v03);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
-<span class="hljs-keyword">try</span>{alert(v04);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
-<span class="hljs-keyword">try</span>{alert(v05);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
-<span class="hljs-keyword">try</span>{alert(v06);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
-<span class="hljs-keyword">try</span>{alert(v07);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
-<span class="hljs-keyword">try</span>{alert(v08);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
-<span class="hljs-keyword">try</span>{alert(v09);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
-<span class="hljs-keyword">try</span>{alert(v0a);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}
-<span class="hljs-keyword">try</span>{alert(v0b);}<span class="hljs-keyword">catch</span>(e){<span class="hljs-built_in">document</span>.write((e.message||e)+<span class="hljs-string">"&lt;br /&gt;"</span>);}</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+<span class="keyword">try</span>{alert(v01);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
+<span class="keyword">try</span>{alert(v02);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
+<span class="keyword">try</span>{alert(v03);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
+<span class="keyword">try</span>{alert(v04);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
+<span class="keyword">try</span>{alert(v05);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
+<span class="keyword">try</span>{alert(v06);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
+<span class="keyword">try</span>{alert(v07);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
+<span class="keyword">try</span>{alert(v08);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
+<span class="keyword">try</span>{alert(v09);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
+<span class="keyword">try</span>{alert(v0a);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}
+<span class="keyword">try</span>{alert(v0b);}<span class="keyword">catch</span>(e){document.write((e.message||e)+<span class="string">"&lt;br /&gt;"</span>);}</code></pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
 <a name="L3-2" href="#L3-2">2</a>
 <a name="L3-3" href="#L3-3">3</a>
 <a name="L3-4" href="#L3-4">4</a>

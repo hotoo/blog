@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="generator" content="nico 0.5.2">
     <meta name="theme" content="KISS 0.1">
-    <title>密码与正则 - 闲耘™.博客</title>
+    <title>带滑块的进度条 - 闲耘™.博客</title>
     <link rel="alternate" type="application/rss+xml" href="https://hotoo.github.io/blog//feed.xml" title="闲耘™.博客" />
     <link rel="stylesheet" href="../static/syntax.css" />
     <link type="text/css" rel="stylesheet" href="../static/template.css" />
@@ -41,45 +41,26 @@
 <div id="container">
   <div id="content" class="document">
 <div class="hentry">
-  <h1 class="entry-title">密码与正则</h1>
-  <div class="entry-content"><p>通常我们需要校验验证用户输入的密码是否符合强度要求。</p>
-<p>密码字符包括以下几种：</p>
-<ul>
-<li>小写英文字符 <code>[a-z]</code></li>
-<li>大写英文字符 <code>[A-Z]</code></li>
-<li>阿拉伯数字 <code>[0-9]</code></li>
-<li>部分特殊字符 <code>[&#96;~!@#$%^&amp;*()_-+=|\[]{}:;&#39;&quot;&lt;&gt;,.\/?]</code>，
-简化为 <code>[ -\/:-@[-&#96;{-~]</code></li>
-</ul>
-<!-- 注，md 的限制，上面特殊字符中 ` 使用 &#96; 代替。 -->
-
-<p>目前常见的密码强度包括以下几种</p>
-<ul>
-<li>普通强度：必须同时包含 2种字符。</li>
-<li>高强度：必须同时包含 3种字符。</li>
-<li>极高强度：必须同时包含 4种密码字符。</li>
-</ul>
-<p>通常情况下，我们可能会基于种种考虑采用字符串方法计算密码强度，或校验密码合法性，
-下面我们更多的考虑使用正则表达式来解决这个问题。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">var</span> normal = <span class="regexp">/^(?![0-9]+$)(?![a-zA-Z]+$)(?![ -\/:-@\[-`{-~]+$)[0-9A-Za-z -\/:-@\[-`{-~]{6,20}$/</span>;
-
-<span class="keyword">var</span> high = <span class="regexp">/^(?![0-9a-zA-Z]+$)(?![a-zA-Z#*@\-\_]+$)(?![0-9#*@\-\_]+$)[0-9A-Za-z#*@\-\_]{6,20}$/</span>;
-
-<span class="keyword">var</span> highest =</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
-<a name="L1-2" href="#L1-2">2</a>
-<a name="L1-3" href="#L1-3">3</a>
-<a name="L1-4" href="#L1-4">4</a>
-<a name="L1-5" href="#L1-5">5</a></pre></div></div><p>&quot;1aa1&quot;.replace(/^(?:([a-z])|([A-Z])|([0-9])|(.)){6,}|(.)+$/, &quot;$1$2$3$4$5&quot;)</p>
+  <h1 class="entry-title">带滑块的进度条</h1>
+  <div class="entry-content"><p>在支付宝钱包，“我的 - 总资产”里面，有一个累计收益的卡片，其中还有一个带滑块的进度条，
+显示我的收益对比同地区理财的用户中，处于什么样的一个水平。</p>
+<p><img src="https://gw.alipayobjects.com/zos/rmsportal/YKAjtnKzJWUpuLWOaMkK.PNG" alt="我的 - 总资产 - 累计收益卡片"></p>
+<p>这种带滑块的卡片，如果不假思索简单处理，做出的效果就会出现进度 0% 和 100% 时在左右超出顶格，滑块只显示一半。</p>
+<p>为了解决这个问题，开发者最早的方案考虑的特别复杂，</p>
+<h2 id="纯-css-实现">纯 CSS 实现</h2><p><a href="http://gitlab.alipay-inc.com/h5_release/wealth/blob/3.6.11/src/index/asset/components/profitRate/index.jsx">http://gitlab.alipay-inc.com/h5_release/wealth/blob/3.6.11/src/index/asset/components/profitRate/index.jsx</a>
+<a href="http://gitlab.alipay-inc.com/h5_release/wealth/blob/3.6.11/src/index/asset/components/profitRate/index.less">http://gitlab.alipay-inc.com/h5_release/wealth/blob/3.6.11/src/index/asset/components/profitRate/index.less</a></p>
+<h2 id="js-css-的复杂不完美实现">JS + CSS 的复杂不完美实现</h2><h2 id="js-css-的简单完美实现">JS + CSS 的简单完美实现</h2><p><img src="https://gw.alipayobjects.com/zos/rmsportal/bvsIRbcSHMcpsyBSnoKc.png" alt="算法示意图"></p>
 </div>
 
   <footer class="entry-meta post clearfix">
     <span class="tags"><a href="../tag">Tags</a>:
  
-      <a href="/tag/#RegExp">RegExp</a>
+      <a href="/tag/#算法">算法</a>
       
     </span>
 
-    <time datetime="2013-11-17T00:00:00.000Z">
-      <a href="../2013">2013年</a>11月17日
+    <time datetime="2018-04-11T00:00:00.000Z">
+      <a href="../2018">2018年</a>04月11日
     </time>
   </footer>
     <section>
@@ -93,7 +74,7 @@
   <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
   <script type="text/javascript">
     
-    var disqus_identifier = "regexp-for-password";
+    var disqus_identifier = "process-with-bar";
     
 
     var gitment = new Gitment({

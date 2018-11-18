@@ -317,24 +317,24 @@
 </table>
 <hr>
 <p>首先我们找到异常所在文件的第 35行，在上面的异常栈信息中我们可以知道异常从
-压缩后的匿名函数 <code>function(a,b,d)</code> 中抛出，这个函数是：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">set:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a,b,d</span>)</span>{<span class="hljs-keyword">var</span> e=a.getAttributeNode(d);e||(e=c.createAttribute(d),a.setAttributeNode(e));<span class="hljs-keyword">return</span> e.nodeValue=b+<span class="hljs-string">""</span>}</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a></pre></div></div><p>对应压缩前的源码是：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">    <span class="hljs-comment">// Use this for any attribute in IE6/7</span>
-    <span class="hljs-comment">// This fixes almost every IE6/7 issue</span>
+压缩后的匿名函数 <code>function(a,b,d)</code> 中抛出，这个函数是：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">set:<span class="function"><span class="keyword">function</span><span class="params">(a,b,d)</span>{</span><span class="keyword">var</span> e=a.getAttributeNode(d);e||(e=c.createAttribute(d),a.setAttributeNode(e));<span class="keyword">return</span> e.nodeValue=b+<span class="string">""</span>}</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a></pre></div></div><p>对应压缩前的源码是：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript">    <span class="comment">// Use this for any attribute in IE6/7</span>
+    <span class="comment">// This fixes almost every IE6/7 issue</span>
     nodeHook = jQuery.valHooks.button = {
-        get: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> elem, name </span>) </span>{
-            <span class="hljs-keyword">var</span> ret;
+        get: <span class="function"><span class="keyword">function</span><span class="params">( elem, name )</span> {</span>
+            <span class="keyword">var</span> ret;
             ret = elem.getAttributeNode( name );
-            <span class="hljs-keyword">return</span> ret &amp;&amp; ( fixSpecified[ name ] ? ret.nodeValue !== <span class="hljs-string">""</span> : ret.specified ) ?
+            <span class="keyword">return</span> ret &amp;&amp; ( fixSpecified[ name ] ? ret.nodeValue !== <span class="string">""</span> : ret.specified ) ?
                 ret.nodeValue :
-                <span class="hljs-literal">undefined</span>;
+                <span class="literal">undefined</span>;
         },
-        set: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> elem, value, name </span>) </span>{
-            <span class="hljs-comment">// Set the existing or create a new attribute node</span>
-            <span class="hljs-keyword">var</span> ret = elem.getAttributeNode( name );
-            <span class="hljs-keyword">if</span> ( !ret ) {
-                ret = <span class="hljs-built_in">document</span>.createAttribute( name );
+        set: <span class="function"><span class="keyword">function</span><span class="params">( elem, value, name )</span> {</span>
+            <span class="comment">// Set the existing or create a new attribute node</span>
+            <span class="keyword">var</span> ret = elem.getAttributeNode( name );
+            <span class="keyword">if</span> ( !ret ) {
+                ret = document.createAttribute( name );
                 elem.setAttributeNode( ret );
             }
-            <span class="hljs-keyword">return</span> ( ret.nodeValue = value + <span class="hljs-string">""</span> );
+            <span class="keyword">return</span> ( ret.nodeValue = value + <span class="string">""</span> );
         }
     };</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>

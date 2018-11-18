@@ -45,15 +45,15 @@
   <div class="entry-content"><blockquote>
 <p>代码是写给人看的，顺便给机器执行。[1]</p>
 </blockquote>
-<h2 id="引子">引子</h2><p>上周有位前端同学周报里分享了段 for 循环的『好代码』：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, item; item = list[i]; i++) {
-  <span class="hljs-comment">// 将 ltem = list[i]当做条件判断语句，当i下标溢出时，返回undefined，循环结束</span>
-  <span class="hljs-comment">// 居然省了一个变量呢～</span>
+<h2 id="引子">引子</h2><p>上周有位前端同学周报里分享了段 for 循环的『好代码』：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, item; item = list[i]; i++) {
+  <span class="comment">// 将 ltem = list[i]当做条件判断语句，当i下标溢出时，返回undefined，循环结束</span>
+  <span class="comment">// 居然省了一个变量呢～</span>
 }</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
 <a name="L1-2" href="#L1-2">2</a>
 <a name="L1-3" href="#L1-3">3</a>
-<a name="L1-4" href="#L1-4">4</a></pre></div></div><p>这位同学是看了 jQuery 里类似下面这种用法之后做的这个分享：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-comment">// If no nodeType, this is expected to be an array</span>
-<span class="hljs-keyword">for</span> ( ; (node = elem[i]); i++ ) {
-    <span class="hljs-comment">// Do not traverse comment nodes</span>
+<a name="L1-4" href="#L1-4">4</a></pre></div></div><p>这位同学是看了 jQuery 里类似下面这种用法之后做的这个分享：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="comment">// If no nodeType, this is expected to be an array</span>
+<span class="keyword">for</span> ( ; (node = elem[i]); i++ ) {
+    <span class="comment">// Do not traverse comment nodes</span>
     ret += getText( node );
 }</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
 <a name="L2-2" href="#L2-2">2</a>
@@ -87,12 +87,12 @@
 <h2 id="如何定义块级作用域中使用的变量？">如何定义块级作用域中使用的变量？</h2><p>持有变量应前置定义观点的同学，估计有不少是受了《JavaScript 权威指南》或其他权威著作的影响。</p>
 <p>《JavaScript 权威指南》第 4 章 4.3.1 小节 [2] 详细分析了块级作用域中变量定义的问题。</p>
 <p>由于 JavaScript 只有函数作用域，没有块级作用域，因此在 <code>for</code>, <code>if/else</code>,
-<code>do/while</code>, <code>switch/case</code>, <code>try/catch</code> 这些块中定义的变量，实际在块之外也可以使用。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">functionScope</span>(<span class="hljs-params"></span>)</span>{
-    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span>,l=<span class="hljs-number">5</span>; i&lt;l; i++){
-        <span class="hljs-keyword">var</span> blockVariable = i;
+<code>do/while</code>, <code>switch/case</code>, <code>try/catch</code> 这些块中定义的变量，实际在块之外也可以使用。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">functionScope</span><span class="params">()</span>{</span>
+    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,l=<span class="number">5</span>; i&lt;l; i++){
+        <span class="keyword">var</span> blockVariable = i;
     }
-    alert(i); <span class="hljs-comment">// 5</span>
-    alert(blockVariable); <span class="hljs-comment">// 4</span>
+    alert(i); <span class="comment">// 5</span>
+    alert(blockVariable); <span class="comment">// 4</span>
 }</code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
 <a name="L4-2" href="#L4-2">2</a>
 <a name="L4-3" href="#L4-3">3</a>
@@ -117,12 +117,12 @@ confuse programmers who are experienced with other C family languages.
 Define all variables at the top of the function.</p>
 </blockquote>
 <p>他们的理由是，既然在块级作用域之内定义的变量可以被块级作用域之外使用，
-那么就应该把变量定义在块级作用域之外，让它们看起来和它们实际的作用域表现一致。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">functionScope</span>(<span class="hljs-params"></span>)</span>{
-    <span class="hljs-keyword">var</span> i, l=<span class="hljs-number">5</span>, blockVariable;
+那么就应该把变量定义在块级作用域之外，让它们看起来和它们实际的作用域表现一致。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">functionScope</span><span class="params">()</span>{</span>
+    <span class="keyword">var</span> i, l=<span class="number">5</span>, blockVariable;
 
-    <span class="hljs-comment">// more codes ...</span>
+    <span class="comment">// more codes ...</span>
 
-    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>; i&lt;l; i++){
+    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;l; i++){
         blockVariable = i;
     }
 }</code></pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a>
