@@ -1,7 +1,14 @@
-
 # 说明
 
 这是闲耘私人的博客，主要用于发表个人的观点；知识、信息积累与分享。
+
+## 安装
+
+```bash
+$ npm i -g nico
+$ sudo easy_install pip
+$ sudo pip install ghp-import
+```
 
 ## 目录结构
 
