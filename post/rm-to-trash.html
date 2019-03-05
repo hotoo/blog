@@ -1,0 +1,275 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.5.2">
+    <meta name="theme" content="KISS 0.1">
+    <title>可恢复的 rm 删除 - 闲耘™.博客</title>
+    <link rel="alternate" type="application/rss+xml" href="https://hotoo.github.io/blog//feed.xml" title="闲耘™.博客" />
+    <link rel="stylesheet" href="../static/syntax.css" />
+    <link type="text/css" rel="stylesheet" href="../static/template.css" />
+  </head>
+  <body>
+  <div id="wrapper">
+    <header class="navigation" role="navigation">
+      <!--<a class="home" href="../">闲耘™.博客</a>-->
+      <div style="float:right;">
+        <form action="/blog/search.html">
+          <input type="text" name="q" autocomplete="off" />
+          <input type="submit" value="搜索" />
+        </form>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="first"><a href="https://hotoo.github.io/"
+            title="Home">Home</a></li>
+          <li class=" actived"><a href="/blog/"
+            title="Blog">Blog</a></li>
+          <li class=""><a href="https://hotoo.github.io/wiki/"
+            title="Wiki">Wiki</a></li>
+          <li class=""><a href="https://hotoo.github.io/wiki/Vim.html"
+            title="Vim">Vim</a></li>
+          <li class=""><a href="https://hotoo.github.io/twitter/"
+            title="Twitter">Twitter</a></li>
+          <li class="last"><a href="https://github.com/hotoo"
+            title="Project">Project</a></li>
+        </ul>
+      </nav>
+    </header>
+
+<div id="container">
+  <div id="content" class="document">
+<div class="hentry">
+  <h1 class="entry-title">可恢复的 rm 删除</h1>
+  <div class="entry-content"><p>用过终端（Terminal）的人都知道， rm 删除的文件，不会像 Mac Finder 里删除文件、文件夹
+一样，会先进入到废纸篓（Trash），一旦 rm 删除，就很难撤销、恢复。</p>
+<p>但是作为程序员，做终端里 rm 删除文件是稀松平常的事，那么如何保障在终端中可以放心
+大胆的删除文件、文件夹，而不用担心误删后不可恢复呢？</p>
+<p>最直接的想法就是 rm 删除的文件也像 Finder 一样先进废纸篓。</p>
+<a name="more"></a>
+
+<p>我网上搜寻一番，发现了以下几个工具：</p>
+<h2 id="applescript">AppleScript</h2><p>在 <a href="https://blog.csdn.net/TinyJian/article/details/78195316">Mac 下使用命令行或脚本删除文件到废纸篓</a>
+这篇文章中介绍，Mac Finder 中删除的文件其实是进入到 ~/.Trash 文件夹。
+但是如果简单的讲文件 mv 到 ~/.Trash 文件夹，是无法做废纸篓里右键恢复到原处的，
+因为这个移动操作没有记录完整的操作行为。</p>
+<p>通过 AppleScript 可以通知 Finder 删除文件：</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash"><span class="shebang">#!/bin/bash
+</span>
+fp=/absolute/path/to/file
+osascript &lt;&lt; EOF
+tell application <span class="string">"Finder"</span>
+    posix path of ((delete posix file <span class="string">"<span class="variable">${fp}</span>"</span>) as unicode text)
+end tell
+EOF</code></pre></div><pre class="line"><a name="L1-1" href="#L1-1">1</a>
+<a name="L1-2" href="#L1-2">2</a>
+<a name="L1-3" href="#L1-3">3</a>
+<a name="L1-4" href="#L1-4">4</a>
+<a name="L1-5" href="#L1-5">5</a>
+<a name="L1-6" href="#L1-6">6</a>
+<a name="L1-7" href="#L1-7">7</a>
+<a name="L1-8" href="#L1-8">8</a></pre></div></div><p>优点：</p>
+<ol>
+<li>删除时有声效。</li>
+<li>有操作记录可“放回原处”。</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>首次使用是有授权提示，可接受。</li>
+</ol>
+<h2 id="rmtrash-1">rmtrash 1</h2><p>在网上找到好几个不同版本但命名相同的 rmtrash 程序，有的是 shell 脚本，有的是
+Xcode 程序。</p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">brew install rmtrash
+
+vi ~/.bashrc
+alias rm=<span class="string">'rmtrash'</span>
+<span class="built_in">source</span> ~/.bashrc</code></pre></div><pre class="line"><a name="L2-1" href="#L2-1">1</a>
+<a name="L2-2" href="#L2-2">2</a>
+<a name="L2-3" href="#L2-3">3</a>
+<a name="L2-4" href="#L2-4">4</a>
+<a name="L2-5" href="#L2-5">5</a></pre></div></div><p>缺点：</p>
+<ol>
+<li>删除时没有声效。</li>
+<li>在废纸篓不可直接“放回原处”。</li>
+</ol>
+<h2 id="rmtrash-2-objective-c">rmtrash 2: Objective-C</h2><ul>
+<li><a href="http://www.nightproductions.net/cli.htm">http://www.nightproductions.net/cli.htm</a></li>
+</ul>
+<p>这个版本的 rmtrash 是用 Objective-C 编写的应用程序，但是版本有点老，下载安装好
+rmtrash 发现并不能在 macOS Mojave (10.14) 中正常运行。</p><div class="highlight"><div class="codes"><div class="code"><pre>$ rmtrash
+zsh: bad CPU type in executable: rmtrash</pre></div><pre class="line"><a name="L3-1" href="#L3-1">1</a>
+<a name="L3-2" href="#L3-2">2</a></pre></div></div><p>缺点：不支持 macOS Mojave。</p>
+<h2 id="rmtrash-3-shell">rmtrash 3: Shell</h2><p><a href="https://github.com/LaiJingli/rmtrash">https://github.com/LaiJingli/rmtrash</a></p>
+<p>从源码上看，被删除的文件是进入了自定义的 ~/.rmtrash/ 文件夹（这不是期望的），
+另外还有一堆其他的功能，例如 list, mv, restore, empty。</p>
+<p>缺点：代码写的太烂，我是不会用的。</p>
+<h2 id="rm-trash-shell">rm-trash: Shell</h2><p><a href="https://github.com/nateshmbhat/rm-trash">https://github.com/nateshmbhat/rm-trash</a></p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">$ rm-trash ~/tmp
+rm-trash: line <span class="number">165</span>: realpath: command not found
+usage: dirname path
+usage: cp [-R [-H | -L | -P]] [-fi | -n] [-apvXc] <span class="built_in">source</span>_file target_file
+       cp [-R [-H | -L | -P]] [-fi | -n] [-apvXc] <span class="built_in">source</span>_file ... target_directory
+Error copying the /Users/hotoo/tmp to trash. Trying to move /Users/hotoo/tmp with the name /Users/hotoo/tmp (<span class="number">0</span>)</code></pre></div><pre class="line"><a name="L4-1" href="#L4-1">1</a>
+<a name="L4-2" href="#L4-2">2</a>
+<a name="L4-3" href="#L4-3">3</a>
+<a name="L4-4" href="#L4-4">4</a>
+<a name="L4-5" href="#L4-5">5</a>
+<a name="L4-6" href="#L4-6">6</a></pre></div></div><p>不过 ~/tmp 实际已被删除到未知域。</p>
+<p>优点：</p>
+<ol>
+<li>支持 Linux。</li>
+<li>代码写的很漂亮。</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>不太支持 macOS，可以删除文件但在 macOS 下执行有报错。</li>
+<li>删除的目录不是 macOS 的 .Trash 目录，无法在 macOS 的废纸篓中找到并放回原处。</li>
+<li>安装有点麻烦。</li>
+</ol>
+<h2 id="参考">参考</h2><ul>
+<li><a href="https://apple.stackexchange.com/questions/194672/why-doesnt-the-rm-command-dump-file-in-trash/194868">Why doesn&#39;t the &#39;rm&#39; command dump file in Trash?</a></li>
+<li><a href="https://apple.stackexchange.com/questions/17622/how-can-i-make-rm-move-files-to-the-trash-can">How can I make &#39;rm&#39; move files to the trash can?</a></li>
+<li><a href="https://github.com/andreafrancia/trash-cli">https://github.com/andreafrancia/trash-cli</a></li>
+<li><a href="https://www.ibm.com/developerworks/cn/linux/1410_licy_linuxtrash/">回收站功能在 Linux 中的实现</a></li>
+</ul>
+<h2 id="总结">总结</h2><p>基于上面的这么多的对比，我实现了一个便于安装、使用的脚本，欢迎使用。</p>
+<p><a href="https://github.com/hotoo/rm-trash">https://github.com/hotoo/rm-trash</a></p><div class="highlight"><div class="codes"><div class="code"><pre><code class="bash">$ npm i -g rm-trash</code></pre></div><pre class="line"><a name="L5-1" href="#L5-1">1</a></pre></div></div></div>
+
+  <footer class="entry-meta post clearfix">
+    <span class="tags"><a href="../tag">Tags</a>:
+ 
+      <a href="/tag/#rm">rm</a>
+      
+ , 
+      <a href="/tag/#Trash">Trash</a>
+      
+ , 
+      <a href="/tag/#Mac">Mac</a>
+      
+ , 
+      <a href="/tag/#Terminal">Terminal</a>
+      
+    </span>
+
+    <time datetime="2019-03-04T00:00:00.000Z">
+      <a href="../2019">2019年</a>03月04日
+    </time>
+  </footer>
+    <section>
+      <!-- div id="disqus_thread"></div -->
+      <noscript>
+        要查看或参与评论，请启用 JavaScript 支持。<br />
+        Please enable JavaScript to view the <a href="https://github.com/hotoo/blog/issues">comments powered by Gitment.</a>
+      </noscript>
+    </section>
+  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+  <!-- script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script -->
+  <script type="text/javascript">
+    // var gitment = new Gitment({
+    //   id: disqus_identifier, // 可选。默认为 location.href
+    //   owner: 'hotoo',
+    //   repo: 'blog',
+    //   oauth: {
+    //     client_id: '2ac185fc670562ffa0aa',
+    //     client_secret: '248f4f2d70ed28b1e3e70113db27d46067a981a8',
+    //   },
+    // });
+    // gitment.render('disqus_thread');
+
+
+    
+    // var disqus_identifier = "rm-to-trash";
+    
+    // var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    // dsq.src = 'http://hotoo.disqus.com/embed.js';
+    // (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  </script>
+</div>
+</div>
+
+    <!-- Vimlike status bar -->
+    <div id="status-bar">
+        <span id="count"></span>
+    </div>
+</div>
+<div id="helper-box"></div>
+<div id="helper" tabindex="1">
+    <table>
+    <thead>
+        <tr>
+            <th colspan="2">Help</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width="120">[count]gg</th>
+            <td>跳转到第 [count] 行，默认第 1 行。</td>
+        </tr>
+        <tr>
+            <th>[count]G</th>
+            <td>跳转到第 [count] 行，默认最后一行。</td>
+        </tr>
+        <tr>
+            <th>[count]j</th>
+            <td>向下跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>[count]k</th>
+            <td>向上跳转 [count] 行，默认跳转一行。</td>
+        </tr>
+        <tr>
+            <th>/</th>
+            <td>开始搜索。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+        <tr>
+            <th>gh</th>
+            <td>跳转到首页。</td>
+        </tr>
+        <tr>
+            <th>gb</th>
+            <td>跳转到博客首页。</td>
+        </tr>
+        <tr>
+            <th>gw</th>
+            <td>跳转到 Wiki 首页。</td>
+        </tr>
+        <tr>
+            <th>gt</th>
+            <td>跳转到我的 Twitter Profile 页。</td>
+        </tr>
+        <tr>
+            <th>gp</th>
+            <td>跳转到我的 Github Profile 页。</td>
+        </tr>
+        <tr>
+            <th>?</th>
+            <td>打开帮助。按 &lt;Esc&gt; 退出。</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/blog/static/js/Vimlike.js"></script>
+<footer>
+  <p><a rel="license" href="http://creativecommons.org/licenses/by/2.5/"><img
+    alt="Creative Commons License" style="border-width: 0pt;"
+    src="http://i.creativecommons.org/l/by/2.5/88x31.png" align="right"/></a>
+  This work is licensed under a
+  <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">Creative
+    Commons Attribution 2.5 Generic License</a>.<br/>
+  Copyleft &copy; 2005-2017, Power by
+  <a href="http://lab.lepture.com/nico/">nico@0.5.2</a>, Theme by 闲耘™(@hotoo).
+  </p>
+</footer>
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-2048484-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  </body>
+</html>

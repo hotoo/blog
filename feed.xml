@@ -5,6 +5,92 @@
     <link href="https://hotoo.github.io/blog/feed.xml" />
     <id>https://hotoo.github.io/blog/feed.xml</id>
     <entry>
+        <title type="html"><![CDATA[可恢复的 rm 删除]]></title>
+        <link href="https://hotoo.github.io/blog/post/rm-to-trash"/>
+        <published>2019-03-04T00:00:00.000Z</published>
+        <updated>2019-03-04T00:00:00.000Z</updated>
+        <id>https://hotoo.github.io/blog/post/rm-to-trash</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
+            <![CDATA[ <p>用过终端（Terminal）的人都知道， rm 删除的文件，不会像 Mac Finder 里删除文件、文件夹
+一样，会先进入到废纸篓（Trash），一旦 rm 删除，就很难撤销、恢复。</p>
+<p>但是作为程序员，做终端里 rm 删除文件是稀松平常的事，那么如何保障在终端中可以放心
+大胆的删除文件、文件夹，而不用担心误删后不可恢复呢？</p>
+<p>最直接的想法就是 rm 删除的文件也像 Finder 一样先进废纸篓。</p>
+<!--more-->
+
+<p>我网上搜寻一番，发现了以下几个工具：</p>
+<h2 id="applescript">AppleScript</h2><p>在 <a href="https://blog.csdn.net/TinyJian/article/details/78195316">Mac 下使用命令行或脚本删除文件到废纸篓</a>
+这篇文章中介绍，Mac Finder 中删除的文件其实是进入到 ~/.Trash 文件夹。
+但是如果简单的讲文件 mv 到 ~/.Trash 文件夹，是无法做废纸篓里右键恢复到原处的，
+因为这个移动操作没有记录完整的操作行为。</p>
+<p>通过 AppleScript 可以通知 Finder 删除文件：</p>
+<div class="highlight"><pre><code class="bash"><span class="shebang">#!/bin/bash
+</span>
+fp=/absolute/path/to/file
+osascript &lt;&lt; EOF
+tell application <span class="string">"Finder"</span>
+    posix path of ((delete posix file <span class="string">"<span class="variable">${fp}</span>"</span>) as unicode text)
+end tell
+EOF</code></pre></div><p>优点：</p>
+<ol>
+<li>删除时有声效。</li>
+<li>有操作记录可“放回原处”。</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>首次使用是有授权提示，可接受。</li>
+</ol>
+<h2 id="rmtrash-1">rmtrash 1</h2><p>在网上找到好几个不同版本但命名相同的 rmtrash 程序，有的是 shell 脚本，有的是
+Xcode 程序。</p>
+<div class="highlight"><pre><code class="bash">brew install rmtrash
+
+vi ~/.bashrc
+alias rm=<span class="string">'rmtrash'</span>
+<span class="built_in">source</span> ~/.bashrc</code></pre></div><p>缺点：</p>
+<ol>
+<li>删除时没有声效。</li>
+<li>在废纸篓不可直接“放回原处”。</li>
+</ol>
+<h2 id="rmtrash-2-objective-c">rmtrash 2: Objective-C</h2><ul>
+<li><a href="http://www.nightproductions.net/cli.htm">http://www.nightproductions.net/cli.htm</a></li>
+</ul>
+<p>这个版本的 rmtrash 是用 Objective-C 编写的应用程序，但是版本有点老，下载安装好
+rmtrash 发现并不能在 macOS Mojave (10.14) 中正常运行。</p>
+<pre>$ rmtrash
+zsh: bad CPU type in executable: rmtrash</pre><p>缺点：不支持 macOS Mojave。</p>
+<h2 id="rmtrash-3-shell">rmtrash 3: Shell</h2><p><a href="https://github.com/LaiJingli/rmtrash">https://github.com/LaiJingli/rmtrash</a></p>
+<p>从源码上看，被删除的文件是进入了自定义的 ~/.rmtrash/ 文件夹（这不是期望的），
+另外还有一堆其他的功能，例如 list, mv, restore, empty。</p>
+<p>缺点：代码写的太烂，我是不会用的。</p>
+<h2 id="rm-trash-shell">rm-trash: Shell</h2><p><a href="https://github.com/nateshmbhat/rm-trash">https://github.com/nateshmbhat/rm-trash</a></p>
+<div class="highlight"><pre><code class="bash">$ rm-trash ~/tmp
+rm-trash: line <span class="number">165</span>: realpath: command not found
+usage: dirname path
+usage: cp [-R [-H | -L | -P]] [-fi | -n] [-apvXc] <span class="built_in">source</span>_file target_file
+       cp [-R [-H | -L | -P]] [-fi | -n] [-apvXc] <span class="built_in">source</span>_file ... target_directory
+Error copying the /Users/hotoo/tmp to trash. Trying to move /Users/hotoo/tmp with the name /Users/hotoo/tmp (<span class="number">0</span>)</code></pre></div><p>不过 ~/tmp 实际已被删除到未知域。</p>
+<p>优点：</p>
+<ol>
+<li>支持 Linux。</li>
+<li>代码写的很漂亮。</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>不太支持 macOS，可以删除文件但在 macOS 下执行有报错。</li>
+<li>删除的目录不是 macOS 的 .Trash 目录，无法在 macOS 的废纸篓中找到并放回原处。</li>
+<li>安装有点麻烦。</li>
+</ol>
+<h2 id="参考">参考</h2><ul>
+<li><a href="https://apple.stackexchange.com/questions/194672/why-doesnt-the-rm-command-dump-file-in-trash/194868">Why doesn&#39;t the &#39;rm&#39; command dump file in Trash?</a></li>
+<li><a href="https://apple.stackexchange.com/questions/17622/how-can-i-make-rm-move-files-to-the-trash-can">How can I make &#39;rm&#39; move files to the trash can?</a></li>
+<li><a href="https://github.com/andreafrancia/trash-cli">https://github.com/andreafrancia/trash-cli</a></li>
+<li><a href="https://www.ibm.com/developerworks/cn/linux/1410_licy_linuxtrash/">回收站功能在 Linux 中的实现</a></li>
+</ul>
+<h2 id="总结">总结</h2><p>基于上面的这么多的对比，我实现了一个便于安装、使用的脚本，欢迎使用。</p>
+<p><a href="https://github.com/hotoo/rm-trash">https://github.com/hotoo/rm-trash</a></p>
+<div class="highlight"><pre><code class="bash">$ npm i -g rm-trash</code></pre></div>]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[钱塘之怪现状]]></title>
         <link href="https://hotoo.github.io/blog/post/dogs-cars"/>
         <published>2018-11-18T00:00:00.000Z</published>
@@ -722,6 +808,71 @@ pre-commit:
 ]]>
         </content>
     </entry><entry>
+        <title type="html"><![CDATA[译：严重混乱的 Resource Timing]]></title>
+        <link href="https://hotoo.github.io/blog/post/serious-confusion-with-resource-timing"/>
+        <published>2014-12-30T00:00:00.000Z</published>
+        <updated>2014-12-30T00:00:00.000Z</updated>
+        <id>https://hotoo.github.io/blog/post/serious-confusion-with-resource-timing</id>
+        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
+            <![CDATA[ <h1 id="或者说『耗时包含了-blocking-部分的时间』">或者说『耗时包含了 Blocking 部分的时间』</h1><p>用 <a href="http://www.w3.org/TR/resource-timing/">Resource Timing</a> 来同统计资源下载性能
+是非常赞的方式，但不幸的是，几乎所有和我聊过的人都是使用 <a href="http://www.w3.org/TR/resource-timing/#duration-attribute"><code>duration</code> 属性</a>，
+而且他们都没有意识到 <code>duration</code> 包含了 blocking 时间。结果 <code>duration</code> 时间
+比实际的下载时间要长很多，超出了开发者意料之外的结果。这个问题在跨域资源中
+尤为糟糕，<code>duration</code> 是唯一可用的。在这篇博文中我将解释这个问题，并提出解决方案。</p>
+<h2 id="resource-timing-回顾">Resource Timing 回顾</h2><p><a href="http://www.w3.org/TR/resource-timing/">Resource Timing 规范</a> 定义了收集网页中
+所有资源耗时统计的 API。现在可用于 Chrome, Chrome for Android, IE 10-11, 和 Opera。
+可以通过 <code>getEntries()</code>, <code>getEntriesByType()</code> 和 <code>getEntriesByName()</code> 得到一个
+<code>PerformanceEntry</code> 列表，一个 <code>PerformanceEntry</code> 对象包含以下属性：</p>
+<ul>
+<li><code>name</code> – URL 地址</li>
+<li><code>entryType</code> – 通常是 “resource”</li>
+<li><code>startTime</code> – 开始处理这个资源的时间（相对开始导航到页面时的毫秒数）</li>
+<li><code>duration</code> – 处理这个资源的总耗时（毫秒）</li>
+</ul>
+<p>上面的属性在所有的资源中都可用，包括同域和跨域的。而同域的资源拥有另外一些可以
+访问的附加属性，这些属性定义在 <code>PerformanceResourceTiming</code> 接口中。这些属性名称
+很简洁清晰，完全可以见名思意，并且以时间顺序排序：</p>
+<ul>
+<li>redirectStart</li>
+<li>redirectEnd</li>
+<li>fetchStart</li>
+<li>domainLookupStart</li>
+<li>domainLookupEnd</li>
+<li>connectStart</li>
+<li>connectEnd</li>
+<li>secureConnectionStart</li>
+<li>requestStart</li>
+<li>responseStart</li>
+<li>responseEnd</li>
+</ul>
+<p>这里有个权威的 <a href="http://www.w3.org/TR/resource-timing/#processing-model">处理模型(processing model)</a> 图
+显示了这些属性所在的各个不同阶段。备注：<code>duration</code> 相当于 <code>responseEnd - startTime</code>。</p>
+<p><img src="http://www.w3.org/TR/resource-timing/resource-timing-overview.png" alt="processing model graphic"></p>
+<p>如何使用 Resource Timing 的详细信息，可以参考我的文章 <a href="http://www.stevesouders.com/blog/2014/08/21/resource-timing-practical-tips/">Resource Timing Practical Tips</a> 『<a href="./resource-timing-practical-tips">译者的中文翻译</a>』</p>
+<h2 id="duration-中出乎意外的-blocking-膨胀"><code>duration</code> 中出乎意外的 blocking 膨胀</h2><p>出于隐私的考虑，同源资源的 PerformanceResourceTiming 属性是受限的。（备注：
+任何资源可以通过 <code>Timing-Allow-Origin</code> 响应头达到“同源”效果。）现在大约有一半
+的资源是跨域的，因此 <code>duration</code> 是度量加载时间的唯一方式。而且即使是同源资源，
+<code>duration</code> 也是唯一以增量方式提供的属性，大概是因为它度量了最重要的阶段。
+这样一来，所有我见过的 Resource Timing 实现都以 <code>duration</code> 做为主要的性能指标。</p>
+<p>不幸的是，<code>duration</code> 比下载时间要大，它包含了阻塞时间（blocking time）—— 浏览器
+意识到需要下载一个资源，到这个资源实际被下载直接的时间延迟。阻塞会在几种情况时
+发生，最典型的资源数量比 TCP 连接数要多的情况。大多数浏览器为每个主机开放了 6
+个 TCP 连接，IE10（8个连接）和 IE11（12个连接）例外。</p>
+<p>这个 <a href="http://stevesouders.com/tests/rt-blocking.php">Resource Timing 阻塞测试页面</a>
+有 16 个图片，因此无论哪个浏览器都会阻塞一部分图片。每个图片被编程为在服务器
+有 1 秒的延迟，这 16 个图片，每个图片都显示了 <code>startTime</code> 和 <code>duration</code>。
+另外还有这个测试页面在 WebPagetest 中通过 <a href="http://www.webpagetest.org/result/141125_4T_11FT/">Chrome</a>,
+<a href="http://www.webpagetest.org/result/141125_BN_11FY/">IE10</a> 和
+<a href="http://www.webpagetest.org/result/141125_5K_11CB/">IE11</a> 加载的测试结果，
+可以通过查看截屏来分析时序结果。注，为什么所有的图片的 <code>startTime</code> 大致都相同？
+英文这个时间是浏览器解析 IMG 标签并意识到需要下载改资源的时间，由于先下载的图片
+阻塞的原因，但在页面出现后，图片的 <code>duration</code> 值大约步进 1 秒左右。</p>
+<h2 id="译者补充">译者补充</h2><ul>
+<li><a href="http://www.stevesouders.com/blog/2014/11/25/serious-confusion-with-resource-timing/">SERIOUS CONFUSION with Resource Timing</a> - 原文出处。</li>
+</ul>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[译：Resource Timing (资源计时) 使用技巧]]></title>
         <link href="https://hotoo.github.io/blog/post/resource-timing-practical-tips"/>
         <published>2014-12-30T00:00:00.000Z</published>
@@ -916,71 +1067,6 @@ Boomerang 是 Philip Tellis 维护的一个非常流行的开源 RUM 包。他�
 </blockquote>
 <h2 id="译者补充">译者补充</h2><ul>
 <li><a href="http://www.stevesouders.com/blog/2014/08/21/resource-timing-practical-tips/">Resource Timing practical tips</a> - 原文出处。</li>
-</ul>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[译：严重混乱的 Resource Timing]]></title>
-        <link href="https://hotoo.github.io/blog/post/serious-confusion-with-resource-timing"/>
-        <published>2014-12-30T00:00:00.000Z</published>
-        <updated>2014-12-30T00:00:00.000Z</updated>
-        <id>https://hotoo.github.io/blog/post/serious-confusion-with-resource-timing</id>
-        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
-            <![CDATA[ <h1 id="或者说『耗时包含了-blocking-部分的时间』">或者说『耗时包含了 Blocking 部分的时间』</h1><p>用 <a href="http://www.w3.org/TR/resource-timing/">Resource Timing</a> 来同统计资源下载性能
-是非常赞的方式，但不幸的是，几乎所有和我聊过的人都是使用 <a href="http://www.w3.org/TR/resource-timing/#duration-attribute"><code>duration</code> 属性</a>，
-而且他们都没有意识到 <code>duration</code> 包含了 blocking 时间。结果 <code>duration</code> 时间
-比实际的下载时间要长很多，超出了开发者意料之外的结果。这个问题在跨域资源中
-尤为糟糕，<code>duration</code> 是唯一可用的。在这篇博文中我将解释这个问题，并提出解决方案。</p>
-<h2 id="resource-timing-回顾">Resource Timing 回顾</h2><p><a href="http://www.w3.org/TR/resource-timing/">Resource Timing 规范</a> 定义了收集网页中
-所有资源耗时统计的 API。现在可用于 Chrome, Chrome for Android, IE 10-11, 和 Opera。
-可以通过 <code>getEntries()</code>, <code>getEntriesByType()</code> 和 <code>getEntriesByName()</code> 得到一个
-<code>PerformanceEntry</code> 列表，一个 <code>PerformanceEntry</code> 对象包含以下属性：</p>
-<ul>
-<li><code>name</code> – URL 地址</li>
-<li><code>entryType</code> – 通常是 “resource”</li>
-<li><code>startTime</code> – 开始处理这个资源的时间（相对开始导航到页面时的毫秒数）</li>
-<li><code>duration</code> – 处理这个资源的总耗时（毫秒）</li>
-</ul>
-<p>上面的属性在所有的资源中都可用，包括同域和跨域的。而同域的资源拥有另外一些可以
-访问的附加属性，这些属性定义在 <code>PerformanceResourceTiming</code> 接口中。这些属性名称
-很简洁清晰，完全可以见名思意，并且以时间顺序排序：</p>
-<ul>
-<li>redirectStart</li>
-<li>redirectEnd</li>
-<li>fetchStart</li>
-<li>domainLookupStart</li>
-<li>domainLookupEnd</li>
-<li>connectStart</li>
-<li>connectEnd</li>
-<li>secureConnectionStart</li>
-<li>requestStart</li>
-<li>responseStart</li>
-<li>responseEnd</li>
-</ul>
-<p>这里有个权威的 <a href="http://www.w3.org/TR/resource-timing/#processing-model">处理模型(processing model)</a> 图
-显示了这些属性所在的各个不同阶段。备注：<code>duration</code> 相当于 <code>responseEnd - startTime</code>。</p>
-<p><img src="http://www.w3.org/TR/resource-timing/resource-timing-overview.png" alt="processing model graphic"></p>
-<p>如何使用 Resource Timing 的详细信息，可以参考我的文章 <a href="http://www.stevesouders.com/blog/2014/08/21/resource-timing-practical-tips/">Resource Timing Practical Tips</a> 『<a href="./resource-timing-practical-tips">译者的中文翻译</a>』</p>
-<h2 id="duration-中出乎意外的-blocking-膨胀"><code>duration</code> 中出乎意外的 blocking 膨胀</h2><p>出于隐私的考虑，同源资源的 PerformanceResourceTiming 属性是受限的。（备注：
-任何资源可以通过 <code>Timing-Allow-Origin</code> 响应头达到“同源”效果。）现在大约有一半
-的资源是跨域的，因此 <code>duration</code> 是度量加载时间的唯一方式。而且即使是同源资源，
-<code>duration</code> 也是唯一以增量方式提供的属性，大概是因为它度量了最重要的阶段。
-这样一来，所有我见过的 Resource Timing 实现都以 <code>duration</code> 做为主要的性能指标。</p>
-<p>不幸的是，<code>duration</code> 比下载时间要大，它包含了阻塞时间（blocking time）—— 浏览器
-意识到需要下载一个资源，到这个资源实际被下载直接的时间延迟。阻塞会在几种情况时
-发生，最典型的资源数量比 TCP 连接数要多的情况。大多数浏览器为每个主机开放了 6
-个 TCP 连接，IE10（8个连接）和 IE11（12个连接）例外。</p>
-<p>这个 <a href="http://stevesouders.com/tests/rt-blocking.php">Resource Timing 阻塞测试页面</a>
-有 16 个图片，因此无论哪个浏览器都会阻塞一部分图片。每个图片被编程为在服务器
-有 1 秒的延迟，这 16 个图片，每个图片都显示了 <code>startTime</code> 和 <code>duration</code>。
-另外还有这个测试页面在 WebPagetest 中通过 <a href="http://www.webpagetest.org/result/141125_4T_11FT/">Chrome</a>,
-<a href="http://www.webpagetest.org/result/141125_BN_11FY/">IE10</a> 和
-<a href="http://www.webpagetest.org/result/141125_5K_11CB/">IE11</a> 加载的测试结果，
-可以通过查看截屏来分析时序结果。注，为什么所有的图片的 <code>startTime</code> 大致都相同？
-英文这个时间是浏览器解析 IMG 标签并意识到需要下载改资源的时间，由于先下载的图片
-阻塞的原因，但在页面出现后，图片的 <code>duration</code> 值大约步进 1 秒左右。</p>
-<h2 id="译者补充">译者补充</h2><ul>
-<li><a href="http://www.stevesouders.com/blog/2014/11/25/serious-confusion-with-resource-timing/">SERIOUS CONFUSION with Resource Timing</a> - 原文出处。</li>
 </ul>
 ]]>
         </content>
@@ -1414,95 +1500,6 @@ CDN 缓存大量无意义资源的问题。</p>
 <h2 id="参考">参考</h2><ol>
 <li><a href="http://segmentfault.com/q/1010000000119794">拉取式相比推送式的对比的参考</a></li>
 </ol>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[每周异常：第 9期，搜狗浏览器中神一样的 try/catch 特性]]></title>
-        <link href="https://hotoo.github.io/blog/post/weekly-topic-about-exceptions-9"/>
-        <published>2013-09-13T00:00:00.000Z</published>
-        <updated>2013-09-13T00:00:00.000Z</updated>
-        <id>https://hotoo.github.io/blog/post/weekly-topic-about-exceptions-9</id>
-        <content type="html" xml:base="https://hotoo.github.io/blog/" xml:lang="en">
-            <![CDATA[ <h2 id="背景">背景</h2><p>某日 16时 30分，监控实时大盘中全站 JavaScript 异常和 404 异常分别朝着不同的方向延伸，
-橙色的 JavaScript 异常急剧上升。</p>
-<p><img src="https://f.cloud.github.com/assets/143572/1136611/435cbfac-1c48-11e3-8856-8fc7ef13ce5a.png" alt="bac3c01389cadbb12d4873520b3bd2a9"></p>
-<p>详细数据中我们看到一向高标准高质量的收银台出现异常大量的异常。</p>
-<p><img src="https://f.cloud.github.com/assets/143572/1136701/ae74db38-1c4a-11e3-9d2d-1101c0b61a79.png" alt="2013-09-13 4 00 58"></p>
-<h2 id="排查">排查</h2><p>我们发现其中有两个页面异常最多，而这两个页面中异常最多的『一个异常』详情如下：</p>
-<ul>
-<li>File: 同页面 URL</li>
-<li>Line: 1</li>
-<li>Message: Uncaught SyntaxError: Unexpected token a</li>
-</ul>
-<p>客户端信息：</p>
-<ul>
-<li>pc/-1;windows/5.1;sg/2.x;webkit/535.1</li>
-<li>pc/-1;windows/6.1;sg/2.x;webkit/535.1</li>
-</ul>
-<p>堆栈信息：</p>
-<pre>at function parse()
-    at function ()
-    at function (data)
-    at function ()
-    at function ()</pre><p>分析过程非常艰辛，重现异常的过程也是一波三折，这里不做赘述，最终分析得出：</p>
-<ul>
-<li>搜狗浏览器的 userAgent 太坑爹，几乎所有版本都是 2.x，开发者太不专业了。最终找到内核为 webkit/535.1 的是 3.2 版。</li>
-<li><p>重现到老版 arale 中的 ajax 模块中对 JSON 有特殊的处理，如果浏览器内置的 JSON 不支持非标准的 JSON （如 <code>{a:1}</code>）则 hack 做兼容。</p>
-<div class="highlight"><pre><code class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">W3CParse</span><span class="params">(data)</span> {</span>
-        <span class="keyword">if</span> (validJSON(data)) {
-            <span class="keyword">return</span> window.JSON.parse(data)
-        } <span class="keyword">else</span> {
-            <span class="keyword">return</span> <span class="literal">null</span>;
-            arale.error(<span class="string">"Invalid JSON: "</span> + data)
-        }
-    }
-
-    <span class="function"><span class="keyword">function</span> <span class="title">defaultParse</span><span class="params">(data)</span> {</span>
-        <span class="keyword">if</span> (validJSON(data)) {
-            <span class="keyword">return</span> (<span class="keyword">new</span> Function(<span class="string">"return ("</span> + data + <span class="string">")"</span>))()
-        } <span class="keyword">else</span> {
-            <span class="keyword">return</span> <span class="literal">null</span>;
-            arale.error(<span class="string">"Invalid JSON: "</span> + data)
-        }
-    }
-    <span class="keyword">var</span> ok_wrong_json = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-        <span class="keyword">try</span> {
-            JSON.parse(<span class="string">"{ a: 1 }"</span>);
-            <span class="keyword">return</span> <span class="literal">true</span>
-        } <span class="keyword">catch</span> (x) {
-            <span class="keyword">return</span> <span class="literal">false</span>
-        }
-    };
-    <span class="keyword">if</span> (window.JSON &amp;&amp; window.JSON.parse &amp;&amp; ok_wrong_json()) {
-        parseJSON = <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> {</span>
-            <span class="keyword">return</span> W3CParse.call(<span class="keyword">this</span>, data)
-        }
-    } <span class="keyword">else</span> {
-        parseJSON = <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> {</span>
-            <span class="keyword">return</span> defaultParse.call(<span class="keyword">this</span>, data)
-        }
-    }</code></pre></div></li>
-<li>抛出异常的代码是 <code>JSON.parse(&quot;{a: 1}&quot;)</code></li>
-<li>但奇怪的是这段代码是放在 try/catch 中，为什么还会有异常被监控捕获？</li>
-<li>最终发现这是搜狗浏览器 3.2版极速(webkit)模式中的特性：即使 try/catch 住的异常，
-同样会被 window.onerror 捕获，但并未因此中断业务逻辑，后续的代码仍然会按照正确的
-try/catch 异常处理流程进行，所以对业务本身没有影响。</li>
-<li>p.s. 搜狗浏览器没有控制台，用户不会知道出了异常。</li>
-<li>另外收银台之前异常量少的主要原因是主要的页面没有引入前端监控，用户抛出了异常而我们不知道而已。</li>
-</ul>
-<h2 id="相关截图">相关截图</h2><p><img src="https://f.cloud.github.com/assets/143572/1136977/316cd2d8-1c51-11e3-9f7e-4bbebec06108.png" alt="2013-09-13 4 39 14">
-<img src="https://f.cloud.github.com/assets/143572/1136980/32da28aa-1c51-11e3-8dc4-5773fc84f885.png" alt="2013-09-13 4 39 33">
-<img src="https://f.cloud.github.com/assets/143572/1136981/331bb9f0-1c51-11e3-93bf-8cd2dcdf5d7f.png" alt="2013-09-13 4 40 26">
-<img src="https://f.cloud.github.com/assets/143572/1136982/331f90c0-1c51-11e3-8d08-8d61c08512dc.png" alt="2013-09-13 4 40 12">
-<img src="https://f.cloud.github.com/assets/143572/1136983/332ad480-1c51-11e3-991f-b4b0db932f69.png" alt="2013-09-13 4 41 03"></p>
-<h2 id="解决方案">解决方案</h2><p>最初虽然有些争议，但我们最终决定的处理方案是监控中临时排除 sg/2.x|webkit/535.1 中
-<code>Uncaught SyntaxError: Unexpected token a</code> 异常。</p>
-<h3 id="是否要排除这个浏览器中所有的异常？">是否要排除这个浏览器中所有的异常？</h3><p>呃，考虑到搜狗浏览器的份额，我们的策略是只排除已知的异常，未知的异常看最终分析结果再考虑。</p>
-<h2 id="广告">广告</h2><p>这个异常排查的主要功臣 @wsvn53，我们在排查过程中频繁使用了他开发的工具
-<a href="https://github.com/wsvn53/fedit">Fedit</a>，可以直接修改线上代码。
-排查线上故 障、线下接⼝什么的都非常⽅方便。强烈建议⼤家都装上⽤用。</p>
-<h2 id="最后">最后</h2><p>我仅代表我自己，想说某些毫无责任心的国产浏览器壳厂商们，你们没有创造价值，
-只是在各种不同方式的索取。</p>
 ]]>
         </content>
     </entry>
