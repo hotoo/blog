@@ -114,6 +114,14 @@ Error copying the /Users/hotoo/tmp to trash. Trying to move /Users/hotoo/tmp wit
 2. 删除的目录不是 macOS 的 .Trash 目录，无法在 macOS 的废纸篓中找到并放回原处。
 3. 安装有点麻烦。
 
+## rmtrash: Shell
+
+https://github.com/PhrozenByte/rmtrash
+
+## rmtrash for Mac OS X: Objective-C
+
+- https://github.com/sebikeller/rmtrash-for-Mac-OS-X
+
 ## 参考
 
 - [Why doesn't the 'rm' command dump file in Trash?](https://apple.stackexchange.com/questions/194672/why-doesnt-the-rm-command-dump-file-in-trash/194868)
